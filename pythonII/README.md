@@ -5,4 +5,4 @@ Bienvenidos al curso de Python II.
 
 ### GitHub
 
-1.- [Versionando usando tags](git-tags/1-Etiquetas.html)
+1.- [Versionando usando tags](git/git-tags/1-Etiquetas.html)
