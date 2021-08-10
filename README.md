@@ -2,12 +2,10 @@
 Repositorio de cursos de la lcg
 
 
-### Lecciones del curso
+### Cursos de Bioinformática
 
 
-#### GitHub
-
-1.- [Versionando usando tags](git-tags/1-Etiquetas.html)
+1.- [PyhtonII](pythonII/README.md)
 
 
 
