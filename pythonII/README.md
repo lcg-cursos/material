@@ -6,7 +6,9 @@ Bienvenidos al curso de Python II.
 ### GitHub intermedio
 
 1.- [Versionando usando tags](git/git-tags/1-Etiquetas.html)
+
 2.- Trabajar con ramas en Git
+
 3.- Pull Request con Git
 
 
