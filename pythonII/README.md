@@ -3,6 +3,51 @@
 
 Bienvenidos al curso de Python II. 
 
-### GitHub
+### GitHub intermedio
 
 1.- [Versionando usando tags](git/git-tags/1-Etiquetas.html)
+2.- Trabajar con ramas en Git
+3.- Pull Request con Git
+
+
+### Python Intermedio
+
+4.-	Introducción a librerías
+5.- BioPython
+  - Secuencias y formatos
+  - Acceso a Bases de datos
+
+6.- Vectores y Matrices con NumPy
+  - Tipos de datos
+  - Generar Arrays
+  - Entrada / Salida
+  - Métodos y operaciones
+  - Indexar y asignar
+
+7.-	DataFrames y Series con Pandas
+  - Tipos de datos
+  - Entrada / Salida
+  - Series y DataFrames
+  - Métodos y operaciones
+
+8.- Creación de gráficos con Matplotlib
+  - Tipos de gráficas y cómo crearlas
+  - Gráficas con Pandas
+  - Formatos de salida
+
+9.- Seaborn
+  - Tipos de gráficas y diferencias con Matplotlib
+  - Gráficas con Pandas
+  - Formato de salida
+
+10.- Algoritmos matemáticos con SciPy
+  - Entrada / Salida
+  - Funciones 
+
+11.- Jupyter Notebooks
+  - Cómo trabajar en Jupyter
+  - Presentación de datos
+
+12.- Mejores prácticas
+  -	Software y Principios FAIR
+  -	Página web personal
