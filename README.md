@@ -7,7 +7,7 @@ Repositorio de cursos de la lcg
 
 #### Github
 
-1.- [Versionando usando tags](git-tabs-l1/1-Etiquetas.html)
+1.- [Versionando usando tags](git-tags-l1/1-Etiquetas.html)
 
 
 
