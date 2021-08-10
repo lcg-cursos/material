@@ -5,9 +5,9 @@ Repositorio de cursos de la lcg
 ### Lecciones del curso
 
 
-#### Github
+#### GitHub
 
-1.- [Versionando usando tags](git-tags-l1/1-Etiquetas.html)
+1.- [Versionando usando tags](git-tags/1-Etiquetas.html)
 
 
 
