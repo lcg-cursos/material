@@ -7,7 +7,7 @@ Bienvenidos al curso de Python II.
 
 1.- [Versionando usando tags](git/git-tags/1-Etiquetas.html)
 
-2.- Trabajar con ramas en Git
+2.- [Trabajar con ramas en Git](git/git-branches/2-Ramas.html)
 
 3.- Pull Request con Git
 
