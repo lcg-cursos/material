@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Python II y GitHub</title>
+    <meta charset="utf-8" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Python II y GitHub
+### Licenciatura en Ciencias Genómicas, UNAM
+### First version: 2021-08-13; Last update: 2021-08-17
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+
+## Contenido
+
+1. [Especificar versiones en Git con tag](1-Etiquetas.html)
+
+2. [Trabajar con ramas en Git: git branch](./leccion2/2-Ramas.html) 
+
+3. [Pull Request con Git](./leccion2/3-PullRequest.html) 
+
+4. [Manejo de un proyecto en GitHub](./leccion4/4-Proyecto.html)
+
+---
+
+# Trabajar con ramas en Git
+
+## Objetivo
+Al finalizar la lección, podremos trabajar con ramas en Git. Conoceremos cómo crear ramas dentro de nuestro repositorio, nos movernos entre distintas ramas, podremos fusionarlas, así como trabajar con ramas de repositorios remotos.
+
+
+
+&lt;img src="img/branches.png" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Introducción
+Imaginemos que estamos trabajando en el proyecto de software para la clase de Python  y queremos implementar una nueva funcionalidad en la que sabemos que quizás tengamos que invertir varios días. 
+
+Posiblemente sea algo experimental, que no sabemos si llegará a incorporarse a nuestro proyecto global, o bien, es algo que tenemos claro que vamos a querer completar, pero que, dado que nos va a ocupar un tiempo indeterminado, es posible que en medio de nuestro trabajo tengamos que tocar el código "base", en el estado en el que lo tenemos en funcionamiento actualmente.
+
+&lt;img src="img/twoBranches.png" width="400px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Introducción
+
+Durante este proceso quisieramos que el código base principal no se vea afectado por cambios o código inestable. 
+
+¿Para qué nos ayudan las ramas (branches)?
+
+- Añadir una nueva función
+- Solucionar un error
+- Trabajar de manera paralela
+- Controlar que código dudoso que fusione con el código principal 
+
+
+&lt;img src="img/branchesOctopus.jpeg" width="450px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Ramas (Branches)
+
+Las ramas son caminos que puede tomar el desarrollo de un software, algo que ocurre naturalmente para resolver problemas o crear nuevas funcionalidades.
+
+Una rama representa una línea independiente de desarrollo.
+
+&lt;img src="img/branchesColab.png" width="350px" style="display: block; margin: auto;" /&gt;
+
+Pensemos en las ramas como un forma de solicitar un nuevo directorio de trabajo, un nuevo entorno de desarrollo o un nuevo historial de proyecto. Los nuevos commits  se registrarán en el historial de la rama actual, lo que crea una bifurcación en el historial del proyecto.
+
+---
+## La rama "master"
+
+Cuando inicializamos un proyecto con Git automáticamente nos encontramos en una rama a la que se denomina *master*.
+
+Esta rama es la principal de nuestro proyecto y a partir de la que podremos crear nuevas ramas cuando lo necesitemos.
+
+
+---
+## Listando las ramas existentes en mi repositorio
+
+El comando _git branch_ nos permite crear, listar y eliminar ramas, así como cambiar su nombre.
+
+Para obtener el listado de las ramas que se encuentran creadas en mi repositorio local usaremos:
+
+Sintaxis:  
+
+.full-width[.content-box-yellow[git branch]]
+
+Resultado:  
+
+.full-width[.content-box-yellow[$ git branch &lt;br&gt;
+\* master
+]]
+
+
+---
+
+## Práctica
+
+1. Abrir una terminal  
+--
+
+2. Localizar nuestro repositorio local de trabajo 
+--
+
+3. Ejecutar el comando
+
+.full-width[.content-box-yellow[git branch]]
+--
+
+¿Cúantas y cuáles son las ramas actuales en el repositorio?
+
+---
+
+## Creando una nueva rama
+
+Para crear una rama en nuestro repositorio usaremos el comando:
+
+Sintaxis:  
+
+.full-width[.content-box-yellow[git branch [branch_name]]]
+
+Ejemplo:  
+
+.full-width[.content-box-yellow[$ git branch feature]]
+
+---
+
+## Pasando de una rama a otra
+
+Para movernoso entre las ramas usaremos el comando _git checkout_ seguido del nombre de la rama que queremos que se active.
+
+
+Sintaxis:  
+
+.full-width[.content-box-yellow[git checkout [branch_name]]]
+
+Ejemplo:  
+
+.full-width[.content-box-yellow[$ git checkout feature]]
+
+Resultado:  
+
+.full-width[.content-box-yellow[Cambiado a rama 'feature']]
+
+
+---
+
+## Pasando de una rama a otra
+
+Para verificar que hayamos cambiado de rama podemos usar el comando _git branch_. La rama en la que estemos situados se marcará con un asterisco (*) y aparecerá en un color distinto.
+
+Ejemplo:  
+
+.full-width[.content-box-yellow[$ git checkout feature]]
+
+Resultado:  
+
+&lt;img src="img/currentBranch.png" width="200px" style="display: block; margin: auto auto auto 0;" /&gt;
+---
+
+## Práctica
+
+1. Abrir una terminal  
+--
+
+2. Localizar nuestro repositorio local de trabajo 
+--
+
+3. Revisar el estado del repositorio. No debe haber nada pendiente por confirmar.
+.full-width[.content-box-yellow[git status]]
+--
+
+4. Crear la rama _feature_
+.full-width[.content-box-yellow[git branch feature]]
+--
+
+6. Revisar las ramas de nuestro repositorio
+.full-width[.content-box-yellow[git branch]]
+--
+
+6. Pasar de la rama _master_ a la rama _feature_
+.full-width[.content-box-yellow[s]]
+--
+
+---
+
+## Pasando de una rama a otra
+
+Al pasar de una rama a otra Git nos cambiará automáticamente todos los archivos de nuestro proyecto para que tengan el contenido en el que se encuentren en la rama correspondiente.
+
+
+Por ahora, las dos ramas tienen exactamente el mismo contenido, pero ahora podríamos empezar a hacer cambios en la rama _feature_ y sus correspondientes commits; entonces los archivos de la rama _master_ y la rama _feature_ tendrán códigos diferentes, de modo que al pasar de una rama a otra habrá cambios en los archivos.
+
+
+&lt;img src="img/gitCheckout.png" width="500px" style="display: block; margin: auto;" /&gt;
+
+
+Si hacemos cambios en la rama _feature_ y usamos el comando _git show-branch_ veremos una descripción más detallada de las ramas. 
+
+
+---
+
+## Práctica
+
+1. Abrir una terminal  
+--
+
+2. Localizar nuestro repositorio local de trabajo 
+--
+
+3. Estando en la rama _feature_ ejecuta el comando:
+.full-width[.content-box-yellow[git show-branch]]
+--
+
+4. Editemos el archivo _reverse-complement.py_. Recuerda usar: 
+git add  
+git commit -m "[mensaje]"
+--
+
+5. Edita el archivo _sequence.txt_ y confirma lo cambios.
+--
+
+6. Revisa la descripción detallada de las ramas.
+.full-width[.content-box-yellow[git show-branch]]
+--
+
+¿Notas que los nuevos commits solo se encuentran en la rama _feature_?
+
+
+---
+
+## Práctica
+
+7. Pasa a la rama _master_
+.full-width[.content-box-yellow[$  git checkout master]]
+--
+
+8. Revisa el contenido del archivo _reverse-complement.py_ y _sequence.txt_
+--
+
+
+¿Estos archivos tienen los cambios que realizamos en la rama _feature_?
+
+---
+
+## Creando una nueva rama y pasar a ella inmediatamente
+
+El comando _checkout_ tiene la posibilidad de permitirnos crear una rama nueva y movernos a ella en un único paso. Para crear una nueva rama y situarnos sobre ella tendremos que darle un nombre y usar el parámetro **-b**.
+
+
+Sintaxis:  
+
+.full-width[.content-box-yellow[git checkout -b [branch_name]]]
+
+Ejemplo:  
+
+.full-width[.content-box-yellow[$ git checkout -b develop]]
+
+Resultado:  
+
+&lt;img src="img/developBranch.png" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Fusionando ramas
+
+A medida que creemos ramas y cambiemos el estado de las carpetas o archivos en el proyecto llegará el momento en el que nos interese fusionar ramas para poder incorporar el trabajo realizado a la rama __master__.
+
+El proceso de fusionado se conoce como __merge__. Git para procesar los merge comprueba los cambios que se han introducido al proyecto, combinando el código de ambas ramas.
+
+&lt;img src="img/merge.png" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Fusionando ramas
+
+Para hacer un merge nos situamos en una rama, en este caso la __master__, y decimos con qué otra rama se debe fusionar el código.
+
+El siguiente comando, lanzado desde la rama _master_, permite fusionarla con la rama _feature_.
+
+Sintaxis:  
+
+.full-width[.content-box-yellow[git merge [branch_name] -m "mensaje"]]
+
+Ejemplo:  
+
+.full-width[.content-box-yellow[$ git merge feature -m "fusionando cambios de la rama feature a la master"]]
+
+---
+
+## Práctica
+
+1. Revisar la rama en la que estamos actualmente. 
+.full-width[.content-box-yellow[$ git branch]]
+--
+
+2. Si no estamos en la rama _master_ cambiarnos a la rama principal.
+.full-width[.content-box-yellow[$ git checkout master]]
+--
+
+3. Fusiona el contenido de la rama _feature_ con la rama _master_
+.full-width[.content-box-yellow[$ git merge feature -m "fusionando cambios de la rama feature a la master"]]
+--
+
+4. Revisa el mensaje obtenido al hacer el merge el contenido de los archivos _reverse-complement.py_ y _sequence.txt_.  
+
+--
+
+5. Revisa el contenido de los archivos  _reverse-complement.py_ y _sequence.txt_.
+
+---
+
+## Fusionando cambios de la rama _master_ en una rama en desarrollo
+
+Durante el desarrollo del proyecto puede ser normal que se vayamos haciendo cambios en la rama _master_, o en otras ramas en desarrollo, y queramos traerlos a nuestra rama actual. Por ejemplo, la rama _feature_ está tardando varios días en completarse y mientras tanto se han agregado nuevas funcionalidades que queramos que estén disponibles también en la rama _feature_. Entonces seguramente queramos traer los cambios de la rama _master_. Para ello, estando en la rama  _feature_, lanzaremos el siguiente comando:
+
+Sintaxis:  
+
+.full-width[.content-box-yellow[git merge [branch_name] -m "mensaje"]]
+Ejemplo:  
+
+.full-width[.content-box-yellow[$ git merge master -m "Merge de master en la rama feature"]]
+
+La rama _feature_ estará actualizada con todos los cambios de _master_.
+
+---
+
+
+## Eliminando de ramas
+
+En algunas circunstancias puede ser necesario eliminar una rama de nuestro repositorio local, por ejemplo, porque nos hayamos equivocado en el nombre al crearla. 
+Para ello utilizaremos el comando git branch, pero agregaremos la opción __-d__ para indicar que es esa rama la que queremos eliminar.
+
+Sintaxis:  
+
+.full-width[.content-box-yellow[git branch -d [branch_name]]]
+
+Ejemplo:  
+
+.full-width[.content-box-yellow[$ git branch -d develop]]
+
+IMPORTANTE: Puede que esta acción no nos funcione porque hayamos hecho cambios que no se hayan salvado en el repositorio remoto, o no se hayan fusionado con otras ramas. Para forzar el borrado utilizaríamos la opción __-D__
+
+
+---
+
+## Práctica
+
+Eliminaremos la rama develop .... 
+
+1. Revisar la rama en la que estamos actualmente (asegurate estar fuera de la rama)
+.full-width[.content-box-yellow[$ git branch]]
+--
+
+2. Eliminar la rama _develop_
+.full-width[.content-box-yellow[$ git branch -d develop]]
+--
+
+3. Revisar las ramas disponibles
+.full-width[.content-box-yellow[$ git branch]]
+
+
+---
+## Subiendo ramas al repositorio remoto (GitHub)
+
+Hasta este momento, las ramas que hemos creado solo pueden ser vistas en nuestro repositorio local, estas ramas no se publicarán en Github a menos que nosotros lo indiquemos. Para que esto ocurra tenemos que realizar específicamente la acción de subir al repositorio remoto una rama determinada.
+
+Sintaxis:  
+
+.full-width[.content-box-yellow[git push -u origin [branch_name]]]
+
+Ejemplo:  
+
+.full-width[.content-box-yellow[$ git push -u origin feature]]
+
+
+.tiny[
+Nota 1: [Generación de token personal](https://docs.github.com/es/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)]
+
+.tiny[
+Nota 2: [Support for password authentication was removed on August 13, 2021](https://dev.to/arjuncodes/support-for-password-authentication-was-removed-on-august-13-2021-fixed-k1e)
+]
+
+---
+
+## Eliminando ramas remotas
+
+Si la rama que queremos eliminar está en el repositorio remoto tendremos que hacer un push indicando la opción --delete, seguida del nombre de la rama que se deseamos borrar.
+
+
+Sintaxis:  
+
+.full-width[.content-box-yellow[git push origin --delete [branch_name]]]
+
+Ejemplo:  
+
+.full-width[.content-box-yellow[$ git push origin --delete test]]
+
+---
+
+## Práctica
+
+1. Crear una nueva rama llamada _test_
+.full-width[.content-box-yellow[$ git branch test]]
+
+--
+
+2. Subir la rama _test_ al repositorio remoro
+.full-width[.content-box-yellow[$ git push -u origin test]]
+--
+
+3. Borrar localmente la rama _test_ 
+.full-width[.content-box-yellow[$ git branch -d test]]
+--
+
+4. Borrar la rama _test_ del repositorio remoto
+.full-width[.content-box-yellow[$ git push origin --delete test]]
+
+
+
+---
+
+## Descargando una rama del repositorio remoto
+
+A veces ocurre que se generan ramas en repositorio remoto, por ejemplo, cuando han sido creadas por otros usuarios y subidas a GitHub, y necesitaremos acceder a ellas en el repositorio local para verificar los cambios o continuar el trabajo. En principio esas ramas en remoto creadas por otros usuarios no están disponibles para nosotros en local, pero las podemos descargar.
+
+Sintaxis:  
+
+.full-width[.content-box-yellow[git fetch]]
+
+
+---
+
+## Conclusión
+
+Por medio del uso de ramas podremos llevar un mejor control de nuestro código. Se trata de tener nuevos caminos mientras el código evoluciona, en paralelo a otras ramas que se puedan generar.
+
+- Creación de una funcionalidad que queramos integrar en un programa
+- Desarrollo de distintas funcionalidades de manera paralela
+- No afectaremos la rama principal
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(img/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
