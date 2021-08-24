@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Python II y GitHub</title>
+    <meta charset="utf-8" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Python II y GitHub
+### Licenciatura en Ciencias Genómicas, UNAM
+### First version: 2021-08-22; Last update: 2021-08-24
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+
+## Contenido
+
+1. [Especificar versiones en Git con tag](1-Etiquetas.html)
+
+2. [Trabajar con ramas en Git: git branch](./leccion2/2-Ramas.html) 
+
+3. [Pull Request con Git](./leccion2/3-PullRequest.html) 
+
+  3.1 [Tips para hacer que Git encaje en tu flujo de trabajo](./leccion2/3.1-TipsWorkflow.html)
+
+---
+
+
+## Git hace que el desarrollo de software sea más sencillo
+
+Actualmente Git es el referente preferido cuando hablamos de __desarrollo de software ágil__.
+
+_Desarrollo de software ágil: Alternativa de desarrollo donde se hincapié en el empoderamiento de las personas para colaborar y tomar decisiones en equipo, además potencia la planificación continua, pruebas permanentes y la integración conjunta del código y los despliegues._
+
+
+Así como del conjunto de prácticas que permiten automatizar e integrar procesos entre el desarrollo de software y los equipos de trabajo.
+
+
+&lt;img src="img/3.1GitBranching.svg" width="450px" style="display: block; margin: auto;" /&gt;
+---
+## Git hace que el desarrollo de software sea más sencillo
+
+Git es lo suficientemente flexible como para soportar una variedad de flujos de trabajo que satisfaga las necesidades de cualquier equipo de software. 
+
+Su naturaleza distribuida da la libertad de experimentar localmente haciendo modificaciones y publicar los cambios solo cuando están listos para su distribución al equipo.
+
+&lt;img src="img/3.1GitWorkFlow.png" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+## Tres consejos para hacer que Git encaje en tu flujo de trabajo 
+
+### Consejo 1: empieza a pensar en las tareas como ramas de Git
+
+Git entra en juego después de que se hayan definido las funciones que integrará el proyecto de desarrollo de software, se hayan documentando cada una de ellas y el equipo de desarrollo esté listo. 
+
+Para lograr esto deben realizarse reuniones con el equipo para que todos lleguen al entendimiento compartido de en qué consistirá cada función (es decir, en los requisitos que tendrá), el alcance del proyecto completo y en qué tareas se tiene que desglosar la función para completarla, así como su respectiva asignación a los desarrolladores 
+
+&lt;img src="img/3.1GitBranches.png" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Tres consejos para hacer que Git encaje en tu flujo de trabajo 
+
+### Consejo 1: empieza a pensar en las tareas como ramas de Git
+
+Justo después de esto es cuando Git empieza a encajar en nuestro flujo de trabajo (metodología ágil). Se recomienda:
+
+- Crear una rama nueva para cada una de las funciones a implementar
+- Por cada corrección de error (mejora a un código ya existente)
+- Todos los cambios de código tienen su propia rama.
+
+
+La creación de ramas permite a los equipos colaborar fácilmente dentro de una base de código. 
+
+Cuando un desarrollador crea una rama, cuenta con su propia versión aislada de la base de código en la que aplicar los cambios. 
+
+&lt;img src="img/3.1GitBranchesPR.png" width="450px" style="display: block; margin: auto;" /&gt;
+---
+
+## Tres consejos para hacer que Git encaje en tu flujo de trabajo 
+
+### Consejo 1: empieza a pensar en las tareas como ramas de Git
+
+Con el uso de ramas, el equipo de desarrollo tiene la capacidad de asumir tareas de forma individualizada y trabajar de manera más eficiente en el mismo código, pero en repositorios distintos. ¡Se acabaron las tareas duplicadas!.
+
+
+&lt;img src="img/3.1GitBranchingDetailed.svg" width="450px" style="display: block; margin: auto;" /&gt;
+
+---
+## Tres consejos para hacer que Git encaje en tu flujo de trabajo 
+
+### Consejo 2: Muchas ramas se pueden probar individualmente, así que aprovéchalo
+
+Una vez que las ramas se consideran terminadas y listas para las revisiones del código, Git desempeña otro papel clave en el flujo de trabajo del desarrollo ágil: _la realización de pruebas_. Los equipos ágiles con mejores resultados practican revisiones de código y configuran pruebas automatizadas (integración continua o entrega continua).
+
+
+&lt;img src="img/3.1GitContinuousIntegration.png" width="100px" style="display: block; margin: auto;" /&gt;
+
+Lo mejor es tener _ramas de función de corta duración_. Esto puede conseguirse desglosando las funciones en tareas más pequeñas, planificando cuidadosamente los avances y fusionando el código pronto para lanzarlo como funciones ocultas.
+
+
+---
+
+## Tres consejos para hacer que Git encaje en tu flujo de trabajo 
+
+### Consejo 3: Git proporciona transparencia y calidad en el desarrollo ágil
+
+ Para lograr que Git funcione con nuestro flujo de trabajo, debemos asegurarnos de que nuestra rama principal (master) siempre está verde. Esto significa que si una función no está lista, es mejor esperar a la siguiente liberación, definiendo ciclos de publicación más cortos.
+ 
+ 
+&lt;img src="img/3.1GitBranchesMerge.png" width="450px" style="display: block; margin: auto;" /&gt;
+---
+
+### Puntos clave
+
+1. Proyecto colaborativo
+
+2. Diseño modularizado de las funcionalidades
+
+3. Distribución de trabajo
+
+4.  Aclarar con los colaboradores quién es responsable de cada funcionalidad
+
+5. Discutir con el equipo en qué orden deben realizarse las funcionalidades para que 
+aquellas que puedan cambiar las mismas lineas no se trabajen simultáneamente 
+
+
+### GitHub avanzado...
+
+- Gestión de un proyecto de software mediante GitHub
+- Fases del proyecto
+- Definición de actividades
+- Estados de las actividade
+- Control del proyecto mediante issues
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(img/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

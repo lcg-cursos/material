@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Python II y GitHub</title>
+    <meta charset="utf-8" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Python II y GitHub
+### Licenciatura en Ciencias Genómicas, UNAM
+### First version: 2021-08-22; Last update: 2021-08-24
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+
+## Contenido
+
+1. [Especificar versiones en Git con tag](1-Etiquetas.html)
+
+2. [Trabajar con ramas en Git: git branch](./leccion2/2-Ramas.html) 
+
+3. [Pull Request con Git](./leccion2/3-PullRequest.html) 
+
+---
+
+
+# Pull Request con Git
+
+## Objetivo 
+
+Al finalizar la lección, podremos enviar propuestas de cambios a nuestros repositorios GitHub, así como a aquellos de acceso abierto. Conoceremos cómo crear un pull request y cómo aprobarlo.
+
+
+
+&lt;img src="img/pullRequestIcon.png" width="300px" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Introducción
+
+
+Pensemos en que estamos navegando en GitHub y nos encontramos el repositorio de algunos de nuestros compañeros de clase, o bien, localizamos el repositorio de algún software o programa en el que estamos interesados.
+
+Comenzamos a revisar el repositorio y detectamos ciertos detalles en el código o mejor aún, identificamos que podríamos contribuir con la corrección de errores o creando una nueva funcionalidad.
+
+Para hacer llegar mis sugerencias a la propietaria o al propietario del repositorio será necesario enviar un _pull request_. 
+
+Mediante el uso de pull request podremos:
+
+- Crear propuestas o cambios al código de un proyecto 
+- Controlar de forma ordenada las sugerencias de nuevo código al repositorio
+- Trabajar en un proyecto de software con muchas personas 
+
+---
+## Pull request
+
+.full-width[.content-box-red[Un _pull request_ es una petición para integrar nuestras propuestas o cambios de código a un proyecto.]]
+
+Un _pull request_ nos sirve para _integrar cambios entre una rama y otra_ dentro de nuestro repositorio de trabajo, o bien para compartir cambios en el proyecto con el resto del equipo. 
+
+También mediante un _pull request_ podremos enviar nuestras propuesta a un repositorio de acceso abierto.
+
+Antes de __aprobar__ un pull request se debe _analizar y revisar el código_ que ha sido modificado, y una vez validado se podrán fusionar los cambios a la rama master.
+
+&lt;img src="img/githubflowPR.png" width="250px" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Pull request
+
+Por ejemplo, en la clase de _ramas_ creamos una rama llamada _feature_, hicimos algunas modificaciones y las fusionamos con la rama _master_ en nuestro repositorio local. Posteriormente subimos la rama _feature_ al repositorio remoto (GitHub).
+
+
+Pero, ¿qué pasa con nuestra rama _feature_ en el repositorio remoto?
+
+
+--
+&lt;img src="img/aheadMaster.png" width="700px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Pull request en mi repositorio
+
+La fusión de los cambios hechos entre la rama _feature_ y la rama _master_ solo se hizo de manera local. En el repositorio remoto la rama _feature_ contiene cambios (commits) que no han sido integrados a la rama _master_.
+
+Tenemos dos soluciones:
+
+1. Hacer un _push_ directo de la rama master del repositorio local al servidor remoto
+2. Desde la interfaz de GitHub abrir un _Pull Request_
+
+&lt;img src="img/openPR.png" width="700px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Actividad
+
+1. Ve GitHub y localiza tu repositorio de trabajo
+
+--
+
+2. Selecciona la rama _feature_. Asegurate que se muestre el mensaje que indica que la rama se encuentra adelantada a la rama master
+
+--
+
+3. En la opción "Contribute" da clic en _Open pull request_
+
+--
+
+4. Ingresa un título y descripción que permita identificar los cambios que quieres intergrar a la rama _master_
+
+&lt;img src="img/descriptionPR.png" width="400px" style="display: block; margin: auto;" /&gt;
+--
+5. Hacer clic en _Create pull request_
+
+---
+
+## Pull request en GitHub
+
+Veremos que se despliega una página con la descripción del Pull request.
+
+1 - Sección Pull request
+
+&lt;img src="img/PR1.png" width="200px" style="display: block; margin: auto;" /&gt;
+--
+2 - Descripción del Pull request
+
+--
+
+3 - Número de commits y sus descripciones
+
+--
+
+4 - Archivos modificados en los commits
+
+--
+
+5 - Merge pull request
+
+--
+
+6 - Sección para realizar comentarios en relación al pull request, así como para cerrarlo y descartar los cambios
+
+
+---
+
+## Actividad
+
+
+1. Agrega un comentario al pull request insertando una referencia al PR (pull request)
+
+--
+
+2. Da formato a tu comentario y usa la opción _preview_
+
+--
+
+3. Haz _merge pull request_
+
+--
+
+4. Ingresa una descripción asociada al _merge_
+
+--
+
+5. Confirma el _merge_
+
+---
+
+## Pull request a un repositorio colaborativo
+
+Para contribuir en un proyecto que está publicado en GitHub tendremos que hacer uso de un _Pull Request_. 
+
+Nota: Para enviar nuestras observaciones/cambios no es necesario ser colaborador del proyecto.
+
+&lt;img src="img/pull-requests.jpeg" width="450px" style="display: block; margin: auto;" /&gt;
+---
+
+## Pull request a un repositorio colaborativo
+
+Una vez que hayamos seleccionado el repositorio donde queremos colaborar será necesario:
+
+1 - Revisar la documentación, así como el código del proyecto
+
+--
+
+2 - Identificar el tipo de cambio que queremos proponer: corrección de errores, proponder nuevas funcionalidades, correccción de documentación, etc.
+
+--
+
+3 - Editar el archivo donde queremos hacer los cambios. Definir un título y mensaje a la propuesta de modificaciones.
+
+&lt;img src="img/editFileGitHub.png" width="200px" style="display: block; margin: auto;" /&gt;
+--
+
+4 - Crear un pull request, definiendo título y descripción
+
+&lt;img src="img/openNewPR.png" width="200px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Pull request a un repositorio colaborativo
+
+Por parte del propietario o propietaria del repositorio:
+
+1 - Desde la interfaz de GitHub, hacer clic en la sección _Pull Requests_, se listarán las solicitudes recibidas. Nota: también se recibirá un correo elecrónico con la notificación
+
+&lt;img src="img/PRList.png" width="200px" style="display: block; margin: auto;" /&gt;
+
+--
+2 - Ingresar al pull request recibido
+
+--
+
+3 - Ahora se podrá revisar: commits realizados, archivo modificados, cambios sugeridos, etc.
+
+&lt;img src="img/mergePR.png" width="200px" style="display: block; margin: auto;" /&gt;
+
+--
+
+4 - Hacer _Merge pull request_. Agregar título y descripción. Confirmar el merge
+
+---
+
+## Resolución de conflictos
+
+Tan pronto como comencemos a trabajar en paralelo, es probable que alguien deshaga lo que otro hizo. Esto incluso es probable que suceda con nosotros mismos. Por ejemplo, si estamos trabajando en script al mismo tiempo en nuestra computadora portátil y en un servidor en el laboratorio, podríamos hacer diferentes cambios a cada copia del script. 
+Git/GitHub nos ayudan a manejar estos confictos al darnos herramientas para resolver cambios que se hayan traslapado.
+
+Para ejemplificar el manejo de conflictos realizaremos lo siguiente:
+
+- Dos usuarios modificarán el mismo archivo
+
+- Cada uno enviará un pull request al repositorio
+
+- El propietario o la propietaria del repositorio deberá revisar los cambios propuestos en cada PR, revisar y solucionar los conflictos que se presentarán para después aceptarlos.
+
+
+&lt;img src="img/conflicts.png" width="400px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Conclusión
+
+**GitHub** más que un lugar donde alojar nuestros proyectos es una "red social"" donde podemos dar a conocer nuestro trabajo y ayudar a otros proyectos colaborando de forma activa, grandes proyectos siguen creciendo gracias a la colaboración de usuarios de la comunidad.
+
+¿Cómo puedes hacer esto? Muy fácil, haz tu colaboración y crea un **pull request**.
+
+_¡Colabora en otros proyectos y comparte tus conocimientos!_
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(img/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
