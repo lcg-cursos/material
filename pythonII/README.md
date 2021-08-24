@@ -9,7 +9,9 @@ Bienvenidos al curso de Python II.
 
 2.- [Trabajar con ramas en Git](git/git-branches/2-Ramas.html)
 
-3.- Pull Request con Git
+3.- [Pull Request con Git](git/git-pull-request/3-PullRequest.html)
+ 
+  3.1- [Tips](git/git-pull-request/3.1-TipsWorkflow.html)
 
 
 ### Python Intermedio
