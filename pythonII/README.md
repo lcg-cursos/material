@@ -18,7 +18,7 @@ Bienvenidos al curso de Python II.
 
 4.-	[Introducción a POO](python/clase1/Clase_1.html)
 
-[Introducción a las librerias de Python](PythonII_L1_v1.0.html)
+[Introducción a las librerias de Python](python/clase1/PythonII_L1_v1.0.html)
     
 5.- BioPython
   - Secuencias y formatos
