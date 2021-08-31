@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Repaso POO <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:dodgerblue;overflow:visible;position:relative;"><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"/></svg></title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.10/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Repaso POO <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:dodgerblue;overflow:visible;position:relative;"><path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-66.8 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.8c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-13.6h160.2c31.1 0 42.6-21.7 53.4-54.2 11.2-33.5 10.7-65.7 0-108.6zM286.2 404c11.1 0 20.1 9.1 20.1 20.3 0 11.3-9 20.4-20.1 20.4-11 0-20.1-9.2-20.1-20.4.1-11.3 9.1-20.3 20.1-20.3zM167.8 248.1h106.8c29.7 0 53.4-24.5 53.4-54.3V91.9c0-29-24.4-50.7-53.4-55.6-35.8-5.9-74.7-5.6-106.8.1-45.2 8-53.4 24.7-53.4 55.6v40.7h106.9v13.6h-147c-31.1 0-58.3 18.7-66.8 54.2-9.8 40.7-10.2 66.1 0 108.6 7.6 31.6 25.7 54.2 56.8 54.2H101v-48.8c0-35.3 30.5-66.4 66.8-66.4zm-6.7-142.6c-11.1 0-20.1-9.1-20.1-20.3.1-11.3 9-20.4 20.1-20.4 11 0 20.1 9.2 20.1 20.4s-9 20.3-20.1 20.3z"/></svg>
+### Licenciatura en Ciencias Genómicas, UNAM
+### First version: 2021-08-15; Last update: 2021-08-30
+
+---
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stac
+koverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+# Clases y objetos
+
+* Clase:
+  - ejemplo:
+
+* Objeto:
+  - ejemplo:
+
+* Atributo:
+  - ejemplo:
+
+* Método:
+  - ejemplo
+  
+---
+# Clases y objetos
+
+* **Clase**: Entidad que define una serie de elementos que determinan un estado (atributos) y un comportamiento (método). Plantillas de los objetos.
+
+* **Objeto**: Instancia de una clase.
+
+
+&lt;img src="imgs/clase_1/ej_clase_objeto.png" width="450px" style="display: block; margin: auto;" /&gt;
+
+---
+
+&lt;img src="imgs/clase_1/ej_clase_objeto2.png" width="800px" style="display: block; margin: auto;" /&gt;
+
+---
+# Nuestro problema...
+Tenemos varios animales, y queremos representarlos en el código. ¿Qué clase pondrían?¿Cuáles serían los objetos?
+&lt;img src="imgs/clase_1/pregunta1.png" width="600px" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+&lt;img src="imgs/clase_1/mamifero.png" width="600px" style="display: block; margin: auto;" /&gt;
+
+---
+Además, los mamíferos tienen subcategorías
+
+&lt;img src="imgs/clase_1/car_clases_mamifero.png" width="1000px" style="display: block; margin: auto;" /&gt;
+---
+Y teniendo estas subcategorías, ya podemos meter a nuestros animales en cada una. Nuestros objetos ya pueden surgir de clases específicas para ellos.
+
+&lt;img src="imgs/clase_1/objetos_mamiferos.png" width="1000px" style="display: block; margin: auto;" /&gt;
+---
+
+# Definimos una clase y atributos
+
+
+```python
+class mamifero(): 
+    # Atributos de clase
+```
+
+---
+# Definimos una clase y atributos
+
+
+```python
+class mamifero(): 
+    # Atributos de clase
+    vertebrado : True
+    pelo : True
+        
+    # Atributos de instancia
+```
+
+---
+# Definimos una clase y atributos
+
+
+```python
+class mamifero(): 
+    # Atributos de clase
+    vertebrado : True
+    pelo : True
+        
+    # Atributos de instancia
+    alimentacion:  ''
+    tamanho: None
+    peso: None
+    progenie: 0
+```
+--
+
+```python
+perro = mamifero()
+perro.vertebrado
+```
+
+--
+
+Sin pensar todavía en constructores, ¿qué problema ven en este código?
+---
+## Agregamos métodos
+
+*self*: variable para referirnos a un objeto dentro del método
+
+
+
+
+```python
+class mamifero(): 
+    #...
+    
+    # Atributos de instancia
+    alimentacion = ''   # carnívoro, omnívoro, etc
+    # ...
+```
+
+---
+## Agregamos métodos
+
+*self*: variable para referirnos a un objeto dentro del método
+
+
+```python
+class mamifero(): 
+    #...
+    
+    # Atributos de instancia
+    alimentacion = ''   # carnívoro, omnívoro, etc
+    # ...
+    
+    # Cuántos puede tener y cuántos van a sobrevivir    
+    def reproducirse(self, max_progenie):
+        self.progenie +=  choice(range( max_progenie))
+    
+    def crecer(self, crecimiento):
+        self.altura += crecimiento
+        self.peso += crecimiento * 0.4
+```
+--
+
+```python
+perro = mamifero()
+perro.alimentacion
+```
+
+```
+## ''
+```
+---
+## Probamos nuestros métodos
+
+
+```python
+perro.alimentacion = 'omnivoro'
+perro.alimentacion
+```
+
+```
+## 'omnivoro'
+```
+
+```python
+perro.altura = 43
+perro.peso = 6.1
+perro.progenie
+```
+
+```
+## 0
+```
+
+
+
+
+
+```python
+perro.reproducirse(6)
+perro.progenie
+```
+
+```
+## 2
+```
+
+---
+# &lt;span style="color:Plum"&gt;Ejercicio 1&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;Clase, atributos y métodos&lt;/span&gt;
+
+* Crea la clase **animal** y agrega los atributos **nombre** y **edad**. También crea un método llamado **haz_ruido** que imprima "AAAAAAAAAAAAH".
+
+![](https://i.kym-cdn.com/photos/images/newsfeed/001/209/872/bc9.jpg)
+---
+## Constructores
+
+```python
+class mamifero(): 
+    # Atributos de clase
+    # ...
+    
+    def __init__(alimentacion, altura, peso, progenie=0):
+        # Atributos de instancia
+        self.alimentacion = alimentacion   # carnívoro, omnívoro, etc
+        self.altura = altura #cm
+        self.peso = peso #kg
+        self.progenie = progenie 
+        
+    # Cuántos puede tener y cuántos van a sobrevivir    
+    def reproducirse(self, max_progenie):
+        self.progenie +=  choice(range( max_progenie))
+    #...
+```
+
+
+```python
+perro = mamifero("omnívoro", 43, 6.1)
+```
+--
+¿Qué problema hay con el constructor?
+---
+
+
+
+
+```python
+perro = mamifero("omnívoro", 43, 6.1)
+perro.__dict__
+```
+
+```
+## {'alimentacion': 'omnívoro', 'altura': 43, 'peso': 6.1, 'progenie': 0}
+```
+---
+
+# &lt;span style="color:Plum"&gt;Ejercicio 2&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;Contructor&lt;/span&gt; 
+
+* Agreguen un constructor a su clase animal
+---
+# Herencia
+
+--
+
+Mecanismo por el cual una clase se deriva de otra de manera que extiende su funcionalidad. Al derivarse de una clase, **hereda** sus métodos y atributos.
+
+&lt;img src="imgs/clase_1/ej_herencia.png" width="600px" style="display: block; margin: auto;" /&gt;
+---
+
+# Superclase y subclase
+
+--
+ La clase **de la que estamos heredando** se suele denominar clase base, clase padre, *superclase*, etc. La clase que recibe la **herencia** es la *subclase*.
+
+&lt;img src="imgs/clase_1/ej_herencia.png" width="600px" style="display: block; margin: auto;" /&gt;
+---
+# Herencia y superclase
+
+Si también necesitáramos una clase `monotrema` (mamíferos que ponen huevos), podemos crear esta nueva clase **heredando** los atributos y métodos de la clase `mamifero`, la cual se convertiría en una *super*clase.
+
+
+```python
+class monotrema(mamifero):
+    espolon = True
+    
+    def poner_huevo(self, max_huevos):
+        huevos = 0
+        
+        # Cuántos de esos huevos eclosionan
+        for n in range(max_huevos):
+            if choice([True, False]):
+                huevos += 1
+                
+        if huevos&gt;0:
+            self.reproducirse(huevos)
+        
+    
+```
+
+---
+
+```python
+echidna = monotrema("carnívoro", 50, 6)
+echidna.__dict__
+```
+
+```
+## {'alimentacion': 'carnívoro', 'altura': 50, 'peso': 6, 'progenie': 0}
+```
+
+```python
+echidna.crecer(10)
+echidna.__dict__
+```
+
+```
+## {'alimentacion': 'carnívoro', 'altura': 60, 'peso': 10.0, 'progenie': 0}
+```
+
+
+```python
+echidna.poner_huevo(5)
+echidna.progenie
+```
+
+```
+## 2
+```
+
+**Heredamos los métodos y los atributos**
+
+---
+# &lt;span style="color:Plum"&gt;Ejercicio 3&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;Herencia y superclase&lt;/span&gt; 
+
+* Crea la clase **perro** y la clase **gato** de manera que &lt;span style="color:Brown"&gt;**hereden**&lt;/span&gt; la clase **animal** 
+
+* A la clase gato agrégale el atributo **usa_arenero** 
+
+
+---
+
+# Overriding
+
+
+--
+Overriding (podemos verlo como **sobreescribir o anular**) es una característica que permite que una subclase implemente a su manera un método que heredó de una superclase.
+
+&lt;img src="imgs/clase_1/ej_overriding.png" width="800px" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Overriding
+Si ahora queremos una clase de mamíferos `placentarios` y queremos guardar la información de si son acuáticos y además si crecen aumentan más su peso.
+
+
+```python
+from random import choice, seed
+class placentario(mamifero):
+
+    def __init__(self, alimentacion, altura, peso, acuatico, progenie=0):
+        self.acuatico = acuatico
+            
+             
+    def crecer(self, crecimiento):
+        self.altura += crecimiento
+        self.peso += crecimiento * 2
+```
+
+
+```python
+cachalote = placentario('carnívoro', 200, 41*10**3, True )
+cachalote.alimentacion
+```
+
+--
+¿Qué le falta a éste código? 
+---
+
+
+
+
+
+```python
+cachalote = placentario('carnívoro', 200, 41*10**3, True )
+cachalote.__dict__
+```
+
+```
+## {'alimentacion': 'carnívoro', 'altura': 200, 'peso': 41000, 'progenie': 0, 'acuatico': True}
+```
+---
+# &lt;span style="color:Plum"&gt;Ejercicio 4&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;Overriding&lt;/span&gt; 
+
+* Haz que la clase **perro** haga un &lt;span style="color:Brown"&gt;overriding&lt;/span&gt; del método **haz_ruido** para que ahora diga "guau" o su onomatopeya favorita
+
+---
+# Polimorfismos
+--
+
+Al invocar un método con el mismo nombre en distintos objetos obtendremos una respuesta distinta.
+
+&lt;img src="imgs/clase_1/ej_polimorfismo.png" width="800px" style="display: block; margin: auto;" /&gt;
+---
+# Polimorfismos
+
+Tenemos una nueva clase marsupial, que igual crece y cambia su peso de manera distinta. Podemos usar ambos métodos sin problema
+
+
+```python
+from random import choice, seed
+class marsupial(mamifero):
+                         
+    def crecer(self, crecimiento):
+        self.altura += crecimiento
+        self.peso += crecimiento * 0.7
+```
+
+
+```python
+cachalote = placentario('carnívoro', 200, 41*10**3, True )
+tlacuache = marsupial('omnívoro', 30, 1.2)
+
+for mamiferito in [cachalote, tlacuache]:
+  mamiferito.crecer(10)
+
+cachalote.peso, tlacuache.peso
+```
+
+```
+## (41020, 8.2)
+```
+
+---
+# &lt;span style="color:Plum"&gt;Ejercicio 5&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;Polimorfismo&lt;/span&gt; 
+
+* Haz que la clase **gato** haga un &lt;span style="color:Brown"&gt;polimorfismo&lt;/span&gt; del método **haz_ruido** para que ahora diga "miau" o su onomatopeya favorita
+
+
+---
+
+# &lt;span style="color:CadetBlue"&gt;Ejercicio completo&lt;/span&gt;
+
+&lt;img src="imgs/clase_1/ejercicio_final.png" width="600px" style="display: block; margin: auto;" /&gt;
+---
+# &lt;span style="color:CadetBlue"&gt;Ejercicio completo&lt;/span&gt;
+
+ Utilizando esta *superclase* animal, crea otras dos clases, perro y gato. 
+ 
+ Ambos van a hacer un **override** de haz_ruido() con sus respectivos sonidos (guau, miau, o con su onomatopeya favorita). 
+ 
+ También agreguen el atributo "usa_arenero" en la clase gato.
+ 
+ Al final, creen 2 objetos, un perro y un gato con los cuales llamen a la función *haz_ruido()* y a '__dict__'
+ 
+---
+
+# Pasos del ejercicio
+
+
+ 1.- Crear la clase perro y la clase gato, heredando la clase animal.
+ 
+ 2.- Sobreescribe (**override**) la función *haz_ruido()* en la clase perro y gato para que cada uno haga el sonido correcto.
+ 
+ 3.- Agrega el atributo "usa_arenero" para la clase gato (**override**).
+
+ 4.- Crea un objeto gato y un objeto perro con sus respectivos atributos y haz que ambos hagan sus respectivos ruidos, luego llama a '__dict__':
+
+    - freya.haz_ruido()
+      &gt; 'guau'
+    - freya.__dict__
+      &gt; {'nombre': 'Freya', 'edad': 7}
+    - senna.haz_ruido()
+      &gt; 'miau'
+    - senna.__dict__
+      &gt; {'nombre': 'Senna', 'edad': 1, 'usa_arenero': True}
+---
+
+# &lt;span style="color:OrangeRed"&gt;Tarea&lt;/span&gt;
+
+Creen sus propias clases con métodos y atributos.
+
+Apliquen herencia, overriding y polimorfismo.
+
+Explica para qué lo usarías
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(imgs/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
