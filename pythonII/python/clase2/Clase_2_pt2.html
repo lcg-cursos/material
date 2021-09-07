@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Secuencias <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:dodgerblue;overflow:visible;position:relative;"><path d="M.1 494.1c-1.1 9.5 6.3 17.8 15.9 17.8l32.3.1c8.1 0 14.9-5.9 16-13.9.7-4.9 1.8-11.1 3.4-18.1H380c1.6 6.9 2.9 13.2 3.5 18.1 1.1 8 7.9 14 16 13.9l32.3-.1c9.6 0 17.1-8.3 15.9-17.8-4.6-37.9-25.6-129-118.9-207.7-17.6 12.4-37.1 24.2-58.5 35.4 6.2 4.6 11.4 9.4 17 14.2H159.7c21.3-18.1 47-35.6 78.7-51.4C410.5 199.1 442.1 65.8 447.9 17.9 449 8.4 441.6.1 432 .1L399.6 0c-8.1 0-14.9 5.9-16 13.9-.7 4.9-1.8 11.1-3.4 18.1H67.8c-1.6-7-2.7-13.1-3.4-18.1-1.1-8-7.9-14-16-13.9L16.1.1C6.5.1-1 8.4.1 17.9 5.3 60.8 31.4 171.8 160 256 31.5 340.2 5.3 451.2.1 494.1zM224 219.6c-25.1-13.7-46.4-28.4-64.3-43.6h128.5c-17.8 15.2-39.1 30-64.2 43.6zM355.1 96c-5.8 10.4-12.8 21.1-21 32H114c-8.3-10.9-15.3-21.6-21-32h262.1zM92.9 416c5.8-10.4 12.8-21.1 21-32h219.4c8.3 10.9 15.4 21.6 21.2 32H92.9z"/></svg> y formatos <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:lemonChiffon ;overflow:visible;position:relative;"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"/></svg></title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.10/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Secuencias <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:dodgerblue;overflow:visible;position:relative;"><path d="M.1 494.1c-1.1 9.5 6.3 17.8 15.9 17.8l32.3.1c8.1 0 14.9-5.9 16-13.9.7-4.9 1.8-11.1 3.4-18.1H380c1.6 6.9 2.9 13.2 3.5 18.1 1.1 8 7.9 14 16 13.9l32.3-.1c9.6 0 17.1-8.3 15.9-17.8-4.6-37.9-25.6-129-118.9-207.7-17.6 12.4-37.1 24.2-58.5 35.4 6.2 4.6 11.4 9.4 17 14.2H159.7c21.3-18.1 47-35.6 78.7-51.4C410.5 199.1 442.1 65.8 447.9 17.9 449 8.4 441.6.1 432 .1L399.6 0c-8.1 0-14.9 5.9-16 13.9-.7 4.9-1.8 11.1-3.4 18.1H67.8c-1.6-7-2.7-13.1-3.4-18.1-1.1-8-7.9-14-16-13.9L16.1.1C6.5.1-1 8.4.1 17.9 5.3 60.8 31.4 171.8 160 256 31.5 340.2 5.3 451.2.1 494.1zM224 219.6c-25.1-13.7-46.4-28.4-64.3-43.6h128.5c-17.8 15.2-39.1 30-64.2 43.6zM355.1 96c-5.8 10.4-12.8 21.1-21 32H114c-8.3-10.9-15.3-21.6-21-32h262.1zM92.9 416c5.8-10.4 12.8-21.1 21-32h219.4c8.3 10.9 15.4 21.6 21.2 32H92.9z"/></svg> y formatos <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:lemonChiffon ;overflow:visible;position:relative;"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"/></svg>
+### Licenciatura en Ciencias Genómicas, UNAM
+### First version: 2021-08-15; Last update: 2021-08-22
+
+---
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+# GenBank
+**Metadata**:
+Información detallada sobre el organismo, referencias  a otras bases de datos, publicaciones, etc.
+
+
+
+```
+## LOCUS       JN584162                 500 bp ss-RNA     linear   VRL 15-APR-2012
+## DEFINITION  Aichi virus isolate 462 VP1 gene, partial cds.
+## ACCESSION   JN584162
+## VERSION     JN584162.1
+## KEYWORDS    .
+## SOURCE      Aichi virus 1
+##   ORGANISM  Aichi virus 1
+##             Viruses; Riboviria; Orthornavirae; Pisuviricota; Pisoniviricetes;
+##             Picornavirales; Picornaviridae; Kobuvirus.
+## REFERENCE   1  (bases 1 to 500)
+##   AUTHORS   Jonsson,N., Wahlstrom,K., Svensson,L., Serrander,L. and
+##             Lindberg,A.M.
+##   TITLE     Aichi virus infection in elderly people in Sweden
+##   JOURNAL   Arch. Virol. (2012) In press
+##    PUBMED   22466255
+##   REMARK    Publication Status: Available-Online prior to print
+## REFERENCE   2  (bases 1 to 500)
+##   AUTHORS   Lindberg,A.M. and Jonsson,N.
+##   TITLE     Direct Submission
+##   JOURNAL   Submitted (15-AUG-2011) School of Natural Sciences, Linnaeus
+```
+---
+# GenBank 
+**Features**:
+Características importantes de la secuencia, como secuencias codificantes, proteínas, etc.
+
+```
+## FEATURES             Location/Qualifiers
+##      source          1..500
+##                      /organism="Aichi virus 1"
+##                      /mol_type="genomic RNA"
+##                      /isolate="462"
+##                      /isolation_source="feces"
+##                      /host="Homo sapiens"
+##                      /db_xref="taxon:1313215"
+##                      /country="Sweden"
+##                      /collection_date="2009"
+##      CDS             &lt;1..&gt;500
+##                      /codon_start=3
+##                      /product="VP1"
+##                      /protein_id="AFH54897.1"
+##                      /translation="PPDTKLENFFSFYRLLPMGGSGAPALSFPADEGTIIPLNPINWL
+##                      KGADVSGIAAMLSCFTYIAADLRITLRFSNPNDNPATMLVAFAPPGATIPLKPTRQML
+##                      SNFYMAEVPVSAATSTMVSFSIPYTSPLSAIPTSYFGWEDWSGTNFGQLSSGSWGNLM
+##                      LIPSLS"
+```
+---
+# GenBank
+**Origin**:
+Secuencia (ADN o proteína). La última línea es un "//" e indican el final del archivo.
+
+```
+## ORIGIN
+##         1 tccctccaga caccaaactg gaaaacttct tctccttcta ccgcttgctg cccatgggtg
+##        61 gcagcggtgc tccagctctt tctttccccg ctgacgaagg cacaatcatc ccactcaacc
+##       121 caatcaattg gctcaaaggg gcggacgtct ccgggatcgc tgcgatgcta tcgtgcttca
+##       181 cgtacatcgc tgcggacctg cgaatcacgc tccgcttctc caacccaaat gacaaccctg
+##       241 ccaccatgct tgttgccttc gctccccctg gcgccaccat ccccctcaaa cccacgcgcc
+##       301 aaatgctctc caacttctac atggcggagg tcccagtctc cgctgccacc tccaccatgg
+##       361 tctctttctc catcccctac acctcccccc tctctgccat ccccacctca tacttcggat
+##       421 gggaggactg gtcaggtacc aactttggcc agctctcctc cgggtcatgg ggaaacctca
+##       481 tgctcatccc ctctctctct
+## //
+```
+---
+# Obtener la información del archivo GenBank
+
+```python
+
+from Bio import SeqIO
+
+for gb_record in SeqIO.parse("./files/clase_2/aichi.gb", "genbank"):
+    print('ID', gb_record.id)
+    print('Secuencia', str(gb_record.seq)[0:30],'...')
+    print('Longitud', len(gb_record))
+```
+
+```
+## ID JN584162.1
+## Secuencia TCCCTCCAGACACCAAACTGGAAAACTTCT ...
+## Longitud 500
+```
+
+```python
+atributos = gb_record.__dict__
+atributos.keys()
+```
+
+```
+## dict_keys(['_seq', 'id', 'name', 'description', 'dbxrefs', 'annotations', '_per_letter_annotations', 'features'])
+```
+---
+# GenBank annotations (metadata)
+
+
+```python
+for annotation, value in gb_record.annotations.items():
+  print(annotation, value)
+  
+```
+
+```
+## molecule_type ss-RNA
+## topology linear
+## data_file_division VRL
+## date 15-APR-2012
+## accessions ['JN584162']
+## sequence_version 1
+## keywords ['']
+## source Aichi virus 1
+## organism Aichi virus 1
+## taxonomy ['Viruses', 'Riboviria', 'Orthornavirae', 'Pisuviricota', 'Pisoniviricetes', 'Picornavirales', 'Picornaviridae', 'Kobuvirus']
+## references [Reference(title='Aichi virus infection in elderly people in Sweden', ...), Reference(title='Direct Submission', ...)]
+```
+---
+# &lt;span style="color:Plum"&gt;Ejercicio 1&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;Obtener información de las anotaciones&lt;/span&gt;
+
+* Utilizando el archivo **hepatitis.gb** obtengan de qué organismo viene  y la fecha.
+
+
+
+---
+
+# GenBank features
+
+
+```python
+for i,feature in enumerate(gb_record.features):
+    print("Feature",i+1,'\n',feature)
+```
+
+
+```
+## Feature 1 
+##  type: source
+## location: [0:500](+)
+## qualifiers:
+##     Key: collection_date, Value: ['2009']
+##     Key: country, Value: ['Sweden']
+##     Key: db_xref, Value: ['taxon:1313215']
+##     Key: host, Value: ['Homo sapiens']
+##     Key: isolate, Value: ['462']
+##     Key: isolation_source, Value: ['feces']
+##     Key: mol_type, Value: ['genomic RNA']
+##     Key: organism, Value: ['Aichi virus 1']
+```
+
+
+---
+# GenBank features
+
+```python
+for i,feature in enumerate(gb_record.features):
+    print("Feature",i+1,'\n',feature)
+```
+
+
+```
+## Feature 2 
+##  type: CDS
+## location: [&lt;0:&gt;500](+)
+## qualifiers:
+##     Key: codon_start, Value: ['3']
+##     Key: product, Value: ['VP1']
+##     Key: protein_id, Value: ['AFH54897.1']
+##     Key: translation, Value: ['PPDTKLENFFSFYRLLPMGGSGAPALSFPADEGTIIPLNPINWLKGADVSGIAAMLSCFTYIAADLRITLRFSNPNDNPATMLVAFAPPGATIPLKPTRQMLSNFYMAEVPVSAATSTMVSFSIPYTSPLSAIPTSYFGWEDWSGTNFGQLSSGSWGNLMLIPSLS']
+```
+
+---
+# Acceder a los valores **qualifiers** del *feature* 
+
+
+```
+## Feature 1 
+##  type: source
+## location: [0:500](+)
+## qualifiers:
+##     Key: collection_date, Value: ['2009']
+##     Key: country, Value: ['Sweden']
+##     Key: db_xref, Value: ['taxon:1313215']
+##     Key: host, Value: ['Homo sapiens']
+##     Key: isolate, Value: ['462']
+##     Key: isolation_source, Value: ['feces']
+##     Key: mol_type, Value: ['genomic RNA']
+##     Key: organism, Value: ['Aichi virus 1']
+```
+
+--
+
+
+```python
+gb_record.features[1].qualifiers
+```
+
+```
+## OrderedDict([('codon_start', ['3']), ('product', ['VP1']), ('protein_id', ['AFH54897.1']), ('translation', ['PPDTKLENFFSFYRLLPMGGSGAPALSFPADEGTIIPLNPINWLKGADVSGIAAMLSCFTYIAADLRITLRFSNPNDNPATMLVAFAPPGATIPLKPTRQMLSNFYMAEVPVSAATSTMVSFSIPYTSPLSAIPTSYFGWEDWSGTNFGQLSSGSWGNLMLIPSLS'])])
+```
+---
+
+# &lt;span style="color:Plum"&gt;Ejercicio 2&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;Obtener información de las anotaciones&lt;/span&gt;
+
+* Utilizando el archivo **hepatitis.gb** obtengan el número del aislado y el país de donde proviene
+
+---
+
+
+# Acceder a los valores **location** del *feature* 
+
+dict:  atributos únicos  
+dir: atributos y métodos únicos y heredados
+
+
+```python
+gb_record.features[1].location
+```
+
+```
+## FeatureLocation(BeforePosition(0), AfterPosition(500), strand=1)
+```
+
+```python
+gb_record.features[1].location.__dict__
+```
+
+```
+## {'_start': BeforePosition(0), '_end': AfterPosition(500), '_strand': 1, 'ref': None, 'ref_db': None}
+```
+
+```python
+dir(gb_record.features[1].location)
+```
+
+```
+## ['__add__', '__class__', '__contains__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__module__', '__ne__', '__new__', '__nonzero__', '__radd__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_end', '_flip', '_get_strand', '_set_strand', '_shift', '_start', '_strand', 'end', 'extract', 'nofuzzy_end', 'nofuzzy_start', 'parts', 'ref', 'ref_db', 'start', 'strand']
+```
+---
+
+Diferencia entre start, end, nofuzzy_start y nofuzzy_end
+
+```python
+
+gb_record.features[1].location.start
+```
+
+```
+## BeforePosition(0)
+```
+
+```python
+gb_record.features[1].location.nofuzzy_start
+```
+
+```
+## 0
+```
+
+```python
+gb_record.features[1].location.end
+```
+
+```
+## AfterPosition(500)
+```
+
+```python
+gb_record.features[1].location.nofuzzy_end
+```
+
+```
+## 500
+```
+
+---
+Sabemos que el objeto gb_record.seq tiene un objeto Secuencia de Biopython, ¿cómo obtengo un subset de esta secuencia del nucléotido 4 al 10?
+
+
+```
+## Seq('TCCCTCCAGACACCAAACTGGAAAACTTCTTCTCCTTCTACCGCTTGCTGCCCA...TCT')
+```
+
+```
+## Seq('CTCCAGA')
+```
+--
+Ahora, ¿cómo accedo a la secuencia usando el inicio y el fin del *feature* cds?
+--
+
+--
+¿Cómo obtengo la proteína de este subset usando la secuencia que obtuvimos?
+--
+
+--
+
+```
+## Feature 2 
+##  type: CDS
+## location: [&lt;0:&gt;500](+)
+## qualifiers:
+##     Key: codon_start, Value: ['3']
+##     Key: product, Value: ['VP1']
+##     Key: protein_id, Value: ['AFH54897.1']
+##     Key: translation, Value: ['PPDTKLENFFSFYRLLPMGGSGAPALSFPADEGTIIPLNPINWLKGADVSGIAAMLSCFTYIAADLRITLRFSNPNDNPATMLVAFAPPGATIPLKPTRQMLSNFYMAEVPVSAATSTMVSFSIPYTSPLSAIPTSYFGWEDWSGTNFGQLSSGSWGNLMLIPSLS']
+```
+
+
+
+¿Notan algo con esta proteína?
+---
+
+# &lt;span style="color:Plum"&gt;Ejercicio 3&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt; &lt;/span&gt;
+
+* Utilizando el archivo **hepatitis.gb** obtengan la secuencia, transcripción y traducción del gen **X**.
+---
+
+# &lt;span style="color:CadetBlue"&gt;Ejercicio completo&lt;/span&gt;
+
+Creen una función que a partir del archivo hepatitis.gb imprime:
+Organismo  
+País de la muestra  
+Número del aislado  
+Nombre del gen y de la proteína que produce (sólo hay un cds)  
+Los primeros 15 nucleótidos de ADN. De estos 15 nucleótidos su respectivo ARN y proteína.
+
+    &gt; resumen("files/clase_2/hepatitis.gb")
+      # Organismo:    Hepatitis B virus
+      # Fecha:    15-MAY-2012
+      # País:   India 
+      # Aislado:    11851
+      # Gen:    X
+      # ADN:    ATGGCTGCTAGGTTG
+      # ARN:    AUGGCUGCUAGGUUG
+      # Proteína:     MAARL
+---
+# Pasos del ejercicio
+
+
+
+ 1.- Lee el archivo y crea tu objeto gb_record
+ 
+ 2.- Puedes obtener los primeros datos de annotations (uno de ellos también aparece en features, puedes tomarlo de donde quieras).
+ 
+ 3.- Revisa cómo accedimos en la clase a la información de features.
+ 
+ 4.- Recuerda que la secuencia de gb_record.seq es una secuencia de Bio.Seq y puedes aprovechar sus métodos.
+
+---
+# BLAST Output
+
+https://blast.ncbi.nlm.nih.gov/Blast.cgi
+
+
+Hit y HSP
+
+&lt;img src="imgs/clase_2/local_global.png" width="600px" style="display: block; margin: auto;" /&gt;
+---
+# Un solo hit y dos High-scoring Segment Pair (HSP) 
+&lt;img src="imgs/clase_2/hit1_hsp2.png" width="600px" style="display: block; margin: auto;" /&gt;
+
+---
+# ¿Cuántos HSP tiene este Hit?
+
+&lt;img src="imgs/clase_2/hit1_hsp2_real.png" width="600px" style="display: block; margin: auto;" /&gt;
+---
+# Un solo hit y un High-scoring Segment Pair (HSP) 
+&lt;img src="imgs/clase_2/hit2_hsp1.png" width="600px" style="display: block; margin: auto;" /&gt;
+
+---
+# ¿Cuántos HSP tiene este Hit?
+&lt;img src="imgs/clase_2/hit2_hsp1_real.png" width="600px" style="display: block; margin: auto;" /&gt;
+---
+# ¿Cuántos HSP tiene este Hit?
+&lt;img src="imgs/clase_2/hit3_hsp3.png" width="600px" style="display: block; margin: auto;" /&gt;
+---
+# Archivo BLAST
+
+&lt;img src="imgs/clase_2/XML_blast.png" width="600px" style="display: block; margin: auto;" /&gt;
+---
+# Estructura final
+&lt;img src="imgs/clase_2/struct_blastf.png" width="600px" style="display: block; margin: auto;" /&gt;
+---
+#Expect
+
+El valor Esperado (E) es un parámetro que describe el número de éxitos que uno puede "esperar" ver cuando se busca en una base de datos de un tamaño particular. Disminuye exponencialmente al mismo tiempo que el Score (S) del match aumenta. Esencialmente, el valor E describe el ruido de fondo aleatorio.
+---
+
+Cada record es un **query**
+
+
+```python
+from Bio.Blast import NCBIXML
+result_handle = open("./files/clase_2/test.blastout.xml")
+blast_records = NCBIXML.parse(result_handle)
+for blast_record in blast_records:
+  print(blast_record.query_id)
+  print(blast_record.matrix)
+  print(blast_record.query)
+  print(blast_record.query_letters)
+```
+
+```
+## Query_1
+## BLOSUM62
+## ENSMUST00000202211.1 cds chromosome:GRCm38:CHR_MG4249_PATCH:6537737:6542711:-1 gene:ENSMUSG00000107099.3 gene_biotype:protein_coding transcript_biotype:protein_coding gene_symbol:Slc22a12 description:solute carrier family 22 (organic anion/cation transporter), member 12 [Source:EntrezGene;Acc:20521]
+## 823
+```
+---
+# &lt;span style="color:Plum"&gt;Ejercicio 1&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt; &lt;/span&gt;
+
+* Impriman los **query_id** del archivo *multiple_blastoutput.xml* , ¿Cuántos hay? 
+
+---
+Cada hit es un alignment
+
+https://www.uniprot.org/help/fasta-headers
+
+
+```python
+n = 0
+from Bio.Blast import NCBIXML
+result_handle = open("./files/clase_2/test.blastout.xml")
+blast_records = NCBIXML.parse(result_handle)
+for blast_record in blast_records:
+    for alignment in blast_record.alignments:
+      if n &lt; 2:
+        print(alignment.title)
+        print(alignment.hit_id)
+        print(alignment.hit_def)
+        print(alignment.length)
+        n+=1
+```
+
+```
+## sp|Q8CFZ5|S22AC_MOUSE Solute carrier family 22 member 12 OS=Mus musculus GN=Slc22a12 PE=1 SV=1
+## sp|Q8CFZ5|S22AC_MOUSE
+## Solute carrier family 22 member 12 OS=Mus musculus GN=Slc22a12 PE=1 SV=1
+## 553
+## sp|Q3ZAV1|S22AC_RAT Solute carrier family 22 member 12 OS=Rattus norvegicus GN=Slc22a12 PE=2 SV=1
+## sp|Q3ZAV1|S22AC_RAT
+## Solute carrier family 22 member 12 OS=Rattus norvegicus GN=Slc22a12 PE=2 SV=1
+## 553
+```
+---
+# &lt;span style="color:Plum"&gt;Ejercicio 2&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt; &lt;/span&gt;
+
+* Impriman los **hit_id** del archivo *multiple_blastoutput.xml* y que sean del query_id **Query_73775**  
+
+¿Cuántos hay? 
+
+---
+
+Hsp es un "subalineamiento"
+
+
+```python
+from Bio.Blast import NCBIXML
+n = 0
+
+result_handle = open("./files/clase_2/test.blastout.xml")
+blast_records = NCBIXML.parse(result_handle)
+for blast_record in blast_records:
+    for alignment in blast_record.alignments:
+        for hsp in alignment.hsps:
+            if n&lt;2:
+                print('score', hsp.score)
+                print('gaps', hsp.gaps)
+                print('E = ' , hsp.expect)
+                print('sbjct = ' , hsp.sbjct)
+                n += 1
+```
+
+```
+## score 846.0
+## gaps 0
+## E =  1.47916e-109
+## sbjct =  RFQLFQTVALVTPILWVTTQNMLENFSAAVPHHRCWVPLLDNSTSQASIPGDLGPDVLLAVSIPPGPDQQPHQCLRFRQPQWQLTESNATATNWSDAATEPCEDGWVYDHSTFRSTIVTTWDLVCNSQALRPMAQSIFLAGILVGAAVCGHASDRF
+## score 613.0
+## gaps 0
+## E =  1.20034e-74
+## sbjct =  WLPESARWLITVGKLDQGLQELQRVAAVNRRKAEGDTLTMEVLRSAMEEEPSRDKAGASLGTLLHTPGLRHRTIISMLCWFAFGFTFYGLALDLQALGSNIFLLQALIGIVDFPVKTG
+```
+---
+# &lt;span style="color:Plum"&gt;Ejercicio 3&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt; &lt;/span&gt;
+
+* Obtengan los valores *e* de los HSP del hit **sp|Q3ZAV1.1|** del query_id **Query_73775**.
+
+¿Cuál es el más bajo?
+
+---
+
+```python
+from Bio.Blast import NCBIXML
+n = 0
+
+result_handle = open("./files/clase_2/test.blastout.xml")
+blast_records = NCBIXML.parse(result_handle)
+for blast_record in blast_records:
+    for alignment in blast_record.alignments:
+        for hsp in alignment.hsps:
+            if n&lt;4:
+                print('id', alignment.title)
+                print('E = ' , hsp.expect)
+                n += 1
+            else:
+                break
+```
+
+```
+## id sp|Q8CFZ5|S22AC_MOUSE Solute carrier family 22 member 12 OS=Mus musculus GN=Slc22a12 PE=1 SV=1
+## E =  1.47916e-109
+## id sp|Q8CFZ5|S22AC_MOUSE Solute carrier family 22 member 12 OS=Mus musculus GN=Slc22a12 PE=1 SV=1
+## E =  1.20034e-74
+## id sp|Q3ZAV1|S22AC_RAT Solute carrier family 22 member 12 OS=Rattus norvegicus GN=Slc22a12 PE=2 SV=1
+## E =  7.69823e-103
+## id sp|Q3ZAV1|S22AC_RAT Solute carrier family 22 member 12 OS=Rattus norvegicus GN=Slc22a12 PE=2 SV=1
+## E =  1.31588e-62
+```
+---
+# Ejercicio
+
+Usando el archivo **test.blastout.xml** parsea los resultados e imprime lo siguiente "queryName o query_id,	hitID,	hit Description o hit_def, e-value" **solo** si el valor *e* es menor que **1e-10**. (el query name es el query_id y lo encuentran en el blast_record y el Hit Description dentro del alignment.hit_def)
+
+Ejemplo: 
+
+|Query Name|Hit ID|Hit Description|e-Value|
+|:---------:|:----:|:------:|:------:|
+|Query_1|sp&amp;#124;Q9Y267&amp;#124;S22AE_HUMAN|Solute carrier family 22 member 14|2.35119e-06|
+
+---
+# Pasos del ejercicio
+
+1.- Hay que recorrer la estructura: 
+
+  - Primero tenemos el blast_record (la búsqueda de nuestro query y su información están aquí)
+  
+  - Después tenemos el alineamiento o hit
+  
+  - Finalmente tenemos cada uno de los HSP con sus estadísticas
+  
+2.- Guarden la información de cada nivel 
+
+3.- Hagan un filtro para solo quedarse con aquellos datos cuyo valor **e** sea menor a **1e-10**
+
+---
+## File Format Conversions
+
+
+```python
+# from Bio import SeqIO
+fasta_records = SeqIO.parse("archivos_trabajo/seq.nt.fa", "fasta")  
+tab_records = SeqIO.write(fasta_records , 'seqs.tab' , 'tab')
+```
+
+
+```python
+# from Bio import SeqIO
+fasta_records = SeqIO.convert('archivos_trabajo/sample.fastq', 'fastq', 'sample.converted.fa', 'fasta')
+```
+
+
+```python
+with open("./archivos_trabajo/aichi.gb") as input_handle:
+    with open("aichi.fasta", "w") as output_handle:
+        sequences = SeqIO.parse(input_handle, "genbank")
+        count = SeqIO.write(sequences, output_handle, "fasta")
+
+print("Converted %i records" % count)
+```
+---
+
+# &lt;span style="color:OrangeRed"&gt;Tarea&lt;/span&gt;
+
+* Guarden en un archivo fasta la secuencia de ARN del archivo hepatitis.gb. 
+
+-----------------------
+
+* También guarden en un archivo fasta las primeras 5  secuencias  con un e-value menor a **1e-11** del archivo BLAST.
+
+* El nombre de las secuencias será el hit ID y el número de HSP (no hay una variable que nos lo dé directamente, tienen que ver en qué número de HSP van del Hit)
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(img/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
