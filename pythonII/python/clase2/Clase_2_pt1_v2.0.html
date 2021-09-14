@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Secuencias <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:dodgerblue;overflow:visible;position:relative;"><path d="M.1 494.1c-1.1 9.5 6.3 17.8 15.9 17.8l32.3.1c8.1 0 14.9-5.9 16-13.9.7-4.9 1.8-11.1 3.4-18.1H380c1.6 6.9 2.9 13.2 3.5 18.1 1.1 8 7.9 14 16 13.9l32.3-.1c9.6 0 17.1-8.3 15.9-17.8-4.6-37.9-25.6-129-118.9-207.7-17.6 12.4-37.1 24.2-58.5 35.4 6.2 4.6 11.4 9.4 17 14.2H159.7c21.3-18.1 47-35.6 78.7-51.4C410.5 199.1 442.1 65.8 447.9 17.9 449 8.4 441.6.1 432 .1L399.6 0c-8.1 0-14.9 5.9-16 13.9-.7 4.9-1.8 11.1-3.4 18.1H67.8c-1.6-7-2.7-13.1-3.4-18.1-1.1-8-7.9-14-16-13.9L16.1.1C6.5.1-1 8.4.1 17.9 5.3 60.8 31.4 171.8 160 256 31.5 340.2 5.3 451.2.1 494.1zM224 219.6c-25.1-13.7-46.4-28.4-64.3-43.6h128.5c-17.8 15.2-39.1 30-64.2 43.6zM355.1 96c-5.8 10.4-12.8 21.1-21 32H114c-8.3-10.9-15.3-21.6-21-32h262.1zM92.9 416c5.8-10.4 12.8-21.1 21-32h219.4c8.3 10.9 15.4 21.6 21.2 32H92.9z"/></svg> y formatos <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:lemonChiffon ;overflow:visible;position:relative;"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"/></svg></title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.9/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Secuencias <svg aria-hidden="true" role="img" viewBox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:dodgerblue;overflow:visible;position:relative;"><path d="M.1 494.1c-1.1 9.5 6.3 17.8 15.9 17.8l32.3.1c8.1 0 14.9-5.9 16-13.9.7-4.9 1.8-11.1 3.4-18.1H380c1.6 6.9 2.9 13.2 3.5 18.1 1.1 8 7.9 14 16 13.9l32.3-.1c9.6 0 17.1-8.3 15.9-17.8-4.6-37.9-25.6-129-118.9-207.7-17.6 12.4-37.1 24.2-58.5 35.4 6.2 4.6 11.4 9.4 17 14.2H159.7c21.3-18.1 47-35.6 78.7-51.4C410.5 199.1 442.1 65.8 447.9 17.9 449 8.4 441.6.1 432 .1L399.6 0c-8.1 0-14.9 5.9-16 13.9-.7 4.9-1.8 11.1-3.4 18.1H67.8c-1.6-7-2.7-13.1-3.4-18.1-1.1-8-7.9-14-16-13.9L16.1.1C6.5.1-1 8.4.1 17.9 5.3 60.8 31.4 171.8 160 256 31.5 340.2 5.3 451.2.1 494.1zM224 219.6c-25.1-13.7-46.4-28.4-64.3-43.6h128.5c-17.8 15.2-39.1 30-64.2 43.6zM355.1 96c-5.8 10.4-12.8 21.1-21 32H114c-8.3-10.9-15.3-21.6-21-32h262.1zM92.9 416c5.8-10.4 12.8-21.1 21-32h219.4c8.3 10.9 15.4 21.6 21.2 32H92.9z"/></svg> y formatos <svg aria-hidden="true" role="img" viewBox="0 0 384 512" style="height:1em;width:0.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:lemonChiffon ;overflow:visible;position:relative;"><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm64 236c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-64c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12v8zm0-72v8c0 6.6-5.4 12-12 12H108c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h168c6.6 0 12 5.4 12 12zm96-114.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"/></svg>
+### Licenciatura en Ciencias Genómicas,UNAM
+### First version: 2021-08-15; Last update: 2021-09-14
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+# Secuencias
+
+## Contenido de la unidad
+
+
+  1. [Bio.Seq](Clase_2_pt1_v2.0.html#5)
+
+  2. [Archivos FASTA](Clase_2_pt1_v2.0.html#23)
+  
+  3. [SeqRecord](Clase_2_pt1_v2.0.html#24)
+
+  4. [Archivos FASTQ](Clase_2_pt1_v2.0.html#37)
+
+---
+
+## Objetivo
+
+- Conocer y aprender a utilizar las estructuras de datos de Biopython para manejo de secuencias de DNA, RNA y proteínas
+
+- Conocer los tipos de formatos para manejo de secuencias biológicas de Biopython
+
+&lt;img src="imgs/clase_2/pusheen.jpg" width="450px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Introducción
+
+
+Con el advenimiento de las tecnologías de secuenciación masiva y la demanda por procesar cada vez más datos, surgen junto con la comunidad bioinformática nuevas herramientas para manejar los datos.
+
+Con lo aprendido hasta ahora, ¿podrían analizar secuencias obtenidas de GeneBank u otra base de datos?
+
+
+De lo que conocen, ¿Qué módulos o estructuras de datos usarían para almacenar secuencias? 
+
+
+
+---
+
+## Módulo Bio.Seq .tiny[(manejo de secuencias)]
+
+.full-width[.content-box-red[Función `Seq`: toma secuencia DNA|RNA|AA (string) y convierte a objeto `Seq`]]
+
+
+```python
+import Bio.Seq
+*seqobj = Bio.Seq.Seq('ATGCGATCGAGC')
+seqobj
+```
+
+```
+## Seq('ATGCGATCGAGC')
+```
+
+.small[se puede regresar a tipo string]
+
+```python
+seq_str = str(seqobj)  # convertir con str()
+print('{} tiene {} nucleotidos'.format( seq_str , len(seq_str)))
+```
+
+```
+## ATGCGATCGAGC tiene 12 nucleotidos
+```
+
+---
+
+### Abreviemos  
+
+Para no tener que escribir todo el tiempo `Bio.Seq.Seq` podemos hacer:
+
+
+```python
+*from Bio.Seq import Seq
+seqobj = Seq('ATGCGATCGAGC')
+```
+
+&lt;br&gt;&lt;br&gt;
+
+.full-width[.content-box-red[Superclase `Bio`, clase `Bio.Seq` y `Seq` como subclase de `Bio` ]]
+
+---
+
+## Inmutabilidad
+
+.full-width[.content-box-red[Los objetos `Seq` son inmutables  ]]
+
+
+
+```python
+## ERROR!!!
+seqobj[0]="T"
+```
+
+Podríamos usar la funcion `.MutableSeq()` para convertir a objeto mutable
+
+```python
+from Bio.Seq import MutableSeq
+# objeto mut_seq será mutable!
+mut_seq = MutableSeq(seqobj)
+mut_seq[0] = "T" 
+```
+O desde un inicio hacer nuestro objeto `MutableSeq` .tiny[(importar `MutableSeq`)]
+.full-width[.content-box-yellow[ from Bio.Seq import MutableSeq ]]
+
+---
+
+&lt;img src="imgs/clase_2/meowtation.jpeg" width="450px" style="display: block; margin: auto;" /&gt;
+
+---
+
+### ¿Cómo obtendrían la secuencia complementaria?
+
+
+```python
+seq_str
+```
+
+```
+## 'ATGCGATCGAGC'
+```
+--
+
+
+```python
+#invertir secuencia 
+seq_str = seq_str[::-1]
+#remplazar cada nucleotido por su complementario
+seq_str = seq_str.replace("A", "t") 
+seq_str = seq_str.replace("C", "g")
+seq_str = seq_str.replace("G", "c")
+seq_str = seq_str.replace("T", "a")
+seq_str
+```
+
+```
+## 'gctcgatcgcat'
+```
+
+---
+
+## Usando `Seq()`
+
+
+- Secuencia complementaria:
+
+```python
+*seqobj.complement()
+```
+
+```
+## Seq('TACGCTAGCTCG')
+```
+
+- Secuencia reverso complementaria:
+
+```python
+*seqobj.reverse_complement()
+```
+
+```
+## Seq('GCTCGATCGCAT')
+```
+
+- o su traducción .tiny[ (empieza a traducir desde inicio sin importar el codón de inicio) ]:
+
+```python
+#to_stop para en codón de paro, de lo contrario continua y escribe "*"
+*seqobj.translate(to_stop = True)
+```
+
+```
+## Seq('MRSS')
+```
+
+---
+
+### Más funciones 
+
+- Obtener transcrito
+
+```python
+*rna = seqobj.transcribe()
+```
+
+- y retrotranscripto
+
+```python
+*rna.back_transcribe()
+```
+
+```
+## Seq('ATGCGATCGAGC')
+```
+
+---
+
+## Extraer subsecuencias
+
+Para ejemplo extraeremos el primer codón [0:3]
+
+```python
+seqobj = Seq('ATGCGATCGAGC')
+seqobj[0:3]
+```
+
+```
+## Seq('ATG')
+```
+
+Podríamos usar expresiones regulares para obtener cada codón, con el módulo `re`
+
+```python
+import re
+for codon in re.findall(r"(.{3})", str(seqobj)):
+    print(codon)
+```
+
+```
+## ATG
+## CGA
+## TCG
+## AGC
+```
+
+---
+
+## Buscar patrones
+
+Buscaremos el patrón **ACG**
+
+
+```python
+# from Bio.Seq import Seq
+*from Bio import SeqUtils
+# Patrón a buscar
+pattern = Seq("ACG")
+# Secuencia donde buscaremos patrón
+sequence = Seq("ATGCGCGACGGCGTGATCAGCTTATAGCCGTACGACTGCTGC")
+# Busqueda patrón en secuencia tipo STRING!!
+*results = SeqUtils.nt_search(str(sequence), pattern)
+
+print(results)  # patrón y posiciones 
+```
+
+```
+## ['ACG', 7, 31]
+```
+
+---
+
+###  Buscar patrón reverso complementario 
+
+Usando los métodos de `Seq`, buscar el reverso complementario del patrón en la misma secuencia:
+
+--
+
+
+```python
+# reverse_complement()
+results_rc = SeqUtils.nt_search(str(sequence),
+*                               pattern.reverse_complement())
+print(results_rc)
+```
+
+```
+## ['CGT', 11, 28]
+```
+
+---
+
+#### Contenido de GC
+
+
+```python
+*from Bio.SeqUtils import GC
+GC(seqobj)  
+GC('AGCGTGCA')
+```
+
+#### calcular masa molecular
+
+```python
+*from Bio.SeqUtils import molecular_weight
+molecular_weight(seqobj)
+```
+
+#### Contar nt
+
+```python
+print(seqobj.count("ATG")) 
+print(seqobj.find("GC"))  # nos da la primera posición que encuentra 
+# (-1 si no encuentra)
+```
+
+.full-width[.content-box-red[ No sobrelapa, por lo que en "AAAA" dará 2 para "AA" ]]
+
+---
+
+# &lt;span style="color:Plum"&gt;Ejercicio 1&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;Obtener cadena protéica de cualquiera de sus ORFs&lt;/span&gt;
+
+
+- .small[(Un ORF inicia con un codón inicial y termina, ya sea con un codón final o al final de la cádena.)]
+
+&lt;br&gt;
+
+Input a utilizar: 
+&lt;pre&gt;AGCCATGTAGCTAACTCAGGTTACATGGGGATGACCCCGCGACTTGGATTAGAGTCTCTTTTGGAATAAGCCTGAATGATCCGAGTAGCATCTCAG&lt;/pre&gt;
+
+--
+
+## &lt;span style="color:Plum"&gt;Ejercicio avanzado&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;Elegir la cadena protéica de mayor longitud&lt;/span&gt;
+
+- .small[No olvidar probar todos los ORFs]
+
+---
+### RESUMEN
+
+- **`Bio.Seq`**
+
+```python
+`from Bio.Seq import Seq, MutableSeq
+Seq("ATGC")  # Crear objeto Seq
+MutableSeq("ATGC") # Crea objeto Seq mutable
+objeto.complement() # secuencia complementaria
+objeto.reverse_complement()	# secuencia reverso complementaria
+objeto.translate()	# secuencia traducida
+objeto.transcrite() # transcrito de secuencia
+objeto.back_transcribe() # retrotranscripto de secuencia 
+```
+
+- **`SeqUtils`**
+
+```python
+from Bio.SeqUtils import nt_search, GC, molecular_weight
+nt_search("ATGC", patron) #buscar patron
+GC("ATGC") # contenido GC
+molecular_weight("ATGC") # peso molecular
+```
+---
+
+## Secuencia consenso
+
+&lt;img src="imgs/clase_2/consensus.jpg" width="350px" style="display: block; margin: auto;" /&gt;
+
+&lt;br&gt;
+
+```python
+from Bio import SeqUtils
+consensus = "RGWYV"
+sequence = "CGTAGCTAGCTCAGAGCAGGGACACGTGCTAGCAACAGCGCT"
+SeqUtils.nt_search(sequence,consensus)
+## ['[AG]G[AT][CT][ACG]', 19]
+```
+
+---
+
+## Motifs
+
+Supongamos que tenemos las instancias de un *DNA motif*
+
+```python
+from Bio.Seq import Seq
+instances = [Seq("TACAA"),
+            Seq("TACGC"),
+            Seq("TACAC"),
+            Seq("TACCC"),
+            Seq("AACCC"),
+            Seq("AATGC"),
+            Seq("AATGC"),
+           ]
+```
+Podemos crear un motif .tiny[(recuerda importar `Bio.motifs`)]
+
+.full-width[.content-box-yellow[ m = motifs.create(instances) ]]
+
+
+---
+
+## FASTA
+
+&lt;br&gt;
+Formato con encabezados que siempre inician con **'&gt;'**, salto de linea, seguido de secuencia de DNA, RNA o aminoácidos
+
+&lt;br&gt;&lt;br&gt;
+&lt;img src="imgs/clase_2/fasta.jpg" width="600px" style="display: block; margin: auto;" /&gt;
+---
+### Objetos `SeqRecord`
+
+`SeqIO.Parse` genera objetos `Bio.SeqRecord.SeqRecord`
+
+.full-width[.content-box-red[ 
+atributos principales:
+- **ID**: identificador (cadena) `objeto.id`
+- **Seq**: secuencia (objeto Seq o similar) `objeto.seq`
+]]
+
+Atributos adicionales:
+- **name**: Nombre de la secuencia, e.g. nombre del gen (string)
+- **description**: Texto adicional (cadena)
+- **dbxrefs**: Lista de referencias cruzadas de bases de datos (lista de cadenas)
+- **features**: Cualquier (sub)features definidos (lista de objetos SeqFeature)
+- **annotations**: Más información sobre la secuencia (dictionary). cadenas, o lista de cadenas.
+
+---
+### `SeqIO`
+
+**Standard Sequence Input/Output interface for Biopython**
+
+**`SeqIO.parse()`**: toma archivo (o handle) y su respectivo formato para regresa iterador de `SeqRecord` .small[[Aquí puedes checar formatos](https://biopython.org/wiki/SeqIO)]
+
+
+```python
+from Bio import SeqIO
+# parsea archivo example.fasta, puedes obtener id, seq, name, features, etc..
+for record in SeqIO.parse("ejemplo.fasta", "fasta"):
+    print(record.id)
+
+# alternativamente se puede usar lo siguiente    
+with open("ejemplo.fasta") as handle:
+    for record in SeqIO.parse(handle, "fasta"):
+        print(record.id)
+```
+
+**`SeqIO.read()`**: similar pero solo si tienes un único record en archivo
+
+
+```python
+*record = SeqIO.read("single.fasta", "fasta")
+```
+
+---
+### Output `SeqIO`
+
+`SeqIO.write()`: necesita `SeqRecord`, archivo output y tipo de formato
+
+
+```python
+secuencias = ...  
+# primera forma de escribir archivo 
+with open("ejemplo.fasta", "w") as output_handle:
+*   SeqIO.write(secuencias, output_handle, "fasta")
+
+# segunda forma de escribir archivo
+SeqIO.write(sequences, "ejemplo.fasta", "fasta")
+```
+
+---
+
+## Leer archivo FASTA
+
+
+```python
+*from Bio import SeqIO
+#dirección de archivo
+filename = "files/clase_2/seq.nt.fa"
+#por cada record queremos ID, longitud seq y traducción
+for seq_record in SeqIO.parse(filename, "fasta"):
+    print('ID {}'.format(seq_record.id))
+    print('len {}'.format(len(seq_record)))
+    print('Traducción {}'.format(seq_record.seq.translate(to_stop=False)))
+    
+#  (to_stop=False,cds=True)
+#cds revisa que tenga un codón de inicio
+```
+Secuencia es de tipo `Seq` por lo que podemos utilizar lo que vimos en [`Bio.Seq`](PythonII_L2_v0.0.html#5):
+
+```python
+seq_record.seq.complement()
+seq_record.seq.reverse_complement()
+rna = seq_record.seq.transcribe()
+rna.back_transcribe()
+```
+
+---
+
+## Archivo fasta a diccionario de Python
+
+Usaremos `SeqIO.to_dict` para que nuestro archivo parseado sea convertido en un diccionario. Nota: no será conveniente si nuestro archivo es muy grande
+
+
+```python
+*id_dict = SeqIO.to_dict(SeqIO.parse('archivos_trabajo/seq.nt.fa', 'fasta'))
+id_dict  # 'seq1' : SeqRecord(id, name, ...), ...
+```
+Y así accedemos:
+
+```python
+print(id_dict['seq4'], '\n')  # objeto record
+print(id_dict['seq4'].seq, '\n')  # solo secuencia
+
+print(type(id_dict['seq4'].seq), '\n')  #clase Seq
+
+print(str(id_dict['seq4'].seq.transcribe()), '\n') 
+```
+
+---
+# &lt;span style="color:Plum"&gt;Ejercicio 2&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt; Imprimir codones (separados por un espacio) de cada secuencia en formato FASTA. [ARCHIVO](files/clase_2/seq.nt.fa) &lt;/span&gt;
+
+.small[
+- Crea diccionario de tu archivo FASTA
+
+- Encuentra todos los codones del primer marco de lectura
+
+- Imprimirlos codones separados con formato FASTA
+]
+
+&lt;br&gt;
+
+--
+## &lt;span style="color:Plum"&gt;Ejercicio avanzado&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;Hacer lo mismo para los 6 marcos de lectura&lt;/span&gt;
+
+- .small[En los encabezados deberá decir a qué marco de lectura pertenece]
+
+---
+
+## Manejo de FASTA con listas
+
+
+```python
+from Bio import SeqIO
+*id_list = list(SeqIO.parse("files/clase_2/seq.nt.fa", "fasta"))
+print(id_list[-1].id, '\n')  # id del ultimo elemento
+```
+
+```
+## seq4
+```
+
+```python
+print(id_list[-1].seq, '\n')  # seq del ultimo elemento
+```
+
+```
+## ATGCTAACCAAAGTTTCAGTTCGGACGTGTCGATGAGCGACGCTCAAAAAGGAAACAACATGCCAAATAGAAACGATCAATTCGGCGATGGAAATCAGAACAACGATCAGTTTGGAAATCAAAATAGAAATAACGGGAACGATCAGTTTAATAACATGATGCAGAATAAAGGGAATAATCAATTTAATCCAGGTAATCAGAACAGAGGT
+```
+
+```python
+id_list  # para examinar
+```
+
+```
+## [SeqRecord(seq=Seq('AAGAGCAGCTCGCGCTAATGTGATAGATGGCGGTAAAGTAAATGTCCTATGGGC...AAC'), id='seq1', name='seq1', description='seq1', dbxrefs=[]), SeqRecord(seq=Seq('GCCACAGAGCCTAGGACCCCAACCTAACCTAACCTAACCTAACCTACAGTTTGA...TCT'), id='seq2', name='seq2', description='seq2', dbxrefs=[]), SeqRecord(seq=Seq('ATGAAAGTTACATAAAGACTATTCGATGCATAAATAGTTCAGTTTTGAAAACTT...AAT'), id='seq3', name='seq3', description='seq3', dbxrefs=[]), SeqRecord(seq=Seq('ATGCTAACCAAAGTTTCAGTTCGGACGTGTCGATGAGCGACGCTCAAAAAGGAA...GGT'), id='seq4', name='seq4', description='seq4', dbxrefs=[])]
+```
+
+
+---
+
+## Archivos grandes
+
+Usando `SeqIO.index` que solo guarda info para que mas tarde puedas acceder a ella
+
+```python
+*record_dict = SeqIO.index("example2.fasta", "fasta")
+
+# hasta este momento recuperará la info de seq1
+print(record_dict["seq1"])
+```
+
+---
+#subset 
+
+Si quisieramos hacer un fasta con ciertas secuencias podriamos hacer lo siguiente
+
+```python
+# guardamos ids de interés
+seq_ids=['seq4','seq1']
+```
+Y ahora escribimos archivo `filtered.fasta` con seq1 y seq4
+
+```python
+with open("files/clase_2/filtered.fasta", "w") as out_handle:
+    for record in SeqIO.parse('archivos_trabajo/seq.nt.fa', "fasta"):
+*       if record.id in seq_ids:
+            SeqIO.write(record, out_handle, "fasta")
+```
+
+---
+## RNA-seq
+
+&lt;iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Sf2Q203nHMw?start=2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+
+---
+### Tecnologías 
+
+&lt;img src="imgs/clase_2/rnaseq.jpeg" width="450px" style="display: block; margin: auto;" /&gt;
+&lt;img src="imgs/clase_2/rnaseq2.jpeg" width="600px" style="display: block; margin: auto;" /&gt;
+.right[https://www.nature.com/articles/s41576-019-0150-2]
+---
+
+&lt;br&gt;&lt;br&gt;
+&lt;img src="imgs/clase_2/rnaseq3.jpeg" width="700px" style="display: block; margin: auto;" /&gt;
+
+&lt;br&gt;
+.right[https://www.nature.com/articles/s41576-019-0150-2]
+---
+## Fastq
+
+- Identificador de secuencia con información sobre la secuenciación. .tiny[Los contenidos de esta línea varian, basados en el software de conversión BCL a FASTQ usado]
+
+- La secuencia ( A, C, T, G y N)
+
+- Un separador, signo de más (+)
+
+- **Puntuaciones de calidad.** Estas son codificadas con Phred +33, usando caracteres ASCII para representar puntuaciones de calidad numéricas
+
+&lt;br&gt;
+&lt;img src="imgs/clase_2/fastq.jpg" width="600px" style="display: block; margin: auto;" /&gt;
+
+---
+
+### ¿Qué significa el idenfiticador?
+
+&lt;br&gt;&lt;br&gt;
+&lt;img src="imgs/clase_2/fastq_2.jpeg" width="400px" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Score de calidad
+
+Q score of 3 means P=0.5, meaning that there is a 50% chance the base is wrong
+
+&lt;img src="imgs/clase_2/fastq_3.jpeg" width="200px" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="imgs/clase_2/score.png" width="550px" style="display: block; margin: auto;" /&gt;
+
+---
+## Leer archivos Fastq
+
+
+```python
+# from Bio import SeqIO
+n = 0
+# indicamos que es un archivo fastq
+*for record in SeqIO.parse("archivos_trabajo/sample.fastq", "fastq"):
+    if n &lt; 5:
+        # pedimos id y seq
+        print("%s %s" % (record.id, record.seq))
+        n +=1
+    else:break
+        
+print ('\n',record.letter_annotations.keys())
+
+# nos da los valores en qscore (ya no en ASCII)
+*print (record.letter_annotations["phred_quality"])
+```
+
+---
+### FASTQC
+
+.small[https://www.bioinformatics.babraham.ac.uk/projects/fastqc/]
+
+Control de calidad de lecturas, contenido GC, oligos, bases N, sobrerepresentación de secuencias, etc.
+
+**Nos puede ayudar con:** sesgo de ciertas secuencias, secuencias poco confiables, posible contaminación, evitar análisis e interpretaciones incorrectas!
+
+&lt;img src="imgs/clase_2/fastqc.jpeg" width="550px" style="display: block; margin: auto;" /&gt;
+
+---
+### Workflow 
+&lt;br&gt;
+&lt;img src="imgs/clase_2/rnaseq4.jpeg" width="600px" style="display: block; margin: auto;" /&gt;
+
+---
+# &lt;span style="color:Plum"&gt;Ejercicio 3&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;Obtener número de lecturas cuyo promedio de calidad está debajo de un umbral dado [ARCHIVO](files/clase_2/sample.fastq)&lt;/span&gt;
+.pull-left[
+Input:
+&lt;pre&gt;
+
+@Rosalind_0041
+GGCCGGTCTATTTACGTTCTCACCCGACGTGACGTACGGTCC
++
+6.3536354;.151&lt;211/0?::6/-2051)-*"40/.,+%)
+@Rosalind_0041
+TCGTATGCGTAGCACTTGGTACAGGAAGTGAACATCCAGGAT
++
+AH@FGGGJ&lt;GB&lt;&lt;9:GD=D@GG9=?A@DC=;:?&gt;839/4856
+@Rosalind_0041
+ATTCGGTAATTGGCGTGAATCTGTTCTGACTGATAGAGACAA
++
+@DJEJEA?JHJ@8?F?IA3=;8@C95=;=?;&gt;D/:;74792.
+
+&lt;/pre&gt;
+]
+.pull-right[
+&lt;img src="imgs/clase_2/toreto.jpeg" width="300px" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
