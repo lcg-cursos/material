@@ -21,7 +21,7 @@ Bienvenidos al curso de Python II.
 [Introducción a las librerias de Python](python/clase1/PythonII_L1_v1.0.html)
     
 5.- BioPython
-  - [Contexto Biológico[(python/clase2/Contexto_biologico.html)
+  - [Contexto Biológico](python/clase2/Contexto_biologico.html)
   - [Secuencias y formatos](python/clase2/Clase_2_pt1_v2.0.htm)
   - [Acceso a Bases de datos](python/clase2/Clase_2_pt2_v2.0.html)
 
