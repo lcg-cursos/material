@@ -22,7 +22,7 @@ Bienvenidos al curso de Python II.
     
 5.- BioPython
   - [Contexto Biológico](python/clase2/Contexto_biologico.html)
-  - [Secuencias y formatos](python/clase2/Clase_2_pt1_v2.0.htm)
+  - [Secuencias y formatos](python/clase2/Clase_2_pt1_v2.0.html)
   - [Acceso a Bases de datos](python/clase2/Clase_2_pt2_v2.0.html)
 
 6.- Vectores y Matrices con NumPy
