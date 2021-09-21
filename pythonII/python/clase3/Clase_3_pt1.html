@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Estructura 3D de Proteínas <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:dodgerblue;overflow:visible;position:relative;"><path d="M488.6 250.2L392 214V105.5c0-15-9.3-28.4-23.4-33.7l-100-37.5c-8.1-3.1-17.1-3.1-25.3 0l-100 37.5c-14.1 5.3-23.4 18.7-23.4 33.7V214l-96.6 36.2C9.3 255.5 0 268.9 0 283.9V394c0 13.6 7.7 26.1 19.9 32.2l100 50c10.1 5.1 22.1 5.1 32.2 0l103.9-52 103.9 52c10.1 5.1 22.1 5.1 32.2 0l100-50c12.2-6.1 19.9-18.6 19.9-32.2V283.9c0-15-9.3-28.4-23.4-33.7zM358 214.8l-85 31.9v-68.2l85-37v73.3zM154 104.1l102-38.2 102 38.2v.6l-102 41.4-102-41.4v-.6zm84 291.1l-85 42.5v-79.1l85-38.8v75.4zm0-112l-102 41.4-102-41.4v-.6l102-38.2 102 38.2v.6zm240 112l-85 42.5v-79.1l85-38.8v75.4zm0-112l-102 41.4-102-41.4v-.6l102-38.2 102 38.2v.6z"/></svg></title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Estructura 3D de Proteínas <svg aria-hidden="true" role="img" viewBox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:dodgerblue;overflow:visible;position:relative;"><path d="M488.6 250.2L392 214V105.5c0-15-9.3-28.4-23.4-33.7l-100-37.5c-8.1-3.1-17.1-3.1-25.3 0l-100 37.5c-14.1 5.3-23.4 18.7-23.4 33.7V214l-96.6 36.2C9.3 255.5 0 268.9 0 283.9V394c0 13.6 7.7 26.1 19.9 32.2l100 50c10.1 5.1 22.1 5.1 32.2 0l103.9-52 103.9 52c10.1 5.1 22.1 5.1 32.2 0l100-50c12.2-6.1 19.9-18.6 19.9-32.2V283.9c0-15-9.3-28.4-23.4-33.7zM358 214.8l-85 31.9v-68.2l85-37v73.3zM154 104.1l102-38.2 102 38.2v.6l-102 41.4-102-41.4v-.6zm84 291.1l-85 42.5v-79.1l85-38.8v75.4zm0-112l-102 41.4-102-41.4v-.6l102-38.2 102 38.2v.6zm240 112l-85 42.5v-79.1l85-38.8v75.4zm0-112l-102 41.4-102-41.4v-.6l102-38.2 102 38.2v.6z"/></svg>
+### Licenciatura en Ciencias Genómicas, UNAM
+### First version: 2021-08-15; Last update: 2021-09-21
+
+---
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+# Importancia
+
+El conocimiento de la estructura 3D de la proteína nos ayuda a comprender cómo funciona la proteína y utilizar esa información para diferentes propósitos:
++ Controlar o modificar la función de la proteína
++ Predecir qué moléculas se unen a esa proteína y comprender diversas interacciones biológicas
++ Ayudar al descubrimiento de fármacos 
++ Diseñar nuestras propias proteínas.
+
+---
+# Contexto biológico
+
+
+## Contribution of Disulfide Bridging to Epitope Expression of the Dengue Type 2 Virus Envelope Glycoprotein
+
+Los enlaces disulfuro (SS) son importantes para la envoltura del virus del dengue. Su eliminación podría interferir con la replicación del virus
+
+---
+# Fenómenos de las ondas
+
+&lt;img src="imgs/clase_3/fenomenos_ondas.png" width="800px" style="display: block; margin: auto;" /&gt;
+---
+# Difracción 
+
+Desviación de ondas alrededor de las esquinas de un obstáculo o a través de una abertura de diámetro menor o igual que la longitud de onda. 
+
+&lt;img src="imgs/clase_3/difraccion.png" width="800px" style="display: block; margin: auto;" /&gt;
+---
+
+# Difracción en el mar
+
+
+
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/2TMR-EyF_ds" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+
+---
+
+# Simulaciones PhET
+
+https://phet.colorado.edu/sims/html/wave-interference/latest/wave-interference_en.html
+
+---
+
+# Difracción 
+
+&lt;img src="imgs/clase_3/simulacion_1.png" width="800px" style="display: block; margin: auto;" /&gt;
+---
+
+# Tamaño y longitud de onda
+
+Figura sencilla
+
+&lt;img src="imgs/clase_3/tamano_ej1.png" width="500px" style="display: block; margin: auto;" /&gt;
+---
+# Tamaño y longitud de onda
+
+Figura compleja
+&lt;img src="imgs/clase_3/tamano_ej2.png" width="500px" style="display: block; margin: auto;" /&gt;
+---
+# Orden
+
+&lt;img src="imgs/clase_3/orden.png" width="500px" style="display: block; margin: auto;" /&gt;
+---
+# Longitudes de ondas
+
++ Rayos gamma `\(&lt;10x10^{-12}m\)` (pico)
+ 
++ Rayos X `\(&lt;10x10^{-9}m\)` (nano)
+
++ Infrarrojo cercano `\(2.5x10^{-6}m\)` (micro)
+
+--
+
+Escalas :  https://learn.genetics.utah.edu/content/cells/scale/
+
+#### ¿Cuál es el tamaño aproximado de una célula de la piel?
+
+--
+
+`\(30\mu m\)`  o `\(3.0x10^{-5}m\)`
+
+--
+
+#### ¿Cuál es el tamaño de un átomo?
+--
+
+`\(340p m\)` o `\(3.4x10^{-10}m\)`
+
+--
+
+#### ¿Cuál onda utilizarían para ver los átomos de una proteína?
+
+--
+### ¿Cómo obtenemos una estructura repetida y ordenada?
+
+---
+# La cristalografía es un arte <svg aria-hidden="true" role="img" viewBox="0 0 576 512" style="height:1em;width:1.12em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:dodgerblue;overflow:visible;position:relative;"><path d="M485.5 0L576 160H474.9L405.7 0h79.8zm-128 0l69.2 160H149.3L218.5 0h139zm-267 0h79.8l-69.2 160H0L90.5 0zM0 192h100.7l123 251.7c1.5 3.1-2.7 5.9-5 3.3L0 192zm148.2 0h279.6l-137 318.2c-1 2.4-4.5 2.4-5.5 0L148.2 192zm204.1 251.7l123-251.7H576L357.3 446.9c-2.3 2.7-6.5-.1-5-3.2z"/></svg>
+
++ Si tocan un cristal de NaCl no se rompe, uno de proteína sí (**no lo toquen**)
+
++ Si sube o baja la T, el cristal **explota**
+
++ Si el cristal es muy grande, la gravedad hará que se **rompa**
+
++ Los rayos X queman, hay que mantener frío el cristal para minimizar el daño
+
++ La humedad puede crear cristales de hielo, y ya no veremos nuestro cristal
+
+---
+# Rayos X
+
+Obtenemos el patrón de difracción y la posición de las nubes electrónicas
+
+--
+#### ¿Cuáles son los átomos que más comúnmente encontramos en una proteína? 
+
+--
++ **H** no suele aparecer,
+--
+
+solo tiene un electrón y usualmente se lo roban  <svg aria-hidden="true" role="img" viewBox="0 0 496 512" style="height:1em;width:0.97em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:gray;overflow:visible;position:relative;"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm80 168c17.7 0 32 14.3 32 32s-14.3 32-32 32-32-14.3-32-32 14.3-32 32-32zM152 416c-26.5 0-48-21-48-47 0-20 28.5-60.4 41.6-77.8 3.2-4.3 9.6-4.3 12.8 0C171.5 308.6 200 349 200 369c0 26-21.5 47-48 47zm16-176c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm170.2 154.2C315.8 367.4 282.9 352 248 352c-21.2 0-21.2-32 0-32 44.4 0 86.3 19.6 114.7 53.8 13.8 16.4-11.2 36.5-24.5 20.4z"/></svg>
+
+--
++ Las cosas con muchos electrones se ven bien
+
+--
++ También se ve bien el enlace peptídico ya que presenta resonancia
+
+&lt;img src="imgs/clase_3/resonancia_aa.png" width="350px" style="display: block; margin: auto;" /&gt;
+--
+
++ Algo que se ve muy bien es el cobre 
+
+---
+
+#### Pensando en que cosas con resonancia se ven bonito, ¿qué aminoácidos deberían verse muy bien?
+
+https://wou.edu/chemistry/files/2019/07/20-Common-Amino-Acids-v2.pdf
+
+[X-ray Protein Crystallography
+](https://phys.libretexts.org/Courses/University_of_California_Davis/UCD%3A_Biophysics_200A_-_Current_Techniques_in_Biophysics/X-ray_Protein_Crystallography)
+
+
+&lt;img src="imgs/clase_3/F2.large.jpg" width="350px" style="display: block; margin: auto;" /&gt;
+---
+
+# Estructura 3D proteína
+
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/j4HgLf_eJoc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+
+---
+
+# Real-Time Observation of Nonclassical Protein Crystallization Kinetics
+Sauter, Andrea, *et al.* (2015)
+
+&lt;video width="560" height="315" controls&gt;
+  &lt;source src="https://s3-eu-west-1.amazonaws.com/ppreviews-acs-4898564/3845914/video_preview.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+
+---
+
+# Resonancia Magnética Nuclear
+
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/RZLew6Ff-JE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+
++ No funciona bien en moléculas de más de 25kDa, y la mayoría de estructuras que no se conocen son más grandes
+
+---
+# Química Dorothy Mary Crowfoot Hodgkin
+
+Great Medical Discoveries: Dorothy Hodgkin and the Structure of Penicillin
+https://www.youtube.com/watch?v=1LitdoIAJ0k
+
+Photo from the Nobel Foundation archive.
+
+&lt;img src="https://www.nobelprize.org/images/hodgkin-13170-portrait-mini-2x.jpg" width="350px" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Estructuras 3D
+
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/yF9ejcyzdfY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+
+---
+
+# Protein Data Bank
+
+El Protein Data Bank (PDB) (Banco de Datos de Proteínas) es una base de datos de la estructura tridimensional de las proteínas y ácidos nucleicos. Estos datos, generalmente obtenidos mediante cristalografía de rayos X o resonancia magnética nuclear, son enviados por biólogos y bioquímicos de todo el mundo. Están bajo el dominio público y pueden ser usados libremente.
+
+
+---
+
+
+# Metadatos 
+Más información sobre los archivos PDB en: 
+https://www.wwpdb.org/documentation/file-format-content/format32/v3.2.html
+
+```
+## HEADER    LECTIN                                  12-JUN-96   1FAT
+## TITLE     PHYTOHEMAGGLUTININ-L
+## COMPND    MOL_ID: 1;
+## COMPND   2 MOLECULE: PHYTOHEMAGGLUTININ-L;
+## COMPND   3 CHAIN: A, B, C, D;
+## COMPND   4 SYNONYM: LEUCOAGGLUTINATING PHYTOHEMAGGLUTININ, PHA-L
+## SOURCE    MOL_ID: 1;
+## SOURCE   2 ORGANISM_SCIENTIFIC: PHASEOLUS VULGARIS;
+## SOURCE   3 ORGANISM_TAXID: 3885;
+## SOURCE   4 ORGAN: SEED;
+## SOURCE   5 OTHER_DETAILS: PURIFIED PHA-L WAS PURCHASED FROM SIGMA
+## KEYWDS    GLYCOPROTEIN, PLANT DEFENSE PROTEIN, LECTIN
+## EXPDTA    X-RAY DIFFRACTION
+## AUTHOR    T.HAMELRYCK,R.LORIS
+## REVDAT   4   29-JUL-20 1FAT    1       COMPND REMARK SEQADV HETNAM
+## REVDAT   4 2                   1       LINK   SITE
+## REVDAT   3   13-JUL-11 1FAT    1       VERSN
+## REVDAT   2   24-FEB-09 1FAT    1       VERSN
+```
+---
+
+# Información estadística, 
+
+
+```
+## REMARK   3   ESD FROM SIGMAA              (A) : NULL
+## REMARK   3   LOW RESOLUTION CUTOFF        (A) : NULL
+## REMARK   3
+## REMARK   3  CROSS-VALIDATED ESTIMATED COORDINATE ERROR.
+## REMARK   3   ESD FROM C-V LUZZATI PLOT    (A) : NULL
+## REMARK   3   ESD FROM C-V SIGMAA          (A) : NULL
+## REMARK   3
+## REMARK   3  RMS DEVIATIONS FROM IDEAL VALUES.
+## REMARK   3   BOND LENGTHS                 (A) : 0.017
+## REMARK   3   BOND ANGLES            (DEGREES) : 2.010
+## REMARK   3   DIHEDRAL ANGLES        (DEGREES) : 28.16
+## REMARK   3   IMPROPER ANGLES        (DEGREES) : 1.710
+## REMARK   3
+## REMARK   3  ISOTROPIC THERMAL MODEL : NULL
+## REMARK   3
+## REMARK   3  ISOTROPIC THERMAL FACTOR RESTRAINTS.    RMS    SIGMA
+## REMARK   3   MAIN-CHAIN BOND              (A**2) : NULL  ; NULL
+## REMARK   3   MAIN-CHAIN ANGLE             (A**2) : NULL  ; NULL
+## REMARK   3   SIDE-CHAIN BOND              (A**2) : NULL  ; NULL
+```
+
+
+---
+# Información estructural
+
+
+```
+## ATOM   6692  C   SER D 170      24.571  23.305  20.087  1.00 32.49           C
+## ATOM   6693  O   SER D 170      24.185  24.488  20.029  1.00 37.32           O
+## ATOM   6694  CB  SER D 170      24.345  21.774  22.049  1.00 27.88           C
+## ATOM   6695  OG  SER D 170      25.509  21.032  21.812  1.00 46.44           O
+## ATOM   6696  N   THR D 171      25.707  22.868  19.547  1.00 31.64           N
+## ATOM   6697  CA  THR D 171      26.676  23.745  18.912  1.00 21.12           C
+## ATOM   6698  C   THR D 171      26.426  23.953  17.440  1.00 19.01           C
+## ATOM   6699  O   THR D 171      27.087  24.766  16.837  1.00 21.78           O
+## ATOM   6700  CB  THR D 171      28.057  23.154  19.029  1.00 18.70           C
+## ATOM   6701  OG1 THR D 171      28.060  21.883  18.364  1.00 26.28           O
+## ATOM   6702  CG2 THR D 171      28.438  22.952  20.476  1.00 14.48           C
+## ATOM   6703  N   ASN D 172      25.496  23.208  16.857  1.00 20.03           N
+```
+
+---
+# Objeto *Structure*
+
+El Objeto Structure sigue el formato llamado SMCRA (Structure/Model/Chain/Residue/- Atom):
+
++ Un structure consiste de models
++ Un model consiste de chains
++ Un chain consiste de residues
++ Un residue consiste de atoms
+
+
+&lt;img src="imgs/clase_3/struc.png" width="600px" style="display: block; margin: auto;" /&gt;
+
+---
+### ¿Cómo obtener un objeto structure?
+
+Primero creamos un **objeto** `PDBParser` con un `QUIET` (evita que nos hable de posibles errores en el archivo PDB, casi todos tienen y no nos concentraremos en eso)
+
+```{}
+de BIO importa PDB
+parser = PDB.PDBParser(QUIET=True)
+```
+
+--
+Después, utilizaremos el **método** `get_structure` para obtener el **objeto** `structure`. Le pasaremos el nombre del archivo y un nombre que nosotros asignaremos
+
+```{}
+obj_struc = parser.get_structure("nombre", "archivo.pdb")
+```
+
+--
+
+Un archivo structure tendrá varios modelos si es un análisis de NMR, donde tenemos diferentes modelos de la misma estructura.
+De lo contrario, solo debería haber 1 modelo
+
+---
+
+Ahora podemos ver cuántos modelos hay en este **objeto** `structure` utilizando `child_dict` o `child_list`
+```{}
+struc.child_dict
+```
+&lt;p&gt;&lt;samp&gt;## {llave_modelo_1 : model_id_1 (Modelo 1, de RMN)&lt;br&gt;## llave_modelo_2 : model_id_2 (Modelo 2, de RMN) }&lt;/samp&gt;&lt;/p&gt;
+
+```{}
+struc.child_list
+```
+&lt;p&gt;&lt;samp&gt;## [ model_id_1 (Modelo 1, de RMN),&lt;br&gt;##  model_id_2 (Modelo 2, de RMN)] &lt;/samp&gt;&lt;/p&gt;
+
+---
+
+también podemos acceder a metadatos almacenados en el **atributo** header
+
+```{}
+struc.header.keys()
+```
+
+&lt;p&gt;&lt;samp&gt;## dict_keys(['name', 'head', 'idcode', 'deposition_date',...])&lt;/samp&gt;&lt;/p&gt;
+
+--
+
+```{}
+struc.header['structure_method']
+```
+
+&lt;p&gt;&lt;samp&gt;## 'x-ray diffraction' (El método que se usó para crear el modelo)&lt;/samp&gt;&lt;/p&gt;
+
+--
+
+```{}
+struc.header['resolution']
+```
+
+&lt;p&gt;&lt;samp&gt;## 2.8 (Con cuánta resolución podemos ver el modelo)&lt;/samp&gt;&lt;/p&gt;
+
+&lt;img src="imgs/clase_3/F2.large.jpg" width="650px" style="display: block; margin: auto;" /&gt;
+
+---
+### Structure **S**
+&lt;img src="imgs/clase_3/1structure.png" width="180px" style="display: block; margin: auto;" /&gt;
+
+
+```python
+from Bio import PDB
+parser = PDB.PDBParser(QUIET=True)
+struc = parser.get_structure("prot_1fat", "./files/clase_3/1fat.pdb")
+struc.child_dict
+```
+
+```
+## {0: &lt;Model id=0&gt;}
+```
+
+```python
+struc.child_list
+```
+
+```
+## [&lt;Model id=0&gt;]
+```
+
+---
+
+```python
+struc.header.keys()
+```
+
+```
+## dict_keys(['name', 'head', 'idcode', 'deposition_date', 'release_date', 'structure_method', 'resolution', 'structure_reference', 'journal_reference', 'author', 'compound', 'source', 'has_missing_residues', 'missing_residues', 'keywords', 'journal'])
+```
+
+```python
+struc.header['structure_method']
+```
+
+```
+## 'x-ray diffraction'
+```
+
+```python
+struc.header['resolution']
+```
+
+```
+## 2.8
+```
+
+```python
+struc.header['source']
+```
+
+```
+## {'1': {'misc': '', 'organism_scientific': 'phaseolus vulgaris', 'organism_taxid': '3885', 'organ': 'seed', 'other_details': 'purified pha-l was purchased from sigma'}}
+```
+
+```python
+struc.header['journal']
+```
+
+```
+## 'AUTH   T.W.HAMELRYCK,M.H.DAO-THI,F.POORTMANS,M.J.CHRISPEELS,L.WYNS,AUTH 2 R.LORISTITL   THE CRYSTALLOGRAPHIC STRUCTURE OF PHYTOHEMAGGLUTININ-L.REF    J.BIOL.CHEM.                  V. 271 20479 1996REFN                   ISSN 0021-9258PMID   8702788DOI    10.1074/JBC.271.34.20479'
+```
+---
+# &lt;span style="color:Plum"&gt;Ejercicio 1&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;Crear un objeto structure con el  archivo 1kcw.pdb e imprimir el método con el que se creó el modelo y su resolución&lt;/span&gt;
+
+```{}
+de BIO importa PDB
+parser = PDB.PDBParser(QUIET=True)
+
+obj_struc = parser.get_structure("nombre", "archivo.pdb")
+
+struc.atributo_metadato['método de estructura']
+
+struc.atributo_metadato['resolución']
+```
+
+---
+## Model  **M**
+&lt;img src="imgs/clase_3/2model.png" width="180px" style="display: block; margin: auto;" /&gt;
+
+Para acceder a los modelos podemos iterar en el objeto `structure`
+
+```{}
+Para Cada modelo en obj_structure:
+  Imprime(modelo)
+```
+&lt;p&gt;&lt;samp&gt;## Model id=0 &lt;br&gt;## Model id=1 &lt;/samp&gt;&lt;/p&gt;
+
+O acceder como diccionario
+
+```{}
+modelo = obj_structure[0]
+```
+---
+Al igual que para el **objeto** `structure`, podemos ver el siguiente nivel almacenado utilizando  `child_dict` o `child_list`
+
+```{}
+modelo.child_dict
+```
+
+&lt;p&gt;&lt;samp&gt;## {'A' :  obj_Cadena_A  &lt;br&gt;## 'B' obj_Cadena_B }&lt;/samp&gt;&lt;/p&gt;
+
+```{}
+modelo.child_list
+```
+
+&lt;p&gt;&lt;samp&gt;## [obj_Cadena_A, obj_Cadena_B]&lt;/samp&gt;&lt;/p&gt;
+
+
+---
+Accedemos al modelo
+
+
+```python
+for model in struc:
+    print(model)
+```
+
+```
+## &lt;Model id=0&gt;
+```
+
+
+```python
+model = struc[0]
+```
+
+
+```
+## &lt;Model id=0&gt;
+```
+
+Vemos la información almacenada
+
+
+
+```python
+model.child_dict
+```
+
+```
+## {'A': &lt;Chain id=A&gt;, 'B': &lt;Chain id=B&gt;, 'C': &lt;Chain id=C&gt;, 'D': &lt;Chain id=D&gt;}
+```
+
+```python
+model.child_list
+```
+
+```
+## [&lt;Chain id=A&gt;, &lt;Chain id=B&gt;, &lt;Chain id=C&gt;, &lt;Chain id=D&gt;]
+```
+
+---
+### Chain **C**
+&lt;img src="imgs/clase_3/3chain.png" width="180px" style="display: block; margin: auto;" /&gt;
+
+Para acceder a las cadenas podemos iterar en el objeto `model`
+
+```{}
+Para Cada cadena en obj_model:
+  Imprime(cadena)
+```
+&lt;p&gt;&lt;samp&gt;## Chain id=A &lt;br&gt;## Chain id=B &lt;/samp&gt;&lt;/p&gt;
+
+También podemos acceder como diccionario 
+
+```{}
+cadena = obj_model['A']
+```
+
+o como lista
+
+```{}
+cadena = obj_model.child_list[0]
+```
+---
+Al igual que para los objetos anteriores, podemos ver el siguiente nivel almacenado utilizando  `child_dict` o `child_list`. Sin embargo, las llaves de child_dict contienen información en la que no ahondaremos pero pueden ver en https://biopython.org/wiki/The_Biopython_Structural_Bioinformatics_FAQ (**What is a residue id**)
+
+**Aquí la lista inicia en 1**
+```{}
+cadena.child_list
+```
+
+&lt;p&gt;&lt;samp&gt;## [(Valina , 1, ...), (Leucina, 2, ...) ]&lt;/samp&gt;&lt;/p&gt;
+
+---
+
+Accedemos a una cadena:
+
+```python
+for chain in model:
+  print(chain)
+```
+
+```
+## &lt;Chain id=A&gt;
+## &lt;Chain id=B&gt;
+## &lt;Chain id=C&gt;
+## &lt;Chain id=D&gt;
+```
+
+
+```python
+chain = model['A']
+```
+
+```
+## &lt;Chain id=A&gt;
+```
+
+
+```python
+chain = model.child_list[0]
+```
+
+```
+## &lt;Chain id=A&gt;
+```
+---
+Vemos la información almacenada
+
+
+```python
+chain.child_list
+```
+
+```
+## [&lt;Residue SER het=  resseq=1 icode= &gt;, &lt;Residue ASN het=  resseq=2 icode= &gt;, &lt;Residue ASP het=  resseq=3 icode= &gt;, &lt;Residue ILE het=  resseq=4 icode= &gt;, &lt;Residue TYR het=  resseq=5 icode= &gt;, &lt;Residue PHE het=  resseq=6 icode= &gt;, &lt;Residue ASN het=  resseq=7 icode= &gt;, &lt;Residue PHE het=  resseq=8 icode= &gt;, &lt;Residue GLN het=  resseq=9 icode= &gt;, &lt;Residue ARG het=  resseq=10 icode= &gt;, &lt;Residue PHE het=  resseq=11 icode= &gt;, &lt;Residue ASN het=  resseq=12 icode= &gt;, &lt;Residue GLU het=  resseq=13 icode= &gt;, &lt;Residue THR het=  resseq=14 icode= &gt;, &lt;Residue ASN het=  resseq=15 icode= &gt;, &lt;Residue LEU het=  resseq=16 icode= &gt;, &lt;Residue ILE het=  resseq=17 icode= &gt;, &lt;Residue LEU het=  resseq=18 icode= &gt;, &lt;Residue GLN het=  resseq=19 icode= &gt;, &lt;Residue ARG het=  resseq=20 icode= &gt;, &lt;Residue ASP het=  resseq=21 icode= &gt;, &lt;Residue ALA het=  resseq=22 icode= &gt;, &lt;Residue SER het=  resseq=23 icode= &gt;, &lt;Residue VAL het=  resseq=24 icode= &gt;, &lt;Residue SER het=  resseq=25 icode= &gt;, &lt;Residue SER het=  resseq=26 icode= &gt;, &lt;Residue SER het=  resseq=27 icode= &gt;, &lt;Residue GLY het=  resseq=28 icode= &gt;, &lt;Residue GLN het=  resseq=29 icode= &gt;, &lt;Residue LEU het=  resseq=30 icode= &gt;, &lt;Residue ARG het=  resseq=31 icode= &gt;, &lt;Residue LEU het=  resseq=32 icode= &gt;, &lt;Residue THR het=  resseq=33 icode= &gt;, &lt;Residue ASN het=  resseq=34 icode= &gt;, &lt;Residue LEU het=  resseq=35 icode= &gt;, &lt;Residue ASN het=  resseq=36 icode= &gt;, &lt;Residue ASN het=  resseq=38 icode= &gt;, &lt;Residue GLY het=  resseq=39 icode= &gt;, &lt;Residue GLU het=  resseq=40 icode= &gt;, &lt;Residue PRO het=  resseq=41 icode= &gt;, &lt;Residue ARG het=  resseq=42 icode= &gt;, &lt;Residue VAL het=  resseq=43 icode= &gt;, &lt;Residue GLY het=  resseq=44 icode= &gt;, &lt;Residue SER het=  resseq=45 icode= &gt;, &lt;Residue LEU het=  resseq=46 icode= &gt;, &lt;Residue GLY het=  resseq=47 icode= &gt;, &lt;Residue ARG het=  resseq=48 icode= &gt;, &lt;Residue ALA het=  resseq=49 icode= &gt;, &lt;Residue PHE het=  resseq=50 icode= &gt;, &lt;Residue TYR het=  resseq=51 icode= &gt;, &lt;Residue SER het=  resseq=52 icode= &gt;, &lt;Residue ALA het=  resseq=53 icode= &gt;, &lt;Residue PRO het=  resseq=54 icode= &gt;, &lt;Residue ILE het=  resseq=55 icode= &gt;, &lt;Residue GLN het=  resseq=56 icode= &gt;, &lt;Residue ILE het=  resseq=57 icode= &gt;, &lt;Residue TRP het=  resseq=58 icode= &gt;, &lt;Residue ASP het=  resseq=59 icode= &gt;, &lt;Residue ASN het=  resseq=60 icode= &gt;, &lt;Residue THR het=  resseq=61 icode= &gt;, &lt;Residue THR het=  resseq=62 icode= &gt;, &lt;Residue GLY het=  resseq=63 icode= &gt;, &lt;Residue THR het=  resseq=64 icode= &gt;, &lt;Residue VAL het=  resseq=65 icode= &gt;, &lt;Residue ALA het=  resseq=66 icode= &gt;, &lt;Residue SER het=  resseq=67 icode= &gt;, &lt;Residue PHE het=  resseq=68 icode= &gt;, &lt;Residue ALA het=  resseq=69 icode= &gt;, &lt;Residue THR het=  resseq=70 icode= &gt;, &lt;Residue SER het=  resseq=71 icode= &gt;, &lt;Residue PHE het=  resseq=72 icode= &gt;, &lt;Residue THR het=  resseq=73 icode= &gt;, &lt;Residue PHE het=  resseq=74 icode= &gt;, &lt;Residue ASN het=  resseq=75 icode= &gt;, &lt;Residue ILE het=  resseq=76 icode= &gt;, &lt;Residue GLN het=  resseq=77 icode= &gt;, &lt;Residue VAL het=  resseq=78 icode= &gt;, &lt;Residue PRO het=  resseq=79 icode= &gt;, &lt;Residue ASN het=  resseq=80 icode= &gt;, &lt;Residue ASN het=  resseq=81 icode= &gt;, &lt;Residue ALA het=  resseq=82 icode= &gt;, &lt;Residue GLY het=  resseq=83 icode= &gt;, &lt;Residue PRO het=  resseq=84 icode= &gt;, &lt;Residue ALA het=  resseq=85 icode= &gt;, &lt;Residue ASP het=  resseq=86 icode= &gt;, &lt;Residue GLY het=  resseq=87 icode= &gt;, &lt;Residue LEU het=  resseq=88 icode= &gt;, &lt;Residue ALA het=  resseq=89 icode= &gt;, &lt;Residue PHE het=  resseq=90 icode= &gt;, &lt;Residue ALA het=  resseq=91 icode= &gt;, &lt;Residue LEU het=  resseq=92 icode= &gt;, &lt;Residue VAL het=  resseq=93 icode= &gt;, &lt;Residue PRO het=  resseq=94 icode= &gt;, &lt;Residue VAL het=  resseq=95 icode= &gt;, &lt;Residue GLY het=  resseq=96 icode= &gt;, &lt;Residue SER het=  resseq=97 icode= &gt;, &lt;Residue GLN het=  resseq=98 icode= &gt;, &lt;Residue PRO het=  resseq=99 icode= &gt;, &lt;Residue LYS het=  resseq=100 icode= &gt;, &lt;Residue ASP het=  resseq=101 icode= &gt;, &lt;Residue LYS het=  resseq=102 icode= &gt;, &lt;Residue GLY het=  resseq=103 icode= &gt;, &lt;Residue GLY het=  resseq=104 icode= &gt;, &lt;Residue PHE het=  resseq=105 icode= &gt;, &lt;Residue LEU het=  resseq=106 icode= &gt;, &lt;Residue GLY het=  resseq=107 icode= &gt;, &lt;Residue LEU het=  resseq=108 icode= &gt;, &lt;Residue PHE het=  resseq=109 icode= &gt;, &lt;Residue ASP het=  resseq=110 icode= &gt;, &lt;Residue GLY het=  resseq=111 icode= &gt;, &lt;Residue SER het=  resseq=112 icode= &gt;, &lt;Residue ASN het=  resseq=113 icode= &gt;, &lt;Residue SER het=  resseq=114 icode= &gt;, &lt;Residue ASN het=  resseq=115 icode= &gt;, &lt;Residue PHE het=  resseq=116 icode= &gt;, &lt;Residue HIS het=  resseq=117 icode= &gt;, &lt;Residue THR het=  resseq=118 icode= &gt;, &lt;Residue VAL het=  resseq=119 icode= &gt;, &lt;Residue ALA het=  resseq=120 icode= &gt;, &lt;Residue VAL het=  resseq=121 icode= &gt;, &lt;Residue GLU het=  resseq=122 icode= &gt;, &lt;Residue PHE het=  resseq=123 icode= &gt;, &lt;Residue ASP het=  resseq=124 icode= &gt;, &lt;Residue THR het=  resseq=125 icode= &gt;, &lt;Residue LEU het=  resseq=126 icode= &gt;, &lt;Residue TYR het=  resseq=127 icode= &gt;, &lt;Residue ASN het=  resseq=128 icode= &gt;, &lt;Residue LYS het=  resseq=129 icode= &gt;, &lt;Residue ASP het=  resseq=130 icode= &gt;, &lt;Residue TRP het=  resseq=131 icode= &gt;, &lt;Residue ASP het=  resseq=132 icode= &gt;, &lt;Residue PRO het=  resseq=133 icode= &gt;, &lt;Residue THR het=  resseq=134 icode= &gt;, &lt;Residue GLU het=  resseq=135 icode= &gt;, &lt;Residue ARG het=  resseq=136 icode= &gt;, &lt;Residue HIS het=  resseq=137 icode= &gt;, &lt;Residue ILE het=  resseq=138 icode= &gt;, &lt;Residue GLY het=  resseq=139 icode= &gt;, &lt;Residue ILE het=  resseq=140 icode= &gt;, &lt;Residue ASP het=  resseq=141 icode= &gt;, &lt;Residue VAL het=  resseq=142 icode= &gt;, &lt;Residue ASN het=  resseq=143 icode= &gt;, &lt;Residue SER het=  resseq=144 icode= &gt;, &lt;Residue ILE het=  resseq=145 icode= &gt;, &lt;Residue ARG het=  resseq=146 icode= &gt;, &lt;Residue SER het=  resseq=147 icode= &gt;, &lt;Residue ILE het=  resseq=148 icode= &gt;, &lt;Residue LYS het=  resseq=149 icode= &gt;, &lt;Residue THR het=  resseq=150 icode= &gt;, &lt;Residue THR het=  resseq=151 icode= &gt;, &lt;Residue ARG het=  resseq=152 icode= &gt;, &lt;Residue TRP het=  resseq=153 icode= &gt;, &lt;Residue ASP het=  resseq=154 icode= &gt;, &lt;Residue PHE het=  resseq=155 icode= &gt;, &lt;Residue VAL het=  resseq=156 icode= &gt;, &lt;Residue ASN het=  resseq=157 icode= &gt;, &lt;Residue GLY het=  resseq=158 icode= &gt;, &lt;Residue GLU het=  resseq=159 icode= &gt;, &lt;Residue ASN het=  resseq=160 icode= &gt;, &lt;Residue ALA het=  resseq=161 icode= &gt;, &lt;Residue GLU het=  resseq=162 icode= &gt;, &lt;Residue VAL het=  resseq=163 icode= &gt;, &lt;Residue LEU het=  resseq=164 icode= &gt;, &lt;Residue ILE het=  resseq=165 icode= &gt;, &lt;Residue THR het=  resseq=166 icode= &gt;, &lt;Residue TYR het=  resseq=167 icode= &gt;, &lt;Residue ASP het=  resseq=168 icode= &gt;, &lt;Residue SER het=  resseq=169 icode= &gt;, &lt;Residue SER het=  resseq=170 icode= &gt;, &lt;Residue THR het=  resseq=171 icode= &gt;, &lt;Residue ASN het=  resseq=172 icode= &gt;, &lt;Residue LEU het=  resseq=173 icode= &gt;, &lt;Residue LEU het=  resseq=174 icode= &gt;, &lt;Residue VAL het=  resseq=175 icode= &gt;, &lt;Residue ALA het=  resseq=176 icode= &gt;, &lt;Residue SER het=  resseq=177 icode= &gt;, &lt;Residue LEU het=  resseq=178 icode= &gt;, &lt;Residue VAL het=  resseq=179 icode= &gt;, &lt;Residue TYR het=  resseq=180 icode= &gt;, &lt;Residue PRO het=  resseq=181 icode= &gt;, &lt;Residue SER het=  resseq=182 icode= &gt;, &lt;Residue GLN het=  resseq=183 icode= &gt;, &lt;Residue LYS het=  resseq=184 icode= &gt;, &lt;Residue THR het=  resseq=185 icode= &gt;, &lt;Residue SER het=  resseq=186 icode= &gt;, &lt;Residue PHE het=  resseq=187 icode= &gt;, &lt;Residue ILE het=  resseq=188 icode= &gt;, &lt;Residue VAL het=  resseq=189 icode= &gt;, &lt;Residue SER het=  resseq=190 icode= &gt;, &lt;Residue ASP het=  resseq=191 icode= &gt;, &lt;Residue THR het=  resseq=192 icode= &gt;, &lt;Residue VAL het=  resseq=193 icode= &gt;, &lt;Residue ASP het=  resseq=194 icode= &gt;, &lt;Residue LEU het=  resseq=195 icode= &gt;, &lt;Residue LYS het=  resseq=196 icode= &gt;, &lt;Residue SER het=  resseq=197 icode= &gt;, &lt;Residue VAL het=  resseq=198 icode= &gt;, &lt;Residue LEU het=  resseq=199 icode= &gt;, &lt;Residue PRO het=  resseq=200 icode= &gt;, &lt;Residue GLU het=  resseq=201 icode= &gt;, &lt;Residue TRP het=  resseq=202 icode= &gt;, &lt;Residue VAL het=  resseq=203 icode= &gt;, &lt;Residue SER het=  resseq=204 icode= &gt;, &lt;Residue VAL het=  resseq=205 icode= &gt;, &lt;Residue GLY het=  resseq=206 icode= &gt;, &lt;Residue PHE het=  resseq=207 icode= &gt;, &lt;Residue SER het=  resseq=208 icode= &gt;, &lt;Residue ALA het=  resseq=209 icode= &gt;, &lt;Residue THR het=  resseq=210 icode= &gt;, &lt;Residue THR het=  resseq=211 icode= &gt;, &lt;Residue GLY het=  resseq=212 icode= &gt;, &lt;Residue ILE het=  resseq=213 icode= &gt;, &lt;Residue ASN het=  resseq=214 icode= &gt;, &lt;Residue LYS het=  resseq=215 icode= &gt;, &lt;Residue GLY het=  resseq=216 icode= &gt;, &lt;Residue ASN het=  resseq=217 icode= &gt;, &lt;Residue VAL het=  resseq=218 icode= &gt;, &lt;Residue GLU het=  resseq=219 icode= &gt;, &lt;Residue THR het=  resseq=220 icode= &gt;, &lt;Residue ASN het=  resseq=221 icode= &gt;, &lt;Residue ASP het=  resseq=222 icode= &gt;, &lt;Residue VAL het=  resseq=223 icode= &gt;, &lt;Residue LEU het=  resseq=224 icode= &gt;, &lt;Residue SER het=  resseq=225 icode= &gt;, &lt;Residue TRP het=  resseq=226 icode= &gt;, &lt;Residue SER het=  resseq=227 icode= &gt;, &lt;Residue PHE het=  resseq=228 icode= &gt;, &lt;Residue ALA het=  resseq=229 icode= &gt;, &lt;Residue SER het=  resseq=230 icode= &gt;, &lt;Residue LYS het=  resseq=231 icode= &gt;, &lt;Residue LEU het=  resseq=232 icode= &gt;, &lt;Residue SER het=  resseq=233 icode= &gt;, &lt;Residue NAG het=H_NAG resseq=253 icode= &gt;, &lt;Residue MN het=H_MN resseq=254 icode= &gt;, &lt;Residue CA het=H_CA resseq=255 icode= &gt;, &lt;Residue HOH het=W resseq=305 icode= &gt;, &lt;Residue HOH het=W resseq=306 icode= &gt;, &lt;Residue HOH het=W resseq=307 icode= &gt;, &lt;Residue HOH het=W resseq=308 icode= &gt;]
+```
+
+```python
+chain.child_dict
+```
+
+```
+## {(' ', 1, ' '): &lt;Residue SER het=  resseq=1 icode= &gt;, (' ', 2, ' '): &lt;Residue ASN het=  resseq=2 icode= &gt;, (' ', 3, ' '): &lt;Residue ASP het=  resseq=3 icode= &gt;, (' ', 4, ' '): &lt;Residue ILE het=  resseq=4 icode= &gt;, (' ', 5, ' '): &lt;Residue TYR het=  resseq=5 icode= &gt;, (' ', 6, ' '): &lt;Residue PHE het=  resseq=6 icode= &gt;, (' ', 7, ' '): &lt;Residue ASN het=  resseq=7 icode= &gt;, (' ', 8, ' '): &lt;Residue PHE het=  resseq=8 icode= &gt;, (' ', 9, ' '): &lt;Residue GLN het=  resseq=9 icode= &gt;, (' ', 10, ' '): &lt;Residue ARG het=  resseq=10 icode= &gt;, (' ', 11, ' '): &lt;Residue PHE het=  resseq=11 icode= &gt;, (' ', 12, ' '): &lt;Residue ASN het=  resseq=12 icode= &gt;, (' ', 13, ' '): &lt;Residue GLU het=  resseq=13 icode= &gt;, (' ', 14, ' '): &lt;Residue THR het=  resseq=14 icode= &gt;, (' ', 15, ' '): &lt;Residue ASN het=  resseq=15 icode= &gt;, (' ', 16, ' '): &lt;Residue LEU het=  resseq=16 icode= &gt;, (' ', 17, ' '): &lt;Residue ILE het=  resseq=17 icode= &gt;, (' ', 18, ' '): &lt;Residue LEU het=  resseq=18 icode= &gt;, (' ', 19, ' '): &lt;Residue GLN het=  resseq=19 icode= &gt;, (' ', 20, ' '): &lt;Residue ARG het=  resseq=20 icode= &gt;, (' ', 21, ' '): &lt;Residue ASP het=  resseq=21 icode= &gt;, (' ', 22, ' '): &lt;Residue ALA het=  resseq=22 icode= &gt;, (' ', 23, ' '): &lt;Residue SER het=  resseq=23 icode= &gt;, (' ', 24, ' '): &lt;Residue VAL het=  resseq=24 icode= &gt;, (' ', 25, ' '): &lt;Residue SER het=  resseq=25 icode= &gt;, (' ', 26, ' '): &lt;Residue SER het=  resseq=26 icode= &gt;, (' ', 27, ' '): &lt;Residue SER het=  resseq=27 icode= &gt;, (' ', 28, ' '): &lt;Residue GLY het=  resseq=28 icode= &gt;, (' ', 29, ' '): &lt;Residue GLN het=  resseq=29 icode= &gt;, (' ', 30, ' '): &lt;Residue LEU het=  resseq=30 icode= &gt;, (' ', 31, ' '): &lt;Residue ARG het=  resseq=31 icode= &gt;, (' ', 32, ' '): &lt;Residue LEU het=  resseq=32 icode= &gt;, (' ', 33, ' '): &lt;Residue THR het=  resseq=33 icode= &gt;, (' ', 34, ' '): &lt;Residue ASN het=  resseq=34 icode= &gt;, (' ', 35, ' '): &lt;Residue LEU het=  resseq=35 icode= &gt;, (' ', 36, ' '): &lt;Residue ASN het=  resseq=36 icode= &gt;, (' ', 38, ' '): &lt;Residue ASN het=  resseq=38 icode= &gt;, (' ', 39, ' '): &lt;Residue GLY het=  resseq=39 icode= &gt;, (' ', 40, ' '): &lt;Residue GLU het=  resseq=40 icode= &gt;, (' ', 41, ' '): &lt;Residue PRO het=  resseq=41 icode= &gt;, (' ', 42, ' '): &lt;Residue ARG het=  resseq=42 icode= &gt;, (' ', 43, ' '): &lt;Residue VAL het=  resseq=43 icode= &gt;, (' ', 44, ' '): &lt;Residue GLY het=  resseq=44 icode= &gt;, (' ', 45, ' '): &lt;Residue SER het=  resseq=45 icode= &gt;, (' ', 46, ' '): &lt;Residue LEU het=  resseq=46 icode= &gt;, (' ', 47, ' '): &lt;Residue GLY het=  resseq=47 icode= &gt;, (' ', 48, ' '): &lt;Residue ARG het=  resseq=48 icode= &gt;, (' ', 49, ' '): &lt;Residue ALA het=  resseq=49 icode= &gt;, (' ', 50, ' '): &lt;Residue PHE het=  resseq=50 icode= &gt;, (' ', 51, ' '): &lt;Residue TYR het=  resseq=51 icode= &gt;, (' ', 52, ' '): &lt;Residue SER het=  resseq=52 icode= &gt;, (' ', 53, ' '): &lt;Residue ALA het=  resseq=53 icode= &gt;, (' ', 54, ' '): &lt;Residue PRO het=  resseq=54 icode= &gt;, (' ', 55, ' '): &lt;Residue ILE het=  resseq=55 icode= &gt;, (' ', 56, ' '): &lt;Residue GLN het=  resseq=56 icode= &gt;, (' ', 57, ' '): &lt;Residue ILE het=  resseq=57 icode= &gt;, (' ', 58, ' '): &lt;Residue TRP het=  resseq=58 icode= &gt;, (' ', 59, ' '): &lt;Residue ASP het=  resseq=59 icode= &gt;, (' ', 60, ' '): &lt;Residue ASN het=  resseq=60 icode= &gt;, (' ', 61, ' '): &lt;Residue THR het=  resseq=61 icode= &gt;, (' ', 62, ' '): &lt;Residue THR het=  resseq=62 icode= &gt;, (' ', 63, ' '): &lt;Residue GLY het=  resseq=63 icode= &gt;, (' ', 64, ' '): &lt;Residue THR het=  resseq=64 icode= &gt;, (' ', 65, ' '): &lt;Residue VAL het=  resseq=65 icode= &gt;, (' ', 66, ' '): &lt;Residue ALA het=  resseq=66 icode= &gt;, (' ', 67, ' '): &lt;Residue SER het=  resseq=67 icode= &gt;, (' ', 68, ' '): &lt;Residue PHE het=  resseq=68 icode= &gt;, (' ', 69, ' '): &lt;Residue ALA het=  resseq=69 icode= &gt;, (' ', 70, ' '): &lt;Residue THR het=  resseq=70 icode= &gt;, (' ', 71, ' '): &lt;Residue SER het=  resseq=71 icode= &gt;, (' ', 72, ' '): &lt;Residue PHE het=  resseq=72 icode= &gt;, (' ', 73, ' '): &lt;Residue THR het=  resseq=73 icode= &gt;, (' ', 74, ' '): &lt;Residue PHE het=  resseq=74 icode= &gt;, (' ', 75, ' '): &lt;Residue ASN het=  resseq=75 icode= &gt;, (' ', 76, ' '): &lt;Residue ILE het=  resseq=76 icode= &gt;, (' ', 77, ' '): &lt;Residue GLN het=  resseq=77 icode= &gt;, (' ', 78, ' '): &lt;Residue VAL het=  resseq=78 icode= &gt;, (' ', 79, ' '): &lt;Residue PRO het=  resseq=79 icode= &gt;, (' ', 80, ' '): &lt;Residue ASN het=  resseq=80 icode= &gt;, (' ', 81, ' '): &lt;Residue ASN het=  resseq=81 icode= &gt;, (' ', 82, ' '): &lt;Residue ALA het=  resseq=82 icode= &gt;, (' ', 83, ' '): &lt;Residue GLY het=  resseq=83 icode= &gt;, (' ', 84, ' '): &lt;Residue PRO het=  resseq=84 icode= &gt;, (' ', 85, ' '): &lt;Residue ALA het=  resseq=85 icode= &gt;, (' ', 86, ' '): &lt;Residue ASP het=  resseq=86 icode= &gt;, (' ', 87, ' '): &lt;Residue GLY het=  resseq=87 icode= &gt;, (' ', 88, ' '): &lt;Residue LEU het=  resseq=88 icode= &gt;, (' ', 89, ' '): &lt;Residue ALA het=  resseq=89 icode= &gt;, (' ', 90, ' '): &lt;Residue PHE het=  resseq=90 icode= &gt;, (' ', 91, ' '): &lt;Residue ALA het=  resseq=91 icode= &gt;, (' ', 92, ' '): &lt;Residue LEU het=  resseq=92 icode= &gt;, (' ', 93, ' '): &lt;Residue VAL het=  resseq=93 icode= &gt;, (' ', 94, ' '): &lt;Residue PRO het=  resseq=94 icode= &gt;, (' ', 95, ' '): &lt;Residue VAL het=  resseq=95 icode= &gt;, (' ', 96, ' '): &lt;Residue GLY het=  resseq=96 icode= &gt;, (' ', 97, ' '): &lt;Residue SER het=  resseq=97 icode= &gt;, (' ', 98, ' '): &lt;Residue GLN het=  resseq=98 icode= &gt;, (' ', 99, ' '): &lt;Residue PRO het=  resseq=99 icode= &gt;, (' ', 100, ' '): &lt;Residue LYS het=  resseq=100 icode= &gt;, (' ', 101, ' '): &lt;Residue ASP het=  resseq=101 icode= &gt;, (' ', 102, ' '): &lt;Residue LYS het=  resseq=102 icode= &gt;, (' ', 103, ' '): &lt;Residue GLY het=  resseq=103 icode= &gt;, (' ', 104, ' '): &lt;Residue GLY het=  resseq=104 icode= &gt;, (' ', 105, ' '): &lt;Residue PHE het=  resseq=105 icode= &gt;, (' ', 106, ' '): &lt;Residue LEU het=  resseq=106 icode= &gt;, (' ', 107, ' '): &lt;Residue GLY het=  resseq=107 icode= &gt;, (' ', 108, ' '): &lt;Residue LEU het=  resseq=108 icode= &gt;, (' ', 109, ' '): &lt;Residue PHE het=  resseq=109 icode= &gt;, (' ', 110, ' '): &lt;Residue ASP het=  resseq=110 icode= &gt;, (' ', 111, ' '): &lt;Residue GLY het=  resseq=111 icode= &gt;, (' ', 112, ' '): &lt;Residue SER het=  resseq=112 icode= &gt;, (' ', 113, ' '): &lt;Residue ASN het=  resseq=113 icode= &gt;, (' ', 114, ' '): &lt;Residue SER het=  resseq=114 icode= &gt;, (' ', 115, ' '): &lt;Residue ASN het=  resseq=115 icode= &gt;, (' ', 116, ' '): &lt;Residue PHE het=  resseq=116 icode= &gt;, (' ', 117, ' '): &lt;Residue HIS het=  resseq=117 icode= &gt;, (' ', 118, ' '): &lt;Residue THR het=  resseq=118 icode= &gt;, (' ', 119, ' '): &lt;Residue VAL het=  resseq=119 icode= &gt;, (' ', 120, ' '): &lt;Residue ALA het=  resseq=120 icode= &gt;, (' ', 121, ' '): &lt;Residue VAL het=  resseq=121 icode= &gt;, (' ', 122, ' '): &lt;Residue GLU het=  resseq=122 icode= &gt;, (' ', 123, ' '): &lt;Residue PHE het=  resseq=123 icode= &gt;, (' ', 124, ' '): &lt;Residue ASP het=  resseq=124 icode= &gt;, (' ', 125, ' '): &lt;Residue THR het=  resseq=125 icode= &gt;, (' ', 126, ' '): &lt;Residue LEU het=  resseq=126 icode= &gt;, (' ', 127, ' '): &lt;Residue TYR het=  resseq=127 icode= &gt;, (' ', 128, ' '): &lt;Residue ASN het=  resseq=128 icode= &gt;, (' ', 129, ' '): &lt;Residue LYS het=  resseq=129 icode= &gt;, (' ', 130, ' '): &lt;Residue ASP het=  resseq=130 icode= &gt;, (' ', 131, ' '): &lt;Residue TRP het=  resseq=131 icode= &gt;, (' ', 132, ' '): &lt;Residue ASP het=  resseq=132 icode= &gt;, (' ', 133, ' '): &lt;Residue PRO het=  resseq=133 icode= &gt;, (' ', 134, ' '): &lt;Residue THR het=  resseq=134 icode= &gt;, (' ', 135, ' '): &lt;Residue GLU het=  resseq=135 icode= &gt;, (' ', 136, ' '): &lt;Residue ARG het=  resseq=136 icode= &gt;, (' ', 137, ' '): &lt;Residue HIS het=  resseq=137 icode= &gt;, (' ', 138, ' '): &lt;Residue ILE het=  resseq=138 icode= &gt;, (' ', 139, ' '): &lt;Residue GLY het=  resseq=139 icode= &gt;, (' ', 140, ' '): &lt;Residue ILE het=  resseq=140 icode= &gt;, (' ', 141, ' '): &lt;Residue ASP het=  resseq=141 icode= &gt;, (' ', 142, ' '): &lt;Residue VAL het=  resseq=142 icode= &gt;, (' ', 143, ' '): &lt;Residue ASN het=  resseq=143 icode= &gt;, (' ', 144, ' '): &lt;Residue SER het=  resseq=144 icode= &gt;, (' ', 145, ' '): &lt;Residue ILE het=  resseq=145 icode= &gt;, (' ', 146, ' '): &lt;Residue ARG het=  resseq=146 icode= &gt;, (' ', 147, ' '): &lt;Residue SER het=  resseq=147 icode= &gt;, (' ', 148, ' '): &lt;Residue ILE het=  resseq=148 icode= &gt;, (' ', 149, ' '): &lt;Residue LYS het=  resseq=149 icode= &gt;, (' ', 150, ' '): &lt;Residue THR het=  resseq=150 icode= &gt;, (' ', 151, ' '): &lt;Residue THR het=  resseq=151 icode= &gt;, (' ', 152, ' '): &lt;Residue ARG het=  resseq=152 icode= &gt;, (' ', 153, ' '): &lt;Residue TRP het=  resseq=153 icode= &gt;, (' ', 154, ' '): &lt;Residue ASP het=  resseq=154 icode= &gt;, (' ', 155, ' '): &lt;Residue PHE het=  resseq=155 icode= &gt;, (' ', 156, ' '): &lt;Residue VAL het=  resseq=156 icode= &gt;, (' ', 157, ' '): &lt;Residue ASN het=  resseq=157 icode= &gt;, (' ', 158, ' '): &lt;Residue GLY het=  resseq=158 icode= &gt;, (' ', 159, ' '): &lt;Residue GLU het=  resseq=159 icode= &gt;, (' ', 160, ' '): &lt;Residue ASN het=  resseq=160 icode= &gt;, (' ', 161, ' '): &lt;Residue ALA het=  resseq=161 icode= &gt;, (' ', 162, ' '): &lt;Residue GLU het=  resseq=162 icode= &gt;, (' ', 163, ' '): &lt;Residue VAL het=  resseq=163 icode= &gt;, (' ', 164, ' '): &lt;Residue LEU het=  resseq=164 icode= &gt;, (' ', 165, ' '): &lt;Residue ILE het=  resseq=165 icode= &gt;, (' ', 166, ' '): &lt;Residue THR het=  resseq=166 icode= &gt;, (' ', 167, ' '): &lt;Residue TYR het=  resseq=167 icode= &gt;, (' ', 168, ' '): &lt;Residue ASP het=  resseq=168 icode= &gt;, (' ', 169, ' '): &lt;Residue SER het=  resseq=169 icode= &gt;, (' ', 170, ' '): &lt;Residue SER het=  resseq=170 icode= &gt;, (' ', 171, ' '): &lt;Residue THR het=  resseq=171 icode= &gt;, (' ', 172, ' '): &lt;Residue ASN het=  resseq=172 icode= &gt;, (' ', 173, ' '): &lt;Residue LEU het=  resseq=173 icode= &gt;, (' ', 174, ' '): &lt;Residue LEU het=  resseq=174 icode= &gt;, (' ', 175, ' '): &lt;Residue VAL het=  resseq=175 icode= &gt;, (' ', 176, ' '): &lt;Residue ALA het=  resseq=176 icode= &gt;, (' ', 177, ' '): &lt;Residue SER het=  resseq=177 icode= &gt;, (' ', 178, ' '): &lt;Residue LEU het=  resseq=178 icode= &gt;, (' ', 179, ' '): &lt;Residue VAL het=  resseq=179 icode= &gt;, (' ', 180, ' '): &lt;Residue TYR het=  resseq=180 icode= &gt;, (' ', 181, ' '): &lt;Residue PRO het=  resseq=181 icode= &gt;, (' ', 182, ' '): &lt;Residue SER het=  resseq=182 icode= &gt;, (' ', 183, ' '): &lt;Residue GLN het=  resseq=183 icode= &gt;, (' ', 184, ' '): &lt;Residue LYS het=  resseq=184 icode= &gt;, (' ', 185, ' '): &lt;Residue THR het=  resseq=185 icode= &gt;, (' ', 186, ' '): &lt;Residue SER het=  resseq=186 icode= &gt;, (' ', 187, ' '): &lt;Residue PHE het=  resseq=187 icode= &gt;, (' ', 188, ' '): &lt;Residue ILE het=  resseq=188 icode= &gt;, (' ', 189, ' '): &lt;Residue VAL het=  resseq=189 icode= &gt;, (' ', 190, ' '): &lt;Residue SER het=  resseq=190 icode= &gt;, (' ', 191, ' '): &lt;Residue ASP het=  resseq=191 icode= &gt;, (' ', 192, ' '): &lt;Residue THR het=  resseq=192 icode= &gt;, (' ', 193, ' '): &lt;Residue VAL het=  resseq=193 icode= &gt;, (' ', 194, ' '): &lt;Residue ASP het=  resseq=194 icode= &gt;, (' ', 195, ' '): &lt;Residue LEU het=  resseq=195 icode= &gt;, (' ', 196, ' '): &lt;Residue LYS het=  resseq=196 icode= &gt;, (' ', 197, ' '): &lt;Residue SER het=  resseq=197 icode= &gt;, (' ', 198, ' '): &lt;Residue VAL het=  resseq=198 icode= &gt;, (' ', 199, ' '): &lt;Residue LEU het=  resseq=199 icode= &gt;, (' ', 200, ' '): &lt;Residue PRO het=  resseq=200 icode= &gt;, (' ', 201, ' '): &lt;Residue GLU het=  resseq=201 icode= &gt;, (' ', 202, ' '): &lt;Residue TRP het=  resseq=202 icode= &gt;, (' ', 203, ' '): &lt;Residue VAL het=  resseq=203 icode= &gt;, (' ', 204, ' '): &lt;Residue SER het=  resseq=204 icode= &gt;, (' ', 205, ' '): &lt;Residue VAL het=  resseq=205 icode= &gt;, (' ', 206, ' '): &lt;Residue GLY het=  resseq=206 icode= &gt;, (' ', 207, ' '): &lt;Residue PHE het=  resseq=207 icode= &gt;, (' ', 208, ' '): &lt;Residue SER het=  resseq=208 icode= &gt;, (' ', 209, ' '): &lt;Residue ALA het=  resseq=209 icode= &gt;, (' ', 210, ' '): &lt;Residue THR het=  resseq=210 icode= &gt;, (' ', 211, ' '): &lt;Residue THR het=  resseq=211 icode= &gt;, (' ', 212, ' '): &lt;Residue GLY het=  resseq=212 icode= &gt;, (' ', 213, ' '): &lt;Residue ILE het=  resseq=213 icode= &gt;, (' ', 214, ' '): &lt;Residue ASN het=  resseq=214 icode= &gt;, (' ', 215, ' '): &lt;Residue LYS het=  resseq=215 icode= &gt;, (' ', 216, ' '): &lt;Residue GLY het=  resseq=216 icode= &gt;, (' ', 217, ' '): &lt;Residue ASN het=  resseq=217 icode= &gt;, (' ', 218, ' '): &lt;Residue VAL het=  resseq=218 icode= &gt;, (' ', 219, ' '): &lt;Residue GLU het=  resseq=219 icode= &gt;, (' ', 220, ' '): &lt;Residue THR het=  resseq=220 icode= &gt;, (' ', 221, ' '): &lt;Residue ASN het=  resseq=221 icode= &gt;, (' ', 222, ' '): &lt;Residue ASP het=  resseq=222 icode= &gt;, (' ', 223, ' '): &lt;Residue VAL het=  resseq=223 icode= &gt;, (' ', 224, ' '): &lt;Residue LEU het=  resseq=224 icode= &gt;, (' ', 225, ' '): &lt;Residue SER het=  resseq=225 icode= &gt;, (' ', 226, ' '): &lt;Residue TRP het=  resseq=226 icode= &gt;, (' ', 227, ' '): &lt;Residue SER het=  resseq=227 icode= &gt;, (' ', 228, ' '): &lt;Residue PHE het=  resseq=228 icode= &gt;, (' ', 229, ' '): &lt;Residue ALA het=  resseq=229 icode= &gt;, (' ', 230, ' '): &lt;Residue SER het=  resseq=230 icode= &gt;, (' ', 231, ' '): &lt;Residue LYS het=  resseq=231 icode= &gt;, (' ', 232, ' '): &lt;Residue LEU het=  resseq=232 icode= &gt;, (' ', 233, ' '): &lt;Residue SER het=  resseq=233 icode= &gt;, ('H_NAG', 253, ' '): &lt;Residue NAG het=H_NAG resseq=253 icode= &gt;, ('H_MN', 254, ' '): &lt;Residue MN het=H_MN resseq=254 icode= &gt;, ('H_CA', 255, ' '): &lt;Residue CA het=H_CA resseq=255 icode= &gt;, ('W', 305, ' '): &lt;Residue HOH het=W resseq=305 icode= &gt;, ('W', 306, ' '): &lt;Residue HOH het=W resseq=306 icode= &gt;, ('W', 307, ' '): &lt;Residue HOH het=W resseq=307 icode= &gt;, ('W', 308, ' '): &lt;Residue HOH het=W resseq=308 icode= &gt;}
+```
+
+---
+## Residue **R**
+&lt;img src="imgs/clase_3/4residue.png" width="180px" style="display: block; margin: auto;" /&gt;
+
+Para acceder a las cadenas podemos iterar en el objeto `cadena`
+
+```{}
+Para Cada residuo en obj_cadena:
+  Imprime(residuo)
+```
+&lt;p&gt;&lt;samp&gt;## (Valina, 1, ...) &lt;br&gt;## (Leucina, 2, ...) &lt;/samp&gt;&lt;/p&gt;
+
+O como una lista con el número de residuo (pensando en que la lista inicia en **1**)
+```{}
+residuo = cadena[1]
+```
+
+&lt;p&gt;&lt;samp&gt;## (Valina, 1, ...) &lt;/samp&gt;&lt;/p&gt;
+---
+Podemos obtener su ID de residuo (número de residuo) con el segundo elemento de get_id().
+
+```{}
+residuo.get_id()[1]
+```
+
+Si queremos obtener el nombre del residuo, utilizamos la función `get_resname` que nos dará el nombre del residuo en el código de 3 letras: 'ALA', 'ARG', etc.
+
+
+```{}
+residuo.get_resname()
+```
+
+&lt;p&gt;&lt;samp&gt;##  'CYS' &lt;/samp&gt;&lt;/p&gt;
+
+De esta manera podríamos buscar cada residuo que nos interesa en la cadena: 
+
+```{}
+Para Cada residuo en obj_cadena:
+  Si residuo.get_resname() es 'CYS':
+    imprime(residuo)
+```
+&lt;p&gt;&lt;samp&gt;## (CYS, 5, ...) &lt;br&gt; ## (CYS, 49, ...)&lt;/samp&gt;&lt;/p&gt;
+
+---
+Accedemos
+
+```python
+for residue in chain:
+  print(residue)
+```
+
+
+```
+## &lt;Residue SER het=  resseq=1 icode= &gt;
+## &lt;Residue ASN het=  resseq=2 icode= &gt;
+```
+
+Como lista empieza en **1**
+
+
+```python
+residue = chain[1]
+```
+
+```
+## &lt;Residue SER het=  resseq=1 icode= &gt;
+```
+---
+Información
+
+```python
+# ID
+residue.get_id()[1]
+# Nombre en código de 3 letras
+```
+
+```
+## 1
+```
+
+```python
+residue.get_resname()
+```
+
+```
+## 'SER'
+```
+
+Ubicar un residuo que nos interesa
+
+```python
+for residue in chain:
+  if residue.get_resname() == "PHE":
+    print(residue)
+```
+
+
+```
+## &lt;Residue PHE het=  resseq=6 icode= &gt;
+## &lt;Residue PHE het=  resseq=8 icode= &gt;
+## &lt;Residue PHE het=  resseq=11 icode= &gt;
+## &lt;Residue PHE het=  resseq=50 icode= &gt;
+## &lt;Residue PHE het=  resseq=68 icode= &gt;
+## &lt;Residue PHE het=  resseq=72 icode= &gt;
+## &lt;Residue PHE het=  resseq=74 icode= &gt;
+## &lt;Residue PHE het=  resseq=90 icode= &gt;
+## &lt;Residue PHE het=  resseq=105 icode= &gt;
+## &lt;Residue PHE het=  resseq=109 icode= &gt;
+## &lt;Residue PHE het=  resseq=116 icode= &gt;
+## &lt;Residue PHE het=  resseq=123 icode= &gt;
+## &lt;Residue PHE het=  resseq=155 icode= &gt;
+## &lt;Residue PHE het=  resseq=187 icode= &gt;
+## &lt;Residue PHE het=  resseq=207 icode= &gt;
+## &lt;Residue PHE het=  resseq=228 icode= &gt;
+```
+---
+
+# &lt;span style="color:Plum"&gt;Ejercicio 2&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;Guardar en una lista todas las cisteínas de la cadena A del archivo 1kcw.pdb&lt;/span&gt;
+
+```{}
+    &gt; cys_A = []
+    &gt; Para Cada residuo En cadena_A:
+        Si residuo Es 'cisteína':
+          cys_A.append(residuo)
+```
+
+---
+
+Al igual que para los objetos anteriores, podemos ver el siguiente nivel almacenado utilizando  `child_dict` o `child_list`. 
+
+```{}
+residuo.child_list
+```
+
+&lt;p&gt;&lt;samp&gt;## [átomo_N,átomo_CA ]&lt;/samp&gt;&lt;/p&gt;
+
+```{}
+residuo.child_dict
+```
+
+&lt;p&gt;&lt;samp&gt;## {'N': átomo_N&lt;br&gt;## 'CA' : átomo_CA]&lt;/samp&gt;&lt;/p&gt;
+---
+Ver la información almacenada
+
+
+```python
+residue = chain[6]
+residue
+```
+
+```
+## &lt;Residue PHE het=  resseq=6 icode= &gt;
+```
+
+```python
+residue.child_list
+```
+
+```
+## [&lt;Atom N&gt;, &lt;Atom CA&gt;, &lt;Atom C&gt;, &lt;Atom O&gt;, &lt;Atom CB&gt;, &lt;Atom CG&gt;, &lt;Atom CD1&gt;, &lt;Atom CD2&gt;, &lt;Atom CE1&gt;, &lt;Atom CE2&gt;, &lt;Atom CZ&gt;]
+```
+
+```python
+residue.child_dict
+```
+
+```
+## {'N': &lt;Atom N&gt;, 'CA': &lt;Atom CA&gt;, 'C': &lt;Atom C&gt;, 'O': &lt;Atom O&gt;, 'CB': &lt;Atom CB&gt;, 'CG': &lt;Atom CG&gt;, 'CD1': &lt;Atom CD1&gt;, 'CD2': &lt;Atom CD2&gt;, 'CE1': &lt;Atom CE1&gt;, 'CE2': &lt;Atom CE2&gt;, 'CZ': &lt;Atom CZ&gt;}
+```
+
+---
+## Atom **A**
+&lt;img src="imgs/clase_3/4residue.png" width="180px" style="display: block; margin: auto;" /&gt;
+
+Para acceder a los átomos podemos iterar en el objeto `residue`
+
+```{}
+Para Cada átomo en obj_residue:
+  Imprime(átomo)
+```
+
+&lt;p&gt;&lt;samp&gt;## átomo_N &lt;br&gt;## átomo_CA &lt;/samp&gt;&lt;/p&gt;
+
+También podemos acceder como diccionario:
+```{}
+atomo = obj_residue['CA']
+```
+&lt;p&gt;&lt;samp&gt;## átomo_CA &lt;/samp&gt;&lt;/p&gt;
+
+---
+O como una lista con el número de átomo 
+```{}
+atomo = obj_residue.child_list[0]
+```
+
+&lt;p&gt;&lt;samp&gt;## átomo_N &lt;/samp&gt;&lt;/p&gt;
+
+--
+
+También podemos ver la información de su posición 3D
+
+```{}
+at_1.coord
+```
+
+&lt;p&gt;&lt;samp&gt;## [X, Y ,Z] &lt;/samp&gt;&lt;/p&gt;
+
+--
+
+Y cuál es el elemento que representa 
+
+```{}
+at_1.element
+```
+
+&lt;p&gt;&lt;samp&gt;## 'N' (nitrógeno)&lt;/samp&gt;&lt;/p&gt;
+---
+Accedemos a los átomos
+
+```python
+residue = chain[22]
+for atom in residue:
+    print(atom)
+```
+
+```
+## &lt;Atom N&gt;
+## &lt;Atom CA&gt;
+## &lt;Atom C&gt;
+## &lt;Atom O&gt;
+## &lt;Atom CB&gt;
+```
+
+
+```python
+atom = residue['CA']
+```
+
+
+```
+## &lt;Atom CA&gt;
+```
+
+
+```python
+atom = residue.child_list[1]
+```
+
+
+```
+## &lt;Atom CA&gt;
+```
+
+---
+
+Información
+
+```python
+# Posición 3D
+atom.coord
+# Elemento
+```
+
+```
+## array([ 35.089, -16.638,  45.038], dtype=float32)
+```
+
+```python
+atom.element
+# ID
+```
+
+```
+## 'C'
+```
+
+```python
+atom.id
+```
+
+```
+## 'CA'
+```
+
+---
+# &lt;span style="color:Plum"&gt;Ejercicio 3&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;Buscar la información del átomo S en las cisteínas&lt;/span&gt;
+
+
+Impriman los elementos y los ids de los átomos de el primer residuo de cisteína que tenemos en la lista `cys_A` para conocer el **id** del elemento **S**
+
+```{}
+    &gt; Para Cada átomo En cys_A[primer_elemento]:
+          Imprime(átomo.elemento, átomo.id)
+      
+      ## N    N
+      ## C    CA
+      ## O    O
+      ## C    CB
+      ## S    ¿?
+```
+---
+
+También podemos ver la distancia en Å entre dos átomos tan solo restando  
+
+```{}
+atomo_1 = obj_residue['CA']
+atomo_2 = obj_residue['N']
+
+atomo_1-atomo_2
+```
+&lt;p&gt;&lt;samp&gt;## 1.16 Å &lt;/samp&gt;&lt;/p&gt;
+---
+Distancias
+
+```python
+atom_1 = residue['N']
+atom_2 = residue['CA']
+atom_1-atom_2
+```
+
+```
+## 1.4573714
+```
+
+```python
+atom_2-atom_1
+```
+
+```
+## 1.4573714
+```
+
+---
+
+# &lt;span style="color:Plum"&gt;Ejercicio 4&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;Calculen las distancias de todos los átomos S para encontrar los que están cerca &lt;/span&gt;
+
+Calculen las distancias de los átomos **S** de las cisteínas de la lista `cys_A`. Guarden los pares de cisteínas de aquellos que tengan una distancia menor a 8.0 Å 
+
+```{}
+    &gt; pares = []
+    &gt; Para Cada cisteína_1 En cys_A:
+        Para Cada cisteína_2 En cys_A:
+        
+          distancia = cisteína_1['id_elemento_S'] - cisteína_2['id_elemento_S']
+          Si distancia Es Menor a  8.0 Å:
+            pares.append( (cisteína_1, cisteína_2) )
+          
+```
+
+
+---
+# &lt;span style="color:OrangeRed"&gt;Tarea&lt;/span&gt;
+
+* Arreglen el código para que solo muestre las combinaciones únicas
+* Creen una función que obtenga e imprima los posibles puentes disulfuro de una cadena y las distancias que presentan sus átomos S
+* Recuerden que pueden obtener el id único de un residuo con `residuo.get_id()[1]`
+
+```{}
+    &gt; obtener_puentes(objeto_cadena)
+    ## possible di-sulfide bond: Cys 155 - Cys 181 2.0
+    ## possible di-sulfide bond: Cys 257 - Cys 338 2.03
+    ## possible di-sulfide bond: Cys 515 - Cys 541 2.02
+    ## possible di-sulfide bond: Cys 618 - Cys 699 2.03
+    ## possible di-sulfide bond: Cys 881 - Cys 855 2.02
+```
+---
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(imgs/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
