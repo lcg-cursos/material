@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>3. Bases de datos</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.9/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# 3. Bases de datos
+### Licenciatura en Ciencias Genómicas,UNAM
+### First version: 2021-08-22; Last update: 2021-10-05
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+# Bases de Datos .small[Entrez]
+
+## Contenido de la unidad
+
+
+  1. [`Einfo`](Clase_3_pt3_v3.0.html#11)
+  
+  2. [`Esearch`](Clase_3_pt3_v3.0.html#21)
+  
+  3. [`EGQuery`](Clase_3_pt3_v3.0.html#32)
+  
+  4. [`Espell`](Clase_3_pt3_v3.0.html#35)
+  
+  5. [`ESummary`](Clase_3_pt3_v3.0.html#36)
+
+  6. [`Efetch`](Clase_3_pt3_v3.0.html#38)
+  
+  7. [`Elink`](Clase_3_pt3_v3.0.html#53)
+  
+  8. [`EPost`](Clase_3_pt3_v3.0.html#64)
+---
+
+## Objetivo
+
+Familiarizarse con las  **E-utilities** de NCBI (API del sistema Entrez)
+
+Emplear las e-utilities desde biopython para consultar y obtener datos de NCBI
+
+---
+## Entrez
+
+&lt;img src="imgs/clase_3_pt3/entrez.jpeg" width="650px" style="display: block; margin: auto;" /&gt;
+---
+## Entrez
+
+&lt;img src="imgs/clase_3_pt3/ncbi.jpeg" width="800px" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+&lt;img src="imgs/clase_3_pt3/ncbi2.jpeg" width="800px" style="display: block; margin: auto;" /&gt;
+---
+## ¿Qué pasa si queremos automatizar?
+
+¿cómo conseguir 1000 (o incluso más) archivos genbanks con los que queremos trabajar?
+
+- ¿Buscariamos uno por uno en la web?
+
+- ¿Haríamos un programa desde cero para recabar nuestra informacion?
+
+- ¿Qué herramientas usarían?
+---
+## E-utilities
+
+&lt;img src="imgs/clase_3_pt3/eutilities.jpeg" width="600px" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="imgs/clase_3_pt3/eutilities2.jpeg" width="600px" style="display: block; margin: auto;" /&gt;
+[Video introductorio a E-Utilities de NCBI](https://youtu.be/BCG-M5k-gvE)
+
+---
+### Pipelines básicos
+
+&lt;img src="imgs/clase_3_pt3/eutilities3.jpeg" width="700px" style="display: block; margin: auto;" /&gt;
+---
+## ¡Importante!
+
+Límites en requests:
+
+- máximo 3 request por segundo (10 con personal key API)
+
+- anexar correo .small[(para que te contacten antes de bloquear la conexión a tu computadora)]
+
+(más laxos durante fines de semana y 9 PM a 5 AM)
+
+---
+## `Einfo`
+
+
+https://eutils.ncbi.nlm.nih.gov/entrez/eutils/einfo.fcgi  (43 DB)
+
+Ejemplo de request. Se usa `handle.read()`: 
+
+
+```python
+from Bio import Entrez
+from pprint import pprint  # para mejor visualización de diccionarios!!
+# Correo
+Entrez.email = "cgil@lcg.unam.mx"  # IMPORTANTE!!!
+# handle con einfo
+handle = Entrez.einfo()
+result = handle.read() 
+handle.close()
+#chequemos qué hay en einfo 
+print(result)
+```
+
+```
+## b'&lt;?xml version="1.0" encoding="UTF-8" ?&gt;\n&lt;!DOCTYPE eInfoResult PUBLIC "-//NLM//DTD einfo 20190110//EN" "https://eutils.ncbi.nlm.nih.gov/eutils/dtd/20190110/einfo.dtd"&gt;\n&lt;eInfoResult&gt;\n&lt;DbList&gt;\n\n\t&lt;DbName&gt;pubmed&lt;/DbName&gt;\n\t&lt;DbName&gt;protein&lt;/DbName&gt;\n\t&lt;DbName&gt;nuccore&lt;/DbName&gt;\n\t&lt;DbName&gt;ipg&lt;/DbName&gt;\n\t&lt;DbName&gt;nucleotide&lt;/DbName&gt;\n\t&lt;DbName&gt;structure&lt;/DbName&gt;\n\t&lt;DbName&gt;genome&lt;/DbName&gt;\n\t&lt;DbName&gt;annotinfo&lt;/DbName&gt;\n\t&lt;DbName&gt;assembly&lt;/DbName&gt;\n\t&lt;DbName&gt;bioproject&lt;/DbName&gt;\n\t&lt;DbName&gt;biosample&lt;/DbName&gt;\n\t&lt;DbName&gt;blastdbinfo&lt;/DbName&gt;\n\t&lt;DbName&gt;books&lt;/DbName&gt;\n\t&lt;DbName&gt;cdd&lt;/DbName&gt;\n\t&lt;DbName&gt;clinvar&lt;/DbName&gt;\n\t&lt;DbName&gt;gap&lt;/DbName&gt;\n\t&lt;DbName&gt;gapplus&lt;/DbName&gt;\n\t&lt;DbName&gt;grasp&lt;/DbName&gt;\n\t&lt;DbName&gt;dbvar&lt;/DbName&gt;\n\t&lt;DbName&gt;gene&lt;/DbName&gt;\n\t&lt;DbName&gt;gds&lt;/DbName&gt;\n\t&lt;DbName&gt;geoprofiles&lt;/DbName&gt;\n\t&lt;DbName&gt;homologene&lt;/DbName&gt;\n\t&lt;DbName&gt;medgen&lt;/DbName&gt;\n\t&lt;DbName&gt;mesh&lt;/DbName&gt;\n\t&lt;DbName&gt;ncbisearch&lt;/DbName&gt;\n\t&lt;DbName&gt;nlmcatalog&lt;/DbName&gt;\n\t&lt;DbName&gt;omim&lt;/DbName&gt;\n\t&lt;DbName&gt;orgtrack&lt;/DbName&gt;\n\t&lt;DbName&gt;pmc&lt;/DbName&gt;\n\t&lt;DbName&gt;popset&lt;/DbName&gt;\n\t&lt;DbName&gt;proteinclusters&lt;/DbName&gt;\n\t&lt;DbName&gt;pcassay&lt;/DbName&gt;\n\t&lt;DbName&gt;protfam&lt;/DbName&gt;\n\t&lt;DbName&gt;biosystems&lt;/DbName&gt;\n\t&lt;DbName&gt;pccompound&lt;/DbName&gt;\n\t&lt;DbName&gt;pcsubstance&lt;/DbName&gt;\n\t&lt;DbName&gt;seqannot&lt;/DbName&gt;\n\t&lt;DbName&gt;snp&lt;/DbName&gt;\n\t&lt;DbName&gt;sra&lt;/DbName&gt;\n\t&lt;DbName&gt;taxonomy&lt;/DbName&gt;\n\t&lt;DbName&gt;biocollections&lt;/DbName&gt;\n\t&lt;DbName&gt;gtr&lt;/DbName&gt;\n&lt;/DbList&gt;\n\n&lt;/eInfoResult&gt;\n'
+```
+
+---
+### `Entrez.read`
+
+En el ejemplo anterior obtenemos un formato poco amigable para su lectura. 
+
+Para esto está el parser del módulo de Entrez, lo checaremos a continuación:
+
+
+```python
+handle = Entrez.einfo()
+*record = Entrez.read(handle)
+# obtenemos diccionario (llave "Dblist")
+print(record["DbList"][0:3])  # primeras 3 bases de datos
+```
+
+```
+## ['pubmed', 'protein', 'nuccore']
+```
+
+```python
+handle.close()  # cerrar handle!
+```
+
+---
+### Accediendo a información de las bases de datos
+
+Podemos checar más información sobre las bases de datos en einfo. Checaremos *PubMed*:
+
+.small[URL con búsqueda para pubmed:] https://eutils.ncbi.nlm.nih.gov/entrez/eutils/einfo.fcgi?db=pubmed
+
+&lt;img src="imgs/clase_3_pt3/einfo_pubmed.jpeg" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;br&gt;&lt;br&gt;
+Lo anterior puede ser obtenido desde biopython de la siguiente manera:
+
+
+```python
+handle = Entrez.einfo(db = "pubmed") # indicar db de interes
+*record = Entrez.read(handle)
+handle.close() #cerramos handle
+record["DbInfo"]["Description"]  # descripcion de pubmed
+```
+
+```
+## 'PubMed bibliographic record'
+```
+
+Notemos que dentro de `FieldList` tiene un campo `Description`. Para acceder a él sería primero ingresar a `FieldList`. **En este caso estamos ingresando a `DbInfo` **
+
+&lt;img src="imgs/clase_3_pt3/pubmed_description.jpeg" width="450px" style="display: block; margin: auto;" /&gt;
+
+---
+### Chequemos qué llaves hay en `"DbInfo"`
+
+
+```python
+record["DbInfo"].keys()  # para saber qué podemos consultar
+```
+
+```
+## dict_keys(['DbName', 'MenuName', 'Description', 'DbBuild', 'Count', 'LastUpdate', 'FieldList', 'LinkList'])
+```
+--
+Probemos entrar a la llave `"LastUpdate"`:
+
+
+```python
+record["DbInfo"]["LastUpdate"]
+```
+
+```
+## '2021/10/04 15:17'
+```
+--
+Como ejercicio propio traten de ingresar a otra llave. **¿Algún campo tendrá más información anidada?**
+
+---
+
+### ¿Y si quiero buscar en algún field?
+
+Si quisieramos ver todos los campos disponibles de cierta base de datos imprimir todos sus campos:
+
+
+```python
+# imprimir todos los campos a los que podemos accesar de pubmed 
+for field in record["DbInfo"]["FieldList"]:
+  print("%(Name)s, %(FullName)s, %(Description)s" % field) 
+```
+
+```
+## ALL, All Fields, All terms from all searchable fields
+## UID, UID, Unique number assigned to publication
+## FILT, Filter, Limits the records
+## TITL, Title, Words in title of publication
+## WORD, Text Word, Free text associated with publication
+## MESH, MeSH Terms, Medical Subject Headings assigned to publication
+## MAJR, MeSH Major Topic, MeSH terms of major importance to publication
+## AUTH, Author, Author(s) of publication
+## JOUR, Journal, Journal abbreviation of publication
+## AFFL, Affiliation, Author's institutional affiliation and address
+## ECNO, EC/RN Number, EC number for enzyme or CAS registry number
+## SUBS, Supplementary Concept, CAS chemical name or MEDLINE Substance Name
+## PDAT, Date - Publication, Date of publication
+## EDAT, Date - Entrez, Date publication first accessible through Entrez
+## VOL, Volume, Volume number of publication
+## PAGE, Pagination, Page number(s) of publication
+## PTYP, Publication Type, Type of publication (e.g., review)
+## LANG, Language, Language of publication
+## ISS, Issue, Issue number of publication
+## SUBH, MeSH Subheading, Additional specificity for MeSH term
+## SI, Secondary Source ID, Cross-reference from publication to other databases
+## MHDA, Date - MeSH, Date publication was indexed with MeSH terms
+## TIAB, Title/Abstract, Free text associated with Abstract/Title
+## OTRM, Other Term, Other terms associated with publication
+## INVR, Investigator, Investigator
+## COLN, Author - Corporate, Corporate Author of publication
+## CNTY, Place of Publication, Country of publication
+## PAPX, Pharmacological Action, MeSH pharmacological action pre-explosions
+## GRNT, Grant Number, NIH Grant Numbers
+## MDAT, Date - Modification, Date of last modification
+## CDAT, Date - Completion, Date of completion
+## PID, Publisher ID, Publisher ID
+## FAUT, Author - First, First Author of publication
+## FULL, Author - Full, Full Author Name(s) of publication
+## FINV, Investigator - Full, Full name of investigator
+## TT, Transliterated Title, Words in transliterated title of publication
+## LAUT, Author - Last, Last Author of publication
+## PPDT, Print Publication Date, Date of print publication
+## EPDT, Electronic Publication Date, Date of Electronic publication
+## LID, Location ID, ELocation ID
+## CRDT, Date - Create, Date publication first accessible through Entrez
+## BOOK, Book, ID of the book that contains the document
+## ED, Editor, Section's Editor
+## ISBN, ISBN, ISBN
+## PUBN, Publisher, Publisher's name
+## AUCL, Author Cluster ID, Author Cluster ID
+## EID, Extended PMID, Extended PMID
+## DSO, DSO, Additional text from the summary
+## AUID, Author - Identifier, Author Identifier
+## PS, Subject - Personal Name, Personal Name as Subject
+## COIS, Conflict of Interest Statements, Conflict of Interest Statements
+```
+---
+
+### URL del request
+
+`handle.url` nos regresa el URL que se ha generado de nuestra petición. Con este URL obtenemos lo que hemos solicitado en nuestro código (request).
+
+
+```python
+print(handle.url)
+```
+
+```
+## https://eutils.ncbi.nlm.nih.gov/entrez/eutils/einfo.fcgi?db=pubmed&amp;tool=biopython&amp;email=cgil%40lcg.unam.mx
+```
+Notemos que el URL contiene `tool=biopython` y `email=cgil@lcg.unam.mx`, que son requeridos y que son añadidos automáticamente por biopython.
+
+---
+
+# &lt;span style="color:Plum"&gt;Ejercicio 1&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;Empleando `Entrez.einfo` y `Entrez.read`, imprimir descripción de dos campos de **genome**
+&lt;/span&gt;
+
+
+&lt;img src="imgs/clase_3_pt3/genome_einfo.jpeg" width="450px" style="display: block; margin: auto;" /&gt;
+---
+## `Esearch`
+
+.full-width[.content-box-yellow[Entrez.esearch( base de datos a buscar , termino )]]
+
+Buscaremos el termino "biopython" en PubMed, checaremos cuantos resultados obtenemos con `record["Count"]`
+
+
+```python
+*handle = Entrez.esearch(db = "pubmed", term = "biopython")
+record = Entrez.read(handle) 
+record["Count"]
+```
+
+```
+## '35'
+```
+
+```python
+handle.close()
+```
+
+[URL de búsqueda de biopython en pubmed](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&amp;term=biopython&amp;tool=biopython&amp;email=cgil%40lcg.unam.mx)
+
+---
+Desde la web se vería así:
+https://pubmed.ncbi.nlm.nih.gov/?term=biopython
+&lt;img src="imgs/clase_3_pt3/pubmed_biopython.jpeg" width="700px" style="display: block; margin: auto;" /&gt;
+---
+### `retmax`
+
+Parámetro que indica número máximo de *retrieves*, (default es **20** y llega hasta 100,000 records). 
+En este caso nuestro count es de 35, por lo modificaremos `retmax`:
+
+```python
+# len(record["IdList"])  #chequemos tamaño 
+count = int(record["Count"]) #cambiemos retmax por long de Counts
+*handle = Entrez.esearch(db="pubmed", term="biopython", retmax=count)
+record = Entrez.read(handle) 
+handle.close()
+len(record["IdList"]) # ahora es de 35!!
+```
+
+```
+## 35
+```
+--
+
+```python
+record.keys()  # info que podemos obtener
+```
+
+```
+## dict_keys(['Count', 'RetMax', 'RetStart', 'IdList', 'TranslationSet', 'TranslationStack', 'QueryTranslation'])
+```
+
+---
+### Ejercicio: Probemos buscando autorxs
+
+Como ejemplo buscaremos "Valeria Mateo-Estrada" en campo de autor. .small[(Recordemos einfo: AUTH, Author, Author(s) of publication)]
+
+
+```python
+handle = Entrez.esearch(db="pubmed", term='Valeria Mateo-Estrada',field='AUTH')
+record = Entrez.read(handle)
+handle.url  # URL de request
+```
+
+```
+## 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&amp;term=Valeria+Mateo-Estrada&amp;field=AUTH&amp;tool=biopython&amp;email=cgil%40lcg.unam.mx'
+```
+
+```python
+handle.close()
+record["IdList"]  # ids de artículos
+```
+
+```
+## ['34282943', '32611704', '31406982', '30625167']
+```
+
+---
+https://pubmed.ncbi.nlm.nih.gov/34282943/
+&lt;img src="imgs/clase_3_pt3/autora.jpeg" width="700px" style="display: block; margin: auto;" /&gt;
+
+---
+### Búsquedas de más de un campo
+
+Si queremos buscar en varios campos, podemos incluirlo todo en `term` usando corchetes para el campo.
+Ejemplo anterior podría ser:
+
+```python
+handle = Entrez.esearch(db="pubmed", term='Valeria Mateo-Estrada[AUTH]')
+```
+---
+### Usando operadores booleanos 
+
+- Para hacer búsquedas con mayor especificidad usaremos operadores **AND** y **OR**
+
+- Se usa paréntesis para ir haciendo expresiones más complejas
+
+
+Hagamos el término para búsqueda de **gen1 o gen2 del organismo1**:
+
+¿Cuál de las siguientes expresiones es correcta?
+
+.full-width[.content-box-yellow[Organismo1[Orgn] AND (gen1[Gene] OR gen2[Gene])]]
+
+.full-width[.content-box-yellow[(Organismo1[Orgn] AND gen1[Gene]) OR (Organismo1[Org] AND gen2[Gene])]]
+
+.full-width[.content-box-yellow[(Organismo1[Orgn] AND gen1[Gene] OR gen2[Gene] ]]
+
+
+---
+Ahora buscaremos una combinacion de campos, usaremos búsqueda que emplearon en artículo de virioma de mosquitos:
+&lt;img src="imgs/clase_3_pt3/busqueda_mosquitos.jpeg" width="700px" style="display: block; margin: auto;" /&gt;
+--
+
+```python
+*termino = "(Aedes[Title] OR Aedes[All Fields])AND((RNA-Seq[Title] OR transcriptomic[Title]) OR (transcriptome[Title] OR sequencing[Title]))"
+handle = Entrez.esearch(db="pubmed", term=termino)
+result = Entrez.read(handle)
+print(result["Count"])  #cuantos encontró 
+```
+
+```
+## 129
+```
+
+```python
+print(result["IdList"]) # lista de los primero 20 
+# handle.url  # url de request
+```
+
+```
+## ['34599327', '34578158', '34270558', '34174320', '34076041', '34044772', '33999150', '33970535', '33938890', '33901182', '33836668', '33671824', '33541262', '33478394', '33406161', '33382725', '33301456', '32916828', '32913240', '32867680']
+```
+---
+
+# &lt;span style="color:OrangeRed"&gt;Tarea&lt;/span&gt;
+
+**Primera parte**
+
+Empleando `Entrez.einfo` y `Entrez.read`, imprime la descripción de los siguientes campos de la base de datos **"protein"**:
+
+- FieldList **"ECNO"**
+- LinkList **"protein_protein_small_genome"**
+
+
+**Segunda parte**
+
+Automatizar lo siguiente:
+
+- Búsqueda con **`esearch`** de ciertx autorx y ciertas palabra en el título (con posibilidad de cambiar búsqueda) .small[**Ejemplo:** Amaranta Manrique (como autora) **Y** ( alacranes (en título del artículo) **O** ética (en título del artículo) ) ]
+
+- Guardar los IDs de los artículos en un archivo
+
+
+
+---
+## `EGQuery`
+
+Muestra en cuales de las bases de datos podemos encontrar información de nuestra búsqueda.
+
+&lt;img src="imgs/clase_3_pt3/egquery.jpeg" width="650px" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Pipelines básicos
+
+&lt;img src="imgs/clase_3_pt3/pipelines_eutilities.jpeg" width="700px" style="display: block; margin: auto;" /&gt;
+
+---
+### Busquemos mismo término del artículo de los mosquitos
+
+`Entrez.egquery` para buscar termino anterior (artículo de virioma de mosquitos). Despues leemos cada `DbName` y su `Count`:
+
+
+```python
+termino = "(Aedes[Title] OR Aedes[All Fields])AND((RNA-Seq[Title] OR transcriptomic[Title]) OR (transcriptome[Title] OR sequencing[Title]))"
+*handle = Entrez.egquery(term=termino)
+record = Entrez.read(handle)
+for row in record["eGQueryResult"]:
+    print(row["DbName"], row["Count"])
+```
+
+```
+## pubmed 129
+## pmc 732
+## mesh 0
+## books 0
+## pubmedhealth Error
+## omim 0
+## ncbisearch 0
+## nuccore 65
+## nucgss 0
+## nucest 0
+## protein 0
+## genome 1
+## structure 0
+## taxonomy 0
+## snp 0
+## dbvar 0
+## gene 0
+## sra 8215
+## biosystems 0
+## unigene 0
+## cdd 0
+## clone 0
+## popset 0
+## geoprofiles 0
+## gds 24
+## homologene 0
+## pccompound 0
+## pcsubstance 0
+## pcassay 0
+## nlmcatalog 0
+## probe 0
+## gap 0
+## proteinclusters 0
+## bioproject 211
+## biosample 152
+## biocollections 0
+```
+
+
+---
+## `ESpell`
+
+Ayuda a corregir búsqueda con sugerencias de ortografía:
+
+
+```python
+*handle = Entrez.espell(term="biopythooon")
+record = Entrez.read(handle)
+record["Query"] # lo que añadimos 
+```
+
+```
+## 'biopythooon'
+```
+
+```python
+record["CorrectedQuery"]  # la sugerencia
+```
+
+```
+## 'biopython'
+```
+
+---
+
+## `Esummary`
+
+Resumen de una lista de IDs:
+
+
+```python
+handle = Entrez.esummary(db="taxonomy", id="9913,30521")
+record = Entrez.read(handle)
+len(record) 
+```
+
+```
+## 2
+```
+
+```python
+record[0].keys()
+```
+
+```
+## dict_keys(['Item', 'Id', 'Status', 'Rank', 'Division', 'ScientificName', 'CommonName', 'TaxId', 'AkaTaxId', 'Genus', 'Species', 'Subsp', 'ModificationDate'])
+```
+
+```python
+record[0]["Id"]
+```
+
+```
+## '9913'
+```
+
+---
+
+### Checando tamaños archivos
+
+`Esummary` es útil porque son archivos menos pesados. Podemos checar el peso de nuestros distintos request con el siguiente código:
+
+
+```python
+import pickle
+## tamaño del record deseado
+len(pickle.dumps(record)) #tamaño esummary
+```
+
+```
+## 1754
+```
+
+---
+
+## `Efetch`
+
+.full-width[.content-box-yellow[Entrez.efetch(base de datos, id, tipo, modo)]]
+
+
+Regresa records en formato especificado (tipo y modo).
+En esta tabla podemos ver las bases de datos en las que `Efetch` puede interactuar y sus valores para `retmode` y `rettype`:
+
+https://www.ncbi.nlm.nih.gov/books/NBK25499/table/chapter4.T._valid_values_of__retmode_and/?report=objectonly
+
+
+&lt;img src="imgs/clase_3_pt3/efetch.jpeg" width="600px" style="display: block; margin: auto;" /&gt;
+---
+### Busquemos base de datos *Nucleotide*
+
+En la siguiente liga tenemos las bases de datos, nombre de sus IDs y nombre segun E-utility
+
+Ejemplo:
+
+- Nucleotide, GI number, nuccore
+
+- PubMed, PMID, pubmed
+
+https://www.ncbi.nlm.nih.gov/books/NBK25497/table/chapter2.T._entrez_unique_identifiers_ui/?report=objectonly
+
+---
+#### Ejemplo efetch
+
+Ahora pediremos archivo genebank de *nucleotide* en texto de id "HE805982" con efetch. Después lo leeremos con `SeqIO.read`
+
+
+```python
+from Bio import Entrez, SeqIO  
+# db = "nuccore" tambien es valido
+*handle = Entrez.efetch(db="nucleotide", id="HE805982", rettype="gb", retmode="text")
+# leemos archivo genebank
+record = SeqIO.read(handle, "genbank")
+handle.close()
+
+print(record)  # imprimimos archivo
+```
+
+```
+## ID: HE805982.1
+## Name: HE805982
+## Description: Hepatitis B virus partial X gene for HBx, isolate 11851
+## Number of features: 3
+## /molecule_type=DNA
+## /topology=linear
+## /data_file_division=VRL
+## /date=15-MAY-2012
+## /accessions=['HE805982']
+## /sequence_version=1
+## /keywords=['']
+## /source=Hepatitis B virus
+## /organism=Hepatitis B virus
+## /taxonomy=['Viruses', 'Riboviria', 'Pararnavirae', 'Artverviricota', 'Revtraviricetes', 'Blubervirales', 'Hepadnaviridae', 'Orthohepadnavirus']
+## /references=[Reference(title='Mutation profiling of Hepatitis B virus strains circulating in India', ...), Reference(title='Direct Submission', ...)]
+## Seq('ATGGCTGCTAGGTTGTACTGCCAACTGGATTCTTCGCGGGACGTCCTTTGTTTA...GTA')
+```
+---
+
+
+```python
+record.id  # id de record obtenido
+```
+
+```
+## 'HE805982.1'
+```
+
+```python
+record.description  # descripcion breve del record
+```
+
+```
+## 'Hepatitis B virus partial X gene for HBx, isolate 11851'
+```
+
+```python
+record.annotations  # las anotaciones que contenga (diccionario)
+```
+
+```
+## {'molecule_type': 'DNA', 'topology': 'linear', 'data_file_division': 'VRL', 'date': '15-MAY-2012', 'accessions': ['HE805982'], 'sequence_version': 1, 'keywords': [''], 'source': 'Hepatitis B virus', 'organism': 'Hepatitis B virus', 'taxonomy': ['Viruses', 'Riboviria', 'Pararnavirae', 'Artverviricota', 'Revtraviricetes', 'Blubervirales', 'Hepadnaviridae', 'Orthohepadnavirus'], 'references': [Reference(title='Mutation profiling of Hepatitis B virus strains circulating in India', ...), Reference(title='Direct Submission', ...)]}
+```
+
+```python
+record.seq  # secuencia
+```
+
+```
+## Seq('ATGGCTGCTAGGTTGTACTGCCAACTGGATTCTTCGCGGGACGTCCTTTGTTTA...GTA')
+```
+---
+### Podemos guardar archivo
+
+Haremos lo mismo pero ahora guardaremos en "HE805982.gb"
+
+```python
+filename = "HE805982.gb"  #nombre del archivo a generar
+*with Entrez.efetch(db="nucleotide",id="HE805982",rettype="gb", retmode="text") as file:
+    with open(filename, "w") as handle:
+        handle.write(file.read())  #escribimos archivo
+# parseamos archivo con SeqIO, indiicamos que es tipo genbank
+record = SeqIO.read("HE805982.gb", "genbank") 
+record
+```
+---
+## `Efetch` y archivos de texto
+
+Hasta el momento hemos usado `Entrez.read` para manejar handles. PERO, cuando tratamos de obtener archivos tipo texto (fasta, abstracts, ¿genbanks?) debemos usar `handle.read`
+
+
+```python
+out_handle = open("files/prueba.fasta", "w")
+fetch_handle = Entrez.efetch(db="nucleotide", id="1919569438, 1919569357, 1251949171",
+                            rettype="fasta", retmode="text")
+data = fetch_handle.read()  #usar handle.read()
+fetch_handle.close() #cerrar handle
+out_handle.write(data) #escribir archivo
+out_handle.close() #cerrar archivo
+```
+
+---
+### Pipelines básicos
+
+Recordemos algunos flujos de trabajo básicos
+
+&lt;img src="imgs/clase_3_pt3/pipelines_eutilities.jpeg" width="700px" style="display: block; margin: auto;" /&gt;
+
+---
+# &lt;span style="color:Plum"&gt;Ejercicio 2&lt;/span&gt;
+
+#### &lt;span style="color:Orchid"&gt;búsqueda de linajes. Busquemos qué tan emparentados están dos organimsos con las herramientas que hemos visto.&lt;/span&gt;
+
+Usaremos a *Notoryctes typhlops* y *Chrysochloris asiatica*
+
+&lt;img src="imgs/clase_3_pt3/topos.jpeg" width="450px" style="display: block; margin: auto;" /&gt;
+
+---
+Como nuestra pregunta es sobre linajes, la base de datos que usaremos será **Taxonomy**.
+
+- **PRIMERA PARTE:** Hacer una búsqueda con `esearch` (en este caso contamos con los nombres de los organismos), la búsqueda nos dará su ID.
+- **SEGUNDA PARTE:** Usar el ID para obtener archivo
+
+--
+
+
+```python
+#PRIMERA PARTE: esearch para buscar 1er organismo en taxonomy
+handle = Entrez.esearch(db="Taxonomy", term="Notoryctes typhlops")
+record = Entrez.read(handle)
+record["IdList"] # obtenemos ID de taxonomia
+```
+
+```
+## ['37699']
+```
+
+```python
+id_taxo = record["IdList"] #guarda ID
+# SEGUNDA PARTE: efetch para obtener archivo de taxonomia
+handle = Entrez.efetch(db="Taxonomy", id=id_taxo, retmode="xml")
+Notoryctes = Entrez.read(handle)
+Notoryctes[0].keys()  #checamos qué informacion tenemos
+```
+
+```
+## dict_keys(['TaxId', 'ScientificName', 'OtherNames', 'ParentTaxId', 'Rank', 'Division', 'GeneticCode', 'MitoGeneticCode', 'Lineage', 'LineageEx', 'CreateDate', 'UpdateDate', 'PubDate'])
+```
+
+---
+
+#### Hacer lo mismo para *Chrysochloris asiatica*
+
+```python
+# PRIMERA PARTE
+*handle = Entrez.esearch(db="Taxonomy", term="Chrysochloris asiatica")
+record = Entrez.read(handle)
+*id_taxo = record["IdList"][0]
+#SEGUNDA PARTE
+*handle = Entrez.efetch(db="Taxonomy", id=id_taxo, retmode="xml")
+Chryso = Entrez.read(handle)
+print(Chryso[0]["Lineage"])  
+```
+
+```
+## cellular organisms; Eukaryota; Opisthokonta; Metazoa; Eumetazoa; Bilateria; Deuterostomia; Chordata; Craniata; Vertebrata; Gnathostomata; Teleostomi; Euteleostomi; Sarcopterygii; Dipnotetrapodomorpha; Tetrapoda; Amniota; Mammalia; Theria; Eutheria; Afrotheria; Chrysochloridae; Chrysochlorinae; Chrysochloris
+```
+---
+
+Checamos linaje de *Notoryctes typhlops*
+
+
+```python
+#topo 1
+# Notoryctes[0]["OtherNames"]  # marsupial mole
+*Notoryctes[0]["Lineage"]  #checamos linaje
+```
+
+```
+## 'cellular organisms; Eukaryota; Opisthokonta; Metazoa; Eumetazoa; Bilateria; Deuterostomia; Chordata; Craniata; Vertebrata; Gnathostomata; Teleostomi; Euteleostomi; Sarcopterygii; Dipnotetrapodomorpha; Tetrapoda; Amniota; Mammalia; Theria; Metatheria; Notoryctemorphia; Notoryctidae; Notoryctes'
+```
+--
+Checamos linaje de *Chrysochloris asiatica*
+
+```python
+#topo2
+# Chryso[0]["OtherNames"]  # Cape golden mole
+*Chryso[0]["Lineage"]
+```
+
+```
+## 'cellular organisms; Eukaryota; Opisthokonta; Metazoa; Eumetazoa; Bilateria; Deuterostomia; Chordata; Craniata; Vertebrata; Gnathostomata; Teleostomi; Euteleostomi; Sarcopterygii; Dipnotetrapodomorpha; Tetrapoda; Amniota; Mammalia; Theria; Eutheria; Afrotheria; Chrysochloridae; Chrysochlorinae; Chrysochloris'
+```
+
+---
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+- ¿En qué punto divergen sus linajes?
+
+  - **¿Cómo compararían los dos linajes que obtuvimos?** 
+
+---
+### Filogenia
+
+
+&lt;img src="imgs/clase_3_pt3/filogenia.jpeg" width="600px" style="display: block; margin: auto;" /&gt;
+
+---
+## `Elink`
+
+Buscar información en otras bases de datos. **¡¡¡Muy muy útil!!**
+
+Buscaremos el siguiente ID de **protein** en **gene**:
+
+
+```python
+ids = "15718680" # id a buscar
+# elink buscara los ids de protein en la base de datos de gene
+*record = Entrez.read(Entrez.elink(dbfrom="protein", id=ids,db='gene'))
+pprint(record[0]) #visualicemos record
+```
+
+```
+## {'DbFrom': 'protein',
+##  'ERROR': [],
+##  'IdList': ['15718680'],
+##  'LinkSetDb': [{'DbTo': 'gene',
+##                 'Link': [{'Id': '3702'}],
+##                 'LinkName': 'protein_gene'}],
+##  'LinkSetDbHistory': []}
+```
+
+---
+
+**Ahora buscaremos 2 IDs (o más):**
+
+
+```python
+ids = "15718680,157427902" # ids a buscar
+# elink buscara los ids de protein en la base de datos de gene
+record = Entrez.read(Entrez.elink(dbfrom="protein", id=ids,db='gene'))
+pprint(record[0]) #visualicemos record
+```
+
+```
+## {'DbFrom': 'protein',
+##  'ERROR': [],
+##  'IdList': ['15718680', '157427902'],
+##  'LinkSetDb': [{'DbTo': 'gene',
+##                 'Link': [{'Id': '522311'}, {'Id': '3702'}],
+##                 'LinkName': 'protein_gene'}],
+##  'LinkSetDbHistory': []}
+```
+
+---
+**Pero ¿los IDs de gene corresponden al orden en que los solicitamos?**
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;img src="imgs/clase_3_pt3/elink.jpeg" width="450px" style="display: block; margin: auto;" /&gt;
+---
+
+#### Modificaremos URL para que IDs correspondan a los solicitados
+
+.small[ [Sección de referencia (NCBI) a checar para resolver esto](https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ELink) ]
+
+&lt;img src="imgs/clase_3_pt3/elink_multiple.jpeg" width="450px" style="display: block; margin: auto;" /&gt;
+
+.pull-left[
+&lt;img src="imgs/clase_3_pt3/elink_sinorden.jpeg" width="350px" style="display: block; margin: auto auto auto 0;" /&gt;
+]
+
+.pull-right[
+&lt;img src="imgs/clase_3_pt3/elink_ordenado.jpeg" width="300px" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+---
+Crearemos una función para modificar URLs obtenidas
+
+*cambio de:*
+
+**id=15718680%2C157427902**
+
+*a:*
+
+**id=15718680&amp;id=157427902**
+
+
+```python
+# Función para generar la URL como en la documentación de ENTREZ
+from urllib.request import urlopen
+from urllib.parse import urlencode
+
+def elink_multiple(dbfrom, ids, db,
+                  mirror="https://eutils.ncbi.nlm.nih.gov/entrez/eutils"):
+    # diccionario con lo que tendrá el URL
+    parameters = {"dbfrom": dbfrom, "db":db, "id": ids, "tool":"biopython", "email":Entrez.email}
+    # Creamos la URL
+    command = urlencode(parameters, doseq=True)
+    
+    url = "%s/elink.fcgi?%s" % (mirror, command)
+    handle = urlopen(url)
+    return(handle)
+```
+
+---
+
+Usemos funcion `elink_multiple`:
+
+
+```python
+pmids = ["15718680","157427902"] # ids a buscar
+*handle = elink_multiple(dbfrom="protein", ids=pmids, db="gene")
+handle.url  # chequemos URL
+```
+
+```
+## 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=protein&amp;db=gene&amp;id=15718680&amp;id=157427902&amp;tool=biopython&amp;email=cgil%40lcg.unam.mx'
+```
+
+```python
+record = Entrez.read(handle)
+handle.close()
+```
+
+Chequemos el segundo registro:
+
+```python
+pprint(record[1])
+```
+
+```
+## {'DbFrom': 'protein',
+##  'ERROR': [],
+##  'IdList': ['157427902'],
+##  'LinkSetDb': [{'DbTo': 'gene',
+##                 'Link': [{'Id': '522311'}],
+##                 'LinkName': 'protein_gene'}],
+##  'LinkSetDbHistory': []}
+```
+
+---
+### Obtener citas 
+
+Checaremos las citas del artículo: https://pubmed.ncbi.nlm.nih.gov/32703847/
+
+
+```python
+pmid = "32703847" #pubmed id
+results = Entrez.read(Entrez.elink(dbfrom="pubmed", db="pmc", id=pmid))
+pprint(results[0])
+```
+
+```
+## {'DbFrom': 'pubmed',
+##  'ERROR': [],
+##  'IdList': ['32703847'],
+##  'LinkSetDb': [{'DbTo': 'pmc',
+##                 'Link': [{'Id': '7990026'}],
+##                 'LinkName': 'pubmed_pmc'},
+##                {'DbTo': 'pmc',
+##                 'Link': [{'Id': '8460600'},
+##                          {'Id': '8357350'},
+##                          {'Id': '8217727'},
+##                          {'Id': '8203844'},
+##                          {'Id': '8166335'},
+##                          {'Id': '8016457'},
+##                          {'Id': '7981288'},
+##                          {'Id': '7828219'},
+##                          {'Id': '7597207'},
+##                          {'Id': '7426639'}],
+##                 'LinkName': 'pubmed_pmc_refs'},
+##                {'DbTo': 'pmc',
+##                 'Link': [{'Id': '7990026'}],
+##                 'LinkName': 'pubmed_pmc_local'}],
+##  'LinkSetDbHistory': []}
+```
+---
+Como ya sabemos que nos interesa la parte de `pubmed_pmc_refs` podemos espeficarlo desde que hacemos request de `elink`:
+
+
+```python
+results = Entrez.read(Entrez.elink(dbfrom="pubmed", db="pmc",
+*                                 LinkName="pubmed_pmc_refs", from_uid=pmid))
+# Guardemos links de PMC
+pmc_ids = [link["Id"] for link in results[0]["LinkSetDb"][0]["Link"]]
+pmc_ids
+```
+
+```
+## ['8460600', '8357350', '8217727', '8203844', '8166335', '8016457', '7981288', '7828219', '7597207', '7426639']
+```
+
+---
+
+Obtuvimos IDs de PMC, ¿y si quisieramos los IDs para PubMed?
+--
+
+```python
+#ahora partimos de PMC a pubmed
+results2 = Entrez.read(Entrez.elink(dbfrom="pmc", db="pubmed",
+*                                   LinkName="pmc_refs_pubmed",
+                                    id=",".join(pmc_ids)))
+#guardamos links
+pubmed_ids = [link["Id"] for link in results2[0]["LinkSetDb"][0]["Link"]]
+pubmed_ids
+```
+
+```
+## ['34161321', '33931503', '33919194', '33779550', '33763039', '33602812', '33425253', '33425249', '33303586', '33289883', '33286869', '33279291', '33260860', '33260635', '33214990', '33182211', '33166013', '33119995', '33113918', '33112451', '33092039', '33091369', '33083548', '33078615', '33067428', '33066610', '33065067', '33050170', '33037152', '33033407', '33025605', '33024104', '33020915', '33020297', '32978375', '32966800', '32961699', '32957645', '32955440', '32954887', '32900870', '32879490', '32878175', '32873645', '32869927', '32867088', '32861496', '32845085', '32835921', '32795260', '32795243', '32792543', '32784880', '32766163', '32747429', '32746932', '32726597', '32717638', '32710495', '32703847', '32701325', '32687030', '32684938', '32665585', '32665440', '32664493', '32659893', '32657418', '32648783', '32630353', '32622246', '32561723', '32556166', '32551433', '32522212', '32488142', '32470820', '32463598', '32444777', '32444610', '32436349', '32434280', '32424336', '32409837', '32403221', '32379825', '32366874', '32360521', '32349767', '32284564', '32275650', '32266079', '32258067', '32245958', '32210422', '32166617', '32158219', '32156825', '32155146', '32155044', '32123384', '32061933', '32058267', '32048840', '32047145', '32029285', '32023941', '32022245', '32019919', '32015543', '31981358', '31978397', '31957181', '31941809', '31937763', '31926940', '31915693', '31887413', '31884165', '31871173', '31863076', '31850364', '31849911', '31847614', '31816234', '31809503', '31803645', '31799423', '31792365', '31783069', '31780816', '31780431', '31777764', '31777175', '31733401', '31722889', '31701150', '31696234', '31689478', '31667520', '31657101', '31641245', '31637421', '31602622', '31591554', '31589781', '31589296', '31586394', '31578371', '31570166', '31522114', '31504793', '31504032', '31461842', '31456563', '31448268', '31416261', '31396911', '31395883', '31391098', '31390539', '31365855', '31364068', '31358985', '31337891', '31325664', '31313058', '31308523', '31299173', '31299083', '31294229', '31278630', '31276536', '31270234', '31266875', '31243142', '31235915', '31213510', '31196170', '31190907', '31181106', '31179245', '31176413', '31171578', '31150626', '31150619', '31146052', '31133758', '31108362', '31104932', '31097577', '31092918', '31091320', '31080069', '31069717', '31050661', '31031756', '30998340', '30991951', '30967470', '30916318', '30912485', '30908261', '30897437', '30890609', '30881730', '30866760', '30856169', '30845144', '30830798', '30828388', '30805337', '30788345', '30787451', '30707687', '30700431', '30698741', '30696980', '30695634', '30686758', '30679358', '30657448', '30617834', '30595456', '30593947', '30587581', '30578265', '30555825', '30554877', '30550564', '30531987', '30525504', '30522834', '30454650', '30425690', '30420454', '30418478', '30412878', '30409883', '30406744', '30395331', '30395289', '30374016', '30373492', '30371894', '30357364', '30352934', '30349396', '30349322', '30340526', '30335785', '30318151', '30315075', '30283141', '30272148', '30263953', '30218022', '30210232', '30201986', '30201845', '30192979', '30115066', '30108561', '30076187', '30065369', '30065105', '30061400', '30061284', '30060506', '30049587', '30049281', '30038306', '30004679', '29997643', '29995838', '29979655', '29975681', '29967028', '29950016', '29944340', '29941428', '29937223', '29926529', '29915221', '29910799', '29906441', '29902092', '29895952', '29890970', '29887378', '29872542', '29843923', '29806041', '29791507', '29784955', '29780833', '29769716', '29769297', '29728462', '29692801', '29680377', '29679008', '29666238', '29657133', '29654320', '29654285', '29631210', '29622804', '29618526', '29618219', '29579101', '29579036', '29570991', '29570700', '29539637', '29522748', '29507227', '29505029', '29488087', '29457794', '29447345', '29444205', '29440576', '29439838', '29429416', '29428477', '29425356', '29420265', '29382745', '29377793', '29358499', '29341567', '29313526', '29291750', '29284126', '29275251', '29267233', '29258014', '29254336', '29218563', '29211988', '29206104', '29184018', '29175850', '29175206', '29174494', '29147057', '29146901', '29129921', '29109626', '29106614', '29105190', '29101379', '29073085', '29072300', '29069382', '29067766', '29064557', '29061664', '29042439', '29040675', '29033955', '29033457', '29026424', '29020004', '28988663', '28978431', '28973464', '28924017', '28916392', '28877501', '28876235', '28857745', '28822274', '28815732', '28814505', '28801037', '28779005', '28768879', '28766807', '28755958', '28731324', '28726822', '28725482', '28723903', '28720731', '28710774', '28649434', '28602657', '28580804', '28559279', '28555623', '28530276', '28529131', '28521004', '28495876', '28485690', '28475309', '28446878', '28416114', '28397262', '28366830', '28356901', '28355599', '28348033', '28338559', '28258236', '28258229', '28246379', '28215528', '28190782', '28187134', '28162953', '28102818', '28089542', '28088694', '28085678', '28081141', '28062462', '28061857', '28045126', '28031032', '28001368', '27996047', '27965289', '27956111', '27941827', '27939973', '27928092', '27912064', '27903898', '27899573', '27883890', '27852217', '27839866', '27816226', '27801646', '27798010', '27789812', '27731797', '27720719', '27697925', '27681362', '27649224', '27617693', '27572735', '27557415', '27510862', '27496533', '27494248', '27480861', '27435677', '27429432', '27415786', '27412096', '27358602', '27351952', '27329289', '27311542', '27305665', '27288422', '27286824', '27245715', '27227426', '27220470', '27194481', '27185502', '27151198', '27136057', '27125900', '27091992', '27081072', '27045833', '27013737', '26989262', '26969117', '26951675', '26941320', '26901109', '26890609', '26724578', '26723635', '26666944', '26641532', '26598662', '26579921', '26578576', '26575626', '26527732', '26527724', '26527720', '26519362', '26482806', '26481353', '26476456', '26471224', '26466662', '26443740', '26442149', '26436480', '26410586', '26402457', '26396257', '26356912', '26333465', '26332955', '26287631', '26264774', '26261351', '26217311', '26201819', '26151137', '26115539', '26112706', '26100894', '26095030', '26079398', '26020786', '26019220', '26010949', '26000478', '25941371', '25933116', '25862689', '25853779', '25845595', '25800747', '25795737', '25795086', '25791083', '25765281', '25763369', '25754869', '25741329', '25735747', '25712329', '25678603', '25658582', '25657653', '25628637', '25566307', '25564669', '25544609', '25544043', '25539838', '25506349', '25473117', '25361974', '25352555', '25340783', '25299042', '25275371', '25227965', '25199793', '25197087', '25195050', '25173450', '25161197', '25149558', '25143952', '25139910', '25087511', '25073740', '25071821', '25064572', '25036631', '24987114', '24965652', '24948735', '24923415', '24889604', '24811519', '24794435', '24766808', '24762745', '24756028', '24704607', '24699140', '24679533', '24670245', '24657232', '24639514', '24621257', '24619611', '24556244', '24532766', '24520165', '24495512', '24461193', '24430943', '24419221', '24296575', '24277855', '24261587', '24186064', '24185838', '24142253', '24086119', '24084808', '24082144', '24078704', '24036504', '24010715', '23927696', '23926077', '23925119', '23897031', '23867202', '23858463', '23830618', '23824091', '23822510', '23747111', '23738527', '23709220', '23651288', '23637881', '23632383', '23608522', '23578462', '23555215', '23540289', '23528096', '23477741', '23455439', '23430643', '23423320', '23216785', '23175606', '23173050', '23139308', '23112201', '23093611', '23072293', '23036703', '23011886', '22965055', '22947602', '22817898', '22778402', '22760628', '22737175', '22663080', '22639227', '22607382', '22583864', '22573269', '22482955', '22481223', '22411467', '22404288', '22367118', '22337858', '22331846', '22325770', '22319433', '22307589', '22272186', '22233419', '22226636', '22203971', '22184215', '22142312', '22139506', '22102587', '22042896', '22042840', '22027554', '22006304', '22000512', '21988909', '21988831', '21963794', '21963604', '21952221', '21829590', '21763447', '21694718', '21694717', '21659325', '21658106', '21602812', '21569058', '21531724', '21529161', '21423716', '21405367', '21392509', '21380410', '21365675', '21324125', '21245845', '21208457', '21187238', '21186362', '21132020', '21097934', '21083885', '20937902', '20836022', '20802497', '20671182', '20668487', '20623278', '20605915', '20591848', '20589842', '20581820', '20558508', '20514043', '20506321', '20461071', '20430689', '20409266', '20386737', '20383132', '20221255', '20212490', '20124702', '20057383', '19997611', '19937727', '19910308', '19888218', '19888215', '19884174', '19881496', '19854939', '19805348', '19721087', '19668183', '19592714', '19478865', '19422679', '19377836', '19372431', '19282977', '19282964', '19233204', '19217386', '19215296', '19188257', '19096502', '19073937', '19067748', '19052235', '18990802', '18957198', '18931137', '18854238', '18812014', '18642243', '18632751', '18621757', '18588029', '18553544', '18536691', '18483615', '18482906', '18410248', '18388284', '18318657', '18277384', '18266853', '18075576', '18069000', '18046406', '18046405', '17984079', '17854493', '17810691', '17593909', '17555749', '17430978', '17353934', '17247100', '17173670', '17088549', '17074904', '17052123', '17052114', '16955948', '16927085', '16924119', '16862137', '16849649', '16738554', '16645050', '16461408', '16306993', '16299075', '16239477', '16233948', '16224011', '16002620', '15991235', '15980490', '15950160', '15903248', '15830344', '15774553', '15763552', '15705577', '15590778', '15501947', '15494745', '15491858', '15446975', '15430309', '15361618', '15294157', '15236963', '15217809', '15186773', '15129285', '15090651', '15042093', '14990450', '14960378', '14737148', '14730350', '14634627', '14597658', '14595777', '14581200', '14559971', '13718526', '13611202', '13517261', '13054692', '12991237', '12952533', '12939135', '12788545', '12788493', '12634795', '12611808', '12580598', '12505024', '12432404', '12424381', '12417136', '12399590', '12202830', '12202358', '12183631', '12169603', '11937062', '11872829', '11768307', '11751770', '11742065', '11532959', '11489853', '11356281', '11154292', '11092844', '10960098', '10939241', '10829079', '10805808', '10802651', '10659857', '10659856', '10649998', '10644772', '10592175', '10592173', '10591225', '10364169', '10194400', '10099424', '10068694', '10033814', '9691025', '9628844', '9496667', '9278503', '9202124', '9129821', '9023339', '8709146', '8599114', '8334303', '8316858', '8254673', '8126097', '7986045', '7910603', '7855252', '7608089', '7592843', '7584337', '6999324', '6786712', '6396082', '6370960', '6206783', '5961488', '4927947', '4897112', '4885263', '4866336', '4570598', '4148026', '3922433', '3911897', '2200167', '2004280', '1833774', '1831270', '813791', '795428', '352533', '328484', '267326', '42390', '14665']
+```
+
+
+---
+### Pipelines básicos
+
+&lt;img src="imgs/clase_3_pt3/pipelines_eutilities.jpeg" width="700px" style="display: block; margin: auto;" /&gt;
+
+---
+## `EPost`
+
+Para evitar que liga se rompa por ser muy larga (por ejemplo si tuvieramos muchos ids)
+Ejemplo: pidamos una lista
+
+```python
+# lista de IDs
+id_list = ["19304878", "18606172", "16403221", "16377612", "14871861", "14630660"]
+# usamos epost para que el request se complete correctamente
+*search_results = Entrez.read(Entrez.epost("pubmed", id=",".join(id_list)))
+search_results  # vemos que se crea un web environment 
+```
+
+```
+## {'QueryKey': '1', 'WebEnv': 'MCID_615c74769d7b671ce4729e20'}
+```
+
+```python
+webenv = search_results["WebEnv"] 
+query_key = search_results["QueryKey"]
+```
+ 
+---
+## Historial y WebEnv
+
+Como vimos en la diapositiva anterior, `Epost` puede ser muy útil para evitar que nuestros requests se quiebre.
+
+Otro uso que se le suele dar es para extraer una gran cantidad de datos
+
+Podriamos usar los datos anteriores, pero para hacer una búsqueda más grande buscaremos lo siguiente
+
+
+```python
+termino = "Aedes aegypti[orgn] AND (Nix OR myo-sex)"
+search_handle = Entrez.esearch(db="nucleotide",term=termino, usehistory="y")
+search_results = Entrez.read(search_handle)
+search_handle.close()
+```
+
+
+```python
+print("The WebEnv is {}".format(search_results["WebEnv"]))
+```
+
+```
+## The WebEnv is MCID_615c7477ca740b0651581c64
+```
+
+```python
+print("The QueryKey is {}".format(search_results["QueryKey"]))
+```
+
+```
+## The QueryKey is 1
+```
+---
+
+```python
+from Bio import Entrez
+import time
+from urllib.error import HTTPError 
+
+# archivoo de salida
+out_handle = open("files/Aedes.fasta", "w") 
+
+# cuantos resultados hay
+count =int(search_results["Count"]) 
+
+# querykey
+query_key = search_results["QueryKey"]
+# WebEnv
+webenv = search_results["WebEnv"] 
+
+# número de lotes
+batch_size = 3 
+```
+---
+
+```python
+for start in range(0, count, batch_size):
+    end = min(count, start+batch_size)
+    print("Going to download record %i to %i" % (start+1, end))
+    attempt = 1
+    while attempt &lt;= 3:
+        try:
+            fetch_handle = Entrez.efetch(db="nucleotide", rettype="fasta", 
+                                        retmode="text", retstart=start, 
+                                        retmax=batch_size, webenv=webenv, 
+                                        query_key=query_key)
+            break
+        except HTTPError as err:
+            if 500 &lt;= err.code &lt;= 599:
+                print("Received error from server %s" % err)
+                print("Attempt %i of 3" % attempt)
+                attempt += 1
+                time.sleep(15)
+            else:
+                raise
+
+    data = fetch_handle.read()
+    fetch_handle.close()
+    out_handle.write(data)
+out_handle.close()
+```
+
+
+---
+
+# &lt;span style="color:OrangeRed"&gt;Tarea&lt;/span&gt;
+
+Esto es un incremento de la tarea sobre búsqueda en pubmed:
+
+Usaremos el **archivo** en el que guardamos los IDs de artículos de ciertx autorx y haremos lo siguiente:
+
+- Guardar en un nuevo archivo los abstracts de al menos tres artículos
+
+- Y por cada abstract guardado incluir los IDs (al menos 3) de los artículos que lo citan
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
