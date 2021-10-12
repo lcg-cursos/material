@@ -27,6 +27,8 @@ Bienvenidos al curso de Python II.
   - [Secuencias y formatos: PDB](python/clase3/Clase_3_pt1.html)
   - [Bases de Datos](python/clase3/Clase_3_pt2_v1.0.html)
   - [Bases de Datos: NCBI](python/clase3/Clase_3_pt3_v3.0.html)
+  - [Bases de Datos: SwissProt](python/leccion4/Clase_4_pt1_v1.0.html)
+  - [Bases de Datos: ExPASy](python/leccion4/Clase_4_pt_2_v1.html)
 
 6.- Vectores y Matrices con NumPy
   - Tipos de datos
