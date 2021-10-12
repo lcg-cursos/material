@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Bases de Datos: Swiss-Prot</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.9/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Bases de Datos: Swiss-Prot
+### Licenciatura en Ciencias Genómicas,UNAM
+### First version: 2021-10-10; Last update: 2021-10-12
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+# Introducción a librerías
+
+## Contenido de la unidad
+
+
+  1. [Inicios](Clase_4_pt1_v1.0.html#4)
+  
+  2. [`Swiss-Prot`](Clase_4_pt1_v1.0.html#6)
+  
+  3. [Swiss Institute](Clase_4_pt1_v1.0.html#7)
+  
+  3. [UniProt](Clase_4_pt1_v1.0.html#10)
+
+  3. [`ExPASy`](Clase_4_pt1_v1.0.html#14)
+  
+  4. [`PROSITE`](Clase_4_pt1_v1.0.html#18)
+  
+---
+
+## Objetivo
+
+Conocer la historia de Swiss-Prot, UniProt, ExPASy y PROSITE.
+
+---
+
+## Inicios
+
+**Finales de 70s:**
+
+Obtención de secuencias de DNA y proteínas cada vez más facil
+
+**Surge la necesidad de almacenarlas y de analizarlas**
+
+
+Primeros programas computacionales se encargaban de comparar proteínas de distintas especies
+
+---
+## Inicios
+
+.pull-left[
+**80s**
+
+Amos Bairoch, estudiante de PhD
+]
+
+.pull.right[
+&lt;img src="imgs/clase_4_pt1/Amos.jpeg" width="250px" style="display: block; margin: auto;" /&gt;
+]
+
+  - COMPSEQ **//** PC/Gene:  software para análisis de nucleótidos y proteínas (para su software necesitaba una base de datos)
+
+  - Basándose en el Atlas de Dayhoff (cambios en formato y adaptándo a formato para computadoras) 
+  
+    - Cubre falta de: referencias cruzadas (nt - aa), anotación sobre función, localización subcelular, etc.
+    
+  - Recolecta más secuencias en literatura
+  
+  - **(Anotación manual de sus secuencias!)**
+
+
+En 1986 lanza su base de datos 
+
+---
+
+## `Swiss-Prot`
+
+.pull-left[
+(1986) Swiss-Prot !!!
+  - experimental results
+  - computed features
+  - scientific conclusions
+
+
+Versiones eran distribuida en cintas magnéticas por EMBL
+
+
+(1989) DB → Diagnostic tool for characterising protein families
+]
+.pull-right[
+&lt;img src="imgs/clase_4_pt1/swissprot.jpeg" width="250px" style="display: block; margin: auto;" /&gt;
+]
+---
+### Hacia el Swiss Institute
+
+**Crecimiento exponencial de Swiss-Prot**
+
+
+**¡¡Biocuradores!!** 
+
+  - Curación de datos manualmente por anotadores especializados 
+
+
+90’s escasez de financiamiento
+
+
+Antes del ‘98 solo tenían financiamiento a corto plazo (Gobierno y Fondo Nacional) 
+
+  - 1998: Creación del SIB
+
+---
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+.center[
+&lt;iframe width="660" height="415" src="https://www.youtube-nocookie.com/embed/esyY0dfxEsY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+]
+
+---
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+.center[
+&lt;iframe width="660" height="415" src="https://www.youtube-nocookie.com/embed/z4DP0Lg-qpw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+]
+
+---
+### `UniProtKnowledgeBase/Swiss-Prot`
+
+.pull-left[
+2002,  Rolf Apweiler, Consorcio UniProt 
+]
+
+.pull.right[
+
+&lt;img src="imgs/clase_4_pt1/Rolf.jpeg" width="125px" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+
+Creación de UniProt Knowledgebase (UniProtKB)
+
+  - UniProtKB/Swiss-Prot (anotación manual)
+  
+  - UniProtKB/TrEMBL (anotación automática) (1996)
+  
+  - and the PIR protein database. 
+
+
+*"World's most comprehensive catalogue of information on proteins"*
+
+
+
+---
+## UniProt Consortium (2002)
+
+- European Bioinformatics Institute (EBI)
+
+- Swiss Institute of Bioinformatics (SIB)
+
+- Protein Information Resource (PIR) 
+
+
+*"The mission of UniProt is to provide the scientific community with a comprehensive, high-quality and freely accessible resource of protein sequence and functional information."*
+
+.pull-left[
+&lt;img src="imgs/clase_4_pt1/UniProt2.jpeg" width="350px" style="display: block; margin: auto auto auto 0;" /&gt;
+]
+.pull-right[
+&lt;img src="imgs/clase_4_pt1/UniProt.jpeg" width="350px" style="display: block; margin: auto 0 auto auto;" /&gt;
+]
+---
+
+## UniProt Consortium
+
+Miembros están involucrados en el mantenimiento y anotación de la base de datos.
+
+&lt;br&gt;
+
+*"These databases coexisted with differing protein sequence coverage and annotation priorities."*
+
+*"Swiss-Prot aimed to provide reliable protein sequences associated with a high level of annotation (such as the description of the function of a protein, its domain structure, post-translational modifications, variants, etc.), a minimal level of redundancy and high level of integration with other databases."*
+
+---
+
+## Diferencia `PDB` y `Swissprot`
+
+**The Protein Databank (PDB)**
+
+  - Repositorio de estructuras 3D generadas por cristalografia de rayos X y/o espectroscopia NMR (proteínas, ácidos nucleicos, complejos macromoleculares)
+
+
+
+**UniProt**
+  - Base de datos de secuencias y anotación de proteínas
+  - Knowledgebase
+
+
+---
+
+## Expert Protein Analysis System (ExPASy)
+
+Portal integrado y extensible que conecta a más de 160 bases de datos y herramientas 
+
+
+Los distintos recursos se encuentran alojados por los distintos grupos (descentralizado) 
+
+&lt;br&gt;
+
+&lt;img src="imgs/clase_4_pt1/expasy3.jpeg" width="800px" style="display: block; margin: auto;" /&gt;
+---
+## Expert Protein Analysis System (ExPASy)
+
+**Creado en 1993**
+
+  - Análisis proteómicos: secuencias, electroforesis 2D-Page y estructuras de proteínas 
+
+
+Anteriormente contenia a UniProtKB/Swiss-Prot y UniprotKB/TrEMBL (ahora en UniProt)
+
+**(Agosto 1993)** ExPasy fue uno de los primeros 150 sitios web en el mundo y el primero dentro de las ciencias biológicas
+
+**(2011)** Se convierte en el catálogo diverso de recursos bioinformaticos SIB ExPASy Bioformatics Resources Portal
+
+**Última versión Octubre 2020**
+
+
+---
+&lt;img src="imgs/clase_4_pt1/expasy.jpeg" width="800px" style="display: block; margin: auto;" /&gt;
+
+---
+### ExPASy anteriormente
+
+&lt;img src="imgs/clase_4_pt1/expasy2.jpeg" width="800px" style="display: block; margin: auto;" /&gt;
+---
+
+## PROSITE
+
+
+&lt;img src="imgs/clase_4_pt1/prosite.jpeg" width="800px" style="display: block; margin: auto;" /&gt;
+
+---
+## PROSITE
+
+
+1988 por Amos Bairoch. 
+  - Distribuida en PC/Gene
+
+Inicio como una base de datos de patrones de familias o dominios de proteínas 
+
+Desarrollada a la par con `Swiss-Prot`, beneficiándose la una de la otra
+
+Muchos patrones fueron identificados al anotar familias de proteínas en Swiss-Prot (antes que incluso hubiera literatura relacionada con ellas)
+
+Patrones no adaptados para identificar regiones menos conservadas o dominios completos (sensible a excepciones). **(adaptado para regiones cortas conservadas: sitios catalíticos, regiones de cisteínas involucradas en enlaces disulfuro, etc.)**
+
+---
+## PROSITE
+
+Contiene documentación extensiva y anotación detallada sobre dominios, familias y sitios funcionales
+
+
+
+(2005) Agrupar información funcional de PROSITE en una base de datos de reglas  que puedan ser leídas por programas y aplicados en proteínas reconocidas por los perfiles de PROSITE
+
+**ProRULE:** genera distintas anotaciones en formato Swiss-Prot, automáticamente
+  - Provee información adicional sobre funcionalidad o de aminoácidos determinantes de estructura 
+  
+  - **anotaciones condicionales**: dependiente de la presencia de ciertos aminoácidos en posiciones precisas o ocurrencia de otros dominios o de taxonomía específica
+  
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
