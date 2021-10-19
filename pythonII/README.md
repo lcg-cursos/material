@@ -31,7 +31,7 @@ Bienvenidos al curso de Python II.
   - [Bases de Datos: ExPASy](python/leccion4/Clase_4_pt_2_v1.html)
 
 6.- Vectores y Matrices con NumPy
-  - Tipos de datos
+  - [Tipos de datos](python/leccion5/Clase_5_pt_1_v1.html)
   - Generar Arrays
   - Entrada / Salida
   - Métodos y operaciones
