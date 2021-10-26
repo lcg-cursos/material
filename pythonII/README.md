@@ -36,12 +36,14 @@ Bienvenidos al curso de Python II.
   - Entrada / Salida
   - Métodos y operaciones
   - Indexar y asignar
+  - [Seeds](python/leccion5/Clase_5_pt2_v2.0.html)
 
 7.-	[DataFrames y Series con Pandas](python/leccion6/Clase_6_pt_2_v1.html)
   - Tipos de datos
   - Entrada / Salida
   - Series y DataFrames
   - Métodos y operaciones
+  
 
 8.- Creación de gráficos con Matplotlib
   - Tipos de gráficas y cómo crearlas
