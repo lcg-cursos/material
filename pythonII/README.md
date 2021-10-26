@@ -37,7 +37,7 @@ Bienvenidos al curso de Python II.
   - Métodos y operaciones
   - Indexar y asignar
 
-7.-	DataFrames y Series con Pandas
+7.-	[DataFrames y Series con Pandas](python/leccion6/Clase_6_pt_2_v1.html)
   - Tipos de datos
   - Entrada / Salida
   - Series y DataFrames
