@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>pandas: Series</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.10/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# pandas: Series
+### Licenciatura en Ciencias Genómicas, UNAM
+### First version: 2021-08-22; Last update: 2021-10-26
+
+---
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+
+
+&lt;img src="imgs/clase_6/estructuras.png" width="500px" style="display: block; margin: auto;" /&gt;
+---
+&lt;img src="imgs/clase_6/estructuras_2.png" width="700px" style="display: block; margin: auto;" /&gt;
+---
+# Series
+Podemos agregar: 
+
+
+.content-box-blue[`index`]: 0, 1, 2 o 'a', 'b', 'c'
+
+
+.content-box-blue[`name`]: 'Matraz'
+
+
+```python
+import pandas as pd
+
+ecoli_matraz = pd.Series([0.1, 0.15, 0.19, 0.5],
+                         name='Matraz'
+                          )
+                         
+ecoli_matraz
+```
+
+```
+## 0    0.10
+## 1    0.15
+## 2    0.19
+## 3    0.50
+## Name: Matraz, dtype: float64
+```
+---
+
+Especificando el índice
+
+```python
+
+ecoli_matraz = pd.Series([0.1, 0.15, 0.19, 0.5, 
+                         0.9, 1.4, 1.8, 2.1, 2.3],
+                         index=['t1', 't2', 't3', 't4',
+                                't5', 't6', 't7', 't8', 't9'], 
+                         name='Matraz'
+                         )
+                         
+ecoli_matraz
+```
+
+```
+## t1    0.10
+## t2    0.15
+## t3    0.19
+## t4    0.50
+## t5    0.90
+## t6    1.40
+## t7    1.80
+## t8    2.10
+## t9    2.30
+## Name: Matraz, dtype: float64
+```
+---
+Podemos hacer operaciones como los numpy arrays  
+Una `\(OD_{600}\)` de 1 representa 0.39 `\(g/L\)` de peso seco. 
+
+```python
+
+ecoli_matraz = pd.Series([0.1, 0.15, 0.19, 0.5, 
+                         0.9, 1.4, 1.8, 2.1, 2.3],
+                         name='Matraz'
+                         )
+                         
+ecoli_matraz*0.39
+```
+
+```
+## 0    0.0390
+## 1    0.0585
+## 2    0.0741
+## 3    0.1950
+## 4    0.3510
+## 5    0.5460
+## 6    0.7020
+## 7    0.8190
+## 8    0.8970
+## Name: Matraz, dtype: float64
+```
+---
+También podemos hacer operaciones contra otra serie, la 
+diferencia es que aquí no es por posición, sino por índice.  
+
+Tenemos diferentes longitdes de onda en nuestras ODs.
+
+
+```python
+ODs = pd.Series([0.2, 0.2, 0.4, 0.1, 0.2, 0.1, 0.2, 0.4, 0.1],
+                index = [8,4,1,2,3,0,5,7,6],
+                name='Ajustes')
+ODs
+```
+
+```
+## 8    0.2
+## 4    0.2
+## 1    0.4
+## 2    0.1
+## 3    0.2
+## 0    0.1
+## 5    0.2
+## 7    0.4
+## 6    0.1
+## Name: Ajustes, dtype: float64
+```
+---
+
+&lt;img src="imgs/clase_6/operaciones.png" width="600px" style="display: block; margin: auto;" /&gt;
+
+```python
+ODs * ecoli_matraz
+```
+
+```
+## 0    0.010
+## 1    0.060
+## 2    0.019
+## 3    0.100
+## 4    0.180
+## 5    0.280
+## 6    0.180
+## 7    0.840
+## 8    0.460
+## dtype: float64
+```
+---
+# &lt;span style="color:Plum"&gt;Ejercicio 1&lt;/span&gt;
+
+Al inducir 5 genes de producción a 30°C  se obtuvieron las siguientes producciones del metabolito de interés en g/L:
+
+| | **30 °C** |
+|:--------:|:---------:|
+| Gen 1    | 5         |
+| Gen 2    | 11        |
+| Gen 3    | 4         |
+| Gen 4    | 7         |
+| Gen 5    | 2         |
+
+
+Cada gen tiene un inductor diferente y conocemos los costos de todos menos del gen 4:
+
+|   | **Costo de inducción** |
+|:-----:|:----------------------:|
+| Gen 1 | 3.5                    |
+| Gen 2 | 5                      |
+| Gen 3 | 7                      |
+| Gen 5 | 4.3                    |
+
+---
+
+```python
+produccion = pd.Series([5, 11, 4, 7, 2],
+                        index= ['gen1', 'gen2', 'gen3', 'gen4', 'gen5'])
+```
+
+```
+## gen1     5
+## gen2    11
+## gen3     4
+## gen4     7
+## gen5     2
+## dtype: int64
+```
+
+```python
+costos = pd.Series([ 5, 4.3, 7, 3.5],
+                  index=['gen1', 'gen2', 'gen3', 'gen5'])
+```
+
+```
+## gen1    5.0
+## gen2    4.3
+## gen3    7.0
+## gen5    3.5
+## dtype: float64
+```
+¿Cómo obtenemos los costos unitarios y obtenemos el menor?
+
+---
+Existen los valores NaN (Not a number)  
+Estos serán ignorados por pandas
+
+```python
+nan_test = pd.Series([0.1, None, 2.1, 2.3],
+                         name='Matraz')
+nan_test                        
+```
+
+```
+## 0    0.1
+## 1    NaN
+## 2    2.1
+## 3    2.3
+## Name: Matraz, dtype: float64
+```
+
+
+```python
+nan_test.count()
+```
+
+```
+## 3
+```
+
+```python
+nan_test.sum()
+```
+
+```
+## 4.5
+```
+
+---
+También podemos guardar objetos de python 
+
+
+```python
+class mamifero(): 
+    # Atributos de clase
+    vertebrado = True
+    
+array_test = pd.Series([0.1, 'a', 0.19, mamifero, 2.1],
+                         name='Multiples objetos'
+                         )
+                         
+array_test
+```
+
+```
+## 0                            0.1
+## 1                              a
+## 2                           0.19
+## 3    &lt;class '__main__.mamifero'&gt;
+## 4                            2.1
+## Name: Multiples objetos, dtype: object
+```
+
+---
+
+# Acceder a `Series`
+Se parece a NumPy
+
+
+```python
+import numpy as np
+*ecoli_matraz_pd = pd.Series([0.1, 0.15, 0.19, 0.5,
+                         0.9, 1.4, 1.8, 2.1, 2.3])
+
+ecoli_matraz_np = np.array([0.1, 0.15, 0.19, 0.5, 
+                         0.9, 1.4, 1.8, 2.1, 2.3])                  
+```
+
+---
+
+
+```python
+*ecoli_matraz_pd[0]
+```
+
+```
+## 0.1
+```
+
+```python
+ecoli_matraz_np[0]
+```
+
+```
+## 0.1
+```
+
+```python
+*ecoli_matraz_pd[2:5]
+```
+
+```
+## 2    0.19
+## 3    0.50
+## 4    0.90
+## dtype: float64
+```
+
+```python
+ecoli_matraz_np[2:5]
+```
+
+```
+## array([0.19, 0.5 , 0.9 ])
+```
+---
+
+
+```python
+*ecoli_matraz_pd[6::-2]
+```
+
+```
+## 6    1.80
+## 4    0.90
+## 2    0.19
+## 0    0.10
+## dtype: float64
+```
+
+```python
+ecoli_matraz_np[6::-2] 
+```
+
+```
+## array([1.8 , 0.9 , 0.19, 0.1 ])
+```
+---
+Pero qué sucede si tenemos una serie como esta:
+
+
+```python
+series_test = pd.Series([5.1, 2.2, 1.1, 3.1, 4.2],
+                         index = [5,2,1,3,4])
+series_test
+```
+
+```
+## 5    5.1
+## 2    2.2
+## 1    1.1
+## 3    3.1
+## 4    4.2
+## dtype: float64
+```
+Cuáles serían los resultados de:  
++ series_test[0]  
++ series_test[1]
+---
+Para eso existen *`loc`* (label) y *`iloc`* (index )
+
+```python
+series_test
+```
+
+```
+## 5    5.1
+## 2    2.2
+## 1    1.1
+## 3    3.1
+## 4    4.2
+## dtype: float64
+```
+
+```python
+series_test.iloc[1]
+```
+
+```
+## 2.2
+```
+
+```python
+series_test.loc[1]
+```
+
+```
+## 1.1
+```
+---
+¿Qué obtendríamos de? :
+
++ `series_test[1::2]`
++ `series_test.loc[1::2]`
++ `series_test.iloc[1::2]`
+
+
+
+```python
+series_test
+```
+
+```
+## 5    5.1
+## 2    2.2
+## 1    1.1
+## 3    3.1
+## 4    4.2
+## dtype: float64
+```
+
+```python
+series_test[1]
+```
+
+```
+## 1.1
+```
+---
+
+Y slices a partir de nombres de índices (un regulón es un grupo de genes regulados como una unidad)
+
+```python
+regulon = pd.Series(['aidB', 'alaS','bhsA'],
+                         index=['AidB', 'AlaS','ComR'],
+                         name='Genes regulados' )
+regulon
+```
+
+```
+## AidB    aidB
+## AlaS    alaS
+## ComR    bhsA
+## Name: Genes regulados, dtype: object
+```
+
+```python
+regulon.loc['AlaS':]
+```
+
+```
+## AlaS    alaS
+## ComR    bhsA
+## Name: Genes regulados, dtype: object
+```
+---
+
+```python
+regulon
+```
+
+```
+## AidB    aidB
+## AlaS    alaS
+## ComR    bhsA
+## Name: Genes regulados, dtype: object
+```
+
+```python
+regulon.loc['AidB'::2]
+```
+
+```
+## AidB    aidB
+## ComR    bhsA
+## Name: Genes regulados, dtype: object
+```
+
+---
+También podemos acceder con booleanos
+
+```python
+ecoli_matraz_np
+```
+
+```
+## array([0.1 , 0.15, 0.19, 0.5 , 0.9 , 1.4 , 1.8 , 2.1 , 2.3 ])
+```
+
+```python
+bool_exp_np = ecoli_matraz_np&gt;0.4
+ecoli_matraz_np[bool_exp_np]
+```
+
+```
+## array([0.5, 0.9, 1.4, 1.8, 2.1, 2.3])
+```
+
+```python
+*bool_exp_pd = ecoli_matraz_pd&lt;0.4
+ecoli_matraz_pd[bool_exp_pd]
+```
+
+```
+## 0    0.10
+## 1    0.15
+## 2    0.19
+## dtype: float64
+```
+---
+Con expresiones un poco más complejas
+
+```python
+ecoli_matraz_pd
+```
+
+```
+## 0    0.10
+## 1    0.15
+## 2    0.19
+## 3    0.50
+## 4    0.90
+## 5    1.40
+## 6    1.80
+## 7    2.10
+## 8    2.30
+## dtype: float64
+```
+
+```python
+complex_bool = (ecoli_matraz_pd&lt;0.4) &amp; (ecoli_matraz_pd&gt;0.1)
+ecoli_matraz_pd[complex_bool]
+```
+
+```
+## 1    0.15
+## 2    0.19
+## dtype: float64
+```
+---
+# &lt;span style="color:Plum"&gt;Ejercicio 2&lt;/span&gt;
+Del ejericio anterior, imprime el costo de producción más alto y el más bajo utilizando booleanos.
+
+
+---
+Podemos repetir índices. Pensemos en un regulón (grupo de genes regulados como una unidad)
+
+http://regulondb.ccg.unam.mx/
+
+
+```python
+regulon = pd.Series(['aidB', 'alaS', 'accB','accC','bhsA'],
+                         index=['AidB', 'AlaS', 'AccB', 'AccB','ComR'],
+                         name='Genes regulados' )
+regulon['AccB']  # Objeto Series
+```
+
+```
+## AccB    accB
+## AccB    accC
+## Name: Genes regulados, dtype: object
+```
+
+```python
+regulon['AidB']  # Valor único
+```
+
+```
+## 'aidB'
+```
+---
+**Iteración**  
+¿Cómo iteramos sobre una lista?
+
+
+```python
+lista = ['a', 'b', 'c', 'd', 'e']
+array = np.array(['a', 'b', 'c', 'd', 'e'])
+*serie = pd.Series(['a', 'b', 'c', 'd', 'e'])
+```
+--
+
+```python
+[letra for letra in lista ]
+```
+
+```
+## ['a', 'b', 'c', 'd', 'e']
+```
+
+```python
+[letra for letra in array ]
+```
+
+```
+## ['a', 'b', 'c', 'd', 'e']
+```
+
+```python
+*[letra for letra in serie ]
+```
+
+```
+## ['a', 'b', 'c', 'd', 'e']
+```
+---
+¿Cómo le preguntamos a una lista si contiene un valor?
+
+--
+
+```python
+'a' in lista
+```
+
+```
+## True
+```
+
+```python
+'a' in array
+```
+
+```
+## True
+```
+
+```python
+*'a' in serie
+```
+
+```
+## False
+```
+
+```python
+*0 in serie
+```
+
+```
+## True
+```
+---
+¿Qué pasó?
+
+```python
+serie
+```
+
+```
+## 0    a
+## 1    b
+## 2    c
+## 3    d
+## 4    e
+## dtype: object
+```
+
+```python
+'a' in serie
+```
+
+```
+## False
+```
+
+```python
+0 in serie
+```
+
+```
+## True
+```
+---
+¿Cómo lo preguntamos en un objeto Series?
+
+```python
+serie
+```
+
+```
+## 0    a
+## 1    b
+## 2    c
+## 3    d
+## 4    e
+## dtype: object
+```
+
+```python
+'a' in list(serie)
+```
+
+```
+## True
+```
+
+```python
+'a' in serie.values
+```
+
+```
+## True
+```
+---
+
+```
+## 0    a
+## 1    b
+## 2    c
+## 3    d
+## 4    e
+## dtype: object
+```
+
+```python
+serie.values
+```
+
+```
+## array(['a', 'b', 'c', 'd', 'e'], dtype=object)
+```
+
+```python
+serie.index
+```
+
+```
+## RangeIndex(start=0, stop=5, step=1)
+```
+
+```python
+serie.keys()
+```
+
+```
+## RangeIndex(start=0, stop=5, step=1)
+```
+---
+.content-box-red[.small[Pertenencia es sobre el índice, mientras que la iteración es sobre los valores]]
+
+
+```python
+serie
+```
+
+```
+## 0    a
+## 1    b
+## 2    c
+## 3    d
+## 4    e
+## dtype: object
+```
+
+```python
+'a' in serie
+```
+
+```
+## False
+```
+
+```python
+0 in serie
+```
+
+```
+## True
+```
+---
+Asignar valores
+
+```
+## AidB    aidB
+## AlaS    alaS
+## AccB    accB
+## AccB    accC
+## ComR    bhsA
+## Name: Genes regulados, dtype: object
+```
+
+```python
+regulon.loc['AidB'] = 'Modificado1'
+regulon.loc['AccB'] = 'Modificado2'
+```
+--
+
+```python
+regulon
+```
+
+```
+## AidB    Modificado1
+## AlaS           alaS
+## AccB    Modificado2
+## AccB    Modificado2
+## ComR           bhsA
+## Name: Genes regulados, dtype: object
+```
+
+---
+
+
+```
+## AidB    Modificado1
+## AlaS           alaS
+## AccB    Modificado2
+## AccB    Modificado2
+## ComR           bhsA
+## Name: Genes regulados, dtype: object
+```
+
+```python
+regulon.iloc[3] = 'accB'
+regulon
+```
+
+```
+## AidB    Modificado1
+## AlaS           alaS
+## AccB    Modificado2
+## AccB           accB
+## ComR           bhsA
+## Name: Genes regulados, dtype: object
+```
+
+---
+También podemos acceder con listas
+
+```python
+regulon
+```
+
+```
+## AidB    Modificado1
+## AlaS           alaS
+## AccB    Modificado2
+## AccB           accB
+## ComR           bhsA
+## Name: Genes regulados, dtype: object
+```
+
+```python
+regulon.iloc[[0,4]] = 'Lista'
+regulon
+```
+
+```
+## AidB          Lista
+## AlaS           alaS
+## AccB    Modificado2
+## AccB           accB
+## ComR          Lista
+## Name: Genes regulados, dtype: object
+```
+---
+
+
+Regresando a que podemos almacenar cualquier objeto de python...
+
+```python
+class mamifero(): 
+    vertebrado = True
+    def haz_ruido():
+        print('aaaaaaaaaaaaaaaaaaaaaaaaaaa')
+    
+array_clase = pd.Series([np.sum, 'a', mamifero],
+                         name='objetos')
+
+jerbo = array_clase.iloc[2]
+jerbo.haz_ruido()
+```
+
+```
+## aaaaaaaaaaaaaaaaaaaaaaaaaaa
+```
+
+```python
+array_clase.iloc[0]([1,2,3])
+```
+
+```
+## 6
+```
+---
+
+```python
+array_funciones = pd.Series([np.sum, np.mean, np.median],
+                         name='funciones')
+                         
+[funcion([1,2,3]) for funcion in  array_funciones.values]      
+```
+
+```
+## [6, 2.0, 2.0]
+```
+---
+Si necesitamos que los índices sean numéricos, podemos utilizar `reset_index` manteniendo o eliminando el índice anterior. (no reescribe el array)
+
+
+```python
+regulon.reset_index()
+```
+
+```
+##   index Genes regulados
+## 0  AidB           Lista
+## 1  AlaS            alaS
+## 2  AccB     Modificado2
+## 3  AccB            accB
+## 4  ComR           Lista
+```
+
+```python
+regulon.reset_index(drop=True)
+```
+
+```
+## 0          Lista
+## 1           alaS
+## 2    Modificado2
+## 3           accB
+## 4          Lista
+## Name: Genes regulados, dtype: object
+```
+---
+
+```python
+regulon
+```
+
+```
+## AidB          Lista
+## AlaS           alaS
+## AccB    Modificado2
+## AccB           accB
+## ComR          Lista
+## Name: Genes regulados, dtype: object
+```
+
+```python
+regulon = regulon.reset_index(drop=True)
+regulon
+```
+
+```
+## 0          Lista
+## 1           alaS
+## 2    Modificado2
+## 3           accB
+## 4          Lista
+## Name: Genes regulados, dtype: object
+```
+
+---
+También podemos asignar nuevos valores desde una lista:
+
+```python
+regulon.index= ['n1', 'n2', 'n3','n4','n5']
+regulon
+```
+
+```
+## n1          Lista
+## n2           alaS
+## n3    Modificado2
+## n4           accB
+## n5          Lista
+## Name: Genes regulados, dtype: object
+```
+
+```python
+regulon.rename({'AlaS':'Nuevo nombre'})
+```
+
+```
+## n1          Lista
+## n2           alaS
+## n3    Modificado2
+## n4           accB
+## n5          Lista
+## Name: Genes regulados, dtype: object
+```
+
+---
+
+```python
+regulon.rename(lambda x: x.lower())
+```
+
+```
+## n1          Lista
+## n2           alaS
+## n3    Modificado2
+## n4           accB
+## n5          Lista
+## Name: Genes regulados, dtype: object
+```
+
+```python
+regulon
+```
+
+```
+## n1          Lista
+## n2           alaS
+## n3    Modificado2
+## n4           accB
+## n5          Lista
+## Name: Genes regulados, dtype: object
+```
+---
+Podemos obtener frecuencias
+
+```python
+regulon.loc['n4'] = 'accB'
+regulon
+```
+
+```
+## n1          Lista
+## n2           alaS
+## n3    Modificado2
+## n4           accB
+## n5          Lista
+## Name: Genes regulados, dtype: object
+```
+
+```python
+regulon.value_counts()
+```
+
+```
+## Lista          2
+## Modificado2    1
+## accB           1
+## alaS           1
+## Name: Genes regulados, dtype: int64
+```
+---
+Eliminar o revisar elementos duplicados
+
+```python
+regulon.drop_duplicates()
+```
+
+```
+## n1          Lista
+## n2           alaS
+## n3    Modificado2
+## n4           accB
+## Name: Genes regulados, dtype: object
+```
+
+```python
+regulon.duplicated()
+```
+
+```
+## n1    False
+## n2    False
+## n3    False
+## n4    False
+## n5     True
+## Name: Genes regulados, dtype: bool
+```
+---
+Estadística
+
+```python
+ecoli_matraz.mean()
+```
+
+```
+## 1.048888888888889
+```
+
+```python
+ecoli_matraz.median()
+```
+
+```
+## 0.9
+```
+
+```python
+ecoli_matraz.quantile()
+```
+
+```
+## 0.9
+```
+
+```python
+ecoli_matraz.quantile(.25)
+```
+
+```
+## 0.19
+```
+
+---
+
+```python
+ecoli_matraz.describe()
+```
+
+```
+## count    9.000000
+## mean     1.048889
+## std      0.875149
+## min      0.100000
+## 25%      0.190000
+## 50%      0.900000
+## 75%      1.800000
+## max      2.300000
+## Name: Matraz, dtype: float64
+```
+
+```python
+ecoli_matraz.std()
+```
+
+```
+## 0.8751491936299268
+```
+
+---
+Variantes de min y max
+
+```
+## gen1    5.0
+## gen2    4.3
+## gen3    7.0
+## gen5    3.5
+## dtype: float64
+```
+
+```python
+costos.min()
+```
+
+```
+## 3.5
+```
+
+```python
+costos.idxmin()
+```
+
+```
+## 'gen5'
+```
+
+```python
+costos.idxmax()
+```
+
+```
+## 'gen3'
+```
+---
+
+También se pueden hacer operaciones con strings con los métodos nativos de Python agregando **.str**
+
+
+```python
+regulon.str.lower()
+```
+
+```
+## n1          lista
+## n2           alas
+## n3    modificado2
+## n4           accb
+## n5          lista
+## Name: Genes regulados, dtype: object
+```
+
+```python
+regulon.str.findall('a')
+```
+
+```
+## n1       [a]
+## n2    [a, a]
+## n3       [a]
+## n4       [a]
+## n5       [a]
+## Name: Genes regulados, dtype: object
+```
+
+```python
+regulon.str.cat()
+```
+
+```
+## 'ListaalaSModificado2accBLista'
+```
+
+---
+Y lidiar con valores NaN
+
+
+```python
+array_NaN = pd.Series([0.1, None, 2.1, 2.3],
+                         name='NaN')
+array_NaN
+```
+
+```
+## 0    0.1
+## 1    NaN
+## 2    2.1
+## 3    2.3
+## Name: NaN, dtype: float64
+```
+
+```python
+array_NaN.dropna()
+```
+
+```
+## 0    0.1
+## 2    2.1
+## 3    2.3
+## Name: NaN, dtype: float64
+```
+---
+
+```python
+array_NaN.fillna(0)
+```
+
+```
+## 0    0.1
+## 1    0.0
+## 2    2.1
+## 3    2.3
+## Name: NaN, dtype: float64
+```
+
+```python
+array_NaN.notnull()
+```
+
+```
+## 0     True
+## 1    False
+## 2     True
+## 3     True
+## Name: NaN, dtype: bool
+```
+---
+
+```python
+array_test.isnull()
+```
+
+```
+## 0    False
+## 1    False
+## 2    False
+## 3    False
+## 4    False
+## Name: Multiples objetos, dtype: bool
+```
+---
+
+También podemos hacer:
+
++ append()
++ update()
++ repeat()
++ sort_values()
++ sort_index()
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(imgs/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
