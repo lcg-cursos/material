@@ -41,7 +41,7 @@ Bienvenidos al curso de Python II.
 7.-	[DataFrames y Series con Pandas](python/leccion6/Clase_6_pt_2_v1.html)
   - Tipos de datos
   - Entrada / Salida
-  - Series y [DataFrames](https://github.com/cursoslcg/cursoslcg.github.io/blob/main/pythonII/python/leccion7/Clase_7_pt_1_v1.html)
+  - Series y [DataFrames](python/leccion7/Clase_7_pt_1_v1.html)
   - Métodos y operaciones
   
 
