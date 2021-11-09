@@ -45,7 +45,7 @@ Bienvenidos al curso de Python II.
   - Métodos y operaciones
   
 
-8.- Creación de gráficos con Matplotlib
+8.- [Creación de gráficos con Matplotlib](python/leccion8/Clase_8_pt1_v1.0.html)
   - Tipos de gráficas y cómo crearlas
   - Gráficas con Pandas
   - Formatos de salida
