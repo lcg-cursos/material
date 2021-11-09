@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>pandas: DataFrame</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.10/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# pandas: DataFrame
+### Licenciatura en Ciencias Genómicas, UNAM
+### First version: 2021-08-22; Last update: 2021-11-09
+
+---
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+
+
+&lt;img src="imgs/clase_6/estructuras.png" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+Crear DataFrame desde cero
+
+```python
+import pandas as pd
+import numpy as np
+
+pd_DF = pd.DataFrame(np.random.rand(3, 2),
+             columns=['columna_1', 'columna_2'],
+             index=['a', 'b', 'c'])
+
+pd_DF
+```
+
+```
+##    columna_1  columna_2
+## a   0.384257   0.977084
+## b   0.772212   0.464179
+## c   0.192166   0.915407
+```
+
+
+---
+A partir de Series
+
+```python
+produccion = pd.Series([5, 11, 4, 7, 2],
+                        index=['gen1', 'gen2', 'gen3', 'gen4', 'gen5'],
+                        name='produccion')
+                        
+costos = pd.Series([ 5, 4.3, 7, 3.5],
+                  index=['gen1', 'gen2', 'gen3', 'gen5'],
+                  name='costos')
+```
+
+```
+## gen1     5
+## gen2    11
+## gen3     4
+## gen4     7
+## gen5     2
+## Name: produccion, dtype: int64
+```
+
+```
+## gen1    5.0
+## gen2    4.3
+## gen3    7.0
+## gen5    3.5
+## Name: costos, dtype: float64
+```
+---
+A partir de Series
+
+```python
+costo_beneficio = pd.DataFrame({'costos': costos,
+                       'produccion': produccion})
+                       
+costo_beneficio
+```
+
+```
+##       costos  produccion
+## gen1     5.0           5
+## gen2     4.3          11
+## gen3     7.0           4
+## gen4     NaN           7
+## gen5     3.5           2
+```
+---
+
+```python
+costo_beneficio.index
+```
+
+```
+## Index(['gen1', 'gen2', 'gen3', 'gen4', 'gen5'], dtype='object')
+```
+
+```python
+costo_beneficio.values
+```
+
+```
+## array([[ 5. ,  5. ],
+##        [ 4.3, 11. ],
+##        [ 7. ,  4. ],
+##        [ nan,  7. ],
+##        [ 3.5,  2. ]])
+```
+
+```python
+costo_beneficio.keys()
+```
+
+```
+## Index(['costos', 'produccion'], dtype='object')
+```
+
+```python
+costo_beneficio.columns
+```
+
+```
+## Index(['costos', 'produccion'], dtype='object')
+```
+---
+Acceder con `loc`
+
+
+```python
+costo_beneficio.nombre_columna  # Podemos acceder como atributo
+costo_beneficio.loc[idx, columna]
+```
+
+```python
+costo_beneficio.costos  
+```
+
+```
+## gen1    5.0
+## gen2    4.3
+## gen3    7.0
+## gen4    NaN
+## gen5    3.5
+## Name: costos, dtype: float64
+```
+
+```python
+costo_beneficio.loc['gen1','costos']
+```
+
+```
+## 5.0
+```
+---
+Podemos jugar con patrones
+
+```python
+costo_beneficio.loc['gen1'::2,'costos']
+```
+
+```
+## gen1    5.0
+## gen3    7.0
+## gen5    3.5
+## Name: costos, dtype: float64
+```
+
+```python
+costo_beneficio.loc['gen3':,'costos']
+```
+
+```
+## gen3    7.0
+## gen4    NaN
+## gen5    3.5
+## Name: costos, dtype: float64
+```
+
+```python
+costo_beneficio.loc['gen2':'gen4','costos']
+```
+
+```
+## gen2    4.3
+## gen3    7.0
+## gen4    NaN
+## Name: costos, dtype: float64
+```
+---
+Acceder a una lista en específico
+
+```python
+genes_interes = ['gen1','gen5']
+costo_beneficio.loc[genes_interes,'costos']
+```
+
+```
+## gen1    5.0
+## gen5    3.5
+## Name: costos, dtype: float64
+```
+---
+
+```python
+*costo_beneficio.costos
+```
+
+```
+## gen1    5.0
+## gen2    4.3
+## gen3    7.0
+## gen4    NaN
+## gen5    3.5
+## Name: costos, dtype: float64
+```
+
+```python
+costo_beneficio.loc[:,'costos']
+```
+
+```
+## gen1    5.0
+## gen2    4.3
+## gen3    7.0
+## gen4    NaN
+## gen5    3.5
+## Name: costos, dtype: float64
+```
+
+.content-box-red[.small[`Si no necesitan un subset, acceder como  **atributo** es más rápido`]]
+
+---
+Acceder con iloc
+
+
+```python
+costo_beneficio.head(1)
+costo_beneficio.iloc[idx, columna]
+```
+
+```python
+costo_beneficio.head(1)
+```
+
+```
+##       costos  produccion
+## gen1     5.0           5
+```
+
+```python
+costo_beneficio.iloc[0:2, 1]
+```
+
+```
+## gen1     5
+## gen2    11
+## Name: produccion, dtype: int64
+```
+---
+Podemos jugar con patrones
+
+
+```python
+costo_beneficio.iloc[::-2, 1]
+```
+
+```
+## gen5    2
+## gen3    4
+## gen1    5
+## Name: produccion, dtype: int64
+```
+
+```python
+costo_beneficio.iloc[3:,:]
+```
+
+```
+##       costos  produccion
+## gen4     NaN           7
+## gen5     3.5           2
+```
+---
+Acceder con listas de interés
+
+```python
+idxs = [0,4]
+costo_beneficio.iloc[idxs, 1]
+```
+
+```
+## gen1    5
+## gen5    2
+## Name: produccion, dtype: int64
+```
+---
+Combinar loc y iloc
+
+```python
+*costo_beneficio.iloc[[0,2,4], costo_beneficio.columns.get_loc('costos')]
+```
+
+```
+## gen1    5.0
+## gen3    7.0
+## gen5    3.5
+## Name: costos, dtype: float64
+```
+
+```python
+costo_beneficio.loc[costo_beneficio.index[[0, 2, 4]], 'costos']
+```
+
+```
+## gen1    5.0
+## gen3    7.0
+## gen5    3.5
+## Name: costos, dtype: float64
+```
+---
+Podemos hacer las mismas operaciones que con las series y además, agregar los resultados a una nueva columna
+
+
+```python
+costo_beneficio.costos + costo_beneficio.produccion
+```
+
+```
+## gen1    10.0
+## gen2    15.3
+## gen3    11.0
+## gen4     NaN
+## gen5     5.5
+## dtype: float64
+```
+
+```python
+costo_beneficio['doble'] = costo_beneficio.costos*2
+costo_beneficio
+```
+
+```
+##       costos  produccion  doble
+## gen1     5.0           5   10.0
+## gen2     4.3          11    8.6
+## gen3     7.0           4   14.0
+## gen4     NaN           7    NaN
+## gen5     3.5           2    7.0
+```
+---
+### &lt;span style="color:Plum"&gt;Ejercicio 1 &lt;/span&gt;
+
+Al inducir 5 genes de producción a 30°C  se obtuvieron las siguientes producciones del metabolito de interés en g/L:
+
+| | **30 °C** |
+|:--------:|:---------:|
+| Gen 1    | 5         |
+| Gen 2    | 11        |
+| Gen 3    | 4         |
+| Gen 4    | 7         |
+| Gen 5    | 2         |
+
+
+Cada gen tiene un inductor diferente y conocemos los costos de todos menos del gen 4:
+
+|   | **Costo de inducción** |
+|:-----:|:----------------------:|
+| Gen 1 | 3.5                    |
+| Gen 2 | 5                      |
+| Gen 3 | 7                      |
+| Gen 5 | 4.3                    |
+
+---
+Agreguemos al `DataFrame` una columna llamada 'costo unitario'. Después, obtengan el gen con el valor más alto de cada columna
+
+
+```python
+
+produccion = pd.Series([5, 11, 4, 7, 2],
+                        index=['gen1', 'gen2', 'gen3', 'gen4', 'gen5'],
+                        name='produccion')
+costos = pd.Series([ 3.5, 5, 7, 4.3],
+                  index=['gen1', 'gen2', 'gen3', 'gen5'],
+                  name='costos')
+
+costo_beneficio = pd.DataFrame({'costos': costos,
+                       'produccion': produccion})
+costo_beneficio
+```
+
+```
+##       costos  produccion
+## gen1     3.5           5
+## gen2     5.0          11
+## gen3     7.0           4
+## gen4     NaN           7
+## gen5     4.3           2
+```
+
+---
+
+```python
+# Agregamos al DataFrame una columna llamada 'costo unitario'
+costo_beneficio⬛⬛⬛ = costo_unitario
+costo_beneficio
+```
+
+```
+##       costos  produccion  costo unitario
+## gen1     3.5           5        0.700000
+## gen2     5.0          11        0.454545
+## gen3     7.0           4        1.750000
+## gen4     NaN           7             NaN
+## gen5     4.3           2        2.150000
+```
+
+```python
+# Agregamos al DataFrame una columna llamada 'costo unitario'
+costo_beneficio.método_mágico()
+```
+
+```
+## costos            gen3
+## produccion        gen2
+## costo unitario    gen5
+## dtype: object
+```
+---
+--
+--
+
+```python
+costo_beneficio
+```
+
+```
+##       costos  produccion  costo unitario
+## gen1     3.5           5        0.700000
+## gen2     5.0          11        0.454545
+## gen3     7.0           4        1.750000
+## gen4     NaN           7             NaN
+## gen5     4.3           2        2.150000
+```
+
+```python
+costo_beneficio.idxmax(axis=1)
+```
+
+```
+## gen1    produccion
+## gen2    produccion
+## gen3        costos
+## gen4    produccion
+## gen5        costos
+## dtype: object
+```
+---
+# &lt;span style="color:Plum"&gt;Ejercicio 2&lt;/span&gt;
+Al inducir 4 genes de producción a diferentes temperaturas se obtuvieron las siguientes producciones del metabolito de interés en g/L:
+
+| | **30 °C** | **35 °C** |
+|:--------:|:---------:|:---------:|
+| Gen 1    | 5         | 3         |
+| Gen 2    | 11        | 7         |
+| Gen 3    | 4         | 9         |
+| Gen 4    | 2         | 6         |
+
+Cada gen tiene un inductor diferente y cada uno tuvo los siguientes costos:
+
+|   | **Costo de inducción** |
+|:-----:|:----------------------:|
+| Gen 1 | 3.5                    |
+| Gen 2 | 5                      |
+| Gen 3 | 7                      |
+| Gen 5 | 4.3                    |
+---
+
+```python
+
+produccion_30 = pd.Series([5, 11, 4, 7, 2],
+                        index=['gen1', 'gen2', 'gen3', 'gen4', 'gen5'],
+                        name='produccion')
+produccion_35 = pd.Series([3, 7, 9, 4, 6],
+                        index=['gen1', 'gen2', 'gen3', 'gen4', 'gen5'],
+                        name='produccion')
+costos = pd.Series([ 3.5, 5, 7, 4.3],
+                  index=['gen1', 'gen2', 'gen3', 'gen5'],
+                  name='costos')
+
+costo_beneficio = pd.DataFrame({'costos': costos,
+                       'produccion 30°': produccion_30,
+                        'produccion 35°': produccion_35})
+costo_beneficio 
+```
+
+```
+##       costos  produccion 30°  produccion 35°
+## gen1     3.5               5               3
+## gen2     5.0              11               7
+## gen3     7.0               4               9
+## gen4     NaN               7               4
+## gen5     4.3               2               6
+```
+---
+¿Cómo obtenemos la división de las producciones a diferentes temperaturas en una sola operación?
+
+```python
+# Obtener el costo unitario en una sola operación
+[producción 30°, producción 35°] / costo
+```
+
+```
+##       produccion 30°  produccion 35°
+## gen1        1.428571        0.857143
+## gen2        2.200000        1.400000
+## gen3        0.571429        1.285714
+## gen4             NaN             NaN
+## gen5        0.465116        1.395349
+```
+---
+Renombrar columnas
+
+```python
+costos_unitarios
+```
+
+```
+##       produccion 30°  produccion 35°
+## gen1        1.428571        0.857143
+## gen2        2.200000        1.400000
+## gen3        0.571429        1.285714
+## gen4             NaN             NaN
+## gen5        0.465116        1.395349
+```
+
+```python
+costos_unitarios.rename(columns = {'produccion 30°':'new_col1'})
+```
+
+```
+##       new_col1  produccion 35°
+## gen1  1.428571        0.857143
+## gen2  2.200000        1.400000
+## gen3  0.571429        1.285714
+## gen4       NaN             NaN
+## gen5  0.465116        1.395349
+```
+
+```python
+costos_unitarios
+```
+
+```
+##       produccion 30°  produccion 35°
+## gen1        1.428571        0.857143
+## gen2        2.200000        1.400000
+## gen3        0.571429        1.285714
+## gen4             NaN             NaN
+## gen5        0.465116        1.395349
+```
+Sin el argumento inplace, no se cambia el DataFrame original. Está creando uno que podemos asignar a una variable. inplace es por default 'False'
+---
+inplace = True
+
+```python
+costos_unitarios
+```
+
+```
+##       produccion 30°  produccion 35°
+## gen1        1.428571        0.857143
+## gen2        2.200000        1.400000
+## gen3        0.571429        1.285714
+## gen4             NaN             NaN
+## gen5        0.465116        1.395349
+```
+
+```python
+costos_unitarios.rename(columns = {'produccion 30°':'costo unitario 30°',
+                                   'produccion 35°':'costo unitario 35°'},
+                                  inplace=True)
+costos_unitarios
+```
+
+```
+##       costo unitario 30°  costo unitario 35°
+## gen1            1.428571            0.857143
+## gen2            2.200000            1.400000
+## gen3            0.571429            1.285714
+## gen4                 NaN                 NaN
+## gen5            0.465116            1.395349
+```
+---
+O renombramos todas las columnas (no recomendado)
+
+```python
+costos_unitarios.columns = ['costo unitario 35°', 'costo unitario 30°']
+```
+---
+Y ya podemos juntar ambos DataFrames
+
+```python
+pd.concat([costo_beneficio ,costos_unitarios],axis=1)
+```
+
+```
+##       costos  produccion 30°  ...  costo unitario 30°  costo unitario 35°
+## gen1     3.5               5  ...            1.428571            0.857143
+## gen2     5.0              11  ...            2.200000            1.400000
+## gen3     7.0               4  ...            0.571429            1.285714
+## gen4     NaN               7  ...                 NaN                 NaN
+## gen5     4.3               2  ...            0.465116            1.395349
+## 
+## [5 rows x 5 columns]
+```
+
+---
+# Podemos acceder con booleanos
+Veamos el método `isin()`
+
+```python
+costo_beneficio
+```
+
+```
+##       costos  produccion 30°  produccion 35°
+## gen1     3.5               5               3
+## gen2     5.0              11               7
+## gen3     7.0               4               9
+## gen4     NaN               7               4
+## gen5     4.3               2               6
+```
+
+```python
+costo_beneficio.isin([5])
+```
+
+```
+##       costos  produccion 30°  produccion 35°
+## gen1   False            True           False
+## gen2    True           False           False
+## gen3   False           False           False
+## gen4   False           False           False
+## gen5   False           False           False
+```
+---
+
+
+
+```python
+organismos = np.random.choice(['procariotas', 'eucariotas', 'arqueas'], 5, p=[0.5, 0.3, 0.2])
+costo_beneficio['organismos'] = organismos
+costo_beneficio
+```
+
+```
+##       costos  produccion 30°  produccion 35°   organismos
+## gen1     3.5               5               3   eucariotas
+## gen2     5.0              11               7   eucariotas
+## gen3     7.0               4               9  procariotas
+## gen4     NaN               7               4   eucariotas
+## gen5     4.3               2               6      arqueas
+```
+---
+
+```python
+costo_beneficio.organismos.isin(['procariotas', 'arqueas'])
+```
+
+```
+## gen1    False
+## gen2    False
+## gen3     True
+## gen4    False
+## gen5     True
+## Name: organismos, dtype: bool
+```
+¿Cómo obtengo la información de todo el DataFrame donde son eucariontes?
+
+
+```python
+costo_beneficio.loc[costo_beneficio.organismo.isin(['eucarionte']),  :  ] 
+```
+o
+
+```python
+costo_beneficio.loc[  :  , costo_beneficio.organismo.isin(['eucarionte'])]
+```
+
+---
+
+# MultiIndex
+
+
+
+```python
+df = pd.DataFrame(np.random.rand(4, 2),
+                  index=[['Temperatura', 'Temperatura', 'Fuente carbono', 'Fuente carbono'],
+                         ['30', '35', 'glc', 'ace']],
+*                 columns=['Gen1', 'Gen2'])
+df
+```
+
+```
+##                         Gen1      Gen2
+## Temperatura    30   0.896293  0.125585
+##                35   0.207243  0.051467
+## Fuente carbono glc  0.440810  0.029876
+##                ace  0.456833  0.649144
+```
+
+```python
+df = pd.DataFrame(np.random.rand(2, 4),
+*                 columns=[['Temperatura', 'Temperatura', 'Fuente carbono', 'Fuente carbono'],
+                         ['30', '35', 'glc', 'ace']],
+                  index=['Gen1', 'Gen2'])
+df
+```
+
+```
+##      Temperatura           Fuente carbono          
+##               30        35            glc       ace
+## Gen1    0.278487  0.676255       0.590863  0.023982
+## Gen2    0.558854  0.259252       0.415101  0.283525
+```
+
+---
+
+## Constructores
+
+```python
+pd.MultiIndex.from_arrays([['a', 'a', 'b', 'b'], [1, 2, 1, 2]])
+```
+
+```
+## MultiIndex([('a', 1),
+##             ('a', 2),
+##             ('b', 1),
+##             ('b', 2)],
+##            )
+```
+
+```python
+pd.MultiIndex.from_tuples([('a', 1), ('a', 2), ('b', 1), ('b', 2)])
+```
+
+```
+## MultiIndex([('a', 1),
+##             ('a', 2),
+##             ('b', 1),
+##             ('b', 2)],
+##            )
+```
+
+```python
+pd.MultiIndex.from_product([['a', 'b'], [1, 2]])
+```
+
+```
+## MultiIndex([('a', 1),
+##             ('a', 2),
+##             ('b', 1),
+##             ('b', 2)],
+##            )
+```
+
+```python
+pd.MultiIndex(levels=[['a', 'b'], [1, 2]],
+              codes=[[0, 0, 1, 1], [0, 1, 0, 1]])
+```
+
+```
+## MultiIndex([('a', 1),
+##             ('a', 2),
+##             ('b', 1),
+##             ('b', 2)],
+##            )
+```
+---
+# MultiIndex en Index y Columns
+
+```python
+expresion = pd.DataFrame(np.random.rand(4, 4),
+                  columns=[['Temperatura', 'Temperatura', 'Fuente carbono', 'Fuente carbono'],
+                         ['30', '35', 'glc', 'ace']],
+                  index=[['E. coli', 'E. coli', 'P. putida', 'P. putida'],
+                         ['Gen1', 'Gen2', 'Gen1', 'Gen2']])
+expresion
+```
+
+```
+##                Temperatura           Fuente carbono          
+##                         30        35            glc       ace
+## E. coli   Gen1    0.693138  0.440454       0.156868  0.544649
+##           Gen2    0.780315  0.306364       0.221958  0.387971
+## P. putida Gen1    0.936384  0.975995       0.672384  0.902834
+##           Gen2    0.845751  0.377994       0.092217  0.653411
+```
+
+```python
+expresion.index.names = ['Organismo', 'Gen']
+expresion
+```
+
+```
+##                Temperatura           Fuente carbono          
+##                         30        35            glc       ace
+## Organismo Gen                                                
+## E. coli   Gen1    0.693138  0.440454       0.156868  0.544649
+##           Gen2    0.780315  0.306364       0.221958  0.387971
+## P. putida Gen1    0.936384  0.975995       0.672384  0.902834
+##           Gen2    0.845751  0.377994       0.092217  0.653411
+```
+---
+**Accedemos** Con loc
+
+```python
+expresion
+```
+
+```
+##                Temperatura           Fuente carbono          
+##                         30        35            glc       ace
+## Organismo Gen                                                
+## E. coli   Gen1    0.693138  0.440454       0.156868  0.544649
+##           Gen2    0.780315  0.306364       0.221958  0.387971
+## P. putida Gen1    0.936384  0.975995       0.672384  0.902834
+##           Gen2    0.845751  0.377994       0.092217  0.653411
+```
+
+```python
+expresion.loc['E. coli', 'Temperatura']
+```
+
+```
+##             30        35
+## Gen                     
+## Gen1  0.693138  0.440454
+## Gen2  0.780315  0.306364
+```
+
+```python
+expresion.loc[('E. coli','Gen1'), 'Temperatura'] 
+```
+
+```
+## 30    0.693138
+## 35    0.440454
+## Name: (E. coli, Gen1), dtype: float64
+```
+
+```python
+expresion.loc[('E. coli','Gen1'), ('Temperatura','35')]
+```
+
+```
+## 0.4404537176707395
+```
+---
+**Accedemos** Con xs sobre índice
+
+```python
+expresion
+```
+
+```
+##                Temperatura           Fuente carbono          
+##                         30        35            glc       ace
+## Organismo Gen                                                
+## E. coli   Gen1    0.693138  0.440454       0.156868  0.544649
+##           Gen2    0.780315  0.306364       0.221958  0.387971
+## P. putida Gen1    0.936384  0.975995       0.672384  0.902834
+##           Gen2    0.845751  0.377994       0.092217  0.653411
+```
+
+```python
+expresion.xs("Gen1", level="Gen")  
+```
+
+```
+##           Temperatura           Fuente carbono          
+##                    30        35            glc       ace
+## Organismo                                               
+## E. coli      0.693138  0.440454       0.156868  0.544649
+## P. putida    0.936384  0.975995       0.672384  0.902834
+```
+
+```python
+expresion.xs("E. coli", level="Organismo", axis=0)
+```
+
+```
+##      Temperatura           Fuente carbono          
+##               30        35            glc       ace
+## Gen                                                
+## Gen1    0.693138  0.440454       0.156868  0.544649
+## Gen2    0.780315  0.306364       0.221958  0.387971
+```
+---
+**Accedemos** Con xs sobre columnas
+
+```python
+expresion.columns.names = ['Estrés', 'Variacion']
+expresion
+```
+
+```
+## Estrés         Temperatura           Fuente carbono          
+## Variacion               30        35            glc       ace
+## Organismo Gen                                                
+## E. coli   Gen1    0.693138  0.440454       0.156868  0.544649
+##           Gen2    0.780315  0.306364       0.221958  0.387971
+## P. putida Gen1    0.936384  0.975995       0.672384  0.902834
+##           Gen2    0.845751  0.377994       0.092217  0.653411
+```
+
+```python
+expresion.xs("Temperatura", level="Estrés", axis=1)  
+```
+
+```
+## Variacion             30        35
+## Organismo Gen                     
+## E. coli   Gen1  0.693138  0.440454
+##           Gen2  0.780315  0.306364
+## P. putida Gen1  0.936384  0.975995
+##           Gen2  0.845751  0.377994
+```
+
+```python
+expresion.xs("glc", level="Variacion", axis=1)
+```
+
+```
+## Estrés          Fuente carbono
+## Organismo Gen                 
+## E. coli   Gen1        0.156868
+##           Gen2        0.221958
+## P. putida Gen1        0.672384
+##           Gen2        0.092217
+```
+---
+**Groupby** : index
+
+```python
+df = pd.DataFrame({'expresion':np.random.rand(6)},
+                 index=['gen1', 'gen2', 'gen3', 'gen1', 'gen2', 'gen3'])
+df
+```
+
+```
+##       expresion
+## gen1   0.557841
+## gen2   0.361565
+## gen3   0.225055
+## gen1   0.406520
+## gen2   0.468940
+## gen3   0.269236
+```
+
+```python
+grupos = df.groupby(level=0)
+grupos.mean()
+```
+
+```
+##       expresion
+## gen1   0.482180
+## gen2   0.415253
+## gen3   0.247145
+```
+---
+**Groupby**: columna
+
+```python
+df = pd.DataFrame({'gen': ['gen1', 'gen2', 'gen3', 'gen1', 'gen2', 'gen3'],
+                   'expresion': np.random.rand(6)}, columns=['gen', 'expresion'])
+df
+```
+
+```
+##     gen  expresion
+## 0  gen1   0.291793
+## 1  gen2   0.457686
+## 2  gen3   0.860534
+## 3  gen1   0.586253
+## 4  gen2   0.283488
+## 5  gen3   0.277978
+```
+
+```python
+grupos = df.groupby('gen')
+grupos.sum()
+```
+
+```
+##       expresion
+## gen            
+## gen1   0.878046
+## gen2   0.741174
+## gen3   1.138511
+```
+---
+# pandas Cheat Sheet
+
+[click aquí :)](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf?utm_source=sociabbleapp&amp;utm_medium=social&amp;utm_campaign=none&amp;utm_term=JcJ1Kr6oyjPL&amp;socid=JcJ1Kr6oyjPL)
+
+
+&lt;img src="https://pbs.twimg.com/card_img/1455997760839290882/6aVzOd1x?format=jpg&amp;name=small" width="350px" style="display: block; margin: auto;" /&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(imgs/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
