@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>matplotlib y SciPy</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.10/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# matplotlib y SciPy
+### Licenciatura en Ciencias Genómicas, UNAM
+### First version: 2021-08-22; Last update: 2021-11-16
+
+---
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+
+&lt;table class="table"&gt;
+&lt;colgroup&gt;
+&lt;col style="width: 25%" /&gt;
+&lt;col style="width: 75%" /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr class="row-odd"&gt;&lt;th class="head"&gt;&lt;p&gt;Subpackage&lt;/p&gt;&lt;/th&gt;
+&lt;th class="head"&gt;&lt;p&gt;Description&lt;/p&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class="row-even"&gt;&lt;td&gt;&lt;p&gt;&lt;a class="reference internal" href="../reference/cluster.html#module-scipy.cluster" title="scipy.cluster"&gt;&lt;code class="xref py py-obj docutils literal notranslate"&gt;&lt;span class="pre"&gt;cluster&lt;/span&gt;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;Clustering algorithms&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="row-odd"&gt;&lt;td&gt;&lt;p&gt;&lt;a class="reference internal" href="../reference/constants.html#module-scipy.constants" title="scipy.constants"&gt;&lt;code class="xref py py-obj docutils literal notranslate"&gt;&lt;span class="pre"&gt;constants&lt;/span&gt;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;Physical and mathematical constants&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="row-even"&gt;&lt;td&gt;&lt;p&gt;&lt;a class="reference internal" href="../reference/fftpack.html#module-scipy.fftpack" title="scipy.fftpack"&gt;&lt;code class="xref py py-obj docutils literal notranslate"&gt;&lt;span class="pre"&gt;fftpack&lt;/span&gt;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;Fast Fourier Transform routines&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="row-odd"&gt;&lt;td&gt;&lt;p&gt;&lt;a class="reference internal" href="../reference/integrate.html#module-scipy.integrate" title="scipy.integrate"&gt;&lt;code class="xref py py-obj docutils literal notranslate"&gt;&lt;span class="pre"&gt;integrate&lt;/span&gt;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;Integration and ordinary differential equation solvers&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="row-even"&gt;&lt;td&gt;&lt;p&gt;&lt;a class="reference internal" href="../reference/interpolate.html#module-scipy.interpolate" title="scipy.interpolate"&gt;&lt;code class="xref py py-obj docutils literal notranslate"&gt;&lt;span class="pre"&gt;interpolate&lt;/span&gt;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;Interpolation and smoothing splines&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# High-performance Python for crystallographic computing
+#### A. Boullea and J. Kiefferb
+#### August 2019
+
+https://journals.iucr.org/j/issues/2019/04/00/gj5229/
+
+
+The Python programming language, combined with the numerical computing library **NumPy** and the scientific computing library **SciPy**, has become the de facto standard for scientific computing in a variety of fields.[...] In the present article it is shown how these approaches can be efficiently used to tackle different problems, with increasing complexity, that are relevant to crystallography: 
+
++ the 2D Laue function
++ scattering from a strained 2D crystal
++ scattering from 3D nanocrystals 
++ diffraction from films and multilayers.
+---
+&lt;table class="table"&gt;
+&lt;colgroup&gt;
+&lt;col style="width: 25%" /&gt;
+&lt;col style="width: 75%" /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr class="row-odd"&gt;&lt;th class="head"&gt;&lt;p&gt;Subpackage&lt;/p&gt;&lt;/th&gt;
+&lt;th class="head"&gt;&lt;p&gt;Description&lt;/p&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class="row-odd"&gt;&lt;td&gt;&lt;p&gt;&lt;a class="reference internal" href="../reference/io.html#module-scipy.io" title="scipy.io"&gt;&lt;code class="xref py py-obj docutils literal notranslate"&gt;&lt;span class="pre"&gt;io&lt;/span&gt;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;Input and Output&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="row-even"&gt;&lt;td&gt;&lt;p&gt;&lt;a class="reference internal" href="../reference/linalg.html#module-scipy.linalg" title="scipy.linalg"&gt;&lt;code class="xref py py-obj docutils literal notranslate"&gt;&lt;span class="pre"&gt;linalg&lt;/span&gt;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;Linear algebra&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="row-odd"&gt;&lt;td&gt;&lt;p&gt;&lt;a class="reference internal" href="../reference/ndimage.html#module-scipy.ndimage" title="scipy.ndimage"&gt;&lt;code class="xref py py-obj docutils literal notranslate"&gt;&lt;span class="pre"&gt;ndimage&lt;/span&gt;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;N-dimensional image processing&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="row-even"&gt;&lt;td&gt;&lt;p&gt;&lt;a class="reference internal" href="../reference/odr.html#module-scipy.odr" title="scipy.odr"&gt;&lt;code class="xref py py-obj docutils literal notranslate"&gt;&lt;span class="pre"&gt;odr&lt;/span&gt;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;Orthogonal distance regression&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="row-odd"&gt;&lt;td&gt;&lt;p&gt;&lt;a class="reference internal" href="../reference/optimize.html#module-scipy.optimize" title="scipy.optimize"&gt;&lt;code class="xref py py-obj docutils literal notranslate"&gt;&lt;span class="pre"&gt;optimize&lt;/span&gt;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;Optimization and root-finding routines&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+&lt;table class="table"&gt;
+&lt;colgroup&gt;
+&lt;col style="width: 25%" /&gt;
+&lt;col style="width: 75%" /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr class="row-odd"&gt;&lt;th class="head"&gt;&lt;p&gt;Subpackage&lt;/p&gt;&lt;/th&gt;
+&lt;th class="head"&gt;&lt;p&gt;Description&lt;/p&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class="row-even"&gt;&lt;td&gt;&lt;p&gt;&lt;a class="reference internal" href="../reference/signal.html#module-scipy.signal" title="scipy.signal"&gt;&lt;code class="xref py py-obj docutils literal notranslate"&gt;&lt;span class="pre"&gt;signal&lt;/span&gt;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;Signal processing&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="row-odd"&gt;&lt;td&gt;&lt;p&gt;&lt;a class="reference internal" href="../reference/sparse.html#module-scipy.sparse" title="scipy.sparse"&gt;&lt;code class="xref py py-obj docutils literal notranslate"&gt;&lt;span class="pre"&gt;sparse&lt;/span&gt;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;Sparse matrices and associated routines&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="row-even"&gt;&lt;td&gt;&lt;p&gt;&lt;a class="reference internal" href="../reference/spatial.html#module-scipy.spatial" title="scipy.spatial"&gt;&lt;code class="xref py py-obj docutils literal notranslate"&gt;&lt;span class="pre"&gt;spatial&lt;/span&gt;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;Spatial data structures and algorithms&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="row-odd"&gt;&lt;td&gt;&lt;p&gt;&lt;a class="reference internal" href="../reference/special.html#module-scipy.special" title="scipy.special"&gt;&lt;code class="xref py py-obj docutils literal notranslate"&gt;&lt;span class="pre"&gt;special&lt;/span&gt;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;Special functions&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class="row-even"&gt;&lt;td&gt;&lt;p&gt;&lt;a class="reference internal" href="../reference/stats.html#module-scipy.stats" title="scipy.stats"&gt;&lt;code class="xref py py-obj docutils literal notranslate"&gt;&lt;span class="pre"&gt;stats&lt;/span&gt;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;
+&lt;td&gt;&lt;p&gt;Statistical distributions and functions&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# Ejemplo
+**DNA diffraction pattern**
+
+https://scipython.com/book/chapter-8-scipy/examples/dna-diffraction-pattern/
+
+Funcion de Bessel 
+
+![](https://upload.wikimedia.org/wikipedia/commons/5/5d/Bessel_Functions_%281st_Kind%2C_n%3D0%2C1%2C2%29.svg)
+---
+
+
+```python
+import numpy as np
+from scipy.special import jn # Función Bessel
+#...
+
+x = np.linspace(xmin, xmax, npts)
+
+# Diffraction pattern along each line layer: |Jn(x)|^2
+# for n = 0, 1, ..., nlayers-1
+*layers = np.array([jn(i, x)**2 for i in range(nlayers)])
+
+# Obtain the indexes of the maxima in each layer
+maxi = [(np.diff(np.sign(np.diff(layers[i,:]))) &lt; 0).nonzero()[0] + 1
+                                                    for i in range(nlayers)]
+```
+
+&lt;img src="https://scipython.com/static/media/examples/E8/eg8-dna-diffraction.svg" width="250px" style="display: block; margin: auto;" /&gt;
+
+
+---
+Crystallographic photo of Sodium Thymonucleate, Type B. "Photo 51." May 1952. (Large Version)
+
+
+&lt;img src="http://scarc.library.oregonstate.edu/coll/pauling/catalogue/11/sci9.001.5-900w.jpg" width="450px" style="display: block; margin: auto;" /&gt;
+
+
+Original held in the Ava Helen and Linus Pauling Papers.
+
+Creator: Rosalind Franklin, Raymond G. Gosling
+
+Date: May 1952
+
+---
+# Ejemplo 
+**The SIR epidemic model**
+
+https://scipython.com/book/chapter-8-scipy/additional-examples/the-sir-epidemic-model/
+
+`odeint` Integrate a system of ordinary differential equations.
+
+
+```python
+import numpy as np
+from scipy.integrate import odeint 
+import matplotlib.pyplot as plt
+
+def deriv(y, t, N, beta, gamma):
+    S, I, R = y
+    dSdt = -beta * S * I / N
+    dIdt = beta * S * I / N - gamma * I
+    dRdt = gamma * I
+    return dSdt, dIdt, dRdt
+  
+# Initial conditions vector
+y0 = S0, I0, R0
+# Integrate the SIR equations over the time grid, t.
+*ret = odeint(deriv, y0, t, args=(N, beta, gamma))
+S, I, R = ret.T
+```
+---
+
+&lt;img src="https://scipython.com/static/media/examples/E8/extras/sir.png" width="450px" style="display: block; margin: auto;" /&gt;
+
++ **SI**: Enfermedades víricas que causan infección vitalicia, como el VIH.
++ **SIS**: Enfermedades que no confieren inmunidad tras la infección
++ **SIR**: Enfermedades víricas en las que una vez infectado, se obtiene inmunidad vitalicia
+
+---
+### Gráfica interactiva de los modelos 
+Basado en el código de modelos epidémicos de: https://blog.csdn.net/youcans 
+(https://blog.csdn.net/youcans/article/details/117843875)
+
++ Importamos las librerías
+
+```python
+from scipy.integrate import odeint 
+import numpy as np 
+import matplotlib.pyplot as plt 
+from matplotlib.widgets import Slider, RadioButtons  # Interactivo
+```
+--
++ Definimos las ecuaciones diferenciales
+
+```python
+def dySIS(y, t, lamda, mu):  # SI/SIS model
+    dy_dt = lamda*y*(1-y)-mu*y 
+    return dy_dt
+def dySIR(y, t, lamda, mu):  # SIR model, 
+    i, s = y
+    di_dt = lamda*s*i-mu*i 
+    ds_dt = -lamda*s*i 
+    return np.array([di_dt,ds_dt])
+```
+---
++ Definimos los parámetros
+
+```python
+number = 1e5 # total number of people
+lamda = 0.2 # Daily contact rate, the average number of susceptible persons who are effectively in contact with the sick each day
+sigma = 2.5 # Number of contacts during infectious period
+
+mu = lamda/sigma # Daily cure rate, the ratio of the number of patients cured each day to the total number of patients
+tEnd = 200 # Forecast date length
+t = np.arange(0.0,tEnd,1) # (start,stop,step)
+
+i0 = 1e-4 # Initial value of the proportion of patients
+s0 = 1-i0 # Initial value of the proportion of susceptible persons
+
+Y0 = (i0, s0) # Initial value of the differential equation system
+```
+--
++ Resolvemos las ecuaciones diferenciales con **`SciPy`**
+
+```python
+ySI = odeint(dySIS, i0, t, args=(lamda,0)) # SI model
+ySIS = odeint(dySIS, i0, t, args=(lamda,mu)) # SIS model
+ySIR = odeint(dySIR, Y0, t, args=(lamda,mu)) # SIR model
+```
+
+---
++ Graficamos 
+
+```python
+fig, ax = plt.subplots()
+plt.subplots_adjust(left=0.25, bottom=0.4)
+
+plt.title("Comparison among SI, SIS and SIR models")
+plt.xlabel('time')
+plt.axis([0, tEnd, -0.1, 1.1])
+
+si_plt, = plt.plot(t, ySI,':g', label='i(t)-SI')
+
+sis_plt, = plt.plot(t, ySIS,'--g', label='i(t)-SIS')
+
+sir_i_plt, = plt.plot(t, ySIR[:,0],'-r', label='i(t)-SIR')
+sir_s_plt, = plt.plot(t, ySIR[:,1],'-b', label='s(t)-SIR')
+sir_r_plt, = plt.plot(t, 1-ySIR[:,0]-ySIR[:,1],'-m', label='r(t)-SIR')
+
+plt.legend(loc='best') 
+```
+---
+
+&lt;img src="https://img-blog.csdnimg.cn/20210612123600936.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lvdWNhbnM=,size_16,color_FFFFFF,t_70#pic_center" width="650px" style="display: block; margin: auto;" /&gt;
+
+---
++ Agregamos las barras interactivas
+
+&lt;img src="./imgs/clase_8/bar_alone.PNG" width="450px" style="display: block; margin: auto;" /&gt;
+
+```python
+axcolor = 'lightgoldenrodyellow'
+
+# Generamos el área de las barras
+axlambda = plt.axes([0.25, 0.1, 0.65, 0.03], facecolor=axcolor)
+axsigma = plt.axes([0.25, 0.18, 0.65, 0.03], facecolor=axcolor)
+axi0 = plt.axes([0.25, 0.26, 0.65, 0.03], facecolor=axcolor)
+
+# Agregamos la información
+slambda = Slider(axlambda, 'Daily contact rate', 0.1, 1,
+               valinit=lamda, color="green")
+ssigma = Slider(axsigma, 'Contacts during\ninfectious period', 0.1, 10,
+                valinit=sigma)
+si0 = Slider(axi0, 'Initial proportion\nof patients', 1e-4, 5e-1,
+                valinit=i0, color="orange")
+```
+
+---
++ Creamos una función que actualice los datos con base en la información modificada en las barras
+
+```python
+def update(val, ):
+  
+    lamda = slambda.val
+    sigma = ssigma.val
+    i0 = si0.val
+
+    mu = lamda / sigma
+    s0 = 1 - i0
+    Y0 = (i0, s0)
+
+    ySI = odeint(dySIS, i0, t, args=(lamda, 0))  # SI model
+    ySIS = odeint(dySIS, i0, t, args=(lamda, mu))  # SIS model
+    ySIR = odeint(dySIR, Y0, t, args=(lamda, mu))  # SIR model
+
+    si_plt.set_ydata(ySI)
+    sis_plt.set_ydata(ySIS)
+    sir_i_plt.set_ydata(ySIR[:, 0])
+    sir_s_plt.set_ydata(ySIR[:, 1])
+    sir_r_plt.set_ydata(1 - ySIR[:, 0] - ySIR[:, 1])
+
+    fig.canvas.draw_idle()
+```
+---
++ Aplicamos la función 
+
+
+```python
+slambda.on_changed(update)
+ssigma.on_changed(update)
+si0.on_changed(update)
+```
+
+&lt;img src="./imgs/clase_8/barras.PNG" width="550px" style="display: block; margin: auto;" /&gt;
+
+---
++ Agregamos botones para ver solo un tipo de módelo
+
+
+```python
+rax = plt.axes([0.025, 0.5, 0.15, 0.15], facecolor=axcolor)
+radio = RadioButtons(rax, ('SI', 'SIS', 'SIR'), active=0)
+
+lines = {'SI':[si_plt], 'SIS':[sis_plt],
+             'SIR':[sir_i_plt, sir_s_plt, sir_r_plt]}
+
+def select_model(label):
+
+    for line_m in lines[label]:
+        line_m.set_alpha(1)
+
+    for others in set(lines.keys()) - set([label]):
+        for line_m in lines[others]:
+            line_m.set_alpha(0)
+    fig.canvas.draw_idle()
+
+radio.on_clicked(select_model)
+plt.show()
+```
+---
+
+&lt;img src="./imgs/clase_8/final_1.png" width="400px" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="./imgs/clase_8/final_SIS.png" width="400px" style="display: block; margin: auto;" /&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(imgs/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

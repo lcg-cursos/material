@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Matplotlib</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.9/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Matplotlib
+### Licenciatura en Ciencias Genómicas,UNAM
+### First version: 2021-11-08; Last update: 2021-11-16
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+  
+---
+
+## Objetivo
+
+Familiarizarse con el módulo `Matplotlib`. 
+
+
+---
+
+## Historia
+
+.pull-left[
+Librería para visualiación de datos de python. 
+
+Creada por [John D. Hunter](http://blog.fperez.org/2013/07/in-memoriam-john-d-hunter-iii-1968-2012.html)
+
+Construida en arrays de numpy. 
+
+Una de las librerías más recurrentes (incluso contra librerías más recientes)
+
+- originamente se pensó como un patch de IPython
+
+- 2003 versión 0.1
+
+- apoyada financieramente por Space Telescope Science Institute (telescopio Hubble)
+
+]
+
+.pull-right[
+&lt;img src="imgs/clase_8_pt1/hunter.jpeg" width="150px" style="display: block; margin: auto;" /&gt;
+]
+
+	
+---
+
+## Importando `Matplotlib`
+
+Por convención se utilizan las siguientes abreviaciones para el importe
+
+
+```python
+*import matplotlib as mpl
+*import matplotlib.pyplot as plt
+```
+
+---
+
+## Componentes de las figuras
+
+&lt;img src="imgs/clase_8_pt1/componentes.jpeg" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+## Dos enfoques
+
+A lo largo de la lección veremos dos enfoques. Con el paso de las diapositivas quedará más clara las diferencias.
+
+- **enfoque procedural:** 
+    
+    plot que será modificado al añadir **funciones**
+
+
+- **enfoque orientado a objetos:**
+
+    plot que será modificado usando **métodos** (aplicados al objeto `axes`)
+
+
+---
+
+## ¡Veamos ambas opciones!
+
+&lt;div style="width:100%;height:0;padding-bottom:56%;position:relative;"&gt;&lt;iframe src="https://giphy.com/embed/kz6cm1kKle2MYkHtJF" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen&gt;&lt;/iframe&gt;&lt;/div&gt;&lt;p&gt;&lt;a href="https://giphy.com/gifs/moodman-kz6cm1kKle2MYkHtJF"&gt;via GIPHY&lt;/a&gt;&lt;/p&gt;
+
+---
+
+## `figures` y `axes`
+
+`figures` (instancia de la clase `plt.Figure`): contenedor/recuadro/ventana en cual se encuentran todos los objetos graficables. 
+
+`axes` (instancia de la clase `plt.Axes`): todo lo que está dentro de `figures`: todos los elementos graficados: títulos, ejes, gráficas, texto, etiquetas. Pueden ser múltiples `axes` por un `figures`
+  - Título: `set_title()`
+  - Límites:`axes.Axes.set_xlim()` y `axes.Axes.set_ylim()`
+  - Etiquetas: `set_xlabel()` y `set_ylabel()`
+
+
+```python
+# creamos figura
+fig = plt.figure()
+# creamos un eje 
+ax = plt.axes()
+```
+
+---
+
+Ahora grafiquemos algo sobre la nueva figura 
+
+
+```python
+x = np.linspace(0, 10, 1000)
+
+# ploteamos (x, y respectivamente)
+*ax.plot(x, np.sin(x))
+plt.show()
+```
+--
+Para agregar etiquetas, titulo, etc. podemos usar `set()` 
+
+
+```python
+*ax.set(xlim=(0, 10), ylim=(-2, 2),  #limites
+*      xlabel="x", ylabel="sen(x)", #etiquetas
+*      title="grafiquita")       #titulo
+```
+--
+O podríamos llamarles individualmente. .tiny[`set()` es bastante más amigable]
+
+
+```python
+ax.set_xlim(0,10)
+ax.set_ylim(-2,2)
+ax.set_xlabel("x")
+ax.set_ylabel("sen(x)")
+ax.set_title("grafiquita")
+```
+
+---
+
+## `plt.subplots()`
+
+Si queremos obtener múltiples `axes` (varias graficas en un mismo espacio) debemos usar `plt.subplots()`. Aunque solo necesitemos uno es preferible usarlo como default.
+
+
+```python
+# creamos figura y un solo axes
+fig, ax = plt.subplots()
+```
+
+--
+
+Si quisieramos tener dos gráficas  
+
+
+```python
+# aqui creamos dos, distribuidos(1,2)
+fig, axs = plt.subplots(nrows = 1, ncols = 2)
+```
+
+--
+
+Usamos índices para acceder a cada uno.
+
+
+```python
+axs[0].plot(x, np.sin(x))  #primer axes
+axs[1].plot(x, np.cos(x)) #segundo axes
+plt.show()
+```
+
+---
+
+## `plt.plot()` (similar a Matlab)
+
+También podríamos emplear `plt.plot()`, de esta manera se genera lo anterior de manera implicita (`figure` y `axes`)
+
+**Podemos plotear varias lineas**: Siguiendo en lo básico, podríamos plotear varias líneas llamando a `plt.plot()` multiples veces
+
+
+```python
+plt.plot(x, np.sin(x), "-")
+*plt.plot(x, np.cos(x) "--")
+plt.show()
+```
+--
+De la misma manera podemos agregar título, etiquetas, etc..
+
+&lt;img src="imgs/clase_8_pt1/matlabsvsoo.jpeg" width="400px" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Enfoque procedural vs orientado a objetos
+
+Se pueden usar estos dos enfoques para trabajar con `Matplotlib` (está basado en Matlab, que es procedural)
+
+
+- **enfoque procedural:**
+
+    `plt.plot()` función de `matplotlib.pyplot`
+
+- **enfoque orientado a objetos:**
+
+    `ax.plot()` `ax` es un objeto `axes` y `plot()` es un método de todos los objetos `figure`
+
+
+Es importante notar la diferencia, ya que **NO** pueden combinarse! 
+
+Ya que python es orientado a objetos se recomienda este enfoque. (pero ambos son válidos ;3)
+
+
+---
+
+## Guardar figuras
+
+`Matplotlib` te permite guardar figuras en distintos formatos. `savefig`()
+
+
+```python
+fig.savefig('my_figure.png')
+```
+
+Si guardamos no es necesario plotear
+
+---
+
+## Formato de salida
+
+Podemos checar qué formatos podemos obtener
+
+
+```python
+*fig.canvas.get_supported_filetypes()
+```
+
+---
+
+## Scatter plot
+
+Usando plt.plot() podríamos conseguir un scatter plot, solo indicando el tipo de marker ( "o" ). Para ver todas las opcions disponibles ponemos la [documentacion de pyplot.plot](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html)
+
+&lt;img src="imgs/clase_8_pt1/marker.jpeg" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## [plt.scatter](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html)
+
+.full-width[.content-box-yellow[ plt.scatter(x, y, marker = "o") ]]
+
+La diferencia de usar esta función es que podemos llevar las gráficas más alla del 2-D!!!!  Usaremos el set de datos de iris de `sklearn.datasets`
+
+&lt;img src="imgs/clase_8_pt1/iris.jpeg" width="450px" style="display: block; margin: auto;" /&gt;
+
+---
+
+- `alpha`: ajustar transparencia 
+
+- [`cmap`: colormaps](https://matplotlib.org/stable/tutorials/colors/colormaps.html) 
+
+
+```python
+from sklearn.datasets import load_iris
+iris = load_iris()
+features = iris.data.T
+
+plt.scatter(features[0], features[1], alpha=0.2,
+            s=100*features[3], c=iris.target, cmap='viridis')
+plt.xlabel(iris.feature_names[0])
+plt.ylabel(iris.feature_names[1])
+```
+
+---
+
+## DataFrames 
+
+Si necesitamos graficar series o dataframes podemos emplear pandas ya que cuenta con su propio submódulo para plotear. La base de todo es matplotlib con lo que estamos familiarizadxs [Link a documentación](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.plot.html)
+
+[Link a datos que usaremos](files/clase_8_pt1/air_data.csv)
+
+
+```python
+import pandas as pd
+air_quality = pd.read_csv("files/clase_8_pt1/air_data.csv", 
+                            index_col=0, parse_dates=True)
+air_quality.head()
+```
+
+
+Chequemos visualmente datos
+
+
+```python
+air_quality.plot()
+```
+
+---
+
+Chequemos NO2 de londres vs paris (usaremos un scatterplot)
+
+
+```python
+air_quality.plot.scatter(x="station_london", y="station_paris", alpha=0.5)
+```
+
+
+boxplot (`DataFrame.plot.box()`)
+
+
+```python
+air_quality.plot.box()
+```
+
+---
+
+Si quisieramos por separadas las graficas
+
+
+```python
+axs = air_quality.plot.area(figsize=(12, 4), subplots=True)
+```
+
+
+Si quisieramos personaliar más
+
+
+```python
+fig, axs = plt.subplots(figsize=(12, 4))
+air_quality.plot.area(ax=axs)
+
+axs.set_ylabel("NO$_2$ concentration")
+fig.savefig("no2_concentrations.png")
+```
+
+
+---
+
+## Widgets
+
+https://matplotlib.org/stable/api/widgets_api.html
+
+
+&lt;img src="imgs/clase_8_pt1/widgets.jpeg" width="650px" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Slider
+
+Si quisieramos cambiar algún parametro de la gráfica podemos usar un deslizador o `slider`. Con dicho deslizador podemos jugar con el comportamiento de nuestra gráfica.
+
+&lt;img src="imgs/clase_8_pt1/slider.jpeg" width="650px" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Slider
+
+A continuación explicaremos las secciones necesarias para crear un `slide`
+
+Importamos las librerias necesarias
+
+
+```python
+import matplotlib.pyplot as plt
+*from matplotlib.widgets import Slider
+```
+
+Creamos `figure` y `axes`, espacio donde estará slider. Algo importante a notar es que plot debe ir seguido de una coma (considerado tupla), esto para que dicho valor pueda ser modificado más adelante. mas info en: [documentacion de assignment statements](https://docs.python.org/3/reference/simple_stmts.html#assignment-statements)
+
+```python
+# creamos figure y axes
+fig, ax = plt.subplots()
+# importante ajustar espacio donde queremos el slider
+*plt.subplots_adjust(bottom = 0.3)
+#usamos la coma para poder quedarnos con el valor y 
+plot, = ax.plot(x,y)
+
+# en qué espacio de figure se plasma (x, y, ancho, alturo)
+*recuadro = plt.axes([0.25, 0.1, 0.65, 0.03])
+```
+
+---
+Una vez que establecimos el espacio en `figure` podemos dar las características y valores que tendrá nuestro slider:
+
+
+
+```python
+# creamos slider con rangos y valores disponibles (0.1 a 10 de 1 en 1)
+*factor = Slider(recuadro, 'factor a cambiar', valmin = 0.1,
+*                 valmax = 10, valinit = 1, valstep = 1)
+```
+
+
+---
+
+Tenemos el slider en gráfica! Pero aún falta conectarlo con la linea a graficar!
+
+--
+
+Por lo que haremos una **función que actualice los datos y linea ploteada:**
+
+1- Se toma valor actual de nuestro slider que está en `.val`
+
+2- Se rehacen las operaciones que son afectadas por factor
+
+3- Se modifica datos en plot con `set_xdata` y `set_ydata`
+
+4- Se usa `plt.draw` para actualizar linea graficada
+
+
+```python
+def update(val):
+    #1. tomamos valor de slider
+*   nuevo_valor = factor.val
+    
+    #2. actualizamos operaciones que son afectadas por el factor
+*   x = sen(nuevo_valor)
+    y = cos(nuevo_valor)
+    
+    #3. Modificamos datos que están en plot (p.)
+*   p.set_xdata(x)
+    p.set_ydata(y) 
+
+    #4. dibujar linea con actualizaciones
+*   plt.draw()
+```
+
+---
+Ahora tenemos que llamar a nuestra función para realizar los cambios. Estos lo queremos siempre que nuestro slider cambie de valor, para ello usaremos `on_changed()`
+
+
+```python
+# llamamos a la funcion update cada que cambie nuestro slider factor
+*factor.on_changed(update)
+
+#ploteamos
+plt.show() 
+```
+
+Ya vimos los componenetes ahora realicemos un pequeño ejercicio para ponerlo en practica
+
+Haremos un pequeño ejemplo
+
+
+---
+
+## Radio Buttons
+
+Si quisieramos cambiar alguna de las propiedades de nuestra gráfica podemos usar ratio buttons, que nos deja escoger entre dos o más opciones. Podríamos modificar el tipo de linea, el color, ancho, función a graficar, etc.
+
+&lt;img src="imgs/clase_8_pt1/radiobuttons.jpeg" width="650px" style="display: block; margin: auto;" /&gt;
+
+---
+### Radio Buttons
+
+A continuación veremos el código necesario para crearlo:
+
+Importamos RadiButtons de `matplotlib.widgets`
+
+```python
+*from matplotlib.widgets import RadioButtons
+```
+
+Creamos `figure` y `axes`. De nuevo usamos coma (tupla) para que `plot` pueda ser modificado
+
+```python
+fig, ax = plt.subplots()
+*plot, = ax.plot(x,y)
+```
+
+---
+
+Especificamos posición del ratio button y sus dimensiones
+
+
+```python
+*plt.subplots_adjust(left=0.3)
+#color del recuadro
+axcolor = 'lightgoldenrodyellow'
+# x, y, ancho, alto y color
+*rax = plt.axes([0.05, 0.7, 0.15, 0.15], facecolor = axcolor)
+```
+
+Creamos Radiobutton con sus caracteristicas espacio a ocupar y opciones de los botones
+
+
+```python
+# especificamos opciones que tendra el botón
+*radio = RadioButtons(rax, ('2 Hz', '4 Hz', '8 Hz'))
+```
+---
+Ya tenemos nuestro recuadro con las opciones en `figure`, pero aún nos falta vincularlo para que se actualice el gráfico. Haremos una función que se encargue de actualizar el valor obtenido en nuestro gráfico:
+
+1- con `labels` podemos obtener valor del botón seleccionado que pasaremos a la función/método de nuestro interés
+
+2- volvemos a dibujar linea
+
+
+```python
+def estilo(label):
+*   l.set_linestyle(label)
+*   plt.draw()
+```
+--
+Cada que el botón cambie de valor se llamará a función para realizar cambios al gráfico. `on_clicked` para checar cuando el valor se modifique
+
+
+```python
+*radio.on_clicked(estilo)
+```
+
+¡Ahora probemos los bloques de código en un pequeño ejemplo!
+
+---
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
