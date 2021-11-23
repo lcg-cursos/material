@@ -64,6 +64,6 @@ Bienvenidos al curso de Python II.
   - Cómo trabajar en Jupyter
   - Presentación de datos
 
-12.- Mejores prácticas
+12.- [Mejores Prácticas](git/git-fair-webpage/4-FAIR-SitioPersonal.html)
   -	Software y Principios FAIR
   -	Página web personal
