@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Python II y GitHub</title>
+    <meta charset="utf-8" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Python II y GitHub
+### Licenciatura en Ciencias Genómicas, UNAM
+### First version: 2021-08-22; Last update: 2021-11-23
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+
+## Contenido
+
+1. Repositorio GitHub bajo principios FAIR
+
+2. Construyendo mi página personal
+
+
+---
+
+
+# 1. Repositorio GitHub bajo principios FAIR
+
+## Objetivo 
+
+Al finalizar la lección, tendremos un repositorio en GitHub bajo las recomendaciones de FAIR para desarrollo de software, esto con la finalidad de contar con un repositorio _documentado_, así como _terminos y condiciones de uso_ definidos. 
+
+
+
+&lt;img src="img/octocat.png" width="300px" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Introducción
+
+Actualmente existen lineamientos o estándares particulares para realizar una publicación (paper, tesis, reportes, etc.), por ejemplo, debe tener un ID único, debe tener metadatos que permitan su localización, entre muchas cosas más.
+
+En el caso de desarrollo de software existen lineamientos similares conocidos como los principios FAIR (Findable, Accesible, Interoperable, Reusable).
+
+&lt;img src="img/FAIR.png" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+## Introducción
+
+Tomando de referencia los principios FAIR nosotros nos enfocaremos a cubrir los siguientes aspectos:
+
+- _Repositorio público con control de versiones_: Con GitHub permitimos que otros usuarios puedan involucrarse y poder reealizar colaboraciones.
+
+- _README_: Archivo de descripción del repositorio.
+
+&lt;img src="img/readme.png" width="100px" style="display: block; margin: auto;" /&gt;
+
+- _Licencia_: Permisos y restricciones de uso del software.
+
+
+&lt;img src="img/license.jpeg" width="150px" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Archivo README 
+
+.full-width[.content-box-red[Todo repositorio en GitHub debe contar con un archivo de descripción que permita conocer al público qué podrá encontrar en él, estructura del repositorio, detalles de uso del software, formas de contacto, etc.]]
+
+&lt;img src="img/readmeExample.png" width="450px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Licencia
+
+.full-width[.content-box-red[Todo trabajo realizado, incluyendo el software, debe estar protegido bajo términos y condiciones de uso. Aunque el código esté compartido a través de plataformas como GitHub, nadie puede usarlo a menos que se les otorgue permiso explícitamente.]]  
+
+&lt;img src="img/licensePermissions.png" width="400px" style="display: block; margin: auto;" /&gt;
+
+Para mayor detalle consultar: [https://choosealicense.com/appendix/](https://choosealicense.com/appendix/)
+
+
+---
+
+## Actividad: Agregar un archivo README a mi repositorio
+
+1. Abrir una consola (terminal) y localizar nuestro repositorio
+
+--
+
+2. Verificar que el repositorio se encuentre actualizado: __git status__.  Si hay algo pendiente por resolver usar: __git add, git commit -m, git push origin master__ o bien, __git pull origin master__
+
+--
+
+3. Crear archivo README.md: touch README.md  
+Para Windows: notepad README.md  
+
+--
+
+4. Agregar contenido al README.md  
+
+\# [Nombre del software/proyecto]  
+
+\# Descripción   
+
+\# Requerimientos  
+
+\# Licencia  
+Para ver detalles de la licencia ver el archivo [LICENSE](./LICENSE)
+
+\# Contacto
+
+
+---
+
+
+## Actividad: Agregar un archivo README a mi repositorio
+
+- Guardar el archivo y subir los cambios a GitHub:  
+
+_ git add README.md_  
+_ git commit -m "agregando archivo readme"_  
+_ git push origin master_
+
+--
+
+- Verificar el despliegue del archivo en GitHub  
+
+---
+
+
+
+## Actividad: Agregar una licencia a mi repositorio
+
+1. Ir a mi repositorio remoto en GitHub. Verificar que estemos a nivel raíz.
+
+--
+
+2. Seleccionar la opción _Add file_
+
+--
+
+3. Dar clic sobre _Create new file_
+
+--
+
+4. En el cuadro de texto escribir _LICENSE_
+
+--
+5. Hacer clic en _Choose a license template_
+
+---
+
+## Actividad: Agregar una licencia a mi repositorio
+
+6. En la parte izquierda aparecerá un panel mostrando un listado de diferentes licencias.
+
+--
+
+7. Al seleccionar alguna de ellas se desplegará el detalle de la licencia
+
+--
+
+8. Seleccionar alguna de ellas, por ejemplo: MIT License, y hacer clic en _Review and submit_
+
+--
+
+9. Hacer commit (revisar que se realice sobre la rama master). Verificar que el archivo se encuentre en el repositorio
+
+---
+
+## Conclusión
+
+Ahora contamos con documentación __README__ sobre el repositorio, así como con una __LICENCIA__ que permite a los usuarios saber los permisos y restricciones de uso.
+
+---
+
+# 2. Construyendo mi página personal
+
+## Objetivo
+Al finalizar la lección, tendremos disponible un sitio web construido en GitHub/_GitHub Pages_ donde podremos mostrar nuestra información académica, datos relevantes sobre nuestros proyectos y cualquier otro dato que nosotros deseemos.
+
+&lt;img src="img/paginaWebPersonal.png" width="350px" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+## Introducción
+
+Imaginemos que deseamos mostrar al público un poco de información sobre nosotros, nuestros proyectos, trabajos realizados, experiencia, áreas de interes y muchas cosas más.
+
+.full-width[.content-box-red[Vivimos en un momento en que todo lo que buscamos lo encontramos de manera online, tener un página web personal nos ayudará de escaparate digital para mostrar el área en que nos desarrollamos, nuestros trabajo y en qué somos especialistas.]]
+
+
+&lt;img src="img/paginaWebPersonal4.jpeg" width="550px" style="display: block; margin: auto;" /&gt;
+---
+
+## ¿Qué es GitHub Pages?
+
+Entre las muchas características con las que cuenta GitHub se encuentra _GitHub Pages_.
+
+_GitHub Pages_ es un servicio de alojamiento de un __sitio web estático__ que toma archivos __HTML__, CSS y JavaScript directamente desde un repositorio en GitHub.
+
+&lt;img src="img/GiHubPages.jpeg" width="450px" style="display: block; margin: auto;" /&gt;
+---
+
+## ¡Comencemos!: Creación del sitio web 
+
+## Creación del sitio web 
+
+_Paso 1:_ Crear un repositorio para nuestra página web
+
+*  Dentro de la página web e GitHub, ir a la esquina superior derecha, hacer clic en el ícono "+" y seleccionar la opción _New repository_
+
+* Indicar el nombre del repositorio y una descripción (opcional): tu repositorio se debe nombrar __[username].github.io__, por ejemplo: _shirleyah.github.io_
+
+* Visibilidad: _Públic_
+
+&lt;img src="img/createRepository3.png" width="400px" style="display: block; margin: auto;" /&gt;
+---
+
+## Creación del sitio web
+
+_Paso 2:_ Crear el archivo __index.Rmd__
+
+* Abrir el programa RStudio  
+
+* Crear un archivo R Markdown, como Título: Mi sitio personal y Autor: [Nombre completo]   
+  
+
+* Guardar el documento con el nombre _index.Rmd_ en nuestro repositorio Git 
+---
+
+## Creación del sitio web
+
+_Paso 3:_ Crear el archivo html
+
+* Ejecutar el arhivo Rmd con la opción Knit para generar el html  
+
+* Revisar el despligue de la página web  
+
+* Asignar un tema a la página web _theme:_ "default", "cerulean", "journal", "flatly", "darkly", "readable", "spacelab", "united", "cosmo", "lumen", "paper", "sandstone", "simplex", "yeti".
+
+Código:  
+
+output:   
+&amp;nbsp; &amp;nbsp; &amp;nbsp;html_document:  
+&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;theme: darkly  
+
+---
+
+## Creación del sitio web
+
+_Paso 4:_ Editar el contenido del index.Rmd
+
+* Agregar las siguientes secciones y registrar los datos correspondientes:
+
+\## Datos personales  
+\- Fecha de nacimiento:  
+\- Edad:  
+
+\## Mis cursos  
+\- ` [Python II](https://github.com/shirleyah/python_class)` : En el siguiente enlace podrás ver los programas desarrollados en el curso. 
+
+\## Contacto y redes sociales  
+\- Correo electrónico:  
+\- Facebook: ` [username](link) `  
+
+Nota: usar el etiquetado markdown para definir secciones, viñetas, links, etc.
+---
+
+
+## Creación del sitio web  
+
+_Paso 5:_ Agregar imágenes a la página web
+
+* Agregar una fotografía personal a la página web. Se recomienda crear una carpeta __/img__ para almacenar todas las imágenes que queremos mostrar en la página web.
+
+Ejemplo:  
+
+` &lt;img src="./img/shirley.jpg" width="200" height="200" /&gt; ` 
+
+_Paso 6:_ Generar de nuevo el archivo html y subir todos los cambios al servidor remoto: 
+ - git add index.Rmd index.html img/  
+ - git commit -m "Agregando index e imagenes"  
+ - git push origin master
+
+---
+
+## Creación del sitio web
+
+_Paso 6:_ Configurar el sitio web en GitHub
+
+* En el sitio web de GitHub, _dentro de nuestro repositorio_ hacer clic en la opción __Settings__
+
+* En el panel izquierdo, hacer clic en __Pages__
+
+* Ir a la opción __Source__ y seleccionar la rama _main_ y directorio _root_
+
+* Con esto obtendremos la url de nuestro sitio web, por ejemplo: https://shirleyah.github.io/
+
+---
+
+## Conclusión
+
+Una página web permite contarle al mundo quién eres, que haces, tu experiencia, tus intereses, y tantas otras cosas, permitiendo que la gente de mismos gustos se encuentre, y así compartan experiencias, intercambien opiniones y reciban consejos el uno del otro.
+
+Además, contar con una página web en _GitHub_ permite al público conocer los proyectos en los que colaboras y el ámbito en el que te desarrollas. Obtendrás visibilidad ya que este será como tener una tarjeta de presentación digital para mostrar a todo el mundo. Y como extra, estarás llevando el control de versiones de los cambios que haces en tu sitio web al mismo tiempo. 
+
+
+&lt;img src="img/paginaWebPersonal5.jpeg" width="330px" style="display: block; margin: auto;" /&gt;
+
+
+---
+  
+##  ¡Gracias!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(img/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
