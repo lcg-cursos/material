@@ -45,17 +45,18 @@ Bienvenidos al curso de Python II.
   - Métodos y operaciones
   
 
-8.- [Creación de gráficos con Matplotlib](python/leccion8/Clase_8_pt1_v1.0.html)
+8.- [Creación de gráficos con Matplotlib](python/leccion8/Clase_8_pt1_v2.0.html)
   - Tipos de gráficas y cómo crearlas
   - Gráficas con Pandas
   - Formatos de salida
+
 
 9.- Seaborn
   - Tipos de gráficas y diferencias con Matplotlib
   - Gráficas con Pandas
   - Formato de salida
 
-10.- Algoritmos matemáticos con SciPy
+10.-[Algoritmos matemáticos con SciPy](python/leccion8/Clase_8_pt_2_v1.html)
   - Entrada / Salida
   - Funciones 
 
