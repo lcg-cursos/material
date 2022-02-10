@@ -1,28 +1,26 @@
----
-title: "Python I"
---subtitle: "1. Intro Git y GitHub"
---author: ''
-institute: "Licenciatura en Ciencias Genómicas, UNAM"
-date: 'First version: 2022-01-31; Last update: `r Sys.Date()`'
-output:
-  xaringan::moon_reader:
-    css: ["default", "default-fonts", "hygge"]
-    lib_dir: ./libs
-    includes:
-      after_body: ./insert-logo.html
-    nature:
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
-      beforeInit: "macros.js"
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Python I</title>
+    <meta charset="utf-8" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Python I
+### Licenciatura en Ciencias Genómicas, UNAM
+### First version: 2022-01-31; Last update: 2022-02-03
 
 ---
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
 
 
-```{css, echo = FALSE}
+
+
+&lt;style type="text/css"&gt;
 /* From https://github.com/yihui/xaringan/issues/147  */
 .scroll-output {
   height: 80%;
@@ -33,7 +31,7 @@ pre {
   max-width: 100%;
   overflow-x: scroll;
 }
-```
+&lt;/style&gt;
 
 
 ## Contenido
@@ -121,25 +119,19 @@ __Ventajas de usar Markdown__
 
 ## Control de versiones
 
-```{r, out.width = "750px",fig.align='center'}
-knitr::include_graphics("img/versiones.png")
-```
+&lt;img src="img/versiones.png" width="750px" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Control de versiones 
 
-```{r, out.width = "500px",fig.align='center'}
-knitr::include_graphics("img/documento.png")
-```
+&lt;img src="img/documento.png" width="500px" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Control de versiones 
 
-```{r, out.width = "450px",fig.align='center'}
-knitr::include_graphics("img/word.gif")
-```
+&lt;img src="img/word.gif" width="450px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -149,15 +141,11 @@ __Forma manual__
 
 El versionamiento está constituido por dos dígitos, versiones primarias y secundarias (X.Y).
 
-```{r, out.width = "150px",fig.align='right'}
-knitr::include_graphics("img/versionManual.png")
-```
+&lt;img src="img/versionManual.png" width="150px" style="display: block; margin: auto 0 auto auto;" /&gt;
 
 Reglas:
 
-```{r, out.width = "650px",fig.align='left'}
-knitr::include_graphics("img/reglas.png")
-```
+&lt;img src="img/reglas.png" width="650px" style="display: block; margin: auto auto auto 0;" /&gt;
 
 ---
 
@@ -185,9 +173,7 @@ Aplicando las reglas...
 __Forma automática__  
 por medio de un sistema de control de versiones.  
 
-```{r, out.width = "450px",fig.align='center'}
-knitr::include_graphics("img/controladores.png")
-```
+&lt;img src="img/controladores.png" width="450px" style="display: block; margin: auto;" /&gt;
     
 
 ---
@@ -209,9 +195,7 @@ Los sistemas de control de versiones no son nuevos. Herramientas como CVS, o Sub
 
 - Un sistema de control de versiones también permite que muchas personas trabajar en paralelo.  
 
-```{r, out.width = "250px",fig.align='right'}
-knitr::include_graphics("img/admiracion.png")
-```
+&lt;img src="img/admiracion.png" width="250px" style="display: block; margin: auto 0 auto auto;" /&gt;
 
 ---
 
@@ -223,9 +207,7 @@ knitr::include_graphics("img/admiracion.png")
 
 - Puede ser utilizado para rastrear los cambios en otros tipos de archivos de texto plano.  
   
-```{r, out.width = "250px",fig.align='right'}
-knitr::include_graphics("img/logo_git.png")
-```
+&lt;img src="img/logo_git.png" width="250px" style="display: block; margin: auto 0 auto auto;" /&gt;
 
 ---
 
@@ -248,9 +230,7 @@ __Git + GitHub:__
 
 ## Trabajando con Git y GitHub 
 
-```{r, out.width = "750px",fig.align='center'}
-knitr::include_graphics("img/git-github.png")
-```
+&lt;img src="img/git-github.png" width="750px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -267,9 +247,7 @@ knitr::include_graphics("img/git-github.png")
 9. Ignorando archivos  
 .  
 
-```{r, out.width = "450px",fig.align='center'}
-knitr::include_graphics("img/gitLocal.png")
-```
+&lt;img src="img/gitLocal.png" width="450px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -284,9 +262,9 @@ Revisar si Git está instalado
 
 Si Git no está disponible...  
 
-_Windows:_  <https://gitforwindows.org/>  
+_Windows:_  &lt;https://gitforwindows.org/&gt;  
 
-_MacOS:_ <https://git-scm.com/download/mac>   
+_MacOS:_ &lt;https://git-scm.com/download/mac&gt;   
 
 _Linux:_ 
 Debian/Ubuntu:`sudo apt-get install git`  
@@ -314,9 +292,7 @@ Para ver los valores de configuración de Git:
 ## Esquema de trabajo de Git
 
 
-```{r, out.width = "650px",fig.align='center'}
-knitr::include_graphics("img/esquemaGit.png")
-```
+&lt;img src="img/esquemaGit.png" width="650px" style="display: block; margin: auto;" /&gt;
 
 _Repositorio_: carpeta que contiene el seguimiento de los cambios que se realicen en el código. 
 
@@ -339,9 +315,7 @@ _Repositorio_: carpeta que contiene el seguimiento de los cambios que se realice
 __Buenas prácticas__  
 Seguir una estructura de organización de carpetas y archivos para nuestros proyectos.
 
-```{r, out.width = "650px",fig.align='center'}
-knitr::include_graphics("img/estructuraDir.png")
-```
+&lt;img src="img/estructuraDir.png" width="650px" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -357,9 +331,7 @@ knitr::include_graphics("img/estructuraDir.png")
 - Comprobar repositorio  
 `git status`  
 
-```{r, out.width = "750px",fig.align='center'}
-knitr::include_graphics("img/gitInit.png")
-```
+&lt;img src="img/gitInit.png" width="750px" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -380,9 +352,7 @@ Imaginemos que dentro del directorio `python_class`:
 
 __¿Les parece que esta sea una buena idea?__
 
-```{r, out.width = "200px",fig.align='left'}
-knitr::include_graphics("img/pensando.png")
-```
+&lt;img src="img/pensando.png" width="200px" style="display: block; margin: auto auto auto 0;" /&gt;
 
 
 ---
@@ -394,9 +364,7 @@ knitr::include_graphics("img/pensando.png")
 
 Git almacena y controla todos los cambios que se hagan en el contenido del repositorio mediante el directorio `.git`
 
-```{r, out.width = "150px",fig.align='center'}
-knitr::include_graphics("img/admiracion.png")
-```
+&lt;img src="img/admiracion.png" width="150px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -421,9 +389,7 @@ knitr::include_graphics("img/admiracion.png")
 
 ##  Controlando los cambios con Git
 
-```{r, out.width = "750px",fig.align='center'}
-knitr::include_graphics("img/flujoGit.png")
-```
+&lt;img src="img/flujoGit.png" width="750px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -431,9 +397,7 @@ knitr::include_graphics("img/flujoGit.png")
 
 - Git: sistemas de control de versiones  
 - Esquema de trabajo de Git  
-```{r, out.width = "450px",fig.align='center'}
-knitr::include_graphics("img/esquemaGit2.png")
-```
+&lt;img src="img/esquemaGit2.png" width="450px" style="display: block; margin: auto;" /&gt;
 
 __Comandos Git:__
 
@@ -451,7 +415,7 @@ __Comandos Git:__
 
 _CLAVE_: Escribe un mensaje que describa con precisión los cambios que se han realizado.  
 
-Los buenos mensajes de commit comienzan con una breve declaración (<50 caracteres) sobre los cambios realizados.  
+Los buenos mensajes de commit comienzan con una breve declaración (&lt;50 caracteres) sobre los cambios realizados.  
 
 Si se deseas profundizar en el mensaje se recomienda:  
 
@@ -462,12 +426,10 @@ Si se deseas profundizar en el mensaje se recomienda:
 - En el cuerpo del commit explicar qué y por qué  
 
 
-```{r, out.width = "250px",fig.align='center'}
-knitr::include_graphics("img/commitExt.png")
-```
+&lt;img src="img/commitExt.png" width="250px" style="display: block; margin: auto;" /&gt;
 
 
-<https://chris.beams.io/posts/git-commit/>
+&lt;https://chris.beams.io/posts/git-commit/&gt;
 
 ---
 
@@ -517,9 +479,7 @@ Si. Puedes podificar el mensaje del commit más reciente:
 `$ git commit - m “mensaje”`
 
 
-```{r, out.width = "550px",fig.align='center'}
-knitr::include_graphics("img/diff.png")
-```
+&lt;img src="img/diff.png" width="550px" style="display: block; margin: auto;" /&gt;
 ---
 
 ## Comparando cambios
@@ -553,9 +513,7 @@ Ahora usemos
 
 ¿Por qué no hay ninguna salida?
 
-```{r, out.width = "650px",fig.align='center'}
-knitr::include_graphics("img/diffstaged.png")
-```
+&lt;img src="img/diffstaged.png" width="650px" style="display: block; margin: auto;" /&gt;
 ---
 
 ## ¿Qué hemos hecho hasta el momento?
@@ -564,9 +522,7 @@ knitr::include_graphics("img/diffstaged.png")
 
 `git log –N` donde N indica el número de commits que queremos obtener.  
 
-```{r, out.width = "650px",fig.align='center'}
-knitr::include_graphics("img/gitlog.png")
-```
+&lt;img src="img/gitlog.png" width="650px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -574,9 +530,7 @@ knitr::include_graphics("img/gitlog.png")
 
 `git log --oneline` información reducida  
 
-```{r, out.width = "650px",fig.align='center'}
-knitr::include_graphics("img/gitOneline.png")
-```
+&lt;img src="img/gitOneline.png" width="650px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -585,9 +539,7 @@ knitr::include_graphics("img/gitOneline.png")
 
 Una rama Git es un apuntador que nos permitirá hacer referencia a cada una de las confirmaciones (commits). La rama por defecto de Git es la rama master.  
 
-```{r, out.width = "550px",fig.align='center'}
-knitr::include_graphics("img/ramas.png")
-```
+&lt;img src="img/ramas.png" width="550px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -595,9 +547,7 @@ knitr::include_graphics("img/ramas.png")
 
 La rama __master__ en Git se crea por defecto al usar el comando git init.  
  
-```{r, out.width = "250px",fig.align='center'}
-knitr::include_graphics("img/ramas.png")
-```
+&lt;img src="img/ramas.png" width="250px" style="display: block; margin: auto;" /&gt;
 
 - __develop__: En esta rama se van integrando todas las nuevas características hasta la siguiente release.  
 - __feature-X__: Cada nueva mejora o característica que vayamos a introducir en nuestro software tendrá una rama que contendrá su desarrollo. Las ramas de _feature_ salen de la rama _develop_ y una vez completado el desarrollo de la mejora, se vuelven a integrar en _develop_.  
@@ -607,9 +557,7 @@ knitr::include_graphics("img/ramas.png")
 
 ## Controlando más de un archivo
 
-```{r, out.width = "750px",fig.align='center'}
-knitr::include_graphics("img/add2.png")
-```
+&lt;img src="img/add2.png" width="750px" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -667,22 +615,154 @@ Identificar archivos sin seguimiento
 
 
 ---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
 
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
 
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(img/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
