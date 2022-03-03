@@ -13,7 +13,7 @@ class: center, middle, inverse, title-slide
 
 # Python I
 ### Licenciatura en Ciencias Genómicas, UNAM
-### First version: 2022-01-31; Last update: 2022-02-24
+### First version: 2022-01-31; Last update: 2022-02-03
 
 ---
 
@@ -100,6 +100,23 @@ __Para lograrlo necesito...__
 
 ---
 
+## ¿Qué es Markdown?  
+
+
+__Ventajas de usar Markdown__  
+
+- Escribir para web es más rápido y cómodo. Una vez que te acostumbras y conoces la sintaxis, completas el texto más rápido.  
+
+- Facilidad de uso debido a la sintaxis que emplea.  
+
+- Es más difícil cometer errores de sintaxis.  
+
+- Es perfecto para usarlo con editores de texto minimalistas.  
+
+- Puede compartirse fácilmente entre computadoras, entornos moviles, etc., quedando resuelto de este modo la incomodidad de dar formato a un texto a través de los sistemas  diferentes sistemas donde se encuentre.  
+
+---
+
 ## Control de versiones
 
 &lt;img src="img/versiones.png" width="750px" style="display: block; margin: auto;" /&gt;
@@ -108,7 +125,7 @@ __Para lograrlo necesito...__
 
 ## Control de versiones 
 
-&lt;img src="img/documento.png" width="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/documento.png" width="500px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -143,9 +160,9 @@ Aplicando las reglas...
 
 - Cambiar el nombre de una variable:                               myScript_v0.2.py  
 
-- Borrar varias funciones del código:                              myScript_v1.0.py  
+- Borrar varias funciones del código:                              myScript_v0.3.py  
 
-- Agregar un método:                                               myScript_v2.0.py  
+- Agregar un método:                                               myScript_v1.0.py  
 
 
 ---
@@ -165,7 +182,7 @@ por medio de un sistema de control de versiones.
 
 Un sistema de control de versiones es una herramienta que se encarga por nosotros de __controlar__ todos los cambios que realicemos en nuestros programas, creando __diferentes versiones de nuestros archivos__.  
 
-Además, nos permite decidir cuales cambios serán aplicados para la siguiente versión (cada registro de estos cambios es llamado como _commit_), además de presentar metadatos acerca de ellos.  
+Además, nos permite decidir cuales cambios serán aplicados para la siguiente versión (cada registro de estos cambios es llamado como commit), además de presentar metadatos acerca de ellos.  
 
 Los sistemas de control de versiones no son nuevos. Herramientas como CVS, o Subversion han estado presentes desde inicios de 1980. Sin embargo, estos han sido considerados anticuados debido a limitaciones en sus capacidades. Actualmente, existen modernos sistemas como Git y Mercurial, que incluyen poderosas herramientas para el trabajo colaborativo y concurrente en los archivos. 
 
@@ -184,11 +201,12 @@ Los sistemas de control de versiones no son nuevos. Herramientas como CVS, o Sub
 
 ## Pero… ¿Qué es Git?
 
-- Es un sistema de control de versiones para _rastrear los cambios de nuestro código_ durante el desarrollo del software.  
+- Es un sistema de control de versiones para rastrear los cambios de nuestro código durante el desarrollo del software.  
 
 - Está diseñado para coordinar el trabajo entre los programadores o contribuidores.  
 
-
+- Puede ser utilizado para rastrear los cambios en otros tipos de archivos de texto plano.  
+  
 &lt;img src="img/logo_git.png" width="250px" style="display: block; margin: auto 0 auto auto;" /&gt;
 
 ---
@@ -470,7 +488,7 @@ Volvamos a modificar el archivo reverse-complement.py
 `$ nano reverse-complement.py` 
 
 Modificar el encabezado del programa agregando el archivo de entrada (sección example)  
-`% python reverse-complement –i __sequence.txt__`
+`% python reverse-complement –i sequence.txt`
 
 Guardar los cambios  
 `ctrl+x` 
@@ -480,6 +498,7 @@ Comparemos las versiones (diff)
 
 Ahora usemos  
 `$ git diff --staged`
+
 
 
 ---
@@ -588,558 +607,12 @@ Identificar archivos sin seguimiento
 
 1. Modificar el archivo `reverse-complement.py`  
 
-2. Agregar al directorio `python_class/src/` el archivo  `sequence.txt`  
+2. Agregar al directorio `python_class/src/ el archivo `sequence.txt`  
 
 3. Agregar los cambios al área de preparación (staging area)  
 
 4. Hacer commit de ambos archivos  
 
-
----
-
-
-
-## Resumen
-
-__git add__: pone los archivos al área de preparación (staging area)  
-
-__git commit__:guarda el contenidos del área de preparación como un nuevo commit en el repositorio local. Indicando por medio de un mensaje los cambios realizados
-
-__git status [-u]__:muestra el estado del repositorio, indicando los archivos que pueden ser guardados/controlados en el directorio de trabajo, archivos que pueden pasar al área de preparación y aquellos archivos que pueden pasar al repositorio
-
-__git log__: lista todos los commits realizados en el repositorio
- 
- 
-&lt;img src="img/admiracion.png" width="100px" style="display: block; margin: auto 0 auto auto;" /&gt;
-
----
-
-
-## Historial de actividad
-
-Además de hacer referencia el commit por el identificador también podemos hacerlo por medio del identificador *HEAD*  
-
-HEAD: cada commit representa un head en el repositorio  
-
-&lt;img src="img/head.png" width="650px" style="display: block; margin: auto;" /&gt;
-
----
-
-
-## Historial de Actividad
-
-Editar el archivo reverse-complement.py agregando un nuevo autor  
-`$ nano reverse-complement.py`  
-
-Comparar el archivo con la versión anterior  
-
-`$ git diff HEAD reverse-complement.py`  
-
-
-
-
----
-
-## Historial de Actividad
-
-**¿Cómo puedo comparar el archivo contra otra versión (no solo la anterior)?**  
-
-Podemos referirnos a versiones anteriores agregando ~1  
-
-`$ git diff HEAD~1 reverse-complement.py`  
-
-
-**git show**  
-
-Muestra más detalle del commit indicando así como el autor y mensaje definido.  
-
-`$ git show HEAD~1 reverse-complement.py`
-
----
-
-## ¿Cuándo restaurar una versión?
-
-- Recuperar versión estable/funcionable  
-- Cambié algo y ahora ya no funciona mi código  
-
--&gt; Reviso fechas y commits para regresar a una versión en particular  
-
-**git checkout**  
-
-Nos permite recuperar versiones anteriores indicando el commit al que queremos volver.
-
-
-
----
-
-## ¿Cuándo restaurar una versión?  
-
-Revisar el estado del repositorio  
-`$ git status` 
-
-Identificando los cambios realizados  
-`$ git diff [#commit] reverse-complement.py` 
-
-Restaurar el programa al commit anterior  
-`git checkout [HEAD|IdCommit] reverse-complement.py`
-
-
-
----
-
-## Resumen
-
-Comandos Git:  
-
-`git log`: Lista todos los commits realizados en el repositorio en orden cronológico inverso  
-
-`git log -N`: Para obtener cierto número de commits  
-
-`git log –-oneline`: Información reducida de los commits  
-
-`git diff HEAD~#`: Comparar un archivo vs un commit en particular  
-
-`git checkout [HEAD|IdCommit] [file]`: Restaurar una versión  
-
-
----
-
-## Algunas preguntas ... 
-
-**¿Cómo modificar el mensaje de un commit en particular?**  
-
-1. Identificar el commit donde actualizaremos el mensaje  
-`git log --oneline`  
-
-2. Obtener el id del commit a actualizar  
-`git rebase --interactive [IdCommit]^`  
-
-3. Estando en el editor, en lugar de pick en la línea del commit que desees modificar poner edit, r o reword  
-`reword [IdCommit] [mensaje del commit que quiero cambiar]`  
-
-4. Guardar el archivo y salir del editor  
-
-5. Git abrirá automáticamente el editor, pero esta vez con el mensaje del commit a modificar  
-
-6. Editar el mensaje, guardar los cambios y salir del editor  
-
-7. Comprobar actualización del mensaje del commit  
-
-`git log --oneline`  
-`git status`  
-
----
-
-
-## Resumen
-
-Comandos Git:  
-
-`git log`: Lista todos los commits realizados en el repositorio en orden cronológico inverso  
-
-`git log -N`: Para obtener cierto número de commits  
-
-`git log –-oneline`: Información reducida de los commits  
-
-`git diff HEAD~#`: Comparar un archivo vs un commit en particular  
-
-`git checkout [HEAD|IdCommit] [file]`: Restaurar una versión  
-
----
-
-## Algunas preguntas ... 
-
-- ¿Cómo saber el número total de commits en un repositorio?  
-`git log --oneline | wc -l`  
-
-- Inclusive podríamos saber el número de commits de un usuario en particular  
-`git log --author="shirleyah" --oneline | wc -l`  
-
-`git config --list`
-
-
----
-
-## Algunas preguntas ... 
-
-- ¿Qué pasa cuando elimino un archivo de mi repositorio?  
-
-Si el archivo ya estaba siendo controlado por Git y decidimos eliminarlo, al conocer el estado de nuestro repositorio Git nos indicará el siguiente mensaje:
-
-Changes not staged for commit:  
-  (use "git add/rm &lt;file&gt;..." to update what will be committed)  
-  (use "git restore &lt;file&gt;..." to discard changes in working directory  
-  
-En este caso, así como le indicamos a Git que queremos controlar un archivo `git add`, también debemos indicarle cuando queremos dejar de eliminar un archivo de nuestro repositorio.
-
-`git rm [nombre del archivo]`  
-`git commit -m "[mensaje]`  
-  
----
-
-## Actividad
-
-
-- Editar el programa `reverse-complement.py`  
-
-- Agregar al repositorio el programa `AT-percentage.py`  
-
-- Agregarlos al área de preparación y hacer commit  
-
-- Volver a modificar ambos archivos  
-
-- Repetir paso 3  
-
-- Restaurar la versión anterior **solo** de un archivo  
-
-
----
-
-## Actividad
-
-Jennifer ha realizado algunos cambios a sus scripts de Python (los cuales ha trabajado por semanas). Sin embargo, las modificaciones que Jennifer realizó esta mañana han afectado el script data_cruncher.py y este ha dejado de funcionar. Ella ha pasado más de 1 hora tratando de repararlo pero no ha tenido suerte.  
-Afortunadamente, ella ha controlando las versiones de su proyecto usando Git.  
-
-¿Cuál de los siguientes comandos le ayudarían a Jennifer ha recuperar la versión del último commit del script llamado data_cruncher.py?  
-1. $ git checkout HEAD  
-2. $ git checkout HEAD data_cruncher.py  
-3. $ git checkout HEAD~1 data_cruncher.py  
-4. $ git checkout &lt;unique ID of last commit&gt; data_cruncher.py  
-
----
-
-## Ignorando archivos
-
-**¿Qué pasa si hay archivos que no quiero controlar?**  
-
-Por ejemplo, archivos de respaldo creados automáticamente por nuestro editor, por el sistema operativo, o aquellos archivos de prueba creados durante el análisis de nuestros datos, archivos de configuración (passwords)...  
-
-**Archivo:    .gitignore**
-
-Crear directorio y archivos de prueba  
-`$ mkdir results`  
-`$ touch a.dat b.dat c.dat results/a.out results/b.out`  
-Comprobando el estado de nuestro repositorio  
-`$ git status`  
-Creando archivo .gitignore en el directorio raíz  
-`$ nano .gitignore`  
-Agregar las líneas:  
-`*.dat`   
-`results/`  
-Comprobando el estado de nuestro repositorio  
-`$ git status`  
-
----
-
-## Ignorando archivos
-
-¿Qué pasa si accidentalmente queremos agregar el archivo a.dat a nuestro repositorio?  
-`$ git add a.dat` 
-
-
-&lt;img src="img/outputGitigonore.png" width="700px" style="display: block; margin: auto;" /&gt;
-
-Ver la lista de archivos que estamos ignorando  
-`$ git status --ignored`  
-
----
-
-## Actividad
-
-- ¿Cómo podrías ignorar todos los archivos *.data en tu directorio, excepto final.data?  
-
----
-
-## Actividad
-
-- ¿Cómo podrías ignorar todos los archivos *.data en tu directorio, excepto final.data?  
-
-`*.data`  
-`!final.data`  
-
----
-
-
-## Actividad
-
-- Dada la siguiente estructura de directorios:  
-`results/data/position/gps/a.data`  
-`results/data/position/gps/b.data`   
-`results/data/position/gps/c.data`  
-`results/data/position/gps/info.txt`  
-`results/plots`  
-
-¿Cuál es la regla para ignorar todos los archivos *.data en result/data/position/gps?  
-
-No ignores el archivo info.txt.  
-
----
-
-## Actividad
-
-- Dada la siguiente estructura de directorios:  
-`results/data/position/gps/a.data`  
-`results/data/position/gps/b.data`   
-`results/data/position/gps/c.data`  
-`results/data/position/gps/info.txt`  
-`results/plots`  
-
-¿Cuál es la regla para ignorar todos los archivos *.data en result/data/position/gps?  
-
-No ignores el archivo info.txt.  
-
-
-__`results/data/position/gps/*.dat`__  
-
-
----
-
-## Actividad
-
-- Dado un archivo .gitignore con el siguiente contenido  
-
-`*.dat`  
-`!*.dat`  
-
-¿Cuál sería el resultado?  
-
----
-
-## Actividad
-
-Dado un archivo .gitignore con el siguiente contenido  
-
-`*.dat`  
-`!*.dat`  
-
-¿Cuál sería el resultado?  
-
-El modificador ! negará la primera instrucción en el archivo .gitignore, por lo que todos los archivos .dat serán controlados.  
-
----
-
-## Resumen
-
-El archivo **.gitignore** le indica a Git cuales son los archivos que debe ignorar.
-
-
----
-
-## Servicios de Hosting
-
-&lt;img src="img/hosting.png" width="600px" style="display: block; margin: auto;" /&gt;
-
-
----
-
-## GitHub
-
-**GitHub** es una plataforma web que permite alojar proyectos basados en Git, haciendo más fácil a los desarrolladores compartir el código.
-
-&lt;img src="img/github.png" width="300px" style="display: block; margin: auto;" /&gt;
-
----
-
-## GitHub Desktop
-
-Interfaz gráfica que permite la interacción con GitHub desde nuestra computadora.  
-
-&lt;https://desktop.github.com/&gt;  
-&lt;img src="img/githubDesktop.png" width="300px" style="display: block; margin: auto;" /&gt;
-
-Disponible para: Windows y MacOS.  
-
-
-GitHub Desktop para GNU/Linux no está oficialmente respaldada por GitHub.
-
----
-
-## GitHub
-
-- Crear cuenta de usuario  
-- Crear nuevo repositorio  
-- Conectar dos repositorios  
-- Push  
-- Pull  
-- Pull request  
-
----
-
-## Crear cuenta de usuario en GitHub
-
-- Ir a la dirección: &lt;https://github.com&gt;  
-
------ Nombre de usuario  
------ Correo electrónico  
------ Contraseña  
-
-*Verificar cuenta de correo electrónico  
-
-
----
-
-
-## Crear nuevo repositorio
-
-
-&lt;img src="img/crearRepo.png" width="500px" style="display: block; margin: auto;" /&gt;
-
----
-
-## Conectar dos repositorios
-
-
-&lt;img src="img/conectarRepos.png" width="800px" style="display: block; margin: auto;" /&gt;
-
----
-
-## _Push_ : llevando los cambios al servidor remoto
-
-`git push origin master`  
-
-&lt;img src="img/push.png" width="800px" style="display: block; margin: auto;" /&gt;
----
-
-
-## _Pull_ : bajando los cambios del servidor remoto (GitHub) a mi repositorio local
-
-`git pull origin master`  
-
-&lt;img src="img/pull.png" width="600px" style="display: block; margin: auto;" /&gt;
-
----
-
-## Pull request
-
-Pensemos en que estamos navegando en GitHub y nos encontramos el repositorio de algunos de nuestros compañeros de clase, o bien, localizamos el repositorio de algún software o programa en el que estamos interesados.
-
-Comenzamos a revisar el repositorio y detectamos ciertos detalles en el código o mejor aún, identificamos que podríamos contribuir con la corrección de errores o creando una nueva funcionalidad.
-
-Para hacer llegar mis sugerencias a la propietaria o al propietario del repositorio será necesario enviar un _pull request_. 
-
-Mediante el uso de pull request podremos:
-
-- Crear propuestas o cambios al código de un proyecto 
-- Controlar de forma ordenada las sugerencias de nuevo código al repositorio
-- Trabajar en un proyecto de software con muchas personas 
-
----
-
-## Pull request
-
-.full-width[.content-box-red[Un _pull request_ es una petición para integrar nuestras propuestas o cambios de código a un proyecto.]]
-
-Un _pull request_ nos sirve para _integrar cambios_ a nuestro repositorio de trabajo, o bien para compartir cambios en el proyecto con el resto del equipo. 
-
-También mediante un _pull request_ podremos enviar nuestras propuestas a un repositorio de acceso abierto.
-
-Antes de __aprobar__ un pull request se debe _analizar y revisar el código_ que ha sido modificado, y una vez validado se podrán fusionar los cambios a la rama master.
-
-&lt;img src="img/githubflowPR.png" width="250px" style="display: block; margin: auto;" /&gt;
-
----
-
-## Pull request
-
-__¿Cómo contribuir en un proyecto haciendo pull request?__  
-
-Para contribuir en un proyecto que está publicado en GitHub tendremos que hacer uso de un _Pull Request_.  
-
-Nota: Para enviar nuestras observaciones/cambios no es necesario ser colaborador del proyecto.  
-
-1. Localizar un repositorio de interés en GitHub  
-
-2. Seleccionar un archivo (o varios) y hacer los cambios  
-
-3. Hacer commit. Revisar sección: "Comparando cambios"  
-
-4. Crear un pull request: título, descripción, etiquetas, etc.
-
-&lt;img src="img/pull-requests.jpeg" width="250px" style="display: block; margin: auto;" /&gt;
-
----
-
-## Pull request
-
-__¿Cómo revisar/aceptar un pull request?__  
-
-Por parte del propietario o propietaria del repositorio:
-
-1. Recibirá una notificación en GitHub sobre el pull request
-
-2. Revisar los cambios propuestos (commits, archivos modificados, etc.)  
-
-3. Escribir un mensaje sobre el visto en el pull request  
-
-4. Hacer "Merge pull request"  y confirmar pull request
-
-5. Revisar en ambas cuentas los cambios realizados
-
-
-
-
----
-
-## Actividad
-
-1. Registra en el archivo excel tu cuenta de usuario y URL de tu repositorio en GitHub  
-
-2. Selecciona un repositorio de tus compañeros y pon tu nombre enseguida  
-
-3. Realizar un pull request (colaborador)  
-
-4. Revisar el pull request y aceptar los cambios (propietario del repositorio)  
-
-
----
-
-## OpenScience
-
-- Intercambiar información libremente podría ser el ideal en ciencia...  
-
-&lt;img src="img/openScience.png" width="800px" style="display: block; margin: auto;" /&gt;
-
-Cuanto más abierto es el trabajo, más ampliamente puede ser citado y reutilizado.  
-
-
----
-
-## OpenScience
-
-__Hosting__  
-- De manera local en servidores de nuestro lugar de trabajo  
-- Contratando un servicio de hosting  
-- Usando servicios de hosting gratuitos: GitHub, GitLab, BitBucket, o SourceForge  
-- Repositorio como Zenodo, figshare 
-
-__Licencia__  
-- Ofrece al autor de una obra una manera simple de otorgar permiso al público en general de compartir y usar su trabajo bajo los términos y condiciones de su elección. MTI, Apachev2.0 , GNU GPLv3 &lt;https://choosealicense.com/licenses/&gt;  
-
-__README__  
-Un archivo README es un archivo de texto que explica un proyecto. Contiene información que comúnmente se requiere para comprender de qué se trata el proyecto/repositorio.  
-
----
-
-## Archivo README
-
-
-&lt;img src="img/readme.png" width="600px" style="display: block; margin: auto;" /&gt;
-
----
-
-## Conclusión
-
-**GitHub** más que un lugar donde alojar nuestros proyectos es una "red social" donde podemos dar a conocer nuestro trabajo y ayudar a otros proyectos colaborando de forma activa, grandes proyectos siguen creciendo gracias a la colaboración de usuarios de la comunidad.
-
-¿Cómo puedes hacer esto? Muy fácil, haz tu colaboración y crea un **pull request**.
-
-_¡Colabora en otros proyectos y comparte tus conocimientos!_
-
----
-
-
-
-## ¡Gracias!
 
 ---
     </textarea>
