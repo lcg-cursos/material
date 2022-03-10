@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Python II y GitHub</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Python II y GitHub
+### Licenciatura en Ciencias Genómicas,UNAM
+### First version: yyy-mm-dd; Last update: 2022-03-10
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+## Objetivo
+
+* Entender el uso de las variables y tipos de datos. 
+
+* Conocer los métodos de los strings.
+
+---
+
+## Contenido de la unidad
+
+1. Tipos de datos
+2. Variables
+3. Métodos de Strings
+
+
+---
+
+## Tipos de datos
+
+### números y sus operadores
+
+Python sirve como calculadora y te permite hacer operaciones
+
+--
+
+```python
+50 - 5*6 / 4
+```
+
+```
+## 42.5
+```
+
+```python
+(50 - 5*6) / 4
+```
+
+```
+## 5.0
+```
+
+--
+
+```python
+5 ** 2 # potencias
+```
+
+```
+## 25
+```
+
+---
+### números y sus operadores
+
+
+```python
+ancho = 20
+alto = 5 * 9
+ancho * alto
+```
+
+```
+## 900
+```
+
+---
+
+### Strings
+
+Python puede manipular cadenas de texto o strings, las cuales pueden ser expresadas de distintas formas. Pueden estar encerradas en comillas simples ('...') o dobles ("...") con el mismo resultado. El \ puede ser usado para escapar comillas
+
+--
+
+```python
+'hola mundo'  # comillas simples
+```
+
+```
+## 'hola mundo'
+```
+
+```python
+'doesn\'t'    # usando \' para poder usar comilla simple 
+```
+
+```
+## "doesn't"
+```
+
+--
+
+
+
+```python
+"doesn't"      # comillas dobles
+```
+
+```
+## "doesn't"
+```
+
+```python
+"Hola Mundo\nCruel"    # \n salto de linea, pero ...
+```
+
+```
+## 'Hola Mundo\nCruel'
+```
+
+---
+
+Usando funciones predefinidas en python
+
+
+```python
+print ("Hola Mundo\nCruel")    # \n y el salto de linea?
+```
+
+```
+## Hola Mundo
+## Cruel
+```
+
+--
+Las cadenas se pueden concatenar (pegar juntas) con el operador + y se pueden repetir con *:
+
+
+```python
+3 * "A"    # repetir
+```
+
+```
+## 'AAA'
+```
+
+```python
+3 * "A" + "TGA"   # repetir y concatenar
+```
+
+```
+## 'AAATGA'
+```
+
+```python
+3 * "A" + "TGA" * 2  # jerarquia de operadores
+```
+
+```
+## 'AAATGATGA'
+```
+
+---
+
+## Variables
+
+¿ Quieres _guardar_ un valor y ponerle un nombre ? usa una variable, que es un contenedor para almacenar valores de datos.
+
+
+
+```python
+dna = 10       # numero
+gene = "araC"  # string
+```
+
+.full-width[.content-box-blue[¿Qué buenas practicas existen para nombrar las variables?]]
+
+---
+### Estilos de nombrado de variables
+
+```
+    b (single lowercase letter)
+    B (single uppercase letter)
+    lowercase
+    lower_case_with_underscores (snake_case)
+    UPPERCASE
+    UPPER_CASE_WITH_UNDERSCORES 
+    CapitalizedWords (or CapWords, CamelCase5, StudlyCaps)
+    mixedCase (differs from CapitalizedWords by initial lowercase character!)
+    Capitalized_Words_With_Underscores (ugly!)
+```
+
+Selecciona un estilo para todos tus programas
+
+
+```python
+genome_size = 400000       
+gene_name = "araC"
+```
+
+---
+## Variables y Operadores
+
+### Concatenar (+)
+
+Se pueden juntar strings utilizando el operador de suma `+`.
+
+
+```python
+saludo = "Buenos días"
+```
+
+--
+
+
+```python
+nombre = "Andrea"
+```
+
+--
+
+
+```python
+print(saludo + ' ' + nombre)
+```
+
+```
+## Buenos días Andrea
+```
+
+---
+
+## Multiplicar (*)
+
+Se puede duplicar un string con el caracter de multiplicación `*`.
+
+--
+
+
+```python
+print("#" * 10)
+```
+
+```
+## ##########
+```
+
+--
+
+
+```python
+print("Hola " * 3 + "mundo")
+```
+
+```
+## Hola Hola Hola mundo
+```
+
+---
+
+## Añadir
+
+Puedes agregar más strings al final del último caracter con `+=`.
+
+--
+
+
+```python
+saludo2 = 'Hola'
+saludo2 += ' '
+saludo2 += 'Mundo' 
+print(saludo2)
+```
+
+```
+## Hola Mundo
+```
+
+
+---
+
+Podemos hacerlo con variables de tipo string
+
+
+```python
+print(saludo)
+```
+
+```
+## Buenos días
+```
+
+```python
+print(nombre)
+```
+
+```
+## Andrea
+```
+
+--
+
+
+```python
+mensaje = saludo + ' ' + nombre
+mensaje += '!' 
+print(mensaje)
+```
+
+```
+## Buenos días Andrea!
+```
+
+
+---
+### Aspectos de las Variables 
+En Python, cada dato (número, cadena, lista, etc.) que aparece en un programa es un objeto. 
+
+
+&lt;img src="img/variables.jpg" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+
+Cada objeto cuenta con :
+
+__identificador__
+Cada objeto tiene un identificador único que se puede conocer mediante la función id():
+
+
+```python
+id(5)  
+```
+
+```
+## 4427672480
+```
+
+--
+__tipo__
+Cada objeto tiene un tipo que se puede conocer mediante la función type():
+
+
+```python
+type(5) 
+```
+
+```
+## &lt;class 'int'&gt;
+```
+
+--
+__valor__
+El valor que contiene el objeto es el propio dato.
+
+---
+
+Entonces, 
+
+* En Python, las _variables_ son simples referencias a los objetos. Una variable es una especie de etiqueta o de alias para referirnos al objeto.
+
+* En Python las variables también tienen identificador, tipo y valor, pero esas tres características son las del objeto al que hace referencia.
+
+* Cuando asignamos un valor a una variable, lo que estamos creando es una etiqueta para referirnos al objeto que contiene el dato.
+
+
+&lt;img src="img/variables2.jpg" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+### Métodos y Funciones
+
+Un _método_ es una función que «pertenece a» un objeto. 
+Es parte de la funcionalidad que le damos a un objeto. Por tanto, un método siempre va a estar asociado a un objeto. 
+
+Las _funciones_ en Python, están definidas por si mismas y no pertenecen a nadie.
+
+Python proporciona muchas funciones integradas o ya definidas para manipular cadenas, números, etc.
+
+
+--
+
+Para ver la información completa de los métodos que se pueden ocupar en un string
+consulta la [página oficial de python](https://docs.python.org/2/library/stdtypes.html#string-methods).
+
+---
+
+### Función: Longitud del string
+
+Puedes saber la longitud de un string
+
+
+```python
+saludo = "Buenos días"
+nombre = "Andrea"
+mensaje = saludo + ' ' + nombre
+mensaje += '!'  
+```
+
+Usamos la función de longitud
+
+```python
+print(len(mensaje))
+```
+
+```
+## 19
+```
+
+---
+
+### Método: Buscar
+
+Puedes buscar dentro de un string, obtenemos la posición donde se encuentra
+
+
+```python
+print(mensaje)
+```
+
+```
+## Buenos días Andrea!
+```
+
+```python
+print(mensaje.find("Andrea"))
+```
+
+```
+## 12
+```
+
+--
+
+```python
+print(mensaje.find("Kevin"))
+```
+
+```
+## -1
+```
+
+---
+## Ejercicio
+
+.content-box-blue[
+¿Dónde empieza el codón inical `AUG` (TAC) en la secuencia 
+
+`dna = 'AAGGTACGTCGCGCGTTATTAGCCTAAT'`?
+]
+
+- Escribe la instrucción que te regrese la posición del codón inicial
+
+- Output: un mensaje y el resultado
+
+--
+
+
+```
+## El codon TAC empieza en la posicion:  4
+```
+
+---
+
+### Minúsculas/Mayúsculas
+
+Puedes convertir todo a minúsculas o mayúsculas.
+
+
+```python
+print(mensaje)
+```
+
+```
+## Buenos días Andrea!
+```
+
+```python
+print(mensaje.lower())
+```
+
+```
+## buenos días andrea!
+```
+
+--
+
+
+```python
+print(mensaje.upper())
+```
+
+```
+## BUENOS DÍAS ANDREA!
+```
+
+---
+### Remplazar
+
+Se pueden replazar los caracteres usando `replace`
+
+
+```python
+print(mensaje)
+```
+
+```
+## Buenos días Andrea!
+```
+
+```python
+print(mensaje.replace('días','noches'))
+```
+
+```
+## Buenos noches Andrea!
+```
+
+---
+### Cortar
+
+Se pueden elegir partes del string
+
+
+```python
+print(mensaje)
+```
+
+```
+## Buenos días Andrea!
+```
+
+```python
+print(mensaje[1:5])
+```
+
+```
+## ueno
+```
+
+---
+
+### Posición en python
+
+&lt;img src="https://i.stack.imgur.com/BWTW0.png" width="500px" style="display: block; margin: auto;" /&gt;
+
+
+```python
+saludo3 = "Hello"
+print(saludo3[0])
+```
+
+```
+## H
+```
+
+```python
+print(saludo3[-5])
+```
+
+```
+## H
+```
+
+---
+## Ejercicio de Rosalind 
+
+.content-box-blue[
+Hacer el ejercico de [Rosalind: Strings and lists](http://rosalind.info/problems/ini3/)
+]
+
+---
+## Ejercicio 
+
+.content-box-blue[
+¿Dónde empieza el codón inical `AUG` en la secuencia 
+
+`dna = 'AAGGTACGTCGCGCGTTATTAGCCTAAT'`?
+]
+
+- Escribe un programa que te regrese la posición del codón inicial
+
+- Output: un mensaje y el resultado
+
+--
+
+.content-box-blue[
+¿Cuál es la secuencia que se transcribe?
+]
+
+- Output: donde empieza el codón inicial `AUG` y la secuencia que se transcribe 
+(asumiendo codon de paro `UAA`)
+
+---
+Resultado del ejercicio
+
+
+```
+## El codon TAC empieza en la posicion  4  y termina en  17
+```
+
+```
+## 
+## Fragmento que será RNA  (codón inicio: TAC, codón de paro =ATT) es: 
+## TACGTCGCGCGTT
+```
+
+---
+## DNA-RNA
+
+
+&lt;img src="https://www.genome.gov/sites/default/files/tg/es/illustration/Marco_abierto_de_lectura.jpg" width="600px" style="display: block; margin: auto;" /&gt;
+
+
+---
+### Secuencias de escape
+
+Para incluir comillas en nuestros mensajes podemos usar `\`
+
+
+```python
+print('El programa imprime \"Hola Mundo\"')
+```
+
+```
+## El programa imprime "Hola Mundo"
+```
+
+--
+
+Para incluir una nueva linea puedes ocupar `\n`
+
+
+```python
+print('Buenos días \nBuenas noches')
+```
+
+```
+## Buenos días 
+## Buenas noches
+```
+
+---
+### Variable + string
+
+Incluir una variable dentro de un string puedes usar `f` al inicio y `{}`
+
+
+```python
+print(f'\nFragmento de RNA inicia por {met_ini}: \n{exon}')
+```
+
+```
+## 
+## Fragmento de RNA inicia por TAC: 
+## TACGTCGCGCGTT
+```
+
+---
+### Contar 
+
+Podemos contar caracteres usando `count`
+
+
+```python
+print(saludo3)
+```
+
+```
+## Hello
+```
+
+```python
+print(saludo3.count('l'))
+```
+
+```
+## 2
+```
+
+---
+### Variable + número
+
+¿Qué pasa con los números?
+
+
+```python
+print('La longitud del exon es ' + len(exon))
+```
+
+--
+
+
+```python
+print('La longitud del exon es ' + str(len(exon)))
+```
+
+```
+## La longitud del exon es 13
+```
+
+--
+
+
+```python
+print('La longitud del exon es ', len(exon))
+```
+
+```
+## La longitud del exon es  13
+```
+
+--
+
+
+```python
+print(f'\nLa longitud del exon es {len(exon)}')
+```
+
+```
+## 
+## La longitud del exon es 13
+```
+
+
+
+---
+## Ejercicio 
+
+.content-box-blue[
+¿Cuantas `A`, `C`, `G` y `T` hay en la secuencia?
+
+.tiny[
+`dna = 'AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC'`
+] 
+
+Resuelve el problema de [Rosalind: Counting DNA Nucleotides](http://rosalind.info/problems/dna/)
+
+]
+
+- Escribe un programa que te regrese la cantidad de nucleotidos
+
+- Output: un mensaje y el resultado
+
+```
+Frecuencia de nucleotidos
+AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC
+A: #  T:#  G:#  C:#     
+```
+---
+
+### Referencias
+
+* Variables en Python. URL: https://realpython.com/python-variables/
+
+* Variables. URL: https://www.mclibre.org/consultar/python/lecciones/python-variables-3.html#
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
