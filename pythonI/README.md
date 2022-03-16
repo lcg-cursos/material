@@ -12,3 +12,7 @@ Bienvenidos al curso de Python I
  
   3.1- [Tips](git/git-pull-request/3.1-TipsWorkflow.html)
 
+
+### Python
+
+1.- [ Introduccion ](https://lcg-cursos.github.io/material/pythonI/python/1-IntroPython.html#25)
