@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Python II y GitHub</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Python II y GitHub
+### Licenciatura en Ciencias Genómicas,UNAM
+### First version: yyy-mm-dd; Last update: 2022-03-31
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+## Objetivo
+
+* Conocer los ciclos usando el for
+
+
+---
+class: inverse, center, middle
+
+# Loops 
+
+---
+# Loops 
+
+Nos permiten generar operaciones repetidamente 
+
+&lt;img src="https://files.realpython.com/media/Python-for-Loops-Definite-Iteration_Watermarked.b38126d495e1.jpg" width="600px" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Loops 
+
+Tiene esta sintáxis:
+
+.content-box-green[
+
+
+```python
+for &lt;var&gt; in &lt;iterable&gt;:
+    &lt;statement(s)&gt;
+```
+
+]
+
+---
+# Loops
+
+Podemos imprimir desde la lista 
+
+
+```python
+# La lista
+apes = ["Pongo pygmaeus", "Pan troglodytes", "Gorilla gorilla"]
+
+# Imprimir una oración 
+print(apes[0] + " is an ape")
+print(apes[1] + " is an ape")
+print(apes[2] + " is an ape")
+```
+
+--
+Usando **loops** con `for`.
+
+
+```python
+for ape in apes:
+  print(ape + " is an ape")
+```
+
+
+--
+
+&lt;br&gt;&lt;br&gt;
+
+.center[.content-box-green[**Vamos a vsCode**]]
+
+---
+# Loops
+
+¿Qué pasa con los strings en **loops**?
+
+
+```python
+name = "python"
+for character in name:
+    print("one character is " + character)
+```
+
+--
+
+&lt;br&gt;&lt;br&gt;
+
+.center[.content-box-green[**Vamos a vsCode**]]
+
+---
+# Identaciones en loops
+
+Es importante respetar los espacios de las identaciones, veamos que pasa utilizando el siguente código:
+
+
+```python
+# La lista
+apes = ["Pongo pygmaeus", "Pan troglodytes", "Gorilla gorilla"]
+
+for ape in apes:
+    name_length = len(ape)
+  first_letter = ape[0]
+    print(ape + " is an ape. Its name starts with " + first_letter)
+    print("Its name has " + str(name_length) + " letters")
+```
+
+---
+# Cortar un string y loops
+
+Podemos cortar un string usando el método `split()` que tiene como argumento el caracter que se usará para cortar `","`. El resultado nos dará una `lista` 
+
+
+```python
+names = "melanogaster,simulans,yakuba,ananassae"
+species = names.split(",")
+print(str(species))
+
+# recorremos la lista
+for specie in species:
+  print(specie + " is an specie")
+```
+
+
+--
+
+&lt;br&gt;&lt;br&gt;
+
+.center[.content-box-green[**Vamos a vsCode**]]
+
+
+---
+# Loops en archivos
+
+Podemos ocupar los loops para leer varias lineas de un archivo `dna_sequences.txt`.
+
+```
+ATCGTACGATCGATCGATCGCTAGACGTATCG
+actgatcgacgatcgatcgatcacgact
+ACTGAC-ACTGT—ACTGTA----CATGTG
+```
+
+
+```python
+# Abir archivo
+file = open("dna_sequences.txt")
+
+# Leer las lineas
+for line in file:
+  print("Length: " + str(len(line))  + line)
+
+# Cerrar archivo
+file.close()
+```
+
+
+---
+# Leer con `readlines()`
+
+Podemos leer todas las lineas de un archivo y guardarlas en una `lista` para después ocuparla dentro de un loop. 
+
+
+```python
+# Abir archivo
+file = open("dna_sequences.txt")
+
+# Leer todas las lineas y guardarlas en una lista
+all_lines = file.readlines()
+
+# Cerrar archivo
+file.close()
+
+# Usar esas lineas en un loop
+for line in all_lines:
+  print("Length: " + str(len(line)) )
+
+# Usar esas lineas en otro loop 
+for line in all_lines:
+  print(line[:5] )
+```
+
+---
+
+## Ejercicio: trimming
+
+.content-box-blue[
+Cortar adaptadores de la secuencia `4_input_adapters.txt`, sabiendo que se encuentran de la posición 1-14. 
+
+```
+ATTCGATTATAAGCTCGATCGATCGATCGATCGATCGATCGATCGATCGATCGATC
+ATTCGATTATAAGCACTGATCGATCGATCGATCGATCGATGCTATCGTCGT
+ATTCGATTATAAGCATCGATCACGATCTATCGTACGTATGCATATCGATATCGATCGTAGTC
+ATTCGATTATAAGCACTATCGATGATCTAGCTACGATCGTAGCTGTA
+ATTCGATTATAAGCACTAGCTAGTCTCGATGCATGATCAGCTTAGCTGATGATGCTATGCA
+```
+
+]
+
+- Input: Archivo `4_input_adapters.txt` con las secuencias.
+
+- Output: Archivo con las secuencias sin adaptadores
+
+
+
+
+---
+## Ejercicio: fasta files
+
+.content-box-blue[
+Convertir las secuencias en formato fasta
+
+```
+seq_1   ATCGTACGATCGATCGATCGCTAGACGTATCG
+seq_2   actgatcgacgatcgatcgatcacgact
+seq_3   ACTGAC-ACTGT—ACTGTA----CATGTG
+```
+
+]
+
+- Input: Archivo `dna_sequences.txt` con las secuencias.
+
+- Output: Archivo `.fasta`
+
+```
+&gt; seq_1
+ATCGTACGATCGATCGATCGCTAGACGTATCG
+&gt; seq_2
+ACTGATCGACGATCGATCGATCACGACT
+&gt; seq_3
+ACTGACACTGTACTGTACATGTG
+```
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
