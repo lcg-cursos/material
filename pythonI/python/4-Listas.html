@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Python II y GitHub</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Python II y GitHub
+### Licenciatura en Ciencias Genómicas,UNAM
+### First version: yyy-mm-dd; Last update: 2022-03-24
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+## Objetivo
+
+* Aprender a usar las listas en python
+
+---
+
+# Resumen
+
+¿ Qué aprendieron sobre archivos?
+
+https://etherpad.wikimedia.org/p/LCG-PythonI-2022
+
+
+---
+# ¿Qué hemos visto?
+
+- Intro a Python.
+- Diferencias entre python 2 vs 3.
+- Variables.
+- Números `int` y `float`.
+- Strings o cadena de caracteres `str`
+- Trabajar con archivos `open`.
+
+
+--
+
+Que pasa si quiero leer varias secuencias del archivo `dna_sequences.txt` donde cada línea representa una secuencia diferente.
+
+```
+ATCGTACGATCGATCGATCGCTAGACGTATCG
+actgatcgacgatcgatcgatcacgact
+ACTGAC-ACTGT—ACTGTA----CATGTG
+````
+
+---
+# Leer un archivo con varias secuencias
+
+¿Sería algo como esto? 
+
+
+```python
+my_file = open("../../data/dna_sequences.txt", "r")
+my_file_contents = my_file.read()
+print(my_file_contents)
+```
+
+--
+
+¿Podríamos saber la longitud de cada secuencia?
+
+--
+
+&lt;br&gt;&lt;br&gt;
+
+.center[.content-box-green[**Vamos a vsCode**]]
+
+---
+# Leer un archivo
+
+Que pasa si quiero leer varias secuencias del archivo `dna_sequences.txt` donde cada línea representa una secuencia diferente y además ponerlos en formato `fasta`. 
+
+```
+ATCGTACGATCGATCGATCGCTAGACGTATCG
+actgatcgacgatcgatcgatcacgact
+ACTGAC-ACTGT—ACTGTA----CATGTG
+````
+
+--
+
+Con lo que sabemos tendríamos que poner cada secuencia en un archivo y después abrirlos:
+
+
+```
+seq_1 = open(header_1 + ".fasta", "w") 
+seq_2 = open(header_2 + ".fasta", "w") 
+seq_3 = open(header_3 + ".fasta", "w")
+```
+
+--
+
+¡Termina siendo repetitivo!
+
+---
+class: inverse, center, middle
+
+# `list`: Listas 
+
+---
+# Listas
+
+&lt;img src="img/lista.png" width="600px" style="display: block; margin: auto;" /&gt;
+
+---
+# Listas
+
+Entonces
+
+* Una lista es una colección de elementos
+
+* Una lista en Python es una __estructura de datos__ formada por una secuencia ordenada de objetos.
+
+--
+
+* Cada objeto dentro de la lista se le conoce como **elemento**.
+
+Las listas en Python son:
+
+    heterogéneas: pueden estar conformadas por elementos de distintos 
+    tipo, incluidos otras listas.
+    
+    mutables: sus elementos pueden modificarse.
+
+---
+
+# Ejemplos de Listas
+
+Para definir una lista, se usan los **corchetes** [ ], separando sus elementos con comas cada uno.
+
+
+
+```python
+# Lista de strings
+apes = ["Pongo pygmaeus", "Pan troglodytes", "Gorilla gorilla"]
+
+#Lista de numeros
+conserved_sites = [24, 56, 132]
+```
+
+Como tambien es un objeto podemos saber sus propiedades
+
+```python
+# identificador 
+id(apes)
+id(conserved_sites)
+
+# tipo
+type(apes)
+```
+
+---
+
+# Listas
+
+Podemos acceder a cada **elemento** usando **[indice]**.
+
+
+```python
+print(apes[2])
+first_site = conserved_sites[2]
+```
+
+--
+
+Podemos ocupar el indice negativo como en los *strings*.
+
+
+```python
+print(apes)
+
+# Ultimo en la lista
+apes[-1]
+```
+
+---
+# Rangos
+
+Podemos selecionar un **rango**.
+
+
+```python
+# valor de indice 0 , 1, el 2 se excluye
+apes[0:2]
+```
+
+--
+
+Podemos selecionar un rango y/o **alternar** valores.
+
+
+&lt;img src="https://files.realpython.com/media/t.8a1e853f9509.png" width="400px" style="display: block; margin: auto;" /&gt;
+
+
+```python
+# alternando
+apes[::2]
+```
+
+--
+
+NOTA : también funciona en *strings*
+
+
+```python
+s = 'foobar'
+s[0:6:2]
+```
+
+---
+### Mutabilidad 
+
+A través de los índices, pueden cambiarse los elementos de una lista.
+
+
+```python
+print(apes)
+
+# indice positivo
+apes[0] = "Macaca fuscata"
+
+# indice negativo
+apes[-1] = "Macaca fuscata"
+```
+
+---
+
+### Función `len()`
+
+La función `len()` devuelve la longitud de la lista (su cantidad de elementos).
+
+
+```python
+# tamaño de la lista
+print("tamaño ",len(apes))
+```
+
+o
+
+
+```python
+print("There are " + str(len(apes)) + " apes")
+```
+-- 
+
+&lt;br&gt;&lt;br&gt;
+
+.center[.content-box-green[**Vamos a vsCode**]]
+
+---
+### Concatenación `+`
+
+Podemos concatenar listas usando `+`
+
+
+```python
+#Crear listas
+apes = ["Pongo pygmaeus", "Pan troglodytes", "Gorilla gorilla"]
+monkeys = ["Papio ursinus", "Macaca mulatta"]
+
+# Unir dos listas
+primates = apes + monkeys
+
+#Imprimir cantidad de elementos
+print(str(len(apes)) + " apes")
+print(str(len(monkeys)) + " monkeys")
+print(str(len(primates)) + " primates")
+```
+
+---
+# Métodos de las listas
+
+El objeto de tipo lista trae incluidos métodos, algunos son:
+
+--
+* append()
+
+* count()
+
+* extend()
+
+* index()
+
+* insert()
+
+* pop()
+
+* reverse()
+
+* sort()
+
+* remove()
+  
+---
+
+### métodos `index()`
+
+
+Podemos obtener la posición del **elemento** a través de su valor con `index()`.
+
+
+```python
+print(apes)
+
+apes.index("Pan troglodytes")
+```
+
+
+
+---
+### método  `append()`
+
+Podemos agregar un elemento al final de la lista usando el método `append()`.
+
+
+```python
+print(len(apes))
+
+apes.append("Pan paniscus")
+
+print(apes)
+print(len(apes))
+```
+
+--
+El método `append()` agrega su argumento como _un solo elemento_ al final de la lista. La longitud de la lista aumentará en uno.
+
+
+```python
+print(apes)
+print(len(apes))
+
+apes.append(["Macaca radiata","Macaca nigra"])  # agregamos una lista de 2 elementos
+
+print(apes)
+print(len(apes))
+```
+
+---
+
+### método `extend()`
+
+También podemos extender una lista agregando elementos de un __iterable__ usando el método `extend()`.
+
+--
+
+**¿Qué es un iterable?**
+
+Las listas, las tuplas, los diccionarios, los conjuntos y las cadenas/strings son todos _objetos iterables_.
+
+--
+
+Cuando usamos `extend()`, la longitud de la lista aumentará según la cantidad de elementos que haya en el argumento iterable, ya que agrega uno por uno.
+
+
+```python
+apes = ["Pongo pygmaeus", "Pan troglodytes", "Gorilla gorilla"]
+monkeys = ["Papio ursinus", "Macaca mulatta"]
+print(len(apes))
+
+apes.extend(monkeys)
+
+print(apes)
+print(len(apes))
+```
+
+---
+### método `extend()`
+
+Toma en cuenta que una cadena es iterable, por lo que si extiendes una lista con una cadena, agregará cada carácter a medida que itera sobre la cadena:
+
+
+```python
+print(apes)
+apes.extend("Macaca sylvanus")
+print(apes)
+```
+
+--
+
+
+```python
+conserved_sites = [24, 56, 132]
+conserved_sites.extend(567)       # ¿que ocurre?
+```
+
+entonces, 
+
+
+```python
+conserved_sites.extend([567])
+print(conserved_sites)
+```
+
+---
+### `append()` vs `extend()`
+
+
+&lt;img src="img/appendVSextend.png" width="400px" style="display: block; margin: auto;" /&gt;
+
+Si desea agregar todos los elementos de un iterable, use extend. Si solo está agregando un elemento, use append.
+
+Extender es semánticamente más claro y es mucho más rápido que agregar, cuando intenta agregar cada elemento en un iterable a una lista.
+
+Si solo tiene un solo elemento (no en iterable) para agregar a la lista, use append.
+
+---
+# Orden en las listas
+
+Podemos cambiar el orden con `reverse()`.
+
+
+```python
+primates.reverse()
+```
+
+--
+
+Podemos ordenarlos por orden alfabetico usando `sort()`.
+
+
+```python
+primates.sort
+```
+
+--
+Para imprimir listas tenemos que convertirlo con `str()`.
+
+
+```python
+primates
+print("at the start : " + str(primates))
+
+primates.reverse()
+print("after reversing : " + str(primates))
+
+primates.sort()
+print("after sorting : " + str(primates))
+```
+
+---
+## Ejercicio  
+
+Problema: Dada una secuencia de DNA en un archivo llamado `sequence.txt` obtener el complemento y reverso de la secuencia e imprimirlo
+
+Tip: ¿Qué pasa cuando pones [::-1]?
+
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
