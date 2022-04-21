@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Python II y GitHub</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Python II y GitHub
+### Licenciatura en Ciencias Genómicas,UNAM
+### First version: yyy-mm-dd; Last update: 2022-04-20
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+# Desarrollo de software y  Errores
+
+Cuando desarrollamos software, diferentes tipos de errores pueden ocurrir. Pueden ser :
+
+  - errores de sintaxis, 
+  
+  - errores lógicos,
+  
+  - errores de tiempo de ejecución.
+
+---
+
+# Errores de sintáxis
+
+Los errores de sintaxis es más probable que ocurran durante la fase de desarrollo inicial y son el resultado de sintaxis incorrecta. Los errores de sintaxis son fácilmente identificables cuando se ejecuta el programa.
+
+
+```
+&gt;&gt;&gt; while True print('Hello world')
+  File "&lt;stdin&gt;", line 1
+    while True print('Hello world')
+                   ^
+SyntaxError: invalid syntax
+```
+
+El intérprete reproduce la línea responsable del error y muestra una pequeña “flecha” que apunta al primer lugar donde se detectó el error.
+
+---
+
+# Errores lógicos
+
+Los errores lógicos, por otra parte, son el resultado de una incorrecta implementación lógica. Un ejemplo sería un programa accediendo a una lista no ordenada suponiendo que lo estuviera. Los errores lógicos son los más difíciles de rastrear.
+
+Un error que hace que una aplicación produzca resultados incorrectos. 
+
+Puede no generar un mensaje de error.
+
+Se encuentran probando la aplicación y analizando los resultados.
+
+---
+# Errores lógicos
+
+Existen *bugs* en el código que no arrojan error y el código se ejecuta hasta el final **PERO** no está bien. 
+
+
+```python
+dna = 'atctgcatattgcgtctgatg'
+a_count = dna.count('A') # no va a encontrar A's
+```
+
+--
+Los errores y los *bugs* anteriores tienen la propiedad intrinseca que dependen del código y son reproducibles. El problema será predecible.
+
+---
+
+# Errores en tiempo de ejecución
+
+Los errores en tiempo de ejecución son los errores más interesantes y comunes. Un ejemplo sería tratar de acceder a un archivo inexistente, o hacer una división con cero.
+
+```
+&gt;&gt;&gt; 10 * (1/0)
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+ZeroDivisionError: division by zero
+```
+
+---
+
+# Errores en tiempo de ejecución 
+
+Por ejemplo, cuando no encontramos un archivo. Esto depende de nuestros *PATHS*. El código hace su tarea corre sin errores, mientras que en mi computadora arroja error si no cambio el nombre del archivo. 
+
+
+```python
+IOError: [Errno 2] No such file or directory: 'missing.txt'
+```
+
+--
+
+A estas situaciones se les conoce como *exceptions* o *excepciones* y al control de ellas como *exception handling* o *manejo de excepciones/errores*.
+
+
+
+---
+# Manejo de excepciones
+
+Python maneja el **no encontrar un archivo** (`IOError: [Errno 2] No such file or directory`) devolviendo un _mensaje_ y deteniendo la ejecucuión del código (útil para el programador, no tanto para el usuario). 
+
+--
+
+Si sabemos que **leer un archivo** puede causar problemas, podemos identificarlo y agregar un mensaje para el usuario.
+
+
+```python
+try:
+    f = open('misssing.txt')
+    print('file contents: ' + f.read())
+except:
+    print("sorry, couldn't find the file")
+```
+
+
+---
+# Manejo de excepciones
+
+`try` y `except` funcionan igual que `for/if` pero ayudan con la legibildad del código y [ligeramente más rápido](https://www.geeksforgeeks.org/try-except-vs-if-in-python/).
+
+Utilizar *manejo de excepciones* previene que Python rompa el código y permite que siga. 
+
+--
+
+- Sin *manejo de excepciones*
+
+```python
+f = open('misssing')
+print('file contents: ' + f.read())
+print("continuing....")
+```
+
+- Con *manejo de excepciones*
+
+```python
+try:
+    f = open('misssing')
+    print('file contents: ' + f.read())
+except:
+    print("sorry, couldn't find the file")
+print("continuing....")
+```
+
+---
+# Manejo de excepciones específicas
+
+Es importante reconocer que el código en `try` aplicará `except` siempre que haya **UN** error (el que sea). 
+
+--
+Asumamos que `data/7-file_num.txt` tiene números:
+
+
+```python
+try:
+  f = open('data/7-file_num.txt')
+  my_number = int(f.read())
+  print(my_number + 5) # sumar
+except:
+    print("sorry, couldn't find the file")
+```
+
+--
+
+Intentar `data/7-file_num.txt` con texto.
+
+¿Qué error/mensaje te da?
+--
+
+&lt;br&gt;&lt;br&gt;
+
+.center[.content-box-green[**Vamos a vsCode**]]
+
+---
+# Manejo de excepciones específicas
+
+Con el ejemplo anterior podemos tener dos tipos de errores:
+
+1. `IOError`: cuando no encuentra el archivo
+
+2. `ValueError`: cuando intenta convertir texto en númerico.
+
+--
+
+Podemos manejar los excepciones indicando especificamente cual es la *excepción*.
+
+
+
+```python
+try:
+    f = open('data/7-file_num.txt')
+    my_number = int(f.read())
+    print(my_number + 5)
+except IOError:
+    print("sorry, couldn't find the file")
+```
+
+---
+# Manejo de excepciones específicas
+
+Podemos especificar ambos tipos de excepciones y controlar mensajes para cada caso.
+
+
+```python
+try:
+    f = open('data/7-file_num.txt')
+    my_number = int(f.read())
+    print(my_number + 5)
+except IOError:
+    print("sorry, couldn't find the file")
+except ValueError:
+    print("sorry, couldn't parse the number")
+```
+
+--
+
+Podemos manejar varios excepciones a la vez.
+
+
+```python
+try:
+    f = open('data/7-file_num.txt')
+    my_number = int(f.read())
+    print(my_number + 5)
+except (IOError, ValueError):
+    print("sorry, something went wrong")
+```
+
+---
+
+## Jerarquía de excepciones
+
+El manejo de excepciones se produce en función de una jerarquía de excepciones.
+
+En Python 3.x 3.0 
+ 
+```
+BaseException
+ +-- SystemExit
+ +-- KeyboardInterrupt
+ +-- GeneratorExit
+ +-- Exception
+      +-- StopIteration
+      +-- StopAsyncIteration
+      +-- ArithmeticError
+      |    +-- FloatingPointError
+      |    +-- OverflowError
+      |    +-- ZeroDivisionError
+      +-- AssertionError
+      +-- AttributeError
+      +-- BufferError
+      +-- EOFError
+      +-- ImportError
+      +-- LookupError
+      |    +-- IndexError
+      |    +-- KeyError
+      +-- MemoryError
+      +-- NameError
+      |    +-- UnboundLocalError
+      +-- OSError
+      |    +-- BlockingIOError
+      |    +-- ChildProcessError
+      |    +-- ConnectionError
+      |    |    +-- BrokenPipeError
+      |    |    +-- ConnectionAbortedError
+      |    |    +-- ConnectionRefusedError
+      |    |    +-- ConnectionResetError
+      |    +-- FileExistsError
+      |    +-- FileNotFoundError
+```
+Source: https://learntutorials.net/es/python/topic/1788/excepciones
+
+---
+# Obtener información de la excepción
+
+Podemos obtener información de la excepción Por ejemplo `IOError` aparecerá cuando no existe el archivo o no podemos abrirlo por permisos por lo que sería útil saber cual es la excepción. 
+
+
+
+```python
+try:
+    f = open('data/7-file_num.txt')
+    my_number = int(f.read())
+    print(my_number + 5)
+except IOError as ex:
+    print("sorry, couldn't open the file: " + ex.strerror)
+except ValueError:
+    print("sorry, couldn't parse the number")
+```
+
+---
+# Obtener información de la excepción
+
+Los objetos `exception` (errores o excepciones) tienen un campo llamado `args`.
+
+
+
+```python
+try:
+    f = open('data/7-file_num.txt')
+    my_number = int(f.read())
+    print(my_number + 5)
+except IOError as ex:
+    print("sorry, couldn't find the file: " + ex.strerror)
+except ValueError as ex:
+    print("sorry, couldn't parse the number: " +  ex.args[0])
+```
+
+
+---
+# `else` en manejo de excepciones
+
+Si existieran más excepciones pero solo estamos interesados en `IOError` y `ValueError` para agregar un mensaje, podemos usar un `else` para que se ejecute `print(my_number + 5)` solo en caso de que no haya más errores. 
+
+Sirve cuando necesitamos asegurarnos que no habrá ningún error.
+
+
+```python
+try:
+    f = open('data/7-file_num.txt')
+    my_number = int(f.read())
+except IOError as ex:
+    print("sorry, couldn't find the file: " + ex.strerror)
+except ValueError as ex:
+    print("sorry, couldn't parse the number: " +  ex.args[0])
+else:
+    print(my_number + 5)
+```
+
+---
+# `finally` en manejo de excepciones
+
+Podemos agregar `finally` para correr una linea de código sin importar si hubo excepción. Estas lineas se correran en todos los casos. 
+
+Supongamos que tenemos un archivo temporal:
+
+
+```python
+import os
+t = open('data/temp.txt', 'w')
+t.write('8')
+t.close()
+try:
+    f = open('data/temp.txt')
+    my_number = int(f.read())
+    print(my_number + 5)
+    os.remove('data/temp.txt') # delete the temp file
+except IOError as ex:
+    print("sorry, couldn't find the file: " + ex.strerror)
+    os.remove('data/temp.txt') # delete the temp file
+except ValueError as ex:
+    print("sorry, couldn't parse the number: " +  ex.args[0])
+    os.remove('data/temp.txt') # delete the temp file
+```
+
+¡Tenemos código repetido!
+
+---
+# `finally` en manejo de excepciones
+
+Podemos sacarlo de `try` pero si existe algún otro error que no contemplamos, no sé borrará el archivo temporal.
+
+
+
+```python
+import os
+t = open('data/temp.txt', 'w')
+t.write('8')
+t.close()
+try:
+    f = open('data/temp.txt')
+    my_number = int(f.read())
+    print(my_number + 5)
+except IOError as ex:
+    print("sorry, couldn't find the file: " + ex.strerror)
+except ValueError as ex:
+    print("sorry, couldn't parse the number: " +  ex.args[0])
+
+os.remove('data/temp.txt') # delete the temp file
+```
+
+---
+# `finally` en manejo de excepciones
+
+Podemos agregar `finally` para eliminar el archivo `data/temp.txt` sin importar si hay errores.
+
+
+```python
+import os
+t = open('data/temp.txt', 'w')
+t.write('8')
+t.close()
+try:
+    f = open('data/temp.txt')
+    my_number = int(f.read())
+    print(my_number + 5)
+except IOError as ex:
+    print("sorry, couldn't find the file: " + ex.strerror)
+except ValueError as ex:
+    print("sorry, couldn't parse the number: " +  ex.args[0])
+finally:
+os.remove('data/temp.txt') # delete the temp file
+```
+
+---
+# Sintáxis para el manejo de excepciones
+
+Podemos tener está sintaxis:
+
+
+```python
+try:
+    # el código aquí se ejecutará hasta que se genere una excepción
+except ExceptionTypeOne:
+    # código aquí se ejecutará si hay una excepción ExceptionTypeOne
+    # está dentro del bloque try
+except ExceptionTypeTwo:
+    # código aquí se ejecutará si hay una excepción ExceptionTypeTwo
+    # está dentro del bloque try
+else:
+    # el código aquí se ejecutará después del bloque try
+    # si no genera una excepción
+finally:
+    # el código aquí siempre se ejecutará
+```
+
+---
+# `try` anidados
+
+Al igual que `if`, podemos anidar `try`.
+
+Considera que queremos cerrar nuestro archivo a pesar de que surgan errores
+
+
+
+```python
+try:
+    f = open('data/7-file_num.txt'') # this line might raise an IOError
+    my_number = int(f.read()) # this line might raise a ValueError
+except IOError:
+    print('cannot open file!')
+except ValueError:
+    print('not an integer!')
+finally:
+    f.close()
+```
+
+Esté código no cerrará porque `f` está definido dentro del bloque de `try` ( será variable local). 
+
+---
+# `try` anidados
+
+Podemos anidar `try`.
+
+
+```python
+try:
+    f = open('data/7-file_num.txt')
+    try:
+        my_number = int(f.read())
+    except ValueError:
+        print('not an integer!')
+    finally:
+        f.close()
+        print("the file was closed")
+except IOError:
+    print('cannot open file')
+```
+
+---
+## Ejercicio
+
+.content-box-blue[ 
+Toma el programa `remove_adapters.py` y agrega el manejo de la excepción en caso de que el archivo no se encuentre. Manda un mensaje indicando ¨El archivo _"indica el nombre"_ no se encuentra.¨
+]
+
+---
+# Manejo de excepciones
+
+Se recomienda el manejo de excepciones cuando se puede hacer algo al respecto y lo podemos hacerlo con `try/except`.
+
+Pero para detectar *bugs* (errores en el manejo pero no en código) necesitamos evocar/generar un error y poder *hacer algo*. 
+
+Para ello Python usa `raise`.
+
+
+---
+# `raise`
+
+`raise` nos permite generar un error en nuestro código (ayuda a identificar *bugs*).
+
+--
+
+Podemos generar una variable de tipo clase de error (`ValueError`) y evocar el error con `raise`.
+
+
+```python
+e = ValueError("this is a description of the problem")
+raise e
+```
+
+--
+Otra sintaxis (más común):
+
+
+```python
+raise ValueError()
+```
+
+---
+
+Supongamos nuestra función `get_at_content`. 
+
+
+```python
+def get_at_content(dna):
+    length = len(dna)
+    a_count = dna.count('A')
+    t_count = dna.count('T')
+    at_content = (a_count + t_count) / length
+    return at_content
+```
+
+--
+
+Está función está diseñada cuando `dna` son `ATGC` y podemos generar un `ValueError` cuando sean `N`s.
+
+
+```python
+def get_at_content(dna):
+    if dna.count("N") &gt; 0:
+        raise ValueError(f'Sequence contains {dna.count("N")} N\'s')
+    length = len(dna)
+    a_count = dna.count('A')
+    t_count = dna.count('T')
+    at_content = (a_count + t_count) / length
+    return at_content
+
+print(get_at_content('ACGTACGTGAC'))
+print(get_at_content('ACTGCTNAACT'))
+```
+
+---
+# Manejo de errores
+
+Podemos ahora incorporar `try/except` para **hacer algo** cuando tengamos un error en nuestro código.
+
+
+```python
+sequences = ['ACGTACGTGAC', 'ACTGCTNAACT', 'ATGGCGCTAGC']
+for seq in sequences:
+    try:
+        print('AT content for ' + seq + ' is ' + str(get_at_content(seq)))
+    except ValueError as ex:
+        print('skipping invalid sequence '+ ex.args[0])
+```
+
+---
+
+Si otro error surgiera en nuestro código y ValueError lo capta, nuestro mensaje sería muy confuso, con el ejemplo anterior. Por eso, a veces se requiere crear nuestros propias excepciones usando la clase Exception. Te dejo el ejemplo, pero ntp, eso lo veremos más adelante cuando veamos clases.
+
+
+```python
+class AmbiguousBaseError(Exception):
+    pass
+
+def get_at_content(dna):
+    if dna.count("N") &gt; 0:
+        raise AmbiguousBaseError(f'Sequence contains {dna.count("N")} N\'s')
+    length = len(dna)
+    a_count = dna.count('A')
+    t_count = dna.count('T')
+    at_content = (a_count + t_count) / length
+    return at_content
+
+sequences = ['ACGTACGTGAC', 'ACTGCTNAACT', 'ATGGCGCTAGC']
+for seq in sequences:
+    try:
+        print('AT content for ' + seq + ' is ' + str(get_at_content(seq)))
+    except AmbiguousBaseError as ex:
+        print('skipping invalid sequence '+ ex.args[0])
+```
+
+
+---
+## Tarea
+
+.content-box-blue[ 
+A todos los programas hechos hasta el momento, corrigelos y agregales excepciones sobre todo para el manejo de archivos, datos de entrada, y cálculos donde pueda ¨romperse¨ el programa.
+]
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
