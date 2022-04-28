@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Python II y GitHub</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Python II y GitHub
+### Licenciatura en Ciencias Genómicas,UNAM
+### First version: yyy-mm-dd; Last update: 2022-04-28
+
+---
+
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+# Interfaz de línea de comandos (CLI).
+
+Software o herramientas cuya `interfaz` de interacción con el usuario es la línea de comando. 
+
+Por ejemplo
+
+```
+reverse-complement araC_Ecoli.fna araC_Ecoli.out
+```
+
+Programa que calcula el reverse complement de una secuencia
+```
+programa      reverse-complement
+argumento 1   araC_Ecoli.fna     archivo de entrada
+argumento 2   araC_Ecoli.out     archivo de salida
+```
+
+---
+# Herramientas de interfaz de línea de comandos (CLI).
+
+En bioinformática hay muchos programas que tienen interfaz de linea de comando, Por ejemplo:
+
+```
+blastp -query mm-first.faa -db zebrafish.1.protein.faa -out mm-first.x.zebrafish.txt
+```
+
+Programa para alinear secuencias de ADN
+
+```
+programa      blast    
+argumentos    opción    valor
+              -query    mm-first.faa
+              -db       zebrafish.1.protein.faa
+              -out      mm-first.x.zebrafish.txt
+
+```
+
+---
+# Herramientas de interfaz de línea de comandos (CLI).
+
+¿Qué tiene de atractivo la línea de comandos contra las aplicaciones web o de interfaz gráfica? 
+
+--
+
+La respuesta corta es productividad, que proviene de dos cosas:
+
+a) Una es que cuando se te presenta solo una ventana de terminal y nada más, puedes concentrarte más intensamente, ya que no hay mucho que te distraiga. No aparecen notificaciones, ni anuncios, ni fotos. Solo tú y tu objetivo.
+
+b) Automatización. Puedes usar el programa N veces pasando distintos datos u opciones sin necesidad de cambiar el código. Además puedes usarlo en tuberias a nivel de unix.
+
+
+&lt;br&gt;
+&lt;br&gt;
+
+
+[Fuente: herramientas-de-linea-de-comando-para-desarrolladores](https://www.toptal.com/software/herramientas-de-linea-de-comando-para-desarrolladores)
+
+---
+# Herramientas de interfaz de línea de comandos (CLI).
+
+Dado que Python es un lenguaje de programación tan popular, se ha vuelto ampliamente utilizado para crear herramientas de línea de comandos para muchos propósitos. El usuario a través de argumentos de la línea de comando, podrá usar archivos específicos, configurar opciones y más. Por ejemplo, estas opciones podrían indicarle a la herramienta que genere información adicional, lea datos de una fuente específica o envíe la salida a una ubicación determinada.
+
+En general, los argumentos se pasan a las herramientas CLI de manera diferente, según su sistema operativo:
+
+    Tipo Unix: 
+    
+          - seguido de una letra, como -ho 
+          -- seguido de una palabra, como --help
+    
+    Windows: 
+          / seguido de una letra o una palabra, 
+          como /help
+
+
+---
+# Argumentos de la línea de comandos en Python 
+
+- ¿Qué es un argumento?
+
+Valores que se pueden utilizar dentro del programa y que son especificados en la terminal desde la linea de comando, y van después del nombre del programa
+
+- ¿Cómo pasar argumentos desde línea de comando?
+
+&lt;img src="https://robocrop.realpython.net/?url=https%3A//files.realpython.com/media/Python-argparse-Guide_Watermarked.a7affa701ed5.jpg&amp;w=960&amp;sig=e7e753776dbbaab6f6b7e1f66cb045e7974487df" width="600px" style="display: block; margin: auto;" /&gt;
+
+---
+# Argumentos en línea de comandos en Python 
+
+El script ya no necesita valores fijos dentro del script. ¿cómo cuales? un archivo de datos de entrada, nombre del archivo de salida, los números para hacer una suma, etc.
+
+Ejemplos
+
+a) sin opciones, 1 argumento
+
+
+```bash
+python3 get_at_content.py src/gene_sequences.txt
+```
+
+--
+
+b) sin opciones, 2 argumentos (es necesario respetar el orden en que se ingresan los argumentos)
+
+```bash
+python get_at_content.py src/gene_sequences.txt output/gene_at_content.txt
+```
+
+c) con opciones, n argumentos, no importa el orden en que se ingresan los argumentos.
+
+
+```bash
+python get_at_content.py -input src/gene_sequences.txt -output output/gene_at_content.txt
+```
+
+---
+# Sobre los argumentos
+
+.content-box-yellow[
+Ten en cuenta que tanto el nombre como el significado de un argumento son específicos de un programa; no existe una definición estandarizada o general, aparte de algunas convenciones comunes como --help para obtener más información sobre el uso de la herramienta. 
+
+Como desarrollador de un script de Python, el programador deberá pensar qué argumentos necesita su programa y que el usuario que lo ejecute pueda usar.
+]
+
+---
+# ¿Cómo funcionan los argumentos?
+
+&lt;img src="img/arguments.jpeg" width="1000px" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+# Manejo de argumentos de línea de comandos con Python
+
+Python 3 admite varias formas diferentes de manejar los argumentos de la línea de comandos. 
+
+- La forma incorporada es utilizar el `sys` módulo.  
+
+- La segunda forma es el `getopt` módulo, que maneja opciones tanto cortas como largas, incluida la evaluación de los valores de los parámetros.
+
+- Además, existen otros dos métodos comunes. Este es el módulo `argparse`, que se deriva del `optparse` módulo disponible hasta Python 2.7. 
+
+- El otro método es usar el `docopt` módulo, que es disponible en GitHub.
+
+Cada una de estas formas tiene sus pros y sus contras.
+
+
+---
+
+# Manejo de argumentos con el módulo `sys`
+
+El módulo `sys` toma los argumentos de la línea de comando y los guarda en una estructura de lista simple llamada sys.argv.
+
+- Cada elemento de la lista representa un solo argumento. 
+
+- El primer elemento de la lista, sys.argv[0], es el nombre del programa. 
+
+- El resto de los elementos de la lista, sys.argv[1] a sys.argv[n]. 
+
+- Como delimitador entre los argumentos, se utiliza un espacio. 
+
+- Los valores de argumento que contienen un espacio en su valor deben estar entre comillas para poder ser analizados correctamente por `sys`
+
+---
+# Manejo de argumentos con el módulo `sys`
+
+
+```python
+import sys
+
+print (f"The script has the name {(sys.argv[0])} ")
+
+arguments = sys.argv
+print (arguments)
+```
+
+---
+
+En Python:
+
+
+```python
+import sys
+
+# save the arguments
+arguments = sys.argv
+
+# get the file path
+file_path = arguments[1]
+
+with open(file_path, 'r') as f:
+  for line in f:
+    print (line)
+```
+
+
+En la Terminal
+
+```
+$ python printFile.py  sequence.fna
+```
+
+---
+# Ayuda (--help)
+
+Podemos decirle al usuario lo que hace falta usando `if`. Ejemplo: imprimir los archivos de un dir `os.listdir("data/")`.
+
+
+```python
+# 7-argumentos.py
+import os
+import sys
+
+if len(sys.argv) &lt; 2:
+    print('You need to specify the path to be listed')
+    sys.exit()
+
+input_path = sys.argv[1]
+
+if not os.path.isdir(input_path):
+    print('The path specified does not exist')
+    sys.exit()
+
+print('\n'.join(os.listdir(input_path)))
+```
+
+--
+Ejecutando el script
+
+
+```bash
+python3 scripts/ejemplos/7-argumentos.py
+python3 scripts/ejemplos/7-argumentos.py data/noexiste.txt
+python3 scripts/ejemplos/7-argumentos.py data/
+```
+
+
+---
+# Utilizando `argparse`
+
+Podemos utilizar el paquete de `argparse` para manejar nuestros argumentos.
+
+`argparse` ha estado disponible desde Python 3.2. Ofrece una interfaz de línea de comandos con una salida estandarizada. 
+
+`argparse` permite la verificación de argumentos fijos y opcionales, con la verificación de nombres como estilo corto o largo. 
+
+Como argumento opcional predeterminado, incluye -h, junto con su versión larga --help. Este argumento va acompañado de un mensaje de ayuda predeterminado que describe los argumentos aceptados.
+
+
+---
+# Utilizando `argparse`
+
+Checar que tengamos la paquetería necesaria y hacemos una lectura de argumentos simple.
+
+
+
+```python
+import argparse
+
+# Initiate the parser
+parser = argparse.ArgumentParser()
+parser.parse_args()
+
+print (arguments)
+```
+
+Terminal
+
+```
+$ python3 arguments-basic.py
+
+$ python3 arguments-basic.py -h
+
+$ python3 arguments-basic.py --help
+```
+---
+# Utilizando `argparse`
+
+Agreguemos una descripción a nuestro programa.
+
+
+```python
+# Include standard modules
+import argparse
+
+# Define the program description
+text="This is a test program. It demonstrates how to use the argparse module with a program description."
+
+# Initiate the parser with a description
+parser = argparse.ArgumentParser(description=text)
+parser.parse_args()
+```
+
+---
+# Utilizando `argparse`
+
+Ahora queremos que nuestro programa despliegue la versión al momento de ejecutarse, siempre y cuando sea opcional y se solicite mediante el argumento --version.
+
+Para hacerlo usamos el método `add_argument()` que llamamos con tres parámetros:
+
+- El nombre del argumento opcional: -V o --version
+
+- El texto de ayuda para el parámetro: help="show program version"
+
+- Acción (sin valor adicional): action="store_true"
+
+--
+El argumento no requiere que se dé un valor en la línea de comando. Es por eso que establecemos el argumento de acción en "store_true". 
+
+---
+
+# Utilizando `argparse`
+
+
+
+```python
+# Include standard modules
+import argparse
+
+# Initiate the parser
+parser = argparse.ArgumentParser()
+parser.add_argument("-V", "--version", help="show program version", action="store_true")
+
+# Read arguments from the command line
+args = parser.parse_args()
+
+print(args)
+
+# Check for --version or -V
+if args.version:
+    print("This is myprogram version 0.1")
+```
+
+---
+
+# El método add_argument()
+
+ArgumentParser.add_argument(name or flags...[, action][, nargs][, const][, default][, type][, choices][, required][, help][, metavar][, dest])
+
+- name or flags - Ya sea un nombre o una lista de cadena de caracteres de opción, e.g. foo o -f, --foo.
+
+- action - El tipo básico de acción a tomar cuando este argumento se encuentra en la línea de comandos.
+
+- nargs - El número de argumentos de la línea de comandos que deben ser consumidos.
+
+- const - Un valor fijo requerido por algunas selecciones de action y nargs.
+
+- default - El valor producido si el argumento está ausente en la línea de comando y si está ausente en el objeto de espacio de nombres.
+
+- type - El tipo al que debe convertirse el argumento de la línea de comandos.
+
+---
+
+# El método add_argument()
+
+- choices - Un contenedor con los valores permitidos para el argumento.
+
+- required - Si se puede omitir o no la opción de la línea de comandos (sólo opcionales).
+
+- help - Una breve descripción de lo que hace el argumento.
+
+- metavar - Un nombre para el argumento en los mensajes de uso.
+
+- dest - El nombre del atributo que será añadido al objeto retornado por parse_args().
+
+Source: https://docs.python.org/es/3.10/library/argparse.html
+---
+
+# Utilizando `argparse` : name or flag
+
+El método `add_argument()` debe saber si se espera un argumento `opcional`, como --version, o un argumento `posicional`, como una lista de nombres de archivos. Por lo tanto, los primeros argumentos que se pasan a add_argument() deben ser una serie de indicadores (flags), o un simple nombre de argumento (name). Por ejemplo, se puede crear un argumento opcional como:
+
+```
+parser.add_argument("-V", "--version", help="show program version", action="store_true")
+```
+
+mientras que un argumento posicional podría ser creado como:
+
+```
+parser.add_argument("input", help="input file name")
+```
+
+Cuando se llama a parse_args() , los argumentos opcionales serán identificados por el prefijo -, y el resto de los argumentos serán asumidos como posicionales
+
+
+Ver https://docs.python.org/es/3.10/library/argparse.html
+https://ajaxhispano.com/ask/argparse-argumentos-requeridos-listados-bajo-argumentos-opcionales-18263/
+
+---
+# Utilizando `argparse`
+
+
+```python
+import argparse
+import os
+import sys
+
+# Create the parser
+my_parser = argparse.ArgumentParser(description='List the content of a folder')
+
+# Add the arguments
+my_parser.add_argument('Path',
+                       metavar='path',
+                       type=str,
+                       help='the path to list')
+
+# Execute the parse_args() method
+args = my_parser.parse_args()
+
+input_path = args.Path
+
+if not os.path.isdir(input_path):
+    print('The path specified does not exist')
+    sys.exit()
+
+print('\n'.join(os.listdir(input_path)))
+```
+
+---
+Podemos agregar esto argumentos a nuestro programa de `get_at_content`.
+
+
+```python
+import argparse
+
+# Create the parser
+parser = argparse.ArgumentParser(description="Script that calculates AT content using command line arguments")
+
+# Add the arguments
+parser.add_argument("-i", "--input",
+                    metavar="path/to/file",
+                    help="File with gene sequences",
+                    required=True)
+```
+
+--
+
+
+```python
+# Add optional arguments
+parser.add_argument("-o", "--output",
+                    help="Path for the output file",
+                    required=False)
+```
+
+--
+
+
+```python
+# Add an argument and change it to numeric
+parser.add_argument("-r", "--round",
+                    help="Number of digits to round",
+                    type=int,
+                    required=False
+)
+```
+
+---
+.tiny[
+
+```python
+import argparse
+
+# Create the parser
+parser = argparse.ArgumentParser(description="Script that calculates AT content using command line arguments")
+
+# Add the arguments
+parser.add_argument("-i", "--input",
+                    metavar="path/to/file",
+                    help="File with gene sequences",
+                    required=True)
+
+# Add optional arguments
+parser.add_argument("-o", "--output",
+                    help="Path for the output file",
+                    required=False)
+
+# Add an argument and change it to numeric
+parser.add_argument("-r", "--round",
+                    help="Number of digits to round",
+                    type=int,
+                    required=False
+)
+
+# Execute the parse_args() method
+args = parser.parse_args()
+
+# Print arguments
+print(args.input, args.output, args.round)
+```
+]
+
+---
+## Ejercicio: argumentos at_content
+
+.content-box-blue[
+
+Toma el programa que calcula el contenido de AT y haz que reciba argumentos en línea de comando. Además que tenga manejo de errores cuando se incorporan Ns 
+
+.small[
+
+Usando el programa AT content, haz que:
+
+- Se pueda usar argumentos desde línea de comando (ex. que lean un archivo de texto, `4_dna_sequences.txt`)
+
+- Que el programa maneje errores e imprima en pantalla si se tiene `N`s.
+
+- Que el resultado se guarde en un archivo diferente, y ese nombre de archivo se pase por linea de comando.
+
+]]
+
+- Input: Archivo `4_dna_sequences.txt` con las secuencias.
+
+- Output: Archivo con el contenido de AT (argumento opcional). si no se introduce el archivo manda a pantalla el resultado.
+
+
+---
+# Quieres profundizar en el tema ?
+
+Checa el sig manual.
+
+argparse – Command line option and argument parsing.
+
+http://pymotw.com/2/argparse/
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
