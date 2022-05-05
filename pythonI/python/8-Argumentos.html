@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Python II y GitHub
 ### Licenciatura en Ciencias Genómicas,UNAM
-### First version: yyy-mm-dd; Last update: 2022-04-28
+### First version: yyy-mm-dd; Last update: 2022-05-05
 
 ---
 
@@ -279,7 +279,7 @@ Podemos utilizar el paquete de `argparse` para manejar nuestros argumentos.
 
 `argparse` ha estado disponible desde Python 3.2. Ofrece una interfaz de línea de comandos con una salida estandarizada. 
 
-`argparse` permite la verificación de argumentos fijos y opcionales, con la verificación de nombres como estilo corto o largo. 
+`argparse` permite la verificación de __argumentos fijos y opcionales__, con la verificación de nombres como estilo corto o largo. 
 
 Como argumento opcional predeterminado, incluye -h, junto con su versión larga --help. Este argumento va acompañado de un mensaje de ayuda predeterminado que describe los argumentos aceptados.
 
@@ -328,6 +328,61 @@ parser = argparse.ArgumentParser(description=text)
 parser.parse_args()
 ```
 
+
+Ejecutamos el script y vemos el resultado! `Namespace()`
+```{}
+$ python argumentos-argparser.py 
+Namespace()
+```
+
+---
+#  El `NameSpace`
+
+Recuerda, en Python todo es un objeto:
+
+- El número 2 es un objeto, 
+- el texto ‘Hola mundo’ es un objeto, 
+- las funciones son objetos
+
+--
+
+Un __nombre__ o identificador es la forma que existe en Python de __referenciar a un objeto__ concreto. 
+
+Una variable no es más que el nombre con el que nos referimos a un objeto que existe en memoria.
+
+---
+
+#  El `NameSpace`
+
+Un __espacio de nombres__ (NameSpace) es una __colección aislada de nombres__ (o identificadores) que referencian a objetos. En un mismo script o programa Python pueden coexistir varios espacios de nombres a la vez.
+
+Cuando accedemos a un intérprete de Python o ejecutamos un programa, todos los identificadores que define el lenguaje son añadidos a un espacio de nombres al que es posible acceder desde cualquier punto de un script. Es por esto que las funciones como print() o len() están siempre accesibles. Este espacio de nombres es conocido como espacio de nombres incorporado (o __built-in namespace__).
+
+Existe un NameSpacec para variables Globales y otro para variables Locales.
+
+---
+#  El `NameSpace` en `ArgumentParser`
+
+ArgumentParser analiza los __argumentos__ mediante el método `parse_args()`.
+
+Éste inspeccionará la línea de comandos, __convertirá cada argumento__ al tipo apropiado y luego invocará la acción correspondiente. 
+
+Esto significa que un __simple objeto Namespace__ se construirá a partir de los __atributos analizados en la línea de comandos__.
+
+---
+#  Objeto `ArgumentParser`
+
+
+_class_ argparse.ArgumentParser(prog=None, usage=None, description=None, epilog=None, parents=[], formatter_class=argparse.HelpFormatter, prefix_chars='-', fromfile_prefix_chars=None, argument_default=None, conflict_handler='error', add_help=True, allow_abbrev=True, exit_on_error=True)
+ 
+- prog - El nombre del programa (default: sys.argv[0])
+
+- usage - La cadena de caracteres que describe el uso del programa (por defecto: generado a partir de los argumentos añadidos al analizador)
+
+- __description__ - Texto a mostrar antes del argumento ayuda (por defecto: ninguno)
+
+- epilog - Texto a mostrar después del argumento ayuda (por defecto: ninguno)
+
 ---
 # Utilizando `argparse`
 
@@ -346,7 +401,7 @@ El argumento no requiere que se dé un valor en la línea de comando. Es por eso
 
 ---
 
-# Utilizando `argparse`
+# Utilizando `add_argument`
 
 
 
@@ -420,8 +475,8 @@ parser.add_argument("input", help="input file name")
 Cuando se llama a parse_args() , los argumentos opcionales serán identificados por el prefijo -, y el resto de los argumentos serán asumidos como posicionales
 
 
-Ver https://docs.python.org/es/3.10/library/argparse.html
-https://ajaxhispano.com/ask/argparse-argumentos-requeridos-listados-bajo-argumentos-opcionales-18263/
+Ver [argumentos opcionales](https://docs.python.org/es/3.10/library/argparse.html
+https://ajaxhispano.com/ask/argparse-argumentos-requeridos-listados-bajo-argumentos-opcionales-18263)
 
 ---
 # Utilizando `argparse`
