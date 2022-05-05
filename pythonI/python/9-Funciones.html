@@ -118,6 +118,8 @@ print (resultado)
 
 El nombre de la función se usa para llamar a la función, pasando los parámetros necesarios entre paréntesis.
 
+Si la definición de una función incluye parámetros, debe proporcionar el __mismo número de parámetros__ cuando llame a la función.
+
 ---
 
 
@@ -195,6 +197,9 @@ print("AT content is " + str(get_at_content("ATGACTGGACCA")))
 
 --
 
+Nota: Python interpreta el bloque de funciones solo cuando se llama a la función y no cuando se define la función. Por lo tanto, incluso si el bloque de definición de función contiene algún tipo de error, el intérprete de Python lo señalará solo cuando se llame a la función.
+
+
 &lt;br&gt;&lt;br&gt;
 
 .center[.content-box-green[**Vamos a vsCode**]]
@@ -202,7 +207,7 @@ print("AT content is " + str(get_at_content("ATGACTGGACCA")))
 ---
 # Imprimir el resultado 
 
-Las variables definidas o usadas dentro de la función son locales, es decir reconocidas solo dentro del bloque de la función.
+Las variables definidas dentro de una función solo existen dentro del __ámbito__ de esa función. Es decir locales a la función.
 
 
 ```python
@@ -451,6 +456,32 @@ assert get_aa_percentage("MSRSLLLRFLLFLLLLPPLP") == 65
 **Tip:* recuerda que podemos ocupar `for` en listas y contar.
 
 ---
+
+# ámbitos de las variables
+
+La ejecución de una función introduce una __nueva tabla de símbolos__ usada para las __variables locales__ de la función. 
+
+Todas las __asignaciones__ de variables en una función _almacenan_ el valor en la __tabla de símbolos local__; mientras que las __referencias__ de variables primero _buscan_ en la tabla de símbolos local, luego en las tablas de símbolos locales de las funciones adjuntas, luego en la tabla de símbolos global y finalmente en la tabla de nombres incorporados. Por lo tanto, a las variables globales no se les puede asignar directamente un valor dentro de una función, aunque se puede hacer referencia a ellas.
+
+```
+&gt;&gt;&gt; a = 1
+&gt;&gt;&gt; b = 10
+&gt;&gt;&gt; def fn():
+...     print(a)    # la variable local a no esta asignada, no esta incluida en la función, es una variable global
+...     b = 20      # la variable local b está asignada en la tabla de símbolos locales para la función.
+...     print(b)    # la variable local b esta referenciada.
+...
+&gt;&gt;&gt; fn()
+1
+20
+&gt;&gt;&gt; b               # la variable global b no se ha modificado por la llamada a la función.
+10
+```
+
+Fuente: https://www.freecodecamp.org/espanol/news/guia-de-funciones-de-python-con-ejemplos/
+
+---
+
 # Encapsulación
 
 Se refiere en dividir programas complejos en pequeñas piezas que trabajen de forma independiente.
