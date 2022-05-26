@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Python II y GitHub</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Python II y GitHub
+### Licenciatura en Ciencias Genómicas,UNAM
+### First version: yyy-mm-dd; Last update: 2022-05-26
+
+---
+
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+# Patrones
+
+Cuando hablamos de patrones hablamos de regularidades. Entonces, un __patrón__ es una sucesión de elementos  (auditivos, gestuales, textuales, gráficos…) que se construye siguiendo una __regla__ al observar las regularidades. Esa regla puede ser de repetición o de recurrencia.
+
+a) Teléfono de diez cifras 
+
+        777-1234-2345 
+        555-2904-2746 
+       `nnn-nnnn-nnnn` patrón
+       
+--
+
+b) Fecha de nacimiento
+
+        18-01-1989 
+        29-05-1997 
+       `nn-nn-nnnn` patrón
+
+---
+
+# Patrones en biología
+
+¿Qué patrones en biología conoces?
+
+--
+
+Ex. `ATG` codón de inicio de los genes
+
+
+```
+ATGGTTAAAGTTTATGCCCCGGCTTCCAGTGC...CGAGTACTGGAAAACTAA
+ATGAAACTCTACAATCTGAAAGATCACAACGA...AAAATGAATCATCAGTAA
+ATGAAGCAGCATAAGGCGATGATTGTCGCCCT...GCTTACGAATCCGAGTAA
+ATGAGCCAGCAAGTCATTATTTTCGATACCAC...AACAAGGAAACCGTGTGA
+ATG...............................................TAA
+                                                   G
+```
+
+---
+# Patrones en bioinformática
+
+¿Qué patrones tenemos en bioinformática?
+
+--
+
+```
+&gt;GX3597KLM "Homo sapiens"
+MQSYASAMLSVFNSDDYSPAVQENIPALRRSSSFLCTESCNSKYQCETGENSKGNVQDRVKRPMNAFIVW
+SRDQRRKMALENPRMRNSEISKQLGYQWKMLTEAEKWPFFQEAQKLQAMHREKYPNYKYRPRRKAKMLPK
+NCSLLPADPASVLCSEVQLDNRLYRDDCTKATHSRMEHQLGHLPPINAASSPQQRDRYSHWTKL
+
+&gt;GK9113FGH "Homo sapiens"
+MRPEGSLTYRVPERLRQGFCGVGRAAQALVCASAKEGTAFRMEAVQEGAAGVESEQAALGEEAVLLLDDI
+MAEVEVVAEEEGLVERREEAQRAQQAVPGPGPMTPESAPEELLAVQVELEPVNAQARKAFSRQREKMERR
+RKPHLDRRGAVIQSVPGFWANVIANHPQMSALITDEDEDMLSYMVSLEVGEEKHPVHLCKIMLFFRSNPY
+FQNKVITKEYLVNITEYRASHSTPIEWYPDYEVEAYRRRHHNSSLNFFNWFSDHNFAGSNKIAEILCKDL
+WRNPLQYYKRMKPPEEGTETSGDSQLLS
+
+&gt;GF7745PUP "Mus musculus"
+MGRLVLLWGAAVFLLGGWMALGQGGAAEGVQIQIIYFNLETVQVTWNASKYSRTNLTFHYRFNGDEAYDQ
+CTNYLLQEGHTSGCLLDAEQRDDILYFSIRNGTHPVFTASRWMVYYLKPSSPKHVRFSWHQDAVTVTCSD
+LSYGDLLYEVQYRSPFDTEWQSKQENTCNVTIEGLDAEKCYSFWVRVKAMEDVYGPDTYPSDWSEVTCWQ
+RGEIRDACAETPTPPKPKLSKFILISSLAILLMVSLLLLSLWKLWRVKKFLIPSVPDPKSIFPGLFEIHQ
+GNFQEWITDTQNVAHLHKMAGAEQESGPEEPLVVQLAKTEAESPRMLDPQTEEKEASGGSLQLPHQPLQG
+GDVVTIGGFTFVMNDRSYVAL
+```
+---
+# Patrones en bioinformática
+
+```
+LOCUS       SCU49845     5028 bp    DNA             PLN       21-JUN-1999
+DEFINITION  Saccharomyces cerevisiae TCP1-beta gene, partial cds, and Axl2p
+            (AXL2) and Rev7p (REV7) genes, complete cds.
+ACCESSION   U49845
+VERSION     U49845.1  GI:1293613
+KEYWORDS    .
+SOURCE      Saccharomyces cerevisiae (baker's yeast)
+FEATURES             Location/Qualifiers
+     source          1..5028
+                     /organism="Saccharomyces cerevisiae"
+                     /db_xref="taxon:4932"
+                     /chromosome="IX"
+                     /map="9"
+     CDS             &lt;1..206
+                     /codon_start=3
+                     /product="TCP1-beta"
+                     /protein_id="AAA98665.1"
+                     /db_xref="GI:1293614"
+                     /translation="SSIYNGISTSGLDLNNGTIADMRQLGIVESYKLKRAVVSSASEA
+                     AEVLLRVDNIIRARPRTANRQHM"
+     gene            687..3158
+                     /gene="AXL2"
+     CDS             687..3158
+```
+
+---
+# Patrones en bioinformática
+
+Sitios de Unión al DNA de Reguladores Transcripcionales
+```
+TACTGTTTTTATATACAGTATA
+TACTGTTTATTTATACAGTAAA
+TACTGTTTTTATATACAGTAGT
+AACTGGTTTTATATACAGTAAA
+AACTGTTTTTTTATCCAGTATA
+AACTGTGATTTTATACAGTATA
+TACTGGTTATTTATACAGGTAA
+AACTGTATTTATATACAGTTGT
+CCCTGGGTGTATATACAGTTAT
+TGCTGTGAGTATATACAGCAAA
+TGCTGGTTATCTATCCAGTGTA
+AGCTGTTTATTTATACAGTGAG
+TACTGTTATTGTGTACAGTATA
+CCCTGTAATTTTATCCAGTTGA
+CGCTGGATATCTATCCAGCATT
+TACTGTATGATTATCCAGTTAG
+TGCTGTATATTTATTCAGCTTG 
+
+consensus.strict             	
+taCTGttttTatataCAGtaaa
+```
+
+---
+# Patrones en genes
+
+Recordando la tarea de condicionales: 
+
+`Genes: kdy647, jdg766, kdy533, hdt739, hdu045, teg436`
+
+--
+
+.content-box-blue[
+- Imprima los nombres de los genes de todos los genes cuyo nombre comience con "k" o "h"
+]
+
+--
+
+¿Qué patrones hay en los genes?
+
+---
+# Expresiones regulares
+
+En cómputo teórico y teoría de lenguajes formales, una expresión regular, o expresión racional, también son conocidas como regex o regexp, por  *regular expression*, **es una secuencia de caracteres que conforma un patrón de búsqueda**. - [Wikipedia](https://es.wikipedia.org/wiki/Expresi%C3%B3n_regular#:~:text=En%20c%C3%B3mputo%20te%C3%B3rico%20y%20teor%C3%ADa,conforma%20un%20patr%C3%B3n%20de%20b%C3%BAsqueda.)
+
+
+Las expresiones regulares son patrones utilizados para encontrar una determinada combinación de caracteres dentro de una cadena de texto. 
+
+--
+
+Es todo un tema en programación:
+
+
+&lt;img src="https://images-na.ssl-images-amazon.com/images/I/51QMf2mTyBL._AC_UL600_SR366,600_.jpg" width="250px" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Expresiones regulares en Python
+
+
+Python maneja *regexp* pero desde el módulo `re`. 
+
+
+
+```python
+import re
+```
+
+---
+# Busqueda de patrones en un *string*
+
+¿Se encuentra el patrón `GAATTC` en la secuencia `ATCGCGAATTCAC`?
+
+
+--
+
+```
+string    ATCGCGAATTCAC
+patrón    GAATTC        --- no
+           GAATTC       --- no
+            GAATTC      --- no
+             GAATTC     --- no
+              GAATTC    --- no
+               GAATTC   --- si
+```
+
+&lt;br&gt;
+
+.center[.content-box-green[**Vamos a vsCode**]]
+
+
+---
+# Busqueda de patrones en un *string*
+
+¿Cómo buscar `GGACC` en `ATCGCGAATTCACGGACC` usando el módulo `re`?
+
+--
+
+Con el módulo de `re` podemos usar `search`.
+
+--
+
+Sintáxis
+
+```
+ re.search(pattern, string, flags)
+```
+
+- Escanea una cadena, buscando cualquier ubicación donde coincida el patrón. 
+- Si lo encuentra retorna un __objeto match__ correspondiente. 
+- Retorna `None` si ninguna posición en la cadena coincide con el patrón.
+
+--
+
+
+```python
+import re
+re.search("GGACC","ATCGCGAATTCACGGACC")
+```
+
+
+---
+# Busqueda de patrones en un *string*
+
+Podemos ocupar condicionales para buscar más patrones en una secuencia.
+
+--
+
+¿Cómo sería para buscar `GGACC` o `GGTCC`?
+
+
+```python
+dna = "ATCGCGAATTCACGGACC"
+```
+
+--
+
+```
+patrón 1   GGACC 
+patrón 2   GGTCC
+           ------
+patrón     GGxCC 
+compuesto
+```
+
+&lt;br&gt;
+
+
+---
+class: inverse, center, middle
+
+# Caracteres 
+
+---
+# Regexp
+
+Si vemos el patrón: `GGxCC` x puede ser `A` o `T`. 
+
+--
+
+Lo podemos describirlo como: `GG(A|T)CC`, escribiendo las posibilidades en `()` y separando las opciones por un `|`.
+
+--
+
+
+```python
+dna = "ATCGCGAATTCACGGACC"
+if re.search("GG(A|T)CC", dna):
+    print("site found!")
+```
+
+--
+
+Otra forma de escribirlo es:
+
+
+```python
+dna = "ATCGCGAATTCACGGACC"
+if re.search("GG[AT]CC", dna):
+    print("site found!")
+```
+
+---
+# Regexp `.`
+
+`.` el uso de un punto representa **cualquier caracter** en el patrón.
+
+--
+
+Si `x` en el patrón `GGxCC` puede ser cualquier caracter, se puede escribir como:
+
+
+
+```python
+dna = "ATCGCGAATTCACGGACC"
+if re.search("GG.CC", dna):
+    print("site found!")
+```
+
+--
+
+Pero también identificará caracteres diferentes a `ATGC`, como `n, $`, etc.
+
+
+```python
+dna = "ATCGCGAATTCACGGnCC"
+```
+
+---
+# Regex `[^]` (negación)
+
+Para negar caracteres podemos usar `[^]`. 
+
+Si queremos saber si hay otro caracter que no sea `ATGC`, se puede indicar como:
+
+
+```python
+dna = "ATCGCGAATTCACGGnCC"
+if re.search("[^ATGC]", dna):
+    print("ambiguous base found!")
+```
+
+--
+¿Cómo podemos generar un error si eso ocurre? (Tip: `raise`)
+
+--
+
+&lt;br&gt;
+
+.center[.content-box-green[**Vamos a vsCode**]]
+
+---
+class: inverse, center, middle
+
+# Cuantificadores 
+
+---
+
+# Cuantificadores 
+
+Los cuantificadores especifican _cuántas instancias_ de un carácter, grupo o clase de caracteres deben estar presentes en la entrada para que se encuentre una coincidencia.
+
+| Cuantificador expansivo | Cuantificador diferido |  Descripción |
+| ---- | ---- | ---- |
+| *     | *?     |Coincide cero o más veces|
+| +     | +?     |Coincide una o más veces|
+| ?     | ??     |Coincide cero o una vez|
+| {N}   | {N}?   |Coincide exactamente n veces.|
+| {N,}  | {N,}?  |Coincide al menos n veces.|
+| {N,M} | {N,M}? |Coincide de n a m veces.|
+
+---
+# Regexp `?`
+
+El símbolo `?` identifica cero o una vez el caracter. 
+
+--
+
+En `GAT?C`, la `T` es opcional.
+
+
+```python
+dna = "ATCGCGAATTCACGGACC"
+if re.search("GAT?C", dna):
+    print("found!")
+```
+
+--
+
+Podemos pedir que un grupo de caracteres sea opcional: `GGG(AAA)?TTT`, buscará `GGGAAATTT` o `GGGTTT`.
+
+
+```python
+dna = "GGGTTT"
+if re.search(r"GGG(AAA)?TTT", dna):
+    print("found!")
+```
+
+---
+# Regexp `+`
+
+El símbolo `+` identifica  una o más vez el caracter. 
+
+--
+
+`GGGA+TTT` buscará `GGGATTT` o `GGGAATTT` o `GGGAAATTT`, etc. PERO NO o `GGGTTT`
+
+
+```python
+dna = "GGGAATTT"
+if re.search("GGGA+TTT", dna):
+    print("found!")
+```
+
+---
+# Regexp `*`
+
+El símbolo `*` indica que es opcional pero también puede estar repetido.
+
+--
+
+`GGGA*TTT` buscará `GGGTTT` o `GGGATTT` o `GGGAATTT` o `GGGAAATTT`, etc. 
+
+
+
+```python
+dna = "GGGTTT"
+if re.search("GGGA*TTT", dna):
+    print("found!")
+```
+
+---
+# Regexp `*`
+
+Si queremos especificar el número de repetidos usamos  `{5}`.
+
+--
+
+`GA{5}T` buscará `GAAAAAT` PERO NO `GAAAAT` o `GAAT` o `GAT`, etc. 
+
+--
+
+Podemos especificar un rango `{2,4}`
+
+`GA{2,4}T` buscará `GAAAAT` o `GAAAT` o `GAAT` PERO NO `GAAAAT` o `GAT`. 
+
+--
+
+`{5,}` Indica 5 ó más.
+
+
+
+```python
+dna = "GGGAAATTT"
+if re.search("GGGA{2,4}TTT", dna):
+    print("found!")
+```
+
+---
+class: inverse, center, middle
+
+# Posición 
+
+---
+# Regexp: Posición
+
+
+Anteriormente vimos: `[^]` que nos sirve para negar. Ejemplo `[^ATGC]`. Ahora veremos como usarlo  para indicar posición.
+
+--
+
+- El símbolo `^` indica el inicio.  `^AAA` identifica `AAATTT` PERO NO `GGGAAATTT`
+
+--
+
+- El símbolo `$` indica el final. `GGG$` identifica `AAAGGG` PERO NO `AAAGGGTTT`.
+
+
+
+```python
+dna = "AAATTT"
+if re.search("^AAA", dna):
+    print("found!")
+```
+
+
+---
+class: inverse, center, middle
+
+# Combinar 
+
+---
+# Regexp
+
+&lt;img src="https://miro.medium.com/max/1838/1*hjsbL45MhT2Tw5DGAYoAUg.png" width="550px" style="display: block; margin: auto;" /&gt;
+
+---
+# Regexp: Combinar
+
+a) ¿Qué se busca con la siguiente expresión?
+
+`^AUG[AUGC]{30,1000}A{5,10}$`
+
+--
+
+b) Si queremos detectar el identificador de la secuencia en un archivo FastA
+
+--
+
+secuencias especiales `\d`, `\s`, `\w` 
+
+--
+
+c) Si queremos buscar el nombre del los genes de un archivo Genbank
+
+
+---
+class: inverse, center, middle
+
+# Objeto `re.match`
+
+---
+# Valor que regresa re.match
+
+¿De que tipo es el resultado de `re.search()`?
+
+--
+
+
+```python
+dna = "ATCGCGAATTCACGGnCC"
+type(re.search(r"[^ATGC]", dna))
+```
+
+--
+
+El resultado no es un `int`, `str`, o `float` es de tipo `re.Match`
+
+```
+&lt;class 're.Match'&gt;
+```
+
+--
+
+
+```python
+# guardando el resultado de la busqueda
+m = re.search(r"[^ATGC]", dna)
+print (m)
+```
+
+Por lo que la variable `m` es de tipo `re.Match`
+
+```
+&lt;re.Match object; span=(15, 16), match='n'&gt;
+```
+
+--
+
+Recuerda, en python todo es un objeto y los objetos tienen propiedades y métodos.
+
+---
+
+# Propiedades y métodos del `re.Match`
+
+Las propiedades y métodos del `re.Match` son usadas para recuperar información resultado de la búsqueda.
+
+.span() returns a tuple containing the start-, and end positions of the match. 
+
+.string returns the string passed into the function. 
+
+.group() returns the part of the string where there was a match. 
+
+
+
+```python
+# guardando el resultado de la busqueda
+m = re.search(r"[^ATGC]", dna)
+print (m.string)
+
+print (m.span())
+
+print (m.group())
+```
+
+
+---
+
+# Ejemplo usando `group()` 
+
+Podemos usar el método `group()` para obtener los resultados del match
+
+
+```python
+dna = "ATCGCGAATTCACGGnCC"
+m = re.search(r"[^atgc]", dna, re.IGNORECASE)  # flag : no distinga entre mayúsculas y minúsculas
+
+if m:
+    print("ambiguous base found!")
+    ambig = m.group()
+    print("the base is " + ambig)
+```
+
+
+---
+## Ejercicio: Función que verifique la secuencia
+
+.content-box-blue[
+
+- Crea una función que verifique que la secuencia tenga [ATGC]
+
+- Que arroje error si no es [ATGC] y que muestre los caracteres incorrectos.
+
+
+]
+
+
+```
+dna = "ATCGCGAATTCACGGnCC"
+```
+
+---
+# Extraer la información 
+
+¿Qué se busca con la siguiente expresión?
+
+`.+ .+`
+
+---
+# Extraer la información 
+
+Para guardar la información del match en variables separadas podemos usar `()`
+
+`(.+) (.+)`
+
+--
+
+
+```python
+scientific_name = "Homo sapiens" 
+
+m = re.search(r"(.+) (.+)", scientific_name) 
+
+if m: 
+    genus = m.group(1) 
+    species = m.group(2) 
+    print("genus is " + genus + ", species is " + species)
+```
+
+---
+# Extraer la posición
+
+Podemos extraer la posición en la que se encuentra el string buscado con `start()`.
+
+- Recuerda que Python cuenta desde cero
+
+
+```python
+dna = "CGATnCGAACGATC" 
+m = re.search(r"[^ATGC]", dna) 
+
+if m: 
+    print("ambiguous base found!") 
+    print("at position " + str(m.start()))
+```
+
+---
+# Múltiples matches `finditer()`
+
+Retorna un iterator que produce objetos de coincidencia sobre todas las coincidencias no superpuestas para pattern («patrón») de RE en la string («cadena»). La string es examinada de izquierda a derecha, y las coincidencias son retornadas en el orden en que se encuentran. 
+
+
+
+```python
+dna = "CGCTCnTAGATGCGCrATGACTGCAyTGC" 
+matches = re.finditer(r"[^ATGC]", dna)
+type(matches)
+
+for m in matches: 
+    type(m)
+    base = m.group() 
+    pos  = m.start() 
+    print(base + " found at position " + str(pos))
+```
+
+---
+# Múltiples matches `findall()` 
+
+Retorna todas las coincidencias no superpuestas de pattern en string, como una __lista de strings o tuplas__. El string se escanea de izquierda a derecha y las coincidencias se retornan en el orden en que se encuentran.
+
+
+
+```python
+dna = "CGCTCnTAGATGCGCrATGACTGCAyTGC" 
+result = re.findall(r"[^ATGC]", dna) 
+type(result)
+print(result)
+
+for m in result: 
+    type(m)
+```
+
+-- 
+Si hay varios grupos presentes, retorna una lista de tuplas de strings que coinciden con los grupos. 
+
+
+```python
+re.findall('(\w+)=(\d+)', 'set width=20 and height=10')
+```
+
+---
+## Ejercicio: Regiones de AT
+
+.content-box-blue[
+
+Encuentra las regiones que tengan más de 5 As o Ts
+
+]
+
+
+```
+dna = "CTGCATTATATCGTACGAAATTATACGCGCG"
+```
+---
+# Dividir 
+
+También podemos dividir el string con `re.split()`
+
+
+```python
+dna = "CGCTCnTAGATGCGCrATGACTGCAyTGC" 
+result = re.split(r"[^ATGC]", dna) 
+print(result)
+```
+
+---
+## Ejercicio: Función que verifique que la secuencia
+
+.content-box-blue[
+
+- Crea una función que verifique que la secuencia tenga [ATGC]
+
+- Que arroje error si no es [ATGC] y que muestre los caracteres incorrectos.
+
+- Usa `try/except` para manejo de errores
+
+- Sino tiene otros caracteres que imprima las regiones ricas en AT
+
+]
+
+
+```
+dna = "CTGCATTATATCGTACGAAATTATACGCGCG"
+```
+
+
+
+
+---
+
+------- end ------
+
+
+--
+
+Anteriormente vimos caracteres especiales como `\n` (salto de línea) o `\t` (tabular). 
+
+
+
+```python
+print("\t\n")
+```
+
+--
+
+A veces los caracteres especiales chocan con caracteres que ya tienen significado en Python. Para que Python ignore estos caracteres, podemos ocupar `r` (*raw*), y cualquier caracter especial dentro del *string* se ignorará. 
+
+--
+
+
+```python
+print(r"\t\n")
+```
+
+
+
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
