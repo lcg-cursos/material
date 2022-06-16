@@ -46,6 +46,7 @@ Curso básico de programación usando buenas prácticas de desarrollo de softwar
 
 * [Expresiones regulares](https://lcg-cursos.github.io/material/pythonI/python/11-Regexp.html)
 
-
+* [Diccionarios](https://lcg-cursos.github.io/material/pythonI/python/12-Diccionarios.html)
+)
 
 
