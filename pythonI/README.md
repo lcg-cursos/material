@@ -43,7 +43,7 @@ Curso básico de programación usando buenas prácticas de desarrollo de softwar
 * [Funciones](https://lcg-cursos.github.io/material/pythonI/python/9-Funciones.html)
 
 * [Módulos](https://lcg-cursos.github.io/material/pythonI/python/10-Modulos.html)
-*
+
 * [Expresiones regulares](https://lcg-cursos.github.io/material/pythonI/python/11-Regexp.html)
 
 
