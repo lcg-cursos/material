@@ -6,9 +6,9 @@ Curso básico de programación usando buenas prácticas de desarrollo de softwar
 
 * [Markdown](https://lcg-cursos.github.io/material/pythonI/markdown/markdown.html)
 
-* [Mejores Prácticas para el desarrollo de software](https://lcg-cursos.github.io/material/pythonI/git/git.html)
+* [Mejores Prácticas para el desarrollo de software](https://lcg-cursos.github.io/material/pythonI/mejorespracticas/DesarrolloSoftware_v1.0.html)
 
-### GitHub
+### [GitHub](https://lcg-cursos.github.io/material/pythonI/git/git.html)
 
 * Introducción
 
@@ -22,29 +22,30 @@ Curso básico de programación usando buenas prácticas de desarrollo de softwar
 
 ### Python
 
-* Infraestructura e instalación de Python
+* [Infraestructura e instalación de Python](https://lcg-cursos.github.io/material/pythonI/python/1-IntroPython.html)
 
-* Introducción a la resolución de problemas 
+* [Introducción a la resolución de problemas](https://lcg-cursos.github.io/material/pythonI/python/)
 
-* Tipos de Datos y Variables
+* [Tipos de Datos y Variables](https://lcg-cursos.github.io/material/pythonI/python/2-Strings.html)
 
-* Archivos
+* [Archivos](https://lcg-cursos.github.io/material/pythonI/python/3-LecturaArchivos.html)
 
-* Listas
+* [Listas](https://lcg-cursos.github.io/material/pythonI/python/4-Listas.html)
 
-* Loops - for
+* [Loops - for](https://lcg-cursos.github.io/material/pythonI/python/5-Loops.html)
 
-* Datos booleanos y Condicionales
+* [Datos booleanos y Condicionales](https://lcg-cursos.github.io/material/pythonI/python/6-Condicionales.html)
 
-* Manejo de Excepciones
+* [Manejo de Excepciones](https://lcg-cursos.github.io/material/pythonI/python/7-ManejoErrores.html)
 
-* Argumentos
+* [Argumentos](https://lcg-cursos.github.io/material/pythonI/python/8-Argumentos.html)
 
-* Funciones
+* [Funciones](https://lcg-cursos.github.io/material/pythonI/python/9-Funciones.html)
 
-* Expresiones regulares
+* [Módulos](https://lcg-cursos.github.io/material/pythonI/python/10-Modulos.html)
+*
+* [Expresiones regulares](https://lcg-cursos.github.io/material/pythonI/python/11-Regexp.html)
 
 
-https://lcg-cursos.github.io/material/pythonI/python/8-Argumentos.html#1
 
 
