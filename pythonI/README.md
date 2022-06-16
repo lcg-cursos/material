@@ -1,18 +1,47 @@
-## Contenido del curso de Python I
+## Curso básico de Programación usando Python
 
-Bienvenidos al curso de Python I
+Curso básico de programación usando buenas prácticas de desarrollo de software, control de versiones usando GitHub y usando el lenguaje de programación Python.
 
-### GitHub intermedio
+### Mejores Prácticas
 
-1.- [Versionando usando tags](git/git-tags/1-Etiquetas.html)
+* Markdown
 
-2.- [Trabajar con ramas en Git](git/git-branches/2-Ramas.html)
+* Mejores Prácticas para el desarrollo de software
 
-3.- [Pull Request con Git](git/git-pull-request/3-PullRequest.html)
- 
-  3.1- [Tips](git/git-pull-request/3.1-TipsWorkflow.html)
+### GitHub
 
+* Introducción
+
+* Creando repositorios
+
+* Control de versiones
+
+* Sugerir cambios con Pull request
+
+* Buenas prácticas en GitHub
 
 ### Python
 
-1.- [ Introduccion ](https://lcg-cursos.github.io/material/pythonI/python/1-IntroPython.html#25)
+* Infraestructura e instalación de Python
+
+* Introducción a la resolución de problemas 
+
+* Tipos de Datos y Variables
+
+* Archivos
+
+* Listas
+
+* Loops - for
+
+* Datos booleanos y Condicionales
+
+* Manejo de Excepciones
+
+* Argumentos
+
+* Funciones
+
+* Expresiones regulares
+
+
