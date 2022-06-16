@@ -4,9 +4,9 @@ Curso básico de programación usando buenas prácticas de desarrollo de softwar
 
 ### Mejores Prácticas
 
-* [Markdown](https://lcg-cursos.github.io/material/pythonI/)
+* [Markdown](https://lcg-cursos.github.io/material/pythonI/markdown/markdown.html)
 
-* Mejores Prácticas para el desarrollo de software
+* [Mejores Prácticas para el desarrollo de software](https://lcg-cursos.github.io/material/pythonI/git/git.html)
 
 ### GitHub
 
