@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Introducción a la Bioinformática
 ### Licenciatura en Ciencias Genómicas,UNAM
-### First version: yyy-mm-dd; Last update: 2022-08-04
+### First version: yyy-mm-dd; Last update: 2022-08-10
 
 ---
 
@@ -27,6 +27,13 @@ class: center, middle, inverse, title-slide
   height: 80%;
   overflow-y: scroll;
 }
+
+.noinverse {
+  background-color: #272822;
+  color: #d6d6d6;
+  text-shadow: 0 0 20px #333;
+}
+
 /* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
 pre {
   max-width: 100%;
@@ -59,6 +66,36 @@ El alumno debe ser capaz de comprender la importancia de la bioinformática y el
 
 ## ¿Porqué aprender bioinformática?
 
+Hace algunos años .. cuando la bioinformática no existía
+
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC336192/bin/pnas00669-0100.tif" alt="DNA sequence of the araBAD promoter in Escherichia coli" width="60%" /&gt;
+&lt;p class="caption"&gt;DNA sequence of the araBAD promoter in Escherichia coli&lt;/p&gt;
+&lt;/div&gt;
+
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC336192/bin/pnas00669-0100.tif
+
+---
+## ¿Porqué aprender bioinformática?
+
+Determinar a través de miles de experimentos los elementos genéticos en el genoma de _E. coli_ necesitó muchisimos años. Actualmente, una base de datos llamada RegulonDB almacena información de alrededor de 5 mil publicaciones de experimentos de un mecanismo llamado regulación transcripcional.
+
+&lt;img src="img/micF-gene.png" width="700px" style="display: block; margin: auto;" /&gt;
+
+.content-box-blue[
+Pero las cosas han cambiado ....
+
+   hay nuevas ideas ...
+   
+   hay nuevas tecnologías ..
+   
+]
+
+---
+
+## ¿Porqué aprender bioinformática?
+
 .pull-left[
 * La cantidad de datos generados cada día en las ciencias biológicas es masiva [Buffalo, 2015]
 
@@ -81,23 +118,25 @@ computacionales.
 ## Haciendo Bioinformática
 
 .content-box-blue[
-"The solution is to approach bioinformatics as a bioinformatician does: try stuff,
-and assess the results. In this way, bioinformatics is just about *having the skills to
-experiment with data using a computer and understanding your results.*"
+"La solución es abordar la bioinformática como lo hace un bioinformático: probar cosas y evaluar los resultados. De esta manera, la bioinformática se trata solo de **tener las habilidades para experimentar con datos usando una computadora y comprender sus resultados**.
+
 --- Bioinformatics Data Skills
 ]
 
 --
 
 .content-box-blue[
-"So what are data skills? They are the set of computational skills that give you
-the ability to quickly improvise a way of looking at complex datasets, using a
-well-known set of tools."
+"Entonces, ¿qué son las habilidades de datos? Son el conjunto de **habilidades computacionales** que te dan la **capacidad** de improvisar rápidamente una forma de ver conjuntos de datos complejos, utilizando un conocido **conjunto de herramientas.**"
 --- Bioinformatics Data Skills
 ]
 
 ---
 
+class: noinverse, center, middle
+
+# Las habilidades no son suficientes
+
+---
 ## A Scientist's Nightmare: carelessness and hubris in the drive to make a historic discovery
 
 .pull-left[
@@ -136,9 +175,7 @@ Non-reproducible single occurrences are of no significance to science"
 ¿Cómo podrian haberse evitado?
  ]
 
-.content-box-red[
-Discute con tu equipo y haz algunas propuestas.
- ]
+
 ---
 
 class: inverse, center, middle
