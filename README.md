@@ -9,7 +9,7 @@ El contenido de este repositorio forma parte del esfuerzo que realizan los profe
 ### Cursos de Bioinformática
 
 
-1.- [Unix](introbioinfo/README.md)
+1.- [Introducción a la Bioinformática](introbioinfo/README.md)
 
 2.- [PyhtonI](pythonI/README.md)
 
