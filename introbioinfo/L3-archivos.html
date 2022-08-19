@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Introducción a la Bioinformática
 ### Licenciatura en Ciencias Genómicas,UNAM
-### First version: yyy-mm-dd; Last update: 2022-08-18
+### First version: yyy-mm-dd; Last update: 2022-08-19
 
 ---
 
@@ -916,100 +916,6 @@ misma información
 3. Sigue las instrucciones en vi una vez más
 
 ---
-## Streams en Unix
-
-Unix fue diseñado como un sistema altamente modular [?]. La existencia
-de distintos flujos (streams), cada uno con un propósito único, facilitan la
-comunicación entre los módulos.
-
-- **Standard input** Es el flujo a través del cual un programa lee sus
-datos de entrada
-- **Standard output** Es el flujo a través del cual un programa escribe su
-salida
-- **Standard error** Es el flujo a través del cual un programa escribe los
-mensajes de error
-
-
----
-## Streams en Unix
-
-
-&lt;img src="img/streams.png" width="400px" style="display: block; margin: auto;" /&gt;
-Fuente: Imagen tomada de Bioinformatics Data Skills
-
-
-El standard output y el standard error generalmente se imprimen a
-pantalla, a menos que sean redirigidos
-
----
-## Un ejemplo de redireccionamiento
-
-¿Cuál es el estándar input, output y error en este ejemplo?
-
-```
-## Concatenar archivo personal_info.txt y NA.txt
-cat personal_info.txt NA.txt
-```
-
-El estándar output y el estándar error se imprimen en pantalla por default
-
-
----
-## Redireccionando el std output y el std error
-
-```
-## Concatenar archivo personal_info.txt y NA.txt
-## Redireccionar solo el std output
-cat personal_info.txt NA.txt &gt; output.txt
-
-## Redireccionar el std output y el std error
-cat personal_info.txt NA.txt &gt; output.txt 2&gt; error.txt
-```
-
----
-## Otro tipo de redireccionamiento
-
-**¿Qué cambió?**
-
-
-```
-## Concatenar archivo personal_info.txt y NA.txt
-## Redireccionar solo el std output, utilizando &gt;&gt;
-cat personal_info.txt NA.txt &gt;&gt; output.txt
-```
-
----
-## Otro tipo de redireccionamiento
-
-**¿Qué cambió?**
-
-```
-## Concatenar archivo personal_info.txt y NA.txt
-## Redireccionar solo el std output, utilizando &gt;&gt;
-cat personal_info.txt NA.txt &gt;&gt; output.txt
-```
-
-|Comando | Función   |
-|---- |---      |
-|&gt;  |Crea el archivo si no existe y lo sobre escribe si existe |
-|&gt;&gt; |Crea el archivo si no existe y agrega el nuevo contenido al final si existe|
-
----
-## Redireccionando std input
-
-Este tipo de redireccionamiento no es tan común
-
-```
-## El inputfile es redireccionado
-## para ser el std input del programa
-## El std output del programa es redireccionado
-## hacia el archivo outputfile
-programa &lt; inputfile &gt; outpufile
-```
-
-
-
-
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
