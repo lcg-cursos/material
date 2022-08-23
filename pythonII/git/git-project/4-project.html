@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Python II y GitHub</title>
+    <meta charset="utf-8" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Python II y GitHub
+### Licenciatura en Ciencias Genómicas, UNAM
+### First version: 2022-07-08; Last update: 2022-08-17
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+## Contenido
+
+1. [Especificar versiones en Git con tag](./leccion1/1-Etiquetas.html)
+
+2. [Trabajar con ramas en Git: git branch](./leccion2/2-Ramas.html) 
+
+3. [Manejo de issues en GitHub](./leccion3/3-issues.html)  
+
+4. [Gestión de un proyecto con GitHub](4-project.html)
+
+---
+
+
+# Gestión de un proyecto con GitHub
+
+## Objetivo 
+
+Al finalizar la lección, dispondremos de un espacio integrado para la gestión de issues y pull requests; medio por el cual podremos priorizar y coordinar nuestro trabajo y el desarrollo del proyecto en general. Conoceremos cómo crear un proyecto y tareas en GitHub, así como vincularlo a un repositorio.
+
+
+&lt;img src="img/board.png" width="450px" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Introducción
+
+
+Pensemos en que queremos dar inicio a un proyecto. Sin importar el tipo que sea, lo principal es comenzar identificando las actividades que debemos realizar, de inicio no lograremos identificar todas las tareas, pero sí al menos las generales.
+
+En el caso de un proyecto donde estamos desarrollando código pasa exactamente lo mismo; tenemos que organizar nuestras actividades, y en conjunto las del equipo de trabajo y colaboradores.
+
+
+&lt;img src="img/tablero-kanban.png" width="450px" style="display: block; margin: auto;" /&gt;
+
+
+---
+## "Project" en GitHub
+
+Un _proyecto_ en GitHub es tablero u hoja de cálculo personalizable que integra los issues y solicitudes de incorporación de cambios (pull requests).   
+
+En un proyecto se puede personalizar el diseño filtrando, clasificando y agrupando los issues y pull requests. También puede agregar campos personalizados para rastrear metadatos.
+
+Los proyectos se componen de issues, pull requests y notas que se clasifican como tarjetas en columnas de su elección. Puedes arrastrar y soltar para reordenar las tarjetas dentro de una columna, mover tarjetas de columna a columna y cambiar el orden de las columnas.
+
+
+&lt;img src="img/projects_board.png" width="850px" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Actividad: Creación de un "Project" en GitHub
+
+1. Ir a GitHub (web)  
+
+--
+
+2. Crear un nuevo repositorio: Simbolo "+"" -&gt; new repository  
+
+--
+
+3. Especificar nombre "biopython", en modo Public, agregar archivo .gitignore (python) y licencia (por ejemplo: MIT)
+
+--
+
+4. Ir a la sección "Projects" y hacer clic en Add project -&gt; "Go to your profile to create a new project" -&gt; New project -&gt; Create  
+
+--
+
+5.  Asignar un nombre el proyecto. En este caso usaremos el mismo del repositorio recien creado "biopython"  
+
+--
+
+6. Observar que el proyecto está compuesto por 3 carriles "Todo", "In progress" y "Done"  
+
+---
+
+## Actividad: Creación de un "Project" en GitHub
+
+Como parte de las actividades del nuevo __proyecto de mosquitos__ que vamos a desarrollar en el semestre:
+
+"Uncovering the Worldwide Diversity and Evolution of the Virome of the Mosquitoes Aedes aegypti and Aedes albopictus"  
+
+_Aplicación: Los virus específicos de insectos pueden utilizarse para generar vacunas contra virus que acarrean los mosquitos._  
+
+
+Es necesario planificar las siguientes tareas:  
+
+- Buscar en la literatura (de manera automática) artículos con información de RNA-Seq de los mosquitos Aedes aegypti y Aedes albopictus  
+
+- Hacer un control de calidad sobre los archivos de fastq  
+
+- Hacer un ensamble de novo  
+
+- Buscar a qué se parecen las secuencias ensambladas (GenBank)  
+
+- Resumir los resultados obtenidos (pandas)  
+
+7. En el carril "Todo" hacer clic en "New item" y crear cada una de las tareas  
+
+
+---
+
+## "Project" personalización
+
+- Seleccionar una vista diferente (table, board)  
+
+- Configurar campos para desplegar: Repository, Labels, Reviewers, etc.  
+
+- Agregar/borrar items y carriles  
+
+- Cambiar el nombre a los carriles  
+
+- Mover las tareas entre los carriles conforme se vayan realizando  
+---
+
+## Actividad: Creación de un "Project" en GitHub
+
+¡No olvidemos clonar el repositorio a nuestra máquina!
+
+git clone [URL]
+
+&lt;img src="img/cloneRepo.png" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Conclusión
+
+Por medio de los **Projects** en GitHub podemos planificar las tareas de realizaremos en nuestro proyecto, así como priorizar aquellas actividades que deben ser resueltas.
+
+_¡Un "project" en GitHub es una excelente forma de organizar y controlar todo el trabajo en nuestro repositorio!_
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(img/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

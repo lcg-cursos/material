@@ -3,7 +3,6 @@
   <head>
     <title>Python II y GitHub</title>
     <meta charset="utf-8" />
-    <script src="libs/header-attrs-2.9/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -14,7 +13,7 @@ class: center, middle, inverse, title-slide
 
 # Python II y GitHub
 ### Licenciatura en Ciencias Genómicas, UNAM
-### First version: 2021-08-03; Last update: 2021-08-10
+### First version: 2021-08-03; Last update: 2022-08-08
 
 ---
 
@@ -35,20 +34,20 @@ pre {
 &lt;/style&gt;
 
 
-# Versionamiento en Git usando tags
 
 ## Contenido
 
-1. [Especificar versiones en Git con tag](1-Etiquetas.html)
+1. [Especificar versiones en Git con tag](1-Etiquetas.html)  
 
-2. [Trabajar con ramas en Git: git branch](./leccion2/2-Ramas.html) 
+2. [Trabajar con ramas en Git: git branch](./leccion2/2-Ramas.html)  
 
-3. [Pull Request con Git](./leccion2/3-PullRequest.html) 
+3. [Manejo de issues en GitHub](./leccion3/3-issues.html)  
 
-4. [Manejo de un proyecto en GitHub](./leccion4/4-Proyecto.html)
+4. [Gestión de un proyecto con GitHub](./leccion4/4-project.html)  
 
 
 ---
+# Versionamiento en Git usando tags
 
 ## Objetivo
 Al finalizar la lección, podremos identificar estados importantes de nuestro código, así como las liberaciones del mismo, mediante el uso de etiquetas en Git/GitHub.
@@ -61,10 +60,10 @@ Al finalizar la lección, podremos identificar estados importantes de nuestro c�
 
 ## Introducción
 
-Imaginemos que trabajamos en un proyecto de software para la clase de Python. A lo largo del desarrollo hemos invertido mucho tiempo en la solución del problema, lo que implica agregar nuevas funcionalidades e incluso modificar o corregir el código que ya hemos hecho (commits). 
+Imaginemos que trabajamos en un proyecto de software para la clase de Python. A lo largo del desarrollo hemos invertido mucho tiempo en la solución de problemas, lo que implica agregar nuevas funcionalidades e incluso modificar o corregir el código que ya hemos hecho (commits). 
 &lt;img src="img/workFlow.png" width="550px" style="display: block; margin: auto;" /&gt;
 
-Sin embargo, durante todo ese proceso, a veces quisieramos guardar una "foto" del **estado actual** de nuestro código, por considerarlo funcionable. Estas "fotos" las podemos llamar **versiones estables** de nuestro código. ¿y que podemos hacer con ellas? :
+Sin embargo, durante todo ese proceso, a veces quisieramos guardar una "foto" del **estado actual** de nuestro código, por considerarlo funcionable. Estas "fotos" las podemos llamar **versiones estables** de nuestro código. ¿y qué podemos hacer con ellas?:
 
 - Obtener resultados de versiones pasadas
 - Ejecutar programas anteriores
@@ -74,7 +73,7 @@ Sin embargo, durante todo ese proceso, a veces quisieramos guardar una "foto" de
 
 #  tags : Etiquetando estados de código
 
-.full-width[.content-box-blue[Los tag son una manera de etiquetar **estados** de tu repositorio, que se usa comúnmente para indicar las **versiones** o releases de un proyecto mantenido con Git.]]
+.full-width[.content-box-blue[Los tags son una manera de etiquetar **estados** de tu repositorio, que se usa comúnmente para indicar las **versiones** o releases de un proyecto mantenido con Git.]]
 
 .pull-left[
 
@@ -87,7 +86,7 @@ Sin embargo, durante todo ese proceso, a veces quisieramos guardar una "foto" de
 
 - **Estados** importantes en la vida de un repositorio
 
-- Usado principalmente para el manejo de las **releases** de un proyecto
+- Usado principalmente para el manejo de los **releases** de un proyecto
 
 - Permite mantener informados a los usuarios del código del software y otros desarrolladores de las **versiones** de una aplicación
 
@@ -122,14 +121,13 @@ git tag
 
 --
 
-- Con **git tag** no nos referimos a la versión de un archivo en particular, sino de todo el proyecto de manera global
+- Con **git tag** no nos referimos a la versión de un archivo en particular, sino de __todo__ el proyecto de manera global
 
 --
 
 - **git tag** permite hacer referencia a un estado del **repositorio completo**, práctica que suele ocurrir cada vez que se libera una nueva versión del software
 
 &lt;img src="img/tagging.png" width="500px" style="display: block; margin: auto;" /&gt;
-
 
 ---
 ## Numeración de las versiones
@@ -138,6 +136,7 @@ Las versiones de los proyectos las define el equipo de desarrollo, y se recomien
 
 &lt;img src="img/versions.png" width="250px" style="display: block; margin: auto;" /&gt;
 
+Ejemplo: https://github.com/google/material-design-icons/tags
 ---
 ## Numeración de las versiones
 
@@ -169,7 +168,7 @@ Las versiones de los proyectos las define el equipo de desarrollo, y se recomien
 
 --
 
-- Si el proyecto ya tiene alguna modificación en funcionalidad, pero _sigue manteniendo completa compatibilidad con la versión anterior_, entonces tendremos que aumentar el segundo dígito, por ejemplo, pasar de la v1.0.0 a la v1.1.0.
+- Si el proyecto tiene alguna modificación en funcionalidad, pero _sigue manteniendo completa compatibilidad con la versión anterior_, entonces tendremos que aumentar el segundo dígito, por ejemplo, pasar de la v1.0.0 a la v1.1.0.
 
 --
 
@@ -188,7 +187,7 @@ Más información sobre [versionamiento semántico](https://semver.org/lang/es/)
 
 Hasta este momento hemos trabajado con un repositorio en Git, realizando cambios y enviandolos al servidor remoto, sin embargo, no tenemos ninguna numeración de versión y ningún tag que nos indique si el código ya se encuentra estable o si existe una nueva versión. 
 
-Supongamos que empezamos por el número de versión **0.0.1**. Entonces para crear la correspondiente etiqueta usaremos el comando: 
+Supongamos que empezamos por el número de versión **0.1.0**. Entonces para crear la correspondiente etiqueta usaremos el comando: 
 
 Sintaxis:  
 
@@ -197,7 +196,7 @@ Sintaxis:
 
 Ejemplo:
 
-.full-width[.content-box-yellow[git tag v0.0.1]]
+.full-width[.content-box-yellow[git tag v0.1.0]]
 
 
 Con esto estaremos etiquetando el estado actual del repositorio, el cual apunta al _último commit realizado_.
@@ -209,13 +208,13 @@ Para poder definir una nueva etiqueta, será necesario realizar cambios al repos
 
 Para crear una segunda etiqueta:
 
-.full-width[.content-box-yellow[git tag v0.0.2]]
+.full-width[.content-box-yellow[git tag v0.2.0]]
 
 
 ---
 ## Consultar los estados de versiones en el repositorio con _git tag_
 
-Una vez creado el primer tag en el repositorio, podremos ejecutar el comando "git tag", el cual nos informará sobre las versiones que hemos etiquetado hasta el momento.
+Una vez creado un tag en el repositorio, podremos ejecutar el comando "git tag", el cual nos informará sobre las versiones que hemos etiquetado hasta el momento.
 
 Sintaxis:  
 
@@ -224,8 +223,8 @@ Sintaxis:
 Resultado:  
 
 .full-width[.content-box-yellow[$ git tag &lt;br&gt;
-v0.0.1&lt;br&gt;
-v0.0.2
+v0.1.0&lt;br&gt;
+v0.2.0
 ]]
 
 
@@ -251,7 +250,7 @@ v0.0.3  Se agregó logo de la LCG
 ---
 ## Consultar una etiqueta en particular con _git show_
 
-Otro comando interesante en el manejo de etiquetas es _git_ **show** _[tag_name]_. Este te permite conocer cómo estaba el repositorio en cada estado que has etiquetado, es decir, en cada versión.
+Otro comando interesante en el manejo de etiquetas es  **git show** _[tag_name]_. Este te permite conocer cómo estaba el repositorio en cada estado que has etiquetado, es decir, en cada versión.
 
 .full-width[.content-box-yellow[git show v0.0.2]]
 
@@ -270,12 +269,12 @@ Hemos trabajado mucho en nuestro repositorio de git llamado _python_class_ y aho
 2. Localizar tu repositorio Git de trabajo
 --
 
-3. Abrir el archivo "sequence.txt", modificarlo
+3. Abrir el archivo "sequence.txt" ubicadon en el directorio src/, modificarlo
 .full-width[.content-box-yellow[git add sequence.txt]]
 --
 
 4. Crear una etiqueta
-.full-width[.content-box-yellow[git tag v0.0.4]]
+.full-width[.content-box-yellow[git tag v0.1.0]]
 --
 
 5. Revisar la etiqueta creada en el repositorio
@@ -302,7 +301,7 @@ Hemos trabajado mucho en nuestro repositorio de git llamado _python_class_ y aho
 --
 
 - Recuerda agregar un mensaje cuando crees la etiqueta  
-**git tag [tag_name] -m [mensaje]**
+**git tag [tag_name] -m "[mensaje]"**
 
 --
 
@@ -324,11 +323,11 @@ Hemos trabajado mucho en nuestro repositorio de git llamado _python_class_ y aho
 --
 
 4. Crea una etiqueta
-.full-width[.content-box-yellow[git tag v0.0.1 -m "Archivo sequence completo y actualizado"]]
+.full-width[.content-box-yellow[git tag v0.1.0 -m "Archivo sequence completo y actualizado"]]
 --
 
 5. Revisa la etiqueta creada en el repositorio
-.full-width[.content-box-yellow[git show v0.0.1]]
+.full-width[.content-box-yellow[git show v0.1.0]]
 
 
 ---
@@ -370,7 +369,7 @@ Sintaxis:
 
 Ejemplo:  
 
-.full-width[.content-box-yellow[git push origin master v0.0.1]]
+.full-width[.content-box-yellow[git push origin master v0.1.0]]
 
 
 ---
@@ -378,7 +377,7 @@ Ejemplo:
 
 ## Desafio
 
-Jennifer ha realizado algunos cambios a sus scripts de Python y ha generado 3 tags (v0.0.1, v0.1.1 y v1.0.0) en su repositorio local para identificar aspectos relevantes de dichas modificaciones. 
+Jennifer ha realizado algunos cambios a sus scripts de Python y ha generado 3 tags (v0.1.0, v0.1.1 y v1.0.0) en su repositorio local para identificar aspectos relevantes de dichas modificaciones. 
 
 ¿Cuál de los siguientes comandos le permitiría a Jennifer enviar la etiqueta v1.0.0 y los últimos cambios al repositorio remoto en GitHub para compartirlo con sus compañeros?
 
@@ -420,7 +419,7 @@ __git tag [tag_name] -m "mensaje"__
 
 --
 
-4-Repite los pasos 1-3, modificando las sessiones _CATEGORY_ y _USAGE_ para crear dos etiquetas (v0.0.3 y v0.0.4)
+4-Repite los pasos 1-3, modificando las sessiones _CATEGORY_ y _USAGE_ para crear dos etiquetas (v0.2.0 y v0.3.0)
 
 --
 
@@ -441,7 +440,7 @@ Puede ser que tengamos commits previos que nos gustaría marcar por medio de eti
 
 Por lo general, cuando se crea una etiqueta, esta se encuentra asociada al último commit realizado; sin embargo, podemos especificar de manera particular el commit al que queremos marcar mediante una etiqueta.
 
-Para ello usaaremos el comando:
+Para ello usaremos el comando:
 
 Sintaxis:  
 
@@ -588,7 +587,6 @@ __git tag -h__
 
 
 ---
-
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

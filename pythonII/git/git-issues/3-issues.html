@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Python II y GitHub</title>
+    <meta charset="utf-8" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Python II y GitHub
+### Licenciatura en Ciencias Genómicas, UNAM
+### First version: 2022-07-08; Last update: 2022-08-17
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+
+## Contenido
+
+1. [Especificar versiones en Git con tag](./leccion1/1-Etiquetas.html)
+
+2. [Trabajar con ramas en Git: git branch](./leccion2/2-Ramas.html)  
+
+3. [Manejo de issues en GitHub](3-issues.html)
+
+4. [Gestión de un proyecto con GitHub](./leccion4/4-project.html) 
+
+
+
+---
+
+
+# "Issues" en GitHub
+
+## Objetivo 
+
+Al finalizar la lección, podremos crear "issues" y dar seguimiento al mantenimiento del software, a reportes de errores, ideas y propuestas de cambios en nuestros repositorios GitHub, así como planificación de actividades. 
+
+
+
+&lt;img src="img/sample_issue.png" width="500px" style="display: block; margin: auto;" /&gt;
+
+
+---
+## Introducción
+
+
+Pensemos en que tenemos nuestro desarrollo de software en GitHub o bien que estamos colaborando en un repositorio. Puede que haya muchas personas involucradas y necesitamos organizar el trabajo de desarrollo o que simplemente nosotros necesitemos organizarnos.  
+
+Existen tareas importantes por realizar, como:  
+
+- Dar mantenimiento al software  
+- Resolver errores  
+- crear nuevas funcionalidades  
+- Realizar actualizaciones  
+
+Así como dar seguimiento a la resolución de aquellos _pull requests_ que hayan sido enviados al repositorio.  
+
+Los __issues__ en GitHub ayudan a gestionar aquellas actividades que permitan tener el _control y comunicación entre nosotros mismos, así como con el equipo de trabajo y con los usuarios del repositorio_.
+
+---
+## Issues
+
+.full-width[.content-box-red[Un _issue_ te permiten rastrear el trabajo en GitHub.]]
+
+Los _issues_ representan una herramienta de seguimiento que está integrada con los repositorios de GitHub. Los issues se usan para concentrarse en tareas importantes y mantener los planes actualizados simultáneamente. Todo equipo ágil necesita organizar su trabajo, pero nadie quiere dejar de trabajar para realizar un seguimiento del mismo.    
+
+&lt;img src="img/issues.png" width="350px" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Issues
+
+Los issues incluyen:  
+
+- Título  
+- Descripción  
+- Asignación  
+- Etiquetas  
+- `@`menciones  
+
+&lt;img src="img/estruc-issues.png" width="700px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Uso de los issues
+
+**Escenario 1**  
+ 
+Haciedo uso del software (programa en particular, librería, etc.)  
+
+Por ejemplo:  
+
+- Enviar un mensaje al desarrollador para solicitar ayuda en la resolución de un error  
+- Solicitar ayuda en la configuración del software  
+- Preguntar sobre el formato de datos de entrada del software  
+
+**Escenario 2**  
+
+Contribuyendo a la mejora del software por medio de pull request
+
+Por ejemplo:  
+
+- Enviar correcciones a la documentación del software  
+- Proponer mejoras al software  
+- Corrección de errores  
+
+---
+
+
+
+## Actividad
+
+
+1. Selecciona el repositorio de algún compañero o compañera  
+
+--
+
+2. Analiza en qué podrías hacer un comentario y/o pregunta (por ejemplo: código o documentación)  
+
+--
+
+3. Crea un issue:
+
+&amp;nbsp;&amp;nbsp;- Título  
+&amp;nbsp;&amp;nbsp;- Descripción  
+&amp;nbsp;&amp;nbsp;- `@`menciones  
+
+--
+
+&lt;ol start=4&gt; 
+4. Hacer clic en &lt;b&gt;Submit new issue&lt;/b&gt;  &lt;/ol&gt;
+
+--
+
+5. La propietaria o el propietario del repositorio deberá revisar el issue y responder. Realizar este paso hasta que se de por terminado el caso.  
+
+&amp;nbsp;&amp;nbsp;- Asignación  
+&amp;nbsp;&amp;nbsp;- Etiquetas  
+
+--
+
+6. Cerrar el issue
+
+
+
+---
+
+## Tablero de issues
+
+Una vez que hemos creado un issue podemos ver en la sección Issues.
+Podemos ver que tenemos:  
+- Filtros  
+- Etiquetas  
+
+&lt;img src="img/tablero-issues.png" width="700px" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Actividad
+
+Planificando tareas mediante los issues:  
+
+Dentro del repositorio de nuestra compañera o nuestro compañero, estamos en la búsqueda de programas que nos permitan:  
+- Calcular regiones ricas en AT  
+- Traducir una secuencia de RNA a proteina  
+
+Queremos preguntar al "propietario" si tiene algunos scrits para esto, por lo cual se requiere:  
+
+1. Crear dos issues (uno por cada programa) en el repositorio de tu compañera o compañero, no olvides mencionar a tu compañera(o).  
+
+--
+
+2. Pídele a tu compañero que haga un comentario en el issue donde lo mencionaste.....   
+
+
+---
+
+
+## Actividad
+
+Planificando tareas mediante los issues:  
+
+&lt;ol&gt; 3. Los programas se construirán en la siguiente clase. Una vez obtenidos, avisarle a nuestra compañera o nuestro compañero sobre la disponibilidad del programa&lt;/ol&gt;   
+
+--
+
+&lt;ol&gt; 4. Cierra los issues&lt;/ol&gt;  
+
+--
+
+&lt;ol&gt; 5. Revisa el estado de los issues en el tablero&lt;/ol&gt;   
+
+---
+
+
+## Conclusión
+
+
+_GitHub issues_ permite dar seguimiento de "problemas"" y dicha funcionalidad está disponible en todos los repositorios de GitHub.  
+
+A tráves de los _issues_ podemos "discutir" con el mundo las cosas que construimos. 
+
+Los _issues_ en GitHub son usados comúnmente para reportar errores y solicitud de nuevas funcionalidades.  
+
+
+Con los _issues_ podemos organizar aún más el trabajo con etiquetas, y realizar un seguimiento las tareas.  
+
+
+_¡Usa los issues para comunicarte y controlar el trabajo!_
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(img/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
