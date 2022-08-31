@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introducción a la Bioinformática</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introducción a la Bioinformática
+### Licenciatura en Ciencias Genómicas,UNAM
+### First version: yyy-mm-dd; Last update: 2022-08-31
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+
+.noinverse {
+  background-color: #272822;
+  color: #d6d6d6;
+  text-shadow: 0 0 20px #333;
+}
+
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+
+
+&lt;/style&gt;
+
+
+## Objetivo
+
+El alumno debe ser capaz de hacer filtros con grep.
+---
+
+## Contenido de la unidad
+
+1. Patrones
+2. Filtros con comandos de la familia grep
+
+
+---
+
+class: inverse, center, middle
+
+# Patrones y Filtros
+
+---
+## Patrones
+
+Cuando hablamos de patrones hablamos de regularidades. Entonces, un patrón es una sucesión de elementos (auditivos, gestuales, textuales, gráficos…) que se construye siguiendo una regla al observar las regularidades. Esa regla puede ser de repetición o de recurrencia.
+
+a) Una palabra o string es un patrón simple
+
+```
+  araC
+  Human Genome
+  CGAGTACTGGAAAACTAA
+```
+--
+
+b) Teléfono de diez cifras
+
+```
+    777-1234-2345 
+    555-2904-2746 
+   `ddd-dddd-dddd` patrón que representa los num telefónicos
+```
+--
+
+c) Fecha de nacimiento
+
+```
+    18-01-1989 
+    29-05-1997 
+   `dd-dd-dddd` patrón que representa las fechas de nacimiento
+```
+
+---
+## Patrones en biología
+
+¿Qué patrones en biología conoces?
+
+--
+
+Ex. ATG codón de inicio de los genes
+
+--
+
+```
+ATGGTTAAAGTTTATGCCCCGGCTTCCAGTGC...CGAGTACTGGAAAACTAA
+ATGAAACTCTACAATCTGAAAGATCACAACGA...AAAATGAATCATCAGTAA
+ATGAAGCAGCATAAGGCGATGATTGTCGCCCT...GCTTACGAATCCGAGTAA
+ATGAGCCAGCAAGTCATTATTTTCGATACCAC...AACAAGGAAACCGTGTGA
+ATG...............................................TAA
+                                                   G
+```
+---
+## Patrones en bioinformática
+
+Sitios de Unión al DNA de Reguladores Transcripcionales
+
+--
+```
+TACTGTTTTTATATACAGTATA
+TACTGTTTATTTATACAGTAAA
+TACTGTTTTTATATACAGTAGT
+AACTGGTTTTATATACAGTAAA
+AACTGTTTTTTTATCCAGTATA
+AACTGTGATTTTATACAGTATA
+TACTGGTTATTTATACAGGTAA
+AACTGTATTTATATACAGTTGT
+CCCTGGGTGTATATACAGTTAT
+TGCTGTGAGTATATACAGCAAA
+TGCTGGTTATCTATCCAGTGTA
+AGCTGTTTATTTATACAGTGAG
+TACTGTTATTGTGTACAGTATA
+CCCTGTAATTTTATCCAGTTGA
+CGCTGGATATCTATCCAGCATT
+TACTGTATGATTATCCAGTTAG
+TGCTGTATATTTATTCAGCTTG 
+```
+--
+```
+taCTGttttTatataCAGtaaa    consensus - patrón que representa a los TFBS
+```
+---
+## Preparando nuestro directorio de trabajo
+
+Seguimos trabajando en el directorio de practica4
+
+---
+## El comando grep
+
+Existe un comando cuya función principal es la búsqueda de patrones
+
+**grep**
+
+```bash
+man grep
+```
+
+--
+
+Algunos ejemplos de sus funcionalidades:
+
+|Opción |   Comportamiento   |
+|----  |---                 |
+|--colour|Marca el texto que corresponde al patrón                 |
+|-E    | Interpreta el patr´on como una expresión regular extendida tipo POSIX |
+|-p    |Interpreta el patrón como una expresión regular extendida, tipo Perl |
+|-f    |Lee uno o más patrones a partir de un archivo|
+|-i    |Ignora mayúsculas/minúsculas |
+|-n    |Imprime el número de línea donde se encontró el patrón|
+|-v    |Selecciona las líneas en donde no ocurre el patrón |
+
+---
+## Algunos ejemplos usando grep
+
+Sintáxis
+
+```bash
+grep [OPTIONS] PATTERN [FILE...]
+```
+
+patrón simple a buscar
+
+```bash
+grep araC data/coli.gff
+
+```
+nota como se resalta el patrón en las líneas donde fue encontrado.
+
+Otros ejemplos
+
+```bash
+grep tRNA data/coli.gff
+
+## patron compuesto
+grep "homoserine kinase" data/coli.gff
+```
+
+---
+## Algunas preguntas biológicas relevantes
+
+1. ¿Cuántos cromosomas tiene *Escherichia coli*?
+
+2. ¿Cuántos genes (con nombre diferente) existen en *E. coli*?
+
+3. ¿Cuántos genes (ID distinto) existen en *Escherichia coli*?
+
+4. ¿Cuántas secuencias proteicas se conocen para *Escherichia coli*?
+
+5. ¿Los IDs (NP##) de las secuencias proteicas son únicos?
+
+6. ¿Cuál es el tipo de feature de la anotación asociado con los protein id del archivo FASTA
+de proteínas?
+
+7. ¿Cuál es la posición de inicio, de final y la cadena de los genes listados en flagella genes.txt?
+
+---
+## P1: ¿Cuántos cromosomas tiene *Escherichia coli*?
+
+Esta pregunta ya la sabemos contestar... casi
+
+sólo que las líneas de comentarios nos ensucian los conteos
+
+```bash
+## Imprime nombres de cromosomas y encabezado
+cut -f1 data/coli.gff | uniq
+```
+--
+
+**grep** tiene ésta opción
+
+-v    Selecciona las líneas en donde **no ocurre el patrón**
+
+Si queremos eliminar las líneas que tienen `#` entonces ¿?
+
+--
+
+```bash
+# Imprime nombres de cromosomas sin encabezado
+## Elimina las lineas del encabezado
+## Obtiene los nombres de los cromosomas
+grep -v "#" data/coli.gff | cut -f1 | uniq
+```
+
+---
+## P2. ¿Cuántos genes (con nombre diferente) existen en *E. coli*?
+
+¿Dóonde está la información que necesitamos? archivo GFF 
+
+Col 9 : **attribute**. Pares tag-value, separados por coma, que proveen información adicional
+
+```
+## more, less o head de data/coli.gff
+NC_000913.3 RefSeq gene 190 255 . + . \
+ID=gene-b0001;Dbxref=ASAP:ABE-0000006,ECOCYC:EG11277,\
+EcoGene:EG11277,GeneID:944742;Name=thrL;gbkey=Gene;\
+gene=thrL;gene_biotype=protein_coding;\
+gene_synonym=ECK0001;locus_tag=b0001
+```
+
+--
+
+Lo que necesitamos hacer:
+
+--
+
+```bash
+## Quedarnos unicamente con renglones que sean de tipo genes
+## Acceder a la columna 9
+## Separar esa info que esta separada por ;
+## Quedarnos con la columna 3
+## Obtener los valores unicos
+## Contar el numero de valores unicos
+```
+
+---
+## P2. ¿Cuántos genes (con nombre diferente) existen en *E. coli*?
+
+```bash
+## Quedarnos unicamente con renglones que sean de tipo genes
+grep "gene" data/coli.gff
+```
+--
+
+.center[**¿Funcionó?¿El output es lo que necesitamos?**]
+
+--
+
+.content-box-blue[
+Podemos ver que no sólo los records de tipo gene están siendo conservados.
+]
+
+**Averigua porqué**
+
+--
+
+.content-box-blue[
+El grep busca el patrón en todo el renglón.. si necesitamos que unicamente tome en cuenta el valor de la columna 3 .. necesitamos ser más específicos.. agregando contexto.
+]
+
+---
+## P2. ¿Cuántos genes (con nombre diferente) existen en *E. coli*?
+
+
+Una lección para recordar:
+
+.content-box-red[
+“Que un programa genere output no significa que el output sea correcto”
+]
+
+---
+## P2. ¿Cuántos genes (con nombre diferente) existen en *E. coli*?
+
+Una forma de hacerlo, es agregar información de contexto. Sabemos que la columna 2 es idéntica para todos los registros del archivo GFF. Entre la columna 2 y 3 hay un tabulador, generalmente se representa como `\t`
+
+Lógicamente quedaria como esto .. filtrando los renglones que tengan RefSeq + tabulador + gene
+
+```bash
+## Quedarnos unicamente con los genes
+grep "RefSeq\tgene" data/coli.gff 
+```
+
+.center[**¿Funcionó?**]
+
+--
+
+.content-box-blue[
+`grep` is using regular expressions as defined by [POSIX](https://muylinux.xyz/que-es-posix-por-que-es-importante-para-los-usuarios-de-linux-unix/). For whatever reasons POSIX have not defined `\t` as tab.
+]
+
+pero hay alternativas ..
+
+---
+## P2. ¿Cuántos genes (con nombre diferente) existen en *E. coli*?
+
+- Podemos decirle a `grep` que use las expresiones regulares definidas por el lenguaje Perl (perl has \t as tab)
+
+```bash
+## Quedarnos unicamente con los genes
+grep -P "RefSeq\tgene" data/coli.gff
+```
+
+--
+
+- Usa de manera literal el carater tabulador, que puedes imprimirlo usando las teclas `^V&lt;tab&gt;`
+control + V y después control + tecla tab
+
+```bash
+## Quedarnos unicamente con los genes
+grep -P "RefSeq       gene" data/coli.gff
+```
+
+--
+
+Entonces, comprobemos que solo tenemos registros de tipo gene
+
+```bash
+## Quedarnos unicamente con los genes
+grep -P "RefSeq\tgene" data/coli.gff | cut -f3 | sort -u
+```
+
+---
+## P2. ¿Cuántos genes (con nombre diferente) existen en *E. coli*?
+
+Continuemos con nuestro flujo 
+
+```bash
+## Quedarnos ´unicamente con los genes
+grep -P "RefSeq\tgene" data/coli.gff
+````
+--
+
+```bash
+## Acceder a la columna 9
+grep -P "RefSeq\tgene" data/coli.gff | cut -f9
+```
+--
+
+```bash
+## Separar esa info por ;
+## Quedarnos con la columna 3s
+man cut
+
+## Obtener los valores unicos
+## Contar el numero de valores unicos
+```
+
+---
+## P2. ¿Cuántos genes (con nombre diferente) existen en *E. coli*?
+
+`cut` tiene la opción
+
+```
+      -d, --delimiter=DELIM
+              use DELIM instead of TAB for field delimiter
+```
+
+--
+
+```bash
+## Separar esa info por ;
+## Quedarnos con la columna 3
+grep -P "RefSeq\tgene" data/coli.gff | cut -f9 | \
+        cut -d ';' -f3 
+```
+
+finalmente
+
+```bash
+## Obtener los valores unicos
+grep -P "RefSeq\tgene" data/coli.gff | cut -f9 | \
+cut -d ';' -f3 | sort -u | head
+```
+
+y contarlos
+
+```bash
+## Contar el numero de valores unicos
+grep -P "RefSeq\tgene" data/coli.gff | cut -f9 | \
+        cut -d ';' -f3 | sort -u | wc -l
+```
+
+---
+## 3. ¿Cuántos genes (ID distinto) existen en *Escherichia coli*?
+
+¿Dónde está la información que necesitamos?
+
+--
+
+```bash
+## more, less o head de data/coli.gff
+NC_000913.3 RefSeq gene 190 255 . + . \
+ID=gene-b0001;Dbxref=ASAP:ABE-0000006,ECOCYC:EG11277,\
+EcoGene:EG11277,GeneID:944742;Name=thrL;gbkey=Gene;\
+gene=thrL;gene_biotype=protein_coding;\
+gene_synonym=ECK0001;locus_tag=b0001
+
+```
+---
+## 3. ¿Cuántos genes (ID distinto) existen en *Escherichia coli*?
+
+Lo que necesitamos hacer:
+
+```bash
+## - Quedarnos unicamente con la feature tipo gene
+
+## - Acceder a la columna 9
+
+## -Separar esa info por ; y quedarnos con la columna 2 
+
+## -Separar esa info por , y quedarnos con la columna 2 (ECOCYC-ID?)
+
+## - Obtener los valores unicos
+
+## - Contar el numero de valores unicos
+
+```
+
+---
+## 3. ¿Cuántos genes (ID distinto) existen en *Escherichia coli*?
+
+```bash
+## Quedarnos unicamente con la feature tipo gene
+grep -P "RefSeq\tgene" data/coli.gff 
+
+```
+
+--
+
+```bash
+##    -Acceder a la columna 9
+grep -P "RefSeq\tgene" data/coli.gff | cut -f9 
+```
+
+--
+
+```bash
+## Separar esa info por ; y quedarnos con la columna 2
+grep -P "RefSeq\tgene" data/coli.gff | cut -f9 | \
+cut -d ';' -f2 
+
+```
+
+--
+
+```bash
+## Separar esa info por , y quedarnos con la columna 2
+grep -P "RefSeq\tgene" data/coli.gff | cut -f9 | \
+cut -d ';' -f2 | cut -d ',' -f2
+```
+```
+## Obtener los valores unicos
+## Contar el numero de valores unicos
+```
+
+.center[**¿Funcionó?¿El output es lo que necesitamos?**]
+
+
+---
+## 3. ¿Cuántos genes (ID distinto) existen en *Escherichia coli*?
+
+.content-box-blue[
+El EcocycID no esta en la misma posición, no podemos cortar los identificadores porque estarian mezclados. ]
+
+Lo más que podemos hacer por el momento, es quedarnos con las lineas que tienen el patrón ECOCYC.
+
+```bash
+## Separar esa info por , y quedarnos con la columna 2
+grep -P "RefSeq\tgene" data/coli.gff | cut -f9 | \
+cut -d ';' -f2 | grep ECOCYC
+```
+
+---
+## 3. ¿Cuántos genes (ID distinto) existen en *Escherichia coli*?
+
+Si usamos otro identificador, como el locus_tag
+
+--
+
+```bash
+## Separar esa info por , y quedarnos con la columna 2
+grep -P "RefSeq\tgene" data/coli.gff | cut -f9 |  \
+cut -d ';' -f8 | wc -l
+```
+
+Asegurarnos que todas las lineas son el locus_tag
+
+```bash
+## Separar esa info por , y quedarnos con la columna 2
+grep -P "RefSeq\tgene" data/coli.gff | cut -f9 |  \
+cut -d ';' -f8 | cut -c1-5 | sort |uniq -c
+```
+
+---
+## 3. ¿Cuántos genes (ID distinto) existen en *Escherichia coli*?
+
+```bash
+## Quedarnos unicamente con los genes
+grep -P "RefSeq\tgene" data/coli.gff 
+
+## Acceder a la columna 9
+grep -P "RefSeq\tgene" data/coli.gff | cut -f9 
+
+## Separar esa info por ; y quedarnos con la columna 1
+grep -P "RefSeq\tgene" data/coli.gff | cut -f9 | \
+cut -d ';' -f8
+
+## Obtener los valores unicos
+grep -P "RefSeq\tgene" data/coli.gff | cut -f9 | \
+cut -d ';' -f8 | sort -u | head
+
+## Contar el numero de valores unicos
+grep -P "RefSeq\tgene" data/coli.gff | cut -f9 | \
+cut -d ';' -f8 | sort -u | wc -l
+```
+
+---
+## 3. ¿Cuántos genes (ID distinto) existen en *Escherichia coli*?
+
+
+***¡LISTO!**
+**4419 genes con ID diferente**
+
+No existe ningún gene (features anotadas como gene) en E. coli (al menos
+en lo que se refiere a esta versión de la anotación)
+
+- Que tenga el mismo nombre y distinto ID
+- Que tenga el mismo ID y distinto nombre
+- Que tenga el mismo nombre y distintas posiciones gen´omicas
+- Que tenga el mismo ID y distintas posiciones gen´omicas
+
+---
+## 4. ¿Cuántas secuencias proteicas se conocen para *Escherichia coli*?
+
+¿Dónde esta la informaci´on que necesitamos?
+
+.content-box-blue[
+     ## Archivo de proteinas
+    head data/coli_protein.fna
+]
+
+--
+
+data/coli protein.fna
+```
+&gt;NP 414542.1 thr operon leader peptide [Escherichia coli str. K-12 substr. MG1655]
+MKRISTTITTTITITTGNGAG
+&gt;NP 414543.1 fused aspartate kinase/homoserine dehydrogenase 1 [Escherichia coli str. K-12 substr. MG1655]
+MRVLKFGGTSVANAERFLRVADILESNARQGQVATVLSAPAKITNHLVAMIEKTISGQDALPNISDAERIFAELLTGLAA
+AQPGFPLAQLKTFVDQEFAQIKHVLHGISLLGQCPDSINAALICRGEKMSIAIMAGVLEARGHNVTVIDPVEKLLAVGHY
+LESTVDIAESTRRIAASRIPADHMVLMAGFTAGNEKGELVVLGRNGSDYSAAVLAACLRADCCEIWTDVDGVYTCDPRQV
+PDARLLKSMSYQEAMELSYFGAKVLHPRTITPIAQFQIPCLIKNTGNPQAPGTLIGASRDEDELPVKGISNLNNMAMFSV
+SGPGMKGMVGMAARVFAAMSRARISVVLITQSSSEYSISFCVPQSDCVRAERAMQEEFYLELKEGLLEPLAVTERLAIIS
+VVGDGMRTLRGISAKFFAALARANINIVAIAQGSSERSISVVVNNDDATTGVRVTHQMLFNTDQVIEVFVIGVGGVGGAL
+LEQLKRQQSWLKNKHIDLRVCGVANSKALLTNVHGLNLENWQEELAQAKEPFNLGRLIRLVKEYHLLNPVIVDCTSSQAV
+```
+---
+## 4. ¿Cuántas secuencias proteicas se conocen para *Escherichia coli*?
+
+Lo que necesitamos hacer:
+
+--
+
+```bash
+## Extraer las lineas con identificadores, NO SECUENCIAS
+## Contar el numero de lineas
+```
+
+--
+
+```bash
+## Extraer las lineas con identificadores
+grep "&gt;" data/coli_protein.fna | head
+```
+--
+
+```bash
+## Contar el numero de lineas
+grep "&gt;" data/coli_protein.fna | wc -l
+```
+
+---
+## 5. ¿Los IDs (NP##) de las secuencias proteicas son únicos?
+
+¿Dónde esta lo que necesitamos?
+
+data/coli protein.fna
+```
+&gt;NP_414542.1 thr operon leader peptide [Escherichia coli str. K-12 substr. MG1655]
+MKRISTTITTTITITTGNGAG
+&gt;NP_414543.1 fused aspartate kinase/homoserine dehydrogenase 1 [Escherichia coli str. K-12 substr. MG1655]
+MRVLKFGGTAVANAERFLRVADILESNARQGQVATVLSAPAKITNHLVAMIEKTISGQDALPNISDAERIFAELLTGLAA
+AQPGFPLAQLKTFVDQEFAQIKHVLHGISLLGQCPDSINAALICRGEKMSIAIMAGVLEARGHNVTVIDPVEKLLAVGHY
+LESTVDIAESTRRIAASRIPADHMVLMAGFTAGNEKGELVVLGRNGSDYSAAVLAACLRADCCEIWTDVDGVYTCDPRQV
+PDARLLKSMSYQEAMELSYFGAKVLHPRTITPIAQFQIPCLIKNTGNPQAPGTLIGASRDEDELPVKGISNLNNMAMFSV
+SGPGMKGMVGMAARVFAAMSRARISVVLITQSSSEYSISFCVPQSDCVRAERAMQEEFYLELKEGLLEPLAVTERLAIIS
+VVGDGMRTLRGISAKFFAALARANINIVAIAQGSSERSISVVVNNDDATTGVRVTHQMLFNTDQVIEVFVIGVGGVGGAL
+LEQLKRQQSWLKNKHIDLRVCGVANSKALLTNVHGLNLENWQEELAQAKEPFNLGRLIRLVKEYHLLNPVIVDCTSSQAV
+```
+
+---
+## 5. ¿Los IDs (NP##) de las secuencias proteicas son únicos?
+
+Lo que necesitamos hacer
+
+```bash
+## Extraer las lineas con identificadores
+## Extraer la columna 1, delimitada por SPACE
+## Contar lineas unicas
+
+```
+
+---
+## 5. ¿Los IDs (NP##) de las secuencias proteicas son únicos?
+
+Lo que necesitamos hacer
+
+```bash
+## Extraer las lineas con identificadores
+grep "&gt;" data/coli_protein.fna | head
+```
+
+--
+
+```bash
+## Extraer la columna 1, delimitada por SPACE
+grep "&gt;" data/coli_protein.fna | cut -d " " -f1 | head
+```
+--
+
+```bash
+## Contar lineas unicas
+grep "&gt;" data/coli_protein.fna | cut -d " " -f1 | \
+sort -u | wc -l
+```
+
+---
+## 5. ¿Los IDs (NP##) de las secuencias proteicas son únicos?
+
+**¡LISTO!**
+**4242 IDs únicos de proteinas**
+
+
+Conclusiones adicionales
+- Cada secuencia tiene un ID unico
+
+- No existen dos secuencias con el mismo ID
+
+
+---
+
+Revisemos los comandos que hemos aprendido
+
+|Comando |   Función básica   |
+|----    |---                 |
+|sort    | Ordena una serie de líneas (o records) |
+|cut     |Corta porciones seleccionadas de cada línea |
+|uniq    |Reporta o filtra las líneas repetidas de un archivo |
+|wc      |Reporta la cuenta de líneas, caracteres y bytes |
+|grep    |Busca patrones |
+
+---
+## 6. ¿Cuál es el tipo de feature de la anotación asociado con los protein id del archivo FASTA de proteínas?
+
+Busquemos los archivos que nos pueden ayudar
+
+El *protein_id* es el identificador de las secuencias
+
+data/coli_protein.fna 
+```bash
+&gt;NP_414542.1 thr operon leader peptide [Escherichia coli str. K-12 substr. MG1655]
+MKRISTTITTTITITTGNGAG
+&gt;NP_414543.1 fused aspartate kinase/homoserine dehydrogenase 1 [Escherichia coli str. K-12 substr. MG1655]
+MRVLKFGGTSVANAERFLRVADILESNARQGQVATVLSAPAKITNHLVAMIEKTISGQDALPNISDAERIFAELLTGLAA
+AQPGFPLAQLKTFVDQEFAQIKHVLHGISLLGQCPDSINAALICRGEKMSIAIMAGVLEARGHNVTVIDPVEKLLAVGHY
+LESTVDIAESTRRIAASRIPADHMVLMAGFTAGNEKGELVVLGRNGSDYSAAVLAACLRADCCEIWTDVDGVYTCDPRQV
+```
+
+--
+
+El *protein_id* esta en la columna 9 del GFF file.
+
+data/coli.gff
+
+```bash
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=511145
+NC_000913.3	RefSeq	CDS	190	255	.	+	0	ID=cds-NP_414542.1;Parent=gene-b0001;Dbxref=UniProtKB/Swiss-Prot:P0AD86,Genbank:NP_414542.1,ASAP:ABE-0000006,ECOCYC:EG11277,EcoGene:EG11277,GeneID:944742;Name=NP_414542.1;gbkey=CDS;gene=thrL;locus_tag=b0001;orig_transcript_id=gnl|b0001|mrna.b0001;product=thr operon leader peptide;protein_id=NP_414542.1;transl_table=11
+```
+---
+## 6. ¿Cuál es el tipo de feature de la anotación asociado con los protein id del archivo FASTA de proteínas?
+
+¿Cómo lo haremos?
+
+--
+
+```bash
+## Extraer los protein id del archivo FASTA
+
+## Guardarlos en un archivo 
+
+## Buscar todos estos IDs en el archivo de anotacion
+
+## Acceder al campo feature type de estas lineas
+
+## Obtener la cuenta para cada uno de los valores unicos
+
+```
+
+---
+## 6. ¿Cuál es el tipo de feature de la anotación asociado con los protein id del archivo FASTA de proteínas?
+
+```bash
+## Extraer los protein_id del archivo FASTA
+grep "&gt;" data/coli_protein.fna | cut -d " " -f1 | head
+```
+
+--
+
+```bash
+## Eliminar el simbolo '&gt;'
+grep "&gt;" data/coli_protein.fna | cut -d " " -f1 | cut -d "&gt;" -f2 | head
+
+### esto tambien puede funcionar
+grep "&gt;" data/coli_protein.fna | cut -d " " -f1 | cut -c2-  | head
+
+```
+
+--
+
+```bash
+## Guardarlos en un archivo
+grep "&gt;" data/coli_protein.fna | cut -d " " -f1 | \
+cut -d "&gt;" -f2 &gt; protein_id.txt
+```
+
+
+
+---
+## 6. ¿Cuál es el tipo de feature de la anotación asociado con los protein id del archivo FASTA de proteínas?
+
+Patrones en un archivo para ser usados con grep
+
+```bash
+man grep
+```
+
+Sigamos
+
+```bash
+## Buscar todos estos IDs en el archivo de anotaci´on
+## Este paso es computacionalmente demandante
+grep -f protein_id.txt data/coli.gff &gt; protein_id.gff
+```
+--
+
+```bash
+## Acceder al campo feature type de estas l´ıneas
+## Obtener valores unicos y sus cuentas
+cut -f3 protein_id.gff | sort | uniq -c
+
+```
+
+**4245 CDS, ¿cuántos IDs de proteínas teníamos originalmente?**
+
+---
+## 6. ¿Cuál es el tipo de feature de la anotación asociado con los protein id del archivo FASTA de proteínas?
+
+¿Cuántos IDs de proteínas teníamos originalmente?
+
+```bash
+## Comparar con numero original de IDs
+wc -l protein_id.txt
+```
+--
+## 6. ¿Cuál es el tipo de feature de la anotación asociado con los protein id del archivo FASTA de proteínas?
+
+- 4242 IDs iniciales
+- 4245 CDS asociados a esos protein id
+- Existe algún protein id asociado a más de un CDS
+
+---
+## 10. ¿Cuál es la posición de inicio, de final y la cadena de los genes listados en flagella genes.txt?
+
+**Te toca**
+
+¿Cuáles IDs se encuentran asociados a más de un CDS? 
+Código comentado - Algoritmo
+Solución
+
+
+---
+## 10. ¿Cuál es la posición de inicio, de final y la cadena de los genes listados en flagella genes.txt?
+
+```bash
+## Buscar los genes en el archivo de anotacion
+grep -f data/flagella_genes.txt data/coli.gff
+## No hemos terminado
+grep -f data/flagella_genes.txt data/coli.gff | \
+grep -P --color "RefSeq\tgene"
+## Extraer las posiciones de inicio, de final y la cadena
+grep -f data/flagella_genes.txt data/coli.gff
+```
+
+
+---
+
+## Cuando llevas estudiando un rato sin parar ...
+&lt;img src="https://areajugones.sport.es/wp-content/uploads/2017/10/maxresdefault-9.jpg.webp" width="800px" style="display: block; margin: auto;" /&gt;
+
+.pull-right[.tiny[["Goku:Kaio-Ken"](https://areajugones.sport.es/wp-content/uploads/2017/10/maxresdefault-9.jpg.webp)]]
+
+### El conocimiento es poder
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
