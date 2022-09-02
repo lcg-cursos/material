@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introducción a la Bioinformática</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introducción a la Bioinformática
+### Licenciatura en Ciencias Genómicas,UNAM
+### First version: yyy-mm-dd; Last update: 2022-09-02
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+
+.noinverse {
+  background-color: #272822;
+  color: #d6d6d6;
+  text-shadow: 0 0 20px #333;
+}
+
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+
+
+&lt;/style&gt;
+
+
+## Objetivo
+
+El alumno debe ser capaz de aplicar los filtros con grep y conocer las expresiones regulares.
+---
+
+## Contenido de la unidad
+
+1. Recordando los comandos básicos de análisis
+
+2. Ejercicios
+
+3. Expresiones regulares
+
+
+---
+## Algunos comandos básicos de análisis
+
+Revisemos los comandos que hemos aprendido
+
+--
+
+|Comando |   Función básica   |
+|----    |---                 |
+|sort    | Ordena una serie de líneas (o records) |
+|cut     |Corta porciones seleccionadas de cada línea |
+|uniq    |Reporta o filtra las líneas repetidas de un archivo |
+|wc      |Reporta la cuenta de líneas, caracteres y bytes |
+|grep    |Busca patrones |
+|man     |Imprime la descripción y opciones de un comando  |
+
+
+---
+## Funcionalidades del comando uniq
+
+Algunas funcionalidades del comando uniq
+
+--
+
+|Opción |   Comportamiento |
+|----    |---                 |
+|-d    | Sólo imprime las líneas repetidas |
+|-u    | Sólo imprime las líneas NO repetidas|
+|-i    | Realiza la comparación case-insensitive|
+|-c    | Precede cada línea output con la cuenta del número de veces que esa línea ocurrió|
+
+---
+## Funcionalidades del comando grep
+
+Algunas funcionalidades del comando grep
+
+|Opción |   Comportamiento |
+|----    |---                 |
+|--color | Marca el texto que corresponde al patrón |
+|-E |Interpreta el patr´on como una expresi´on regular extendida tipo POSIX|
+|-P |Interpreta el patr´on como una expresi´on regular extendida, tipo Perl|
+|-f |Lee uno o más patrones a partir de un archivo|
+|-i |Ignora mayúsculas/minúsculas|
+|-n |Imprime el número de línea donde se encontró el patrón|
+|-v |Selecciona las l´ıneas en donde no ocurre el patrón|
+
+---
+## Buenas prácticas
+
+Las siguientes recomendaciones te ayudarán a construir flujos de trabajo más robustos y reproducibles.
+
+- Piensa en los pasos necesarios para obtener la respuesta que buscas antes de ejecutar tu primer comando
+
+- Documenta tus códigos describiendo la funcionalidad de cada sección
+
+- Analiza el output para encontrar fallas lógicas o comportamientos inesperados
+
+- Recuerda que siempre puedes acceder al manual de un comando o buscar ayuda en internet para entender su funcionamiento
+
+---
+## Ejercicios
+
+Preparando nuestro directorio de trabajo
+
+- Muévete a tu directorio home en el servidor
+
+- Crea la carpeta practica5
+
+- Entra a la carpeta practica5
+
+- Crea la carpeta data
+
+- Copia los archivos ubicados en /home/lgomez/WelcomeBioinfo/datos/practica5 a tu carpeta data
+
+---
+## Familiarizándonos con los datos de trabajo
+
+- Visualiza y explora cada uno de los archivos
+
+- Los archivos llamados cholerae son anotaciones de la bacteria Vibrio cholerae
+
+- Los archivos llamados anthracis son anotaciones de la bacteria Bacillus anthracis
+
+
+---
+## Familiarizándonos con los organismos de trabajo
+
+.pull-left[
+Vibrio cholerae
+
+- Bacteria gram negativa
+- Gamma proteobacteria
+- Produce colera en humanos
+
+&lt;img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Cholera_bacteria_SEM.jpg/440px-Cholera_bacteria_SEM.jpg" width="300px" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+
+Bacillus anthracis
+
+- Bacteria gram positiva
+- Es un bacilo formador de endoesporas
+- Es el agente que produce antrax en humanos
+
+&lt;img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Bacillus_anthracis.png/654px-Bacillus_anthracis.png" width="300px" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Ejercicio 1 Pregunta
+
+**¿Cuál es la fuente de datos más común para los datos de anotación de
+Vibrio cholerae y de Bacillus anthracis?**
+
+.content-box-blue[
+Recuerda: en el caso de *Escherichia coli* todos los datos provenían de
+RefSeq, un recurso altamente curado y detallado
+]
+
+--
+
+**¿Cuál es el algoritmo que debemos seguir?**
+
+---
+## Ejercicio 1 Algoritmo
+
+.content-box-yellow[
+Para cada organismo
+- Eliminar el encabezado
+
+- Acceder a la columna 2
+
+- Obtener los valores únicos y el número de repeticiones para cada uno
+de ellos
+
+]
+
+---
+## Ejercicio 1 Código
+
+Una forma de hacerlo
+
+```bash
+## Fuente de los datos para V. cholerae
+grep -v "#" data/cholerae.gff | cut -f2 | \
+sort | uniq -c
+````
+
+--
+
+```bash
+## Fuente de los datos para B. anthracis
+grep -v "#" data/anthracis.gff | cut -f2 | \
+sort | uniq -c
+```
+
+---
+## Ejercicio 1 Respuesta
+
+
+.content-box-green[
+V. cholerae, fuentes de datos más comunes:
+  - 3771 RefSeq
+  - 3609 **Protein Homology**
+
+B. anthracis, fuentes de datos más comunes:
+  - 5530 RefSeq
+  - 5332 **Protein Homology**
+]
+
+Para ambos organismos la fuente de casi la mitad de las anotaciones es la
+inferencia de homolog´ıa para los genes o proteínas
+
+---
+## Ejercicio 2 Pregunta
+
+**¿Cuántos de los genes de Vibrio cholerae existen en Bacillus anthracis?**
+
+.content-box-blue[
+Para fines de este ejercicio, un gene será considerado como el mismo si
+tiene el mismo nombre.
+]
+
+**¿Cuál es el algoritmo que debemos seguir?**
+
+---
+## Ejercicio 2 Algoritmo
+
+
+**¿Cuántos de los genes de Vibrio cholerae existen en Bacillus anthracis?**
+
+.content-box-yellow[
+- Obtener los genes únicos de V. cholerae
+
+- Contar el número de genes únicos de V. cholerae
+
+- Buscar estos genes B. anthracis
+
+- Obtener el nombre de los genes compartidos en B. anthracis
+
+- Obtener el número de genes únicos compartidos
+
+]
+
+---
+## Ejercicio 2 Código
+
+Una forma de hacerlo
+
+```bash
+## Obtener los genes unicos de V. cholerae
+grep -v "#" data/cholerae.gff | grep -P "RefSeq\tgene" | cut -f9 | \
+cut -d ';' -f2 | sort -u &gt; cholerae_genes.txt
+
+## Contar el numero de genes unicos de V. cholerae
+wc -l cholerae_genes.txt
+
+## Buscarlos en B. anthracis
+grep -f cholerae_genes.txt data/anthracis.gff \
+&gt; cholerae_anthracis_genes.gff
+
+## Obtener numero de genes unicos compartidos
+grep -P "RefSeq\tgene" cholerae_anthracis_genes.gff \
+| cut -f 9 | cut -d ';' -f2 | sort -u | wc -l
+
+```
+---
+## Ejercicio 2 Respuesta
+
+.content-box-green[
+- V. cholerae tiene 3620 genes únicos
+
+- 523 también existen en B. anthracis
+]
+
+---
+## Ejercicio 3 Pregunta
+
+**¿Cuántos de las proteínas de Vibrio cholerae también existen en Bacillus anthracis?**
+
+.content-box-blue[
+
+Para fines de este ejercicio, una prote´ına ser´a considerada la misma si tiene
+la misma descripción en el campo product.
+
+]
+
+**¿Cuál es el algoritmo que debemos seguir?**
+
+---
+## Ejercicio 3 Algoritmo
+
+**¿Cuántos de las proteínas de Vibrio cholerae también existen en Bacillus anthracis?**
+
+.content-box-yellow [
+
+- Obtener los productos únicos de V. cholerae
+
+- Contar el número de productos únicos de V. cholerae
+
+- Buscar estos productos en B. anthracis
+
+- Obtener el nombre de los productos en B. anthracis
+
+- Obtener el número de productos únicos compartidos
+
+]
+
+**El campo product se encuentra disperso en varias columnas**
+
+
+---
+## Ejercicio 3 Código
+
+Una forma de hacerlo
+
+```bash 
+## El campo product esta disperso en varias columnas
+grep -v "#" data/cholerae.gff | grep -P "\tCDS\t" | cut -f9 | \
+cut -d ';' -f7 | grep "product=" &gt; cholerae_products.txt
+
+grep -v "#" data/cholerae.gff | grep -P "\tCDS\t" | cut -f9 | \
+cut -d ';' -f8 | grep "product=" &gt;&gt; cholerae_products.txt
+
+grep -v "#" data/cholerae.gff | grep -P "\tCDS\t" | cut -f9 | \
+cut -d ';' -f9 | grep "product=" &gt;&gt; cholerae_products.txt
+
+grep -v "#" data/cholerae.gff | grep -P "\tCDS\t" | cut -f9 | \
+cut -d ';' -f10 | grep "product=" &gt;&gt; cholerae_products.txt
+
+grep -v "#" data/cholerae.gff | grep -P "\tCDS\t" | cut -f9 | \
+cut -d ';' -f11 | grep "product=" &gt;&gt; cholerae_products.txt
+
+## Productos unicos
+sort -u cholerae_products.txt &gt; cholerae_products_uniq.txt
+wc -l cholerae_products_uniq.txt
+```
+
+**Recuerda verificar que tu respuesta sea la correcta**
+
+---
+## Ejercicio 3 Código
+
+La segunda parte de la respuesta:
+
+```bash
+## Buscarlos en B. anthracis
+grep -iFf cholerae_products_uniq.txt data/anthracis.gff \
+&gt; cholerae_anthracis_products.gff
+
+## Obtener productos compartidos
+grep -P "\tCDS\t" cholerae_anthracis_products.gff | cut -f9 | \
+cut -d ';' -f7 | grep "product=" &gt; anthracis_shared_products.txt
+grep -P "\tCDS\t" cholerae_anthracis_products.gff | cut -f9 | \
+cut -d ';' -f8 | grep "product=" &gt;&gt; anthracis_shared_products.txt
+grep -P "\tCDS\t" cholerae_anthracis_products.gff | cut -f9 | \
+cut -d ';' -f9 | grep "product=" &gt;&gt; anthracis_shared_products.txt
+grep -P "\tCDS\t" cholerae_anthracis_products.gff | cut -f9 | \
+cut -d ';' -f10 | grep "product=" &gt;&gt; anthracis_shared_products.txt
+grep -P "\tCDS\t" cholerae_anthracis_products.gff | cut -f9 | \
+cut -d ';' -f11 | grep "product=" &gt;&gt; anthracis_shared_products.txt
+
+## Numero de productos unicos
+sort -u anthracis_shared_products.txt | wc -l
+```
+
+---
+## Ejercicio 3  Respuesta
+
+.content-box-green[
+
+- V. cholerae tiene 2430 productos proteicos (de acuerdo a la descripción del producto)
+
+- 1030 también existen en B. anthracis
+]
+
+---
+## Ejercicio 4 Pregunta
+
+**¿Cuál es la longitud aproximada de los genomas de Vibrio cholerae y de
+Bacillus anthracis? ¿Cuántos cromosomas tiene cada bacteria?**
+
+.content-box-blue[
+
+HINT: Una longitud estimada incluyendo saltos de l´ınea pero sin incluir el
+header
+
+]
+
+**¿Cuál es el algoritmo que debemos seguir?**
+
+---
+## Ejercicio 4 Algoritmo
+
+**¿Cuál es la longitud aproximada de los genomas de Vibrio cholerae y de
+Bacillus anthracis? ¿Cuántos cromosomas tiene cada bacteria?**
+
+.content-box-yellow[
+
+Para cada organismo:
+
+- Obtener las líneas encabezado del fasta genómico y contarlas
+
+- Excluir las líneas encabezado del fasta genómico y contar los caracteres
+
+]
+
+---
+## Ejercicio 4 Código
+
+Una forma de hacerlo
+
+```bash
+## Numero de cromosomas V. cholerae
+grep "&gt;" data/cholerae_genomic.fna
+
+## Longitud aprox de genoma V. cholerae
+grep -v "&gt;" data/cholerae_genomic.fna | wc
+
+## Numero de cromosomas B. anthracis
+grep "&gt;" data/anthracis_genomic.fna
+
+## Longitud aprox de genoma B. anthracis
+grep -v "&gt;" data/anthracis_genomic.fna | wc
+```
+
+---
+## Ejercicio 4 Respuesta
+
+.content-box-green[
+
+V. cholerae:
+  - 2 cromosomas
+  - aprox 4083883 pares de bases en su genoma
+  
+B. anthracis:
+  - 1 cromosoma
+  - aprox 5292635 pares de bases en su genoma
+]
+
+---
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
