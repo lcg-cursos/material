@@ -40,23 +40,33 @@ pre {
 }
 &lt;/style&gt;
 
+# From text to FastA format
+
 **Problema:**
 
-¿Dónde empieza el codón inical AUG en la secuencia 
+Crear un archivo fasta a partir de la secuencia de DNA que está en `dna.txt` 
 
-dna = 'AAGGTACGTCGCGCGTTATTAGCCTAAT' ?
+Ejemplo de un archivo fasta: 
 
-Escribe un programa que te regrese la posición del codón inicial y donde termina el codón de término
+```
+&gt; sequence_name 
+ATCGACTGATCGATCGTACGAT
+```
 
-Output: un mensaje y el resultado
+---
 
-````
+Entonces, el programa
 
-El codon TAC empieza en la posicion  4
+- Debe pedir el archivo dna.txt con la secuencia
 
-Fragmento que será RNA  (codón inicio: TAC, codón de paro =ATT) es: 
+- Debe pedir el nombre del archivo de salida que tendrá la secuencia en formato FastA
 
-TACGTCGCGCGTT
+Ejemplo
+
+```
+    Input file: dna.txt 
+
+    Output file: dna.fasta 
 ```
 
     </textarea>
