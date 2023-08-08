@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 ### Licenciatura en Ciencias Genómicas,UNAM
 ]
 .date[
-### First version: 2021-08-15; Last update: 2023-08-04
+### First version: 2021-08-15; Last update: 2023-08-07
 ]
 
 ---
@@ -72,34 +72,50 @@ pre {
 
 Con el advenimiento de las tecnologías de secuenciación masiva y la demanda por procesar cada vez más datos, surgen junto con la comunidad bioinformática nuevas herramientas para manejar los datos.
 
-Las herramientas para poder ejecutarse necesitan archivos de datos, y ellas mismas generan nueva información. Estos archivos de entrada y salida leen un formato específico de datos, y muchas veces si la herramienta se vuelve muy usada, el formato de los datos se vuelve un estándar. Por eso, una parte importante de la Bioinformática es conocer y saber usar esos formatos para poder conectar las distintas herramientas de análisis.
+Las herramientas para poder ejecutarse necesitan **archivos de datos**, y ellas mismas generan nueva información. Estos **archivos de entrada y salida** leen un **formato específico de datos**, y muchas veces si la herramienta se vuelve muy usada, el formato de los datos se vuelve un estándar. Por eso, una parte importante de la Bioinformática es **conocer y saber usar esos formatos** para poder conectar las distintas herramientas de análisis.
 
-Uno de los datos más comunes en genómica es la secuencia, las propiedades entorno a ella como su posición en el genóma, su strand y las distintas funcionalidades que se pueden aplicar a una secuencia como su tamaño, su contenido de AT. Además, los repositorios donde son colocadas esas secuencias y su acceso a ellas es esencial.
+Uno de los **datos** más comunes en genómica es **la secuencia**, las propiedades entorno a ella como su posición en el genóma, su strand y las distintas funcionalidades que se pueden aplicar a una secuencia como su tamaño, su contenido de AT. Además, los repositorios donde son colocadas esas secuencias y su acceso a ellas es esencial.
 
 ---
 
-El Proyecto Biopython es una asociación internacional de desarrolladores de Python disponible gratuitamente (https:
-//www.python.org) de herramientas para biología molecular computacional. 
+## Biopython
 
-Básicamente, El objetivo de Biopython es facilitar al máximo el uso de Python para bioinformática mediante la creación de
-módulos y clases reutilizables. Las características de Biopython incluyen analizadores para varios formatos de archivo de bioinformática (BLAST, Clustalw, FASTA, Genbank, ...), acceso a servicios online (NCBI, Expasy, ...), interfaces a common
-y programas no tan comunes (Clustalw, DSSP, MSMS ...), una clase de secuencia estándar, varios agrupamientos
-módulos, una estructura de datos de árbol KD, etc. e incluso documentación.
+El Proyecto **Biopython** es una asociación internacional de **desarrolladores de Python** disponible gratuitamente (https://www.python.org) de herramientas para biología molecular computacional. 
+
+Básicamente, el objetivo de Biopython es **facilitar al máximo el uso de Python para bioinformática** mediante la creación de **módulos y clases** reutilizables. 
+
+Las características de Biopython incluyen analizadores para varios **formatos** de archivo de bioinformática (BLAST, ClustalW, FASTA, Genbank, ...), acceso a **servicios online** (NCBI, Expasy, ...), interfaces a common y programas no tan comunes (Clustalw, DSSP, MSMS ...), una clase de secuencia estándar, varios agrupamientos módulos, una estructura de datos de árbol KD, etc. e incluso documentación.
 
 [source: http://biopython.org/DIST/docs/tutorial/Tutorial.pdf]
----
 
+---
 ## Manejo de secuencias
 
-Las secuencias biológicas son posiblemente el objeto central de la bioinformática, y en esta sección presentaremos
-el mecanismo de Biopython para tratar con secuencias, el objeto **Seq**. Mas adelante veremos como el Objeto SeqRecord, combina la información de secuencia con cualquier anotación.
+Las **secuencias biológicas** son posiblemente el **objeto central de la bioinformática**, y en esta sección presentaremos el mecanismo de Biopython para tratar con secuencias, el objeto **Seq**. Mas adelante veremos como el Objeto SeqRecord, combina la información de secuencia con cualquier anotación.
 
-Las secuencias son esencialmente cadenas de letras como AGTACACTGGT, que parece muy natural ya que esta es la forma más común en que las secuencias se ven en formatos de archivos biológicos. La **diferencia** más importante entre los **objetos Seq** y las **cadenas estándar** de Python es que **tienen diferentes métodos**. Aunque el objeto Seq admite muchos de los mismos métodos que una cadena simple, su método translate() difiere al realizar la traducción biológica a diferencia que en un string dicho método reemplaza un caracter por otro. También hay métodos adicionales biológicamente relevantes como reverse_complement() en el objeto Seq.
+Las secuencias son esencialmente cadenas de letras como AGTACACTGGT. Es la forma más común para representar las secuencias y se formatean en distintos formatos de archivos biológicos. 
 
-[Métodos string](https://www.w3schools.com/python/python_ref_string.asp)
+&lt;img src="imgs/clase_2/sequenceFormats.png" width="700px" style="display: block; margin: auto;" /&gt;
+
+---
+## Secuencias .. string vs objeto Seq
+
+Las dos diferencias más importante entre los **objetos Seq** y las **cadenas estándar** de Python son:
+
+- que tienen diferentes métodos  
+- el objeto Seq tiene el attributo alphabet.  
+
+&lt;img src="https://www.researchgate.net/publication/328011342/figure/fig1/AS:962451910717440@1606477825497/Biotites-internal-representation-of-sequences-A-Sequence-object-takes-symbols-as-input.png" width="250px" style="display: block; margin: auto;" /&gt;
+.tiny[A Sequence object takes symbols as input parameter. Each symbol is encoded into its symbol code, using a Sequence class specific alphabet. The resulting code is then stored as NumPyndarray in the Sequence object.]
+
+Aunque el objeto Seq admite muchos de los mismos métodos que una cadena simple, su método **translate()** difiere al realizar la traducción biológica a diferencia que en un string dicho método reemplaza un caracter por otro. También hay métodos adicionales biológicamente relevantes como **reverse_complement()** en el objeto Seq.
+
+[Métodos string](https://www.w3schools.com/python/python_ref_string.asp), 
 [Métodos Bio.Seq](https://biopython.org/docs/1.75/api/Bio.Seq.html)
 
-----
+---
+
+## De string a Seq
 
 .full-width[.content-box-red[Función `Seq`: toma secuencia DNA|RNA|AA (string) y convierte a objeto `Seq`]]
 
@@ -142,11 +158,9 @@ seqobj = Seq('ATGCGATCGAGC')
 .full-width[.content-box-red[Superclase `Bio`, clase `Bio.Seq` y `Seq` como subclase de `Bio` ]]
 
 ---
-
 ## Inmutabilidad
 
-.full-width[.content-box-red[Los objetos `Seq` son inmutables  ]]
-
+.full-width[.content-box-red[Los objetos `Seq` son inmutables. **Inmutables**: no permiten ser modificados una vez creados.]]
 
 
 ```python
@@ -162,16 +176,20 @@ from Bio.Seq import MutableSeq
 mut_seq = MutableSeq(seqobj)
 mut_seq[0] = "T" 
 ```
-O desde un inicio hacer nuestro objeto `MutableSeq` .tiny[(importar `MutableSeq`)]
-.full-width[.content-box-yellow[ from Bio.Seq import MutableSeq ]]
+O desde un inicio hacer nuestro objeto `MutableSeq` .tiny[(import `MutableSeq`)]
+
+
+```python
+from Bio.Seq import MutableSeq
+```
 
 ---
 
 &lt;img src="imgs/clase_2/meowtation.jpeg" width="450px" style="display: block; margin: auto;" /&gt;
 
 ---
+## String: reverse/complement
 
-### ¿Cómo obtendrían la secuencia complementaria?
 
 
 ```python
@@ -181,12 +199,21 @@ seq_str
 ```
 ## 'ATGCGATCGAGC'
 ```
+
+¿cómo sacamos el reverso?
 --
 
 
 ```python
 #invertir secuencia 
 seq_str = seq_str[::-1]
+```
+
+ahora el complemento
+--
+
+
+```python
 #remplazar cada nucleotido por su complementario
 seq_str = seq_str.replace("A", "t") 
 seq_str = seq_str.replace("C", "g")
@@ -200,9 +227,7 @@ seq_str
 ```
 
 ---
-
-## Usando `Seq()`
-
+## Objeto `Seq()`: reverse/complement
 
 - Secuencia complementaria:
 
@@ -214,6 +239,8 @@ seq_str
 ## Seq('TACGCTAGCTCG')
 ```
 
+--
+
 - Secuencia reverso complementaria:
 
 ```python
@@ -223,6 +250,8 @@ seq_str
 ```
 ## Seq('GCTCGATCGCAT')
 ```
+
+--
 
 - o su traducción .tiny[ (empieza a traducir desde inicio sin importar el codón de inicio) ]:
 
@@ -243,6 +272,11 @@ seq_str
 
 ```python
 *rna = seqobj.transcribe()
+rna
+```
+
+```
+## Seq('AUGCGAUCGAGC')
 ```
 
 - y retrotranscripto
@@ -257,9 +291,9 @@ seq_str
 
 ---
 
-## Extraer subsecuencias
+## Objeto `Seq()`: Extraer subsecuencias
 
-Para ejemplo extraeremos el primer codón [0:3]
+Extraer el primer codón [0:3]
 
 ```python
 seqobj = Seq('ATGCGATCGAGC')
@@ -286,7 +320,6 @@ for codon in re.findall(r"(.{3})", str(seqobj)):
 ```
 
 ---
-
 ## Buscar patrones
 
 Buscaremos el patrón **ACG**
@@ -295,10 +328,13 @@ Buscaremos el patrón **ACG**
 ```python
 # from Bio.Seq import Seq
 *from Bio import SeqUtils
+
 # Patrón a buscar
 pattern = Seq("ACG")
+
 # Secuencia donde buscaremos patrón
 sequence = Seq("ATGCGCGACGGCGTGATCAGCTTATAGCCGTACGACTGCTGC")
+
 # Busqueda patrón en secuencia tipo STRING!!
 *results = SeqUtils.nt_search(str(sequence), pattern)
 
@@ -369,7 +405,8 @@ print(seqobj.find("GC"))  # nos da la primera posición que encuentra
 &lt;br&gt;
 
 Input a utilizar: 
-&lt;pre&gt;AGCCATGTAGCTAACTCAGGTTACATGGGGATGACCCCGCGACTTGGATTAGAGTCTCTTTTGGAATAAGCCTGAATGATCCGAGTAGCATCTCAG&lt;/pre&gt;
+&lt;pre&gt;AGCCATGTAGCTAACTCAGGTTACATGGGGATGACCCCGCGACTTGGATTAGAGT
+CTCTTTTGGAATAAGCCTGAATGATCCGAGTAGCATCTCAG&lt;/pre&gt;
 
 --
 
@@ -380,12 +417,15 @@ Input a utilizar:
 - .small[No olvidar probar todos los ORFs]
 
 ---
-### RESUMEN
+### RESUMEN     
 
 - **`Bio.Seq`**
 
+--
+
+
 ```python
-`from Bio.Seq import Seq, MutableSeq
+from Bio.Seq import Seq, MutableSeq
 Seq("ATGC")  # Crear objeto Seq
 MutableSeq("ATGC") # Crea objeto Seq mutable
 objeto.complement() # secuencia complementaria
@@ -396,9 +436,12 @@ objeto.back_transcribe() # retrotranscripto de secuencia
 ```
 
 - **`SeqUtils`**
+--
+
 
 ```python
 from Bio.SeqUtils import nt_search, GC, molecular_weight
+
 nt_search("ATGC", patron) #buscar patron
 GC("ATGC") # contenido GC
 molecular_weight("ATGC") # peso molecular
@@ -413,6 +456,7 @@ molecular_weight("ATGC") # peso molecular
 
 ```python
 from Bio import SeqUtils
+
 consensus = "RGWYV"
 sequence = "CGTAGCTAGCTCAGAGCAGGGACACGTGCTAGCAACAGCGCT"
 SeqUtils.nt_search(sequence,consensus)
@@ -427,6 +471,7 @@ Supongamos que tenemos las instancias de un *DNA motif*
 
 ```python
 from Bio.Seq import Seq
+
 instances = [Seq("TACAA"),
             Seq("TACGC"),
             Seq("TACAC"),
@@ -443,7 +488,7 @@ Podemos crear un motif .tiny[(recuerda importar `Bio.motifs`)]
 
 ---
 
-## FASTA
+## Formato fastA
 
 &lt;br&gt;
 Formato con encabezados que siempre inician con **'&gt;'**, salto de linea, seguido de secuencia de DNA, RNA o aminoácidos
@@ -453,13 +498,15 @@ Formato con encabezados que siempre inician con **'&gt;'**, salto de linea, segu
 ---
 ### Objetos `SeqRecord`
 
-`SeqIO.Parse` genera objetos `Bio.SeqRecord.SeqRecord`
-
-.full-width[.content-box-red[ 
+ `Seq` contiene la secuencia y el alfabeto
+ 
+ Pero las secuencias generalmente vienen con más información
+ 
+  `SeqRecord` =  `Seq` + metadata
+  
 atributos principales:
 - **ID**: identificador (cadena) `objeto.id`
 - **Seq**: secuencia (objeto Seq o similar) `objeto.seq`
-]]
 
 Atributos adicionales:
 - **name**: Nombre de la secuencia, e.g. nombre del gen (string)
@@ -570,7 +617,7 @@ print(str(id_dict['seq4'].seq.transcribe()), '\n')
 
 - Encuentra todos los codones del primer marco de lectura
 
-- Imprimirlos codones separados con formato FASTA
+- Imprimir los codones separados con formato FASTA
 ]
 
 &lt;br&gt;
@@ -679,7 +726,7 @@ with open("files/clase_2/filtered.fasta", "w") as out_handle:
 
 ---
 
-### ¿Qué significa el idenfiticador?
+### ¿Qué significa el identificador?
 
 &lt;br&gt;&lt;br&gt;
 &lt;img src="imgs/clase_2/fastq_2.jpeg" width="400px" style="display: block; margin: auto;" /&gt;
