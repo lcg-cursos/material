@@ -3,6 +3,7 @@
   <head>
     <title>Python II y GitHub</title>
     <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -13,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Python II y GitHub
 ### Licenciatura en Ciencias Genómicas, UNAM
-### First version: 2021-08-03; Last update: 2022-08-08
+### First version: 2021-08-03; Last update: 2023-08-08
 
 ---
 
@@ -60,7 +61,7 @@ Al finalizar la lección, podremos identificar estados importantes de nuestro c�
 
 ## Introducción
 
-Imaginemos que trabajamos en un proyecto de software para la clase de Python. A lo largo del desarrollo hemos invertido mucho tiempo en la solución de problemas, lo que implica agregar nuevas funcionalidades e incluso modificar o corregir el código que ya hemos hecho (commits). 
+Imaginemos que trabajamos en un proyecto de software para nuestra clase. A lo largo del desarrollo hemos invertido mucho tiempo en la solución de problemas, lo que implica agregar nuevas funcionalidades e incluso modificar o corregir el código que ya hemos hecho (commits). 
 &lt;img src="img/workFlow.png" width="550px" style="display: block; margin: auto;" /&gt;
 
 Sin embargo, durante todo ese proceso, a veces quisieramos guardar una "foto" del **estado actual** de nuestro código, por considerarlo funcionable. Estas "fotos" las podemos llamar **versiones estables** de nuestro código. ¿y qué podemos hacer con ellas?:
@@ -154,33 +155,7 @@ Ejemplo: https://github.com/google/material-design-icons/tags
 
 --
 
-- z -&gt; si lo que hiciste fue arreglar un bug
-
-
----
-## Numeración de las versiones
-
- Por ejemplo: 
-
---
-
-- Si tu proyecto estaba en la v0.0.1 y haces un _cambio que no altera la funcionalidad_ de trabajo entonces lo adecuado es versionar tu aplicación como v0.0.2.
-
---
-
-- Si el proyecto tiene alguna modificación en funcionalidad, pero _sigue manteniendo completa compatibilidad con la versión anterior_, entonces tendremos que aumentar el segundo dígito, por ejemplo, pasar de la v1.0.0 a la v1.1.0.
-
---
-
-- Si los **cambios** introducidos en el proyecto son tales _que impliquen una alteración sobre cómo se usará esa aplicación_, haciendo que no sea toltalmente compatible con versiones anteriores, entonces habría que aumentar en 1 la versión en su número más relevante, por ejemplo, pasar de la v1.1.5 a la v2.0.0.
-
-
-
-.tiny[
-Más información sobre [versionamiento semántico](https://semver.org/lang/es/)
-]
-
-
+- z -&gt; si lo que hiciste fue arreglar un bug  
 
 ---
 ## Crear un tag en Git
@@ -269,7 +244,7 @@ Hemos trabajado mucho en nuestro repositorio de git llamado _python_class_ y aho
 2. Localizar tu repositorio Git de trabajo
 --
 
-3. Abrir el archivo "sequence.txt" ubicadon en el directorio src/, modificarlo
+3. Abrir el archivo "sequence.txt" ubicado en el directorio src/, modificarlo
 .full-width[.content-box-yellow[git add sequence.txt]]
 --
 
@@ -310,7 +285,7 @@ Hemos trabajado mucho en nuestro repositorio de git llamado _python_class_ y aho
 
 ---
 ## Práctica
-1. Abre una terminal y localiza tu repositorio de trabajo: python_class
+1. Abre una terminal y localiza tu repositorio de trabajo
 --
 
 2. Revisa el estado de tu repositorio. Asegurate que no haya nada pendiente por confirmar
@@ -383,7 +358,7 @@ Jennifer ha realizado algunos cambios a sus scripts de Python y ha generado 3 ta
 
 
 .full-width[.content-box-yellow[a) git push origin master v1.0.0]]
-.full-width[.content-box-yellow[b) git push origin v1.0.0]]
+.full-width[.content-box-yellow[b) git push origin]]
 .full-width[.content-box-yellow[c) git push origin master --tags]]
 .full-width[.content-box-yellow[d) git --tags master v1.0.0 ]]
 
@@ -396,9 +371,7 @@ Jennifer ha realizado algunos cambios a sus scripts de Python y ha generado 3 ta
 
 La opción correcta es la "a", ya que indica exactamente la etiqueta a enviar, así como los cambios realizados. 
 
-La opción "b" solo enviaría la etiqueta el repositorio remoto, pero no los cambios. 
-
-La opción "c" y "d" son incorrectas en sintaxis.
+La opción "b", c" y "d" son incorrectas en sintaxis.
 
 ---
 
@@ -419,7 +392,7 @@ __git tag [tag_name] -m "mensaje"__
 
 --
 
-4-Repite los pasos 1-3, modificando las sessiones _CATEGORY_ y _USAGE_ para crear dos etiquetas (v0.2.0 y v0.3.0)
+4-Repite los pasos 1-3, modificando las sessiones _CATEGORY_ y crea la etiqueta v0.2.0  
 
 --
 
@@ -431,49 +404,6 @@ __git tag__ o __git show [tag_name]__
 6-Envía a GitHub solo una de las etiquetas creadas, así como su commit correspondiente:  
 __git push origin master [tag_name]__
 
-
----
-
-## Asociar una etiqueta a un commit en particular
-
-Puede ser que tengamos commits previos que nos gustaría marcar por medio de etiquetas debido a que son muy importantes dentro de nuestro código.
-
-Por lo general, cuando se crea una etiqueta, esta se encuentra asociada al último commit realizado; sin embargo, podemos especificar de manera particular el commit al que queremos marcar mediante una etiqueta.
-
-Para ello usaremos el comando:
-
-Sintaxis:  
-
-.full-width[.content-box-yellow[git tag -a [tag_name] [commit_id] -m "message"]]
-
-
-Ejemplo:  
-
-.full-width[.content-box-yellow[git tag -a v0.0.5 cab6e1b -m "Solución del bug en la lectura de la secuencia"]]
-
-
----
-
-## Práctica
-
-1-Ve al repositorio local y revisa la lista de commits
-
-__git log --oneline__ 
-
---
-
-2-Identifica el id del commit que quieres etiquetar
-
---
-
-3-Crea la etiqueta para el commit seleccionado
-
-__git tag -a [tag_name] [commit_id] -m "message"__
-
---
-
-4-Revisar la etiqueta creada:  
-__git tag__ o __git show [tag_name]__
 
 ---
 
@@ -587,6 +517,7 @@ __git tag -h__
 
 
 ---
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

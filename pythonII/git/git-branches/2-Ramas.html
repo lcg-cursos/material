@@ -3,6 +3,7 @@
   <head>
     <title>Python II y GitHub</title>
     <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -13,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Python II y GitHub
 ### Licenciatura en Ciencias Genómicas, UNAM
-### First version: 2021-08-13; Last update: 2022-08-08
+### First version: 2021-08-13; Last update: 2023-08-08
 
 ---
 
@@ -219,7 +220,7 @@ Al pasar de una rama a otra Git nos cambiará automáticamente todos los archivo
 Por ahora, las dos ramas tienen exactamente el mismo contenido, pero ahora podríamos empezar a hacer cambios en la rama _feature_ y sus correspondientes commits; entonces los archivos de la rama _master_ y la rama _feature_ tendrán códigos diferentes, de modo que al pasar de una rama a otra habrá cambios en los archivos.
 
 
-&lt;img src="img/gitCheckout.png" width="500px" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/gitCheckout.png" width="450px" style="display: block; margin: auto;" /&gt;
 
 
 Si hacemos cambios en la rama _feature_ y usamos el comando _git show-branch_ veremos una descripción más detallada de las ramas. 
@@ -279,7 +280,7 @@ Sintaxis:
 
 .full-width[.content-box-yellow[git checkout -b [branch_name]]]
 
-Ejemplo:  
+Actividad:  
 
 .full-width[.content-box-yellow[$ git checkout -b develop]]
 
@@ -432,7 +433,7 @@ Ejemplo:
 
 --
 
-2. Subir la rama _test_ al repositorio remoro
+2. Subir la rama _test_ al repositorio remoto
 .full-width[.content-box-yellow[$ git push -u origin test]]
 --
 
@@ -449,7 +450,7 @@ Ejemplo:
 
 ## Descargando una rama del repositorio remoto
 
-A veces ocurre que se generan ramas en repositorio remoto, por ejemplo, cuando han sido creadas por otros usuarios y subidas a GitHub, y necesitaremos acceder a ellas en el repositorio local para verificar los cambios o continuar el trabajo. En principio esas ramas en remoto creadas por otros usuarios no están disponibles para nosotros en local, pero las podemos descargar.
+A veces ocurre que se generan ramas en el repositorio remoto, por ejemplo, cuando han sido creadas por otros usuarios y subidas a GitHub, y necesitaremos acceder a ellas en el repositorio local para verificar los cambios o continuar el trabajo. En principio, esas ramas creadas por otros usuarios no están disponibles para nosotros en local, pero las podemos descargar.
 
 Sintaxis:  
 
@@ -465,6 +466,9 @@ Por medio del uso de ramas podremos llevar un mejor control de nuestro código. 
 - Creación de una funcionalidad que queramos integrar en un programa
 - Desarrollo de distintas funcionalidades de manera paralela
 - No afectaremos la rama principal
+
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
