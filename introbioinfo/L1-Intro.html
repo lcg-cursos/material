@@ -3,7 +3,7 @@
   <head>
     <title>Introducción a la Bioinformática</title>
     <meta charset="utf-8" />
-    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -12,9 +12,12 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Introducción a la Bioinformática
+]
+.institute[
 ### Licenciatura en Ciencias Genómicas,UNAM
-### First version: yyy-mm-dd; Last update: 2022-08-10
+]
 
 ---
 
@@ -44,29 +47,29 @@ pre {
 
 ## Objetivo
 
-El alumno debe ser capaz de comprender la importancia de la bioinformática y el uso de buenas prácticas en el desarrollo de software.
+El alumno será capaz de comprender la importancia de la bioinformática y el uso de buenas prácticas en el desarrollo de software.
 
 ---
 
 ## Contenido de la unidad
 
-1. ¿Porqué aprender bioinformática?
+1. ¿Por qué aprender bioinformática?
 
-2. Buenas prácticas
+2. Buenas prácticas.
 
 3. ¿Qué es el shell?
 
 4. Conexión remota a un servidor.
 
-5. Operaciones básicas en la consola de comandos
+5. Operaciones básicas en la consola de comandos.
 
-6. Tipos de archivos
+6. Tipos de archivos.
 
 ---
 
-## ¿Porqué aprender bioinformática?
+## ¿Por qué aprender bioinformática?
 
-Hace algunos años .. cuando la bioinformática no existía
+Hace algunos años... cuando la bioinformática no existía
 
 
 &lt;div class="figure" style="text-align: center"&gt;
@@ -77,32 +80,32 @@ Hace algunos años .. cuando la bioinformática no existía
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC336192/bin/pnas00669-0100.tif
 
 ---
-## ¿Porqué aprender bioinformática?
+## ¿Por qué aprender bioinformática?
 
-Determinar a través de miles de experimentos los elementos genéticos en el genoma de _E. coli_ necesitó muchisimos años. Actualmente, una base de datos llamada RegulonDB almacena información de alrededor de 5 mil publicaciones de experimentos de un mecanismo llamado regulación transcripcional.
+Determinar a través de miles de experimentos los elementos genéticos en el genoma de _E. coli_ necesitó muchísimos años. Actualmente, una base de datos llamada RegulonDB almacena información de alrededor de 5 mil publicaciones de experimentos de un mecanismo llamado regulación transcripcional.
 
 &lt;img src="img/micF-gene.png" width="700px" style="display: block; margin: auto;" /&gt;
 
 .content-box-blue[
 Pero las cosas han cambiado ....
 
-   hay nuevas ideas ...
+   Hay nuevas ideas...
    
-   hay nuevas tecnologías ..
+   Existen nuevas tecnologías...
    
 ]
 
 ---
 
-## ¿Porqué aprender bioinformática?
+## ¿Por qué aprender bioinformática?
 
 .pull-left[
-* La cantidad de datos generados cada día en las ciencias biológicas es masiva [Buffalo, 2015]
+* La cantidad de datos generados cada día en las ciencias biológicas es masiva [Buffalo, 2015].
 
 * La única forma de acceder y analizar todos estos datos es a través de herramientas
 computacionales.
 
-* Nos permite ahorrar tiempo y esfuerzo al automatizar tareas y procesos
+* Nos permite ahorrar tiempo y esfuerzo al automatizar tareas y procesos.
 ]
 
 .pull-right[
@@ -118,7 +121,7 @@ computacionales.
 ## Haciendo Bioinformática
 
 .content-box-blue[
-"La solución es abordar la bioinformática como lo hace un bioinformático: probar cosas y evaluar los resultados. De esta manera, la bioinformática se trata solo de **tener las habilidades para experimentar con datos usando una computadora y comprender sus resultados**.
+"La solución es abordar la bioinformática como lo hace un bioinformático: probar cosas y evaluar los resultados. De esta manera, la bioinformática se trata solo de **tener las habilidades para experimentar con datos usando una computadora y comprender sus resultados**".
 
 --- Bioinformatics Data Skills
 ]
@@ -126,7 +129,8 @@ computacionales.
 --
 
 .content-box-blue[
-"Entonces, ¿qué son las habilidades de datos? Son el conjunto de **habilidades computacionales** que te dan la **capacidad** de improvisar rápidamente una forma de ver conjuntos de datos complejos, utilizando un conocido **conjunto de herramientas.**"
+"Entonces, ¿qué son las habilidades de datos? 
+Son el conjunto de **habilidades computacionales** que te dan la **capacidad** de improvisar rápidamente una forma de ver conjuntos de datos complejos, utilizando un conocido **conjunto de herramientas.**"
 --- Bioinformatics Data Skills
 ]
 
@@ -169,10 +173,10 @@ Non-reproducible single occurrences are of no significance to science"
 ## ¿Soluciones?
 
 .content-box-blue[
-¿Cuales son los problemas en ambas situaciones?
+¿Cuáles son los problemas en ambas situaciones?
 
 
-¿Cómo podrian haberse evitado?
+¿Cómo podrían haberse evitado?
  ]
 
 
@@ -191,26 +195,26 @@ Los **Principios FAIR** buscan solucionar la ausencia de buenas prácticas para 
 
 --
 
-Los datos podrían ser considerados como la producción principal de la investigación científica y su publicación y reutilización es necesaria para garantir su validez, reproductibilidad y para conducir nuevos descubrimientos. 
+Los datos podrían ser considerados como la producción principal de la investigación científica y su publicación y reutilización es necesaria para garantizar su validez, reproducibilidad y para conducir nuevos descubrimientos. 
 
 --
 
 [Video FAIR principles](https://www.youtube.com/watch?v=5OeCrQE3HhE)
 
 - Findable. 
-- Accesible
-- Interoperable
-- Reusable
+- Accesible.
+- Interoperable.
+- Reusable.
 
 ---
 
 ## 5 Recomendaciones para FAIR Software 
 
-1. Usar un repositorio público accesible con control de versiones
+1. Usar un repositorio público accesible con control de versiones.
 
-2. Agregar una licencia de uso
+2. Agregar una licencia de uso.
 
-3. Para ser tu código Findable, registralo en alguna comunidad.Ahí te pediran metadatos para describir tu programa.
+3. Para ser tu código Findable, regístralo en alguna comunidad. Ahí te pedirán metadatos para describir tu programa.
 
 4. Indica como citar tu software. 
 
@@ -225,12 +229,14 @@ Los datos podrían ser considerados como la producción principal de la investig
 
 ¿Qué necesitamos para reproducir el resultado de un análisis computacional?
 
+--
+
 * Los datos
 
 --
 
-  * la fuente de donde se descargaron
-  * la versión de la fuente asociada a ellos
+  * La fuente de donde se descargaron.
+  * La versión de la fuente asociada a ellos.
   
 --
 
@@ -238,35 +244,34 @@ Los datos podrían ser considerados como la producción principal de la investig
 
 --
 
-    * la versión de cada un de los programas
-    * los valores de cada uno de los argumentos utilizados.
+    * La versión de cada un de los programas.
+    * Los valores de cada uno de los argumentos utilizados.
 
 ---
 
 ## Todo lo que puede salir mal, saldrá mal... eventualmente
 
-* Las bases de datos son actualizadas o dejan detener mantenimiento
-* Siempre existirán excepciones o casos límite que no cumplen con las suposiciones de tu código
-* Que un programa genere un resultado no significa que el resultado sea correcto
+* Las bases de datos no son actualizadas o dejan detener mantenimiento.
+* Siempre existirán excepciones o casos límite que no cumplen con las suposiciones de tu código.
+* Que un programa genere un resultado no significa que el resultado sea correcto.
 * Todo lo que se te puede olvidar, se te va a olvidar:
-  * De donde descargaste los datos?
-  * Cuáles son las suposiciones acerca de los datos iniciales?
-  * Que hacia esa función compleja y rebuscada que pensaste era una joya en su momento?
+  * ¿De dónde descargaste los datos?
+  * ¿Cuáles son las suposiciones acerca de los datos iniciales?
+  * ¿Qué hacia esa función compleja y rebuscada que pensaste era una joya en su momento?
   
 ---
 
 ## Empezando por la organización
 
-Es importante mantener una estructura de directorios organizada: un directorio de trabajo por
-proyecto. Dentro de este directorio, los pasos del proyecto se organizarán en subdirectorios.
+Es importante mantener una estructura de directorios organizada: un directorio de trabajo por proyecto. Dentro de este directorio, los pasos del proyecto se organizarán en subdirectorios.
 
 Organización propuesta:
 
 * Archivo de texto **README**: Con todos los comandos necesarios para reproducir los
-resultados
-* Carpeta **data**: Con los datos iniciales de esta fase del proyecto
-* Carpeta **bin**: Con los scripts utilizados durante esta fase del proyecto
-* Carpeta **resultados**: Con los resultados generados por esta fase del proyecto
+resultados.
+* Carpeta **data**: Con los datos iniciales de esta fase del proyecto.
+* Carpeta **bin**: Con los scripts utilizados durante esta fase del proyecto.
+* Carpeta **resultados**: Con los resultados generados por esta fase del proyecto.
 
 --
 
@@ -275,11 +280,11 @@ resultados
 ---
 ## Importante
 
-* Los nombres de las carpetas y de los archivos deben ser informativos
+* Los nombres de las carpetas y de los archivos deben ser informativos.
 
-* No deben contener espacios, acentos, ~n's
+* No deben contener espacios, acentos, ~n's.
 
-* Los nombres de directorios y archivos son case-sensitive
+* Los nombres de directorios y archivos son case-sensitive.
 
 ---
 ## Documentación, documentación
@@ -288,7 +293,7 @@ resultados
 **EJEMPLO**
 
 Pruebas una cochinita pibil deliciosa, y le recomiendas a tu mejor amigo
-que la haga Tu amigo llega una semana después diciéndote que la
+que la haga. Tu amigo llega una semana después diciéndote que la
 cochinita pibil es la cosa más espantosa que ha comido en su vida!!!
 
 
@@ -302,7 +307,7 @@ cochinita pibil es la cosa más espantosa que ha comido en su vida!!!
 **EJEMPLO**
 
 Después de analizar los resultados de secuenciación que has esperado
-ansiosamente por meses compartes tus resultados con un colega. El quiere
+ansiosamente por meses compartes tus resultados con un colega. Él quiere
 replicar tus resultados, pero para sorpresa de ambos los resultados no son
 los mismos.
 
@@ -334,7 +339,7 @@ La respuesta a todas estas preguntas forma parte de la documentación
 
 Desarrollaste un algoritmo capaz de automatizar una tarea que se lleva a
 cabo rutinariamente en tu laboratorio. Un colega te pide que se la pases
-para utilizarlas en sus datos. Al correr tu programa, truena.
+para utilizarla en sus datos. Al correr tu programa, truena.
 
 ** ¿Cómo podemos saber qué pasó?**
 
@@ -349,15 +354,15 @@ para utilizarlas en sus datos. Al correr tu programa, truena.
 
 * ¿El formato de los datos de entrada es correcto?
 
-* ¿Los datos de entrada deberán cumplir con alguna suposición?
+* ¿Los datos de entrada deberían cumplir con alguna suposición?
 
-* ¿Los valores numéricos deben ser enteros y no flotantes ?
+* ¿Los valores numéricos deben ser enteros y no flotantes?
 
 * ¿Alguna columna debe estar ordenada numéricamente?
 
 
 La respuesta a todas estas preguntas (y muchas más...) forma parte
-de la documentación
+de la documentación. 
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
@@ -407,6 +412,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
