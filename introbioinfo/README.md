@@ -16,6 +16,7 @@ El objetivo del curso es ayudar al alumno 1) a conocer los conceptos básicos de
 
 |Lección |Unix         |Biologia|
 |---     |---          |---     |
+| [Herramientas/markdown](https://lcg-cursos.github.io/material/introbioinfo/markdown.html) |           |      |
 |[L1](https://lcg-cursos.github.io/material/introbioinfo/L1-Intro.html)      |             |Introducción a la Bioinformática|
 |[L2](https://lcg-cursos.github.io/material/introbioinfo/L2-shell.html)      | El shell, servidor, protocolos    |    |
 |[L3](https://lcg-cursos.github.io/material/introbioinfo/L3-archivos.html) | Descarga de archivos, checksum, transferencia de archivos, contenido de archivos y editores | Secuencias y genomas a. Tipos de secuencias b. Código Genético c. Genoma (GenBank) d.Formatos de secuencias (FASTA) Bases de datos biológicas a.	NCBI: Genomes, Nucleotide, PubMed, etc b. EMBL c.DDBJ |
