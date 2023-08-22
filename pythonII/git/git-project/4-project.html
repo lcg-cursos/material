@@ -3,6 +3,7 @@
   <head>
     <title>Python II y GitHub</title>
     <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -13,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Python II y GitHub
 ### Licenciatura en Ciencias Genómicas, UNAM
-### First version: 2022-07-08; Last update: 2022-08-17
+### First version: 2022-07-08; Last update: 2023-08-21
 
 ---
 
@@ -84,57 +85,29 @@ Los proyectos se componen de issues, pull requests y notas que se clasifican com
 
 ---
 
-## Actividad: Creación de un "Project" en GitHub
+## Creación de un "Project" en GitHub
 
-1. Ir a GitHub (web)  
-
---
-
-2. Crear un nuevo repositorio: Simbolo "+"" -&gt; new repository  
+1. Ir a la sección "Projects" y hacer clic en New project  
 
 --
 
-3. Especificar nombre "biopython", en modo Public, agregar archivo .gitignore (python) y licencia (por ejemplo: MIT)
+2.  Seleccionar una plantilla (board)    
 
 --
 
-4. Ir a la sección "Projects" y hacer clic en Add project -&gt; "Go to your profile to create a new project" -&gt; New project -&gt; Create  
+3. Observar que el proyecto está compuesto por 3 carriles "Todo", "In progress" y "Done"  
 
 --
 
-5.  Asignar un nombre el proyecto. En este caso usaremos el mismo del repositorio recien creado "biopython"  
+4. Asignar un nombre al proyecto    
 
 --
 
-6. Observar que el proyecto está compuesto por 3 carriles "Todo", "In progress" y "Done"  
+5. Agregar una actividad    
+
 
 ---
 
-## Actividad: Creación de un "Project" en GitHub
-
-Como parte de las actividades del nuevo __proyecto de mosquitos__ que vamos a desarrollar en el semestre:
-
-"Uncovering the Worldwide Diversity and Evolution of the Virome of the Mosquitoes Aedes aegypti and Aedes albopictus"  
-
-_Aplicación: Los virus específicos de insectos pueden utilizarse para generar vacunas contra virus que acarrean los mosquitos._  
-
-
-Es necesario planificar las siguientes tareas:  
-
-- Buscar en la literatura (de manera automática) artículos con información de RNA-Seq de los mosquitos Aedes aegypti y Aedes albopictus  
-
-- Hacer un control de calidad sobre los archivos de fastq  
-
-- Hacer un ensamble de novo  
-
-- Buscar a qué se parecen las secuencias ensambladas (GenBank)  
-
-- Resumir los resultados obtenidos (pandas)  
-
-7. En el carril "Todo" hacer clic en "New item" y crear cada una de las tareas  
-
-
----
 
 ## "Project" personalización
 
@@ -147,15 +120,6 @@ Es necesario planificar las siguientes tareas:
 - Cambiar el nombre a los carriles  
 
 - Mover las tareas entre los carriles conforme se vayan realizando  
----
-
-## Actividad: Creación de un "Project" en GitHub
-
-¡No olvidemos clonar el repositorio a nuestra máquina!
-
-git clone [URL]
-
-&lt;img src="img/cloneRepo.png" width="500px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -164,6 +128,46 @@ git clone [URL]
 Por medio de los **Projects** en GitHub podemos planificar las tareas de realizaremos en nuestro proyecto, así como priorizar aquellas actividades que deben ser resueltas.
 
 _¡Un "project" en GitHub es una excelente forma de organizar y controlar todo el trabajo en nuestro repositorio!_
+
+
+---
+
+## Actividad  
+
+Generar la segunda versión de mi repositorio, considerando que:  
+
+*  Debe de exitir un solo archivo por cada programa. Recuerden que los cambios las controla Git, no  es necesario tener varios archivos del mismo programa cambiando el nombre  
+
+* Todos los programas deben recibir paso de parámetros  
+
+* Actualizar el archivo *readme* de cada programa
+
+* Crear/actualizar el archivo *readme* del repositorio y poner el link hacía el readme de cada programa  
+
+* Por cada programa debe de existir la siguiente estructura:  
+
+[Repositorio]  
+&amp;nbsp;&amp;nbsp;&amp;nbsp;[Programa X]  
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[doc] archivo readme  
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[src] programa python   
+&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;[data] ejemplos/archivos de datos  
+
+---
+
+## Tareas  
+
+
+- TAREA: Crear un *proyecto* asociado al repositorio  
+
+- TAREA: Crear los *issues* necesarios para organizar el trabajo que conllevará esta segunda versión del repositorio  
+
+**RECUERDA** que todo el trabajo deberás realizarlo en la rama *develop* y hacer merge con la rama *master*.  
+
+
+&lt;img src="img/flujoTrabajo.png" width="500px" style="display: block; margin: auto;" /&gt;
+
+
+    
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
