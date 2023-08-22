@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introducción a la Bioinformática</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introducción a la Bioinformática
+### Licenciatura en Ciencias Genómicas,UNAM
+### First version: yyy-mm-dd; Last update: 2022-08-12
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+## Objetivo
+
+El alumno debe ser capaz de comprender que es el shell y acceder de manera remota a un servidor unix.
+
+---
+## Algunos conceptos preliminares
+
+**¿Qué tienen en común estos dispositivos?**
+
+&lt;img src="http://1.bp.blogspot.com/-ZGAVLgs4Aas/UT1arCZsL-I/AAAAAAAAGus/L3-M6-jHm7Q/s280/productos+fragmentados.png" width="400px" style="display: block; margin: auto;" /&gt;
+
+--
+Sistema Operativo
+
+Un sistema operativo (SO) es el **conjunto de programas** de un sistema informático que **gestiona los recursos de hardware** (memoria, disco duro...) y provee servicios a los programas de aplicación de software. 
+
+
+---
+## Tipos de sistemas operativos
+
+&lt;img src="https://www.areatecnologia.com/informatica/imagenes/so.jpg" width="400px" style="display: block; margin: auto;" /&gt;
+
+¿Cuál es tu sistema operativo?
+
+---
+## Cuando tu compu la conectas a internet
+
+1. Se conecta a la red por un protocolo llamado Internet Protocol IP
+2. Se asigna una dirección IP tipo 189.183.114.100,  PERO si te conectas via wifi esta dirección no es fija.
+
+--
+
+La familia de protocolos de internet es un conjunto de protocolos de red en los que se basa internet y que permiten **la transmisión de datos entre computadoras**.
+
+&lt;img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Suite_de_Protocolos_TCPIP.png" width="400px" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Un sistema tipo Unix
+
+&lt;img src="https://www.brunoribas.com.br/aed1/2013-1/praticas/1/teoria-img1.png" width="400px" style="display: block; margin: auto;" /&gt;
+
+
+---
+## ¿Qué es el shell?
+
+* Es un programa que ejecuta otros programas
+
+* Es la interface para comunicarnos con el sistema Unix
+
+* Es un lenguaje de programación
+
+
+.content-box-blue[
+
+Unix was not designed to stop its users from doing stupid things, as that would
+also stop them from doing clever things.
+
+.pull-right[ .tiny[-- Doug Gwyn (ficcticio o real..)]]
+
+]
+
+.tiny[
+Páginas web be interés:
+
+- [Filosofía de Unix.](https://opensource.com/business/14/12/linux-philosophy)
+- [Shell Style Guides.](https://google.github.io/styleguide/shellguide.html)
+]
+
+---
+## ¿Cómo accedemos al shell?
+
+.bold[Unix/Linux]
+
+- Tiene un programa integrado: Terminal.
+
+
+.bold[Mac]
+
+- Tiene un programa integrado: Terminal.
+
+- La encuentras en el directorio Aplicaciones/Utilidades
+
+
+.bold[Windows]
+
+- Se necesita descargar un programa emulador del ambiente Linux.
+
+- A partir de Windows10, Windows incluye un emulador Una opción amigable: MobaXTerm
+
+---
+
+## ¿Cómo accedemos al shell?
+
+.content-box-green[
+
+¿Todos puedes acceder a su terminal?
+
+]
+
+---
+
+## ¿Qué es un servidor?
+
+"Un servidor es un sistema que proporciona recursos, datos, servicios o programas
+a otros ordenadores, conocidos como clientes, a través de una red. En teoría, se
+consideran servidores aquellos ordenadores que comparten recursos con máquinas
+cliente"
+
+.pull-right[ .tiny[-- Paessler, the monitoring experts]]
+
+---
+
+&lt;img src="img/diagrama-cliente-servidor.jpeg.webp" width="800px" style="display: block; margin: auto;" /&gt;
+
+.tiny[Source: https://blog.infranetworking.com/modelo-cliente-servidor/]
+
+---
+
+## ¿Por qué conectarnos a un servidor?
+
+- Mayor cantidad de procesadores y memoria RAM que nuestra computadora personal
+
+--
+
+- Muchos usuarios se pueden conectar y trabajar al mismo tiempo. Agiliza el trabajo colaborativo
+
+--
+
+- Acceso a los datos e infraestructura desde cualquier parte del mundo
+
+---
+## ¿Cómo conectarnos a un servidor?
+
+Necesitamos:
+
+- Credenciales de acceso del usuario:
+
+    Nombre
+
+    Contraseña
+
+- Identidad del servidor
+
+    Nombre o IP del servidor
+
+      132.248.220.14
+
+      tepeu.lcg.unam.mx
+
+
+---
+
+## Opción 1: conectándose a un servidor
+
+**Comando**: `ssh`
+
+**Argumentos**: `user@SERVER`  
+
+Información de identificación necesaria para la conexión
+
+
+.content-box[
+.remark-inline-code[
+$ ssh user@SERVER
+]
+]
+
+Ejemplo
+
+.content-box[
+.remark-inline-code[
+$ ssh lgomez@132.248.220.14
+]
+]
+
+---
+
+## Práctica: Tu primera conexión
+
+Conectate al servidor 
+
+.content-box[
+.remark-inline-code[
+$ ssh user@SERVER
+]
+]
+
+---
+## Aprendiendo más sobre un comando
+
+
+.remark-inline-code[
+$ man ssh
+]
+
+&lt;br&gt;
+
+**Opciones**
+
+.remark-inline-code[
+- p : Para especificar el puerto de acceso
+- X : Para conectarse abriendo un puerto gráfico (X11)
+]
+
+&lt;br&gt;
+&lt;br&gt;
+
+Las opciones modifican el funcionamiento de un comando
+
+.content-box[
+.remark-inline-code[
+$ ssh -p 8080 -X lgomez@132.248.220.14
+]
+]
+
+---
+## Opción 2. Putty (Windows) o MobaXTerm
+
+&lt;img src="https://imag.malavida.com/mvimgbig/download-fs/putty-339-1.jpg" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+## Nuestros primeros comandos
+
+```
+## Siempre es bueno saber donde estamos conectados
+hostname
+
+## Con que usuario estamos conectados
+whoami
+
+## La ruta absoluta del directorio en el que estamos parados
+## ssh ingresaria por default al directorio home del usuario
+pwd
+
+## La estructura de archivos del directorio donde estamos
+tree
+```
+
+---
+## Algunos comandos básicos de navegación
+
+
+|Comando|Función|
+|----    |----  |
+|ls      |Lista los contenidos de un directorio|
+|mkdir   |Crea un directorio|
+|cd      |Cambia de directorio|
+|cp      |Copia un archivo o directorio|
+|mv      | Mueve un archivo o directorio|
+|rm      |Elimina un archivo o directorio|
+
+---
+## Algunos tips básicos
+
+|Comando|Función|
+|----    |----  |
+|TAB     |Autocompletar comandos y nombres de archivos|
+|Flechas arriba y abajo |Navegar en la historia de comandos|
+|Botón derecho del ratón |Copiar y pegar texto|
+
+
+---
+## Rutas absolutas y relativas
+
+**Ruta absoluta**: Inician desde la raíz
+
+**Ruta relativa**: Inician desde el directorio actual
+
+|Comando|Función|
+|----    |----  |
+|.       |El directorio donde estás parado|
+|..      |Un directorio arriba en la estructura de directorios|
+|../../  |Dos directorios arriba en la estructura de directorios|
+|~/      |Directorio HOME|
+
+---
+## Hagamos algunos ejercicios
+
+- En tu home crea un directorio llamado practica1
+
+- Muévete al directorio practica1
+
+- Crea un directorio llamado animales
+
+- Crea un directorio llamado plantas
+
+- Entra al directorio animales y crea el directorio osos
+
+- Entra al directorio osos
+
+- Regresa a tu directorio home
+
+- Imprime la estructura de directorios que has creado
+
+
+
+
+---
+## ... unos más
+
+&lt;br&gt;
+
+- Regresa al directorio osos
+
+- Copia el archivo panda.txt (ubicado en
+/home/lgomez/WelcomeBioinfo/datos/practica1/ ) utilizando rutas
+absolutas
+
+- Mueve el archivo panda.txt al directorio animales utilizando rutas
+relativas
+
+- Entra a la carpeta plantas utilizando rutas absolutas
+
+- Copia el archivo geranio.txt (ubicado en
+/home/lgomez/WelcomeBioinfo/datos/practica1/ ) utilizando rutas
+relativas
+
+- Lista los archivos que se encuentran en el directorio animales
+
+
+
+---
+## ... ya casi
+
+&lt;br&gt;
+
+- Colócate en tu directorio practica1 e imprime la estructura de
+directorios desde ahí
+
+- Elimina el archivo geranio.txt
+
+- Elimina la carpeta osos
+
+- Vuelve a imprimir la estructura de directorios desde tu directorio
+practica1
+
+
+
+---
+## Atajos de teclado en Unix
+
+&lt;br&gt;
+
+|Atajo|Función|
+|----    |----  |
+|Ctrl + E |Ir al final de la línea|
+|Ctrl + A |Ir al principio de la línea|
+|Ctrl + N |Ir a la línea siguiente|
+|Ctrl + P |Ir a la línea anterior|
+|Ctrl + K |Borrar hasta el final de la línea|
+
+
+---
+## ¿Cuáles tipos de archivos conoces?
+
+- Archivos de música
+- Archivos de video
+- Archivos binarios
+  - Archivos de Word
+  - Archivos de Excel
+  - Archivos de PowerPoint
+- Archivos de texto plano
+- Archivos comprimidos
+
+&lt;br&gt;
+
+En bioinformática la mayoría de los archivos con los que se trabaja son
+archivos de texto plano
+
+
+---
+## Conociendo el tipo de archivo
+
+Utilizaremos el comando `file` para conocer el tipo de un archivo
+
+```
+### Muevete a la carpeta
+### /home/lgomez/WelcomeBioinfo/datos/practica2/
+cd /home/lgomez/WelcomeBioinfo/datos/practica2/
+
+### Lista los archivos existentes
+ls
+
+### Imprime el tipo de un archivo
+file excel.xlsx
+
+### Imprime el tipo de todos los archivos
+file *
+```
+
+---
+## Visualizando distintos tipos de archivos
+
+¿Cómo creen que se vean los distintos tipos de archivos en la terminal si
+los abrimos con las herramientas diseñadas para abrir archivos de texto?
+
+&lt;br&gt;
+
+--
+Para visualizar el contenido de un archivo utilizaremos el comando `less`
+
+&lt;br&gt;
+
+```
+### Visualiza cada archivo
+less word.docx
+```
+
+--
+
+&lt;br&gt;
+
+- Los archivos de texto plano son los únicos que pueden ser visualizados
+correctamente
+
+- La extensión de los archivos no es relevante
+
+
+---
+## Archivos comprimidos
+
+Los archivos de text comprimidos pueden ser descomprimidos utilizando
+alguno de los siguientes comandos:
+
+- gunzip
+
+- unzip
+
+
+---
+## Práctica: descomprimir y visualizar
+
+- Copia el archivo texto-plano3.txt.gz a tu home
+- Regresa a tu home
+- Descomprímelo y visualízalo
+- Elimina este archivo de tu home
+
+
+
+---
+## Referencias
+
+Búalo, V. (2015).
+Bioinformatics data skills: Reproducible and robust research with open
+source tools.
+" O'Reilly Media, Inc.".
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
