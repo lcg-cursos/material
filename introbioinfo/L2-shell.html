@@ -3,7 +3,7 @@
   <head>
     <title>Introducción a la Bioinformática</title>
     <meta charset="utf-8" />
-    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -12,9 +12,12 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Introducción a la Bioinformática
+]
+.institute[
 ### Licenciatura en Ciencias Genómicas,UNAM
-### First version: yyy-mm-dd; Last update: 2022-08-12
+]
 
 ---
 
@@ -37,7 +40,7 @@ pre {
 
 ## Objetivo
 
-El alumno debe ser capaz de comprender que es el shell y acceder de manera remota a un servidor unix.
+Lxs alumnxs serán capaces de comprender qué es el shell y acceder de manera remota a un servidor Unix.
 
 ---
 ## Algunos conceptos preliminares
@@ -60,10 +63,11 @@ Un sistema operativo (SO) es el **conjunto de programas** de un sistema informá
 ¿Cuál es tu sistema operativo?
 
 ---
-## Cuando tu compu la conectas a internet
+## Cuando conectas tu computadora a internet...
 
-1. Se conecta a la red por un protocolo llamado Internet Protocol IP
-2. Se asigna una dirección IP tipo 189.183.114.100,  PERO si te conectas via wifi esta dirección no es fija.
+1. Se conecta a la red por un protocolo llamado *Internet Protocol* (IP).
+
+2. Se asigna una dirección IP tipo 189.183.114.100,  PERO si te conectas via Wi-fi esta dirección no es fija.
 
 --
 
@@ -82,24 +86,24 @@ La familia de protocolos de internet es un conjunto de protocolos de red en los 
 ---
 ## ¿Qué es el shell?
 
-* Es un programa que ejecuta otros programas
+* Es un programa que ejecuta otros programas.
 
-* Es la interface para comunicarnos con el sistema Unix
+* Es la interfaz para comunicarnos con el sistema Unix.
 
-* Es un lenguaje de programación
+* Es un lenguaje de programación.
 
 
 .content-box-blue[
 
-Unix was not designed to stop its users from doing stupid things, as that would
-also stop them from doing clever things.
+"Unix was not designed to stop its users from doing stupid things, as that would
+also stop them from doing clever things".
 
 .pull-right[ .tiny[-- Doug Gwyn (ficcticio o real..)]]
 
 ]
 
 .tiny[
-Páginas web be interés:
+Páginas web de interés:
 
 - [Filosofía de Unix.](https://opensource.com/business/14/12/linux-philosophy)
 - [Shell Style Guides.](https://google.github.io/styleguide/shellguide.html)
@@ -117,14 +121,15 @@ Páginas web be interés:
 
 - Tiene un programa integrado: Terminal.
 
-- La encuentras en el directorio Aplicaciones/Utilidades
+- La encuentras en el directorio Aplicaciones/Utilidades.
 
 
 .bold[Windows]
 
 - Se necesita descargar un programa emulador del ambiente Linux.
 
-- A partir de Windows10, Windows incluye un emulador Una opción amigable: MobaXTerm
+- Windows incluye un emulador a partir de Windows 10.  
+Una opción amigable: MobaXTerm.
 
 ---
 
@@ -132,21 +137,24 @@ Páginas web be interés:
 
 .content-box-green[
 
-¿Todos puedes acceder a su terminal?
+¿Todxs pueden acceder a su terminal?
 
 ]
+
+&lt;img src="https://images.pexels.com/photos/16176059/pexels-photo-16176059/free-photo-of-animal-perro-mascota-mono.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600" width="250px" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## ¿Qué es un servidor?
 
+.content-box-blue[
 "Un servidor es un sistema que proporciona recursos, datos, servicios o programas
 a otros ordenadores, conocidos como clientes, a través de una red. En teoría, se
 consideran servidores aquellos ordenadores que comparten recursos con máquinas
-cliente"
+cliente".
 
 .pull-right[ .tiny[-- Paessler, the monitoring experts]]
-
+]
 ---
 
 &lt;img src="img/diagrama-cliente-servidor.jpeg.webp" width="800px" style="display: block; margin: auto;" /&gt;
@@ -157,15 +165,15 @@ cliente"
 
 ## ¿Por qué conectarnos a un servidor?
 
-- Mayor cantidad de procesadores y memoria RAM que nuestra computadora personal
+- Mayor cantidad de procesadores y memoria RAM que nuestra computadora personal.
 
 --
 
-- Muchos usuarios se pueden conectar y trabajar al mismo tiempo. Agiliza el trabajo colaborativo
+- Muchxs usuarixs se pueden conectar y trabajar al mismo tiempo. Agiliza el trabajo colaborativo.
 
 --
 
-- Acceso a los datos e infraestructura desde cualquier parte del mundo
+- Acceso a los datos e infraestructura desde cualquier parte del mundo.
 
 ---
 ## ¿Cómo conectarnos a un servidor?
@@ -174,17 +182,17 @@ Necesitamos:
 
 - Credenciales de acceso del usuario:
 
-    Nombre
+    - Nombre.
 
-    Contraseña
+    - Contraseña.
 
 - Identidad del servidor
 
-    Nombre o IP del servidor
+    - Nombre o IP del servidor:
 
-      132.248.220.14
+      `132.248.220.14`
 
-      tepeu.lcg.unam.mx
+      `tepeu.lcg.unam.mx`
 
 
 ---
@@ -216,7 +224,7 @@ $ ssh lgomez@132.248.220.14
 
 ## Práctica: Tu primera conexión
 
-Conectate al servidor 
+Conéctate al servidor.  
 
 .content-box[
 .remark-inline-code[
@@ -227,18 +235,18 @@ $ ssh user@SERVER
 ---
 ## Aprendiendo más sobre un comando
 
-
+.content-box[
 .remark-inline-code[
 $ man ssh
-]
+]]
 
 &lt;br&gt;
 
 **Opciones**
 
 .remark-inline-code[
-- p : Para especificar el puerto de acceso
-- X : Para conectarse abriendo un puerto gráfico (X11)
+- -p : Para especificar el puerto de acceso
+- -X : Para conectarse abriendo un puerto gráfico (X11)
 ]
 
 &lt;br&gt;
@@ -260,20 +268,33 @@ $ ssh -p 8080 -X lgomez@132.248.220.14
 ---
 ## Nuestros primeros comandos
 
-```
-## Siempre es bueno saber donde estamos conectados
-hostname
+Siempre es bueno saber dónde estamos conectadxs.
+.content-box[
+.remark-inline-code[
+$ hostname
+]]
 
-## Con que usuario estamos conectados
-whoami
+--
+Con qué usuario estamos conectadxs.
+.content-box[
+.remark-inline-code[
+$ whoami
+]]
 
-## La ruta absoluta del directorio en el que estamos parados
-## ssh ingresaria por default al directorio home del usuario
-pwd
+--
+La ruta absoluta del directorio donde estamos paradxs.  
+&lt;code&gt; ssh&lt;/code&gt; ingresaria por default al directorio &lt;i&gt;home&lt;/i&gt; del usuario
+.content-box[
+.remark-inline-code[
+$ pwd
+]]
 
-## La estructura de archivos del directorio donde estamos
-tree
-```
+--
+La estructura de archivos del directorio donde estamos.
+.content-box[
+.remark-inline-code[
+$ tree
+]]
 
 ---
 ## Algunos comandos básicos de navegación
@@ -281,55 +302,55 @@ tree
 
 |Comando|Función|
 |----    |----  |
-|ls      |Lista los contenidos de un directorio|
-|mkdir   |Crea un directorio|
-|cd      |Cambia de directorio|
-|cp      |Copia un archivo o directorio|
-|mv      | Mueve un archivo o directorio|
-|rm      |Elimina un archivo o directorio|
+|ls      |Lista los contenidos de un directorio.|
+|mkdir   |Crea un directorio.|
+|cd      |Cambia de directorio.|
+|cp      |Copia un archivo o directorio.|
+|mv      |Mueve un archivo o directorio /&lt;br /&gt;Cambiar el nombre de un archivo o directorio.|
+|rm      |Elimina un archivo o directorio.|
 
 ---
 ## Algunos tips básicos
 
 |Comando|Función|
 |----    |----  |
-|TAB     |Autocompletar comandos y nombres de archivos|
-|Flechas arriba y abajo |Navegar en la historia de comandos|
-|Botón derecho del ratón |Copiar y pegar texto|
+|TAB     |Autocompletar comandos y nombres de archivos.|
+|Flechas arriba y abajo |Navegar en la historia de comandos.|
+|Botón derecho del ratón |Copiar y pegar texto.|
 
 
 ---
 ## Rutas absolutas y relativas
 
-**Ruta absoluta**: Inician desde la raíz
+**Ruta absoluta**: Inician desde la raíz.
 
-**Ruta relativa**: Inician desde el directorio actual
+**Ruta relativa**: Inician desde el directorio actual.
 
 |Comando|Función|
 |----    |----  |
-|.       |El directorio donde estás parado|
-|..      |Un directorio arriba en la estructura de directorios|
-|../../  |Dos directorios arriba en la estructura de directorios|
-|~/      |Directorio HOME|
+|.       |El directorio donde estás parado.|
+|..      |Un directorio arriba en la estructura de directorios.|
+|../../  |Dos directorios arriba en la estructura de directorios.|
+|~/      |Directorio HOME.|
 
 ---
 ## Hagamos algunos ejercicios
 
-- En tu home crea un directorio llamado practica1
+- En tu home crea un directorio llamado `practica1`.
 
-- Muévete al directorio practica1
+- Muévete al directorio `practica1`.
 
-- Crea un directorio llamado animales
+- Crea un directorio llamado `animales`.
 
-- Crea un directorio llamado plantas
+- Crea un directorio llamado `plantas`.
 
-- Entra al directorio animales y crea el directorio osos
+- Entra al directorio animales y crea el directorio `osos`.
 
-- Entra al directorio osos
+- Entra al directorio `osos`.
 
-- Regresa a tu directorio home
+- Regresa a tu directorio `home`.
 
-- Imprime la estructura de directorios que has creado
+- Imprime la estructura de directorios que has creado.
 
 
 
@@ -337,41 +358,34 @@ tree
 ---
 ## ... unos más
 
-&lt;br&gt;
+- Regresa al directorio `osos`
 
-- Regresa al directorio osos
+- Copia el archivo `panda.txt` (ubicado en
+`/home/lgomez/WelcomeBioinfo/datos/practica1/` ) utilizando rutas absolutas.
 
-- Copia el archivo panda.txt (ubicado en
-/home/lgomez/WelcomeBioinfo/datos/practica1/ ) utilizando rutas
-absolutas
+- Mueve el archivo `panda.txt` al directorio `animales` utilizando rutas relativas.
 
-- Mueve el archivo panda.txt al directorio animales utilizando rutas
-relativas
+- Entra a la carpeta `plantas` utilizando rutas absolutas
 
-- Entra a la carpeta plantas utilizando rutas absolutas
+- Copia el archivo `geranio.txt` (ubicado en
+`/home/lgomez/WelcomeBioinfo/datos/practica1/`) utilizando rutas
+relativas.
 
-- Copia el archivo geranio.txt (ubicado en
-/home/lgomez/WelcomeBioinfo/datos/practica1/ ) utilizando rutas
-relativas
-
-- Lista los archivos que se encuentran en el directorio animales
+- Lista los archivos que se encuentran en el directorio `animales`.
 
 
 
 ---
 ## ... ya casi
 
-&lt;br&gt;
+- Colócate en tu directorio `practica1` e imprime la estructura de directorios desde ahí. 
 
-- Colócate en tu directorio practica1 e imprime la estructura de
-directorios desde ahí
+- Elimina el archivo `geranio.txt`.
 
-- Elimina el archivo geranio.txt
-
-- Elimina la carpeta osos
+- Elimina la carpeta `osos`.
 
 - Vuelve a imprimir la estructura de directorios desde tu directorio
-practica1
+`practica1`.
 
 
 
@@ -382,50 +396,70 @@ practica1
 
 |Atajo|Función|
 |----    |----  |
-|Ctrl + E |Ir al final de la línea|
-|Ctrl + A |Ir al principio de la línea|
-|Ctrl + N |Ir a la línea siguiente|
-|Ctrl + P |Ir a la línea anterior|
-|Ctrl + K |Borrar hasta el final de la línea|
+|Ctrl + E |Ir al final de la línea.|
+|Ctrl + A |Ir al principio de la línea.|
+|Ctrl + N |Ir a la línea siguiente.|
+|Ctrl + P |Ir a la línea anterior.|
+|Ctrl + K |Borrar hasta el final de la línea.|
 
 
 ---
 ## ¿Cuáles tipos de archivos conoces?
 
-- Archivos de música
-- Archivos de video
-- Archivos binarios
-  - Archivos de Word
-  - Archivos de Excel
-  - Archivos de PowerPoint
-- Archivos de texto plano
-- Archivos comprimidos
+- Archivos de música.
+
+- Archivos de video.
+
+- Archivos binarios  
+  - Archivos de Word  
+  - Archivos de Excel  
+  - Archivos de PowerPoint.
+  
+- Archivos de texto plano.
+
+- Archivos comprimidos. 
 
 &lt;br&gt;
 
 En bioinformática la mayoría de los archivos con los que se trabaja son
-archivos de texto plano
+archivos de texto plano.
 
 
 ---
 ## Conociendo el tipo de archivo
 
-Utilizaremos el comando `file` para conocer el tipo de un archivo
+Utilizaremos el comando `file` para conocer el tipo de un archivo.
 
-```
-### Muevete a la carpeta
-### /home/lgomez/WelcomeBioinfo/datos/practica2/
-cd /home/lgomez/WelcomeBioinfo/datos/practica2/
+Muevete a la carpeta  
+`/home/lgomez/WelcomeBioinfo/datos/practica2/`
 
-### Lista los archivos existentes
-ls
+--
+.content-box[
+.remark-inline-code[
+$ cd /home/lgomez/WelcomeBioinfo/datos/practica2/]]
 
-### Imprime el tipo de un archivo
-file excel.xlsx
+--
+Lista los archivos existentes
 
-### Imprime el tipo de todos los archivos
-file *
-```
+--
+.content-box[
+.remark-inline-code[
+$ ls]]
+
+--
+Imprime el tipo de un archivo
+--
+.content-box[
+.remark-inline-code[
+$ file excel.xlsx]]
+--
+
+Imprime el tipo de todos los archivos
+
+--
+.content-box[
+.remark-inline-code[
+$ file *]]
 
 ---
 ## Visualizando distintos tipos de archivos
@@ -438,41 +472,45 @@ los abrimos con las herramientas diseñadas para abrir archivos de texto?
 --
 Para visualizar el contenido de un archivo utilizaremos el comando `less`
 
+--
 &lt;br&gt;
 
-```
-### Visualiza cada archivo
-less word.docx
-```
+.content-box[
+.remark-inline-code[
+`### Visualiza cada archivo`  
+less word.docx]]
 
 --
 
 &lt;br&gt;
 
 - Los archivos de texto plano son los únicos que pueden ser visualizados
-correctamente
+correctamente.
 
-- La extensión de los archivos no es relevante
+- La extensión de los archivos no es relevante.
 
 
 ---
 ## Archivos comprimidos
 
-Los archivos de text comprimidos pueden ser descomprimidos utilizando
+Los archivos de texto comprimidos pueden ser descomprimidos utilizando
 alguno de los siguientes comandos:
 
-- gunzip
+- `gunzip`
 
-- unzip
+- `unzip`
 
 
 ---
 ## Práctica: descomprimir y visualizar
 
-- Copia el archivo texto-plano3.txt.gz a tu home
-- Regresa a tu home
-- Descomprímelo y visualízalo
-- Elimina este archivo de tu home
+- Copia el archivo `texto-plano3.txt.gz` a tu `home`.
+
+- Regresa a tu `home`.
+
+- Descomprímelo y visualízalo.
+
+- Elimina este archivo de tu `home`.
 
 
 
@@ -532,6 +570,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
