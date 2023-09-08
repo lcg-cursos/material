@@ -3,7 +3,7 @@
   <head>
     <title>Introducción a la Bioinformática</title>
     <meta charset="utf-8" />
-    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -585,22 +585,49 @@ scp [$SOURCE] [$DESTINATION]
 **DESTINATION**: A donde van los datos.
 
 ---
-## Copiemos un archivo al servidor
+## Copiemos un archivo desde MI COMPUTADORA --&gt; SERVIDOR 
 
-
-Sintaxis básica:
+.content-box-red[
+DESDE mi computadora, me coloco en el directorio donde esta el archivo a copiar
+]
 
 .content-box-gray[
 ```
-## Copiando el archivo prueba.txt
-## a mi carpeta practica3 en el servidor
-scp prueba.txt compu2@[$SERVER]:/home/compu2/practica3/
+## Copiando el archivo prueba.txt que esta en  MI COMPUTADORA
+## a mi carpeta practica3 en el SERVIDOR
 
-## Copiando el archivo e_coli_genome.fasta.gz
-## desde el servidor a mi computadora
-scp compu2@[$SERVER]:/home/compu2/practica3/
+scp prueba.txt miusuario@tepeu.lcg.unam.mx:/home/miusuario/practica3/
+
+# o puedo usar el IP del servidor
+scp prueba.txt miusuario@132.248.220.14:/home/miusuario/practica3/
+
 ```
 ]
+
+.tiny[
+prueba.txt es el archivo que esta en mi computadora  
+miusuario es el nombre de mi usuario,  
+@tepeu.lcg.unam.mx luego @ y despues el nombre del servidor  
+:/home/miusuario/practica3/  vienen : puntos y luego el path a donde quiero copiar el archivo  
+]
+---
+## Copiando un archivo desde el SERVIDOR  ---&gt; MI COMPU
+
+.content-box-red[
+SIGO ESTANDO EN MI COMPUTADORA, EN EL DIRECTORIO donde quiero copiar el archivo
+
+]
+
+.content-box-gray[
+```
+## Copiando el archivo e_coli_genome.fasta.gz
+## desde el servidor a mi computadora
+scp miusuario@tepeu.lcg.unam.mx:/home/miusuario/practica3/ .
+
+```
+]
+
+
 
 ---
 ## rsync
