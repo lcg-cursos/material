@@ -3,7 +3,7 @@
   <head>
     <title>Introducción a la Bioinformática</title>
     <meta charset="utf-8" />
-    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -12,9 +12,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Introducción a la Bioinformática
+]
+.institute[
 ### Licenciatura en Ciencias Genómicas,UNAM
-### First version: yyy-mm-dd; Last update: 2022-08-25
+]
+.date[
+### First version: yyy-mm-dd; Last update: 2023-09-19
+]
 
 ---
 
@@ -46,13 +52,14 @@ pre {
 
 ## Objetivo
 
-El alumno debe ser capaz de realizar conteos de datos usando comandos de unix y seguirá haciendo uso de tuberias y redireccionamientos.
+Lxs alumnxs deberán ser capaces de realizar conteos de datos usando comandos de unix y seguir haciendo uso de tuberias y redireccionamientos.
 ---
 
 ## Contenido de la unidad
 
-1. Conteos y análisis con el shell
-2. Uso de Tuberías
+1. Conteos y análisis con el shell.
+
+2. Uso de Tuberías.
 
 
 ---
@@ -67,25 +74,25 @@ class: inverse, center, middle
 
 |Comando |   Función básica   |
 |----    |---                 |
-|sort    | Ordena una serie de líneas (o records) |
-|cut     |Corta porciones seleccionadas de cada línea |
-|uniq    |Reporta o filtra las líneas repetidas de un archivo |
-|wc      |Reporta la cuenta de líneas, caracteres y bytes |
-|man     |Imprime la descripción y opciones de un comando |
+|sort    | Ordena una serie de líneas (o records). |
+|cut     |Corta porciones seleccionadas de cada línea. |
+|uniq    |Reporta o filtra las líneas repetidas de un archivo. |
+|wc      |Reporta la cuenta de líneas, caracteres y bytes. |
+|man     |Imprime la descripción y opciones de un comando. |
 
 ---
 ## Preparando nuestro directorio de trabajo
 
-- Muévete a tu directorio home
+- Muévete a tu directorio home.
 
-- Crea la carpeta practica4
+- Crea la carpeta `practica4`.
 
-- Entra a la carpeta practica4
+- Entra a la carpeta `practica4`.
 
-- Crea la carpeta data
+- Crea la carpeta `data`.
 
 - Copia los archivos ubicados en:
-/home/lgomez/WelcomeBioinfo/bioinfo2021/dato/practica4 a tu carpeta data
+`/home/lgomez/WelcomeBioinfo/bioinfo2021/dato/practica4` a tu carpeta `data`.
 
 ---
 ## Algunas preguntas biológicas relevantes
@@ -106,7 +113,7 @@ class: inverse, center, middle
 
 8. ¿Cuántos genes hay en cada una de la cadenas del genoma de *Escherichia coli*?
 
-9. Escribe un archivo ordenado por cadena y regiión genómica
+9. Escribe un archivo ordenado por cadena y región genómica.
 
 ---
 ## P1: ¿De qué tamaño es el genoma de *Escherichia coli*?
@@ -119,24 +126,22 @@ class: inverse, center, middle
 
 --
 
-Explorando los datos
 
-```
+```bash
+## Explorando los datos:
 ls data
-
 head data/coli_genomic.fna
 head data/coli_protein.fna
 head data/coli.gff
+
+## Explorando un comando
+man wc
 ```
+
 ---
 ## P1: ¿De qué tamaño es el genoma de *Escherichia coli*?
 
-Explorando un comando
-
-```
-## veamos el manual
-man wc
-
+```bash
 ## Numero de lineas y de bytes de un archivo
 wc data/coli_genomic.fna
 
@@ -144,13 +149,14 @@ wc data/coli_genomic.fna
 ```
 
 .content-box-blue[
-R: Aproximadamente 4.6Mb
+**R**: Aproximadamente 4.6Mb
 
 Esto nos da una respuesta aproximada.
 ]
 
 El número de bytes incluye:
-- Los bytes utilizados en el header
+- Los bytes utilizados en el header.
+
 - Los bytes utilizados para los saltos de línea.
 
 ---
@@ -162,11 +168,23 @@ El número de bytes incluye:
 ¿Cuál comando nos será útil para extraer la información que necesitamos?
 ]
 
---
+---
+## P2. ¿Cuántos cromosomas tiene *Escherichia coli*?
 
-- Archivo: data/coli.gff
-- Necesitamos acceder a la primer columna
-- Y obtener los valores únicos
+.content-box-blue[
+¿Cuál es el archivo de datos que utilizaremos para responder esta pregunta?
+]
+ `data/coli.gff`
+       
+
+
+--
+.content-box-blue[
+¿Cuál comando nos será útil para extraer la información que necesitamos?
+]
+- Necesitamos acceder a la primer columna.
+
+- Y obtener los valores únicos.
 
 ---
 ## P2. ¿Cuántos cromosomas tiene *Escherichia coli*?
@@ -178,10 +196,9 @@ man cut
 ## Necesito obtener los valores unicos
 man uniq
 ```
-
 --
 
-Usemos las tuberias
+Utilicemos tuberias:
 
 ```bash
 ## Accediendo a la primer columna
@@ -196,7 +213,7 @@ Nota que el output incluye las 8 líneas del header (empiezan con #)
 --
 
 .content-box-blue[
-Sólo uno: NC 000913.3 
+**Sólo uno: NC 000913.3 **
 ]
 
 ---
@@ -206,8 +223,9 @@ Sólo uno: NC 000913.3
 
 --
 
-- cut - Necesito acceder a la tercer columna
-- uniq - Necesito obtener los valores únicos
+- `cut` - Necesitamos acceder a la tercer columna.
+
+- `uniq` - Necesitamos obtener los valores únicos.
 
 --
 
@@ -219,7 +237,7 @@ cut -f3 data/coli.gff | head
 cut -f3 data/coli.gff | uniq
 ```
 
-Esto no genera el resultado que esperaba...
+Esto no genera el resultado que esperábamos...
 
 ---
 ## 3. ¿Qué tipos de features tiene el genoma de *Escherichia coli*?
@@ -246,9 +264,11 @@ to sort the files first.
 
 --
 
-- **cut** - Necesito acceder a la tercer columna
-- **sort** - Necesito ordenar los valores de la tercer columna
-- **uniq** - Necesito obtener los valores únicos
+- **`cut`** - Necesito acceder a la tercer columna.
+
+- **`sort`** - Necesito ordenar los valores de la tercer columna.
+
+- **`uniq`** - Necesito obtener los valores únicos.
 
 --
 
@@ -264,7 +284,6 @@ cut -f3 data/coli.gff | sort | uniq
 
 ## Otra opcion
 cut -f3 data/coli.gff | sort -u
-
 ```
 
 ---
@@ -289,7 +308,7 @@ NCBI clasifica a los elementos del genoma de *E. coli* en las siguientes categor
 ---
 ## P4. ¿Cuántos tipos de features se encuentran anotadas como parte del genoma de *Escherichia coli*?
 
-En este caso, ya tenemos la respuesta, son 13. ¿Y si fueran cientos?
+En este caso, ya tenemos la respuesta, son 13. Pero ¿y si fueran cientos?
 
 ```bash
 ## Numero de features unicas, numero de lineas
@@ -303,7 +322,8 @@ cut -f3 data/coli.gff | sort -u | wc -l
 ---
 ## P5. ¿Cuáles son las fuentes de los datos anotados?
 
-**¿Qué columna usamos?**
+**¿Qué columna usamos?**  
+
 **¿Cuáles serian los pasos?**
 
 --
@@ -311,43 +331,44 @@ cut -f3 data/coli.gff | sort -u | wc -l
 ```bash
 ## Valores unicos para las fuentes de datos
 cut -f2 data/coli.gff | sort | uniq
-
+```
+--
+```bash
 ## Otra opcion
 cut -f2 data/coli.gff | sort -u
 ```
-
 --
 
-Solo existe una fuente de datos: RefSeq
+Solo existe una fuente de datos: **RefSeq**.
 
 ---
 ## P6. ¿Cuántos genes y cuántas CDS tiene el genoma de *Escherichia coli*?
 
 **¿Hay alguna combinación comando-parámetro para los comandos
-listados en esta tabla que me ayude a responder la pregunta?**
+listados en esta tabla que nos ayude a responder la pregunta?**
 
-¿cuántos hay?
+¿Cuántos hay?
 
 |Comando |   Función básica   |
 |----    |---                 |
-|sort    | Ordena una serie de líneas (o records) |
-|cut     |Corta porciones seleccionadas de cada línea |
-|uniq    |Reporta o filtra las líneas repetidas de un archivo |
-|wc      |Reporta la cuenta de líneas, caracteres y bytes |
-|man     |Imprime la descripción y opciones de un comando |
+|sort    | Ordena una serie de líneas (o records). |
+|cut     |Corta porciones seleccionadas de cada línea. |
+|uniq    |Reporta o filtra las líneas repetidas de un archivo. |
+|wc      |Reporta la cuenta de líneas, caracteres y bytes. |
+|man     |Imprime la descripción y opciones de un comando. |
 
 
 ---
 ## P6. ¿Cuántos genes y cuántas CDS tiene el genoma de *Escherichia coli*?
 
-Funcionalidades del comando uniq
+Funcionalidades del comando `uniq`:
 
 |Opción  |Comportamiento      |
 |----    |---                 |
-|-d      |Sólo imprime las líneas repetidas|
-|-u      |Sólo imprime las líneas no repetidas|
-|-i      |Realiza la comparación case-insensitive|
-|-c      |Precede cada línea output con la cuenta del número de veces que esa línea ocurrió|
+|-d      |Sólo imprime las líneas repetidas.|
+|-u      |Sólo imprime las líneas no repetidas.|
+|-i      |Realiza la comparación case-insensitive.|
+|-c      |Precede cada línea output con la cuenta del número de veces que esa línea ocurrió.|
 
 ---
 ## P6. ¿Cuántos genes y cuántas CDS tiene el genoma de *Escherichia coli*?
@@ -355,22 +376,22 @@ Funcionalidades del comando uniq
 ¿Qué tenemos que hacer?
 
 ```bash
-# Acceder a la columna 3 de la anotacion
+# Acceder a la columna 3 de la anotación.
 
-# Contar cuantas veces ocurre cada elemento
+# Contar cuántas veces ocurre cada elemento.
 ```
 --
 
-Analicemos la solución
+Analicemos la solución:
 
 ```bash
-# Acceder a la columna 3 de la anotacion
+# Acceder a la columna 3 de la anotación
 cut -f3 data/coli.gff | head
 
-# Contar cuantas veces ocurre cada elemento:
-## Ordenar los elements
-## Obtener los unicos
-## Contar numero de ocurrencias
+# Contar cuántas veces ocurre cada elemento:
+## Ordenar los elementos
+## Obtener los únicos
+## Contar número de ocurrencias
 cut -f3 data/coli.gff | sort | uniq -c
 ```
 ---
@@ -378,21 +399,26 @@ cut -f3 data/coli.gff | sort | uniq -c
 
 **¡LISTO!**
 
-- 4379 CDS
-- 4419 genes
+- 4379 CDS.
+- 4419 genes.
 
 --
 
 .content-box-blue[
-¿Seguros? ¿No estamos contando de más? ¿Qué suposiciones implícitas
-hace nuestro programa? ¿No tenemos genes o CDSs repetidos en nuestro
-archivo?
+¿Seguros?
+
+¿No estamos contando de más?
+
+¿Qué suposiciones implícitas hace nuestro programa?
+
+¿No tenemos genes o CDSs repetidos en nuestro archivo?
 ]
 
 ---
 ## P6. ¿Cuántos genes y cuántas CDS tiene el genoma de *Escherichia coli*?
 
-Vamos a incluir las posiciones para asegurarnos de que cada gene sea único
+Vamos a incluir las posiciones para asegurarnos de que cada gene sea único. 
+
 ¿Cómo cortamos más de una columna?
 
 ```bash
@@ -401,18 +427,23 @@ man cut
 ```
 
 ---
+## P6. ¿Cuántos genes y cuántas CDS tiene el genoma de *Escherichia coli*?
 
 .content-box-blue[
-¿cuál es el algoritmo que debemos aplicar?
-¿cuáles son los pasos necesarios para resolver nuestra pregunta?
+**¿Cuál es el algoritmo que debemos aplicar?**
+
+¿Cuáles son los pasos necesarios para resolver nuestra pregunta?
 ]
 
 --
 
-1. Cortar las columnas feature, inicio y final
-2. Obtener las lineas únicas
-3. Acceder a la columna 3
-4. Contar cuantas veces ocurre cada elemento
+1. Cortar las columnas feature, inicio y final.
+
+2. Obtener las lineas únicas.
+
+3. Acceder a la columna 3.
+
+4. Contar cuantas veces ocurre cada elemento.
 
 
 ---
@@ -435,7 +466,7 @@ cut -f3-5 data/coli.gff | sort -u | cut -f1 \
 
 --
 
-**¡AHORA SI ESTAMOS SEGUROS!**
+**¡AHORA SÍ ESTAMOS SEGUROS!**
 
 - 4379 CDS
 - 4419 genes
@@ -443,14 +474,18 @@ cut -f3-5 data/coli.gff | sort -u | cut -f1 \
 ---
 ## P7. ¿Cuántos orígenes de replicación tiene el genoma de *Escherichia coli*?
 
+.content-box-blue[
 **¿Cuál es el algoritmo que debemos aplicar?**
-¿Cuáles son los pasos necesarios para resolver nuestra pregunta?
 
+¿Cuáles son los pasos necesarios para resolver nuestra pregunta?
+]
 --
 
 Debemos aplicar el mismo algoritmo que en el ejercicio anterior.
 
 Revisa el output de tu tubería anterior.
+
+--
 
 Exacto, ya tenemos la respuesta:
 
@@ -461,8 +496,7 @@ Exacto, ya tenemos la respuesta:
 
 **¡TE TOCA!**
 
-Antes de intentarlo dime ¿cómo resolverías el problema si no supieras de la
-existencia de las herramientas que hemos visto en clase?
+Antes de intentarlo, dime cómo resolverías el problema si no supieras de la existencia de las herramientas que hemos visto en clase.
 
 --
 
@@ -484,22 +518,26 @@ cut -f3,7 data/coli.gff | sort | uniq -c
 - 2246 genes en la cadena -
 
 ---
-## Escribe un archivo ordenado por cadena y región genómica
+## P9. Escribe un archivo ordenado por cadena y región genómica
 
 .content-box-blue[
-¿cuál es el algoritmo que debemos aplicar?
-¿cuáles son los pasos necesarios para resolver nuestra pregunta?
+**¿Cuál es el algoritmo que debemos aplicar?**
+
+¿Cuáles son los pasos necesarios para resolver nuestra pregunta?
 ]
 
 ---
-## P8.2 Escribe un archivo ordenado por cadena y región genómica
+## P9. Escribe un archivo ordenado por cadena y región genómica
 
 **¿Cuál es el algoritmo que debemos aplicar?**
 
 --
 
-- Acceder a la columna de la cadena y de las posiciones genómicas
-- Ordenar por la cadena, y después por posición genómica ascendente
+- Acceder a la columna de la cadena y de las posiciones genómicas.
+
+- Ordenar por la cadena, y después por posición genómica ascendente.
+
+--
 
 ¿Cómo?
 
@@ -510,22 +548,23 @@ man sort
 ```
 
 ---
-## P8.2 Escribe un archivo ordenado por cadena y región genómica
+## P9. Escribe un archivo ordenado por cadena y región genómica
 
-Veámos como se ve ordenado
+Veamos cómo se ve ordenado:
+
 ```bash
 ## Podemos hacer todo con un solo comando
 sort -k7,7 -k4,4 data/coli.gff | less -S
 
 ```
-
+--
 Sin embargo, el output no es exactamente lo que necesitamos.. el ordenamiento no es correcto.
 
-**¿Porqué?**
+**¿Por qué?**
 
 --
 
-cuando necesitamos ordenar numericamente una columna
+Cuando necesitamos ordenar numericamente una columna
 
 ```bash
 ## Debemos especificar
@@ -534,9 +573,11 @@ sort -k7,7 -k4,4n data/coli.gff | less -s
 ```
 --
 
-redireccionamos la salida a un archivo
+redireccionamos la salida a un archivo.
 
---
+---
+
+## P9. Escribe un archivo ordenado por cadena y región genómica
 
 ```bash
 ## Escribir archivo de resultados
@@ -551,12 +592,8 @@ sort -k7,7 -k4,4n data/coli.gff &gt; coli_strand.gff
 
 .pull-right[.tiny[["Goku:Kaio-Ken"](https://areajugones.sport.es/wp-content/uploads/2017/05/Goku_Kaio-Ken_Coolers_Revenge.jpg)]]
 
-
 ### El conocimiento es poder
 ---
-
-
-9. Escribe un archivo ordenado por cadena y regiión genómica
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -605,6 +642,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
