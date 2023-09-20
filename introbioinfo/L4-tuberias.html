@@ -210,16 +210,16 @@ Usando `&gt;` podemos redireccionar el std output y el std error a un archivo.
 
 ```bash
 ## Concatenar el archivo personal_info.txt y NA.txt
-## Redireccionar solo el std output  &gt; output.txt o 1 &gt; output.txt
+## Redireccionar solo el std output  &gt; output.txt o 1&gt; output.txt
 ## Pero el error se imprime en pantalla
 cat personal_info.txt NA.txt &gt; output.txt   
 
 ## Redireccionar solo el std error. El comando marca un eror porque NA.txt no existe
 ## En la salida del comando cat, el std output se manda a pantalla
-cat personal_info.txt NA.txt 2 &gt; error.txt   
+cat personal_info.txt NA.txt 2&gt; error.txt   
 
 ## Redireccionar el std output y el std error
-cat personal_info.txt NA.txt &gt; output.txt 2 &gt; error.txt
+cat personal_info.txt NA.txt &gt; output.txt 2&gt; error.txt
 ```
 
 Si el archivo que guarda la salida existe, se sobrescibe; si no existe, se crea.
