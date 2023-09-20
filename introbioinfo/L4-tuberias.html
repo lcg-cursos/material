@@ -90,13 +90,16 @@ cat   mi_archivo.txt
 ]
 
 - Entrada o fuente de datos: mi_archivo.txt
-
 - salida: imprime en pantalla el contenido de mi_archivo.txt 
 
 --
 
-&lt;img src="https://bioinf.comav.upv.es/courses/unix/_images/cli_program.png" width="300px" style="display: block; margin: auto;" /&gt;
+&lt;img src="https://bioinf.comav.upv.es/courses/unix/_images/cli_program.png" width="250px" style="display: block; margin: auto;" /&gt;
 .pull-right[ .tiny[Fuente: https://bioinf.comav.upv.es/courses/unix/pipes.html]]
+
+--
+
+Otros ejemplos:  mkdir, less, 
 
 ---
 ## Streams o flujos de datos
@@ -272,6 +275,19 @@ Este tipo de redireccionamiento no es tan común.
 ## El std output del programa es redireccionado hacia el archivo outputfile
 programa &lt; inputfile &gt; outpufile
 ```
+
+---
+
+## Ejercicio
+
+Queremos tener en un archivo los 3 archivos/directorios primeros y los 3 últimos. En total el archivo de salida debe tener 6 nombres de archivos/directorios.
+
+1. Lista el contenido del directorio / y mandalo a un archivo llamado `archivos_raiz.txt`. Recuerda que para guardar el archivo debe ser en tu cuenta donde tienes permisos de escritura.
+
+2. Obten los 3 primeros archivos del directorio raíz usando el archivo `archivos_raiz.txt` y manda la salida a `archivos_raiz_top_last.txt`
+
+3. Obten los 3 últimos archivos del directorio raíz usando el archivo `archivos_raiz.txt` y manda la salida a `archivos_raiz_top_last.txt`. Recuerda no sobreescribir el resultado.
+
 
 ---
 ## Redireccionamientos
