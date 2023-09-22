@@ -3,7 +3,7 @@
   <head>
     <title>Introducción a la Bioinformática</title>
     <meta charset="utf-8" />
-    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 ### Licenciatura en Ciencias Genómicas,UNAM
 ]
 .date[
-### First version: yyy-mm-dd; Last update: 2023-09-19
+### First version: yyy-mm-dd; Last update: 2023-09-21
 ]
 
 ---
@@ -69,18 +69,94 @@ class: inverse, center, middle
 # Conteos
 
 ---
-## Algunos comandos básicos de análisis
+# Comandos que ya hemos visto
 
+| comando |        | comando | |
+|:----   |:--- |:--- |:--- |
+| ls     | listar           | mkdir  | crear directorio |
+| mv     | mover/renombrar  | cd     | cambiar de directorio |
+| rm     | borrar           | pwd    | mostrar dir. actual |
+| cp     | copiar           | scp    | copar archivos entre hosts |
+| more   | mostrar          | less   | mostrar |
+| cat    | concatenar/imprimir|        |
+| head   | display first lines | tail   | display last lines |
+| curl   | transferir/descargar un URL | wget   | transferir/descargar un URL|
+| gzip   | comprimir | gunzip | descomprimir |
+| .      | directorio actual |  ..    | directorio padre |
+| ~      | user home  |        |
+|  &gt;     | redireccionar |   &gt;&gt;   | redireccionar agregar |
+
+---
+## Algunos comandos básicos de *análisis*
 
 |Comando |   Función básica   |
 |----    |---                 |
-|sort    | Ordena una serie de líneas (o records). |
+|sort    |Ordena una serie de líneas (o records). |
 |cut     |Corta porciones seleccionadas de cada línea. |
 |uniq    |Reporta o filtra las líneas repetidas de un archivo. |
 |wc      |Reporta la cuenta de líneas, caracteres y bytes. |
 |man     |Imprime la descripción y opciones de un comando. |
 
+
+&lt;br&gt;
+&lt;br&gt;
+
+--
+
+.content-box-red[
+       **¿Qué implica realizar un análisis de datos**
+]
+
 ---
+##  El Proceso de Análisis de Datos
+
+.content-box-yellow[
+
+"El **Proceso de Análisis de Datos** conlleva la **recolección**, **transformación**, **limpieza** y **modelado** de datos para **descubrir/conocer** la *información útil* y de interés.
+
+Todos los datos obtenidos se transforman en conclusiones y se usan para la toma de decisiones. 
+]
+
+---
+##  El Proceso de Análisis de Datos
+
+Para nuestros ejemplos de ahora en adelante, seguiremos los siguientes pasos:
+
+- **Conocer el Problema o el Escenario**. En lo posible, en nuestro documento de Reporte de Investigación, describir en la Introducción, el problema.
+
+- **Recolectar/descargar/copiar los datos**. Los puedes descargar de base de datos, de otro servidor, pero siempre hay que anotar la fuente. De preferencia hay que guardarlos en un directorio puede ser `input_data`, `data`, `data_source` o como quieras llamarlo.
+
+- **Explorar/Entender los datos**. ANTES de usar los datos, investiga su contenido, qué hay en cada columna, qué tipo de datos son (números, reales, caracteres..). Checa si hay valores vacios. Determina el tipo de formato.
+
+- **Limpiar/Filtrar los datos** ( mas adelante cuando aprendamos a filtrar!). Los datos ORIGINALES que descargas NO SE TOCAN. Si es necesario limpiar (eliminar renglones o columnas o algun dato), crea otra carpeta donde guardes esos archivos modificados.
+
+---
+
+##  El Proceso de Análisis de Datos
+
+- **Analizar los datos y Responder las preguntas**. Analiza primero los pasos que vas a seguir para responder la pregunta, y describelo (algoritmo). Un algoritmo NO SON LOS COMANDOS, sino la LOGICA que vas a seguir, usando el archivo de datos. 
+
+&gt; Por ejemplo, si usaramos el archivo de anotaciones del genoma de E. coli (.gff), si queremos saber cuantos genes tiene el genoma, el algoritmo seria:
+
+&gt; 1. **Obtener/Filtrar** todos los renglones que en su columna 3 diga "gene"
+&gt; 2. **Contar** cuantos renglones son.
+
+&gt; Si te fijas siempre iniciamos con un verbo.
+
+- **Sacar conclusiones**. Una vez que respondas las preguntas, observa los resultados y describe lo que observas.
+
+---
+# Entendiendo el problema 
+
+El genoma de **Escherichia coli** K12 se publicó en 1997, y a través de los años se ha ido anotando información sobre sus genes o otros elementos genéticos. Vamos a explorar el genoma y contestar algunas preguntas que nos ayudarán a entender mejor este organismo.
+
+
+1. Vamos a prepar el repositorio para el proyecto, 
+2. Vamos a copiar el documento `README.txt` 
+3. Lee con cuidado el `README.txt` de inicio a fin.
+
+---
+
 ## Preparando nuestro directorio de trabajo
 
 - Muévete a tu directorio home.
@@ -92,9 +168,30 @@ class: inverse, center, middle
 - Crea la carpeta `data`.
 
 - Copia los archivos ubicados en:
-`/home/lgomez/WelcomeBioinfo/bioinfo2021/dato/practica4` a tu carpeta `data`.
+`/home/compu2/WelcomeBioinfo/datos/practica4` a tu carpeta `data`.
+
+- Copia el template de Reporte a tu directorio doc ( puedes hacer un scp o abrir nano y copiar el formato). 
 
 ---
+## Preparando nuestro directorio de trabajo
+
+Como debe quedar nuestro directorio:
+
+```
+practica4
+|-- data
+|   |-- coli_genomic.fna
+|   |-- coli.gff
+|   |-- coli_protein.fna
+|   |-- directorio.txt
+|   `-- flagella_genes.txt
+`-- doc
+    `-- README.txt
+
+```
+
+---
+
 ## Algunas preguntas biológicas relevantes
 
 1. ¿De qué tamaño es el genoma de *Escherichia coli*?
@@ -116,16 +213,18 @@ class: inverse, center, middle
 9. Escribe un archivo ordenado por cadena y región genómica.
 
 ---
+
 ## P1: ¿De qué tamaño es el genoma de *Escherichia coli*?
 
 .content-box-blue[
 ¿Cuál es el archivo de datos que utilizaremos para responder esta pregunta?
 
-¿Cuál comando nos será útil para extraer la información que necesitamos?
+¿Cuál pasos vamos a seguir?
 ]
 
 --
 
+Ya sabemos el problema, ya tenemos los datos .. ahora vamos a Explorar los datos:
 
 ```bash
 ## Explorando los datos:
@@ -141,12 +240,26 @@ man wc
 ---
 ## P1: ¿De qué tamaño es el genoma de *Escherichia coli*?
 
+Archivo: data/coli_genomic.fna
+
+&gt; El archivo tiene un renglón de anotación, y cada línea tiene un caracter que es el salto de línea que se cuenta pero no se ve.
+
+Algoritmo: 
+
+&gt; 1. Contar el número de líneas del archivo `coli_genomic.fna` que tiene la secuencia de nucleotidos del genoma.
+
+&gt; 2. Restar al total, la linea de encabezado y todos los saltos de línea.
+
+
 ```bash
 ## Numero de lineas y de bytes de un archivo
 wc data/coli_genomic.fna
 
 ## Output: lineas, palabras, bytes
 ```
+
+---
+## P1: ¿De qué tamaño es el genoma de *Escherichia coli*?
 
 .content-box-blue[
 **R**: Aproximadamente 4.6Mb
@@ -165,7 +278,7 @@ El número de bytes incluye:
 .content-box-blue[
 ¿Cuál es el archivo de datos que utilizaremos para responder esta pregunta?
 
-¿Cuál comando nos será útil para extraer la información que necesitamos?
+¿Cuál es el algoritmo o pasos a seguir para encontrar la respuesta ?
 ]
 
 ---
@@ -174,17 +287,23 @@ El número de bytes incluye:
 .content-box-blue[
 ¿Cuál es el archivo de datos que utilizaremos para responder esta pregunta?
 ]
- `data/coli.gff`
-       
 
+Archivo:  `data/coli.gff`
+       
+&gt; Tiene la anotación de todos los elementos genéticos (features) hasta ahora conocidos.
 
 --
-.content-box-blue[
-¿Cuál comando nos será útil para extraer la información que necesitamos?
-]
-- Necesitamos acceder a la primer columna.
 
-- Y obtener los valores únicos.
+.content-box-blue[
+¿Cuál es el algoritmo o pasos a seguir para encontrar la respuesta ?
+]
+
+
+&gt; 1. Tomar/Sacar la primer columna, que indica en que cromosoma se encuetra cada feature.
+
+&gt; 2. Quitar las repeticiones para quedarnos con los valores únicos.
+
+&gt; 3. Contar el número de cromosomas.
 
 ---
 ## P2. ¿Cuántos cromosomas tiene *Escherichia coli*?
@@ -219,15 +338,23 @@ Nota que el output incluye las 8 líneas del header (empiezan con #)
 ---
 ## 3. ¿Qué tipos de features tiene el genoma de *Escherichia coli*?
 
-**¿Qué comandos voy a ocupar?**
+.content-box-blue[
+¿Cuál es el archivo de datos que utilizaremos para responder esta pregunta?
 
---
+¿Cuál es el algoritmo o pasos a seguir para encontrar la respuesta ?
+]
 
-- `cut` - Necesitamos acceder a la tercer columna.
+Archivo:  `data/coli.gff`
 
-- `uniq` - Necesitamos obtener los valores únicos.
+Algoritmo: 
 
---
+&gt; 1. Sacar/Obtener la tercer columna, que contiene la anotación del tipo de feature.
+
+&gt; 2. Quitar repeticiones para quedarnos con los valores únicos
+
+
+## 3. ¿Qué tipos de features tiene el genoma de *Escherichia coli*?
+
 
 ```bash
 ## Accediendo a la tercer columna
@@ -326,7 +453,19 @@ cut -f3 data/coli.gff | sort -u | wc -l
 
 **¿Cuáles serian los pasos?**
 
---
+Archivo: data/coli.gff 
+
+Algoritmo:
+
+&gt; 1. Obtener la columna 2 que tiene la fuente de la anotación del feature.
+
+&gt; 2. Ordenar la columna
+
+&gt; 3. Quitar repeticiones
+
+---
+## P5. ¿Cuáles son las fuentes de los datos anotados?
+
 
 ```bash
 ## Valores unicos para las fuentes de datos
@@ -594,6 +733,34 @@ sort -k7,7 -k4,4n data/coli.gff &gt; coli_strand.gff
 
 ### El conocimiento es poder
 ---
+
+
+
+
+----
+Para llevar a cabo un proyecto de Análisis de Datos existen varias metodologías a seguir. Aunque KDD, SEMMA y CRISP-DM son las tres más utilizadas".
+
+- KDD o Knowledge Discover Database
+- SEMMA o Sample, Explore, Modify, Model and Assess
+- CRISP-DM o Cross Industry Standard Process for Data Mining
+
+---
+##  Procesos de Análisis de Datos 
+
+| KDD     |  SEMMA   | CRISP  |
+|:--      |:---      |:---     |
+| Selección    | Muestrear | Entendimiento del Negocio |
+| Preprocesamiento    | Explorar | Entendimiento de los datos |
+| Transformación | Modificar | Preparación de los datos |
+| Minería de datos | Modelar | Modelado|
+| Interpretación / Evaluación | Evaluar | Evaluación|
+|     |     | Despliegue |
+
+
+Aunque son metodologías para descubrir conocimiento aplicando mineria de datos.. podemos aplicar algunas fases en nuestros análisis.
+
+&lt;img src="https://learn.microsoft.com/es-es/azure/architecture/data-science-process/media/lifecycle/tdsp-lifecycle2.png" width="300px" style="display: block; margin: auto;" /&gt;
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
