@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>FormatoAnalisis</title>
+<title>ReporteGenomaEcoli</title>
 
 
 <style type="text/css">
@@ -494,7 +494,7 @@ NC_000913.3     RefSeq  CDS     337     2799    .       +       0       ID=cds-N
 
 <p><br></p>
 
-<h3 id="toc_7">C. Análisis de los datos</h3>
+<h2 id="toc_7">Resultados</h2>
 
 <h3 id="toc_8">1. ¿De qué tamaño es el genoma de <em>Escherichia coli</em>?</h3>
 
@@ -528,6 +528,10 @@ NC_000913.3     RefSeq  CDS     337     2799    .       +       0       ID=cds-N
 </code></pre></div>
 
 <p>Donde -l regresa el número de líneas, y -c el número de caracteres del archivo.</p>
+
+<p><strong>Resultado</strong></p>
+
+<p>La secuencia de nucleotidos del genoma completo de <em>E. coli</em> es de 4.6 MB, ya que el resultado del conteo es de 469,9745 caracteres del archivo, y restamos el numero de lineas 58022. </p>
 
 <h3 id="toc_9">2. ¿Cuántos cromosomas tiene <em>Escherichia coli</em>?</h3>
 
@@ -573,6 +577,21 @@ NC_000913.3     RefSeq  CDS     337     2799    .       +       0       ID=cds-N
 
 <p>donde <code>cut -f1</code> nos permite cortar la información de la columna 1, y <code>uniq</code> nos elimina repeticiones.</p>
 
+<p><strong>Resultados</strong>
+La respuesta que obtenemos es </p>
+
+<div><pre><code class="language-none">##gff-version 3
+#!gff-spec-version 1.21
+#!processor NCBI annotwriter
+#!genome-build ASM584v2
+#!genome-build-accession NCBI_Assembly:GCF_000005845.2
+##sequence-region NC_000913.3 1 4641652
+##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=511145
+NC_000913.3
+###</code></pre></div>
+
+<p>Donde las líneas que comienzan con <code>#</code> son comentarios. Por lo que tenemos solo un cromosoma con identificador <code>NC_000913.3</code>.</p>
+
 <!-- ### 2. Pregunta 
 
 Archivo(s):     
@@ -589,35 +608,13 @@ Solución.
 
 -->
 
-<h2 id="toc_10">Resultados</h2>
-
-<h3 id="toc_11">1. ¿De qué tamaño es el genoma de <em>Escherichia coli</em>?</h3>
-
-<p>La secuencia de nucleotidos del genoma completo de <em>E. coli</em> es de 4.6 MB, ya que el resultado del conteo es de 469,9745 caracteres del archivo, y restamos el numero de lineas 58022. </p>
-
-<h3 id="toc_12">2. ¿Cuántos cromosomas tiene <em>Escherichia coli</em>?</h3>
-
-<p>La respuesta que obtenemos es </p>
-
-<div><pre><code class="language-none">##gff-version 3
-#!gff-spec-version 1.21
-#!processor NCBI annotwriter
-#!genome-build ASM584v2
-#!genome-build-accession NCBI_Assembly:GCF_000005845.2
-##sequence-region NC_000913.3 1 4641652
-##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=511145
-NC_000913.3
-###</code></pre></div>
-
-<p>Donde las líneas que comienzan con <code>#</code> son comentarios. Por lo que tenemos solo un cromosoma con identificador <code>NC_000913.3</code>.</p>
-
-<h2 id="toc_13">Análisis y Conclusiones</h2>
+<h2 id="toc_10">Análisis y Conclusiones</h2>
 
 <p>El genoma de E.coli versión NC_000913.3, tiene ## cromosoma con un un tamaño aproximado de ### MB. Se han anotado ### número de genes, los cuales ### van en la cadena de 5&#39;-3&#39; y ### van en la cadena complementaria.  </p>
 
 <p><!-- describe todo lo que descubriste en este análisis --></p>
 
-<h2 id="toc_14">Referencias</h2>
+<h2 id="toc_11">Referencias</h2>
 
 <p>[1] https://es.wikipedia.org/wiki/Escherichia_coli</p>
 
