@@ -3,7 +3,7 @@
   <head>
     <title>Introducción a la Bioinformática</title>
     <meta charset="utf-8" />
-    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 ### Licenciatura en Ciencias Genómicas,UNAM
 ]
 .date[
-### First version: yyy-mm-dd; Last update: 2023-10-03
+### First version: yyy-mm-dd; Last update: 2023-10-04
 ]
 
 ---
@@ -115,13 +115,13 @@ Algunas funcionalidades del comando `grep`
 
 Las siguientes recomendaciones te ayudarán a construir flujos de trabajo más robustos y reproducibles:
 
-- Piensa en los pasos necesarios para obtener la respuesta que buscas antes de ejecutar tu primer comando.
+1. **Piensa en los pasos necesarios** para obtener la respuesta que buscas ANTES de ejecutar tu primer comando.
 
-- Documenta tus códigos describiendo la funcionalidad de cada sección.
+2. Documenta tus códigos describiendo la funcionalidad de cada sección.
 
-- Analiza el output para encontrar fallas lógicas o comportamientos inesperados.
+3. Analiza el OUTPUT de CADA PARTE de la TUBERIA para encontrar fallas lógicas o comportamientos inesperados.
 
-- Recuerda que siempre puedes acceder al manual de un comando o buscar ayuda en internet para entender su funcionamiento.
+4. Recuerda que siempre puedes acceder al manual de un comando o buscar ayuda en internet para entender su funcionamiento.
 
 ---
 ## Ejercicios
@@ -191,6 +191,10 @@ RefSeq, un recurso altamente curado y detallado.
 
 **¿Cuál es el algoritmo que debemos seguir?**
 
+.content-box-red[ 
+Recuerda, la LOGICA de cómo abordar el problema y encontrar la solución es PRIMERO antes de saber que comando vas a usar. 
+
+]
 ---
 ## Ejercicio 1: Algoritmo
 
@@ -198,12 +202,13 @@ RefSeq, un recurso altamente curado y detallado.
 
 Para cada organismo:
 
-- Eliminar el encabezado.
+- Eliminar el encabezado, porque son comentarios.
 
-- Acceder a la columna 2.
+- Acceder a la columna 2, ya que es la que nos indica el origen de los datos, la fuente. El resto de datos no nos sirve para abordar la respuesta.
 
-- Obtener los valores únicos y el número de repeticiones para cada uno
-de ellos.
+- Ordenar la columna 2 para que todas las fuentes de datos queden juntas.
+
+- Contar cuantas veces se repite cada fuente ( las repeticiones nos indican cuantos features estan anotadas en esa fuente.)
 
 ]
 
