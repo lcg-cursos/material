@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 ### Licenciatura en Ciencias Genómicas,UNAM
 ]
 .date[
-### First version: yyy-mm-dd; Last update: 2023-10-04
+### First version: yyy-mm-dd; Last update: 2023-10-06
 ]
 
 ---
@@ -298,7 +298,7 @@ cut -d ';' -f2 | sort -u &gt; cholerae_genes.txt
 wc -l cholerae_genes.txt
 
 ## Buscarlos en B. anthracis
-grep -f cholerae_genes.txt data/anthracis.gff \
+grep -w -f cholerae_genes.txt data/anthracis.gff \
 &gt; cholerae_anthracis_genes.gff
 
 ## Obtener número de genes únicos compartidos
@@ -387,7 +387,7 @@ La segunda parte de la respuesta:
 
 ```bash
 ## Buscarlos en B. anthracis
-grep -iFf cholerae_products_uniq.txt data/anthracis.gff \
+grep -wiFf cholerae_products_uniq.txt data/anthracis.gff \
 &gt; cholerae_anthracis_products.gff
 
 ## Obtener productos compartidos
