@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 ### Licenciatura en Ciencias Genómicas,UNAM
 ]
 .date[
-### First version: yyy-mm-dd; Last update: 2023-10-06
+### First version: yyy-mm-dd; Last update: 2023-10-18
 ]
 
 ---
@@ -1024,43 +1024,309 @@ class: inverse, center, middle
 ---
 ## ¿Qué es una expresión regular?
 
-Una expresión regular es una secuencia de caracteres que definen un patrón de búsqueda.
+Las expresiones regulares son **cadenas de texto** especialmente **codificadas** que se utilizan como **patrones** para hacer ***coincidir** con conjuntos de cadenas. Comenzaron a surgir en la década de 1940 como una forma de describir lenguajes regulares, pero realmente comenzaron a aparecer en el mundo de la programación durante la década de 1970. 
+
+El primer lugar donde pude encontrarlos fue en el editor de texto QED escrito por Ken. Thompson.
+
+Entonces, 
+
+- Una expresión regular es una secuencia de caracteres que definen un patrón de búsqueda.
 
 - Se utilizan para hacer coincidir combinaciones de caracteres en cadenas.
 
 ---
 ## Expresiones Regulares
 
-¿Cómo definirías una secuencia de patrones que describa a todas las siguientes líneas?
+Las expresiones regulares se convirtieron en una parte importante del conjunto de herramientas que surgió de el sistema operativo Unix: los editores ed, sed y vi (vim), grep, AWK, entre otros, las incluyen.
 
-.pull-left[
+Las expresiones regulares (regex) se utilizan para identificar, hacer coincidir o administrar el texto.
 
-- YP 588464.1
-- YP 588465.1
-- YP 588466.1
-- YP 588467.1
-- YP 588468.1
-- YP 588469.1
-- YP 588470.1
+Sin embargo, Regex es capaz de mucho más que realizar búsquedas de palabras clave. Se puede utilizar para encontrar cualquier tipo de patrón imaginable.
+
+Los patrones se pueden encontrar más fácilmente usando **META CARACTERES** Esos caracteres especiales que hacen que esta herramienta de búsqueda sea mucho más poderosa.
+
+---
+## Expresiones Regulares
+
+The grep command offers three regex syntax options:
+
+1. Basic Regular Expression (BRE)
+
+2. **Extended Regular Expressions (ERE)**  ( Option -E)
+
+3. Perl Compatible Regular Expressions (PCRE)  ( Option -P)
+
+By default, grep uses the BRE syntax.
+
+---
+## Expresiones Regulares
+
+Esta herramienta puede resultar intimidante tanto para los novatos como para los usuarios más experimentados de Linux.
+
+Desafortunadamente, incluso un patrón relativamente simple como un número de teléfono puede dar como resultado una cadena de expresiones regulares de aspecto aterrador.
+
+Es bueno que sepas, que no existe la necesidad de entrar en pánico cuando veas expresiones como esa.
+
+Una vez que te familiarices con los conceptos básicos de las expresiones regulares, puedes abrir un nuevo mundo de posibilidades para tu día a día.
 
 
-]
+source: https://ciberninjas.com/linux-que-es-grep/
+
+---
+## Expresiones Regulares
+
+Vamos a trabajar primero en unos ejemplos para ver que es una expresión regular usando una herramienta que nos facilitará entender las expresiones regulares 
+
+- https://www.regexpal.com/
+- https://regex101.com/
+
+Veamos la interfaz!!
+
+---
+## REGEX EJEMPLO DE NUMERO TELEFONICO
+
+* En la interfaz en la sección de TEXT STRING, vamos a poner la información que contendría un archivo, vamos a poner números telefónicos. Primero pongamos este `707-827-7019`
+
+* Podemos poner en la caja de `Regular Expression` el mismo número. Lo que has hecho al colocar el número en la caja de expresión regular es usar algo llamado **literal de cadena**, para que coincida con una cadena en el texto de destino. Un literal de cadena es una representación literal de una cadena.
+
+* En la caja de `Regular Expression` borra el número y deja sólo un número 7. Observa la caja de Test String. El carácter literal (número) 7 en la expresión regular coincide con las cuatro instancias del número 7 en la texto que estás haciendo coincidir.
+
+ - Qué pasa si le quitas el `flag g` ?
+
+---
+### REGEX : Match con dígitos usando conjuntos de caracter
+
+Si queremos que la `Regular Expression` identifique a todos los números del String ?
+
+```
+[0-9]
+```
+
+"Haga coincidir cualquier dígito que encuentre en el rango del 0 al 9".
+
+
+Los `[]` corchetes no coinciden literalmente porque se tratan especialmente como **metacaracteres**. Un metacarácter tiene un significado especial en expresiones regulares y está **reservado**. Una expresión regular en la forma [0-9] se llama **clase de carácter** o, a veces,
+un **conjunto de caracteres**.
+
+Si queremos ciertos digitos específicos, podemos indicarlo
+
+```
+[012789]
+```
+
+
+---
+
+### REGEX : Match con dígitos usando conjuntos de caracter
+
+Para hacer coincidir cualquier número de teléfono de 10 dígitos, cuyas partes están separadas por guiones, qué podríamos hacer??
 
 --
 
-.pull-right[
+```
+[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]
+```
 
-- YP 5884
-- Seguido de dos números
-- Seguido de .1
+Esto parece demasiado, no? Hay una forma más sencilla de representar este patrón, llamada `shorthand`.
 
-]
+Usando un `Shorthand` de caracteres, `\d` el cual hace match con cualquier digito como lo hace `[0-9]`
+
+```
+\d\d\d-\d\d\d-\d\d\d\d
+```
+
+El `-` en este caso es un caracter literal.
+
+--
+
+Pero con D `\D`, podemos hacer match con cualquier caracter que no sea un dígito.  Reemplacemos los  `-` por `\D`
+
+```
+\d\d\d\D\d\d\d\D\d\d\d\d
+```
+
+---
+
+## REGEX : Match con cualquier caracter
+
+También podemos hacer match con el `-` si usamos el punto `.`
+
+```
+\d\d\d.\d\d\d.\d\d\d\d
+```
+
+El punto actúa esencialmente como un comodín y coincidirá con cualquier carácter (excepto,
+en determinadas situaciones, un final de línea).
+
+De hecho, si en lugar de `-` tuvieramos `%` o `=` o cualquier otro caracter nuestra expresión regular tomaría esos casos.
+
+Pega en el Test String, lo ssiguientes casos
+ 
+```
+707-827-7017
+707-827%7029
+707:827:3019
+```
+
+¿Qué observas?
+
+---
+## REGEX : Captura de grupos y referencias anteriores
+
+Ahora vamos a hacer lo siguiente:
+
+-Vamos a coincidir solo una parte del número de teléfono utilizando lo que se conoce como **grupo de captura**. 
+- Luego harás **referencia** al contenido del grupo con una referencia retrospectiva. Para crear un grupo de captura, incluya `\d` entre paréntesis para colocarlo en un grupo.
+- y luego siga con un `\1` para hacer referencia a lo que se capturó.
+
+````
+(\d)\d\1
+```
+
+• (\d) coincide con el primer dígito y lo captura/guarda (el número 7)  
+• \d coincide con el siguiente dígito (el número 0) pero no lo captura porque no es
+encerrado entre paréntesis  
+• \1 hace referencia al dígito capturado (el número 7)  
+
+--
+
+¿Qué hace lo siguiente ?
+
+```
+(\d)0\1\D\d\d\1\D\1\d\d\d
+```
+
+---
+## REGEX : Usando cuantificadores
+
+Otra  forma de hacer match con el número telefónico, es la siguiente:
+
+```
+\d{3}-?\d{3}-?\d{4}
+```
+
+- Los **números** entre **llaves** le dicen al procesador de expresiones regulares exactamente **cuántas ocurrencias** de esos dígitos que desea que busque. Las **llaves con números** son una especie de **cuantificador**. Las llaves mismas se consideran **metacaracteres**.
+
+- El signo de interrogación `?` es otro tipo de `cuantificador`. Sigue el guión en el formato normal y significa que el guión es opcional, es decir, que puede haber **cero o una** aparición del guión (uno o ninguno). 
+
+- Existen otros cuantificadores como el el signo más `+`, que significa `uno o más`, o el asterisco `*` que significa `cero o más`.
+
+---
+## REGEX : Usando cuantificadores
+
+Usando cuantificadores, nuestra **expresion regular** puede ser más concisa
+
+```
+(\d{3,4}[.-]?)+
+```
+
+La expresión regular paso a paso:
+
+```
+• ( open a capturing group  
+• \ start character shorthand (escape the following character)  
+• d end character shorthand (match any digit in the range 0 through 9 with \d)  
+• { open quantifier  
+• 3 minimum quantity to match  
+• , separate quantities  
+• 4 maximum quantity to match  
+• } close quantifier  
+• [ open character class  
+• . dot or period (matches literal dot)  
+• - literal character to match hyphen   
+• ] close character class  
+• ? zero or one quantifier  
+• ) close capturing group  
+• + one or more quantifier  
+```
+
+---
+## REGEX : Usando cuantificadores
+
+El problema de la expresión regular `(\d{3,4}[.-]?)+` si queremos ser estrictos con un número telefónico, es que si aceptamos 4 números al inicio y en medio, ya no sería un número telefónico en el formato que estamos procesando.
+
+Podríamos corregirlo de la siguiente manera:
+
+```
+(\d{3}[.-]?){2}\d{4}
+```
+
+---
+
+## REGEX : Inicio y fin
+
+- En tu caja de `Test String` escribe lo siguiente
+
+```
+7078277017
+707-827-7412
+707.827.7029 es de USA
+Este es mi teléfono 707.827-3019 apuntalo
+```
+
+y en la Caja de `Regular Expression` seguimos con `(\d{3}[.-]?){2}\d{4}`
+
+Qué observas ? ¿Cuántos estan coloreados y porqué ?
+
+---
+
+## REGEX : Inicio y fin
+
+Que tal si queremos filtrar sólo las líneas que tengan el número telefónico **al inicio** ?
+
+```
+^(\d{3}[.-]?){2}\d{4}
+```
+
+**^ matches the beginning of a line**
+
+--
+
+Y si quisieramos que solo filtre todas aquellas líneas que solo tengan el número telefónico de inicio a fin de línea.
+
+```
+^(\d{3}[.-]?){2}\d{4}$
+```
+
+**$ matches the end of a line.**
+
+---
+
+## Resumen
+
+What a regular expression is
+
+• How to use regex, a simple regular expression processor   
+--
+
+• How to match string literals   
+--
+
+• How to match digits with a character class  
+--
+
+• How to match a digit with a character shorthand  
+--
+
+• How to match a non-digit with a character shorthand  
+--
+
+• How to use a capturing group and a backreference  
+--
+
+• How to match an exact quantity of a set of strings  
+--
+
+• How to match a character optionally (zero or one) or one or more times  
+--
+
+• How to match strings at either the beginning or the end of a line  
 
 ---
 
 ## Vocabulario básico para formar una expresión regular
 
-|Caracter  | Significado  |
+|Caracter   | Significado  |
 |-----------|--------------------------------|
 | .         | Identifica cualquier caracter. |
 | ^         | Identifica el inicio de la cadena.|
@@ -1076,227 +1342,42 @@ Una expresión regular es una secuencia de caracteres que definen un patrón de 
 | \w        | Cualquier caracter alfanumérico. |
 
 ---
-## Expresiones Regulares
+## Ejercicio
 
-¿Cómo definirías una secuencia de patrones que describa a todas las siguientes líneas?
+¿Cómo definirías una o más expresiones regulares que describan a todas las siguientes líneas?
 
-.pull-left[
-
-- YP 588464.1
-- YP 588465.1
-- YP 588466.1
-- YP 588467.1
-- YP 588468.1
-- YP 588469.1
-- YP 588470.1
-
-.center[**```YP 5884\d{2}\.1```**]
-
-
-]
-
-
-.pull-right[
-
-- YP 5884
-- Seguido de dos números
-- Seguido de .1
-
-]
-
-
----
-## ¿Cómo aplicamos una expresión regular?
-
-**Recupera las líneas de la anotación de E. coli que describen los productos asociados a nuestros IDs utilizando expresiones regulares**
-
-
-```bash
-## Pidiendo ayuda
-## grep se utiliza para buscar patrones
-man grep
+```
+YP_588464.1
+YP_588465.1
+YP_588466.1
+YP_588467.1
+YP_588468.1
+YP_588469.1
+YP_588470.1
 ```
 
----
-## Aplicando expresiones regulares
-
-**Recupera las líneas de la anotación de E. coli que describen los productos asociados a nuestros IDs utilizando expresiones regulares**
-
-```bash
-## Aplicando nuestra expresion regular
-## a la anotación de E. coli
-grep -P 'YP_5884\d{2}\.1' data/coli.gff | less -S
-```
-
-¿Recuperamos únicamente las líneas que pertenecen a nuestros ID problema?
-
----
-## Aplicando expresiones regulares
-
-¿Cuántos IDs diferentes recupera nuestra expresión regular?
-
-```bash
-## IDs recuperados (36)
-grep -P 'YP_5884\d{2}\.1' data/coli.gff | \
-cut -f9 | cut -d';' -f1 | sort -u | wc -l
-## IDs iniciales (7)
-```
---
-
-Algunos de los IDs adicionales:
-
-- YP 588435.1
-- YP 588463.1
-- YP 588478.1
-
-¿Cómo podemos disminuir el número de falsos positivos (IDs adicionales)?
-
----
-## Refinando una expresión regular
-
-.pull-left[
-
-- YP 588464.1
-- YP 588465.1
-- YP 588466.1
-- YP 588467.1
-- YP 588468.1
-- YP 588469.1
-- YP 588470.1
-]
-
-.pull-right[
-
-Nuestra expresión regular original:
-
-```YP 5884\d{2}\.1```
-
-Refinando la expresión regular:
-
-```YP 5884[6|7]\d\.1```
-
-]
-
----
-## Aplicando expresiones regulares
-
-**Recupera las líneas de la anotación de E. coli que describen los productos asociados a nuestros IDs utilizando expresiones regulares**
-
-```bash
-## IDs recuperados (18)
-grep -P 'YP_5884[6|7]\d\.1' data/coli.gff | \
-cut -f9 | cut -d';' -f1 | sort -u
-## IDs iniciales (7)
-```
-
-Aún no es perfecta, pero funciona mejor.
-
----
-## Practicando con expresiones regulares
-
-Explora el archivo de trabajo `regexp_example.txt`.
-
-Ubicado en tu carpeta `data`.
-
-
----
-## Aplicando expresiones regulares
-
-1. Recupera manzana y melon.
-
-2. Recupera manzana y banana.
-
-3. Recupera melon y peron.
-
-4. Recupera lampara y carta.
-
-5. Recupera manzana, banana, lampara y carta.
-
-6. Recupera peron y peloton.
-
-7. Recupera melon, peron y peloton.
-
-No existe una ÚNICA solución correcta.
-
-En cada caso se deben recuperar únicamente las palabras solicitadas.
 
 ---
 ## Ejercicio
 
-**1 . Recupera manzana y melon**
+¿Cómo definirías una o más expresiones regulares que describan a todas las siguientes líneas?
 
-```bash
-## Empiezan con m
-grep -P '^m' data/regexp_example.txt
 ```
---
-
-**2. Recupera manzana y banana**
-
-```bash
-## Terminan con ana
-grep -P 'ana$' data/regexp_example.txt
-```
---
-
-**3. Recupera melon y peron**
-
-```bash
-## Existe una letra cualquiera al inicio de la palabra
-## Seguida de una e
-## Seguida de unicamente una letra
-## Seguida de on
-## Terminan con on
-grep -P '^\we\won$' data/regexp_example.txt
+TACTGTTTTTATATACAGTATA
+TACTGTTTATTTATACAGTAAA
+TACTGTTTTTATATACAGTAGT
+AACTGGTTTTATATACAGTAAA
+AACTGTTTTTTTATCCAGTATA
+AACTGTGATTTTATACAGTATA
+TACTGGTTATTTATACAGGTAA
+AACTGTATTTATATACAGTTGT
+CCCTGGGTGTATATACAGTTAT
+TGCTGTGAGTATATACAGCAAA
+TGCTGGTTATCTATCCAGTGTA
+AGCTGTTTATTTATACAGTGAG
+TACTGTTATTGTGTACAGTATA 
 ```
 
----
-
-## Ejercicio
-
-**4. Recupera manzana, lampara y carta**
-
-```bash
-## Existe una a
-## Seguida de dos letras,
-## Seguida de otra a
-grep -P 'a\w{2}a' data/regexp_example.txt
-```
-
---
-
-**5. Recupera manzana, banana, lampara y carta**
-
-```bash
-## Terminan con a
-grep -P 'a$' data/regexp_example.txt
-```
-
---
-
-**6. Recupera peron y peloton**
-
-```bash
-## Inician con pe
-## Seguido de una o m´as letras
-## Seguido de on
-grep -P '^pe\w+on' data/regexp_example.txt
-```
-
----
-## Ejercicio 
-
-**7. Recupera melon, peron y peloton**
-
-```bash
-## A partir del inicio de la palabra existe una letra
-## Seguido de una e
-## Seguido de una o m´as letras
-## Seguido de on
-grep -P '^\we\w+on' data/regexp_example.txt
-```
-
----
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
