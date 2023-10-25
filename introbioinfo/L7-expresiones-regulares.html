@@ -1709,6 +1709,18 @@ YP_588469.1
 YP_588470.1
 ```
 
+---
+## Ejercicio
+
+Genera una expresión regular que permita extraer todos los gene con sus coordenadas genómicas. Deben tomarse en cuenta genes en forward o en la cadena complementaria. Usa el archivo `NC_000913.3.gbk `
+
+```
+     gene            337..2799
+     gene            5234..5530
+     gene            complement(5683..6459)
+     gene            complement(6529..7959)
+     gene            8238..9191
+```
 
 ---
 ## Ejercicio
@@ -1741,8 +1753,10 @@ Checa si tu expresión regular, puede encontrar todos los sitios.
 3. Hacer una o más expresiones regulares que permitan hacer match con los renglones donde el feature es gene y traigan nombre de gene (Name=)
 
 ```
-NC_000913.3     RefSeq  gene    190     255     .       +       .       ID=gene-b0001;Dbxref=ASAP:ABE-0000006,ECOCYC:EG11277,EcoGene:EG11277,GeneID:944742;Name=thrL;gbkey=Gene;gene=thrL;gene_biotype=protein_coding;gene_synonym=ECK0001;locus_tag=b0001
-NC_000913.3     RefSeq  gene    337     2799    .       +       .       ID=gene-b0002;Dbxref=ASAP:ABE-0000008,ECOCYC:EG10998,EcoGene:EG10998,GeneID:945803;Name=thrA;gbkey=Gene;gene=thrA;gene_biotype=protein_coding;gene_synonym=ECK0002,Hs,thrA1,thrA2,thrD;locus_tag=b0002
+NC_000913.3     RefSeq  gene    190     255     .       +       .      
+ID=gene-b0001;Dbxref=ASAP:ABE-0000006,ECOCYC:EG11277,EcoGene:EG11277,GeneID:944742;Name=thrL;gbkey=Gene;gene=thrL;gene_biotype=protein_coding;gene_synonym=ECK0001;locus_tag=b0001
+NC_000913.3     RefSeq  gene    337     2799    .       +       .      
+ID=gene-b0002;Dbxref=ASAP:ABE-0000008,ECOCYC:EG10998,EcoGene:EG10998,GeneID:945803;Name=thrA;gbkey=Gene;gene=thrA;gene_biotype=protein_coding;gene_synonym=ECK0002,Hs,thrA1,thrA2,thrD;locus_tag=b0002
 ```
 
 &lt;br&gt;
