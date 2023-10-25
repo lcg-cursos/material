@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 ### Licenciatura en Ciencias Genómicas,UNAM
 ]
 .date[
-### First version: yyy-mm-dd; Last update: 2023-10-18
+### First version: yyy-mm-dd; Last update: 2023-10-24
 ]
 
 ---
@@ -1179,7 +1179,7 @@ Ahora vamos a hacer lo siguiente:
 - Luego harás **referencia** al contenido del grupo con una referencia retrospectiva. Para crear un grupo de captura, incluya `\d` entre paréntesis para colocarlo en un grupo.
 - y luego siga con un `\1` para hacer referencia a lo que se capturó.
 
-````
+```
 (\d)\d\1
 ```
 
@@ -1197,11 +1197,72 @@ encerrado entre paréntesis
 ```
 
 ---
+## Usemos grep
+
+1. Copia los archivos de `/home/compu2/WelcomeBioinfo/datos/regex` a tu directorio de practicas.
+
+2. Conjuntos: 
+
+```
+# literal
+grep "7" phone.txt
+
+# conjunto de caracteres
+grep '[0123456789]'  phone.txt
+
+# intervalo de conjuntos
+grep "[0-9]" phone.txt
+grep '[0-9]'  phone.txt
+
+# un formato de número usando intervalos
+grep "[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]" phone.txt
+````
+
+---
+## Usando grep
+
+3. Haciendo uso de shorthands
+
+```
+# podemos usar shorhand
+grep "\d" phone.txt      # pero qué pasa??
+grep -E "\d" phone.txt   # pero qué pasa??
+grep -P "\d" phone.txt   # pero qué pasa??
+
+# los shorthand forman parte de las PCRE
+grep -P "\d\d\d-\d\d\d-\d\d\d\d" phone.txt
+grep -P "\d\d\d\D\d\d\d\D\d\d\d\d" phone.txt
+
+grep -P "\d\d\d.\d\d\d.\d\d\d\d" phone.txt
+```
+
+---
+## Usando de grep
+
+Haciendo uso de grupos y referencias
+
+```
+grep -P "(\d)\d\1" phone.txt
+grep -P "(\d)0\1\D\d\d\1\D\1\d\d\d" phone.txt
+```
+
+¿Puedes darme 2 ejemplos más que cumplan con la expresión `(\d)0\1\D\d\d\1\D\1\d\d\d`
+
+
+https://www.arubanetworks.com/techdocs/ArubaOS_63_Web_Help/Content/ArubaFrameStyles/ESI/Basic_Regular_Expression.htm
+https://juncotic.com/grep-y-las-expresiones-regulares-basicas-y-extendidas/
+
+---
 ## REGEX : Usando cuantificadores
 
 Otra  forma de hacer match con el número telefónico, es la siguiente:
 
 ```
+\d?
+\d+
+\d*
+\d{3}
+\d{3,4}
 \d{3}-?\d{3}-?\d{4}
 ```
 
@@ -1252,16 +1313,33 @@ Podríamos corregirlo de la siguiente manera:
 ```
 
 ---
+## Usemos grep
+
+Cuantificadores
+
+
+```
+grep  "\d{3}-?\d{3}-?\d{4}" phone.txt # porque no funciona??
+
+grep -P "\d{3}-?\d{3}-?\d{4}" phone.txt
+grep -P "(\d{3,4}[.-]?)+" phone.txt
+grep -P "(\d{3}[.-]?){2}\d{4}" phone.txt
+```
+
+---
 
 ## REGEX : Inicio y fin
 
-- En tu caja de `Test String` escribe lo siguiente
+Las afirmaciones marcan límites, pero no se refieren a sumar caracteres, es decir, no se devolverán caracteres en un resultado. Ellos son también conocidas como afirmaciones de ancho cero. Una afirmación de ancho cero no coincide con un carácter, sino más bien una ubicación en una cadena. Algunos de ellos, como ^ y $, también se denominan **anclas**.
+
+- En tu caja de `Test String` copia lo del archivo `phone.txt`
 
 ```
-7078277017
-707-827-7412
-707.827.7029 es de USA
-Este es mi teléfono 707.827-3019 apuntalo
+707-827-7019
+907-327-3011
+707.827.7019
+707:827:7019
+707-525-7019....
 ```
 
 y en la Caja de `Regular Expression` seguimos con `(\d{3}[.-]?){2}\d{4}`
@@ -1344,7 +1422,282 @@ What a regular expression is
 ---
 ## Ejercicio
 
-¿Cómo definirías una o más expresiones regulares que describan a todas las siguientes líneas?
+Genera una expresion regular, que permita extraer todas aquellas líneas donde el `feature` sea gene y vengan las coordenadas del gene
+
+```
+     gene            190..255
+     gene            337..2799
+     gene            2801..3733
+     gene            3734..5020
+     gene            5234..5530
+
+```
+
+---
+# Expresiones regulares: Caracteres
+
+Copia el contenido del archivo `rima.txt` en  [https://regex101.com/](https://regex101.com/) en la caja de TEST STRING.
+
+Veremos algunos metacaracteres y opciones relacionados con strings.
+
+---
+## Conjuntos de caracteres
+
+Conjuntos de caracteres e intervalos.
+
+Prueba estas expresiones regulares y observa como hace match
+
+```
+# solo vocales
+[aeiou]
+
+# caracteres entre la a-z
+[a-z]
+
+# caracteres entre a y f
+[a-f]
+
+# mayusculas
+[A-Z]
+
+# mayusculas y minusculas
+[a-zA-Z]
+```
+---
+## Conjuntos de caracteres
+
+También puedes usar shorhands dentro de una clase de caracteres. 
+
+`\w` : Matches any letter, digit or underscore. Equivalent to [a-zA-Z0-9_]
+`\s` : Matches any space, tab or newline character.
+
+Probemos
+```
+\w
+\s
+````
+
+Por ejemplo, para combinar con el espacio en blanco y caracteres alfabéticos, podrías crear una clase de carácter como esta:
+
+```
+# to match white-space and word characters
+[\w\s]
+
+# es lo mismo que esto guión y espacio incluidos
+[_a-zA-Z \t\n\r]
+```
+
+---
+## Negar conjuntos y clases de caracteres con *nombre* (POSIX)
+
+Portable Operating System Interface is a family of standards maintained by
+IEEE. It includes a regular expression standard, (ISO/IEC/IEEE 9945:2009), which
+provides a set of named character classes that have the form
+
+[[:xxxx:]]    where xxxx is a name.
+
+````
+# I don’t want these characters.
+[^aeiou]
+
+# For alphabetic characters in either upper- or lowercase, use:
+[[:alpha:]]
+
+# if you wanted to match non-alphabetic characters
+[[:^alpha:]]
+
+# To match space and tab characters
+[[:space:]]
+
+# to match all whitespace characters
+[[:blank:]]
+```
+---
+# Usemos grep
+
+
+```
+# Probemos estos conjuntos de caracteres, que se marca?
+grep --color '[aeiou]' rima.txt 
+grep --color '[a-z]' rima.txt 
+grep --color '[a-zA-Z]' rima.txt 
+grep --color '[a-zA-Z0-9_]' rima.txt 
+
+# shorhands
+grep --color '\w' rima.txt 
+# shorthand con conjunto, solo con -P
+grep --color '[\w\s]' rima.txt 
+
+
+# usemos una clase con nombre
+# buscando solo letras
+grep --color '[[:alpha:]]' rima.txt 
+```
+
+---
+
+```
+# queremos caracteres alfanuméricos
+# letras, numeros y _
+grep --color '[[:word:]]' rima.txt   # Qué ocurre? ... grep: Invalid character class name
+
+grep -E --color '[[:word:]]' rima.txt # Qué ocurre?
+
+# No todas las clases con nombre estan en Exp basicas o Extendidas
+# solo disponibles con -Perl Exp
+grep -P --color '[[:word:]]' rima.txt 
+
+# Qué caracteres reconocen estas ?
+grep -P --color '[[:punct:]]' rima.txt 
+grep -P --color '[[:space:]]' rima.txt 
+
+# Negación con clases con nombre, solo con -P
+grep -P --color '[[:^alpha:]]' rima.txt 
+```
+
+---
+## Límites de palabras y no palabras
+
+Checa que este marcado `insensitive case` en https://regex101.com/
+
+`b` : Marcar el límite de una palabra. Como, ^ o $, \b es una afirmación de ancho cero. Solo limita no hace match con algún caracter.
+
+Observa como no hay un caracter match para  `\b`
+
+```
+# buscando literalmente THE
+THE
+
+# boundary - perimetro - limite 
+# Observa los the al inicio y final de linea, qué caracteres reconoce como limite ?
+\bTHE\b
+
+# Para hacer coincidir un límite que no es una palabra
+\Be\B
+
+# que pasa con la expresión anterior si unes "from thence" en el texto ?
+```
+
+---
+## Alternation, Groups, and Backreferences
+
+La alternancia le ofrece la opción de elegir patrones alternativos para combinar.
+
+```
+(the|The|THE)
+```
+
+Podemos acortar este grupo aplicando una opción. Las opciones le permiten especificar la forma
+le gustaría buscar un patrón. En la interfaz puedes activar el `insensitive case` o en grep con la opció -i, pero también puedes indicarlo en la expresión regular usando `(?i)`
+
+```
+'(?i)the'
+```
+
+**Alternancia y Subpatrones **
+
+```
+# Qué selecciona esta expressión
+(t|T)h(e|eir)
+
+# y estas ? cuantos match hay ?
+(t|T)h(e|eir)+
+(t|T)h(e|eir)*
+
+# subpatrones y boundary
+\b[tT]h[ceinry]*\b
+```
+
+---
+## Grupos y referencias
+
+Los grupos guardan en memoria, recuerdo como \1 \2 etc..
+Observa los 2 grupos de esta expresión 
+
+```
+(It is) (an ancyent Marinere)
+```
+
+Si no necesitas aplicar una  backreference en tu expresión regular, no tiene caso guardar en memoria. Podrías escribir un no-captura de grupo con `(?:)`
+
+```
+(?:the|The|THE)
+```
+
+Que pasó en el resultado con los grupos ?
+
+Y si quiers agregar la opción de insensitive case
+
+```
+# los 3 son lo mismo
+(?i)(?:the)
+(?:(?i)the)
+(?i:the)
+
+```
+---
+
+## Usemos grep
+
+```
+# boundary
+grep  '\bTHE\b' rima.txt 
+
+# observa "manner the" porque no  la marca ?
+grep '\Be\B' rima.txt
+```
+
+Alternativas
+
+```
+# todas las opciones de The
+grep "(the|The|THE)" rima.txt   # que pasa?
+
+# alternativas solo en extendidas o Perl exp
+grep -E "(the|The|THE)" rima.txt
+
+# alternativas y patrones
+grep -E "(t|T)h(e|eir)" rima.txt
+grep -E "(t|T)h(e|eir)+" rima.txt
+grep -E "(t|T)h(e|eir)*" rima.txt
+
+# alternativa con conjuntos, pero solo carcateres independientes
+grep -E "\b[tT]h[ceinry]*\b" rima.txt
+```
+---
+## Usemos grep
+
+grep y las opciones -c y -o 
+```
+grep -Ec "(the|The|THE)" rima.txt
+grep -Eo "(the|The|THE)" rima.txt | wc -l 
+```
+¿Por qué hay diferencia en los totales ? 
+
+Porque -c te da un recuento de coincidencias líneas, pero puede haber más de una coincidencia en cada línea. Si usa -o con wc -l, entonces cada aparición de las diversas formas de la palabra aparecerá en una línea separada y se cuentan.
+
+---
+## Usemos grep
+
+```
+# busca sin importar mayusculas o minusculas
+grep -P  '(?i)the' rima.txt 
+
+# lo mismo - insensitive case con opción de grep -i
+grep -P -i  'the' rima.txt 
+
+# sin guardar el grupo
+grep -P  '(?i:the)' rima.txt 
+
+grep -P  '(?i:the)\1' rima.txt  # que pasa
+
+```
+
+---
+
+## Ejercicio
+
+1. ¿Cómo definirías una o más expresiones regulares que describan a todas las siguientes líneas?
 
 ```
 YP_588464.1
@@ -1360,7 +1713,9 @@ YP_588470.1
 ---
 ## Ejercicio
 
-¿Cómo definirías una o más expresiones regulares que describan a todas las siguientes líneas?
+2. ¿Cómo definirías una o más expresiones regulares que describan a todas las siguientes líneas?
+
+Sitios de unión del Factor de Transcripción LexA (File: LexA_tfbs.txt)
 
 ```
 TACTGTTTTTATATACAGTATA
@@ -1377,6 +1732,47 @@ TGCTGGTTATCTATCCAGTGTA
 AGCTGTTTATTTATACAGTGAG
 TACTGTTATTGTGTACAGTATA 
 ```
+
+Checa si tu expresión regular, puede encontrar todos los sitios.
+
+---
+## Ejercicios
+
+3. Hacer una o más expresiones regulares que permitan hacer match con los renglones donde el feature es gene y traigan nombre de gene (Name=)
+
+```
+NC_000913.3     RefSeq  gene    190     255     .       +       .       ID=gene-b0001;Dbxref=ASAP:ABE-0000006,ECOCYC:EG11277,EcoGene:EG11277,GeneID:944742;Name=thrL;gbkey=Gene;gene=thrL;gene_biotype=protein_coding;gene_synonym=ECK0001;locus_tag=b0001
+NC_000913.3     RefSeq  gene    337     2799    .       +       .       ID=gene-b0002;Dbxref=ASAP:ABE-0000008,ECOCYC:EG10998,EcoGene:EG10998,GeneID:945803;Name=thrA;gbkey=Gene;gene=thrA;gene_biotype=protein_coding;gene_synonym=ECK0002,Hs,thrA1,thrA2,thrD;locus_tag=b0002
+```
+
+&lt;br&gt;
+
+4. Extender la anterior expresión regular, para que además el mismo nombre del gene este en la etiqueta de gene=
+
+---
+
+## Ejercicios
+
+Las enzimas de restricción cortan en base a patrones; por ejemplo, la enzima aPEK1 corta moléculas de ADN como "GCAGC" o "GCTGC". Con base en los patrones reconocidos, algunas enzimas son “cortadoras frecuentes” y otras no; los cortadores más frecuentes muestran más ubicaciones en un genoma pero sacrifican la profundidad de secuenciación. Por esta razón, los investigadores suelen querer conocer, dado un patrón enzimático y una secuencia genómica, la distribución de las longitudes de los fragmentos que resultarán.
+
+Escribe un programa o comando que tome una secuencia de ADN y un patrón de expresión regular y muestre todos los match encontrados para aPEK1. Como ejemplo, “AAAAGCAGCAAAAAAAAGCTGCAAGCAGCAAAAA" cuando se procesa para aPEK1 deben obtenerse las secuencias y la posición donde se se hace el corte ( checa las opciones de -ob de grep)
+
+---
+
+&lt;!--
+```
+# hat is, grep knows where the ends of the lines are, but sees the input as one big line. 
+# -o print only matching. 
+grep -zo "^THE.*\?$"  rime_marinere.txt 
+
+^THE.*
+```
+
+grep -P --color "\tgene\t.+gene=[^;]{3,10};" coli.gff
+
+Expresion para seleccionar el ombre del organismo
+grep -o -P "\[[^\]]+\]" anthracis_protein.fna
+--&gt;
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
