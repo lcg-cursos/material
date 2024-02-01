@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 ### Licenciatura en Ciencias Genómicas,UNAM
 ]
 .date[
-### First version: yyy-mm-dd; Last update: 2023-03-09
+### First version: yyy-mm-dd; Last update: 2024-02-01
 ]
 
 ---
@@ -108,7 +108,7 @@ De los científicos encuestados por Pinto et al. en 2018
 
 # Encuesta 
 
-Lejos de ponerse de acuerdo sobre las mejores prácticas en toda la investigación computaciona, tienen **prácticas de software divergentes** que conducen a **diferentes niveles** de **confiabilidad**, replicabilidad y reutilización del software de investigación. 
+Lejos de ponerse de acuerdo sobre las mejores prácticas en toda la investigación computacional, se tienen **prácticas de software divergentes** que conducen a **diferentes niveles** de **confiabilidad**, replicabilidad y reutilización del software de investigación. 
 
 
 .tiny[
@@ -123,9 +123,9 @@ El software escrito **sin la debida atención a las prácticas de ingeniería** 
 
 Dos casos presentados sobre la enfermedad por coronavirus 2019 (COVID-19) :
 
-- The Lancet publicó, y luego se retractó, un análisis de los efectos del tratamiento con hidroxicloroquina o cloroquina para el COVID-19. 
+- Caso 1. The Lancet publicó, y luego se retractó, un análisis de los efectos del tratamiento con hidroxicloroquina o cloroquina para el COVID-19. 
 
-- Se utilizó un modelo de propagación de la pandemia producido en el Imperial College de Londres para justificar las políticas gubernamentales relacionadas con el confinamiento en marzo de 2020.
+- Caso 2. Se utilizó un modelo de propagación de la pandemia producido en el Imperial College de Londres para justificar las políticas gubernamentales relacionadas con el confinamiento en marzo de 2020.
 
 ---
 
@@ -143,32 +143,24 @@ Dos casos presentados sobre la enfermedad por coronavirus 2019 (COVID-19) :
 
 
 .tiny[
-[Two Huge Covid-19 Studies Are Retracted After Scientists Sound Alarms](https://www.nytimes.com/2020/06/04/health/coronavirus-hydroxychloroquine.html)]
+[NYT Journal: Two Huge Covid-19 Studies Are Retracted After Scientists Sound Alarms](https://www.nytimes.com/2020/06/04/health/coronavirus-hydroxychloroquine.html)]
 
 ]
-
-Pon tus comentarios [aqui](https://etherpad.wikimedia.org/p/LCG-PythonI)
 
 ---
 
-# Caso Imperial College de Londres
+# Caso Lancet: Resumen
 
-.content-box-blue[
+Los estudios, publicados en revistas científicas de renombre, produjeron resultados sorprendentes y **alteraron el curso de la investigación sobre la pandemia de coronavirus**.
 
-¿ Qué habian publicado inicialmente?
+Uno de ellos socavó la afirmación del presidente Trump de que ciertos medicamentos antipalúdicos curan el Covid-19 , la enfermedad causada por el virus, y **concluyó que los medicamentos en realidad eran peligrosos para los pacientes**. El otro encontró que algunos medicamentos para la presión arterial no aumentaban el riesgo de Covid-19 e incluso podrían tener un efecto protector.
 
-¿ Qué fué lo que corrigieron ?
+Ambos estudios fueron dirigidos por un profesor de Harvard y ambos dependían de una enorme **base de datos** internacional de **registros médicos** de pacientes de la que pocos expertos habían oído hablar.
 
-¿ Dónde estuvo el problema ?
-
-¿ Qué aprendemos ?
+Los estudios fueron retractados por las revistas científicas en las que habían aparecido, The New England Journal of Medicine y The Lancet, porque **los autores no pudieron verificar los datos de los que dependían los resultados**.
 
 .tiny[
-[INFLUENTIAL PANDEMIC SIMULATION VERIFIED BY CODE CHECKERS](https://media.nature.com/original/magazine-assets/d41586-020-01685-y/d41586-020-01685-y.pdf)]
-
-]
-
-Pon tus comentarios [aqui](https://etherpad.wikimedia.org/p/LCG-PythonI)
+[Two Huge Covid-19 Studies Are Retracted After Scientists Sound Alarms](https://www.nytimes.com/2020/06/04/health/coronavirus-hydroxychloroquine.html)]
 
 ---
 
@@ -187,13 +179,46 @@ Pon tus comentarios [aqui](https://etherpad.wikimedia.org/p/LCG-PythonI)
 
 ---
 
-# Caso Imperial College de Londres
+# Caso 2: Imperial College de Londres
 
-- Inicialmente el modelo no estaba disponible para el escrutinio externo y la replicación, lo hicieron 3 meses después de su publicación, por presiones.
+.content-box-blue[
+
+¿ Qué habian publicado inicialmente?
+
+¿ Qué fué lo que corrigieron ?
+
+¿ Dónde estuvo el problema ?
+
+¿ Qué aprendemos ?
+
+.tiny[
+[INFLUENTIAL PANDEMIC SIMULATION VERIFIED BY CODE CHECKERS ](https://media.nature.com/original/magazine-assets/d41586-020-01685-y/d41586-020-01685-y.pdf)]
+
+]
+
+---
+# Caso 2: Imperial College - Resumen
+
+**Un modelo de propagación de la pandemia producido en el Imperial College de Londres para justificar las políticas gubernamentales relacionadas con el confinamiento en marzo de 2020.**
+
+El código sustenta una **influyente simulación** de coronavirus realizada por científicos del Imperial College de Londres, uno de varios modelos que ayudaron a convencer a los políticos del Reino Unido para que **declarara el confinamiento**.
+
+Algunos artículos mencionaron que no se podían repetir la simulación, lo que arrojaba más dudas sobre el estudio. Un neurocientífico computacional informó que ha vuelto a ejecutar la simulación de forma independiente y reprodujo sus resultados.
+
+Los científicos no pusieron el código de la simulación a disposición del escrutinio público. Cuando se lanzó una versión mejorada a finales de abril, los ingenieros de software menospreciaron su calidad y dijeron que la simulación necesitaba
+ser repetido por otros. 
+
+.tiny[
+[INFLUENTIAL PANDEMIC SIMULATION VERIFIED BY CODE CHECKERS](https://media.nature.com/original/magazine-assets/d41586-020-01685-y/d41586-020-01685-y.pdf)]
+
+---
+# Caso Imperial College - loq ue aprendemos
+
+- Inicialmente el modelo no estaba disponible para el escrutinio externo y lo hicieron público 3 meses después de su publicación, por presiones.
 
 - La confianza pública en el modelo ya se había erosionado, una situación que podría haberse evitado **documentando** y **probando** el software cuando se utilizó por primera vez.
 
-- "El código del estudio se veía **"horrible"**, pero que tales deficiencias se esperan en el código escrito por científicos que no son **especialistas en desarrollo de software**." El autor dijo "Cleaning up and releasing the code was not a top priority at the time."
+- "El código del estudio se veía **"horrible"**, pero tales deficiencias se esperan en el código escrito por científicos que no son **especialistas en desarrollo de software**." El autor dijo "Cleaning up and releasing the code **was not a top priority at the time**."
 
 
 .tiny[
@@ -203,480 +228,244 @@ Pon tus comentarios [aqui](https://etherpad.wikimedia.org/p/LCG-PythonI)
 
 ---
 
-# ¿Qué es la Ingeniería de Software ?
+# Varios conceptos
 
+- revisado por **Ingenieros de software** ...  
 
-La **Ingeniería de Software** (IS) es una de las ramas de las ciencias de la computación que estudia la creación de **software confiable y de calidad**, basándose en métodos y técnicas de ingeniería, y brindando soporte operacional y de mantenimiento. 
+- no son especialistas en **Desarrollo de software**  
 
-La ingeniería de software requiere llevar a cabo numerosas tareas agrupadas en etapas, al conjunto de estas etapas se le denomina **ciclo de vida**. 
+- El **Software científico** bajo escrutinio ...  
 
+- haberse evitado **documentando** y **probando** ..  
 
+- verificar la **Calidad de datos**    
 
-.tiny[
-[Wikipedia: Ing. de Software](https://es.wikipedia.org/wiki/Ingenier%C3%ADa_de_software)]
-
-
-
----
-
-# ¿Qué es la Ingeniería de Software ?
-
-Los nombres de las etapas son identificadas como Requisitos, Análisis, Diseño, Codificación y Pruebas, como lo ilustra la siguiente figura. 
-
-
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="https://agenciadigitalamd.com/wp-content/webp-express/webp-images/uploads/2021/04/ciclos-de-desarrollo-de-software-800x793-1-768x761.jpg.webp" alt="Ciclo de desarrollo de Software" width="60%" /&gt;
-&lt;p class="caption"&gt;Ciclo de desarrollo de Software&lt;/p&gt;
-&lt;/div&gt;
+- dudas sobre la **Calidad de software** en la ciencia  
 
 ---
 
-# ¿Qué es la IS ? : Requisitos
+# El desarrollo de software de calidad
 
-En esta etapa hay que identificar el **qué** se necesita, qué se requiere que haga el programa, cúal es el problema a abordar, qué pretendo solucionar.
-
-*Req. Funcionales* 
-
-Describen lo que el sistema debe hacer: flujo de trabajo, entradas, salidas, excepciones.
-
-*Reg. No funcionales*
-
-Se refieren a las  propiedades del sistema como tiempo de respuesta, capacidad de almacenamiento, seguridad, o alguna especificación como el lenguaje de programación,  plataforma tecnológica, estándares de calidad (MoProSoft).
-
-
-Técnicas para obtener los requisitos:
-
-- Entrevistas
-- Cuestionarios
-- Observación
-
-**Entregables**: Documento con la lista de requisitos descritos, puede incluir diagramas de casos de uso.
-
----
-
-# ¿Qué es la IS ? : Requisitos - ejemplo
-
-**Queremos un programa que me permita sumar números.**
-
-¿fácil? 
-
---
- 
-¿ya quieres programarlo? pero ...
-
---
-
-¿cuáles son los requisitos? 
-
---
-
-- ¿Serán sumas de base 10 ? es decir no binarios, no octales, ni hexadecimales.
-
---
-
-- ¿Sólo enteros o también flotantes ?
-
---
-
-- ¿Cuántos números serán?
-
---
-
-- ¿Los datos se pasarán en un archivo o se pedirán por teclado ?
-
---
-
-- ¿Cómo debe presentarse el resultado ? ¿quieres algún mensaje?
-
-
----
-
-## Levantemos los Requisitos
-
-**Queremos un programa que me permita sumar números.**
-
---
-
-- Programa que sume números base 10, enteros como flotantes.
-
---
-
-- El programa debe ser capaz de recibir n números a sumar en un archivo, uno por línea. Debe mandar un mensaje de error si el archivo no existe.
-
---
-
-- El programa no debe hacer la suma, y debe mandar un error cuando se introduzcan valores no válidos.
-  
---
-
-- El resultado deberá ser:
-
-   n1 + n2 + n3 + n4 = suma
-   
-   donde n1..nn son los números introducidos por el usuario.
-
---
-
-- **Casos de prueba**:  A+B  "Error, no se pueden sumar letras", 10 + 5 = 15, 5.6 + 2.4 = 8.0 
-
-
----
-
-## Análisis y diseño
-
-Consiste en:
-
-- Estudiar y entender los requisitos para proponer una solución a implementarse
-- Buscar la mejor solución al problema
-- Identificar toda la información de entrada y salida del sistema
-- Definir restricciones en los datos
-- Definir cómo se visualizarán los datos
-- Etcétera
-
----
-
-## Análisis y diseño: Herramientas y Técnicas
+"La **Ingeniería de Software** es una de las ramas de las ciencias de la computación que estudia la creación de software confiable y de calidad, basándose en **procesos y métodos y técnicas de ingeniería**, y brindando soporte operacional y de mantenimiento." [Wikipedia](https://es.wikipedia.org/wiki/Ingenier%C3%ADa_de_software)
 
 .pull-left[
-- Modelado   (UML)  Tool: [LucidChart](https://www.lucidchart.com/pages/)
-    - Diagramas de comportamiento: 
-        - Use Case Diagram (used by some methodologies during requirements gathering)
-        - Activity Diagram
-        - State Machine Diagram
-    - Diagramas de interacción:
-        - Sequence Diagram
-        - Communication Diagram
-        - Timing Diagram
-        - Interaction Overview Diagram
-- Bosquejos/Prototipos visuales (mockups)
+&lt;img src="https://blog.innevo.com/hs-fs/hubfs/Blog%20Centro%20de%20Mejora/Im%C3%A1genes%20de%20Apoyo/BLOG%20-%2033%20-%20Calidad%20Desarrollo%20Software_CicloVidaDesarrolloC.png?width=1684&amp;height=1352&amp;name=BLOG%20-%2033%20-%20Calidad%20Desarrollo%20Software_CicloVidaDesarrolloC.png" width="100%" style="display: block; margin: auto;" /&gt;
 
-Entregables: Documento de AD.
+.tiny[Fuente https://blog.innevo.com/calidad-en-el-desarrollo-de-software]
+
 ]
 
 .pull-right[
 
-&lt;img src="img/casosuso.png" width="800px" style="display: block; margin: auto;" /&gt;
+**[Modelos para el desarrollo de software](https://blog.innevo.com/calidad-en-el-desarrollo-de-software)**: cascada, prototipos, espiral, por etapas, etc.
+
+**Estándares y Métricas De Calidad de la gestión de proyectos**: ISO 9000, CMMI, SPICE, MoProSfot
+
+**[Roles](http://profayadira.yolasite.com/resources/Roles_desarrollo_software.pdf)**: .tiny[ Administrador de proyectos, analistas, diseñadores, programadores, tester, aseguradores de calidad, administrador de configuración, ing. de validación y verificación, documentador, ing de mantenimiento ]
+
+**Productos**: En cada fase se generan productos de trabajo, más de 30 productos en total.
+
+]
+---
+
+# Pero ... Qué es el software científico (SC) ?
+
+.pull-left[
+&lt;img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjKlVP6wguUJw93ACMUk3X-kcoqATc1xFvAg&amp;usqp=CAU" width="50%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+El *software de investigación* incluye **archivos de código fuente**, **algoritmos**, **scripts**, **documentacion**, **flujos de trabajo computacionales y ejecutables** que se crearon durante el proceso de investigación o con un propósito de investigación. 
+
+--
+
+&lt;br&gt;
+
+Los componentes de software (por ejemplo, sistemas operativos, bibliotecas, dependencias, paquetes, scripts, etc.) que se utilizan para la investigación pero **que no fueron creados** durante o con una clara intención de investigación deben considerarse software **en** investigación y no software **de** investigación
+
+
+.tiny[ Patel, B., Soundarajan, S., Ménager, H. et al. Making Biomedical Research Software FAIR: Actionable Step-by-step Guidelines with a User-support Tool. Sci Data 10, 557 (2023). https://doi.org/10.1038/s41597-023-02463-x ]
+
+---
+
+# Componentes de software
+
+RSAT Suite
+
+Código  https://github.com/rsa-tools/rsat-code/blob/master/python-scripts/random-motif
+
+workflows: https://github.com/rsa-tools/rsat-snakemake/blob/315a220da1a333e8c98fdb650f5003b17f0fed0a/makefiles/install_environment.mk#L11
+
+Documentación: http://rsa-tools.github.io/teaching/
+
+
+---
+# Qué tanto SC existe?
+
+Evolución del número de nuevos repositorios de software relacionados con la biomedicina creados en GitHub 
+
+&lt;img src="https://translate.google.com/website?sl=auto&amp;tl=es&amp;hl=es-419&amp;u=https://media.springernature.com/full/springer-static/image/art%253A10.1038%252Fs41597-023-02463-x/MediaObjects/41597_2023_2463_Fig1_HTML.png?as%3Dwebp" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# La importancia del SC
+
+El software de investigación se ha convertido en un **activo esencial** de la investigación científica y, por lo tanto, se ha vuelto *fundamental preservarlo, compartirlo y hacerlo reutilible*.
+
+Los principios rectores Localizable, Accesible, Interoperable y Reutilizable (**FAIR**) proporcionan una base para lograrlo.
+
+---
+
+# Actividad
+
+Tiempo : [10 min]
+
+.content-box-green[
+
+En grupos de 3, discutir la sección del ABSTRACT Y LA INTRODUCCION
+
+Patel, B., Soundarajan, S., Ménager, H. et al. Making Biomedical Research Software FAIR: Actionable Step-by-step Guidelines with a User-support Tool. Sci Data 10, 557 (2023). https://doi.org/10.1038/s41597-023-02463-x
 
 ]
 
+Y responder lo siguiente:
+
+1. Qué es FAIR ?
+
+2. Para qué sirve FAIR?
+
+3. Porqué es importante ?
+
+Pon tus respuestas en nuestro [cuaderno colaborativo](https://etherpad.wikimedia.org/p/LCG-PythonI)
 
 ---
 
-## Codificación
+# Actividad
 
-Traducir el diseño en un lenguaje de programación y tecnología específicos.
+Tiempo : [10-15 min]
 
-Seleccionar:
+.content-box-green[
+En grupos de 3, discutir la sección del RESULTADOS
 
-* Lenguajes de programación
-* Paradigma de programación
-* Estándares de programación
-* Infraestructura de desarrollo
-* Interfaces de desarrollo integrado (IDEs)
-* Software de base de datos
+Hay 5 categorías de alto nivel para cumplir los principios FAIR4RS
 
-Estándares de programación
+Describe brevemente lo que implican
 
-* Mejoran legibilidad del código y su mantenimiento
-* Nombres de variables, clases, scripts, etcétera
-* Documentación interna del código
+.tiny[ 
+Categoría 1: Desarrollar software siguiendo estándares y mejores prácticas.  
+Categoría 2: Incluir metadatos  
+Categoría 3: Proporcionar una licencia  
+Categoría 4: Compartir software en un repositorio  
+Categoría 5: Inscribirse en un registro
+
+]
+
+Las prácticas y recomendaciones se resumen en la guía [FAIR-BioRS](https://github.com/FAIR-BioRS/Guidelines/tree/main/main)
+
+] 
+
+Pon tus respuestas en nuestro [cuaderno colaborativo](https://etherpad.wikimedia.org/p/LCG-PythonI)
+
+**También comenta Cuáles de ellas ya aplicas cuando has desarrollado software?**
+
 
 
 ---
 
-## Pruebas
-
-Niveles:
-
-- Unitarias: un solo componente, después de que es liberado por el programador
-- De integración: varios componentes, después de las unitarias
-- Del sistema: el sistema completo, incluye pruebas de seguridad, desempeño y documentación
-- De aceptación: con el usuario, alfa (datos de prueba) y beta (datos reales)
-
-Tipos:
-
-- Funcionalidad: revisión de requisitos
-- Seguridad: de datos, privilegios y de acceso al sistema
-- Volumen: muchos datos
-- Usabilidad: facilidad de uso del sistema por el usuario
-- Stress: cargas de trabajo extremas o condiciones desfavorables para el sistema
-
----
-
-## Liberación y Mantenimiento
-
-- Licenciamiento
-
-- Cierre del proyecto
-
-- Entrega de manuales
-
-   - M. Técnico
-   
-   - M. de usuario
-   
-   - M. mantenimiento
-
----
-
-class: inverse, center, middle
-
-# SOFTWARE CIENTIFICO
-
----
-
-# Software Científico
-
-Generalmente, en un proyecto para el análisis de datos biológicos incluye todo un **pipeline** o flujo de ejecución de varios programas que hacen "algo" y producen más datos durante el proceso de análisis. Muchas de las tareas incluyen el **formateo de datos** para pasar el resultado de un programa como entrada de datos a otro. Y en algunas ocasiones requeriremos desarrollar **scripts** en **unix** o **programas** en algún **lenguaje de programación** que nos permitan o bien formatear datos o realizar algún cálculo o análisis.
-
-Sea que tengamos que hacer un **programa** para una tarea pequeña o bien para hacer un análisis complejo, es recomendable seguir la misma metodología para la solución de problemas. Porque permite la reproducibilidad, el reuso y el mantenimiento.
-
-En Software científico es dificil aplicar todas las metodologías y estándares de IS, pero se recomienda aplicar algunas de ellas. Algunos esfuerzos por generar datos y software reproducibles son **los principios FAIR**.
-
----
-
-## FAIR Data and Software
-
-Los principios de **encontrabilidad, accesibilidad, interoperabilidad y reutilización** (los **principios FAIR**) se publicaron por primera vez en 2016 y se han convertido en normas ampliamente adoptadas en muchas disciplinas, con **mejores prácticas** recomendadas o exigidas para **respaldar la FAIR-calidad de los datos y del software**. 
-
-**¿Cómo se gestionan los datos?**
-
-* Guarde los datos brutos.
-* Asegúrese de que se haga una copia de seguridad de los datos sin procesar en más de una ubicación.
-* Crea los datos que deseas ver en el mundo.
-* Cree datos fáciles de analizar.
-* Registre todos los pasos utilizados para procesar los datos.
-* Anticípese a la necesidad de utilizar varias tablas y utilice un identificador único para cada registro.
-* Envíe los datos a un repositorio que emita DOI de buena reputación para que otros puedan acceder y citarlos.
-
----
-
-# Tomando algunas prácticas de IS
-
-&lt;img src="img/IS-research.png" width="600px" style="display: block; margin: auto;" /&gt;
-
-
-
-Hay que seleccionar unas prácticas "mínimas suficientes" de ingeniería de software para abordar el desarrollo de software científico y sugeridas como línea de base.
-
-Disponibilidad de software, Documentación de software, Control de versiones, Pruebas y soporte
-
----
-
-## Disponibilidad del Software
-
-FAIR: Accesible y Reusable
-
-- El software utilizado en la investigación debebe estar disponible para la comunidad en repositorios abiertos con
-metadatos utilizando el formato de archivo de cita estándar. 
-
-- La entrada del repositorio del software debe estar asociada con un identificador de objeto digital (DOI). El DOI debe utilizarse en relación con cualquier publicación que utilice el software.
-
-- El software también debe tener una licencia para que otros lo puedan volver a utilizar; por ejemplo, bajo una licencia de software de código abierto (OSS) como la licencia del Instituto Tecnológico de Massachusetts (MIT) o la licencia pública general GNU (GPL)
-
-Ej. [Zenodo](https://zenodo.org/record/3629727/export/json#.ZAoBQhPMKKk)
-
----
-
-## Documentación de Configuración, uso y expectativas del código.
-
-- Con acceso al software, el posible replicador debe **poder ejecutar el software** de la misma manera que lo hizo el autor original.
-
--  Debería ser posible para una persona motivada **sin conocimiento previo del proyecto obtener una copia del código**, ejecutarlo y luego hacer un uso productivo del software, siguiendo solo los pasos incluidos en un **archivo READM**E o "introducción".
-
-- Documentar los **requisitos de configuración del software**, incluidos los números de **versión específicos de los lenguajes de programación, paquetes, módulos u otros programas utilizados**. Si no es posible ejecutar el software en otros entornos (portabilidad), al menos debería ser posible replicar la configuración del autor.
-
----
-
-## Control de Versiones
-
-- Es fundamental para la reproducibilidad y la reutilización de la investigación que los replicadores utilicen no solo el mismo script o aplicación, sino **exactamente la misma versión del software que se utilizó** en la investigación original.
-
-- Un sistema de control de versiones funciona como un rastreador de cambios intencionales, lo que permite a los autores registrar cambios significativos en su código como "confirmaciones" en un registro permanente. Git es muy usado en la comunidad científica.
-
----
-
-## Pruebas, preferentemente unitarias
-
-- Las pruebas **reducen el riesgo** de que los **resultados** obtenidos en la investigación **sean erróneos**, al descartar fallas debido a un comportamiento incorrecto del software.
-
-- Sugerimos pequeñas pruebas de componentes aislados, llamadas **pruebas unitarias**, que brindan una buena retroalimentación sobre lo que salió mal cuando se informa una falla en la prueba y motivan la descomposición de códigos en pequeñosmódulos y procedimientos que facilitan compartir y reutilizar. 
-
-- Las pruebas deben considerarse **parte de la documentación del software**, ya que encapsulan información sobre el comportamiento esperado del software. Las pruebas deben ser parte de la distribución de software estándar, junto con la documentación de cómo ejecutar las pruebas
-
-Algunos incluyen un documento adicional de pruebas o dentro del encabezado del código se ponen ejemplos de prueba.
-
----
-
-##  Soporte o mantenimiento del software
-
-Dejar en claro en el momento de la publicación las expectativas que otros investigadores pueden tener con respecto a la **sostenibilidad del software**, tanto en términos del flujo de trabajo esperado como de los recursos disponibles, simplificará el trabajo de los autores y el de las personas que deseen ampliar ese trabajo.
-
-Se puede incentivar una comunidad que apoye el mantenimiento del software.
-
----
-
-## Codificación
-
-Aprender a programar es relativamente sencillo, en internet encontrarás cientos de tutoriales.Pero lo realmente complicado y que se adquiere tras mucha práctica, es programar de forma estructurada, precisa y rigurosa, digase software de calidad.
-
-* Dividir los desarrollos en fases o entregables.
---
-
-* Coloque un breve comentario explicativo al comienzo de cada programa.
---
-
-* Descomponer programas en funciones.
---
-
-* Sea implacable en la eliminación de la duplicación. (DRY: don´t repear yourself)
---
-
-* Busque siempre bibliotecas de software bien mantenidas que hagan lo que necesita.
---
-
-* Pruebe las bibliotecas antes de confiar en ellas.
---
-
-* Asigne nombres significativos a las funciones y variables.
---
-
-* Haga explícitas las dependencias y los requisitos.
---
-
-* No comente ni descomente secciones de código para controlar el comportamiento de un programa.
---
-
-* Proporcione un ejemplo simple o un conjunto de datos de prueba.
---
-
-* Envíe el código a un repositorio que emita DOI de buena reputación.
---
-
-* Estandarizar las reglas del desarrollo (snakecase, camelCase) [PEP8](https://legacy.python.org/dev/peps/pep-0008/)
---
-
-* Código explícito, Simple, No demasiado anidado.
---
-
-* Comente tu código. Redacta sentencias simples.
-
----
-
-# Encabezado
+# Check List of FAIR-BioRS guidelines v2.0.0
 
 .tiny[
-```{}
 
-NAME
-       ramdom-motif
+1. Prepare prior to the development of the software:   
+1.1. **Version control system platform : Usaremos Git y GitHub**  
+1.2. **license:  MIT or Apache 2.0* **   
 
-VERSION
-        1.0
+2. Follow coding standards and best practices during development  
+2.1 **code-level documentation: template.py**  
+2.2 **Record dependencies: [package.json](https://docs.npmjs.com/creating-a-package-json-file)**  
+2.3 **Language-specific standards and best practices : PEP8**  
+2.4 **Inputs/outputs of the software follow any applicable community standards**  
 
-AUTHOR
-        Matthieu Defrance &lt;matthieu.dc.defrance@ulb.ac.be&gt;
+3. Document software  
+3.1 **README**  
+    - Web site using GitHub  
+    - Documentation for research software: Write the Docs, Doxygen, Sphinx3  
+3.2 **ChangeLog**  
 
-DESCRIPTION
-        random motif generator
+4. Include metadata files  
+4.1 **[Codemeta.json](https://github.com/codemeta/codemeta/blob/master/examples/codemeta.json) metadata**  
+4.2 **[CITATION.cff](https://citation-file-format.github.io/#/what-is-a-citation-cff-file) metadata file** ([tool](https://citation-file-format.github.io/cff-initializer-javascript/#/))
 
-CATEGORY
-        motifs
+5. Share software on a repository  
+5.1 **PyPI or Conda for Python packages**  
+5.2 Zenodo or Figshare repository   
+5.3 Archive the software repository on Software Heritage  
 
-USAGE
-        ramdom motif [OPTIONS] 
+6. Register software on a registry  
+6.1  bio.tools registry or Research Resource Identifiers (RRID) Portal  
 
-ARGUMENTS
-    --version             show program's version number and exit
-    -h, --help            show this help message and exit
-    -v #, --verbosity=#   set verbosity to level #
-                              0 no verbosity
-                              1 max verbosity
-    -o #, --output=#      output results to #
-                          if not specified, the standard output is used
+]
+
+---
+
+# Actividad
+
+[Tiempo: 15 min.]
+
+.content-box-green[
+
+Selecciona al menos 2 de los siguientes proyectos de software y usando el checklist de FAIR-BioRS, verifica cúantos de ellos cumplen con los principios FAIR:
+
+https://github.com/cytoscape/cytoscape.js  
+https://github.com/regulondbunam/GraphQL-api  
+https://github.com/GMOD/jbrowse  
+https://github.com/rsa-tools/rsat-code/tree/master  
+https://github.com/lcolladotor/derfinder  
+
+]
+
+Pon tus respuestas en nuestro [cuaderno colaborativo](https://etherpad.wikimedia.org/p/LCG-PythonI)
+
+---
+
+# Preparándonos para hacer software!
+
+Para prepararnos para el desarrollo de software siguiendo las recomendaciones FAIR4RS vamos a organizar nuestros directorios y crear nuestras plantillas.
+
+* **Repositorio template**  
+
+   Todo proyecto de desarrollo requiere de una estructura donde vamos a organizar todos los productos de trabajo generados durante el desarrollo. Crea un repo-template que tenga los directorios de 
+   - src (codigo fuente)
+   - lib (librerias a usar)
+   - docs (documentación)
+   - tests (para las pruebas)
+  
+```{}  
+github-rs
+└── template-repo
+    ├── docs
+    ├── lib
+    ├── src
+    └── tests
+```
     
-SEE ALSO
-        random-sites
-        implant-sites
-
-```
-
-]
-
 ---
 
-# Algoritmo, en el código como primera versión.
+# Preparándonos para hacer software!
 
-```
-.....
+* Plantilla para programas en python  
 
-ARGUMENTS
-    --version             show program's version number and exit
-    -h, --help            show this help message and exit
-    -v #, --verbosity=#   set verbosity to level #
-                              0 no verbosity
-                              1 max verbosity
-    -o #, --output=#      output results to #
-                          if not specified, the standard output is used
-    -i #, --input=#       input file
+El FAIR4RS recomienda en el punto  2.1 **code-level documentation**, es decir todo programa debe tener un encabezado y comentarios internos en el código. Vamos a generar una plantilla llamada program_template.py donde vamos a poner el encabezado que debe tener todo programa, por ejemplo ver
 
-'''
+Ejemplo:
 
-## 1. Leer argumentos
+Aquí puedes ver un [ejemplo real](https://github.com/rsa-tools/rsat-code/blob/master/python-scripts/random-motif)
 
-## 2. Leer archivo de datos
+Descarga un [template](https://lcg-cursos.github.io/material/pythonI/python/templates/template_program.py) y ajustalo si es necesario:
 
-## 3. Calcular suma
+Esta plantilla debes colocarla en `src`
 
-## 4. Imprimir resultados
-
-
-```
-
----
-
-# Práctica
-
-1. Ir a https://github.com/rsa-tools/rsat-code
-
-2. Checa como esta organizada la carpeta.
-
-3.  Analiza el programa [infer-operon](https://github.com/rsa-tools/rsat-code/blob/master/perl-scripts/infer-operons) e indica que buenas practicas aplica. 
-
-4. Analiza el programa [random-motif](https://github.com/rsa-tools/rsat-code/blob/master/python-scripts/random-motif) e indica que buenas practicas aplica.
-
-5.  Analiza el programa [local-word-analysis](https://github.com/rsa-tools/rsat-code/blob/master/python-scripts/local-word-analysis) e indica que buenas practicas aplica.
-
-
----
-
-### Bibliografía
-
-.tiny[
-1. Imelda Avalos Flores. (2010). I. Introducción a la programación. Junio 14, 2017, de Universidad Autónoma de Nayarit Sitio web: http://correo.uan.edu.mx/~iavalos/FP/FP1.html
-
-2. SENA. (2017). Etapas del ciclo de vida. Junio 14, 2017, de wikispaces Sitio web: https://ciclodevidasoftware.wikispaces.com/ETAPAS+DEL+CICLO+DE+VIDA
-
-3. Bernal, L. A.. (Agosto 11, 2014). Cómo hacer una prueba de escritorio. Junio 10, 2017, de aztlek.org Sitio web: https://aztlek.org/2014/08/11/como-hacer-una-prueba-de-escritorio/
-
-4. https://islascruz.org/blog/2018/07/25/buenas-practicas-en-python/
-
-5. https://www.educ.ar/recursos/132522/consejos-y-buenas-practicas-para-programar-en-python
-
-6. https://www.tithink.com/es/2018/06/13/12-buenas-practicas-para-el-desarrollo-software/
-
-7. https://wiki.python.org/moin/PythonTestingToolsTaxonomy
-
-8. ¿Por qué es importante la Ingeniería de Software? https://medium.com/@FunktionellMx/por-qu%C3%A9-es-importante-la-ingenier%C3%ADa-de-software-a4000134f6e2
-
-9. Metodologías de desarrollo de software: ¿qué son? 
-https://blog.becas-santander.com/es/metodologias-desarrollo-software.html
-
-10. Good enough practices in scientific computing. https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510
-
-11. Para generar referencias automáticamente: http://www.cva.itesm.mx/biblioteca/pagina_con_formato_version_oct/apaweb.html
-
-]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
