@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Software Cientifico y la IS</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Software Cientifico y la IS
+]
+.institute[
+### Licenciatura en Ciencias Genómicas,UNAM
+]
+.date[
+### First version: yyy-mm-dd; Last update: 2024-02-08
+]
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+
+# Contenido
+
+1. Guía de estilo para código Python PEP8
+
+---
+# Objetivo
+
+Conocer los éstándares y la importancia de usarlos
+
+
+---
+# Ciclo de Vida del Desarrollo de Software
+
+&lt;img src="img/fases.png" width="900px" style="display: block; margin: auto;" /&gt;
+
+&lt;br&gt;
+
+.content-box-blue[
+
+Cada **pieza de software** que se crea tiene que pasar por una ruta similar, que va **desde la idea** hasta el **día de lanzamiento** del software. En conjunto, los pasos de esta ruta se denominan **ciclo de vida** de desarrollo de software o proceso. 
+
+]
+
+---
+
+# REQUISITOS
+
+.content-box-blue[
+
+En esta etapa hay que identificar el **qué** se necesita, qué se requiere que haga el programa, cúal es el problema a abordar, qué pretendo solucionar.
+
+]
+
+- *Req. Funcionales*.  Describen lo que el sistema debe hacer: flujo de trabajo, entradas, salidas, excepciones.
+
+- *Reg. No funcionales*. Tiempo de respuesta, capacidad de almacenamiento, seguridad, o alguna especificación como el lenguaje de programación,  plataforma tecnológica.
+
+Técnicas para obtener los requisitos:
+
+- Entrevistas
+- Cuestionarios
+- Observación
+
+**Entregables**: Documento con la lista de requisitos descritos.
+
+---
+
+# Requisitos: ejemplo
+
+**Queremos un programa que me permita sumar números.**
+
+--
+
+¿es suficiente información? 
+
+--
+
+- ¿Serán sumas de base 10 ? es decir no binarios, no octales, ni hexadecimales.
+
+--
+
+- ¿Sólo enteros o también flotantes ?
+
+--
+
+- ¿Cuántos números serán?
+
+--
+
+- ¿Los datos se pasarán en un archivo o se pedirán por teclado ?
+
+--
+
+- ¿Cómo debe presentarse el resultado ? ¿quieres algún mensaje?
+
+--
+
+- ¿Qué sumas no son permitidas? 
+
+---
+
+## Lista de Requisitos
+
+**Queremos un programa que me permita sumar números.**
+
+--
+
+- Sumar números base 10, enteros como flotantes.
+
+--
+
+- Recibir el archivo por argumento al programa, y éste contiene los números a sumar, uno por línea.
+
+--
+
+- Mandar un mensaje de error si el archivo no existe.
+
+--
+
+- Validar los datos. En caso de no recibir números de base 10 mandar un mensaje de error.
+  
+--
+
+- Desplegar el resultado como:  n1 + n2 + n3 + n4 = suma  donde n# son los números que vienen en el archivo.
+   
+--
+
+**Casos de prueba**:  
+
+- C1: A + B  "Error!, introducir números de base 10"
+
+- C2: 10 + 5 = 15
+
+- C3: 5.6 + 2.4 = 8.0 
+
+- C4: 5F + 9A    "Error!, introducir números de base 10"
+
+---
+
+## Análisis y diseño
+
+Consiste en:
+
+- Estudiar y entender los requisitos para proponer una solución a implementarse
+- Buscar la mejor solución al problema
+- Identificar toda la información de entrada y salida del sistema
+- Definir restricciones en los datos
+- Definir cómo se visualizarán los datos
+- Etcétera
+
+---
+
+## Análisis y diseño: Herramientas y Técnicas
+
+.pull-left[
+- Algoritmos / Pseudocódigo
+- Modelado   (UML)  Tool: [LucidChart](https://www.lucidchart.com/pages/)
+    - Diagramas de comportamiento: 
+        - Use Case Diagram
+        - Activity Diagram
+        - State Machine Diagram
+    - Diagramas de interacción:
+        - Sequence Diagram
+        - Communication Diagram
+        - Timing Diagram
+        - Interaction Overview Diagram
+- Bosquejos/Prototipos visuales (mockups)
+
+Entregables: Documento de AD.
+]
+
+.pull-right[
+
+&lt;img src="img/casosuso.png" width="800px" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+## Casos de uso
+
+.content-box-blue[ Un caso de uso es una **descripción de cómo interactúa un usuario con un sistema** para lograr un objetivo particular. Describe el flujo de trabajo entre el usuario y el sistema en un escenario particular.
+
+En términos más técnicos, un caso de uso es una especificación de **conjunto de acciones realizadas por un sistema**, que producen un resultado observable y valioso para un actor en particular (**un actor es a menudo un usuario**, pero puede ser cualquier sistema que interactúe con el nuestro).
+
+]
+
+.tiny[ Cada caso de uso proporciona una o más s**ecuencias de eventos, llamadas flujos**, que describen cómo se interactúa con el sistema. Un flujo puede ser:
+
+- Un Flujo principal (o principal): Esta es la secuencia de eventos que se da cuando todo va bien, la situació más común.
+- Un Flujo alternativo (o secundario): Estas son las secuencias de eventos que se dan cuando algo no va según lo esperado, o cuando se emplea un método alternativo para completar la acción.
+
+Los casos de uso son una parte clave en el desarrollo de software dirigido por modelos y en la ingeniería de requisitos, porque proporcionan una manera de capturar requisitos funcionales y cómo interactúa el usuario con el sistema.
+
+Por ejemplo, para un cajero automático, algunos casos de uso podrían ser: "Sacar dinero", "Depositar dinero", "Consultar saldo". Cada uno de estos describe una forma en la que un usuario interactuaría con el cajero automático.
+]
+---
+
+
+
+- **Actor**: Usuario
+- **Descripción**: El actor proporciona un archivo de entrada con números a sumar. El sistema valida el archivo y los datos de entrada, calcula la suma de los números y muestra el resultado.
+- **Flujo principal**:
+	1. El actor inicia el sistema proporcionando el archivo de entrada con los números a sumar.
+	2. El sistema valida el archivo y los datos de entrada.
+	3. El sistema calcula la suma de los números.
+	4. El sistema muestra el resultado.
+- **Flujos alternativos**:
+	- Si el archivo proporcionado no existe
+		1. El sistema muestra un mensaje de error diciendo que el archivo no se encuentra.
+	- Si los datos de entrada no son números en base 10
+		1. El sistema muestra un mensaje de error diciendo que se deben introducir números en base 10.
+		
+&lt;img src="img/caso_uso_gral.png" width="400px" style="display: block; margin: auto;" /&gt;
+
+---
+## Codificación
+
+Traducir el diseño en un lenguaje de programación y tecnología específicos.
+
+Seleccionar:
+
+* Lenguajes de programación
+* Paradigma de programación
+* Estándares de programación
+* Infraestructura de desarrollo
+* Interfaces de desarrollo integrado (IDEs)
+* Software de base de datos
+
+Estándares de programación
+
+* Mejoran legibilidad del código y su mantenimiento
+* Nombres de variables, clases, scripts, etcétera
+* Documentación interna del código
+
+
+---
+
+&lt;img src="img/code.png" width="400px" style="display: block; margin: auto;" /&gt;
+
+---
+## Pruebas
+
+Niveles:
+
+- Unitarias: un solo componente, después de que es liberado por el programador
+- De integración: varios componentes, después de las unitarias
+- Del sistema: el sistema completo, incluye pruebas de seguridad, desempeño y documentación
+- De aceptación: con el usuario, alfa (datos de prueba) y beta (datos reales)
+
+Tipos:
+
+- Funcionalidad: revisión de requisitos
+- Seguridad: de datos, privilegios y de acceso al sistema
+- Volumen: muchos datos
+- Usabilidad: facilidad de uso del sistema por el usuario
+- Stress: cargas de trabajo extremas o condiciones desfavorables para el sistema
+
+---
+
+# Pruebas
+
+- Manuales
+- Programadas
+
+&lt;img src="img/test.png" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Liberación y Mantenimiento
+
+- Licenciamiento
+
+- Cierre del proyecto
+
+- Entrega de manuales
+
+   - M. Técnico
+   
+   - M. de usuario
+   
+   - M. mantenimiento
+
+---
+# Actividad
+
+[Tiempo: 15 min]
+
+1. Descarga la carpeta `ejemplo` de la página del curso 
+2. Abre el archivo `detalles_proyecto.md` 
+3. ¿Propones algun otro punto adicional para detallar el proyecto antes de programar?
+4. Abre el archivo `test_cases.md`
+5. ¿Hay algún otro caso de prueba que debemos considerar?
+
+---
+
+#  Metodologías de desarrollo
+
+&lt;img src="img/metodologias.png" width="700px" style="display: block; margin: auto;" /&gt;
+
+La **metodología de desarrollo de software** es un marco que se utiliza para **estructurar, planificar y controlar** el proceso de desarrollo de un sistema de información. En este tipo de metodología de desarrollo, la única preocupación del proceso de desarrollo de software es que **no implica ningún aspecto técnico**, sino que exige una **planificación adecuada** del ciclo de vida de desarrollo de software por parte de la organización de desarrollo.
+
+.tiny[[Consultar Analisis y Diseño de Sistemas](http://ual.dyndns.org/biblioteca/Analisis_Dise%C3%B1o_Sistemas/Pdf/06%20Capitulo%2006_Elaboracion%20de%20prototipos,%20rad%20y%20Programacion%20Externa.pdf)]
+
+---
+
+# Metodología sugerida
+
+
+&lt;img src="img/AD-metodologia.png" width="1000px" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Software Científico
+
+.content-box-blue[
+
+"Los desarrolladores de software científico se están centrando en **prácticas que mejoran la productividad de la implementación**, como la reutilización de código, el uso de bibliotecas de terceros y la aplicación de **“ buenas ” técnicas de programación**. Además, además de descubrir que el **rendimiento** es un factor clave para muchas de estas aplicaciones, los desarrolladores de software científico también consideran importantes la **mantenibilidad y la productividad.**"
+
+]
+
+.tiny[
+[Software engineering practices for scientific software development: A systematic mapping study](https://doi.org/10.1016/j.jss.2020.110848) ]
+---
+
+# Desarrollo de Software
+
+&lt;img src="img/fases_software.png" width="700px" style="display: block; margin: auto;" /&gt;
+
+---
+# Estándares
+
+.pull-left[
+
+.content-box-blue[
+El objetivo de los estándares de codificación de software es **inculcar prácticas de programación comprobadas** que conduzcan a un código seguro, confiable, comprobable y mantenible. 
+
+&lt;br&gt;
+
+Por lo general, esto significa **evitar prácticas de codificación no seguras** conocidas o código que pueda causar un comportamiento impredecible. 
+
+]
+]
+
+.pull-right[
+&lt;img src="https://ouzhang.me/slides/readable_code/img/self-explaining.PNG" width="100%" style="display: block; margin: auto;" /&gt;
+
+.tiny[ [Write Readable Code](https://ouzhang.me/slides/readable_code/img/self-explaining.PNG) ]
+]
+
+---
+# Los lenguajes y la programación
+
+Los lenguajes de programación son **abstracciones para los humanos**. No importa si escribe código en C, Java, Python o ensamblador. Todos son para humanos. Si los humanos pudiéramos comprender y escribir cadenas de "0" y "1" tan rápido como una computadora, entonces no necesitaríamos lenguajes de programación.
+
+Pero no podemos (o al menos no fácilmente). Así que desarrollamos una forma de aprovechar toda esa potencia informática con la ayuda de la **lógica y la intuición humanas**.
+
+Como programadores, debemos esforzarnos por hacer que **el código sea lo más legible posible**. Es por eso que seguimos tomando prestados términos de la vida real como pilas, colas, diccionarios, etc. Porque son familiares.
+
+Como programador, **también eres escritor**. Por supuesto, la audiencia es limitada en comparación con las novelas, pero de todos modos eres un escritor. Asi que haz de tu código un best-seller.
+
+
+[Traducido de "Tips to improve code readability" by Mihai Sandu ](https://levelup.gitconnected.com/tips-to-improve-code-readability-fa16a9a9f8dc)
+
+---
+# Pero como programador
+
+Evita hacer programas para "presumir". ¿Puedes codificar esto en menos símbolos?" —¡como si esto tuviera alguna relevancia conceptual!— o simplemente pregunta “¡Adivina qué hace!”.. (aquellos a quienes les gusta mostrar lo inteligentes que son).
+
+Aquellos que quieran un software realmente fiable descubrirán que, para empezar, deben encontrar **formas de evitar la mayoría de los errores** y, como resultado, el proceso de programación será más barato.
+
+.content-box-blue[
+Haremos un trabajo de programación mucho mejor, siempre que abordemos la tarea con plena apreciación de su tremenda dificultad, siempre que nos **ciñamos a lenguajes de programación modestos y elegantes**, siempre que respetemos las limitaciones intrínsecas de la mente humana y abordemos la tarea como programadores muy humildes.
+]
+
+.tiny[
+"El humilde programador” (1972) escrito por Edsger W Dijkstra
+ https://www.cs.utexas.edu/~EWD/transcriptions/EWD03xx/EWD340.html
+]
+
+---
+# Filosofía de Python
+
+La filosofía de Python tiene como objetivo hacer que el código sea «Pythonic». Uno de sus desarrolladores, Tim Peters, escribió el Python Zen, que es un conjunto de principios sobre cómo debemos escribir código.
+
+- Hermoso es mejor que feo.
+- Explícito es mejor que implícito.
+- Lo simple es mejor que lo complejo.
+- Complejo es mejor que complicado.
+- Plano es mejor que anidado.
+- Escaso es mejor que denso.
+- La legibilidad cuenta.
+- Los casos especiales no son lo suficientemente especiales como para romper las reglas.
+- Aunque la practicidad supera la pureza.
+- Los errores nunca deben pasar en silencio.
+- A menos que sea silenciado explícitamente.
+- Ante la ambigüedad, rechaza la tentación de adivinar.
+- Si la implementación es difícil de explicar, es una mala idea. Si la implementación es fácil de explicar, puede ser una buena idea.
+...
+
+---
+# El Zen de Python en tu código
+
+- En lugar de escribir un código largo y difícil de entender, trata de dividirlo en funciones más pequeñas y fáciles de entender.
+- Usa nombres de variables claros y descriptivos, en lugar de nombres cortos o abreviados que pueden ser confusos.
+- Documenta tu código de forma clara y concisa, utilizando comentarios que expliquen el propósito de cada sección.
+- Evita el uso excesivo de estructuras complejas, como bucles anidados o condicionales múltiples. 
+
+[Desenmarañando el Zen de Python](https://es.linkedin.com/pulse/desenmara%C3%B1ando-el-zen-de-python-c%C3%B3mo-la-filosof%C3%ADa-del-jesus-daniel)
+
+---
+# PEP 8 – Guía de estilo para código Python
+
+Las pautas proporcionadas aquí tienen como objetivo mejorar la legibilidad del código y hacerlo consistente.
+
+https://pep8.org/
+https://cheatography.com/jmds/cheat-sheets/python-pep8-style-guide/
+https://gist.github.com/RichardBronosky/454964087739a449da04
+
+---
+# Practica
+
+1. Abre el archivo `programa1.py`
+2. Identifica las malas prácticas que no se ajustan a PEP8 (puedes poner # problema PEP8 )
+3. Abre el archivo README
+4. Hay algun otro punto que crees se deba agregar al README?
+5. Organiza el directorio del proyecto, genera las carpetas y mueve los archivos a sus carpetas.
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(img/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
