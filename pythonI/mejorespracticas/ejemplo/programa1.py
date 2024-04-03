@@ -1,4 +1,4 @@
-import argparse, os
+import argparse, os    # no pep8
 
 def file_data(filepath):
     if os.path.exists(filepath)==False:
@@ -28,13 +28,14 @@ def printresult(nums, result):
   print(' + '.join([str(i) for i in nums if i != None])+' = '+str(result))
 
 def sum_numbers(filepath):
-  filedata = file_data( filepath )
-  nums = validatedata( filedata)
+  filedata = file_data(filepath)
+  nums = validatedata(filedata)
   result=operacion(nums)
-  printresult(nums, result)
+  printresult(nums,result)
 
 if __name__=="__main__":
   ap=argparse.ArgumentParser()
-  ap.add_argument('-inputfile', dest='inputfile', required=True, help='path to input file')
+  ap.add_argument('-inputfile', dest='inputfile', 
+                 required=True, help='path to input file')
   args=ap.parse_args()
   sum_numbers(args.inputfile)
