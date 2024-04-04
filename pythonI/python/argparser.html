@@ -19,10 +19,11 @@ class: center, middle, inverse, title-slide
 ### Licenciatura en Ciencias Genómicas,UNAM
 ]
 .date[
-### First version: yyy-mm-dd; Last update: 2024-04-03
+### First version: yyy-mm-dd; Last update: 2024-04-04
 ]
 
 ---
+
 
 
 
@@ -39,6 +40,22 @@ pre {
   overflow-x: scroll;
 }
 &lt;/style&gt;
+
+## Resumen
+
+- En python todo es un objeto
+
+- Variables, Condicionales, Archivos, Ciclos
+
+- Aguas con la mutabilidad.
+
+- Puedes usar tools de codificación: chatgpt, bito, github-copilot, etc.. PERO DEBES entender el código.
+
+- Nuestro directorio python_class
+
+- Programa count_atgc.py
+
+---
 
 ## Objetivo
 
@@ -105,17 +122,32 @@ Bowtie2 es una herramienta para alinear secuencias de lecturas de secuenciación
 ---
 #  Programas CLI en bioinformática
 
-.content-box-yellow[
-En cada uno de estos casos, argparse (o un módulo similar en otro lenguaje de programación) podría ser utilizado para procesar los argumentos de línea de comandos.
+&lt;img src="https://files.realpython.com/media/Python-argparse-Guide_Watermarked.a7affa701ed5.jpg" width="600px" style="display: block; margin: auto auto auto 0;" /&gt;
 
-Estos ejemplos ilustran cómo los programas CLI son fundamentales en bioinformática, y resaltan la importancia de aprender a usar herramientas como argparse para crear tus propios programas CLI.
+.tiny[
+- En cada uno de estos casos, argparse (o un módulo similar en otro lenguaje de programación) podría ser utilizado para procesar los argumentos de línea de comandos.
+
+- Estos ejemplos ilustran cómo los programas CLI son fundamentales en bioinformática, y resaltan la importancia de aprender a usar herramientas como argparse para crear tus propios programas CLI.
 ]
 
 ---
 
-## Uso más simple de argparse
+## Uso más simple de argparse: argumento posicional
 
+.content-box-green[
 Programa que acepta un número entero desde la línea de comandos y luego imprime el cuadrado de ese número.
+]
+
+
+```bash
+python square.py 5
+```
+
+```
+25
+```
+
+**Programa: square.py**
 
 
 ```python
@@ -128,23 +160,12 @@ print(args.x ** 2)
 ```
 
 
-Guarda esto como **square.py**. Ejecútalo desde la línea de comandos así:
-
-
-```bash
-python square.py 5
-
-# qué pasa aqui?
-python square.py -h
-
-# que pasa aqui ..
-python square.py 
-```
-
-
 ---
 
-# Entendiendo argparse
+&lt;img src="img/arparse.png" width="600px" style="display: block; margin: auto;" /&gt;
+
+.tiny[
+**Entendiendo argparse**
 
 1. `parser = argparse.ArgumentParser()`: Esto crea un objeto que se encarga de "analizar" (parsear) la línea de comandos.
 
@@ -153,6 +174,8 @@ python square.py
 3. `args = parser.parse_args()`: Analiza la línea de comandos y asocia los argumentos ingresados al nombre correspondiente.
 
 4. `print(args.x ** 2)`: Por último, toma el número introducido, lo eleva al cuadrado (eso es lo que hace ** 2) e imprime el resultado.
+
+]
 
 ---
 ## Argumentos opcionales 
@@ -191,7 +214,7 @@ python square2.py
 Los argumentos posicionales y opcionales son fundamentales en argparse y es importante entender la diferencia entre los dos. 
 
 ---
-# Cómo decidir entre arg posicional vs opcional ?
+## Cuando usar un argumento posicional vs opcional ?
 
 .content-box-green[
 
@@ -205,9 +228,10 @@ Por otro lado, los argumentos opcionales (aquellos precedidos por - o --) son ú
 ---
 ## Manejando  un argumento con más de un valor
 
-¿Qué pasa si quiero pasar mas de un valor a un argumento?
+.content-box-green[
+Programa que suma números que se pasan por línea de comando.
+]
 
-Programa que suma los números que se le pasan por línea de comando.
 
 
 ```python
@@ -256,6 +280,8 @@ print("Archivo de salida: ", args.output)
 
 Salvalo como readfile.py y correlo 2 veces con los siguientes argumentos:
 
+--
+
 
 ```bash
 python readfile.py my_input.txt
@@ -299,33 +325,174 @@ ejecutalo como :
 
 
 ```bash
-python readfile.py -i example.txt
-python readfile.py --input_file example.txt --output myoutput.txt 
+python readfile2.py -i example.txt
+python readfile2.py --input_file example.txt --output myoutput.txt 
 ```
 
 .content-box-yellow[
-**Importante**: dentro del programa deberas utilizar args.file y no args.f, porque en  python el nombre de la propiedad es la versión del nombre del argumento con caracteres alfanuméricos más largos, eliminando los signos - o --. OBviamente si solo defines -f, usarás args.f
+**Importante**: dentro del programa deberas utilizar args.input_file y no args.i, porque en  python el nombre de la propiedad es la versión del nombre del argumento con caracteres alfanuméricos más largos, eliminando los signos - o --. Obviamente si solo defines -i, usarás args.i
 ]
 
 ---
+## Argumentos boleanos
+
+Esta opción se usa para activar algún comportamiento en el programa cuando está presente.  En argparse, las opciones booleanas son argumentos opcionales. Los valores predeterminados son False a menos que se especifique lo contrario. 
+
+
+```python
+import argparse
+
+parser = argparse.ArgumentParser(description='Ejemplo de argumento booleano en argparse.')
+parser.add_argument('--flag', '-f', action='store_true',
+                    help='Activa el flag')
+
+args = parser.parse_args()
+
+if args.flag:
+    print('Flag activado')
+else:
+    print('Flag no activado')
+```
+
+
+
+```bash
+python script.py
+python script.py --flag
+```
+
+---
+## Argumento con lista de valores permitidos
+
+
+```python
+import argparse
+
+parser = argparse.ArgumentParser(description='Ejemplo de argparse con una lista de valores permitidos.')
+parser.add_argument('--color', choices=['red', 'green', 'blue'],
+                    help='Elige tu color preferido')
+
+args = parser.parse_args()
+
+print('Tu color preferido es:', args.color)
+```
+
+
+Ejecutar el programa:
+
+
+```bash
+python choices.py --color red
+python choices.py --color yellow  # que pasa?
+```
+
+---
+
+## Ejemplos
+
+.content-box-green[
+Analiza los códigos de los siguientes ejemplos (NO los copies, sólo lee y entiende el código), e indica como ejecutar los programas correctamente.
+Puede haber más de una forma de ejecutarlos.
+
+]
+
+---
+## Ejemplo 1. Programa chatbot.py
+
+
+```python
+import argparse
+import random
+
+parser = argparse.ArgumentParser(description="¡Hablemos! Pídele al chatbot que cuente un chiste o que te salude")
+
+# Añadir los argumentos
+parser.add_argument("-c", "--chiste", action='store_true',
+                    help="Pide al chatbot que cuente un chiste.")
+parser.add_argument("--nombre", type=str,
+                    help="Dile tu nombre al chatbot.")
+args = parser.parse_args()
+
+chistes = ["¿Por qué no se puede confiar en los átomos? ¡Porque hacen todo a las espaldas!",
+           "¿Qué le dice un bit al otro? Nos vemos en el bus",
+           "¿Cómo saluda un informático? ¡HOLA MUNDO!"]
+
+def chat(args):
+    if args.nombre:
+        print(f"¡Hola, {args.nombre}! ¿Cómo estás?")
+    if args.chiste:
+        print(random.choice(chistes))
+
+chat(args)
+```
+
+---
+## Ejemplo 2. Programa: dragon.py
+
+
+```python
+import argparse
+
+parser = argparse.ArgumentParser(description="Te encuentras con un dragon... ¿Qué deberías hacer?")
+parser.add_argument("name", type=str, default="valiente desconocido",
+                    help="Coloca tu nombre de héroe.")
+parser.add_argument("-a", "--action", type=str, choices=["fight", "run"], required=True,
+                    help="Decide tu acción. ¿Vas a luchar (fight) o huir (run)?")
+args = parser.parse_args()
+
+if args.action == "fight":
+    print(f"{args.name} saca su espada y decide luchar...")
+    print("Después de una batalla épica, {args.name} emerge victorioso!")
+else:
+    print(f"{args.name} decide que la discreción es mejor que el valor y decide huir rápidamente!")
+    print("Escapas, pero el dragón todavía reina supremo...")
+```
+
+---
+# Ejemplo 3. Programa. monster.py
+
+
+```python
+import argparse
+
+# Crear el argparse object
+parser = argparse.ArgumentParser(description="¡Crea una criatura a partir de un segmento de ADN!")
+
+# Añadir los argumentos
+parser.add_argument('DNA', type=str, help="El segmento de ADN que servirá de base para la criatura.")
+parser.add_argument("-m", "--monster", action='store_true',
+                    help="Usa este switch si quieres que la criatura sea un monstruo.")
+
+args = parser.parse_args()
+
+# Diccionario para "traducir" el ADN
+dna_to_trait = {
+    "A": "Tiene alas.",
+    "T": "Tiene escamas.",
+    "C": "Puede cambiar de color.",
+    "G": "Puede brillar en la oscuridad."
+}
+
+# siguen mas instrucciones ...
+```
+---
+
 # Ejercicio / Tarea
 
-A. El programa de count_atgc.py pasa como argumento el nombre del archivo de entrada.
+PASO 1. Modifica el programa de count_atgc.py para que el usuario puda pasar como argumento el nombre del archivo que contiene la secuencia de DNA. Guarda y sube a GitHub.
 
-B. Modifica el programa para que permita pasar como argumento las letras de las que quieres ver su frecuencia.
+PASO 2. Modifica el programa para que permita pasar como argumento las letras de las que quieres ver su frecuencia, si no se especifica el default muestra la frecuencia de todos los nucleótidos. Guarda los cambios y sube a GitHub.
 
 ```
 count_atgc.py dna.seq -n A T
 count_atgc.py dna.seq -nucleotides A T
 ```
 
-C. Testea tus casos de prueba o escenarios. Si no creaste tu documento de pruebas es el momento que lo hagas y pruebes tu programa.
+PASO 3. Checa tus casos de prueba o escenarios. Si no creaste tu documento de pruebas es el momento que lo hagas y pruebes tu programa.Guarda y Sube a GitHub.
 
-D. Genera el manual o README para usar tu programa.
+PASO 4. Genera el manual o README para usar tu programa. Este doc tiene que estar dentro de la carpeta del proyecto count_atgc. Guarda y Sube a GitHub.
 
-Recuerda que en cada punto, debes mandar los cambios a github.
-
-Se evaluará el proceso que vas haciendo de cada punto y los commits que al menos hagas en cada punto. También, el paso de argumentos deberá estar includo en la versión final.
+Se evaluará el proceso que vas haciendo de cada punto sobre todo los commits. El programa final debe tener los 2 argumentos.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
