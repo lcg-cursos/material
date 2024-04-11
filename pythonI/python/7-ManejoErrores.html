@@ -3,7 +3,7 @@
   <head>
     <title>Python II y GitHub</title>
     <meta charset="utf-8" />
-    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -12,9 +12,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Python II y GitHub
+]
+.institute[
 ### Licenciatura en Ciencias Genómicas,UNAM
-### First version: yyy-mm-dd; Last update: 2022-04-20
+]
+.date[
+### First version: yyy-mm-dd; Last update: 2024-04-11
+]
 
 ---
 
@@ -34,22 +40,40 @@ pre {
 }
 &lt;/style&gt;
 
-# Desarrollo de software y  Errores
+# Desarrollo de software y Errores
 
-Cuando desarrollamos software, diferentes tipos de errores pueden ocurrir. Pueden ser :
+Los errores son inevitables (*como todo en la vida, !eres humano!*) a la hora de desarrollar un programa, hasta el punto que la **estrategia más eficaz** para prevenirlos no es tanto evitar que ocurran, sino **intentar detectarlos y corregirlos rápidamente**.
 
-  - errores de sintaxis, 
+&lt;img src="https://files.realpython.com/media/Python_Exceptions_Watermark.47f814fbeced.jpg" width="600px" style="display: block; margin: auto;" /&gt;
+
+.tiny[Fuente: https://files.realpython.com/media/Python_Exceptions_Watermark.47f814fbeced.jpg]
+
+---
+# Desarrollo de software y Errores
+
+Los errores de programación responden a diferentes tipos y pueden clasificarse dependiendo de la fase en que se presenten. Algunos tipos de errores son más difíciles de detectar y reparar que otros.
+
+&lt;img src="https://files.realpython.com/media/Understanding-Pythons-Traceback_Watermarked.138741dabfeb.jpg" width="600px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Tipos de errores
+
+Algunos tipos de errores:
+
+- errores de sintaxis. 
   
-  - errores lógicos,
+- errores lógicos o de diseño. 
   
-  - errores de tiempo de ejecución.
+- errores de tiempo de ejecución.
 
 ---
 
 # Errores de sintáxis
 
-Los errores de sintaxis es más probable que ocurran durante la fase de desarrollo inicial y son el resultado de sintaxis incorrecta. Los errores de sintaxis son fácilmente identificables cuando se ejecuta el programa.
+Son errores en el **código**, en la Fase de Desarrollo. Son el resultado de **sintaxis incorrecta** (nombres de funciones mal escritas, incorrecta asignación de datos, etc). Los errores de sintaxis son fácilmente identificables cuando se ejecuta el programa, porque se mandará un mensaje en la pantalla con el error. El programa **no funcionará sino se resuelven**:
 
+--
 
 ```
 &gt;&gt;&gt; while True print('Hello world')
@@ -59,24 +83,61 @@ Los errores de sintaxis es más probable que ocurran durante la fase de desarrol
 SyntaxError: invalid syntax
 ```
 
+.content-box-green[
 El intérprete reproduce la línea responsable del error y muestra una pequeña “flecha” que apunta al primer lugar donde se detectó el error.
+]
 
 ---
+# Errores de sintáxis
 
+```
+&gt;&gt;&gt; print(0 / 0))
+  File "&lt;stdin&gt;", line 1
+    print(0 / 0))
+                ^
+SyntaxError: unmatched ')'
+
+```
+
+--
+
+**Cómo los solucionamos?**
+
+El intérprete nos ayuda a encontrarlos. Ver a donde apunta la felcha y verificar cual fue el error de dedo o de sintáxis. 
+
+Sino sabemos cual es el error, podemos:
+
+- **VSC**: nos marcará en rojo el caracter incorrecto.
+- **Usar chatgpt**: pegar el error y nos describirá el porque es incorrecto.
+- **google**: buscar páginas del error y ver la sintáxis.
+
+---
 # Errores lógicos
 
-Los errores lógicos, por otra parte, son el resultado de una incorrecta implementación lógica. Un ejemplo sería un programa accediendo a una lista no ordenada suponiendo que lo estuviera. Los errores lógicos son los más difíciles de rastrear.
+Los errores lógicos, son el resultado de una **incorrecta implementación lógica**. Si nos hemos equivocado al diseñar nuestro algoritmo, no habrá ningún programa que nos pueda ayudar a corregirlos. 
 
-Un error que hace que una aplicación produzca resultados incorrectos. 
+Un ejemplo sería un programa accediendo a una lista no ordenada suponiendo que lo estuviera. 
 
-Puede no generar un mensaje de error.
+Los errores lógicos son los más difíciles de rastrear:
 
-Se encuentran probando la aplicación y analizando los resultados.
+- Un error que hace que una aplicación produzca resultados incorrectos. 
+
+- Puede no generar un mensaje de error.
+
+--
+
+** ¿Cómo los solucionamos? **
+
+.content-box-green[
+Contra estos errores sólo cabe practicar y pensar, realizar pruebas, hacerle seguimiento y depuración a la aplicación hasta dar con el problema ( ver documento de análisis y diseño y los casos de prueba).
+]
 
 ---
 # Errores lógicos
 
 Existen *bugs* en el código que no arrojan error y el código se ejecuta hasta el final **PERO** no está bien. 
+
+--
 
 
 ```python
@@ -84,11 +145,13 @@ dna = 'atctgcatattgcgtctgatg'
 a_count = dna.count('A') # no va a encontrar A's
 ```
 
+Cual es el error?
+
 --
-Los errores y los *bugs* anteriores tienen la propiedad intrinseca que dependen del código y son reproducibles. El problema será predecible.
+
+**algun otro? **
 
 ---
-
 # Errores en tiempo de ejecución
 
 Los errores en tiempo de ejecución son los errores más interesantes y comunes. Un ejemplo sería tratar de acceder a un archivo inexistente, o hacer una división con cero.
@@ -101,7 +164,6 @@ ZeroDivisionError: division by zero
 ```
 
 ---
-
 # Errores en tiempo de ejecución 
 
 Por ejemplo, cuando no encontramos un archivo. Esto depende de nuestros *PATHS*. El código hace su tarea corre sin errores, mientras que en mi computadora arroja error si no cambio el nombre del archivo. 
@@ -113,18 +175,28 @@ IOError: [Errno 2] No such file or directory: 'missing.txt'
 
 --
 
-A estas situaciones se les conoce como *exceptions* o *excepciones* y al control de ellas como *exception handling* o *manejo de excepciones/errores*.
+.content-box-green[
+A estas situaciones se les conoce como *exceptions* o *excepciones* y al control de ellas como *exception handling* o *manejo de excepciones*.
+]
 
-
+**Como identificarlos?**: 
+- Podemos anticiparnos a través de los casos de prueba (definimos el comportamiento del programa dada una situación)  
+- Al encontrar un error de ejecución, detectar cual es el problema e implementar la excepción.
 
 ---
+# Manejo de Excepciones
+
+&lt;img src="https://files.realpython.com/media/Raising-Exceptions-Manually-in-Python.-Best-Practices_Watermarked.ef77e2f3902b.jpg" width="600px" style="display: block; margin: auto;" /&gt;
+
+---
+
 # Manejo de excepciones
 
-Python maneja el **no encontrar un archivo** (`IOError: [Errno 2] No such file or directory`) devolviendo un _mensaje_ y deteniendo la ejecucuión del código (útil para el programador, no tanto para el usuario). 
+Python maneja el **no encontrar un archivo** (`IOError: [Errno 2] No such file or directory`) devolviendo un _mensaje_ y deteniendo la ejecución del código (útil para el programador, no tanto para el usuario). 
 
 --
 
-Si sabemos que **leer un archivo** puede causar problemas, podemos identificarlo y agregar un mensaje para el usuario.
+Si sabemos que **leer un archivo** puede causar problemas, podemos identificarlo y agregar un mensaje para el usuario (te lo agradecerán mucho!).
 
 
 ```python
@@ -191,7 +263,7 @@ Intentar `data/7-file_num.txt` con texto.
 
 &lt;br&gt;&lt;br&gt;
 
-.center[.content-box-green[**Vamos a vsCode**]]
+.center[.content-box-green[**mm pero si existe el archivo!!**]]
 
 ---
 # Manejo de excepciones específicas
@@ -273,6 +345,9 @@ BaseException
       +-- BufferError
       +-- EOFError
       +-- ImportError
+---
+
+```
       +-- LookupError
       |    +-- IndexError
       |    +-- KeyError
@@ -421,10 +496,17 @@ except IOError as ex:
 except ValueError as ex:
     print("sorry, couldn't parse the number: " +  ex.args[0])
 finally:
-os.remove('data/temp.txt') # delete the temp file
+    os.remove('data/temp.txt') # delete the temp file
 ```
 
 ---
+
+# Sintáxis para el manejo de excepciones
+
+&lt;img src="https://www.learnbyexample.org/wp-content/uploads/python/Python-Exception-try-except-else-finally-Syntax.png" width="600px" style="display: block; margin: auto;" /&gt;
+
+---
+
 # Sintáxis para el manejo de excepciones
 
 Podemos tener está sintaxis:
@@ -490,18 +572,12 @@ except IOError:
 ```
 
 ---
-## Ejercicio
 
-.content-box-blue[ 
-Toma el programa `remove_adapters.py` y agrega el manejo de la excepción en caso de que el archivo no se encuentre. Manda un mensaje indicando ¨El archivo _"indica el nombre"_ no se encuentra.¨
-]
-
----
 # Manejo de excepciones
 
-Se recomienda el manejo de excepciones cuando se puede hacer algo al respecto y lo podemos hacerlo con `try/except`.
+Se recomienda el manejo de excepciones cuando se puede **hacer algo** al respecto y lo podemos hacerlo con `try/except`.
 
-Pero para detectar *bugs* (errores en el manejo pero no en código) necesitamos evocar/generar un error y poder *hacer algo*. 
+Pero para detectar *bugs* necesitamos evocar/generar un error y poder *hacer algo*. 
 
 Para ello Python usa `raise`.
 
@@ -607,9 +683,22 @@ for seq in sequences:
 ---
 ## Tarea
 
-.content-box-blue[ 
-A todos los programas hechos hasta el momento, corrigelos y agregales excepciones sobre todo para el manejo de archivos, datos de entrada, y cálculos donde pueda ¨romperse¨ el programa.
-]
+Modifica el programa `count_atgc.py` y aplica la detección de los siguientes posibles errores o bugs que pueden romper/detener la ejecución del programa:
+
+Para el archivo de secuencia de DNA: 
+
+- El programa debe mandar un mensaje "sorry, couldn't find the file", cuando el archivo no exista. [try/except]
+
+- El programa debe mandar el mensaje "sorry, the file is empty", cuando el archivo venga vacio.
+
+- El programa acepta letras ATGC mayúsculas o minúsculas. [try/except, raise, if, u otra solución]
+
+- El programa no acepta ningun otro caracter que no sean letras ATGC. Si existieran debera marcar "Sequence contains [caracter], it is invalid character".
+
+
+Para el argumento nucleotides:
+
+- Solo debe aceptar letras ATGC mayúsculas o minúsculas.
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
@@ -659,6 +748,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
