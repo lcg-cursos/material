@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Módulos y Paquetes</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Módulos y Paquetes
+]
+.subtitle[
+## Python I y GitHub
+]
+.institute[
+### Licenciatura en Ciencias Genómicas,UNAM
+]
+.date[
+### 25 April, 2024
+]
+
+---
+
+
+
+
+&lt;!--
+Programa que calcula La frecuencia de todos los codones en una secuencia de ADN. El archivo de DNA debe ser introducido por linea de comando con la libreria argparse. Aplicar validación de errores con try, y organizarlo en funciones. Seguir las recomendaciones de PEP8 y documenta con docstring. También aplicar algunos asserts. Agrega un encabezado al programa como documentación interna tipo ayuda de unix.
+
+Programa que calcula el Contenido de AT de una secuencia de ADN. El archivo de DNA debe ser introducido por linea de comando con la libreria argparse.Seguir Aplicar validación de errores con try, y organizarlo en funciones. las recomendaciones de PEP8 y documenta con docstring.También aplicar algunos asserts.Agrega un encabezado al programa como documentación interna tipo ayuda de unix.
+
+Programa para Identificar Sitios de Restricción en una Secuencia de ADN. El archivo de DNA debe ser introducido por linea de comando con la libreria argparse.Seguir Aplicar validación de errores con try, y organizarlo en funciones. las recomendaciones de PEP8 y documenta con docstring.También aplicar algunos asserts.Agrega un encabezado al programa como documentación interna tipo ayuda de unix.
+--&gt;
+
+# Programación modular
+
+"La **programación modular** es un paradigma de programación que consiste en dividir un programa en módulos o subprogramas con el fin de hacerlo más legible y manejable."[Wikipedia](https://es.wikipedia.org/wiki/Programaci%C3%B3n_modular)
+
+**Divide y vencerás**. 
+
+
+&lt;img src="https://www.atalayar.com/asset/thumbnail,1920,1080,center,center/media/atalayar/images/2019/06/16/20190616161257008800.jpg" width="550px" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Programación modular
+
+ Ventajas:
+
+- Simple
+
+- Fácilita su mantenimiento
+
+- Reusable
+
+
+&lt;img src="https://hi-static.z-dn.net/files/d03/9870a48eb374a30f5f2905d53c7ba036.jpg" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+# Escenario
+
+Programas:
+
+- **Cálculo del Contenido de AT**: Determina el porcentaje de adenina (A) y timina (T) en la secuencia de ADN proporcionada. Esto es útil para identificar regiones ricas en AT que pueden ser de interés especial en estudios genómicos.
+
+- **Análisis de Frecuencia de Codones**: .tiny[Evalúa la frecuencia con la que cada codón aparece en la secuencia de ADN. Esta información es fundamental para estudios de expresión génica y optimización de la expresión de proteínas en organismos modelados.]
+
+- **Identificación de Sitios de Restricción**: .tiny[Busca secuencias específicas que son reconocidas por enzimas de restricción conocidas. Esto es esencial para planificar experimentos de clonación y manipulación genética.]
+
+.content-box-green[
+Revisa cada uno de los programas: 
+qué funciones manejan?, 
+qué argumentos reciben? 
+qué tienen en común?
+
+]
+
+---
+# Escenario
+
+Crear un **paquete dna_analysis**. Este paquete será una suite de herramientas de bioinformática diseñada para realizar diversos análisis en secuencias de ADN:
+
+- Cálculo del Contenido de AT
+- Análisis de Frecuencia de Codones
+- Identificación de Sitios de Restricción
+
+---
+# Estructura del paquete dna_analysis
+
+.pull-left[
+
+```
+dna_analysis/
+│
+├── __init__.py
+├── utils/
+│   ├── __init__.py
+│   ├── file_io.py
+│   └── validators.py
+│
+├── operations/ # tools|core|components
+│   ├── __init__.py
+│   ├── at_content.py
+│   ├── codon_frequency.py
+│   └── restriction_sites.py
+│
+├── scripts/
+│   ├── __init__.py
+│   ├── calculate_at_content.py
+│   ├── calculate_codon_frequency.py
+│   └── find_restriction_sites.py
+│
+```
+]
+
+.pull-right[
+
+```
+├── tests/
+│   ├── __init__.py
+│   ├── test_utils/
+│   │   ├── __init__.py
+│   │   ├── test_file_io.py
+│   │   └── test_validators.py
+│   ├── test_operations/
+│   │   ├── __init__.py
+│   │   ├── test_at_content.py
+│   │   ├── test_codon_frequency.py
+│   │   └── test_restriction_sites.py
+│   └── test_scripts/
+│       ├── __init__.py
+│       ├── test_calculate_at_content.py
+│       ├── test_calculate_codon_frequency.py
+│       └── test_find_restriction_sites.py
+└── docs/
+    ├── user_manual.md
+    ├── api_reference.md
+    └── developer_guide.md
+```
+]
+
+---
+## Descripción de los Componentes
+
+- `__init__.py`: .tiny[ Los archivos `__init__.py` hacen que Python trate los directorios como paquetes. Esto es necesario para poder importar módulos de subdirectorios.]
+
+- `utils/`: .tiny[Este paquete incluirá módulos de utilidades como:]
+  - `file_io.py` : .tiny[Funciones para leer y escribir secuencias de ADN.]
+  - `validators.py`: .tiny[Funciones para validar las secuencias de ADN, como asegurarse de que sólo contienen caracteres válidos.]
+
+- `operations/`: .tiny[Aquí se colocarán los módulos que realizan cálculos específicos:]
+  - `at_content.py`: .tiny[Funciones para calcular el contenido de AT.]
+  - `codon_frequency.py`: .tiny[Funciones para calcular la frecuencia de codones.]
+  - `restriction_sites.py`: .tiny[Funciones para encontrar sitios de restricción en la secuencia de ADN.]
+
+- `scripts/`: .tiny[Scripts que pueden ser ejecutados directamente desde la línea de comando y hacen uso de las funcionalidades definidas en `operations/`. Cada script hará uso de `argparse` para manejar la entrada de la línea de comandos y llamará a las funciones adecuadas del paquete `operations`.]
+    
+---
+# Documentación del Paquete
+
+.pull-left[
+
+**Por Cada Programa del Paquete**
+
+En este enfoque, cada script o módulo en el paquete tendría su documento dedicado que describe su uso, argumentos, ejemplos, y cualquier otra información relevante.
+
+.tiny[
+
+Ventajas:
+
+- **Específico y detallado**: Esta forma permite detalles exhaustivos que son específicos para cada módulo o script, lo que puede ser extremadamente útil para usuarios que solo están interesados en una parte particular del paquete.
+- **Mejor organizado para grandes paquetes**: En paquetes grandes con muchos módulos o funcionalidades, esta organización puede ayudar a mantener la documentación clara y manejable.
+
+```
+docs/
+│
+├── at_content.md
+├── codon_frequency.md
+├── restriction_sites.md
+└── ...
+```
+
+]
+]
+
+
+.pull-right[
+
+**Del Paquete Completo**
+
+Aquí, se escribe un manual o varios documentos que cubren todo el paquete, potencialmente organizados por categorías o funcionalidades pero dentro de un conjunto unificado de documentos.
+
+.tiny[
+Ventajas:
+
+- **Visión holística**: Ofrece una visión general del paquete, lo que es útil para usuarios o desarrolladores que necesitan entender cómo interactúan las diferentes partes del paquete.
+- **Evita la redundancia**: Puede evitar la duplicación de información común, como la configuración del entorno, instalación, y problemas de solución de errores, que sería relevante para múltiples módulos.
+
+```
+docs/
+│
+├── user_manual.md
+├── api_reference.md
+└── developer_guide.md
+```
+
+]]
+
+---
+# Actividad: Crear Paquete `dna_analysis`
+
+.pull-left[
+
+- Genera las carpetas para organizar el paquete. 
+
+- Genera los archivos `__init__.py` (paquete y subpaquetes). 
+
+- Y copia los programas dentro de `scripts`.
+
+- Carga la carpeta dentro de VSC (visual)
+
+]
+
+.pull-right[
+
+.content-box-gray[
+
+```
+dna_analysis/
+│
+├── __init__.py
+├── docs
+├── operations
+│   └── __init__.py
+├── scripts
+│   ├── __init__.py
+│   ├── at_content.py
+│   ├── frecuencia_codones.py
+│   └── sitios_restriccion.py
+├── tests
+│   └── __init__.py
+└── utils
+    └── __init__.py
+```
+]
+]
+
+
+---
+# Estructura del paquete dna_analysis
+
+.pull-left[
+
+```
+dna_analysis/
+│
+├── __init__.py &lt;==
+├── utils/      &lt;==
+│   ├── __init__.py  &lt;==
+│   ├── file_io.py
+│   └── validators.py
+│
+├── operations/    &lt;==
+│   ├── __init__.py   &lt;==
+│   ├── at_content.py
+│   ├── codon_frequency.py
+│   └── restriction_sites.py
+│
+├── scripts/        &lt;==
+│   ├── __init__.py  &lt;==
+│   ├── calculate_at_content.py
+│   ├── calculate_codon_frequency.py
+│   └── find_restriction_sites.py
+│
+```
+]
+
+.pull-right[
+
+```
+├── tests/     &lt;==
+│   ├── __init__.py   &lt;==
+│   ├── test_utils/ 
+│   │   ├── __init__.py
+│   │   ├── test_file_io.py
+│   │   └── test_validators.py
+│   ├── test_operations/
+│   │   ├── __init__.py
+│   │   ├── test_at_content.py
+│   │   ├── test_codon_frequency.py
+│   │   └── test_restriction_sites.py
+│   └── test_scripts/
+│       ├── __init__.py
+│       ├── test_calculate_at_content.py
+│       ├── test_calculate_codon_frequency.py
+│       └── test_find_restriction_sites.py
+└── docs/   &lt;==
+    ├── user_manual.md
+    ├── api_reference.md
+    └── developer_guide.md
+```
+]
+
+---
+# Módulos
+
+Los módulos son bloques de código con funciones y clases, almacenadas en ficheros separados, con extensión .py y sirven para realizar tareas comunes. 
+
+
+&lt;img src="https://files.realpython.com/media/Python-Modules-and-Packages-An-Introduction_Watermarked.20936240a94d.jpg" width="600px" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Overview
+
+Hay varias formas de definir un módulo en Python, entre ellas:
+
+1. Escribir un módulo en Python
+
+2. Escribir un módulo en C y cargarlo en Python
+
+--
+
+&lt;br&gt;
+&lt;br&gt;
+
+Ejemplo de un módulo que contiene una función
+
+```
+# test.py
+# function
+def displayText():
+    print( "Yes! you are importing a function")
+
+```
+
+
+---
+
+# Qué puede contener un módulo?
+
+- **Importaciones**: .tiny[Cualquier módulo que interactúe con otras partes del sistema o que utilice bibliotecas externas necesitará importar esos módulos o librerías. ]
+
+--
+
+- **Variables**: .tiny[A veces es útil definir variables globales que se pueden usar en varias funciones dentro del mismo módulo. Por ejemplo VALID_DNA_CHARS = 'ACGT' ]
+
+--
+
+- **Funciones Auxiliares Privadas**:.tiny[Aparte de las funciones principales que se espera que sean utilizadas fuera del módulo, también podrías definir funciones auxiliares internas que son útiles para abstraer y reducir la repetición dentro del mismo módulo. Estas funciones suelen ser precedidas por un guion bajo (_) para indicar que son privadas.]
+
+--
+
+
+```python
+def _validate_sequence(sequence):
+    if any(char not in VALID_DNA_CHARS for char in sequence):
+        raise ValueError("La secuencia contiene caracteres no válidos.")
+```
+
+---
+# Qué contiene un módulo?
+
+- **Bloques de Prueba**: .tiny[Si quieres hacer algunas pruebas rápidas o demostraciones de las funciones dentro del módulo, puedes incluir un bloque de código que solo se ejecuta si el módulo se ejecuta como script principal:]
+
+
+```python
+if __name__ == "__main__":
+    # Código de prueba aquí. Esto solo se ejecutará si este módulo es el script principal.
+    print(read_dna_sequence("example_dna.txt"))
+```
+
+--
+
+- **Documentación de Módulo**: .tiny[Es una excelente práctica incluir una documentación al principio del módulo que explique el propósito del módulo, las funciones que proporciona, y cualquier otra información relevante como los autores, versiones, y cambios.]
+
+
+- ** Declaraciones de Meta-información**: .tiny[Puedes incluir meta-información como __author__, __version__, etc., para proporcionar más contexto sobre el módulo:]
+
+---
+# Variable `__name__` :  ejecutable vs importable
+
+En una sesión de Python podemos encontrar la variable `__name__`, la cual está definida como `__main__`. 
+
+
+```python
+print(__name__)
+print(f'Variable __name__: {__name__}')
+```
+
+--
+
+Cuando un archivo .py se importa como un módulo, Python establece la variable especial `__name__` con el nombre del módulo. Checa `module.py` e  `ìmporting_module.py`
+
+```
+python module.py 
+python importing_module.py 
+```
+
+---
+# Módulo `utils/file_io.py`
+
+- Centraliza todas **las operaciones de archivos** en un solo lugar, lo que facilita el mantenimiento y las posibles optimizaciones futuras.
+
+- Separa la lógica de manejo de archivos de la lógica principal de análisis de ADN, lo que mejora la organización del código y lo hace más modular y fácil de entender.
+
+- Proporciona un punto único para mejorar la seguridad y el manejo de errores relacionados con las operaciones de archivos, crucial para la estabilidad y fiabilidad del software.
+
+.content-box-green[ 
+- Qué funciones puede contener éste módulo, de los 3 programas ?
+]
+
+---
+# Módulo `utils file_io.py`
+
+- Revisa el archivo (módulo) `file_io.py`
+- Mueve el  archivo al subpaquete utils.
+
+
+---
+# Módulo `utils validators.py`
+
+Módulo que incluya funciones que verifiquen y validen la entrada de datos para asegurar que cumplan con ciertos estándares o formatos esperados.
+
+--
+
+- La validación de secuencias de ADN para asegurar que solo contienen los caracteres válidos (A, C, G, T).
+
+--
+
+- Verifica que el archivo tenga el formato correcto de FASTA.
+
+--
+
+.content-box-green[ 
+- Qué otras funciones de validación se te ocurren ?
+]
+
+---
+# Módulo `utils/validators.py`
+
+- Revisa el archivo (módulo) `validators.py`
+- Mueve el  archivo al subpaquete utils.
+
+
+---
+# SubPaquete `operations`
+
+`operations` dedica a realizar cálculos específicos, análisis y procesamientos sobre las secuencias de ADN. Este paquete es fundamental para la lógica de negocio del software de análisis de ADN y es aquí donde se encapsulan todas las transformaciones y evaluaciones de datos relevantes.  Es esencialmente el **corazón técnico** del paquete de análisis de ADN
+
+--
+
+- **Análisis de Secuencias de ADN** : .tiny[ Realiza cálculos detallados como determinar el contenido de adenina y timina (AT content), frecuencia de codones, y otras características genéticas basadas en las secuencias de ADN. ]
+
+--
+
+- **Interpretación y Reporte**: .tiny[ Podría ser responsable de interpretar los resultados de los análisis y ayudar a formatearlos en una forma que sea útil para los científicos o investigadores, como generar visualizaciones o resúmenes estadísticos.]
+
+--
+
+- **Identificación de Características Genéticas**: .tiny[ Busca patrones específicos, como sitios de restricción para enzimas específicas, y podría también identificar motivos genéticos (secuencias cortas y comunes dentro del ADN que tienen una función biológica). ]
+
+--
+
+- **Transformación de Datos**: .tiny[ Prepara y modifica secuencias de ADN para su análisis, lo cual puede incluir la normalización de secuencias, la conversión entre diferentes formatos de datos, y la manipulación de secuencias para facilitar comparaciones y análisis. ]
+
+---
+# Módulo  `operations/at_content.py`
+
+El módulo `at_content.py` sería responsable de calcular el contenido de adenina (A) y timina (T) en una secuencia de ADN proporcionada. 
+
+--
+
+Revisa el archivo (módulo) `at_content.py` y responde lo siguiente: 
+
+.content-box-green[ 
+
+Función calculate_at_content:
+
+- Argumentos:
+  
+- Validaciones:
+            
+- Cálculo:
+            
+- Bloque if __name__ == "__main__":
+
+]
+
+---
+
+# Importar módulos
+
+Para importar módulos necesitamos:
+
+- `import`
+
+-  nombre del módulo
+
+--
+
+El script `test.py`  es un módulo
+
+
+```python
+# test.py
+# function
+def displayText():
+    print( "Yes! you are importing a function")
+```
+
+Tenemos varias sintáxis que podemos ocupar para importarlo. 
+
+
+```python
+import test
+from test import displayText
+import test as f
+```
+
+
+---
+# Import y from
+
+- **import**. La declaración import se usa cuando quieres importar un módulo completo. Esto te permite acceder a todas las funciones, clases y variables del módulo usando la notación de punto. Es útil cuando necesitas usar múltiples cosas del módulo o si simplemente quieres asegurarte de que el código indique claramente de qué módulo provienen las funciones o clases.
+
+
+```python
+import math
+
+result = math.sqrt(16)  # Utilizando sqrt del módulo math
+```
+
+---
+# Import y from
+
+- **Uso de from ... import** La declaración from ... import te permite importar elementos específicos (funciones, clases, variables) de un módulo directamente al espacio de nombres local. Esto permite usar esos elementos directamente sin la notación de punto. Es útil cuando solo necesitas una parte específica de un módulo y no quieres cargar todo el módulo en memoria o cuando deseas simplificar tu código eliminando la necesidad de la notación de punto.
+
+
+```python
+from math import sqrt
+
+result = sqrt(16)  # Directamente utilizando sqrt sin prefijo de módulo
+```
+
+---
+# Import vs from
+
+.content-box-green[
+
+Elige `import` cuando necesites múltiples funciones o cuando quieras que el código refleje claramente de dónde provienen las funciones o clases. 
+
+Opta por `from ... import` cuando trabajes con unas pocas funcionalidades de un módulo y quieras simplificar tu código. 
+
+Evita usar `from ... import *` en la medida de lo posible para mantener tu código claro y mantenible.
+
+]
+
+---
+# ¿Qué dice PEP-8 sobre los imports?
+
+Los imports siempre se deben de poner al principio del archivo, después de los comentarios del módulo y los docstrings y antes de las variables globales o constantes del módulo.
+
+
+Se deberán agrupar en el siguiente orden:
+
+1. Standard library imports.
+
+2. Related third party imports.
+
+3. Local application/library specific imports.
+
+4. Separados por un saltó de línea entre cada grupo.
+
+---
+# PEP-8 sobre imports
+
+Ejemplo
+
+
+```python
+# 1. Standard library imports.
+import random
+
+# 2. Related third party imports.
+from flask import Flask
+from flask_restful import Api
+from flask_sqlalchemy import SQLAlchemy
+
+# 3. Local application/lib specific imports.
+from lib import at_content
+```
+
+---
+# PEP-8 sobre imports
+
+No sé recomienda:
+
+
+```python
+# No se sugiere
+from random import randint
+from random import funcion2
+from random import funcion3
+randint()
+ 
+# No se sugiere
+from random import *
+randint()
+
+# No se sugiere
+from random import randint as numero_random
+numero_random()
+```
+
+
+---
+#  Docstrings para Módulos
+
+Los docstrings de los módulos de Python deben listar todas las clases, funciones, objetos y excepciones disponibles que se importan cuando se importa el módulo.
+
+--
+
+También deben tener un resumen de una línea para cada elemento.
+
+--
+
+Se escriben al principio del archivo Python.
+
+--
+
+
+
+```python
+import random
+print(random.__doc__)
+```
+
+--
+
+Es lo mismo que hacer 
+
+
+```python
+help(random)
+```
+
+---
+# Módulos
+
+Los módulos pueden contener variables, clases, funciones.
+
+
+```python
+# test.py
+# function
+
+def displayText():
+    print( "Yes! you are importing a function")
+
+class AmbiguousBaseError(Exception):
+    '''A new error class object'''
+    pass
+    
+def get_at_content(dna):
+    '''Takes a DNA seq and calculates AT content'''
+    if dna.count("N") &gt; 0:
+        raise AmbiguousBaseError(f'Sequence contains {dna.count("N")} N\'s')
+    length = len(dna)
+    a_count = dna.count('A')
+    t_count = dna.count('T')
+    at_content = (a_count + t_count) / length
+    return at_content
+
+dna = 'ATGCCCTATACGTA' 
+```
+
+---
+# Módulos
+
+Podemos pasar variables y acceder a ellas
+
+
+```python
+import test
+
+print(test.dna)
+```
+
+¿Qué es diferente?
+
+
+---
+
+# Paths en Python
+
+Cuando el intérprete ejecuta `import`, busca en los siguientes paths:
+
+- `.`: en el directorio en el cual es ejecturó el intérpetre o el script `.py`.
+
+- En la lista de directorios contenidos en la variable de entorno `PYTHONPATH` y se puede consultar a traés de `sys.path`.
+
+
+
+```python
+import sys
+sys.path
+```
+
+---
+# Paths en Python
+
+Para poder acceder a los modulos podemos:
+
+- Poner el `test.py` en el mismo directorio donde está el script.
+
+- Poner el `test.py` en algún directorio de `PYTHONPATH`.
+
+- Modificar la variable de entorno `PYTHONPATH`. También puedes modificar la variable de entorno en el momento de ejecutar el script.
+
+
+```python
+sys.path.append(r'/Users/user/Documents/Doctorado/Courses/Taught/pythonCCG_2021/scripts/ejemplos)
+```
+
+
+---
+# Ubicación de los módulos
+
+Podemos checar la ubicación de los módulos con `__file__`
+
+
+```python
+# Local module
+import test
+print(test.__file__)
+
+# Check location of python modules
+import random
+print(random.__file__)
+```
+
+---
+---
+class: inverse, center, middle
+
+# Tarea final
+
+---
+# Tarea Proyecto Final Parte 1.
+
+El proyecto final consiste en crear un paquete (puedes usar éste mismo pero completando el resto de subpaquetes y módulos) o hacer otro diferente, y hacer una demostración de 15 min. El paquete debe
+
+.content-box-blue[
+
+- Tener al menos 2 módulos
+
+- Tener al menos 2 subpaquetes
+
+- Seguir TODAS las recomendaciones FAIR y buenas prácticas (documentación interna y docstring).
+
+- Estar versionado y controlado por git y depositado en GitHub
+
+]
+
+
+---
+---
+---
+# ¿Qué son los docstrings?
+
+--
+Dada una función podemos tener:
+
+&lt;img src="https://www.stechies.com//userfiles/images/python-docstrings.webp" width="600px" style="display: block; margin: auto;" /&gt;
+
+---
+# Docstrings en funciones
+
+Descripción simple:
+
+
+```python
+def square(n):
+    '''Takes in a number n, returns the square of n'''
+    return n**2
+
+print(square.__doc__)
+```
+
+---
+# Docstrings en funciones
+
+Descripción simple:
+
+
+```python
+def add_binary(a, b):
+    '''
+    Returns the sum of two decimal numbers in binary digits.
+
+            Parameters:
+                    a (int): A decimal integer
+                    b (int): Another decimal integer
+
+            Returns:
+                    binary_sum (str): Binary string of the sum of a and b
+    '''
+    binary_sum = bin(a+b)[2:]
+    return binary_sum
+
+
+print(add_binary.__doc__)
+```
+
+--
+También podemos acceder a los docstrings de las funciones de Python 
+
+
+```python
+print(print.__doc__)
+```
+
+---
+# ¿En que se diferencia con un comentario?
+
+--
+
+Los **comentarios** son descripciones que ayudan a los programadores a entender el código y su funcionalidad. 
+
+--
+
+Los **docstrings** son usados para documentar el código después de definir una función, método, clase o  módulo. 
+
+--
+
+Como convención, no son descriptivas más bien son puntuales "Haz esto, regresa aquello". 
+
+--
+
+Otras convenciones son: terminan con `.`, no tienen lineas en blanco antes o después.
+
+--
+
+
+```python
+print(print.__doc__)
+```
+
+---
+---
+# Ubicación
+
+¿Porqué me sale error cuando ejecuto en consola (`alt + shift + E`)?
+
+--
+
+
+
+```python
+import os
+from scripts.ejemplos import test
+
+print(os.getcwd())
+print(test.dna)
+```
+
+--
+Otra sintáxis
+
+
+```python
+import scripts.ejemplos.test as t
+```
+
+---
+
+
+# Ejecutar un módulo
+
+Un módulo es un script de python que podríamos ejecutar si se desea.
+
+En el archivo `test.py` guardaremos el código y lo importaremos en `hello.py`
+
+---
+`test.py`
+
+
+```python
+def displayText():
+    print("Yes! you are importing a function")
+
+
+class AmbiguousBaseError(Exception):
+    '''A new error class object'''
+    pass
+
+def get_at_content(dna):
+    '''Takes a DNA seq and calculates AT content'''
+    if dna.count("N") &gt; 0:
+        raise AmbiguousBaseError(f'Sequence contains {dna.count("N")} N\'s')
+    length = len(dna)
+    a_count = dna.count('A')
+    t_count = dna.count('T')
+    at_content = (a_count + t_count) / length
+    return at_content
+
+dna = 'ATGCCCTATACGTA' 
+
+displayText()
+print(get_at_content(dna))
+```
+
+---
+
+`hello.py`
+
+
+```python
+import test
+```
+
+--
+
+¿Cómo  podríamos distinguir entre el output del módulo descargado y el nuevo script?
+
+---
+# Variable `__name__`
+
+En una sesión de Python podemos encontrar la variable `__name__`, la cual está definida como `__main__`. 
+
+
+```python
+print(__name__)
+print(f'Variable __name__: {__name__}')
+```
+
+--
+
+Cuando un archivo .py se importa como un módulo, Python establece la variable especial `__name__` con el nombre del módulo.
+
+Checar con el archivo `test.py`.
+
+
+```python
+import test
+```
+
+
+---
+
+
+```python
+def displayText():
+    print("Yes! you are importing a function")
+
+class AmbiguousBaseError(Exception):
+    '''A new error class object'''
+    pass
+
+def get_at_content(dna):
+    '''Takes a DNA seq and calculates AT content'''
+    if dna.count("N") &gt; 0:
+        raise AmbiguousBaseError(f'Sequence contains {dna.count("N")} N\'s')
+    length = len(dna)
+    a_count = dna.count('A')
+    t_count = dna.count('T')
+    at_content = (a_count + t_count) / length
+    return at_content
+
+dna = 'ATGCCCTATACGTA'
+
+print(f'Variable __name__: {__name__}')
+
+if (__name__ == '__main__'):
+    displayText()
+    print(get_at_content(dna))
+```
+
+---
+# Paquetes en Python
+
+- **Módulos**: Archivo de python `.py`
+
+- **Paquetes**: Directorio que contiene uno o más módulos y el archivo `__init__.py`
+
+&lt;img src="https://files.realpython.com/media/pkg1.9af1c7aea48f.png" width="200px" style="display: block; margin: auto;" /&gt;
+
+---
+# Paquetes en Python
+
+- Crear un dir que se llame `pkg`
+
+- Crear dos modulos: `mod1.py` y `mod2.py`
+
+`mod1.py`
+
+
+```python
+def fun1():
+    print("This is module 1")
+```
+
+---
+
+Importar el módulo 1 (como ya sabemos).
+
+
+```python
+import pkg.mod1
+
+pkg.mod1.fun1()
+```
+
+--
+Importar el paquete `pkg` (los dos módulos). ¿Qué error da?
+
+
+```python
+import pkg 
+pkg.mod1()
+```
+
+&lt;br&gt;
+
+.center[.content-box-green[**Vamos a pyCharm**]]
+
+---
+# Inicializar el paquete
+
+Nos falta el `__init__.py`
+
+
+```python
+print(f'Invoking __init__.py for {__name__}')
+```
+
+--
+En el archivo `hello.py`, checar el paquete.
+
+
+```python
+import pkg.mod1
+
+pkg.mod1.fun1()
+pkg.mod2.fun2()
+```
+
+--
+
+¿Qué falta?
+
+--
+
+
+```python
+print(f'Invoking __init__.py for {__name__}')
+import pkg.mod1
+import pkg.mod2 
+```
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
