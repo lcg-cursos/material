@@ -22,7 +22,7 @@ class: center, middle, inverse, title-slide
 ### Licenciatura en Ciencias Genómicas,UNAM
 ]
 .date[
-### 25 April, 2024
+### 02 May, 2024
 ]
 
 ---
@@ -702,7 +702,7 @@ print(test.dna)
 
 Cuando el intérprete ejecuta `import`, busca en los siguientes paths:
 
-- `.`: en el directorio en el cual es ejecturó el intérpetre o el script `.py`.
+- `.`: en el directorio en el cual es ejecutó el intérpetre o el script `.py`.
 
 - En la lista de directorios contenidos en la variable de entorno `PYTHONPATH` y se puede consultar a traés de `sys.path`.
 
@@ -724,346 +724,266 @@ Para poder acceder a los modulos podemos:
 
 - Modificar la variable de entorno `PYTHONPATH`. También puedes modificar la variable de entorno en el momento de ejecutar el script.
 
+---
+# Ejecutando los componentes del paquete
+
+Correr el **módulo**  `file_io.py`, el archivo `example_dna.txt` debe estar creado.
+
+```bash
+pwd   # carpeta raiz de mi paquete dna_analysis
+cd utils
+python3 file_io.py
+```
+
+--
+
+Ejecutar el **módulo**  `validators.py`
+Este no tiene la sección de validación, puedes agregar una validación de una secuencia
+
 
 ```python
-sys.path.append(r'/Users/user/Documents/Doctorado/Courses/Taught/pythonCCG_2021/scripts/ejemplos)
+if __name__ == "__main__":
+    seq = "ATGCATCAG"
+    assert(validate_dna_sequence(seq)) == True
 ```
+
+```bash
+python3 validators.py
+```
+
+Si a la secuencia le agregas una N, que pasa ?
+
+---
+# Ejecutando los componentes del paquete
+
+Entrar a la carpeta de operations. 
+
+`at_content.py`tiene una sección de validación, asi que podemos probarlo:
+
+
+```bash
+cd operations
+python3 at_content.py 
+
+```
+
+---
+# Ejecutando el script
+
+Ahora vamos a correr el **script** `calculate_at_content.py.`
+
+```bash
+cd scripts 
+python3 calculate_at_content.py 
+```
+
+**que pasa?**
+
+--
+
+Dentro de `scripts` esta tratando de buscar la carpeta y marca
+
+```
+ModuleNotFoundError: No module named 'dna_analysis'
+```
+
+--
+
+Si  copiamos el módulo dna_analysis/operations/calculate_at_content.py a este lugar correrá .. pero nuestros módulos estan organizados en otro lado!!
 
 
 ---
-# Ubicación de los módulos
+# Ejecutando el script
 
-Podemos checar la ubicación de los módulos con `__file__`
+Y si nos salimos hasta el directorio papá de `dna_analysis`
 
+```
+python3 dna_analysis/scripts/calculate_at_content.py
+```
 
-```python
-# Local module
-import test
-print(test.__file__)
+**que pasa?? **
 
-# Check location of python modules
-import random
-print(random.__file__)
+--
+
+&lt;br&gt;
+
+sigue sin identificar la estructura del paquete y los módulos, entonces
+
+```bash
+python --help
+```
+
+```
+-m mod : run library module as a script (terminates option list)
+```
+
+--
+
+Entonces lo corremos de esta manera:
+
+```
+python -m dna_analysis.scripts.calculate_at_content
+python -m dna_analysis.scripts.calculate_at_content --help
+```
+---
+# Ejecutando los componentes del paquete
+
+Pero si quiero ejecutar mis scripts desde otro lugar que no sea el directorio papá del paquete?
+
+--
+
+**Ajustar la Variable PYTHONPATH**: Si por alguna razón necesitas ejecutar el script desde otro lugar, puedes agregar el directorio que contiene el paquete dna_analysis a la variable de entorno PYTHONPATH. Esto le permite a Python saber dónde buscar paquetes y módulos adicionales.
+
+--
+
+En una terminal de Unix o Linux, podrías ajustar PYTHONPATH temporalmente así:
+
+```bash
+export PYTHONPATH="/path/to/dna_analysis_parent_directory:$PYTHONPATH"
+```
+
+Y en Windows, lo harías así desde el Command Prompt:
+
+```bash
+set PYTHONPATH=C:\path\to\dna_analysis_parent_directory;%PYTHONPATH%
+```
+
+--
+
+Y corro el script
+
+```bash
+python -m dna_analysis.scripts.calculate_at_content --help
 ```
 
 ---
+# Testing en Python
+
+Dentro de la ingeniería software y la programación en general, el testing es una de las partes más importantes que nos encontraremos en casi cualquier proyecto. 
+
+-**Tests manuales**: Son tests ejecutados manualmente por una persona, probando diferentes combinaciones y viendo que el comportamiento del código es el esperado. Sin duda los has realizado alguna vez.
+
+-**Tests automáticos**: Se trata de código que testea que otro código se comporta correctamente. La ejecución es automática, y permite ejecutar gran cantidad de verificaciones en muy poco tiempo. Es la forma más común, pero no siempre es posible automatizar todo.
+
+  - asserts
+  - Tests Unitarios 
+    
+---
+# Testing
+
+En proyectos grandes, es común que antes de permitirnos hacer merge de nuestro código en master, se nos obligue a ejecutar un conjunto de tests automatizados. Si todos pasan, se asumirá que nuestro código funciona y que no hemos “roto” nada, por lo que tendremos el visto bueno.
+
+Aunque el uso de assert() puede ser suficiente para nuestros tests, a veces no es suficiente y necesitamos librerías como unittest, que ofrecen alguna que otra funcionalidad que nos hará la vida más fácil.
+
+---
+#Tests Unitarios en Python con unittest
+
+Podemos usar unittest para crear varios tests que verifiquen que nuestra función funciona correctamente. 
+
+- Creamos **una clase** `Test&lt;NombreDeLoQueSePrueba&gt;` que hereda de `unittest.TestCase`.
+
+- Definimos varios **tests como métodos de la clase**, usando `test_&lt;NombreDelTest&gt;` para nombrarlos.
+
+- En cada test ejecutamos las comprobaciones necesarias, usando `assertEqual` en vez de assert, pero su comportamiento es totalmente análogo.
+
+&lt;br&gt;
+&lt;br&gt;
+.tiny[Source: https://ellibrodepython.com/python-testing]
+
+---
+#Tests Unitarios en Python con unittest
+
+
+```python
+import unittest
+from dna_analysis.operations.at_content import calculate_at_content
+
+class TestATContent(unittest.TestCase):
+    """
+    Clase de pruebas unitarias para la función `calculate_at_content` del módulo `at_content`.
+    
+    Esta clase contiene métodos para probar el correcto cálculo del contenido de adenina
+    y timina (AT) en secuencias de ADN, incluyendo el manejo correcto de entradas inesperadas
+    o inválidas.
+    
+    Métodos:
+        test_calculate_at_content: Prueba varios casos, incluyendo secuencias válidas e inválidas,
+        para asegurar el correcto comportamiento de la función `calculate_at_content`.
+    """
+
+    # casos de prueba
+    def test_calculate_at_content(self):
+        self.assertEqual(calculate_at_content("ATGC"), 50.0)
+        self.assertEqual(calculate_at_content("AAAA"), 100.0)
+        self.assertEqual(calculate_at_content("TGAAC", normalize=False), 60.0)
+
+if __name__ == '__main__':
+    unittest.main()
+```
+
+---
+#Tests Unitarios en Python con unittest
+
+`unittest.main()` proporciona una interfaz de línea de comandos para el script de prueba. Básicamente, lo que hace es **recolectar todos los casos de prueba** que se encuentran en el módulo desde el cual se ejecuta, y luego **ejecutar todos los tests** que se han definido. Es decir, actúa como el punto de entrada principal para correr las pruebas, gestionando el proceso de ejecución de pruebas y la agregación de resultados.
+
+Qué hace:
+
+- Detección de Test Cases: unittest.main() busca en el módulo las clases que heredan de unittest.TestCase, que es la forma estándar de definir casos de prueba en la biblioteca unittest.
+
+- Ejecución de Pruebas: Ejecuta cada método de test que se haya definido en las clases de TestCase recopiladas. Estos métodos de test generalmente son aquellos que comienzan con el prefijo "test".
+
+- Recolección de Resultados: Recolecta los resultados de estas pruebas y proporciona un resumen al final de la ejecución, indicando cuántas pruebas fueron ejecutadas y cuántas fallaron, entre otros datos útiles.
+
+- Manejo de Flags: Permite el uso de flags en la línea de comandos para controlar la ejecución de las pruebas, como -v para el modo verboso, que proporciona una salida detallada de cada prueba ejecutada.
+
+---
+#Tests Unitarios en Python con unittest
+
+
+
+```bash
+python3 -m dna_analysis.test.operations.test_at_content
+
+python3 -m dna_analysis.test.operations.test_at_content -v  # mas detalle
+
+```
+
+---
+# Ejercicio
+
+- Implementa otra funcionalidad del paquete
+ 
+ - Análisis de Frecuencia de Codones
+ 
+ - Identificación de Sitios de Restricción.
+
+Usa las funciones ya creadas para otros módulos en `utils` y genera en `operations` el módulo con las funcionalidades requeridas. Y finalmente crea el script importando los módulos necesarios.
+
+
 ---
 class: inverse, center, middle
 
 # Tarea final
 
 ---
-# Tarea Proyecto Final Parte 1.
+#  Proyecto Final
 
-El proyecto final consiste en crear un paquete (puedes usar éste mismo pero completando el resto de subpaquetes y módulos) o hacer otro diferente, y hacer una demostración de 15 min. El paquete debe
+El proyecto final consiste en crear un paquete  (puedes trabajar con un compañero y la actividad del trabajo de ambos debe verse en el historial de GitHub).
+
+Hacer una demostración de 15 min. El paquete debe
 
 .content-box-blue[
 
-- Tener al menos 2 módulos
+- Tener al menos 2 funcionalidades, que deben estar organizadas en módulos.
 
-- Tener al menos 2 subpaquetes
+- Python: lectura de argumentos, uso de archivos, manejo de errores con try y realizar pruebas con assert y /unittest.
 
-- Seguir TODAS las recomendaciones FAIR y buenas prácticas (documentación interna y docstring).
+- Seguir TODAS las recomendaciones FAIR y buenas prácticas (por ejemplo documentación interna y docstring).
 
 - Estar versionado y controlado por git y depositado en GitHub
 
 ]
 
-
----
----
----
-# ¿Qué son los docstrings?
-
---
-Dada una función podemos tener:
-
-&lt;img src="https://www.stechies.com//userfiles/images/python-docstrings.webp" width="600px" style="display: block; margin: auto;" /&gt;
-
----
-# Docstrings en funciones
-
-Descripción simple:
-
-
-```python
-def square(n):
-    '''Takes in a number n, returns the square of n'''
-    return n**2
-
-print(square.__doc__)
-```
-
----
-# Docstrings en funciones
-
-Descripción simple:
-
-
-```python
-def add_binary(a, b):
-    '''
-    Returns the sum of two decimal numbers in binary digits.
-
-            Parameters:
-                    a (int): A decimal integer
-                    b (int): Another decimal integer
-
-            Returns:
-                    binary_sum (str): Binary string of the sum of a and b
-    '''
-    binary_sum = bin(a+b)[2:]
-    return binary_sum
-
-
-print(add_binary.__doc__)
-```
-
---
-También podemos acceder a los docstrings de las funciones de Python 
-
-
-```python
-print(print.__doc__)
-```
-
----
-# ¿En que se diferencia con un comentario?
-
---
-
-Los **comentarios** son descripciones que ayudan a los programadores a entender el código y su funcionalidad. 
-
---
-
-Los **docstrings** son usados para documentar el código después de definir una función, método, clase o  módulo. 
-
---
-
-Como convención, no son descriptivas más bien son puntuales "Haz esto, regresa aquello". 
-
---
-
-Otras convenciones son: terminan con `.`, no tienen lineas en blanco antes o después.
-
---
-
-
-```python
-print(print.__doc__)
-```
-
----
----
-# Ubicación
-
-¿Porqué me sale error cuando ejecuto en consola (`alt + shift + E`)?
-
---
-
-
-
-```python
-import os
-from scripts.ejemplos import test
-
-print(os.getcwd())
-print(test.dna)
-```
-
---
-Otra sintáxis
-
-
-```python
-import scripts.ejemplos.test as t
-```
-
----
-
-
-# Ejecutar un módulo
-
-Un módulo es un script de python que podríamos ejecutar si se desea.
-
-En el archivo `test.py` guardaremos el código y lo importaremos en `hello.py`
-
----
-`test.py`
-
-
-```python
-def displayText():
-    print("Yes! you are importing a function")
-
-
-class AmbiguousBaseError(Exception):
-    '''A new error class object'''
-    pass
-
-def get_at_content(dna):
-    '''Takes a DNA seq and calculates AT content'''
-    if dna.count("N") &gt; 0:
-        raise AmbiguousBaseError(f'Sequence contains {dna.count("N")} N\'s')
-    length = len(dna)
-    a_count = dna.count('A')
-    t_count = dna.count('T')
-    at_content = (a_count + t_count) / length
-    return at_content
-
-dna = 'ATGCCCTATACGTA' 
-
-displayText()
-print(get_at_content(dna))
-```
-
----
-
-`hello.py`
-
-
-```python
-import test
-```
-
---
-
-¿Cómo  podríamos distinguir entre el output del módulo descargado y el nuevo script?
-
----
-# Variable `__name__`
-
-En una sesión de Python podemos encontrar la variable `__name__`, la cual está definida como `__main__`. 
-
-
-```python
-print(__name__)
-print(f'Variable __name__: {__name__}')
-```
-
---
-
-Cuando un archivo .py se importa como un módulo, Python establece la variable especial `__name__` con el nombre del módulo.
-
-Checar con el archivo `test.py`.
-
-
-```python
-import test
-```
-
-
----
-
-
-```python
-def displayText():
-    print("Yes! you are importing a function")
-
-class AmbiguousBaseError(Exception):
-    '''A new error class object'''
-    pass
-
-def get_at_content(dna):
-    '''Takes a DNA seq and calculates AT content'''
-    if dna.count("N") &gt; 0:
-        raise AmbiguousBaseError(f'Sequence contains {dna.count("N")} N\'s')
-    length = len(dna)
-    a_count = dna.count('A')
-    t_count = dna.count('T')
-    at_content = (a_count + t_count) / length
-    return at_content
-
-dna = 'ATGCCCTATACGTA'
-
-print(f'Variable __name__: {__name__}')
-
-if (__name__ == '__main__'):
-    displayText()
-    print(get_at_content(dna))
-```
-
----
-# Paquetes en Python
-
-- **Módulos**: Archivo de python `.py`
-
-- **Paquetes**: Directorio que contiene uno o más módulos y el archivo `__init__.py`
-
-&lt;img src="https://files.realpython.com/media/pkg1.9af1c7aea48f.png" width="200px" style="display: block; margin: auto;" /&gt;
-
----
-# Paquetes en Python
-
-- Crear un dir que se llame `pkg`
-
-- Crear dos modulos: `mod1.py` y `mod2.py`
-
-`mod1.py`
-
-
-```python
-def fun1():
-    print("This is module 1")
-```
-
----
-
-Importar el módulo 1 (como ya sabemos).
-
-
-```python
-import pkg.mod1
-
-pkg.mod1.fun1()
-```
-
---
-Importar el paquete `pkg` (los dos módulos). ¿Qué error da?
-
-
-```python
-import pkg 
-pkg.mod1()
-```
-
-&lt;br&gt;
-
-.center[.content-box-green[**Vamos a pyCharm**]]
-
----
-# Inicializar el paquete
-
-Nos falta el `__init__.py`
-
-
-```python
-print(f'Invoking __init__.py for {__name__}')
-```
-
---
-En el archivo `hello.py`, checar el paquete.
-
-
-```python
-import pkg.mod1
-
-pkg.mod1.fun1()
-pkg.mod2.fun2()
-```
-
---
-
-¿Qué falta?
-
---
-
-
-```python
-print(f'Invoking __init__.py for {__name__}')
-import pkg.mod1
-import pkg.mod2 
-```
 
 
     </textarea>
