@@ -244,7 +244,7 @@ Trabaja con un compañero y aborda las siguientes preguntas:
 ¿Cómo podrían haberse evitado?
  ]
 
-Anota las respuestas para compartirlas con el grupo.
+Anota las respuestas en nuestra bitácora del curso para compartirlas con el grupo.
 
 ---
 
@@ -253,6 +253,13 @@ class: inverse, center, middle
 # Algunos conceptos y Buenas Prácticas
 
 ---
+
+class: center, middle
+
+# Los Datos
+
+---
+
 ## Datos en investigación
 
 Como científico puedes:
@@ -293,14 +300,55 @@ Fuente: https://biblioguias.uva.es/datos-investigacion/gestion
 
 ## Lectura de Gestión de datos -- FAIR Data
 
---
+Tiempo: 10 min.
 
-&lt;img src="img/fair-data.png" width="800px" style="display: block; margin: auto;" /&gt;
+Con tu compañero discute lo siguiente:
 
+.content-box-blue[
+
+Cueles son las fases en la gestión de datos ?
+
+Qué son los Principios FAIR y para que sirve?
+
+ ]
+ 
+ 
+Anota las respuestas en nuestra bitácora del curso para compartirlas con el grupo.
 
 ---
 
+## Principios FAIR
+
+
+Los **Principios FAIR** buscan solucionar la ausencia de buenas prácticas para la **publicación** de datos científicos que sean ampliamente compartidas, claramente articuladas y ampliamente aplicadas.
+
+--
+
+.content-box-blue[
+Los **datos** podrían ser considerados como la **producción principal** de la investigación científica y su publicación y reutilización es necesaria para garantizar su validez, reproducibilidad y para conducir nuevos descubrimientos. 
+]
+
+--
+
+[Video FAIR principles](https://www.youtube.com/watch?v=5OeCrQE3HhE)
+
+- Findable. 
+- Accesible.
+- Interoperable.
+- Reusable.
+
+---
+
+## FAIR Data
+
+&lt;img src="img/fair-data.png" width="800px" style="display: block; margin: auto;" /&gt;
+
+[FAIR DATA Publishing cheatsheet](https://github.com/UtrechtUniversity/FAIR-Cheatsheets/blob/main/cheatsheets/FAIR_data_publishing/cheatsheet_FAIR_data_publishing.pdf)
+
+---
 ## Organizar y documentar los datos
+
+Sea que vayas a usar o publicar datos, sigue estas recomendaciones:
 
 ► **Nombres de ficheros y estructura de archivos** Una estructura de ficheros bien organizada y coherente, archivos con nombres definidos, claros y significativos ayudan a encontrar la información de forma rápida y precisa. Es muy importante pensar bien la jerarquía, la estructura, nombres y versiones de los archivos, sobre todo cuando se trabaja en equipo.
 
@@ -325,8 +373,15 @@ Zenodo es un repositorio de datos de investigación abierto, creado por el proye
 
 ---
 
+class: center, middle
+
+# El Software
+
+---
 
 ## 5 Recomendaciones para FAIR Software 
+
+Si tu investigación tiene como producto de trabajo un software, un protocolo de investigación que tenga comandos o código, sigue estas recomendaciones:
 
 1. Usar un repositorio público accesible con control de versiones.
 
@@ -338,6 +393,7 @@ Zenodo es un repositorio de datos de investigación abierto, creado por el proye
 
 5. Apégate a las buenas prácticas de desarrollo de software, que incluye documentar tu código, seguir un estándar de codificación, hacer pruebas, etc.
 
+
 [FAIR Software](https://fair-software.nl/recommendations/checklist)
 
 
@@ -345,7 +401,7 @@ Zenodo es un repositorio de datos de investigación abierto, creado por el proye
 
 ## Código reproducible es buen código
 
-¿Qué necesitamos para reproducir el resultado de un análisis computacional?
+¿Qué necesitamos para **REPRODUCIR** el resultado de un análisis computacional?
 
 --
 
@@ -379,78 +435,10 @@ Zenodo es un repositorio de datos de investigación abierto, creado por el proye
   * ¿De dónde descargaste los datos?
   * ¿Cuáles son las suposiciones acerca de los datos iniciales?
   * ¿Qué hacia esa función compleja y rebuscada que pensaste era una joya en su momento?
-  
----
-
-## Empezando por la organización
-
-Es importante mantener una estructura de directorios organizada: un directorio de trabajo por proyecto. Dentro de este directorio, los pasos del proyecto se organizarán en subdirectorios.
-
-Organización propuesta:
-
-* Archivo de texto **README**: Describe de que trata el proyecto y todo lo que se realiza con los datos. Contiene todos los comandos necesarios para reproducir los resultados. (El formato se definirá más adelante en el protocolo de investigación).
-* Carpeta **data**: Con los **datos** con los que arranca el proyecto y sus respectivos **metadatos**. Los datos fuente no se modifican, si los formateas o filtras debes describirlo en el README y tener una fase (resultados) en el proyecto que se llame limpieza de datos.
-* Carpeta **bin**: Con los scripts utilizados durante esta fase del proyecto.
-* Carpeta **resultados**: Con los resultados generados por el proyecto.
-
---
-
-&lt;img src="img/estructura-proyecto.png" width="800px" style="display: block; margin: auto;" /&gt;
-
----
-## Importante
-
-* Los nombres de las carpetas y de los archivos deben ser informativos.
-
-* No deben contener espacios, acentos, ñ's.
-
-* Los nombres de directorios y archivos son case-sensitive en unix, así que procura no mezclar mucho mayúsculas o minúsculas. Recomendable todo minúsculas.
-
 
 
 ---
-
----
----
-## Principios FAIR
-
-
-Los **Principios FAIR** buscan solucionar la ausencia de buenas prácticas para la **publicación** de datos científicos que sean ampliamente compartidas, claramente articuladas y ampliamente aplicadas.
-
---
-
-.content-box-blue[
-Los **datos** podrían ser considerados como la **producción principal** de la investigación científica y su publicación y reutilización es necesaria para garantizar su validez, reproducibilidad y para conducir nuevos descubrimientos. 
-]
-
---
-
-[Video FAIR principles](https://www.youtube.com/watch?v=5OeCrQE3HhE)
-
-- Findable. 
-- Accesible.
-- Interoperable.
-- Reusable.
-
----
-
-
-
-## Documentación, documentación
-
-.content-box-green[
-**EJEMPLO**
-
-Haces una cochinita pibil y te quedó deliciosa, y le presumes a tu mejor amigx
-y le dices que la haga. Tu amigx llega una semana después diciéndote que la
-cochinita pibil es la cosa más espantosa que ha comido en su vida!!!
-
-
-**¿Qué pasó?**
-
-]
----
-## Documentación, documentación
+## Escenario: Replicar analisis
 
 .content-box-green[
 **EJEMPLO**
@@ -480,7 +468,7 @@ los mismos.
 La respuesta a todas estas preguntas forma parte de la documentación
 
 ---
-## Documentación, documentación
+## Escenario: Correr programa con mis datos
 
 .content-box-green[
 
@@ -512,6 +500,45 @@ para utilizarla en sus datos. Al correr tu programa, truena.
 
 La respuesta a todas estas preguntas (y muchas más...) forma parte
 de la documentación. 
+
+---
+
+class: center, middle
+
+# Cómo empezamos?
+
+---
+
+## Empezando por la organización
+
+Es importante mantener una **estructura de directorios organizada**: un directorio de trabajo por proyecto. Dentro de este directorio, los pasos del proyecto se organizarán en subdirectorios.
+
+Organización propuesta:
+
+* Archivo de texto **README**: Describe de que trata el proyecto y todo lo que se realiza con los datos. Contiene todos los comandos necesarios para reproducir los resultados. (Este README es lo que nosotros tenemos como `protocolo de investigación`).
+
+* Carpeta **data**: Con los **datos** con los que arranca el proyecto y sus respectivos **metadatos**. Los datos fuente no se modifican, si los formateas o filtras debes describirlo en el README y tener una fase (resultados) en el proyecto que se llame limpieza de datos.
+
+* Carpeta **bin**: Con los scripts utilizados durante esta fase del proyecto.
+
+* Carpeta **resultados**: Con los resultados generados por el proyecto.
+
+--
+
+&lt;img src="img/estructura-proyecto.png" width="800px" style="display: block; margin: auto;" /&gt;
+
+---
+## Importante
+
+* Los nombres de las carpetas y de los archivos deben ser informativos.
+
+* No deben contener espacios, acentos, ñ's.
+
+* Los nombres de directorios y archivos son case-sensitive en unix, así que procura no mezclar mucho mayúsculas o minúsculas. Recomendable todo minúsculas.
+
+
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
