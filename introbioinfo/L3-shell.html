@@ -40,7 +40,7 @@ pre {
 
 ## Objetivo
 
-Lxs alumnxs serán capaces de comprender qué es el shell, acceder de manera remota a un servidor Unix y comprender la organización de directorios en unix.
+Lxs alumnxs serán capaces de comprender qué es el shell, acceder de manera remota a un servidor Unix y comprender el sistema de archivos en unix.
 
 ---
 
@@ -89,13 +89,18 @@ El Protocolo de transferencia de archivos (en inglés File Transfer Protocol o F
 
 .tiny[Source: https://www.cloudcenterandalucia.es/wp-content/uploads/2021/08/CCA_Protocolo-FTP-1.png]
 ---
+# Transferencia de Archivos
+
+&lt;img src="img/sftp-protocol.png" width="700px" style="display: block; margin: auto;" /&gt;
+
+---
 ## Protocolo SSH: secure shell
 
-SSH (o Secure SHell) es el nombre de un protocolo y del programa que lo implementa cuya principal función es el acceso remoto a un servidor por medio de un canal seguro en el que toda la información está cifrada. 
+SSH (o Secure SHell) es el nombre de un protocolo y del programa que lo implementa cuya principal función es el **acceso remoto a un servidor** por medio de un canal seguro en el que toda la información está cifrada. 
 
 &lt;img src="https://i0.wp.com/lab.wallarm.com/wp-content/uploads/2024/05/160.2.jpg?w=770&amp;ssl=1" width="700px" style="display: block; margin: auto;" /&gt;
 
-
+---
 
 ---
 **¿Qué tienen en común estos dispositivos?**
@@ -124,15 +129,47 @@ Un sistema operativo (SO) es el **conjunto de programas** de un sistema informá
 .tiny[ Te recomiendo este artículo : https://www.freecodecamp.org/news/an-introduction-to-operating-systems/ ]
 
 ---
-## En Resúmen
 
-- Toda computadora tiene un sistema operativo que la hace funcionar.
+# GUI vs CLI
+
+Para interactuar con el sistema operativo podemos hacerlo usando una **interfaz gráfica (GUI)** o a través de **linea de comandos (CLI)**.
+
+.content-box-blue[
+En una **interfaz gráfica**, se usa el **mouse** u otro dispositivo **apuntador** con el que se hace "click" en cada elemento de la pantalla. Por otra parte la **interfaz de línea de comando** muestra un "prompt" o inductor donde **escribimos comandos** y argumentos que ejecutarán las tareas que le asignemos.
+]
+
+&lt;img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*9cp4T0Hz-Gmcpku3.png" width="400px" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+# GUI vs CLI
+
+Si los entornos gráficos son fáciles de usar y bonitos, porqué usar un CLI ?
+
+.content-box-yellow[
+**Escenario 1**. Imagina que tienes muchos **archivos de texto** en tu escritorio y quieres **eliminar** solo aquellos archivos que **inician con a y terminan con n**. Cómo lo harias usando la interfaz gráfica?
+]
+
+--
+
+.content-box-green[
+**Escenario 2**. Imagina que tienes muchos **archivos de texto**, y quieres **buscar** todos aquellos archivos que **contengan cierta palabra o una frase específica**. Cómo lo harias usando la interfaz gráfica?
+]
+
+---
+## En Resúmen
 
 - Toda computadora conectada a internet tiene una dirección IP.
 
 - Para comunicar las computadoras se usan los protocolos de internet.
 
 - Los protocolos nos permiten acceder a  páginas html, acceder a archivos de datos, trabajar en un servidor remoto, etc.
+
+- Toda computadora tiene un sistema operativo que la hace funcionar.
+
+- Para comunicarnos con el SO de una computadora puede ser a través de una interfaz GUI o CLI.
 
 ---
 
@@ -142,6 +179,7 @@ class: center, middle
 
 
 ---
+
 ## Qué se requiere en Bioinformática ?
 
 Muchos concuerdan en que alguien que piense dedicarse a la bioinformática debe manejar :
@@ -154,7 +192,7 @@ Muchos concuerdan en que alguien que piense dedicarse a la bioinformática debe 
 En Bioinformática algunas veces se requiere procesamiento en paralelo por la complejidad y cantidad de operaciones y cálculos (se usan clusters).
 
 ---
-# Si hay varios SO, ¿Porqué Unix?
+## Sistema Operativo Unix
 
 El sistema operativo más usado para el desarrollo de la bioinformática es **Unix**; por el excelente rendimiento en el **procesamiento de datos** nativos, por el **aprovechamiento óptimo de los recursos de hardware** y sobre todo, por ser distribuido en forma **gratuita** bajo la filosofía de código abierto.
 
@@ -173,12 +211,19 @@ Sus características técnicas principales son su **portabilidad**, su capacidad
 
 Pero Unix, más que una marca, también es una filosofía, que tiene por principios el **minimalismo** y la **modularidad**: hacer ***programas que hagan una sola cosa bien hecha***, y que al comunicarse entre sí, ejecuten tareas más complejas.
 
+&lt;img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjz7d2lx7ovSFF94vR0YZznml3rjilqeGQTRlt6xeNKj73PnVCh2KPtkdRBx8pt-CviDOolybncQLC9lS4gCIvitDw8v6ycFMWVzNssv679E9__thk2OGt_HX_Ec8DT6JfUKfBwDz5PVEQ/s320/list_640px.jpg" width="300px" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Un sistema tipo Unix
 
+.pull-left[
 &lt;img src="https://www.brunoribas.com.br/aed1/2013-1/praticas/1/teoria-img1.png" width="400px" style="display: block; margin: auto;" /&gt;
+]
 
+.pull-right[
+&lt;img src="https://ejerciciosdocencia.wordpress.com/wp-content/uploads/2020/01/135-recursos-gestion-so.jpg?w=768" width="400px" style="display: block; margin: auto;" /&gt;
+
+]
 
 ---
 ## ¿Qué es el shell?
@@ -263,7 +308,9 @@ Teclea `ls` es un comando para listar los archivos/carpetas que se encuentran do
 ---
 # Práctica
 
-Prueba los siguientes comandos en la terminal y brevemente indica lo que obtienes.
+1. Abre una `Terminal` en tu computadora. MacOS y Unix busca la `Terminal`, y para Windows abre MobaXTerm y busca la opción de `Terminal`.
+
+2. Prueba los siguientes comandos en la terminal y brevemente indica lo que obtienes.
 
 `whoami` 
 
@@ -326,7 +373,7 @@ Necesitamos:
 
 ## Conectándose a un servidor por protocolo ssh
 
-Usando la `Terminal` de MpbaXTerm o la de MacOS
+Usando la `Terminal` de MobaXTerm o la de MacOS
 
 **Comando**: `ssh`
 
@@ -403,6 +450,33 @@ $ ssh -p 8080 -X mateom@132.248.220.14
 ]
 ]
 
+
+---
+## Aprendiendo más sobre un comando
+
+Veamos la ayuda de los siguiente comandos
+
+- hostname
+
+- pwd 
+
+---
+## Aprendiendo más sobre un comando
+
+Donde más buscar ayuda ?
+
+- **Web - Google**
+
+Estratégias de búsqueda
+
+```
+comando pwd en unix
+qué hace el comando pwd en unix
+```
+
+- Chat-gpt
+
+
 ---
 ## Nuestros primeros comandos
 
@@ -445,18 +519,18 @@ class: center, middle
 
 ## Sistema de archivos
 
-• Para administrar los dispositivos de almacenamiento masivo (cintas, discos), es necesario que el SO implante el concepto abstracto de fichero.
+• Para administrar los dispositivos de almacenamiento masivo (cintas, discos), es necesario que el SO implante el concepto abstracto de archivo.
 
-• Los ficheros almacenan datos y programas y para facilitar su uso se organizan en estructuras denominadas **directorios**.
+• Los archivos almacenan datos y programas y para facilitar su uso se organizan en estructuras denominadas **directorios**.
 
-• Es necesario controlar “quien y como” puede acceder a un fichero.
+• Es necesario controlar “quien y como” puede acceder a un archivo.
 
 • Para esto se utilizan ciertas técnicas de protección y seguridad.
 
 .content-box-blue[
-un sistema de ficheros vendrá dado por:
+un sistema de archivos vendrá dado por:
 
-- un conjunto de ficheros.
+- un conjunto de archivos.
 
 - estructura de directorios.
 ]
@@ -474,46 +548,86 @@ un sistema de ficheros vendrá dado por:
 &lt;img src="img/archivo.png" width="35%" style="display: block; margin: auto;" /&gt;
 
 ---
-## ¿Qué es un directorio?
 
-Directorio como tipo especial de fichero
-
-• Es un mecanismo o estructura para organizar los ficheros.
-
-• En general un directorio es una estructura de datos que
-contiene un **conjunto de entradas o registros** que hacen
-referencia a un fichero u otro directorio.
-
-• En UNIX los directorios se implementan como ficheros.
-
----
-# Propiedades de fichero/directorio
+# Propiedades de archivo
 
 |Propiedad        | Descripción     |
 |:--              |:--               |
-|Nombre de fichero| Nombre simbólico dado por el usuario.|
-|Tipo de fichero  | para sistemas que permiten varios tipos.|
-|Tamaño           | tamaño del fichero en bits,bytes, bloques.. etc.|
+|Nombre de archivo| Nombre simbólico dado por el usuario. Generalmente tiene nombre.extension*|
+|Tipo de archivo  | para sistemas que permiten varios tipos.|
+|Tamaño           | tamaño del archivo en bits,bytes, bloques.. etc.|
 |Protección       |información sobre el control de acceso.|
-|Propietario      |usuario que creo el fichero.|
+|Propietario      |usuario que creo el archivo.|
 |Hora, fecha…     |información referente a hora y fecha de creación, ultima modificación, último acceso|
 
+* La extensión de un archivo nos indica generalmente el tipo o aplicación que lo generó, por ejemplo una extensión .xlsx viene de excel, .ppt de power point, .txt es un archivo de texto plano.
+
 ---
-## Operaciones sobre archivos/directorios
+## Operaciones sobre archivos
 
 - búsqueda
 - creación
 - eliminación
-- listado del directorio
+- listado ( en caso de directorios)
 - copiado
 - renombrar
 
 ---
-## Sistema de archivos en unix
+## ¿Qué es un directorio?
+
+Directorio como tipo especial de archivo
+
+• Es un mecanismo o estructura para organizar los archivos.
+
+• En general un directorio es una estructura de datos que
+contiene un **conjunto de entradas o registros** que hacen
+referencia a un archivo u otro directorio.
+
+• En UNIX los directorios se implementan como archivos. Pero... sigamos viendolo como carpetas ;)
+
+• Un directorio es una Estructura arborescente
+
+• con un número Nº arbitrario de entradas (archivos)
+
+• Pero tiene 2 entradas predeterminadas "." y ".."
+
+---
+## Estructura de la Organización de los archivos (tipo árbol)
+
+.pull-left[
+&lt;img src="img/sistema-archivos.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+.pull-right[
+
+- El árbol tiene una **raíz** "/"
+
+- Se puede llegar a un archivo usando rutas absolutas o relativas.
+
+- Podemos desplazarnos a cualquier parte del árbol.
+
+- Podemos Borrar directorios (ramas)
+
+- Podemos Crear directorios (ramas)
+
+]
 
 
-&lt;img src="img/sistema-archivos.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+## Rutas absolutas y relativas
 
+**Ruta absoluta**: Inician desde la raíz.
+
+`/home/compu2`
+
+**Ruta relativa**: Inician desde el directorio donde estas parado actualmente en el árbol.
+
+|Comando|Función|
+|----    |----  |
+|.       |El directorio donde estás parado.|
+|..      |Un directorio arriba en la estructura de directorios.|
+|../../  |Dos directorios arriba en la estructura de directorios.|
+|~/      |Directorio HOME.|
 
 ---
 ## Algunos comandos básicos de navegación
@@ -539,25 +653,61 @@ referencia a un fichero u otro directorio.
 
 
 ---
-## Rutas absolutas y relativas
 
-**Ruta absoluta**: Inician desde la raíz.
-
-**Ruta relativa**: Inician desde el directorio actual.
-
-|Comando|Función|
-|----    |----  |
-|.       |El directorio donde estás parado.|
-|..      |Un directorio arriba en la estructura de directorios.|
-|../../  |Dos directorios arriba en la estructura de directorios.|
-|~/      |Directorio HOME.|
-
----
 ## Hagamos algunos ejercicios
 
-- En tu home crea un directorio llamado `practica1`.
+- Vamos a conectarnos al servidor `tepeu`
 
-- Muévete al directorio `practica1`.
+- Vamos a ver donde estamos parados dentro del sistema de archivos (el árbol)
+
+- listemos lo que hay en esa parte del árbol
+
+- Movámonos a la raíz del árbol y chequemos donde estamos parados
+
+- listemos lo que hay en raíz
+
+- Nos movemos dentro del directorio home usando rutas absolutas.
+
+- Voy a moverme al directorio `datos` usando rutas absolutas
+
+- Voy a moverme al directorio `compu2` usando rutas absolutas
+
+
+
+---
+## rutas relativas
+
+- Estoy en compu2, voy a entrar a WelcomeBioInfo
+
+- Estando en WelcomeBioInfo, voy a entrar a `datos`
+
+- Estando en `datos`, entrar al directorio `practica1` y listar.
+
+- Listemos TODO lo que hay en el directori de `practica1` incluyendo lo oculto (ver directorio . y ..)
+
+- Estando en `practica1` y vamos a subir un nivel, es decir a `datos`
+
+- Estamos en `datos` subimos otro nivel.
+
+- Estamos en `WelcomeBioInfo` vamos a subir 2 niveles. Dónde estamos?
+
+- Si estamos en `home` queremos ir a practica1 usando rutas relativas
+
+- Estando en `practica1` nos movemos dentro del `practica3`
+
+
+
+---
+## Hagamos algo más complejo
+
+
+- En tu home crea un directorio llamado intro-bioinfo
+
+- Vamos a movernos dentro de esa rama o directorio
+
+- Creamos un directorio llamado `practica1`.
+
+- Muévete dentro del directorio `practica1`.
 
 - Crea un directorio llamado `animales`.
 
@@ -623,6 +773,13 @@ relativas.
 
 
 ---
+
+class: center, middle
+
+# Archivos
+
+
+---
 ## ¿Cuáles tipos de archivos conoces?
 
 - Archivos de música.
@@ -630,11 +787,11 @@ relativas.
 - Archivos de video.
 
 - Archivos binarios  
-  - Archivos de Word  
-  - Archivos de Excel  
-  - Archivos de PowerPoint.
+  - Archivos de Word  (.doc, .docx)
+  - Archivos de Excel  (.xls)
+  - Archivos de PowerPoint. (.pptx)
   
-- Archivos de texto plano.
+- Archivos de texto plano. (.txt)
 
 - Archivos comprimidos. 
 
@@ -704,34 +861,84 @@ less word.docx]]
 &lt;br&gt;
 
 - Los archivos de texto plano son los únicos que pueden ser visualizados
-correctamente.
+correctamente en una CLI.
 
-- La extensión de los archivos no es relevante.
+- No es suficiente con cambiar el nombre del archivo o su extensión para visualizarlos.
 
 
 ---
 ## Archivos comprimidos
 
-Los archivos de texto comprimidos pueden ser descomprimidos utilizando
-alguno de los siguientes comandos:
+.content-box-blue[
+Un archivo comprimido prácticamente es idéntico al original, pero reduciendo su tamaño, mediante algoritmos de comprensión de datos. 
+]
 
-- `gunzip`
+Las herramientas de compresión permiten reducir el espacio de disco de uno o varios archivos basándose en diferentes algoritmos de compresión. Algunos de ellos permiten al mismo tiempo **empaquetar** varios archivos o carpetas dentro de un mismo archivador. 
 
-- `unzip`
+Tipos: Zip, Gzip, Bzip2, TAR, Rar, 7z
 
+
+Comandos:
+
+- `gzip` - `gunzip`
+
+- `zip` - `unzip`
+
+- hay más...
 
 ---
-## Práctica: descomprimir y visualizar
+## Descomprimir y visualizar
+
+- Estando en `/home/compu2/WelcomeBioinfo/datos/practica2/`
 
 - Copia el archivo `texto-plano3.txt.gz` a tu `home`.
 
 - Regresa a tu `home`.
 
-- Descomprímelo y visualízalo.
+- Visualiza el archivo `texto-plano3.txt.gz`. Cómo se ve?
 
-- Elimina este archivo de tu `home`.
+- Descomprímelo, lista el directorio, ¿qué pasó?
+
+- Ahora visualiza el archivo
 
 
+
+---
+## Comprimir UN archivo
+
+- lista el directorio
+
+- Vamos a comprimir el archivo `texto-plano3.txt.gz`
+
+- lista el directorio, ¿qué pasó?
+
+
+
+---
+# Comprimir y empaquetar un directorio o varios archivos
+
+Empaquetar. Es agrupar en un solo fichero varios ficheros y/o directorios. 
+
+```
+zip [options] zipfile files_list
+```
+
+- options: opciones que modifican el comportamiento del comando
+- zipfile: es el nombre del archivo que empaqueta y comprime todos los archivos
+- files_list: es la lista de archivos a empaquetar y comprimir
+
+
+- Descomprime el archivo `texto-plano3.txt`
+- Genera 2 copias del archivo `texto-plano3.txt`, con el nombre `texto-plano4.txt` y `texto-plano5.txt`
+- Empaquetar y comprimir los 3 archivos.
+
+
+
+
+---
+## Trabajando con archivos comprimidos
+
+No es necesario descomprimir un archivo de texto para usarlo.
 
 ---
 ## Referencias
