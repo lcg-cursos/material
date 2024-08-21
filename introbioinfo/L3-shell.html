@@ -141,7 +141,6 @@ En una **interfaz gráfica**, se usa el **mouse** u otro dispositivo **apuntador
 &lt;img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*9cp4T0Hz-Gmcpku3.png" width="400px" style="display: block; margin: auto;" /&gt;
 
 
-
 ---
 
 # GUI vs CLI
@@ -519,21 +518,29 @@ class: center, middle
 
 ## Sistema de archivos
 
-• Para administrar los dispositivos de almacenamiento masivo (cintas, discos), es necesario que el SO implante el concepto abstracto de archivo.
-
-• Los archivos almacenan datos y programas y para facilitar su uso se organizan en estructuras denominadas **directorios**.
-
-• Es necesario controlar “quien y como” puede acceder a un archivo.
-
-• Para esto se utilizan ciertas técnicas de protección y seguridad.
-
-.content-box-blue[
-un sistema de archivos vendrá dado por:
-
-- un conjunto de archivos.
-
-- estructura de directorios.
+.content-box-blue[ 
+Un sistema de archivos en Unix es una **estructura organizada** que el sistema operativo utiliza para **almacenar, organizar, y gestionar archivos y directorios** en un disco o en otros dispositivos de almacenamiento. 
 ]
+
+### Características Principales de un Sistema de Archivos en Unix
+
+1. **Jerarquía de Directorios**:
+   - Los sistemas de archivos en Unix están organizados en una **estructura jerárquica** de directorios, también conocida como **árbol de directorios**. El **directorio raíz ("/")** es el punto de partida de esta jerarquía.
+
+---
+## Sistema de archivos
+
+2. **Archivos y Directorios**:
+   - **Archivos**: Son las unidades básicas de almacenamiento de datos. Pueden contener texto, datos binarios, programas ejecutables, etc.
+   - **Directorios**: Son contenedores que pueden almacenar archivos y otros directorios (subdirectorios).
+
+3. **Permisos y Propiedades**:
+   - Cada archivo y directorio tiene permisos asociados que controlan quién puede leer, escribir o ejecutar el archivo. Estos permisos se dividen en tres categorías: propietario, grupo y otros.
+   - Además, cada archivo y directorio tiene propiedades como el propietario, el grupo, el tamaño, las marcas de tiempo (creación, modificación, acceso), entre otras.
+   
+
+[Tree File system](https://www.ibm.com/docs/es/aix/7.3?topic=tree-root-file-system)
+
 
 ---
 ## ¿Que es un fichero/archivo ?
@@ -583,13 +590,11 @@ Directorio como tipo especial de archivo
 contiene un **conjunto de entradas o registros** que hacen
 referencia a un archivo u otro directorio.
 
-• En UNIX los directorios se implementan como archivos. Pero... sigamos viendolo como carpetas ;)
-
 • Un directorio es una Estructura arborescente
 
 • con un número Nº arbitrario de entradas (archivos)
 
-• Pero tiene 2 entradas predeterminadas "." y ".."
+• Pero tiene 2 entradas predeterminadas `"."` y `".."`
 
 ---
 ## Estructura de la Organización de los archivos (tipo árbol)
@@ -612,35 +617,109 @@ referencia a un archivo u otro directorio.
 
 ]
 
+---
+## Estructura de la Organización de los archivos
+
+
+| elemento   | descripción |
+|----   |-----|
+| /     | root, raíz |
+| /dev  | Contiene nodos de dispositivos para archivos especiales de dispositivos locales. El directorio /dev contiene archivos especiales para unidades de cintas, impresoras, particiones de disco y terminales. |
+| /etc  | Contiene archivos de configuración  |
+| /export | Contiene los directorios y archivos de un servidor destinados a clientes remotos.  |
+| /home  | /home contiene archivos y directorios organizados por usuario.  |
 
 ---
-## Rutas absolutas y relativas
+## Cómo nos movemos en el sistema de archivos?
 
-**Ruta absoluta**: Inician desde la raíz.
+#### Rutas Absolutas
+Una ruta absoluta es una ruta que especifica la **ubicación completa** de un archivo o directorio desde el directorio raíz (`/`). No depende del directorio de trabajo actual.
 
-`/home/compu2`
+```
+/home/compu2
+/var/mail
+/export/home
+```
 
-**Ruta relativa**: Inician desde el directorio donde estas parado actualmente en el árbol.
+#### Ventajas:
+- No importa en qué directorio te encuentres, una ruta absoluta siempre te llevará al mismo archivo o directorio.
 
-|Comando|Función|
+- Es útil para scripts y configuraciones donde necesitas especificar ubicaciones exactas.
+
+---
+## Cómo nos movemos en el sistema de archivos?
+
+**Ruta relativa**: Una ruta relativa es una ruta que especifica la **ubicación de un archivo o directorio** en relación con el **directorio de trabajo actual**.
+
+#### Características:
+- No comienza con `/`.
+- Depende del directorio en el que te encuentres actualmente.
+
+#### Ventajas:
+- Más cortas y fáciles de escribir.
+- Útiles para scripts y comandos que se ejecutan en diferentes contextos de directorios.
+
+
+Ejemplos
+
+```
+# Si estoy en /home/compu2 y quiero moverme al directorio WelcomeBioInfo
+cd WelcomeBioInfo
+```
+
+---
+
+## Rutas Relativas
+
+`.` y `..` son entradas especiales que se encuentran en cada directorio y tienen significados específicos. Estan ocultos pero los puedes visualzar con `ls -la`
+
+|        |Descripción|
 |----    |----  |
 |.       |El directorio donde estás parado.|
 |..      |Un directorio arriba en la estructura de directorios.|
 |../../  |Dos directorios arriba en la estructura de directorios.|
+|../otro_directorio/| Se refiere a `otro_directorio` en el directorio padre.|
 |~/      |Directorio HOME.|
 
 ---
-## Algunos comandos básicos de navegación
+
+## Ejercicio: 
+
+.pull-left[
+&lt;img src="img/sistema-archivos.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
 
 
-|Comando|Función|
-|----    |----  |
-|ls      |Lista los contenidos de un directorio.|
-|mkdir   |Crea un directorio.|
-|cd      |Cambia de directorio.|
-|cp      |Copia un archivo o directorio.|
-|mv      |Mueve un archivo o directorio /&lt;br /&gt;Cambiar el nombre de un archivo o directorio.|
-|rm      |Elimina un archivo o directorio.|
+.pull-right[
+
+**Rutas absolutas** 
+
+De `bin` es:   
+De `compu2` es:  
+De `practica2` es:  
+De `panda.txt`es:   
+
+** Rutas relativas, partiendo de compu2**
+
+De `WelcomeBioInfo` es  
+De `practica2` es :  
+De `home` es:  
+De `/`es :   
+
+]
+---
+## Algunos comandos básicos relacionados con el sistema de archivos
+
+- `ls`: Lista el contenido de un directorio.
+- `cd`: Cambia el directorio actual.
+- `pwd`: Muestra el directorio de trabajo actual.
+- `mkdir`: Crea un nuevo directorio.
+- `rmdir`: Elimina un directorio vacío.
+- `rm`: Elimina archivos o directorios.
+- `chmod`: Cambia los permisos de un archivo o directorio.
+- `chown`: Cambia el propietario de un archivo o directorio.
+- `df`: Muestra el uso del espacio en disco.
+- `du`: Muestra el uso del espacio en disco por archivos y directorios.
 
 ---
 ## Algunos tips básicos
@@ -696,6 +775,13 @@ referencia a un archivo u otro directorio.
 - Estando en `practica1` nos movemos dentro del `practica3`
 
 
+
+---
+# Creando directorios
+
+```
+man mkdir
+```
 
 ---
 ## Hagamos algo más complejo
@@ -939,6 +1025,120 @@ zip [options] zipfile files_list
 ## Trabajando con archivos comprimidos
 
 No es necesario descomprimir un archivo de texto para usarlo.
+
+---
+## Los permisos
+
+.content-box-blue[
+Los permisos de archivos y directorios son fundamentales para la seguridad y la gestión de recursos. Los permisos determinan quién puede leer, escribir o ejecutar un archivo o directorio.
+]
+
+Cada archivo y directorio en Unix tiene tres tipos de permisos:
+
+1. **Lectura (r)**: Permite ver el contenido del archivo o listar el contenido del directorio.
+2. **Escritura (w)**: Permite modificar el contenido del archivo o hacer cambios en el contenido del directorio (crear, eliminar, renombrar archivos).
+3. **Ejecución (x)**: Permite ejecutar el archivo (si es un programa o script) o acceder al directorio (entrar en él con `cd`).
+
+---
+
+### Categorías de Usuarios
+
+Los permisos se aplican a tres categorías de usuarios:
+
+1. **Propietario (u)**: El usuario que posee el archivo o directorio.
+2. **Grupo (g)**: Un grupo de usuarios que tienen permisos específicos sobre el archivo o directorio.
+3. **Otros (o)**: Todos los demás usuarios que no son el propietario ni pertenecen al grupo.
+
+---
+## Representación de Permisos
+
+Los permisos se representan en una cadena de 10 caracteres, por ejemplo: 
+
+`-rwxr-xr--`.
+
+- El primer carácter indica el tipo de archivo:
+  - `-` para un archivo regular.
+  - `d` para un directorio.
+  - `l` para un enlace simbólico.
+  - Otros caracteres pueden indicar otros tipos de archivos especiales.
+
+- Los siguientes nueve caracteres se dividen en tres grupos de tres:
+  - **Propietario**: Los primeros tres caracteres (`rwx` en el ejemplo) indican los permisos del propietario.
+  - **Grupo**: Los siguientes tres caracteres (`r-x` en el ejemplo) indican los permisos del grupo.
+  - **Otros**: Los últimos tres caracteres (`r--` en el ejemplo) indican los permisos de otros usuarios.
+
+
+---
+## Ejemplo
+
+### Ejemplo de Permisos
+
+- `-rwxr-xr--`:
+  - `-`: Archivo regular.
+  - `rwx`: El propietario tiene permisos de lectura, escritura y ejecución.
+  - `r-x`: El grupo tiene permisos de lectura y ejecución.
+  - `r--`: Otros usuarios tienen permisos de lectura.
+  
+---
+## Ejercicio
+
+Qué permisos describe la siguiente representación ?
+
+`drwxr-xr-x`:   
+`-r--r--r--`:  
+`-rwx------`:  
+`-r--r--rwx`:    
+
+---
+## Comandos para Gestionar Permisos
+
+#### `ls -l`
+
+El comando `ls -l` muestra una lista detallada de archivos y directorios, incluyendo sus permisos.
+
+```sh
+ls -l
+```
+
+#### `chmod`
+
+El comando `chmod` se utiliza para cambiar los permisos de un archivo o directorios. El símbolo `+` otorga y `-` quita los permisos.
+
+- **Modo simbólico**:
+
+  ```sh
+  chmod u+rwx,g+rx,o+r archivo.txt
+  ```
+  
+Esto otorga permisos de lectura, escritura y ejecución al propietario, permisos de lectura y ejecución al grupo, y permisos de lectura a otros.
+
+---
+
+- **Modo numérico**:
+  Los permisos también se pueden representar con números:
+  - `r` = 4
+  - `w` = 2
+  - `x` = 1
+
+  Por ejemplo, `chmod 755 archivo.txt` otorga:
+  - `7` (rwx) al propietario.
+  - `5` (r-x) al grupo.
+  - `5` (r-x) a otros.
+
+---
+
+## Ejercicio
+
+Establece los permisos usando ambos formatos simbólico y numérico:
+
+`drwxr-xr-x`:   
+`-r--r--r--`:  
+`-rwx------`:  
+`-r--r--rwx`:    
+
+
+`drwxr-xr-x`  --&gt;  `drwx--x--x`:   
+`-rwxr-xr-x`  --&gt;  `drwx--x--x`:   
 
 ---
 ## Referencias
