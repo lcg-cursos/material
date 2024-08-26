@@ -1089,12 +1089,24 @@ Los permisos se representan en una cadena de 10 caracteres, por ejemplo:
 ---
 ## Ejercicio
 
-Qué permisos describe la siguiente representación ?
+a. Qué permisos describe la siguiente representación ?
 
 `drwxr-xr-x`:   
 `-r--r--r--`:  
 `-rwx------`:  
 `-r--r--rwx`:    
+
+
+--
+
+b. Chequemos los permisos de algunos directorios y archivos en tu usuario  
+  - Tu directorio (usuario) en home.  
+  - Tu directorio intro-bioinfo.  
+
+c. Pídele a tu compañero su usuario de unix y revisa los permisos de lo siguiente:
+  - El directorio home de tu compañero
+  - El directorio `intro-bioinfo`
+  - intro-bioinfo/variacion_genetica/mutaciones/mutacion3.txt
 
 ---
 ## Comandos para Gestionar Permisos
@@ -1136,16 +1148,25 @@ Esto otorga permisos de lectura, escritura y ejecución al propietario, permisos
 
 ## Ejercicio
 
-Establece los permisos usando ambos formatos simbólico y numérico:
+a. Establece los permisos usando ambos formatos simbólico y numérico:
 
-`drwxr-xr-x`:   
+`drwxr-xr-x`:   `chmod grwx,gorx file`  --    `chmod 755 file`   
 `-r--r--r--`:  
 `-rwx------`:  
-`-r--r--rwx`:    
+`-r--r--rwx`:   
+`-rwx--x--x`:  
+`----------`:
 
+--
 
-`drwxr-xr-x`  --&gt;  `drwx--x--x`:   
-`-rwxr-xr-x`  --&gt;  `drwx--x--x`:   
+b. Realiza lo siguiente:
+
+- Cambia los permisos de tu directorio `intro-bioinfo` para que solo tú tengas todos los permisos.
+- Quita los permisos de ejecución del directorio `tmp` para el grupo y otros.
+- Dale permisos al grupo y a otros de rw sobre el archivo `texto-plano3.txt` en tu home
+- Trata de entrar al directorio `intro-bioinfo` de tu compañero. ¿Qué pasa?
+- Trata de entrar al directorio `tmp` de tu compañero. ¿Qué pasa?
+- Borra el archivo `texto-plano3.txt` de tu compañero. Lista el directorio de tu compañero. ¿Qué paso?
 
 ---
 ## Referencias
