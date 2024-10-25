@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 ### Licenciatura en Ciencias Genómicas,UNAM
 ]
 .date[
-### First version: yyy-mm-dd; Last update: 2024-10-21
+### First version: yyy-mm-dd; Last update: 2024-10-23
 ]
 
 ---
@@ -161,9 +161,7 @@ Los miRNA son cruciales para la regulación de muchos procesos biológicos, incl
 class: center, middle
 
 
-&lt;img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/The-AWK-Programming-Language.svg" width="800px" style="display: block; margin: auto;" /&gt;
-
-
+&lt;img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/The-AWK-Programming-Language.svg" width="700px" style="display: block; margin: auto;" /&gt;
 
 ---
 ## Comando `awk`
@@ -360,6 +358,33 @@ awk '$2 + $3 &lt;= 50 {print $1}' data/tabular.txt
 
 
 .tiny[Imagen tomada de Bionformatics Data Skills]
+
+---
+## Con expresiones regulares
+
+```bash 
+# Simulando un grep con un patrón
+awk '/12/' tabular.txt
+```
+--
+
+```bash
+# filtrando lineas que empiecen con un NO digito
+awk '/^[^0-9]/' tabular.txt
+```
+
+--
+```bash
+# Filtrando y con un AND
+awk '/^[^0-9]/ &amp;&amp; ($2 + $3 &lt;= 50)' tabular.txt
+```
+
+--
+
+```
+# Un patrón dada una columna
+awk '$3 ~ /12/' tabular.txt
+```
 
 ---
 
