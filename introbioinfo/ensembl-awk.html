@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 ### Licenciatura en Ciencias Genómicas,UNAM
 ]
 .date[
-### First version: yyy-mm-dd; Last update: 2024-10-23
+### First version: yyy-mm-dd; Last update: 2024-10-28
 ]
 
 ---
@@ -181,6 +181,11 @@ Caracteristicas:
 ```
   condición {acción}
 ```
+---
+## awk variables
+
+&lt;img src="img/awk-vars.png" width="800px" style="display: block; margin: auto;" /&gt;
+
 ---
 ## Awk puede _no recibir_ una condición
 
@@ -781,6 +786,68 @@ Además tiene estructuras de control:
   - BEGIN = bloque de código que se ejecutará ANTES de leer el archivo
   
   - END = bloque de código que se ejecutará AL TERMINAR de leer el archivo
+
+---
+## Sintáxis 
+
+La sintaxis básica de awk es bastante flexible y puede variar según los elementos que uses, como patrones, bloques de código y condiciones. 
+
+.pull-left[
+
+```bash
+# Solo la acción
+awk '
+     { acción1 }
+     ' archivo
+```  
+
+```bash
+# Con condición
+awk '
+     patrón1 { acción1 }
+     ' archivo
+```
+
+
+```bash
+# Más de una condición y acción
+awk '
+     patrón1 { acción1 }
+     patrón2 { acción2 }
+     ' archivo
+```
+]
+
+
+.pull-right[
+
+```bash
+# Con bloque BEGIN
+awk '
+     BEGIN { acciones_iniciales }
+     patrón1 { acción1 }
+     ' archivo
+```
+
+```bash
+# Con bloque END
+awk '
+     patrón1 { acción1 }
+     END { acciones_finales }' archivo
+```
+]
+
+---
+## Sintáxis completa
+
+```bash
+# Con BEGIN y END
+awk '
+     BEGIN { acciones_iniciales }
+     patrón1 { acción1 }
+     patrón2 { acción2 }
+     END { acciones_finales }' archivo
+```
 
 
 ---
