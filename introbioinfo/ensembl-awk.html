@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 ### Licenciatura en Ciencias Genómicas,UNAM
 ]
 .date[
-### First version: yyy-mm-dd; Last update: 2024-10-28
+### First version: yyy-mm-dd; Last update: 2024-10-29
 ]
 
 ---
@@ -1028,6 +1028,47 @@ awk 'BEGIN{ s = 0 }; { s += ($1) }; END{ print "mean: " s/NR };'
 
 **En promedio, cada gene contiene 22.19 miRNAs**
 
+
+---
+## Usos comunes de NR
+
+**Mostar el número de línea**
+
+```bash
+awk '{print NR, $0}' tabular.txt 
+```
+
+**Filtrar líneas específicas**: Puedes condicionar el procesamiento de líneas en base a NR. Por ejemplo, para imprimir solo las primeras 3 líneas:
+
+```bash
+awk 'NR &lt;= 3 { print $0 }' tabular.txt
+```
+
+**Usar NR en bloques END**. En el bloque END, NR representa el total de líneas en el archivo.
+
+```bash
+awk '
+END { print "Total de líneas:", NR }' tabular.txt
+```
+
+---
+## awk y las variables
+
+las variables que defines tú mismo no llevan el prefijo `$`. El símbolo `$` se usa solo para referirse a las columnas de la línea actual en el archivo de entrada.
+
+```bash
+awk '
+BEGIN { suma = 0 } 
+{ suma += $2 } 
+END { print "La suma de la segunda columna es:", suma }' tabular.txt
+```
+
+Nota: 
+
+`suma` es una variable definida en el script awk, y no lleva `$`.
+
+`$1` representa la primera columna de cada línea del archivo, y sí lleva `$`.
+
 ---
 ## Tarea ¿Y para otros organismos?
 
@@ -1048,6 +1089,31 @@ Respondan las siguientes preguntas:
 ¿Cuál es el número promedio de miRNAs por gene?
 
 ]
+
+---
+
+## Ejercicio 2: Interacciones reguladoras
+
+Descarga el archivo  `RISet` de la página de descargas de RegulonDB.
+Este archivo contiene las interacciones reguladoras (RIs) de los reguladores conocidos y anotados en RegulonDB. [ **5 min exploración del archivo** ]
+
+1. Cualés son los tipos de RIs anotados ? (columna 2)
+
+2. Cuántas RIs hay de cada tipo ?
+
+3. Obtener las RIs de los TFs (Tipo: TF-promotor, TF-tu, TF-gene) y obtener aquellas RIs cuyo nivel de confianza es Strong ( (20) confidenceLevel = S ).
+
+4. Cuantás RIs de los TFs (Tipo: TF-promotor, TF-tu, TF-gene) hay para cada nivel de confianza ?
+
+5. Obtener todas aquellas RIs que no tienen nivel de confianza, cuántas son? y cuantas son de cada tipo?
+
+6. Extrae todas las interacciones relacionadas con small RNAs (identificadas en la columna 2 que contiene "srna-" al inicio) y calcular su distancia promedio al primer gen transcrito (columna 18, tfrsDistTo1Gene). Tomar en cuenta sólo las que tienen un valor en tfrsDistTo1Gene.
+
+7. Qué otra pregunta se te ocurre indagar sobre los datos?
+
+
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
