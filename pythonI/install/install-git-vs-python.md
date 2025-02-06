@@ -1,22 +1,23 @@
 # Instalación de la Infraestructura del Curso
 
-## Instalación y Configuración de Git y GitHub. 
-⁠
+
+## Instalación y Configuración de Git y GitHub.
+
 #### Requisitos.
 
 1. **Crea una cuenta en el sitio web de [GitHub](https://github.com/signup?source=login)**. Se recomienda que utilices tu cuenta @ccg.unam.mx para obtener beneficios adicionales por ser estudiante.  
-2. ⁠Contar con computadora personal.
-3. ⁠Verifica que en tu computadora personal se encuentre instalado el sistema de control de versiones "git". Para ello, abre una terminal/consola o línea de comandos (cmd) en Windows y ejecuta el comando:
+2. Contar con computadora personal.
+3. Verifica que en tu computadora personal se encuentre instalado el sistema de control de versiones "git". Para ello, abre una terminal/consola o línea de comandos (cmd) en Windows y ejecuta el comando:
 
 ```
-⁠ git version ⁠
+git version
 ```
 
 Debes de obtener un resultado como el siguiente (puede variar la versión):
 
 ```
-$ git version ⁠ ⁠ git --version ⁠
-⁠  git version 2.19.0 
+$ git version 
+git version 2.19.0 
 
 ```
 
@@ -26,7 +27,7 @@ En caso de que no obtengas ningún resultado, descarga e instala git en tu compu
 - **Ubuntu**: [https://www.youtube.com/watch?v=4M8cL-lXANQ]()
 - **MacOS**: [https://www.youtube.com/watch?v=5EXAugHfhuk]()
 
-⁠Realiza los pasos del TUTORIAL **SOLO HASTA** la instalación de git. No crees ningún directorio ni configures nada adicional.
+Realiza los pasos del TUTORIAL **SOLO HASTA** la instalación de git. No crees ningún directorio ni configures nada adicional.
 
 ----
 
