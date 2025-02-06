@@ -1,6 +1,6 @@
 # Instalación de la Infraestructura del Curso
 
-## Instalación y Configuración de Git y GitHub
+## Instalación y Configuración de Git y GitHub. 
 ⁠
 #### Requisitos.
 
