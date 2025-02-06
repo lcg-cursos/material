@@ -333,22 +333,24 @@ kbd {
 
 <h1 id="toc_0">Instalación de la Infraestructura del Curso</h1>
 
-<h2 id="toc_1">Instalación y Configuración de Git y GitHub.</h2>
+<h2 id="toc_1">1. Instalación y Configuración de Git y GitHub</h2>
+
+<p>⁠</p>
 
 <h4 id="toc_2">Requisitos.</h4>
 
 <ol>
 <li><strong>Crea una cuenta en el sitio web de <a href="https://github.com/signup?source=login">GitHub</a></strong>. Se recomienda que utilices tu cuenta @ccg.unam.mx para obtener beneficios adicionales por ser estudiante.<br></li>
-<li>Contar con computadora personal.</li>
-<li>Verifica que en tu computadora personal se encuentre instalado el sistema de control de versiones &quot;git&quot;. Para ello, abre una terminal/consola o línea de comandos (cmd) en Windows y ejecuta el comando:</li>
+<li>⁠Contar con computadora personal.</li>
+<li>⁠Verifica que en tu computadora personal se encuentre instalado el sistema de control de versiones &quot;git&quot;. Para ello, abre una terminal/consola o línea de comandos (cmd) en Windows y ejecuta el comando:</li>
 </ol>
 
-<div><pre><code class="language-none">git version</code></pre></div>
+<div><pre><code class="language-none">⁠ git version ⁠</code></pre></div>
 
 <p>Debes de obtener un resultado como el siguiente (puede variar la versión):</p>
 
-<div><pre><code class="language-none">$ git version 
-git version 2.19.0 
+<div><pre><code class="language-none">$ git version ⁠ ⁠ git --version ⁠
+⁠  git version 2.19.0 
 </code></pre></div>
 
 <p>En caso de que no obtengas ningún resultado, descarga e instala git en tu computadora personal. Consulta los siguientes tutoriales para instalarlo de acuerdo al sistema operativo que tengas</p>
@@ -359,11 +361,9 @@ git version 2.19.0 
 <li><strong>MacOS</strong>: <a href="">https://www.youtube.com/watch?v=5EXAugHfhuk</a></li>
 </ul>
 
-<p>Realiza los pasos del TUTORIAL <strong>SOLO HASTA</strong> la instalación de git. No crees ningún directorio ni configures nada adicional.</p>
+<p>⁠Realiza los pasos del TUTORIAL <strong>SOLO HASTA</strong> la instalación de git. No crees ningún directorio ni configures nada adicional.</p>
 
-<hr>
-
-<h2 id="toc_3">Instalación de Visual Studio Code</h2>
+<h2 id="toc_3">2. Instalación de Visual Studio Code</h2>
 
 <p>Sigue estos pasos para instalar Visual Studio Code en tu sistema operativo.</p>
 
@@ -418,22 +418,23 @@ sudo apt-get install -f</code></pre></div>
 
 <h3 id="toc_11">Paso 4: Instalar extensiones</h3>
 
-<p>Visual Studio Code permite la instalación de extensiones para añadir funcionalidades, lenguajes de programación y temas.
-Accede al Marketplace de extensiones desde el ícono de extensiones en la barra lateral izquierda y busca las extensiones que necesites (En clase te indicaremos algunas).</p>
+<p>Visual Studio Code permite la instalación de extensiones para añadir funcionalidades, lenguajes de programación y temas.</p>
 
-<h2 id="toc_12">Instalación y Configuración de Python Usando Entornos Virtuales</h2>
+<p>Accede al Marketplace de extensiones desde el ícono de extensiones en la barra lateral izquierda y busca las extensiones que necesites (En clase te indicaremos algunas).</p>
+
+<h2 id="toc_12">3. Instalación y Configuración de Python Usando Entornos Virtuales</h2>
 
 <p>La instalación y adecuada configuración de Python es un paso fundamental para asegurar un inicio exitoso en tu viaje de programación. Para maximizar el entorno de trabajo, utilizaremos entornos virtuales, los cuales te permitirán crear y gestionar espacios de desarrollo aislados en tu computadora. Estos entornos son esenciales para mantener organizados los proyectos, ya que permiten instalar paquetes y bibliotecas específicos sin interferir con otros proyectos o con la instalación global de Python. En esta sección, te guiaremos a través de los pasos necesarios para instalar Python, crear un entorno virtual, y configurarlo para un trabajo sin interrupciones, asegurando que todos los estudiantes tengan una base sólida y consistente desde la cual partir.</p>
 
-<h3 id="toc_13">Entornos virtuales</h3>
+<p><strong>Entornos virtuales</strong></p>
 
 <p>Un entorno virtual en Python es una herramienta esencial que permite crear un espacio aislado para un proyecto de Python, donde puedes instalar librerías y dependencias específicas sin interferir con otros proyectos ni con el sistema Python global. Aquí tienes una explicación sencilla, seguida de algunos detalles adicionales:</p>
 
-<h3 id="toc_14">Explicación Sencilla</h3>
+<p><strong>Explicación Sencilla</strong></p>
 
 <p>Piensa en un entorno virtual como en una &quot;burbuja&quot; para tu proyecto de Python. Dentro de esta burbuja, puedes instalar cualquier librería o versión específica de una librería que tu proyecto necesite, sin preocuparte por conflictos con otras librerías instaladas en tu sistema. Esto es especialmente útil cuando trabajas en múltiples proyectos que pueden requerir diferentes versiones de una misma librería.</p>
 
-<h3 id="toc_15">Detalles Adicionales</h3>
+<p><strong>Detalles Adicionales</strong></p>
 
 <ol>
 <li><p><strong>Aislamiento de Dependencias:</strong> </p>
@@ -453,54 +454,13 @@ Accede al Marketplace de extensiones desde el ícono de extensiones en la barra 
 <ul>
 <li>Mantener las versiones exactas de las librerías controladas garantiza que el software probado bajo ciertas condiciones funcione de manera esperada en otros entornos o cuando se comparten proyectos con otros desarrolladores.</li>
 </ul></li>
-<li><p><strong>Creación y Activación de Entornos Virtuales:</strong></p>
-
-<ul>
-<li><p><strong>Verificar la Instalación de Python:</strong> Asegúrate de que tanto Python como <code>pip</code> estén instalados en tu sistema. Puedes verificarlo ejecutando los siguientes comandos en la terminal:</p>
-
-<div><pre><code class="language-bash">python3 --version
-pip3 --version</code></pre></div></li>
-<li><p><strong>Instalación del Módulo <code>venv</code>:</strong> El módulo <code>venv</code> es parte de la biblioteca estándar de Python 3, por lo que ya deberías tenerlo disponible si estás usando una versión reciente de Python 3.</p></li>
-<li><p><strong>Crear un entorno virtual:</strong> Usas <code>venv</code> que es un módulo estándar disponible en Python 3.
-<code>bash
-python -m venv nombre_del_entorno
-</code></p></li>
-<li><p><strong>Activar el entorno virtual:</strong></p>
-
-<ul>
-<li>En Windows:
-<code>bash
-.\nombre_del_entorno\Scripts\activate
-</code></li>
-<li>En macOS/Linux:
-<code>bash
-source nombre_del_entorno/bin/activate
-</code></li>
-</ul></li>
-<li><p>Cuando un entorno virtual está activado, el terminal indicará el nombre cerca del prompt, dejándote ver visualmente que estás trabajando dentro de ese entorno.</p></li>
-<li><p><strong>Desactivar el entorno virtual:</strong>
-<code>bash
-deactivate
-</code></p></li>
-<li><p>Esto te retorna al sistema Python global.</p></li>
-</ul></li>
-<li><p><strong>Uso Práctico:</strong></p>
-
-<ul>
-<li>Los entornos virtuales son esenciales cuando colaboras en proyectos, pues puedes definir un <code>requirements.txt</code> con todas las dependencias necesarias y compartirlo con otros desarrolladores. Simplemente pueden replicar el entorno usando:
-<code>bash
-pip install -r requirements.txt
-</code></li>
-</ul></li>
 </ol>
 
-<p>Usar entornos virtuales es una gran práctica que te ayudará a mantener la organización, prevenir problemas con dependencias y asegurar consistencia en tu entorno de desarrollo de Python.</p>
+<h3 id="toc_13">3.1 Instalar Python y Configurar VS Code</h3>
 
-<h2 id="toc_16">Recomendaciones para Instalar Python y Configurar VS Code</h2>
+<p>Es esencial configurar un entorno de desarrollo que sea accesible, fácil de manejar y que facilite la instalación de paquetes y el manejo de proyectos en Python. Aquí tienes una guía para establecer un entorno amigable utilizando Visual Studio Code (VS Code):</p>
 
-<p>Para estudiantes principiantes, es esencial configurar un entorno de desarrollo que sea accesible, fácil de manejar y que facilite la instalación de paquetes y el manejo de proyectos en Python. Aquí tienes una guía para establecer un entorno amigable utilizando Visual Studio Code (VS Code):</p>
-
-<h4 id="toc_17">Paso 1: Instalar Python</h4>
+<h4 id="toc_14">Paso 1: Instalar Python</h4>
 
 <ol>
 <li><p><strong>Descargar Python:</strong></p>
@@ -512,15 +472,17 @@ pip install -r requirements.txt
 <li><p><strong>Verificar la Instalación:</strong></p>
 
 <ul>
-<li>Abre una terminal (Command Prompt en Windows o Terminal en macOS/Linux) y escribe:
-<code>bash
-python --version
-</code></li>
-<li>Esto debería mostrar la versión de Python que instalaste.</li>
+<li>Abre una terminal (Command Prompt en Windows o Terminal en macOS/Linux) y escribe:</li>
 </ul></li>
 </ol>
 
-<h4 id="toc_18">Paso 2: Instalar Visual Studio Code (VS Code)</h4>
+<div><pre><code class="language-bash">python --version</code></pre></div>
+
+<ul>
+<li>Esto debería mostrar la versión de Python que instalaste.</li>
+</ul>
+
+<h4 id="toc_15">Paso 2: Instalar Visual Studio Code (VS Code)</h4>
 
 <ol>
 <li><p><strong>Descargar VS Code:</strong></p>
@@ -535,7 +497,7 @@ python --version
 </ul></li>
 </ol>
 
-<h4 id="toc_19">Paso 3: Configurar VS Code para Python</h4>
+<h4 id="toc_16">Paso 3: Configurar VS Code para Python</h4>
 
 <ol>
 <li><p><strong>Instalar la Extensión de Python:</strong></p>
@@ -552,84 +514,120 @@ python --version
 </ul></li>
 </ol>
 
-<h4 id="toc_20">Paso 4: Configurar un Entorno Virtual</h4>
+<h4 id="toc_17">Paso 4: Configurar un Entorno Virtual</h4>
 
 <p>Para facilitar el manejo de librerías y evitar conflictos de versiones, se recomienda usar entornos virtuales:</p>
 
 <ol>
-<li><p><strong>Crear un Entorno Virtual:</strong></p>
+<li><strong>Crear un Entorno Virtual:</strong></li>
+</ol>
+
+<p>Usas <code>venv</code> que es un módulo estándar disponible en Python 3.</p>
+
+<div><pre><code class="language-bash">python -m venv nombre_del_entorno</code></pre></div>
+
+<p>Entonces haz lo siguiente:</p>
 
 <ul>
 <li>Abre tu terminal dentro de VS Code (con <code>Ctrl+ñ</code>) y navega al directorio del proyecto.</li>
-<li>Crea un entorno virtual usando <code>venv</code>:
-<code>bash
-python -m venv venv
-</code></li>
-<li>Este comando creará una carpeta llamada <code>venv</code> que contiene un entorno aislado.</li>
-</ul></li>
+<li>Crea un entorno virtual usando <code>venv</code>:</li>
+</ul>
+
+<div><pre><code class="language-bash">python -m venv pyvenv</code></pre></div>
+
+<ul>
+<li><p>Este comando creará una carpeta llamada <code>pyvenv</code> que contiene un entorno aislado.</p></li>
+</ul>
+
+<ol>
 <li><p><strong>Activar el Entorno Virtual:</strong></p>
 
 <ul>
-<li>En Windows:
-<code>bash
-.\venv\Scripts\activate
-</code></li>
-<li>En macOS/Linux:
-<code>bash
-source venv/bin/activate
-</code></li>
+<li>En Windows:</li>
 </ul></li>
+</ol>
+
+<div><pre><code class="language-bash">.\pyvenv\Scripts\activate</code></pre></div>
+
+<ul>
+<li>En macOS/Linux:</li>
+</ul>
+
+<div><pre><code class="language-bash">source pyvenv/bin/activate</code></pre></div>
+
+<ol>
 <li><p><strong>Notar el Cambio de Entorno:</strong></p>
 
 <ul>
-<li>Deberías ver que el nombre del entorno (e.g., <code>venv</code>) aparece al comienzo de la línea de comandos como indicativo de que el entorno virtual está activo.</li>
+<li>Deberías ver que el nombre del entorno (e.g., <code>pyvenv</code>) aparece al comienzo de la línea de comandos como indicativo de que el entorno virtual está activo.</li>
 </ul></li>
+<li><p><strong>Desactivar el entorno virtual:</strong>. </p></li>
 </ol>
 
-<h4 id="toc_21">Paso 5: Instalación de Librerías</h4>
+<div><pre><code class="language-bash">deactivate</code></pre></div>
+
+<ul>
+<li>Esto te retorna al sistema Python global.</li>
+</ul>
+
+<h4 id="toc_18">Paso 5: Instalación de Librerías</h4>
 
 <ol>
-<li><p><strong>Instalar Librerías Necesarias:</strong></p>
+<li><strong>Instalar Librerías Necesarias:</strong>
 
 <ul>
-<li>Mientras el entorno virtual está activado, puedes instalar librerías usando <code>pip</code>:
-<code>bash
-pip install nombre_de_la_libreria
-</code></li>
-<li>Por ejemplo, para instalar NumPy:
-<code>bash
-pip install numpy
-</code></li>
-</ul></li>
-<li><p><strong>Crear un Archivo Requirements:</strong></p>
-
-<ul>
-<li>Para facilitar la instalación de librerías en otros entornos, crea un archivo <code>requirements.txt</code>:
-<code>bash
-pip freeze &gt; requirements.txt
-</code></li>
+<li>Mientras el entorno virtual está activado, puedes instalar librerías usando <code>pip</code>:</li>
 </ul></li>
 </ol>
 
-<h4 id="toc_22">Paso 6: Prueba de Configuración</h4>
+<div><pre><code class="language-bash">pip install nombre_de_la_libreria</code></pre></div>
+
+<ul>
+<li>Por ejemplo, para instalar NumPy:</li>
+</ul>
+
+<div><pre><code class="language-bash">pip install numpy</code></pre></div>
 
 <ol>
-<li><p><strong>Probar la Configuración con un Script Simple:</strong></p>
+<li><strong>Crear un Archivo Requirements:</strong></li>
+</ol>
+
+<p>Los entornos virtuales son esenciales cuando colaboras en proyectos, pues puedes definir un <code>requirements.txt</code> con todas las dependencias necesarias y compartirlo con otros desarrolladores. </p>
 
 <ul>
-<li><p>Crea un archivo <code>main.py</code> y pega el siguiente código:
-```python
-import numpy as np</p>
+<li>Para facilitar la instalación de librerías en otros entornos, crea un archivo <code>requirements.txt</code>:</li>
+</ul>
 
-<p>a = np.array([1, 2, 3])
-print(f&quot;Array: {a}&quot;)
-```</p></li>
-<li><p>Ejecuta el script desde la terminal dentro de VS Code para verificar que todo esté funcionando correctamente:
-<code>bash
-python main.py
-</code></p></li>
+<div><pre><code class="language-bash">pip freeze &gt; requirements.txt</code></pre></div>
+
+<ul>
+<li>Para replicar el entorno, usa <code>requirements.txt</code></li>
+</ul>
+
+<div><pre><code class="language-bash">pip install -r requirements.txt</code></pre></div>
+
+<p>Usar entornos virtuales es una gran práctica que te ayudará a mantener la organización, prevenir problemas con dependencias y asegurar consistencia en tu entorno de desarrollo de Python.</p>
+
+<h4 id="toc_19">Paso 6: Prueba de Configuración</h4>
+
+<ol>
+<li><strong>Probar la Configuración con un Script Simple:</strong>
+
+<ul>
+<li>Crea un archivo <code>main.py</code> y pega el siguiente código:</li>
 </ul></li>
 </ol>
+
+<div><pre><code class="language-python">import numpy as np
+
+a = np.array([1, 2, 3])
+print(f&quot;Array: {a}&quot;)</code></pre></div>
+
+<ul>
+<li>Ejecuta el script desde la terminal dentro de VS Code para verificar que todo esté funcionando correctamente:</li>
+</ul>
+
+<div><pre><code class="language-bash">python main.py</code></pre></div>
 
 
 
