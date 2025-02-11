@@ -1,5 +1,6 @@
 
 # 📚 Material de Cursos – Licenciatura en Ciencias Genómicas (LCG)
+Web Page: https://lcg-cursos.github.io/material/introbioinfo/
 
 Bienvenido al repositorio de **Material de Cursos** de la **Licenciatura en Ciencias Genómicas (LCG)**.  
 Este repositorio reúne recursos educativos utilizados en diversas materias del programa, con un enfoque especial en bioinformática, análisis de datos y genómica computacional.
