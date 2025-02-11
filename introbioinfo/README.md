@@ -1,5 +1,7 @@
 # Introducción a la Bioinformática
 
+URL: https://lcg-cursos.github.io/material/introbioinfo/
+
 ## Descripción del curso
 
 El objetivo de este curso es familiarizar a los estudiantes con las herramientas bioinformáticas básicas más importantes y de uso frecuente en el área. Se abordarán temas como el sistema operativo Linux, bases de datos biológicas, manejo de secuencias y genomas, alineamientos y automatización de tareas con scripts.
