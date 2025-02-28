@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>ReporteGenomaEcoli</title>
+<title>ReporteGenomeEcoli_Formato_v2</title>
 
 
 <style type="text/css">
@@ -331,65 +331,53 @@ kbd {
 
 <body>
 
-<h1 id="toc_0">Análisis del Genoma de <em>Escherichia coli</em></h1>
+<h1 id="toc_0">Exploración y análisis del genoma de <em>Escherichia coli</em> K12</h1>
 
-<!-- Este protocolo  de análisis de genoma de E coli es un ejercicio para alumnos que estan aprendiendo unix, y es su primera aproximación al uso de tuberias, redireccionamientos y comandos básicos. Por lo que las soluciones, no verás los comandos más avanzados como grep, awk etc. Por lo que las respuestas son aproximaciones usando los comandos que hasta el momento conocen los alumnos-->
+<!-- Metadata -->
 
-<p>Nombre: Hely Salgado (<a href="mailto:heladia@ccg.unam.com">heladia@ccg.unam.com</a>)</p>
+<p><strong>Nombre del autor:</strong>   Hely Salgado
+<strong>Email:</strong> <a href="mailto:heladia@ccg.unam.mx">heladia@ccg.unam.mx</a><br>
+<strong>Fecha:</strong> 13/sep/2024   </p>
 
-<p>Fecha:  22 de sept 2023</p>
+<h2 id="toc_1">Resumen (abstract)</h2>
 
-<h2 id="toc_1">Introducción</h2>
+<!-- La sección de resumen (también llamada abstract en inglés) de un artículo científico es una breve sinopsis del contenido del artículo. Su finalidad es proporcionar a los lectores una visión rápida y concisa de los objetivos, métodos, resultados y conclusiones del estudio. Un buen resumen debe ser claro, informativo y autosuficiente, permitiendo que los lectores entiendan la esencia del trabajo sin necesidad de profundizar inmediatamente en el texto completo. -->
 
-<p><em>E. coli</em> es la bacteria anaerobia comensal más abundante de la microbiota del tracto gastrointestinal, en donde junto con otros microorganismos es esencial para el funcionamiento correcto del proceso digestivo.</p>
+<h2 id="toc_2">Introducción</h2>
 
-<p><em>Escherichia coli</em> también es un organismo modelo utilizado frecuentemente en el laboratorio por su velocidad de crecimiento, por sus pocos requerimientos nutricionales y por su amplia bibliografía. Además, E. coli es usada en experimentos de genética y biología molecular debido a que la estructura de su genoma es altamente flexible [1].</p>
+<!-- La sección de introducción de un artículo científico tiene la función de establecer el contexto para el estudio, presentar el problema de investigación, situar el trabajo en el panorama de la literatura existente y plantear los objetivos y/o hipótesis de la investigación. Una buena introducción capta el interés del lector y proporciona una base sólida para entender la relevancia y la importancia del estudio.  -->
 
-<p>Debido a su extraordinaria posición como modelo preferido en genética bioquímica, biología molecular y biotecnología, E. coli K-12 fue el primer organismo sugerido como candidato para la secuenciación del genoma completo [2]. Su secuencia se completó y reportó en 1997.</p>
+<p><em>Escherichia coli</em> K12 es una cepa modelo de bacterias que ha sido ampliamente estudiada debido a su importancia en biología molecular y microbiología. El genoma de <em>E. coli</em> K12, publicado en 1997, representa un avance significativo en la comprensión de los mecanismos genéticos de esta bacteria. La anotación detallada de sus genes y otros elementos genéticos a lo largo de los años ha permitido una comprensión más profunda de su biología y fisiología. Este estudio tiene como objetivo explorar y responder varias preguntas clave sobre el genoma de <em>E. coli</em> K12, incluyendo su tamaño, el número de cromosomas, los tipos de features, las fuentes de los datos de anotación, y la cantidad y distribución de genes y CDS. Estos análisis proporcionarán una visión integral del genoma de <em>E. coli</em> y facilitarán futuras investigaciones en el campo.</p>
 
-<!-- incluimos la grafica del genoma usando notación html, para modificar el tamaño y centrarla-->
+<h2 id="toc_3">Metodología</h2>
 
-<p><center>
-<img src="https://www.science.org/cms/10.1126/science.277.5331.1453/asset/e220b39e-ec5b-465d-bb1a-c7e4803d9453/assets/graphic/se3275565001.jpeg" alt="drawing" width="400"/>
-</center></p>
+<!-- La sección de metodología o métodos de un artículo científico describe en detalle cómo se llevó a cabo el estudio. Su objetivo principal es permitir que otros investigadores puedan reproducir tu estudio con fidelidad y evaluar la validez y relevancia de tu trabajo. Debe proporcionar suficiente información para que alguien con conocimientos similares pueda replicar tu trabajo y verificar tus resultados. -->
 
-<p>Su genoma completo y sus anotaciones pueden ser descargadas desde NCBI.</p>
+<p>Para llevar a cabo la exploración del genoma de <em>Escherichia coli</em> K12, se utilizaron datos de anotación disponibles públicamente. Los principales pasos metodológicos fueron los siguientes:</p>
 
-<p>Este análisis consiste en explorar y conocer un poco más sobre el genoma de <em>E. coli</em>, a través de una serie de preguntas planteadas que abordaremos usando comandos de unix para responderlas.</p>
+<h3 id="toc_4">1. Software</h3>
 
-<p>Al final daremos nuestra opinión sobre los hallazgos.</p>
+<!-- Describir el servidor y el software que se va a usar para reproducir los resultados -->
 
-<h2 id="toc_2">Metodología</h2>
+<p>Todo el análisis se hizo usando comandos unix. La versión del sistema operativo es CentOS Stream version 9.0.  <!-- El siguiente comando nos puede dar información del SO: `cat /etc/os-release` --> 
+Servidor: tepeu.lcg.unam.mx</p>
 
-<h3 id="toc_3">A. Servidor y software</h3>
+<p>Para generar el actual reporte se usó stackedit - markdown [ref].</p>
 
-<blockquote>
-<p>Servidor: tepeu.lcg.unam.mx</p>
+<h3 id="toc_5">2. Obtención de datos</h3>
 
-<p>Usuario: compu2</p>
-
-<p>Software: sistema operativo unix</p>
-</blockquote>
-
-<h3 id="toc_4">B. Datos de Entrada</h3>
+<!-- Indicar de donde se descargan los datos, si hay URL o un ID indicarlo, incluir la versión. También aqui se incluye la exploración de los datos, los formatos, si hay limpieza y generación de nuevos archivos -->
 
 <!-- Entendiendo los archivos de datos -->
 
-<p>Los datos de entrada han sido copiados desde /home/compu2/WelcomeBioinfo/datos/practica4, y éstos fueron descargados desde NCBI.</p>
+<p>Los datos del genoma de <em>E. coli</em> K12 fueron descargados de la base de datos NCBI, con ID NC<em>000913.3 (URL: https://www.ncbi.nlm.nih.gov/nuccore/NC</em>000913.3/). Se utilizaron archivos en formato GFF (General Feature Format) versión xxxx y fastA.</p>
 
 <div><pre><code class="language-none">|-- data
 |   |-- coli_genomic.fna
 |   |-- coli.gff
-|   |-- coli_protein.fna
-|   |-- directorio.txt
-|   `-- flagella_genes.txt</code></pre></div>
+|   `-- coli_protein.fna</code></pre></div>
 
-<h4 id="toc_5">metadatos de la carpeta de datos</h4>
-
-<blockquote>
-<p>Versión/Identificador del genoma:  NC_000913.3</p>
-
-<p>Fecha de descarga: </p>
+<p>A continuación se describen los archivos:</p>
 
 <table>
 <thead>
@@ -403,40 +391,29 @@ kbd {
 <tbody>
 <tr>
 <td style="text-align: left">coli_genomic.fna</td>
-<td style="text-align: left">Secuencia de nucleotidos de E. coli</td>
+<td style="text-align: left">Secuencia de nucleotidos de <em>E. coli</em></td>
 <td style="text-align: left">Formato FastA</td>
 </tr>
 <tr>
 <td style="text-align: left">coli.gff.</td>
-<td style="text-align: left">Anotación del genoma de E. coli</td>
+<td style="text-align: left">Anotación del genoma de <em>E. coli</em></td>
 <td style="text-align: left">Formato gff</td>
 </tr>
 <tr>
 <td style="text-align: left">coli_protein.faa</td>
-<td style="text-align: left">Secuencia de aminoacidos de las proteinas de E. coli</td>
+<td style="text-align: left">Secuencia de aminoacidos de las proteinas de <em>E. coli</em></td>
 <td style="text-align: left">formato FastA</td>
-</tr>
-<tr>
-<td style="text-align: left">flagella_genes.txt</td>
-<td style="text-align: left">Genes con función relacionada al flagello en E. coli</td>
-<td style="text-align: left">lista</td>
-</tr>
-<tr>
-<td style="text-align: left">directorio.txt.</td>
-<td style="text-align: left">Archivo con nombres de personas</td>
-<td style="text-align: left">lista</td>
 </tr>
 </tbody>
 </table>
-</blockquote>
 
 <h4 id="toc_6">Formato de los archivos</h4>
 
 <ul>
-<li><code>coli_genomic.fna</code> : formato FastA</li>
+<li><code>coli_genomic.fna</code> : formato fastA</li>
 </ul>
 
-<div><pre><code class="language-none">&gt;NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome
+<div><pre><code class="language-none">&gt; NC_000913.3 Escherichia coli str. K-12 substr. MG1655, complete genome
 AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGCTTCTGAACTG
 GTTACCTGCCGTGAGTAAATTAAAATTTTATTGACTTAGGTCACTAAATACTTTAACCAATATAGGCATAGCGCACAGAC
 AGATAAAAATTACAGAGTACACAACATCCATGAAACGCATTAGCACCACCATTACCACCACCATCACCATTACCACAGGT</code></pre></div>
@@ -444,9 +421,9 @@ AGATAAAAATTACAGAGTACACAACATCCATGAAACGCATTAGCACCACCATTACCACCACCATCACCATTACCACAGGT
 <p>Formato: </p>
 
 <blockquote>
-<p>a. La primera línea es información de la secuencia. Primero viene el identificador del genoma.</p>
+<p>a. La primera línea es información de la secuencia, iniciando con el identificador del genoma.</p>
 
-<p>b. Después vienen varias líneas con la secuencia de nuclótidos del genoma completo.</p>
+<p>b. Las siguientes líneas es la secuencia de DNA del genoma.</p>
 </blockquote>
 
 <p><br></p>
@@ -479,9 +456,9 @@ NC_000913.3     RefSeq  CDS     337     2799    .       +       0       ID=cds-N
 
 <p>b. Cada renglón en el formato gff es una elemento genético anotado en el genoma, que se le denomina <code>feature</code>, éstos features pueden ser genes, secuencias de inserción, promotores, sitios de regulación, todo aquello que este codificado en el DNA y ocupe una región en el genoma de  E. coli.</p>
 
-<p>c. Los atributos de cada columna par cada elemento genético son</p>
-
-<div><pre><code class="language-none">1. seqname. Nombre del cromosoma
+<p>c. Los atributos de cada columna par cada elemento genético son
+<code>
+1. seqname. Nombre del cromosoma
 2. source. Nombre del programa que generó ese elemento
 3. feature. Tipo de elemento
 4. start. Posición de inicio
@@ -489,136 +466,218 @@ NC_000913.3     RefSeq  CDS     337     2799    .       +       0       ID=cds-N
 6. score. Un valor de punto flotante
 7. strand. La cadena (+ , - )
 8. frame. Marco de lectura
-9.  attribute. Pares tag-value, separados por coma, que proveen información adicional</code></pre></div>
+9.  attribute. Pares tag-value, separados por coma, que proveen información adicional
+</code></p>
 </blockquote>
 
 <p><br></p>
 
 <h2 id="toc_7">Resultados</h2>
 
-<h3 id="toc_8">1. ¿De qué tamaño es el genoma de <em>Escherichia coli</em>?</h3>
+<!-- En esta sección, debes proporcionar evidencia empírica que responderá las preguntas de investigación o probará las hipótesis planteadas. Poner las preguntas que hay que contestar,  como se van resolviendo y los resultados que se obtienen -->
 
-<p>Según la referencia  Blattner et al. se secuenció el genoma completo de la bacteria <em>E. coli</em>. Para determinar cual es el tamaño del genoma haremos lo siguiente:</p>
+<h3 id="toc_8">1.  ¿De qué tamaño es el genoma de <em>Escherichia coli</em>?</h3>
 
-<p>Archivo(s):  data/coli_genomic.fna</p>
-
-<p>Algoritmo: </p>
-
-<blockquote>
-<ul>
-<li>Usar el archivo data/coli_genomic.fna que contiene la secuencia del genoma completo.</li>
-<li>Contar los caracteres del archivo ( Lo ideal seria tomar solo la secuencia )</li>
-<li>Al total hay que restar el num de lineas del archivo ( porque se cuenta el salto de linea), menos los caracteres del primer renglón que no es secuencia.</li>
-</ul>
-</blockquote>
-
-<p>Solución. <!-- aqui pones los comandos que dan solución --></p>
-
-<p>El archivo esta en formato FastA, por lo que tiene una línea con información, además las secuencias vienen en líneas de 80 base pairs (el salto de línea se cuenta como un caracter).</p>
-
-<p>Vamos a contar el total de caracteres de todo el archivo que seria un aproximado del tamaño del genoma, o bien podemos sacar el valor exacto del tamaño del genoma al calcular la resta del total de carcateres del archivo menos el número de lineas y los caracteres del primer renglón.</p>
-
-<blockquote>
-<p>tamaño del genoma = total de caracteres - (num de lineas del archivo + numero de caracteres primera línea )</p>
-</blockquote>
-
-<p>Para nuestro caso llegaremos hasta restar el número de líneas solamente.</p>
-
-<div><pre><code class="language-bash">wc -l -c data/coli_genomic.fna
-</code></pre></div>
-
-<p>Donde -l regresa el número de líneas, y -c el número de caracteres del archivo.</p>
-
-<p><strong>Resultado</strong></p>
-
-<p>La secuencia de nucleotidos del genoma completo de <em>E. coli</em> es de 4.6 MB, ya que el resultado del conteo es de 469,9745 caracteres del archivo, y restamos el numero de lineas 58022. </p>
-
-<h3 id="toc_9">2. ¿Cuántos cromosomas tiene <em>Escherichia coli</em>?</h3>
-
-<p>La información de anotación de lo que se conoce en el genoma de <em>E. coli</em> se reporta en archivos de formato tabular GFF.</p>
-
-<p>Archivo(s): data/coli.gff </p>
-
-<blockquote>
-<p>Como se describe en la sección `B. Datos de Entrada de éste documento, la columna 1 del formato GFF se anota el nombre del cromosoma donde esta reportada cada feature del genoma.</p>
-
-<p>El archivo tiene 7 lineas de comentarios (líneas que comienzan con <code>#</code>.</p>
-
-<p>El total de líneas del archivo son data/coli.gff que se obtiene con <code>wc -l data/coli.gff</code></p>
-</blockquote>
-
-<p>Algoritmo:</p>
-
-<blockquote>
-<ul>
-<li>Usar la columna 1 del archivo GFF, que es el nombre del cromosoma.</li>
-</ul>
-
-<blockquote>
-<ul>
-<li><p>No nos interesa el resto de la información del <code>feature</code> solo en qué cromosoma esta anotado. </p></li>
-<li><p>Al quedarnos con el nombre del cromosoma, tendremos muchas repeticiones, tantas como <code>features</code>esten anotadas en ese cromosoma.</p></li>
-<li><p>Tomar en cuenta que las líneas de comentarios también vendrán.</p></li>
-</ul>
-</blockquote>
+<p><strong>Solución</strong></p>
 
 <ul>
-<li>Eliminar repeticiones (quedarnos con valores únicos de cromosomas)</li>
-<li>Contar el número de cromosomas ( Vendran las líneas de comentarios, hay que restarlas al total )</li>
+<li>En la base de datos <code>Genome</code>en NCBI, en el <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.3/">genoma de E. coli</a>, la versión 3 del genoma, se indica el tamaño del genoma que es de 4,641,652 bp.</li>
 </ul>
-</blockquote>
 
-<p>Solución</p>
+<div><pre><code class="language-none">LOCUS       NC_000913            4641652 bp    DNA     circular CON 09-MAR-2022</code></pre></div>
 
-<p>Siguiendo el algoritmo su implementación seria</p>
+<ul>
+<li>También, en el archivo <code>coli.gff</code> en formato GFF del genoma de <em>E. coli</em>,  se indica el tamaño del genoma.</li>
+</ul>
 
-<div><pre><code class="language-bash">cut -f1 data/coli.gff | uniq
-</code></pre></div>
+<div><pre><code class="language-none">##sequence-region NC_000913.3 1 4641652</code></pre></div>
 
-<p>donde <code>cut -f1</code> nos permite cortar la información de la columna 1, y <code>uniq</code> nos elimina repeticiones.</p>
+<h3 id="toc_9">2.  ¿Cuántos cromosomas tiene <em>Escherichia coli</em>?</h3>
 
-<p><strong>Resultados</strong>
-La respuesta que obtenemos es </p>
+<p>En la página del genoma de <em>E. coli</em>, se indica que es un sólo cromosoma. Lo que vamos a validar, es si el archivo <code>coli.gff</code> contiene solo features del cromosoma.</p>
 
-<div><pre><code class="language-none">##gff-version 3
-#!gff-spec-version 1.21
-#!processor NCBI annotwriter
-#!genome-build ASM584v2
-#!genome-build-accession NCBI_Assembly:GCF_000005845.2
-##sequence-region NC_000913.3 1 4641652
-##species https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=511145
-NC_000913.3
-###</code></pre></div>
+<p><strong>Archivo</strong>: <code>coli.gff</code></p>
 
-<p>Donde las líneas que comienzan con <code>#</code> son comentarios. Por lo que tenemos solo un cromosoma con identificador <code>NC_000913.3</code>.</p>
+<ul>
+<li>El archivo tiene comentarios que no hay que tomar en cuenta.</li>
+<li>El resto de las líneas vienen anotadas las features, la columna 1 viene anotado el cromosoma.</li>
+</ul>
 
-<!-- ### 2. Pregunta 
+<p><strong>Algoritmo</strong></p>
 
-Archivo(s):     
+<ol>
+<li>Eliminar las líneas de comentarios. O bien no tomar en cuenta.</li>
+<li>Tomar solo la columna 1, donde vienen los cromosomas.</li>
+<li>Compactar/Quitar repeticiones</li>
+</ol>
 
-Algoritmo: 
+<p><strong>Solución</strong></p>
 
-1. 
+<div><pre><code class="language-bash">cut -f1 coli.gff | uniq</code></pre></div>
 
-Solución.
+<p>En resumen, el genoma de <em>E. coli</em> K12 tiene un tamaño de aproximadamente 4.6 millones de pares de bases distribuidos en un solo cromosoma circular.</p>
 
-```bash
+<h3 id="toc_10">3.  ¿Qué tipos de features tiene el genoma de <em>Escherichia coli</em>?</h3>
 
-```
+<p><strong>Archivo</strong> :  </p>
 
--->
+<h2 id="toc_11"></h2>
 
-<h2 id="toc_10">Análisis y Conclusiones</h2>
+<ul>
+<li></li>
+</ul>
 
-<p>El genoma de E.coli versión NC_000913.3, tiene ## cromosoma con un un tamaño aproximado de ### MB. Se han anotado ### número de genes, los cuales ### van en la cadena de 5&#39;-3&#39; y ### van en la cadena complementaria.  </p>
+<p><strong>Algoritmo</strong></p>
 
-<p><!-- describe todo lo que descubriste en este análisis --></p>
+<ol>
+<li></li>
+<li></li>
+</ol>
 
-<h2 id="toc_11">Referencias</h2>
+<p><strong>Solución</strong></p>
 
-<p>[1] https://es.wikipedia.org/wiki/Escherichia_coli</p>
+<div><pre><code class="language-none"></code></pre></div>
 
-<p>[2] Frederick R. Blattner et al., The Complete Genome Sequence of <i>Escherichia coli</i> K-12.Science277,1453-1462(1997).DOI:10.1126/science.277.5331.1453</p>
+<h3 id="toc_12">4.  ¿Cuántos tipos de features se encuentran anotadas como parte del genoma de <em>Escherichia coli</em>?</h3>
+
+<p><strong>Archivo</strong>:  </p>
+
+<h2 id="toc_13"></h2>
+
+<ul>
+<li></li>
+</ul>
+
+<p><strong>Algoritmo</strong></p>
+
+<ol>
+<li></li>
+<li></li>
+</ol>
+
+<p><strong>Solución</strong></p>
+
+<div><pre><code class="language-none"></code></pre></div>
+
+<h3 id="toc_14">5.  ¿Cuáles son las fuentes de los datos de anotación?</h3>
+
+<p><strong>Archivo</strong>:  </p>
+
+<h2 id="toc_15"></h2>
+
+<ul>
+<li></li>
+</ul>
+
+<p><strong>Algoritmo</strong></p>
+
+<ol>
+<li></li>
+<li></li>
+</ol>
+
+<p><strong>Solución</strong></p>
+
+<div><pre><code class="language-none"></code></pre></div>
+
+<h3 id="toc_16">6.  ¿Cuántos genes y cuántos CDS tiene el genoma de <em>Escherichia coli</em>?</h3>
+
+<p><strong>Archivo</strong>:  </p>
+
+<h2 id="toc_17"></h2>
+
+<ul>
+<li></li>
+</ul>
+
+<p><strong>Algoritmo</strong></p>
+
+<ol>
+<li></li>
+<li></li>
+</ol>
+
+<p><strong>Solución</strong></p>
+
+<div><pre><code class="language-none"></code></pre></div>
+
+<h3 id="toc_18">7.  ¿Cuántos orígenes de replicación tiene el genoma de <em>Escherichia coli</em>?</h3>
+
+<p><strong>Archivo</strong>:  </p>
+
+<h2 id="toc_19"></h2>
+
+<ul>
+<li></li>
+</ul>
+
+<p><strong>Algoritmo</strong></p>
+
+<ol>
+<li></li>
+<li></li>
+</ol>
+
+<p><strong>Solución</strong></p>
+
+<div><pre><code class="language-none"></code></pre></div>
+
+<h3 id="toc_20">8.  ¿Cuántos genes hay en cada una de la cadenas del genoma de <em>Escherichia coli</em>?</h3>
+
+<p><strong>Archivo</strong>:  </p>
+
+<h2 id="toc_21"></h2>
+
+<ul>
+<li></li>
+</ul>
+
+<p><strong>Algoritmo</strong></p>
+
+<ol>
+<li></li>
+<li></li>
+</ol>
+
+<p><strong>Solución</strong></p>
+
+<div><pre><code class="language-none"></code></pre></div>
+
+<h3 id="toc_22">9.  Escribe un archivo ordenado por cadena y región genómica.</h3>
+
+<p><strong>Archivo</strong>:  </p>
+
+<h2 id="toc_23"></h2>
+
+<ul>
+<li></li>
+</ul>
+
+<p><strong>Algoritmo</strong></p>
+
+<ol>
+<li></li>
+<li></li>
+</ol>
+
+<p><strong>Solución</strong></p>
+
+<div><pre><code class="language-none"></code></pre></div>
+
+<h2 id="toc_24">Discusión</h2>
+
+<!-- En esta sección, se interpretan los resultados del estudio, se discuten sus implicaciones y limitaciones, y se sugiere direcciones futuras para la investigación.  Proporciona una conclusión que cierra la discusión y resume las contribuciones más importantes de tu estudio. Reafirma la importancia de tus hallazgos y sus implicaciones.
+ -->
+
+<h2 id="toc_25">Conclusiones</h2>
+
+<h2 id="toc_26">Referencias</h2>
+
+<!-- Referencias en formato APA -->
+
+<ol>
+<li>Moreno, D. y Carrillo J. (2019). <em>Normas APA 7.^a^ edición. Guía de citación y referenciación</em> (Universidad Central, ed.). Universidad Central. Consultado el 07 de agosto de 2024. https://bitly.cx/hE17</li>
+</ol>
 
 
 
