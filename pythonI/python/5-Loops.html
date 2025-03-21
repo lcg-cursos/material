@@ -3,7 +3,7 @@
   <head>
     <title>Python II y GitHub</title>
     <meta charset="utf-8" />
-    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -12,9 +12,15 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Python II y GitHub
+]
+.institute[
 ### Licenciatura en Ciencias Genómicas,UNAM
-### First version: yyy-mm-dd; Last update: 2022-03-31
+]
+.date[
+### First version: yyy-mm-dd; Last update: 2025-03-20
+]
 
 ---
 
@@ -36,18 +42,28 @@ pre {
 
 ## Objetivo
 
-* Conocer los ciclos usando el for
+* Conocer los Ciclos e Iteradores en Python
 
 
 ---
 class: inverse, center, middle
 
-# Loops 
+# Ciclos e Iterables en Python
 
 ---
+## Introducción
+
+En Python, los **ciclos** permiten **repetir** un conjunto de **instrucciones** varias veces. Son esenciales para recorrer **objetos iterables**. 
+
+
+### Objeto iterable
+
+Un **objeto iterable** es cualquier objeto que **puede devolver sus elementos uno a uno**. En Python, las **listas, tuplas, cadenas de texto y archivos** son iterables por lo tanto se pueden recorrer con un ciclo `for`.
+
+---
+
 # Loops 
 
-Nos permiten generar operaciones repetidamente 
 
 &lt;img src="https://files.realpython.com/media/Python-for-Loops-Definite-Iteration_Watermarked.b38126d495e1.jpg" width="600px" style="display: block; margin: auto;" /&gt;
 
@@ -55,75 +71,110 @@ Nos permiten generar operaciones repetidamente
 ---
 # Loops 
 
+El ciclo for permite recorrer elementos de una secuencia (listas, archivos, cadenas de texto).
+
 Tiene esta sintáxis:
 
 .content-box-green[
 
 
-```python
+``` python
 for &lt;var&gt; in &lt;iterable&gt;:
     &lt;statement(s)&gt;
 ```
 
 ]
 
+
+### Características del ciclo for
+
+- Itera automáticamente sobre cualquier objeto iterable.
+- Objeto iterables: listas, tuplas, diccionarios, archivos, y más.
+- Es más seguro y eficiente que while, ya que evita errores de condición infinita.
+- Se puede combinar con `enumerate()`, `zip()`, `range()`, `reversed()`, entre otros.
+
 ---
-# Loops
+# Loops: for
 
-Podemos imprimir desde la lista 
+**Ejemplo:** Recorrer una lista de genes.
 
 
-```python
-# La lista
-apes = ["Pongo pygmaeus", "Pan troglodytes", "Gorilla gorilla"]
-
-# Imprimir una oración 
-print(apes[0] + " is an ape")
-print(apes[1] + " is an ape")
-print(apes[2] + " is an ape")
+``` python
+genes = ["rpoB", "lacZ", "gyrA", "recA"]
+for gen in genes:
+    print(f"Procesando el gen: {gen}")
 ```
 
 --
-Usando **loops** con `for`.
+
+### Iterar en orden inverso con reversed()
+
+Podemos recorrer una lista en orden inverso usando reversed().
 
 
-```python
-for ape in apes:
-  print(ape + " is an ape")
+``` python
+genes = ["rpoB", "lacZ", "gyrA", "recA"]
+for gen in reversed(genes):
+    print(f"Procesando el gen: {gen}")
+```
+
+---
+
+# Loops: for
+
+
+**Ejemplo:** Recorrer un rango de números.
+
+
+``` python
+for i in range(1, 6):
+    print(f"Iteración {i}")
 ```
 
 
 --
 
-&lt;br&gt;&lt;br&gt;
+```
+range(start, stop, step)
+```
 
-.center[.content-box-green[**Vamos a vsCode**]]
+.tiny[
+La función **`range()`** se usa para generar una secuencia de números enteros. Es comúnmente utilizada en bucles for y en operaciones donde se necesita iterar sobre un rango de valores.
+Parámetros:
+
+- start (opcional): Número desde donde comienza la secuencia (por defecto es 0).
+- stop (obligatorio): Número hasta donde se genera la secuencia (exclusivo).
+- step (opcional): Incremento o decremento entre cada número de la secuencia (por defecto es 1).
+]
 
 ---
-# Loops
+
+# Loops: for y strings
+
+**Ejemplo:** Iterar sobre caracteres en una secuencia de ADN.
 
 ¿Qué pasa con los strings en **loops**?
 
 
-```python
-name = "python"
-for character in name:
-    print("one character is " + character)
+
+``` python
+secuencia = "ATGCGTAC"
+for nucleotido in secuencia:
+    print(nucleotido)
 ```
 
---
 
-&lt;br&gt;&lt;br&gt;
+Los **strings** son objetos **iterables**.
 
-.center[.content-box-green[**Vamos a vsCode**]]
 
 ---
+
 # Identaciones en loops
 
 Es importante respetar los espacios de las identaciones, veamos que pasa utilizando el siguente código:
 
 
-```python
+``` python
 # La lista
 apes = ["Pongo pygmaeus", "Pan troglodytes", "Gorilla gorilla"]
 
@@ -134,13 +185,68 @@ for ape in apes:
     print("Its name has " + str(name_length) + " letters")
 ```
 
+**Cómo lo corregimos?**
+- identación
+- actualizar el print (+)
+
+---
+## split
+
+La función `split()` en Python se usa para dividir una cadena de texto en una lista de subcadenas, utilizando un delimitador especificado. Si no se proporciona un delimitador, se usa el espacio en blanco por defecto.
+
+```
+cadena.split(separador, maxsplit)
+```
+
+
+.tiny[
+
+**Parámetros**
+
+1.  **`separador`** (opcional): El delimitador que se usará para dividir la cadena. Si no se especifica, se usan espacios en blanco.
+2.  **`maxsplit`** (opcional): Número máximo de divisiones a realizar. El valor por defecto es `-1`, lo que significa que se divide en todas las posibles ocurrencias.
+
+]
+
+
+---
+## split
+
+
+
+``` python
+texto = "ATG CGT TAA GGC"
+lista = texto.split() # usa espacios en blanco para dividir la cadena
+print(lista)
+```
+
+--
+
+
+
+``` python
+secuencia = "ATG,CGT,TAA,GGC"
+lista = secuencia.split(",")
+print(lista)
+```
+
+--
+
+
+``` python
+secuencia = "ATG-CGT-TAA-GGC"
+lista = secuencia.split("-", 2)
+print(lista)
+```
+
+
 ---
 # Cortar un string y loops
 
-Podemos cortar un string usando el método `split()` que tiene como argumento el caracter que se usará para cortar `","`. El resultado nos dará una `lista` 
+Podemos cortar un string usando el método `split()` que tiene como argumento el caracter que se usará para cortar `","`. El resultado nos dará una `lista` que recorremos con un for.
 
 
-```python
+``` python
 names = "melanogaster,simulans,yakuba,ananassae"
 species = names.split(",")
 print(str(species))
@@ -150,16 +256,28 @@ for specie in species:
   print(specie + " is an specie")
 ```
 
+---
+# split y map
 
---
 
-&lt;br&gt;&lt;br&gt;
 
-.center[.content-box-green[**Vamos a vsCode**]]
+``` python
+numeros_str = input("Introduce tres números separados por espacio: ").split()
+print(numeros_str)
+numeros = list(map(int, numeros_str))  # Convierte cada elemento a entero
+total = sum(numeros)
+print(total)
+```
 
+
+📌 ¿Qué hace?
+
+`map(int, numeros_str)` aplica `int()` a cada elemento de numeros_str.
+
+desppués veremos mas detalles de `map`.
 
 ---
-# Loops en archivos
+# Loops y archivos
 
 Podemos ocupar los loops para leer varias lineas de un archivo `dna_sequences.txt`.
 
@@ -170,7 +288,7 @@ ACTGAC-ACTGT—ACTGTA----CATGTG
 ```
 
 
-```python
+``` python
 # Abir archivo
 file = open("dna_sequences.txt")
 
@@ -182,6 +300,7 @@ for line in file:
 file.close()
 ```
 
+**¿Cómo lo cambiamos por `with open` ?
 
 ---
 # Leer con `readlines()`
@@ -189,7 +308,7 @@ file.close()
 Podemos leer todas las lineas de un archivo y guardarlas en una `lista` para después ocuparla dentro de un loop. 
 
 
-```python
+``` python
 # Abir archivo
 file = open("dna_sequences.txt")
 
@@ -208,56 +327,239 @@ for line in all_lines:
   print(line[:5] )
 ```
 
----
-
-## Ejercicio: trimming
-
-.content-box-blue[
-Cortar adaptadores de la secuencia `4_input_adapters.txt`, sabiendo que se encuentran de la posición 1-14. 
-
-```
-ATTCGATTATAAGCTCGATCGATCGATCGATCGATCGATCGATCGATCGATCGATC
-ATTCGATTATAAGCACTGATCGATCGATCGATCGATCGATGCTATCGTCGT
-ATTCGATTATAAGCATCGATCACGATCTATCGTACGTATGCATATCGATATCGATCGTAGTC
-ATTCGATTATAAGCACTATCGATGATCTAGCTACGATCGTAGCTGTA
-ATTCGATTATAAGCACTAGCTAGTCTCGATGCATGATCAGCTTAGCTGATGATGCTATGCA
-```
-
-]
-
-- Input: Archivo `4_input_adapters.txt` con las secuencias.
-
-- Output: Archivo con las secuencias sin adaptadores
-
-
-
 
 ---
-## Ejercicio: fasta files
+## Loop, archivo y split
 
-.content-box-blue[
-Convertir las secuencias en formato fasta
-
-```
-seq_1   ATCGTACGATCGATCGATCGCTAGACGTATCG
-seq_2   actgatcgacgatcgatcgatcacgact
-seq_3   ACTGAC-ACTGT—ACTGTA----CATGTG
-```
-
-]
-
-- Input: Archivo `dna_sequences.txt` con las secuencias.
-
-- Output: Archivo `.fasta`
+Supongamos que tenemos un archivo `genes.gff` con el siguiente contenido:
 
 ```
-&gt; seq_1
-ATCGTACGATCGATCGATCGCTAGACGTATCG
-&gt; seq_2
-ACTGATCGACGATCGATCGATCACGACT
-&gt; seq_3
-ACTGACACTGTACTGTACATGTG
+NC_000913.3	RefSeq	gene	190	255	.	+	.	ID=gene0;Name=thrL
+NC_000913.3	RefSeq	gene	337	2799	.	+	.	ID=gene1;Name=thrA
+NC_000913.3	RefSeq	gene	2801	3733	.	+	.	ID=gene2;Name=thrB
 ```
+
+Queremos calcular el tamaño de los genes en un archivo GFF 
+
+
+``` python
+with open("genes.gff", "r") as archivo:
+    for linea in archivo:
+        columnas = linea.strip().split("\t")  
+        
+        # Validar que las columnas 3 y 4 no están vacías
+        if columnas[3].isdigit() and columnas[4].isdigit():
+            inicio = int(columnas[3])  
+            fin = int(columnas[4])  
+            tamaño = fin - inicio + 1  
+
+            print(f"Gen en {inicio}-{fin} tiene tamaño: {tamaño} pb")
+```
+
+
+---
+# Modificando el comportamiento del `for`
+
+Dentro de un bucle `for`, se pueden usar varias funciones y palabras clave que modifican su comportamiento.
+
+
+### `break` → Detener el bucle antes de que termine
+
+Finaliza el bucle cuando se cumple una condición.
+
+Ejemplo: Buscar una base específica en una secuencia
+
+
+``` python
+secuencia = "ATGCGTACGTAG"
+buscar = "C"
+
+for base in secuencia:
+    if base == buscar:
+        print(f"Base '{buscar}' encontrada, deteniendo el bucle.")
+        break
+    print(base)
+```
+
+🔹 **Explicación**: El bucle se detiene cuando encuentra la primera 'C'.
+
+---
+# Modificando el comportamiento del `for`
+
+
+### `continue` → Saltar una iteración y seguir con la siguiente
+
+`continue` omite el código restante en la iteración actual y pasa a la siguiente.
+
+Ejemplo: Omitir bases 'C' en una secuencia
+
+
+``` python
+secuencia = "ATGCGTACGTAG"
+
+for base in secuencia:
+    if base == "C":
+        continue
+    print(base, end="")
+```
+
+🔹 **Explicación**: Cada vez que se encuentra una `'C'`, la impresión se omite y el bucle continúa.
+
+---
+## Modificando el comportamiento del `for`
+
+### `else` en un `for` → Se ejecuta si el bucle NO se interrumpe con `break`.
+
+Ejemplo: Buscar una base que no existe
+
+
+``` python
+secuencia = "ATGCGTAG"
+buscar = "X"
+
+for base in secuencia:
+    if base == buscar:
+        print(f"Base '{buscar}' encontrada.")
+        break
+else:
+    print(f"Base '{buscar}' no encontrada en la secuencia.")
+```
+
+🔹 **Explicación**: Como `'X'` no está en la secuencia, el `else` se ejecuta.
+
+---
+# Otras funciones útiles en `for`
+
+### `enumerate()` → Obtener índice y valor a la vez.
+
+Ejemplo: Mostrar índices de cada base
+
+
+``` python
+secuencia = "ATGCGT"
+
+for i, base in enumerate(secuencia):
+    print(f"Posición {i}: {base}")
+```
+
+🔹 **Explicación**: `enumerate()` ayuda a recorrer la secuencia junto con los índices.
+
+---
+# Otras funciones útiles en `for`
+
+### `zip()` → Iterar sobre múltiples listas a la vez
+
+Ejemplo: Emparejar bases de ADN con su complemento
+
+
+``` python
+bases = "ATGC"
+complementos = "TACG"
+
+for base, complemento in zip(bases, complementos):
+    print(f"{base} → {complemento}")
+```
+
+
+---
+## `zip()` con listas no del mismo tamaño
+
+Si las listas que se usan con `zip()` no tienen el mismo tamaño, **zip solo emparejará elementos hasta la longitud de la lista más corta**, ignorando los elementos sobrantes de la más larga.
+
+
+``` python
+genes = ["thrL", "thrA", "thrB"]
+longitudes = [66, 2463]  # Lista más corta
+
+for gen, tamaño in zip(genes, longitudes):
+    print(f"Gen: {gen}, Tamaño: {tamaño} pb")
+```
+
+---
+
+## Ciclo `while`
+
+Repite un bloque de código mientras se cumpla una condición, es decir sea verdadera.
+
+**Sintaxis:**
+
+```python
+while condicion:
+    # Bloque de instrucciones
+
+```
+
+Es útil cuando **no sabemos de antemano cuántas veces se repetirá un proceso**. Es ideal cuando la **condición de salida** depende de algo externo, como la entrada del usuario, la lectura de un archivo hasta el final, o el monitoreo de una condición en tiempo real.
+
+---
+## Ciclo `while`
+
+### Esperar una entrada válida del usuario
+
+Si queremos asegurarnos de que el usuario ingrese un valor válido, un while es la mejor opción.
+
+
+
+``` python
+opcion = ""
+while opcion.lower() not in ["a", "b", "c"]:
+    opcion = input("Elige una opción (A, B, C): ")
+print(f"Opción seleccionada: {opcion.upper()}")
+```
+
+---
+## Ciclo `while` : menu iterativo
+
+
+``` python
+opcion = ""
+while opcion != "4":
+    print("\n🎭 MENÚ DE OPCIONES RIDÍCULAMENTE ÚTILES 🎭")
+    print("1. Recibir un consejo motivacional ✨")
+    print("2. Saber qué animal serías hoy 🐾")
+    print("3. Generar una excusa para no trabajar 📋")
+    print("4. Salir 🚪")
+
+    opcion = input("Selecciona una opción: ")
+    
+    if opcion == "1":
+           print("Si la vida te da limones... ¡exige aguacates! 🥑")
+    elif opcion == "2":  
+           print("\n🐾 Hoy serías: un perezoso 🦥");
+    elif opcion == "3":
+           print("No puedo, mi pez está deprimido. 🐠😔")
+    elif opcion == "4":
+        print("\n🚪 ¡Adiós! Recuerda beber agua y hacer algo ridículamente divertido hoy. 💦😁")
+
+    else:
+        print("\n⚠️ Error: Opción no válida. ¿Intentaste hackear el menú? 🤨")
+```
+
+---
+## Ciclo `while`
+
+### Simular intentos de acceso con contraseña
+
+Un while es ideal cuando queremos darle al usuario un número limitado de intentos.
+
+
+``` python
+contraseña_correcta = "bioinfo123"
+intentos = 3
+
+while intentos &gt; 0:
+    contraseña = input("Introduce la contraseña: ")
+    if contraseña == contraseña_correcta:
+        print("Acceso concedido.")
+        break
+    else:
+        intentos -= 1
+        print(f"Contraseña incorrecta. Intentos restantes: {intentos}")
+
+if intentos == 0:
+    print("Acceso denegado.")
+```
+
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
@@ -307,6 +609,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
