@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ejercicios-parte1</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h2 id="objetivo-de-la-sesión-práctica"><strong>Objetivo de la Sesión Práctica</strong></h2>
+<p>Esta sesión práctica tiene como propósito ayudar al estudiante a reforzar sus conocimientos sobre <strong>variables, listas, comprensión de listas, condicionales</strong> y algunas funciones  y métodos como <code>print()</code>, <code>len()</code>, <code>.startwith()</code>, <code>input()</code>, <code>.count()</code>, etc.</p>
+<p>Revisa cada ejercicio con atención, sigue las instrucciones y escribe el código en Python dentro del bloque correspondiente. Puedes ejecutar y probar tu código en <strong>Visual Studio Code</strong> o en cualquier otro entorno de desarrollo que prefieras.</p>
+<p>⚠ <strong>Importante:</strong> Resuelve los ejercicios por tu cuenta. <strong>No uses ChatGPT ni otras herramientas de asistencia automática</strong> para generar las respuestas. El objetivo es que practiques y desarrolles tus habilidades de programación. 🚀</p>
+<h3 id="ejercicio-1-contar-la-longitud-de-una-secuencia-de-adn"><strong>Ejercicio 1: Contar la longitud de una secuencia de ADN</strong></h3>
+<p>📌 <em>Objetivo:</em> Uso de variables,  función <code>input</code> y  <code>len()</code>.</p>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>Pide al usuario que ingrese una secuencia de ADN.</li>
+<li>Calcula e imprime su longitud.</li>
+</ul>
+<pre class=" language-python"><code class="prism  language-python">
+</code></pre>
+<h3 id="ejercicio-2.-contar-la-frecuencia-de-cada-nucleótido-en-una-secuencia-5-min"><strong>Ejercicio 2. Contar la frecuencia de cada nucleótido en una secuencia (5 min)</strong></h3>
+<p>📌 <em>Objetivo:</em> Uso de variables y del método <code>count()</code> .</p>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>Pide al usuario que ingrese una secuencia de ADN.</li>
+<li>Cuenta e imprime cuántas veces aparece cada nucleótido (<code>A, T, C, G</code>).</li>
+</ul>
+<pre class=" language-python"><code class="prism  language-python">
+</code></pre>
+<h3 id="ejercicio-3-identificar-el-codón-de-inicio-en-una-secuencia-de-adn-5-min"><strong>Ejercicio 3: Identificar el codón de inicio en una secuencia de ADN (5 min)</strong></h3>
+<p>📌 <em>Objetivo:</em> Uso de <code>if</code>,  <code>print()</code> y método <code>.startswith</code>.</p>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>Pide al usuario que ingrese una secuencia de ADN.</li>
+<li>Verifica si la secuencia comienza con el codón de inicio <code>ATG</code>.</li>
+</ul>
+<pre class=" language-python"><code class="prism  language-python">
+</code></pre>
+<h3 id="ejercicio-4-eliminar-adaptadores-de-secuencias"><strong>Ejercicio 4: Eliminar Adaptadores de secuencias</strong></h3>
+<p>📌 <em>Objetivo:</em> Uso de <code>with</code>,  <code>open()</code> y  <code>for</code>.</p>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>Lee el archivo de entrada <code>4_input_adapters.txt</code></li>
+<li>Cortar adaptadores de la secuencia <code>4_input_adapters.txt</code>. Los adaptadores son los primeros 1-14 caracteres de cada secuencia.</li>
+<li>Manda la salida a un archivo <code>4_input_no_adapters.txt</code></li>
+</ul>
+<p><code>4_input_adapters.txt</code></p>
+<pre><code>ATTCGATTATAAGCTCGATCGATCGATCGATCGATCGATCGATCGATCGATCGATC
+ATTCGATTATAAGCACTGATCGATCGATCGATCGATCGATGCTATCGTCGT
+ATTCGATTATAAGCATCGATCACGATCTATCGTACGTATGCATATCGATATCGATCGTAGTC
+ATTCGATTATAAGCACTATCGATGATCTAGCTACGATCGTAGCTGTA
+ATTCGATTATAAGCACTAGCTAGTCTCGATGCATGATCAGCTTAGCTGATGATGCTATGCA
+</code></pre>
+<pre class=" language-python"><code class="prism  language-python">
+</code></pre>
+<h3 id="ejercicio-5-convertir-de-tsv-a-fasta"><strong>Ejercicio 5: Convertir de tsv a fasta</strong></h3>
+<p>📌 <em>Objetivo:</em> Uso de <code>with</code>,  <code>open()</code> y  <code>for</code>.</p>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>Lee el archivo de entrada <code>dna_sequences.txt</code></li>
+<li>Convertir las secuencias en formato tsv <code>dna_sequences.txt</code>  a formato fasta.</li>
+<li>Guarda las secuencias en un archivo <code>dna_sequences.fa</code></li>
+</ul>
+<p><code>dna_sequences.txt</code></p>
+<pre><code>seq_1   ATCGTACGATCGATCGATCGCTAGACGTATCG
+seq_2   actgatcgacgatcgatcgatcacgact
+seq_3   ACTGAC-ACTGT—ACTGTA----CATGTG
+</code></pre>
+<p><code>dna_sequences.fa</code></p>
+<pre><code>&gt; seq_1
+ATCGTACGATCGATCGATCGCTAGACGTATCG
+&gt; seq_2
+ACTGATCGACGATCGATCGATCACGACT
+&gt; seq_3
+ACTGACACTGTACTGTACATGTG
+</code></pre>
+<pre class=" language-python"><code class="prism  language-python">
+</code></pre>
+<h3 id="ejercicio-6-contar-líneas-en-un-archivo-fasta-10-min"><strong>Ejercicio 6: Contar líneas en un archivo FASTA (10 min)</strong></h3>
+<p>📌 <em>Objetivo:</em> Uso de <code>with</code>,  <code>open()</code> y  <code>len</code>, <code>startswith</code>, <code>list comprehension</code></p>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>Lee el archivo <code>secuencias.fasta</code></li>
+<li>Cuenta cuántas secuencias hay en el archivo (líneas que comienzan con <code>&gt;</code>)</li>
+<li>Imprime un mensaje que indique el numero de secuencias.</li>
+</ul>
+<pre><code>&gt;Secuencia1
+ATGCGTACGTAGCTAGCTAGC
+&gt;Secuencia2
+CGTAGCTAGCTAGCTAGCTAGC
+</code></pre>
+<pre class=" language-python"><code class="prism  language-python">
+</code></pre>
+<h3 id="ejercicio-7-extraer-los-primeros-tres-nucleótidos-de-cada-secuencia-10-min"><strong>Ejercicio 7: Extraer los primeros tres nucleótidos de cada secuencia (10 min)</strong></h3>
+<p>📌 <em>Objetivo:</em> Uso de comprensión de listas para extraer subcadenas y <code>split</code>.</p>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>Pide al usuario que ingrese varias secuencias de ADN separadas por comas.</li>
+<li>Extrae los primeros tres nucleótidos de cada secuencia.</li>
+</ul>
+<pre class=" language-python"><code class="prism  language-python">
+</code></pre>
+<h3 id="ejercicio-8-calcular-el-contenido-de-gc-en-una-secuencia-10-min"><strong>Ejercicio 8: Calcular el contenido de GC en una secuencia (10 min)</strong></h3>
+<p>📌 <em>Objetivo:</em> Uso de listas, comprensión de listas, <code>len</code> e <code>in</code>.</p>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>Pide al usuario que ingrese una secuencia de ADN.</li>
+<li>Calcula el porcentaje de nucleótidos <code>G</code> y <code>C</code> en la secuencia.</li>
+</ul>
+<pre class=" language-python"><code class="prism  language-python">
+</code></pre>
+<h3 id="ejercicio-9-transformar-secuencias-de-adn-en-arn-10-min"><strong>Ejercicio 9: Transformar secuencias de ADN en ARN (10 min)</strong></h3>
+<p>📌 <em>Objetivo:</em> Uso de comprensión de listas, <code>input</code>,  método <code>.replace()</code>.</p>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>Pide al usuario que ingrese varias secuencias de ADN separadas por comas.</li>
+<li>Convierte cada secuencia a ARN reemplazando <code>T</code> por <code>U</code>.</li>
+</ul>
+<pre class=" language-python"><code class="prism  language-python">
+</code></pre>
+<p>📌 <strong>Extensión:</strong> Guardar las secuencias convertidas en un archivo <code>secuencias_arn.txt</code>.</p>
+<h3 id="ejercicio-10--filtrar-muestras-biológicas-según-su-ph-20-min"><strong>Ejercicio 10:  Filtrar muestras biológicas según su pH (20 min)</strong></h3>
+<p>📌 <em>Objetivo:</em> Uso de comprensión de listas para filtrar valores numéricos.</p>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>Pide al usuario que ingrese valores de pH de distintas muestras separados por comas.</li>
+<li>Filtra aquellas muestras que están dentro del rango fisiológico (pH entre 6.8 y 7.8).</li>
+</ul>
+<p><strong>Código:</strong></p>
+<pre class=" language-python"><code class="prism  language-python">
+</code></pre>
+<h3 id="ejercicio-11--invertir-secuencias-de-adn"><strong>Ejercicio 11:  Invertir secuencias de ADN</strong></h3>
+<p>📌 <em>Objetivo:</em> Uso de comprensión de listas para invertir cadenas.</p>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>Pide al usuario que ingrese varias secuencias de ADN separadas por comas.</li>
+<li>Imprime las secuencias en orden inverso.</li>
+</ul>
+<pre class=" language-python"><code class="prism  language-python"></code></pre>
+<h3 id="ejercicio-12--encontrar-secuencias-que-contengan-un-codón-de-parada-10-min"><strong>Ejercicio 12:  Encontrar secuencias que contengan un codón de parada (10 min)</strong></h3>
+<p>📌 <em>Objetivo:</em> Uso de listas y comprensión de listas para filtrar datos.</p>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>Pide al usuario que ingrese varias secuencias de ADN separadas por comas.</li>
+<li>Filtra aquellas que contengan un codón de parada (<code>TAA</code>, <code>TAG</code>, <code>TGA</code>).</li>
+</ul>
+<pre class=" language-python"><code class="prism  language-python">
+</code></pre>
+<h3 id="ejercicio-13-contar-nucleótidos-en-cada-secuencia-15-min"><strong>Ejercicio 13: Contar nucleótidos en cada secuencia (15 min)</strong></h3>
+<p>📌 <em>Objetivo:</em> Uso de listas anidadas y comprensión de listas.</p>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>Pide al usuario que ingrese varias secuencias de ADN separadas por comas.</li>
+<li>Devuelve una lista con la cantidad de <code>A, T, C, G</code> en cada secuencia.</li>
+</ul>
+<pre class=" language-python"><code class="prism  language-python">
+</code></pre>
+<p>📌 <strong>Extensión:</strong> Si queremos que tome en cuenta secuencias en minúsculas??</p>
+<h3 id="ejercicio-14-filtrar-secuencias-con-alto-contenido-de-gc-15-min"><strong>Ejercicio 14: Filtrar secuencias con alto contenido de GC (15 min)</strong></h3>
+<p>📌 <em>Objetivo:</em> Uso de comprensión de listas para filtrar secuencias.</p>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>Pide al usuario que ingrese varias secuencias separadas por comas.</li>
+<li>Calcula el porcentaje de GC de cada secuencia.</li>
+<li>Filtra e imprime solo aquellas con un contenido de GC superior al 50%.</li>
+</ul>
+<pre class=" language-python"><code class="prism  language-python"></code></pre>
+<p>📌 <strong>Extensión:</strong> Mostrar también el porcentaje de GC de cada secuencia.</p>
+<h3 id="ejercicio-15-saltar-secuencias-que-no-tengan-el-codón-de-inicio-atg"><strong>Ejercicio 15: Saltar secuencias que no tengan el codón de inicio <code>ATG</code></strong></h3>
+<p>📌 <em>Objetivo:</em> Uso de <code>for</code>, <code>if</code>, <code>continue</code>, y listas.</p>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>Recorre la lista de secuencias de ADN</li>
+<li>Imprime solo aquellas que contienen el codón de inicio <code>ATG</code>.</li>
+</ul>
+<h3 id="ejercicio-16-combinar-genes-y-secuencias">**Ejercicio 16: Combinar genes y secuencias</h3>
+<p>📌 <em>Objetivo:</em> Uso de <code>for</code>, <code>zip()</code>, y listas.</p>
+<p><strong>Instrucciones:</strong></p>
+<ul>
+<li>Dadas dos listas, una con nombres de genes y otra con sus secuencias correspondientes,</li>
+<li>usa <code>zip()</code> para imprimir cada gen junto con su secuencia.</li>
+</ul>
+<p>salida esperada</p>
+<pre><code>Gen: rpoB, Secuencia: ATGC
+Gen: lacZ, Secuencia: CGTA
+Gen: gyrA, Secuencia: TTGA
+</code></pre>
+</div>
+</body>
+
+</html>
