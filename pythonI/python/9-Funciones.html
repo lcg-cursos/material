@@ -3,7 +3,7 @@
   <head>
     <title>Python II y GitHub</title>
     <meta charset="utf-8" />
-    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 ### Licenciatura en Ciencias Genómicas,UNAM
 ]
 .date[
-### First version: yyy-mm-dd; Last update: 2024-04-18
+### First version: yyy-mm-dd; Last update: 2025-04-25
 ]
 
 ---
@@ -41,838 +41,1017 @@ pre {
 }
 &lt;/style&gt;
 
-# Objetivo
+# 🎯 Objetivo
 
-Organizar el código en Funciones, Módulos, Bibliotecas, y paquetes en Python
-
----
-# Contenido de la unidad
-
-1. Funciones
-2. Módulos
-3. Paquetes
-
+Comprender el concepto, la utilidad y la sintaxis de las funciones en Python, aplicando buenas prácticas de programación.
 
 &lt;img src="https://realpython.com/cdn-cgi/image/width=1920,format=auto/https://files.realpython.com/media/Pythons-Math-Module-Guide_Watermarked.c882e267cbd0.jpg" width="600px" style="display: block; margin: auto;" /&gt;
 
 ---
-# Razones para la Organización del código
+## 🔹 ¿Por qué usar funciones en programación?
 
-- **Legibilidad**: Un código bien organizado es más fácil de leer y entender, no solo por ti, sino también por otros que podrían trabajar en tu código en el futuro.
-
-- **Mantenibilidad**: Con el código bien organizado, es más fácil hacer cambios y agregar nuevas funcionalidades. 
-
-- **Eficiencia de depuración**: Si ocurre un error, es mucho más sencillo aislar el problema y solucionarlo cuando el código está bien estructurado y organizado.
-
-- **Reutilización**: Al dividir tu código en funciones y módulos, puedes reutilizar piezas del código en diferentes partes de tu proyecto sin tener que reescribirlo.
-
-- **Colaboración**: Cuando trabajas en un proyecto de equipo, tener un código bien organizado facilita la colaboración, ya que cada miembro del equipo puede trabajar en un módulo o función en particular sin interferir con el trabajo de los demás.
-
-- **Pruebas**: Con tu código bien organizado y dividido en funciones y módulos, puedes escribir pruebas para cada parte de manera más efectiva, asegurando así que el código funcione como se espera.
+Cuando escribimos un programa, muchas veces necesitamos **repetir ciertas operaciones** u **organizar el código** para que sea más claro y fácil de mantener. Ahí es donde entran las **funciones**.
 
 ---
-# Como lo organizamos ?
 
-.pull-left[
-**Funciones**: Las funciones pueden encapsular una tarea específica en un bloque de código independiente. 
+# 🧠 ¿Qué es una función?
 
-**Módulos**: Agrupar funcionalidades relacionadas en un módulo para reutilizar en diferentes programas.
+Una **función** es un bloque de código reutilizable que recibe entradas (parámetros), ejecuta instrucciones, y puede retornar un valor.
 
-**Paquetes**: Un paquete es una manera de organizar módulos relacionados. Por lo tanto, un "paquete" en Python es simplemente un directorio que contiene varios módulos o incluso otros paquetes. 
+Nos permite:
 
-**Bibliotecas**: Una biblioteca (o library) es un término más general que se utiliza para describir una colección de módulos y/o paquetes que trabajan juntos para proporcionar ciertas funcionalidades.
-
-]
-
-.pull-right[
-&lt;img src="https://miro.medium.com/v2/resize:fit:1030/format:webp/1*iL3Hq35sZ3sG26WGpjv8rg.png" width="600px" style="display: block; margin: auto;" /&gt;
-
-]
----
-# Ejemplo
-
-.pull-left[
-
-`matematicas/`: .tiny[Este es el directorio raíz de nuestro paquete.]
-
-`init.py`: .tiny[Este es un archivo especial en Python. La presencia de este archivo indica a Python que el directorio debe ser tratado como un paquete. Por lo general, este archivo se deja vacío, pero puede ser utilizado para ejecutar código de inicialización para el paquete.]
-
-`operaciones_basicas.py`: .tiny[Este es un módulo en nuestro paquete que puede contener funciones para realizar operaciones matemáticas básicas.]
-
-`geometria/` y `algebra/`: .tiny[Estos son subpaquetes en nuestro paquete Siguen la misma estructura que el paquete principal, con su propio archivo __init__.py, y contienen módulos específicos a sus respectivas áreas matemáticas.]
-
-]
-
-.pull-right[
-
-```
-matematicas/
-    __init__.py
-    operaciones_basicas.py
-    geometria/
-        __init__.py
-        area.py
-        volumen.py
-    algebra/
-        __init__.py
-        ecuaciones.py
-```
-]
-
----
-# Ejemplo: Pandas
-
-.pull-left[
-El paquete pandas es una biblioteca de código abierto en Python que proporciona estructuras de datos y herramientas de análisis de datos de alto rendimiento y fáciles de usar.
-
-Como puedes ver, `panda`s está muy bien estructurado con diferentes subpaquetes y módulos, lo que hace que sea más fácil de mantener y extender.
-
-]
-
-.pull-right[
-
-```
-pandas/
-    __init__.py
-    _config/
-    _libs/
-    _testing.py
-    _version.py
-    api/
-    compat/
-    core/                     #(aquí es donde residen DataFrame, Series, Index...)
-        __init__.py
-        algorithms.py
-        base.py
-        frame.py
-        indexers.py
-        indexing.py
-        series.py
-        ...
-    tseries/                  #(aquí es donde residen todas las funcionalidades relacionadas con las series temporales)
-        __init__.py
-        ...
-    io/                       #(aquí es donde residen todas las funcionalidades de entrada/salida (por ejemplo, leer desde CSV, Excel...)
-    util/
-    ...         
-```
-]
-
----
-# ejemplo BioPython
-
-.pull-left[
-
-Cada subdirectorio en el directorio Bio (paquete) representa un módulo, como Align, Alphabet, Data, etc. Dentro de estos subdirectorios, puedes encontrar varios archivos Python .py que contienen clases y funciones.
-
-Los archivos .py en el directorio Bio a nivel superior, como Seq.py y SeqIO.py, también representan módulos.
-
-El directorio Tests contiene los scripts de test unitario para cada módulo.
-
-Finalmente, setup.py es el script que se ejecuta para instalar Biopython.
-
-]
-.pull-right[
-
-```
-biopython-1.77/
-├── Bio
-│   ├── Align
-│   ├── Alphabet
-│   ├── Data
-│   ├── Seq.py
-│   ├── SeqIO.py
-│   ├── ...
-├── Tests
-│   ├── test_Seq.py
-│   ├── test_SeqIO.py
-│   ├── ...
-├── setup.py
-├── ...
-```
-]
-
----
-# El origen de la organización conceptual: funciones
-
-Una función es un __bloque de código reutilizable__ (DRY:Don't Repeat Yourself) que realiza una única acción. 
-
-.content-box-green[
-Conceptualmente, puedes pensar una función como una pequeña máquina que realiza **una acción específica**. Esta "máquina" tiene **una entrada** (los argumentos de la función) y **una salida* (el resultado que devuelve la función).
-`
-]
-
-Si bien Python ya proporciona muchas funciones integradas como `print()` y `len()`, también puedes definir tus propias funciones para usar en tus proyectos.
-
----
-# Cuando crear una función?
-
---
-
-- **Código repetido**: .tiny[Si te encuentras escribiendo el mismo bloque de código en varios lugares, probablemente deba estar en una función. DRY (Don't Repeat Yourself) es un principio fundamental de la programación.]
-
-- **Abstracción de operaciones complicadas**: .tiny[Si estás haciendo algo que es conceptualmente una sola acción pero que requiere varias líneas de código, podría ser útil crear una función para ello. Esto puede hacer que tu programa sea más fácil de leer y mantener.]
-
-- **Reutilización de código**:  .tiny[Si crees que un bloque de código puede ser útil en el futuro en un contexto similar, podría ser una buena idea convertirlo en una función.]
-
----
-# Sintaxis
-
-En Python, una definición de función tiene las siguientes características:
-
-
-```python
-def  functionName():
-    &lt;block code&gt;
-    return value
-```
-
-1. La palabra clave _def_
-
-2. Un _nombre_ de función
-
-3. Paréntesis ’()’, y dentro de los paréntesis los parámetros de entrada, aunque los parámetros de entrada sean opcionales.
-
-4. Dos puntos ’:’
-
-5. Algún bloque de código para ejecutar
-
-6. Una sentencia de retorno (opcional). Una función siempre devuelve un valor. La función utiliza la palabra clave return  para devolver un valor; si no desea devolver ningún valor, se devolverá el valor predeterminado None.
+-   **Evitar la repetición** de código (principio DRY: _Don't Repeat Yourself_).
     
+-   **Dividir un problema complejo** en partes pequeñas, más fáciles de entender.
+    
+-   **Reutilizar** código en distintas partes del programa sin copiar/pegar.
+    
+-   **Hacer pruebas más fácilmente**, porque cada función se puede probar por separado.
+
 ---
-# Funciones
 
-Es importante primero *definir* la función y luego *llamarla*.
+## 🌟 ¿Qué pasa si no usamos funciones?
 
-Función sin parámetros y sin retorno de valores
+Estás trabajando con secuencias de ADN y necesitas calcular el contenido GC de **varias secuencias** obtenidas de diferentes genes.
 
+
+
+``` python
+seq1 = "ATGCGCGTAAAGC"
+gc1 = (seq1.count('G') + seq1.count('C')) / len(seq1) * 100
+
+seq2 = "TTATGGCCATAT"
+gc2 = (seq2.count('G') + seq2.count('C')) / len(seq2) * 100
+
+seq3 = "GGCCGCGCGCGG"
+gc3 = (seq3.count('G') + seq3.count('C')) / len(seq3) * 100
+
+print(gc1, gc2, gc3)
+```
+
+🧨 Este código:
+
+.tiny[
+- Repite la misma lógica varias veces.
+- Es difícil de modificar (imagina que ahora quieres redondear o validar...).
+- Es propenso a errores si cambias una línea pero no las demás.
+]
+
+---
+
+## ✅ Con función:
+
+
+``` python
+def contenido_gc(seq):
+    return (seq.count('G') + seq.count('C')) / len(seq) * 100
+
+secuencias = [
+    "ATGCGCGTAAAGC",
+    "TTATGGCCATAT",
+    "GGCCGCGCGCGG"
+]
+
+for i, seq in enumerate(secuencias, start=1):
+    print(f"Secuencia {i} → GC%: {contenido_gc(seq):.2f}")
+```
+
+🧠 Ventajas claras:
+
+-   Reutilización del código.
+-   Mejor lectura.
+-   Más fácil de **modificar o mejorar** (por ejemplo, agregar validación).
+-   Lista para usar en otros proyectos o pruebas.
+
+---
+
+### 🎓 Lección
+
+&gt; "Con funciones, puedes resolver un problema **una sola vez** y usar esa solución tantas veces como necesites. Así piensan los programadores profesionales: resolver inteligentemente, no repetir."
+
+
+---
+
+# 🧩 Sintaxis de una función
 
 ```python
-# función sin parámetros o retorno de valores
-def diHola():
-  print("Hola!")
+def nombre_de_funcion(parámetros):
+    # bloque de código
+    return valor
+```
 
-# llamada a la función, 'Hola!' se muestra en la consola
-diHola() 
+🧱 Partes de una función
+
+.tiny[
+1.  **`def`**  
+    Palabra clave para **definir una función**.
+    
+2.  **Nombre de la función**  
+    Debe ser **descriptivo** (por ejemplo: `calcular_promedio`, `limpiar_secuencia`), siguiendo la convención `snake_case`.
+    
+3.  **Paréntesis `()`**  
+    Dentro van los **parámetros de entrada**, que son opcionales si no se necesitan.
+    
+4.  **Dos puntos `:`**  
+    Indica el comienzo del **bloque de código** que pertenece a la función.
+    
+5.  **Bloque de código**  
+    Todas las líneas dentro deben estar **indentadas** con 4 espacios (PEP8).
+    
+6.  **Sentencia `return` (opcional)**  
+    Especifica el **valor que devuelve** la función. Si no se indica `return`, la función devuelve `None` por defecto.
+]
+
+---
+# ✍️ Ejemplo básico :Saludo
+
+Una función puede definirse **sin parámetros** y **sin valor de retorno**. Solo ejecuta una acción cuando es llamada.
+
+
+``` python
+# Definimos una función sin parámetros ni retorno
+def di_hola():
+    print("¡Hola!")
+
+# Llamamos a la función: imprime el mensaje en la consola
+di_hola()
 ```
 
 --
 
-Función con un parámetro
+.tiny[
 
-```python
-# función con un parámetro
-def holaConNombre(name):
-  print("Hola " + name + "!")
+### 📌 Explicación:
 
-# llamada a la función. 'Hola AnaSofi!' se muestra en la consola
-holaConNombre("AnaSofi")  
+-   `def di_hola():` → define una función llamada `di_hola`, que **no recibe datos**.
+-   Dentro, ejecuta `print("¡Hola!")`.
+-   Al llamar `di_hola()`, se imprime el mensaje.
+-   **No hay `return`**, así que el valor devuelto es `None` (implícitamente).
+]
+
+---
+## ✍ Función con un parámetro
+
+Una función puede recibir **información de entrada** (llamada _parámetro_) y usarla para personalizar su comportamiento.
+
+
+``` python
+# Definimos una función que recibe un nombre como parámetro
+def saludar_con_nombre(nombre):
+    print(f"¡Hola, {nombre}!")
+
+# Llamamos a la función pasando un argumento (una cadena)
+saludar_con_nombre("AnaSofi")
 ```
 
 ---
-# Algunos conceptos
+## ✍ Función con múltiples parámetros y valor de retorno
+
+Una función puede aceptar **más de un parámetro** y retornar un valor, que luego puede usarse o imprimirse.
 
 
-- **Parámetro**: es una variable que se utiliza en la definición de una función para referirse a la información que se espera recibir cuando la función se llama o "invoca". Es la "variable" en la definición de la función.
+``` python
+# Definimos una función que multiplica dos valores
+def multiplica(valor1, valor2):
+    return valor1 * valor2
 
-- **Argumento**: es la información real que se pasa a la función cuando se hace la llamada o "invocación". Es el "valor" que se pasa a la función cuando se llama.
-    
-    
-Así que en la siguiente función suma, a y b son parámetros:
+# Llamamos a la función con dos argumentos
+resultado = multiplica(2, 3)
 
+# Imprimimos el resultado: 6
+print(resultado)
 ```
-def suma(a, b):
-    return a + b
-```
 
-Y aquí, en la llamada a la función, 5 y 3 son argumentos:
 
-```
-suma(5, 3)
-```
+.tiny[
+📌 Explicación:
+-   `valor1` y `valor2` son **parámetros** definidos en la función.
+-   `multiplica(2, 3)` pasa dos **argumentos**: `2` y `3`.
+-   La función retorna el producto de esos valores con `return`.
+]
 
 ---
-# Función con múltiples parámetros y con retorno
+## 🧩 Algunos conceptos clave
 
+Cuando trabajamos con funciones, es importante diferenciar entre:
 
+### 🔹 Parámetro
 
-```python
-# funcion con multiples parametros con una sentencia de retorno
-def multiplica(val1, val2):
-  return val1 * val2
+Es una **variable definida en la función**. Es como un espacio reservado que recibirá el valor al momento de llamar la función.
 
-resultado = multiplica(2, 3)  # muestra 6 en la consola
-print (resultado)
-```
+### 🔹 Argumento
 
-&lt;br&gt;&lt;br&gt;
-
-El nombre de la función se usa para llamar a la función, pasando los parámetros necesarios entre paréntesis.
-
-Si la definición de una función incluye parámetros, debe proporcionar el __mismo número de parámetros__ cuando llame a la función.
+Es el **valor real** que se pasa a la función cuando la invocamos. Es el dato concreto que sustituye al parámetro.
 
 ---
 
-
-Ya sabemos contar el contenido de `AT` en una secuencia 
-
+# 📌 Ejemplo
 
 
-```python
-my_dna = "ACTGATCGATTACGTATAGTATTTGCTATCATACATATATATCGATGCGTTCAT" 
+``` python
+def multiplica(valor1, valor2):
+    return valor1 * valor2
+```
 
-length = len(my_dna) 
-a_count = my_dna.count('A') 
-t_count = my_dna.count('T') 
-at_content = (a_count + t_count) / length 
+-   Aquí, `a` y `b` son **parámetros**.
+-   Son variables **internas a la función** que se usarán para multiplicar.
+
+
+``` python
+print(multiplica(4, 5))  # 20
+```
+
+-   Aquí, `4` y `5` son **argumentos**.
+-   Son los **valores reales** que se pasan a la función.
+
+---
+## 🧠 ¡Vamos a transformar este código en una función!
+
+Tenemos este código para contar el contenido de `A` y `T` en una secuencia de ADN:
+
+
+``` python
+my_dna = "ACTGATCGATTACGTATAGTATTTGCTATCATACATATATATCGATGCGTTCAT"
+
+length = len(my_dna)
+a_count = my_dna.count('A')
+t_count = my_dna.count('T')
+at_content = (a_count + t_count) / length
 
 print("AT content is " + str(at_content))
 ```
 
 
---
+.tiny[
+Antes de convertirlo en función, piensa en:
 
-&lt;br&gt;&lt;br&gt;
+-   🔹 ¿Cuál es la **entrada**?
+    
+-   🔹 ¿Cuál es la **salida**?
+    
+-   🔹 ¿Qué parte del código se **puede generalizar o reutilizar**?
 
-.center[.content-box-green[**Vamos a vsCode**]]
-
----
-
-Podemos crear una función que calcule el contenido de `AT`.
-
-
-```python
-def get_at_content():
-    dna = "ACTGATGCTAGCTA"    # mala idea, solo funciona para esta secuencia 
-    length = len(dna) 
-    a_count = dna.count('A') 
-    t_count = dna.count('T') 
-    at_content = (a_count + t_count) / length 
-    return at_content
-```
-
-Una función puede no tener argumentos como entrada, a veces es útil pero no en este momento. 
-
-Por eso es mejor pasarle la secuencia como argumento, en este ejemplo la variable _dna_ recibe el dato.
---
-
-```python
-def get_at_content(dna): 
-    length = len(dna) 
-    a_count = dna.count('A') 
-    t_count = dna.count('T') 
-    at_content = (a_count + t_count) / length 
-    return at_content
-```
-
---
-
-&lt;br&gt;
-
-.center[.content-box-green[**Vamos a vsCode**]]
-
----
-# Imprimir el resultado 
-
-Ejecutar la función no almacena la información, necesitamos almacenarla en una variable. 
-
-
-
-```python
-get_at_content("ATGACTGGACCA")
-```
-
---
-
-
-```python
-at_content = get_at_content("ATGACTGGACCA")
-```
-
---
-
-
-```python
-print("AT content is " + str(get_at_content("ATGACTGGACCA")))
-```
-
-.content-box-green[
-Nota: Python interpreta el bloque de funciones solo cuando se llama a la función y no cuando se define la función. Por lo tanto, incluso si el bloque de definición de función contiene algún tipo de error, el intérprete de Python lo señalará solo cuando se llame a la función.
 ]
 
 ---
-# ámbitos de las variables en las funciones
+### 🤔 Preguntas para realzar la transformación:
 
-La ejecución de una función introduce una __nueva tabla de símbolos__ usada para las __variables locales__ de la función. 
-
-Todas las __asignaciones__ de variables en una función _almacenan_ el valor en la __tabla de símbolos local__; mientras que las __referencias__ de variables primero _buscan_ en la tabla de símbolos local, luego en las tablas de símbolos locales de las funciones adjuntas, luego en la tabla de símbolos global y finalmente en la tabla de nombres incorporados. Por lo tanto, a las variables globales no se les puede asignar directamente un valor dentro de una función, aunque se puede hacer referencia a ellas.
-
-```
-&gt;&gt;&gt; a = 1
-&gt;&gt;&gt; b = 10
-&gt;&gt;&gt; def fn():
-...     print(a)    # la variable local a no esta asignada, no esta incluida en la función, es una variable global
-...     b = 20      # la variable local b está asignada en la tabla de símbolos locales para la función.
-...     print(b)    # la variable local b esta referenciada.
-...
-&gt;&gt;&gt; fn()
-1
-20
-&gt;&gt;&gt; b               # la variable global b no se ha modificado por la llamada a la función.
-10
-```
-
-Fuente: https://www.freecodecamp.org/espanol/news/guia-de-funciones-de-python-con-ejemplos/
+1.  ✅ ¿Qué dato debería poder cambiar sin reescribir el código?
+    
+    -   👉 **¿Y si quiero calcular el contenido AT de otra secuencia?**
+        
+2.  ✅ ¿Qué parte se repite si quiero hacer esto muchas veces?
+    
+    -   👉 **¿Y si quiero analizar 10 secuencias diferentes?**
+        
+3.  ✅ ¿Qué parte es fija y qué parte podría ir como parámetro?
+    
+    -   👉 **¿Qué cambiarías si quisieras usar este código como parte de un análisis más grande?**
 
 ---
-# ámbito - alcance de las variables
 
-Las variables definidas dentro de una función solo existen dentro del __ámbito__ de esa función. Es decir locales a la función.
+### ✅ Posible solución (la función): 
+
+- Funcion: contenido_at
+
+---
+
+---
 
 
-```python
+``` python
+def contenido_at(secuencia):
+    #Calcula el contenido AT de una secuencia de ADN.
+    
+    secuencia = secuencia.tupper()
+    length = len(secuencia)
+    a_count = secuencia.count('A')
+    t_count = secuencia.count('T')
+    return (a_count + t_count) / length
+  
+
+#resultado = contenido_at("ACTGATCGATTACGTATAGTATTTGCTATCATACATATATATCGATGCGTTCAT")
+#print(f"AT content: {resultado:.2f}")
+```
+
+Quita los 2 últimos comentarios ... ¿qué ocurre?
+
+---
+
+### 💡 Nota importante
+
+.content-box-green[
+
+&gt; Python **no ejecuta el código dentro de una función** cuando esta se define.  
+&gt; Solo lo **interpreta y lo guarda en memoria** con su nombre.
+
+&gt; Por eso, si hay un error dentro del bloque de la función, **no se mostrará** al definirla — el error solo aparecerá cuando realmente **llames (ejecutes)** la función.
+
+]
+
+---
+
+
+``` python
+def contenido_at(secuencia):
+    # Calcula el contenido AT de una secuencia de ADN.
+    
+    secuencia = secuencia.upper()   # ¡¡corregido!!
+    length = len(secuencia)
+    a_count = secuencia.count('A')
+    t_count = secuencia.count('T')
+    return (a_count + t_count) / length
+  
+
+resultado = contenido_at("ACTGATCGATTACGTATAGTATTTGCTATCATACATATATATCGATGCGTTCAT")
+print(f"AT content: {resultado:.2f}")
+```
+
+---
+
+## 🧠 Ejercicio para transformar en función
+
+Conteo de bases de una secuencia de ADN.
+
+
+``` python
+# Secuencia de ADN
+dna = "ATGCTTCAGAAAGGTCTTACG"
+
+# Contar bases
+a = dna.count('A')
+t = dna.count('T')
+g = dna.count('G')
+c = dna.count('C')
+
+# Imprimir resultados
+print("A:", a)
+print("T:", t)
+print("G:", g)
+print("C:", c)
+```
+
+---
+
+### ❓ Preguntas para guiar la transformación
+
+1.  🔹 ¿Cuál es la **entrada**?
+    
+    -   ¿Qué cambiarías si tuvieras otra secuencia?
+        
+2.  🔹 ¿Cuál es la **salida**?
+    
+    -   ¿Debería imprimir o devolver los conteos?
+        
+3.  🔹 ¿Qué parte podrías **generalizar**?
+    
+4.  🔹 ¿Qué pasa si necesitas usar este código 100 veces en diferentes secuencias?
+
+---
+
+### Respuesta
+
+
+``` python
+def contar_bases(dna):
+    """
+    Cuenta e imprime el número de A, T, G y C en una secuencia de ADN.
+    """
+    dna = dna.upper()  # Asegura que todas las letras estén en mayúsculas
+
+    a = dna.count('A')
+    t = dna.count('T')
+    g = dna.count('G')
+    c = dna.count('C')
+
+    print("A:", a)
+    print("T:", t)
+    print("G:", g)
+    print("C:", c)
+
+
+# Llamando a la función
+dna = "ATGCTTCAGAAAGGTCTTACG"
+contar_bases(dna)
+```
+
+---
+## 🔁 ¿Imprimir o retornar?
+
+### Opción 1: retornar con `return` → más flexible
+
+
+
+``` python
+def contar_bases(dna):
+    ...
+    return conteo
+```
+
+Usa `print()` solo al momento de mostrar resultados.
+
+### Opción 2: imprimir desde dentro de la función
+
+
+``` python
+def print_contar_bases(dna):
+    ...
+    print(conteo)
+```
+
+Útil para tareas simples, **pero limita** el uso posterior del valor (no se puede guardar, comparar, ni reutilizar).
+
+---
+
+## Versión modificada
+
+- No imprimir dentro de la función, sino regresar los conteos.
+
+- Qué tipo de variable usamos para guardar los valores?
+
+---
+## Versión con diccionarios 
+
+
+``` python
+def contar_bases(dna):
+    # Cuenta el número de A, T, G y C en una secuencia de ADN.
+    dna = dna.upper()
+    conteo = {
+        'A': dna.count('A'),
+        'T': dna.count('T'),
+        'G': dna.count('G'),
+        'C': dna.count('C')
+    }
+    return conteo
+
+# Llamada a la función
+dna = "ATGCTTCAGAAAGGTCTTACG"
+resultado = contar_bases(dna)
+
+# Imprimir los resultados fuera de la función
+for base, cantidad in resultado.items():
+    print(f"{base}: {cantidad}")
+```
+
+---
+## 🧠 **Ámbito de las variables (Scope)**
+
+### 🔹 ¿Qué es el _scope_ (ámbito) de una variable?
+
+--
+
+Cuando defines una variable en Python, **su ámbito determina en qué parte del programa esa variable es accesible**.
+
+-   Las variables **definidas dentro de una función** son **locales** a esa función.
+    
+-   Las variables **definidas fuera** de cualquier función son **globales**.
+    
+
+---
+## Acceso a variables globales dentro de una función
+
+
+
+``` python
+a = 1
+b = 10
+
+def fn():
+    print(a)      # Se refiere a la variable global 'a'
+    b = 20        # Se crea una nueva variable local 'b'
+    print(b)      # Imprime la 'b' local
+
+fn()
+
+print(b)          # Imprime la 'b' global, que NO cambió
+```
+
+✅ Salida esperada:: 
+
+---
+
+## 🔒 Regla general de búsqueda de variables (LEGB)
+
+Python busca una variable en este orden:
+
+1.  **L**ocal – dentro de la función actual
+    
+2.  **E**nclosing – en funciones anidadas (si existen)
+    
+3.  **G**lobal – en el script principal
+    
+4.  **B**uilt-in – funciones internas de Python (`print`, `len`, etc.)
+
+
+---
+## ⚠️ Error común: acceder a variables locales fuera de su ámbito
+
+
+
+``` python
 def get_at_content(dna): 
-    length = len(dna) 
+    length = len(dna)
     a_count = dna.count('A')
-    t_count = dna.count('T') 
-    at_content = (a_count + t_count) / length 
-    return at_content 
+    return (a_count + dna.count('T')) / length
 
-print(a_count)
-```
-
----
-# Probar la función
-
-Vamos a probar la función utilizando varias secuencias de DNA.
-
-
-```python
-print(get_at_content("ATGCGCGATCGATCGAATCG"))
-print(get_at_content("ATGCATGCAACTGTAGC"))
-print(get_at_content("aactgtagctagctagcagcgta"))
+print(a_count)  # ❌ ERROR: a_count está definida solo dentro de la función
 ```
 
 
+
 ---
-# Redondear el output
+## 🧪 Argumentos para personalizar el resultado
 
-Podemos redondear el output con `round` para el resultado sea similar.
+Podemos agregar **más argumentos** a nuestras funciones para que el usuario pueda **modificar el comportamiento** o la salida.
+
+En este ejemplo, permitimos que quien use la función decida **cuántas cifras decimales** mostrar en el resultado del contenido AT:
 
 
 
-```python
-def get_at_content(dna): 
-    length = len(dna) 
+``` python
+def get_at_content(dna, sig_figs):
+    # Calcula el contenido AT de una secuencia de ADN,
+    # redondeando a 'sig_figs' cifras decimales.
+    length = len(dna)
     a_count = dna.upper().count('A')
-    t_count = dna.upper().count('T') 
-    at_content = (a_count + t_count) / length 
-    return round(at_content, 2) # usamos round()
-
-print(get_at_content("ATGCGCGATCGATCGAATCG"))
-print(get_at_content("ATGCATGCAACTGTAGC"))
-print(get_at_content("aactgtagctagctagcagcgta"))
-```
-
-
----
-# Output de las funciones
-
-Las funciones no siempre necesitan regresar un valor con `return`, también podemos imprimir el resultado `print`.
-
-
-```python
-def print_at_content(dna): 
-    length = len(dna) 
-    a_count = dna.upper().count('A') 
-    t_count = dna.upper().count('T') 
-    at_content = (a_count + t_count) / length 
-    print(str(round(at_content, 2)))
-```
-
----
-# Argumentos
-
-Podemos agregar más argumentos a nuestras funciones para poder cambiar el output.
-
-
-```python
-def get_at_content(dna, sig_figs): # declaramos una variable como argumento
-    length = len(dna) 
-    a_count = dna.upper().count('A') 
-    t_count = dna.upper().count('T') 
-    at_content = (a_count + t_count) / length 
-    return round(at_content, sig_figs) # la usamos
-
+    t_count = dna.upper().count('T')
+    at_content = (a_count + t_count) / length
+    return round(at_content, sig_figs)  # usamos el argumento para redondear
+  
+  
 test_dna = "ATGCATGCAACTGTAGC"
-print(get_at_content(test_dna, 1))
-print(get_at_content(test_dna, 2))
-print(get_at_content(test_dna, 3))
+
+print(get_at_content(test_dna, 1))  # → 0.5
+print(get_at_content(test_dna, 2))  # → 0.50
+print(get_at_content(test_dna, 3))  # → 0.500
 ```
-
-
---
-
-&lt;br&gt;&lt;br&gt;
-
-.center[.content-box-green[**Vamos a vsCode**]]
 
 ---
-# Argumentos
 
-Podemos llamar a los argumentos por su nombre.
+### 🧠 Reflexión para alumnos:
+
+-   ¿Qué pasaría si no pasamos el segundo argumento?  
+    (→ Generará un error a menos que tenga un valor por defecto).
+    
+-   ¿Cómo podrías hacer que `sig_figs` sea **opcional**?
+
+---
+
+## 🎯 Paso de argumentos
+
+En Python, puedes **pasar argumentos** a una función de distintas formas:
+
+### 🟢 1. Argumentos posicionales
+
+Se pasan **en el orden en que se definen** los parámetros en la función.
 
 
-```python
+``` python
+# definicion
+def get_at_content(dna, sig_figs):
+    #....
+    return round(at_content, sig_figs)
+
+# llamado a la función    
 get_at_content("ATCGTGACTCG", 2)
-get_at_content(dna="ATCGTGACTCG", sig_figs=2)
 ```
 
---
+-   `"ATCGTGACTCG"` se asigna a **`dna`**
+-   `2` se asigna a **`sig_figs`**
 
-Y el orden no es necesario cuando se ocupa el nombre del argumento.
+**Y si se te olvida el orden y los intercambias??**
+
+---
+
+### 🟡 2. Argumentos con nombre (keyword arguments)
+
+Puedes especificar el **nombre del parámetro**, lo que hace que el **orden no importe**.
 
 
-```python
+``` python
 get_at_content(dna="ATCGTGACTCG", sig_figs=2)
 get_at_content(sig_figs=2, dna="ATCGTGACTCG")
 ```
 
---
-
-¿Todos estas variaciones funcionan?
-
-
-```python
-get_at_content(dna="ATCGTGACTCG", sig_figs=2)
-get_at_content("ATCGTGACTCG", sig_figs=2)
-get_at_content(dna="ATCGTGACTCG", 2)
-```
-
---
-
-.tiny[En Python, todos los argumentos posicionales deben ser colocados antes que los argumentos con palabras clave.]
+✔️ Ambas llamadas hacen lo mismo.
 
 ---
-# Argumentos
+### ⚠️ Reglas importantes
 
-Podemos definir valores *default*.
-
-
-```python
-def get_at_content(dna, sig_figs=2): # default value
-    length = len(dna) 
-    a_count = dna.upper().count('A') 
-    t_count = dna.upper().count('T') 
-    at_content = (a_count + t_count) / length 
-    return round(at_content, sig_figs)
+-   Los **argumentos posicionales deben ir primero**.
     
-get_at_content("ATCGTGACTCG")
+-   Después se pueden poner los **argumentos con nombre**.
+    
+
+❌ Este ejemplo es inválido:
+
+
+``` python
+get_at_content(dna="ATCGTGACTCG", 2)  # ❌ ERROR
+```
+
+Llamadas válidas:
+
+
+``` python
+# Posicional + keyword → ✔️ correcto
+get_at_content("ATCGTGACTCG", sig_figs=3)
+
+# Solo keyword arguments → ✔️ correcto
+get_at_content(dna="ATCGTGACTCG", sig_figs=2)
+
+# Solo posicionales → ✔️ correcto
+get_at_content("ATCGTGACTCG", 2)
 ```
 
 ---
-# Testing
+## 🧩 Definir parámetros con valores por defecto
 
-Es importante checar nuestro código incluyendo las funciones, podemos hacerlo imprimiendo mensajes `print`.
-
---
-
-También podemos probarlo para corroborar que nuestro resultado sea lo esperado con `assert`. El cual checa que el valor resultante sea `==` al esperado.
+Puedes definir un valor por defecto en la función para que **ese parámetro sea opcional**.
 
 
-```python
-assert get_at_content("ATGC",1) == 0.5
+``` python
+def get_at_content(dna, sig_figs=2):
+    length = len(dna)
+    a = dna.upper().count('A')
+    t = dna.upper().count('T')
+    at_content = (a + t) / length
+    return round(at_content, sig_figs)
+
+get_at_content("ATCGTGACTCG")               # Usa el valor por defecto (2)
+get_at_content("ATCGTGACTCG", sig_figs=3)   # Usa 3 cifras significativas
 ```
 
---
-Si no es igual, arroja un error `AssertionError`.
+
+#### ✅ Ventajas de usar parámetros por nombre o con valor por defecto
+
+-   Mejora la **legibilidad** del código.
+-   Permite **parámetros opcionales**.
+-   Hace que las funciones sean más **versátiles** y fáciles de usar.
 
 
-```python
-assert get_at_content("ATGC",1) == 0.4
+---
+
+# 🔄 Parámetros variables: *args y **kwargs
+
+## 🧠 ¿Qué son `*args` y `**kwargs`?
+
+Permiten que una función reciba **una cantidad variable de argumentos**, sin saber de antemano cuántos serán.
+
+---
+
+## 🔹 `*args` → argumentos posicionales variables
+
+-   Usamos `*args` para recibir **cualquier número de argumentos posicionales**.
+-   Internamente, Python los guarda como una **tupla**.
+    
+
+### ✅ Ejemplo:
+
+
+``` python
+def suma(*numeros):
+    return sum(numeros)
+
+print(suma(1, 2))             # 3
+print(suma(1, 2, 3, 4, 5))    # 15
 ```
 
 ---
-# Testing
+## 🔸 `**kwargs` → argumentos nombrados variables
 
-Nos ayuda a probar la robustes de nuestra función. 
+-   Usamos `**kwargs` para recibir **cualquier número de argumentos con nombre**.
+-   Internamente, Python los guarda como un **diccionario**.
+    
+
+### ✅ Ejemplo:
 
 
-```python
-assert get_at_content("ATGCNNNNNNNNNN",1) == 0.5
+
+``` python
+def mostrar_info(**datos):
+    for clave, valor in datos.items():
+        print(f"{clave}: {valor}")
+
+mostrar_info(nombre="Ana", edad=28, ciudad="CDMX")
 ```
 
-¿Cómo lo puedes arreglar?
+---
 
---
+## 💡 Puedes combinarlos
 
 
-```python
-dna = dna.replace('N', '')
+``` python
+def ejemplo_completo(a, b, *args, **kwargs):
+    print(f"a = {a}, b = {b}")
+    print("args:", args)
+    print("kwargs:", kwargs)
+
+ejemplo_completo(1, 2, 3, 4, 5, nombre="Ana", edad=30)
 ```
---
-Podemos definir varias pruebas para nuestra función
 
 
-```python
-assert get_at_content("A") == 1
-assert get_at_content("G") == 0
+#### 📌 Salida:
+
+---
+
+## 🧠 Reglas importantes
+
+-  El orden siempre debe ser:
+   
+
+``` python
+def funcion(fijos, *args, **kwargs):
+```
+
+-   Solo puede haber **uno** de cada uno en la definición.
+    
+-   `args` y `kwargs` son nombres convencionales, pero puedes usar otros:
+
+
+``` python
+def funcion(*valores, **opciones):
+```
+
+---
+
+## ✅ Buenas prácticas (PEP8 + PEP257)
+
+| Práctica                     | ¿Por qué?                                               |
+|-----------------------------|----------------------------------------------------------|
+| **Nombre descriptivo**          | Facilita entender el propósito de la función            |
+| **Una sola responsabilidad**    | Evita funciones confusas y difíciles de probar          |
+| **Retornar, no imprimir**       | Permite reutilizar y testear los resultados             |
+| **Valores por defecto**         | Mejora flexibilidad y facilidad de uso                  |
+| Docstring                   | Documenta claramente qué hace y cómo usarla             |
+| Probar con `assert`         | Asegura que la función funciona como se espera          |
+| Validar entradas            | Evita errores difíciles de detectar                     |
+| Reutilizar en módulos       | Mantiene el código organizado y limpio                  |
+
+---
+
+## 💡 ¿Qué es un docstring?
+
+Un **docstring** (_documentation string_) es un texto que se escribe justo después de la definición de una función (o clase/módulo) para **describir qué hace y cómo se usa**.
+
+### ✍️ Se escribe entre triple comillas (`""" """` o `''' '''`)
+
+Se trata de una **documentación interna**, que:
+
+-   Facilita la lectura del código por otras personas (o por ti mismo en el futuro).
+    
+-   Aparece cuando usas funciones como `help()` o herramientas como Jupyter o VSCode.
+    
+-   Es una **buena práctica obligatoria** en proyectos profesionales y académicos.
+
+---
+## 🧪 Ejemplo: get_at_content
+
+Versión con docstring
+
+
+``` python
+def get_at_content(dna, sig_figs=2):
+    """
+    Calcula el contenido AT de una secuencia de ADN,
+    redondeando a un número específico de cifras decimales.
+
+    Parámetros:
+    dna (str): Secuencia de ADN (ej. 'ATGCGC')
+    sig_figs (int, opcional): número de cifras decimales (por defecto = 2)
+
+    Retorna:
+    float: contenido AT redondeado
+    """
+    dna = dna.upper()
+    length = len(dna)
+    a = dna.count('A')
+    t = dna.count('T')
+    at_content = (a + t) / length
+    return round(at_content, sig_figs)
+```
+
+---
+
+## ℹ️ ¿Qué debe incluir un buen docstring?
+
+1.  **Una línea resumen clara**.
+    
+2.  (Opcional) Una descripción más extensa si lo amerita.
+    
+3.  Lista de **parámetros** con sus tipos y significados.
+    
+4.  **Valor retornado** y su tipo.
+    
+
+✅ Buenas prácticas PEP257
+
+- Usar comillas triples.
+- Comenzar con una frase en modo afirmativo (“Calcula…”, “Devuelve…”).
+- Describir argumentos, especialmente si hay más de uno.
+- No olvidar incluir el tipo de dato esperado y retornado.
+    
+    
+Ver https://www.datacamp.com/es/tutorial/docstrings-python 
+
+---
+
+## ✅ Introducción al **Testing** en Python
+
+### 🧠 ¿Por qué probar nuestro código?
+
+En programación, **cometer errores es inevitable**. Por eso, es fundamental incluir mecanismos que:
+
+-   Detecten errores antes de que el programa se use en producción.
+    
+-   Verifiquen que las funciones realmente hacen lo que dicen en su docstring.
+    
+-   Faciliten el mantenimiento al evitar que los cambios rompan funcionalidades anteriores.
+    
+
+&gt; ✨ El testing es como una red de seguridad para tu código.
+
+---
+
+## 🧪 ¿Cómo hacemos testing en Python?
+
+### ✅ Con la instrucción `assert`
+
+
+``` python
+assert expresión_booleana
+```
+
+-   Si la expresión es `True`, **el programa sigue normalmente**.
+-   Si es `False`, lanza un **`AssertionError`** que detiene el programa.
+
+
+---
+## 🧬 Ejemplo aplicado: función get_at_content
+
+
+
+``` python
+def get_at_content(dna, sig_figs=2):
+    """
+    Calcula el contenido AT de una secuencia de ADN.
+    Retorna el resultado redondeado a 'sig_figs' cifras decimales.
+    """
+    dna = dna.upper()
+    length = len(dna)
+    a_count = dna.count('A')
+    t_count = dna.count('T')
+    at_content = (a_count + t_count) / length
+    return round(at_content, sig_figs)
+```
+
+🧪 Testing básico con assert
+
+
+``` python
+assert get_at_content("ATGC", 1) == 0.5
+assert get_at_content("ATGC", 1) == 0.4  # ❌ AssertionError
+```
+
+---
+## ⚠️ Testing también revela problemas lógicos
+
+
+
+``` python
+assert get_at_content("ATGCNNNNNN", 1) == 0.5
+```
+
+❌ Este test fallará si la función no descarta las N.
+
+💡 Solución: limpiar la secuencia dentro de la función:
+
+
+``` python
+dna = dna.replace("N", "")
+```
+
+---
+## 🔁 Testing con múltiples casos
+
+Puedes validar diferentes entradas así:
+
+
+``` python
+assert get_at_content("A") == 1.0
+assert get_at_content("G") == 0.0
 assert get_at_content("ATGC") == 0.5
-assert get_at_content("AGG") == 0.33
 assert get_at_content("AGG", 1) == 0.3
 assert get_at_content("AGG", 5) == 0.33333
 ```
 
+✔️ Cada línea valida un caso distinto.
+
 ---
-# Resumen
+## 🛡️ Validación con `assert` dentro de la función
 
-El statement `assert` en Python es una forma de depuración de código y es una herramienta para manejar errores. Es básicamente una interrupción en el programa, sólo se ejecuta si la condición que se prueba es falsa.
-
-Si la condición es verdadera, el programa continúa como si nada. Si la condición es falsa, el programa se detiene e imprime un mensaje de error, permitiendo que sepas qué casusó el error.
-
-Se suele usar durante el desarrollo de un programa para escribir tests y garantizar que ciertos supuestos en tu código sean verdaderos.
+Puedes proteger la función de errores de uso con `assert`:
 
 
-```python
-def get_at_content(dna, sig_figs): 
-    assert type(dna) == str, "dna is not a string: %r" % dna
-    assert dna != "", "dna is an empty string"
-    assert sig_figs &gt;= 0, "sig_figs should be a positive integer value: %r" % sig_figs
-    ...
+``` python
+def get_at_content(dna, sig_figs=2):
+    assert isinstance(dna, str), \
+        f"dna debe ser string, no {type(dna)}"
+    assert dna != "", "dna no puede ser una cadena vacía"
+    assert sig_figs &gt;= 0, "sig_figs debe ser mayor o igual a cero"
+
+    dna = dna.upper().replace("N", "")
+    length = len(dna)
+    a_count = dna.count('A')
+    t_count = dna.count('T')
+    return round((a_count + t_count) / length, sig_figs)
 ```
 
+&gt; La función `isinstance(objeto, clase_tipo)` sirve para verificar si un objeto es de un tipo o clase específica.
+
 ---
-# Documentación de las funciones
 
-`Docstring`: Los docstrings en Python son cadenas de texto que se utilizan para documentar partes de tu código. Pueden ser muy útiles para comprender rápidamente lo que hace una función, un módulo o una clase sin tener que leer y entender todo el código.
+## ✅ ¿Se deben dejar los `assert` en producción?
 
-Para funciones, los docstrings se colocan justo después de la definición de la función.
+### 🧪 1. **Durante el desarrollo**: ¡Sí, úsalos!
+
+-   `assert` es perfecto para **testing interno**, validar suposiciones y detectar errores temprano.
+    
+-   Ayuda a encontrar fallos lógicos o mal uso de funciones.
+    
+-   No requiere librerías externas ni estructura formal de testing.
+    
+---
+
+### 🚨 2. **En producción (programas ya en uso)**: **❌ No deberías confiar en `assert` para validaciones importantes**
+
+#### ¿Por qué?
+
+-   Los `assert` **pueden ser ignorados automáticamente** si Python se ejecuta con el modo optimizado (`python -O programa.py`).
+    
+-   En ese modo, **todos los `assert` se eliminan al compilar**.
+
+
+✅ En producción, usa validaciones explícitas:
 
 ```
-def suma(a, b):
-    """
-    Esta función suma dos números.
+if not isinstance(dna, str):
+    raise TypeError("dna debe ser una cadena de texto")
 
-    Parámetros
-    ----------
-    a : int o float
+if sig_figs &lt; 0:
+    raise ValueError("sig_figs debe ser mayor o igual a cero")
 ```
 
----
-# Multi-Line docstring
-
-Los docstrings en Python siguen ciertas convenciones de estilo. En general, un docstring debe ser una cadena de texto que comienza y termina con tres comillas dobles ("""). Según el estándar de estilo PEP 257, un docstring debe tener la siguiente estructura:
-
-- Una línea que resume brevemente lo que hace el objeto (función, método, clase, módulo). Esta línea debe comenzar con una letra mayúscula y terminar con un punto.
-
-- Una línea en blanco.
-
-- Descripción más detallada de lo que hace, como los parámetros que toma, los valores que devuelve, las excepciones que puede levantar, etc.
-
-
-.content-box-green[
-Para la documentación de los parámetros y el valor devuelto, hay varias convenciones de estilo. Por ejemplo, la convención de estilo de NumPy/SciPy que se ve comúnmente en proyectos de ciencia de datos y machine learning. Ver ejemplo suma.py]
-
-.tiny[
-Source: https://peps.python.org/pep-0257/ y 
-https://www.datacamp.com/es/tutorial/docstrings-python 
-]
----
-# Ejercicio: Predecir lista de compras
-
-Imagina que estamos organizando una fiesta y necesitamos calcular cuántos refrescos, botellas de agua, bolsas de papas y porciones de pizza debemos comprar según la cantidad de invitados.
-
-Las reglas son las siguientes:
-
-- En promedio, cada dos personas consumirán una soda.
-- Cada invitado consumirá una botella de agua.
-- En promedio, tres personas compartirán una bolsa de papas fritas.
-- Cada invitado comerá tres porciones de pizza.
-
-Vamos a necesitar realizar este cálculo varias veces, porque estamos en proceso de confirmación de asistencia de los invitados y el número puede variar.
-
-.content-box-green[
-Cómo pueden automatizar este cálculo, de manera que sólo necesiten ingresar el número de invitados y el programa nos dé la cantidad de cada ítem que necesitamos comprar? ]
-
----
-# Analizando el problema
-
---
-
-&lt;img src="img/calcula_compras.png" width="600px" style="display: block; margin: auto;" /&gt;
-
---
-
-**calcular_comida_bebida**:
- - input:     #guest
- - output:   lista de cosas a comprar
-
----
-# Ejercicio: Frecuencia de codones en DNA
-
-Calcular la frecuencia de todos los codones en una secuencia de ADN.
-
-Piensa en acciones .... 
-
---
-
-- Leer archivo de secuencia de DNA
-
---
-
-- Generar todos los codones posibles
-
---
-
-- Contar la aparición de cada codón en la secuencia de DNA
-
---
-- Imprimir los resultados
-
----
-# Analizando el problema
-
-**generate_codon_list**:
- - input:     none
- - output:    codon list
-
---
-
-**count_codons**:
- - input:     dna_sequence
- - output:    codon_frequency dicc
-
-
----
-# Tarea
-
-Analizar el programa de count-atgc.py y genera todas las posibles funciones que creas conveniente
-
-- Trata que tus funciones reciban al menos un parámetro
-- Las funciones deberán regresar algun valor
-
-
-Para los que ya sus programas anteriores incluyeron funciones, realizar cualquiera de los dos ejercicios anteriores.
+Esto nunca será ignorado y puedes manejarlo con try/except.
 
 ---
 
-# Referencias
+### ✅ Reglas prácticas para usar `assert`
 
-- [Assert Statement](https://realpython.com/python-assert-statement/)
+| Contexto           | ¿Usar `assert`? | ¿Por qué?                                     |
+|--------------------|-----------------|-----------------------------------------------|
+| Desarrollo         | ✅ Sí           | Para validar suposiciones y detectar errores  |
+| Scripts personales | ✅ Sí           | Rápido y cómodo para testing                  |
+| Producción         | ⚠️ No           | Puede ser ignorado con `-O`; usa excepciones  |
+| Testing formal     | ⚠️ No           | Usa `unittest` o `pytest` en su lugar         |
+
+
+
+---
+## ✅ Conclusión
+
+&gt; Usa `assert` como herramienta **de desarrollo**, no como validación definitiva en producción.
+
+&gt; Mas adelante veremos otras formas de hacer Testing.
+
+---
+## 🔝 Características avanzadas de funciones en Python
+
+| Característica                        | Descripción breve                                                                 | Ejemplo corto |
+|--------------------------------------|-----------------------------------------------------------------------------------|---------------|
+| Funciones anidadas                   | Definir funciones dentro de otras para encapsular lógica                         | `def externa(): def interna(): ...` |
+| Closures                             | Funciones internas que recuerdan variables del entorno externo                   | `def outer(x): def inner(): return x` |
+| Decoradores                          | Añaden funcionalidad a otra función sin modificarla directamente                 | `@mi_decorador` |
+| Funciones como objetos               | Se pueden pasar, retornar y asignar a variables                                  | `f = saludar` |
+| Recursividad                         | Función que se llama a sí misma                                                  | `def factorial(n): return n * factorial(n-1)` |
+---
+## 🔝 Características avanzadas de funciones en Python
+
+| Característica                        | Descripción breve                                                                 | Ejemplo corto |
+|--------------------------------------|-----------------------------------------------------------------------------------|---------------|
+| Funciones lambda                     | Funciones anónimas en una sola línea                                             | `lambda x: x ** 2` |
+| Funciones de orden superior          | Reciben funciones como argumentos o devuelven funciones                          | `map(lambda x: x+1, lista)` |
+| Type hints                           | Anotan tipos de parámetros y retorno                                             | `def f(x: int) -&gt; int:` |
+| Funciones generadoras (`yield`)     | Generan secuencias sin cargar todo en memoria                                    | `def gen(): yield 1` |
 
 
 ---
 
----
+# 📚 Recursos extra
 
-
-# Encapsulación
-
-Se refiere en dividir programas complejos en pequeñas piezas que trabajen de forma independiente.
-
---
-
-Vamos a dividir el código donde *definimos* la función y el código donde *ejecutamos* la función.
-
---
-
-1. Guardamos nuestra función en el archivo `test.py`.
-
-
-```python
-# test.py&gt;
-
-# function
-def displayText():
-    print( "Yes! you are importing a function")
-```
-
----
-# Encapsulación
-
-Se refiere en dividir programas complejos en pequeñas piezas que trabajen de forma independiente.
-
-Vamos a dividir el código donde *definimos* la función y el código donde *ejecutamos* la función.
-
-2. Importamos la función en otro archivo.
-
-
-```python
-from test import displayText
-f.displayText()
-```
-
-
----
-# Encapsulación
-
-Podemos importar todas las funciones.
-
-
-```python
-import test as f
-f.displayText()
-```
-
---
-Pasar la ruta del archivo `test.py`.
-
-
-```python
-import scripts.ejemplos.test as f
-f.displayText()
-```
-
-
----
----
-## Ejercicio: Aminoácidos
-
-.content-box-blue[
-
-Escribe una función que calcule el porcentaje de un aminoácido. 
-
-]
-
-- Input: 1) Secuencia protéica, 2) Aminoácido.
-
-- Output: Porcentaje del aminoácido en la secuencia 
-
-Asegurate que pasen estas pruebas 
-
-```
-assert get_aa_percentage("MSRSLLLRFLLFLLLLPPLP", "M") == 5
-assert get_aa_percentage("MSRSLLLRFLLFLLLLPPLP", "r") == 10
-assert get_aa_percentage("msrslllrfllfllllpplp", "L") == 50
-assert get_aa_percentage("MSRSLLLRFLLFLLLLPPLP", "Y") == 0
-```
-
-
----
-## Ejercicio: Lista de Aminoácidos 
-
-.content-box-blue[
-
-Escribe una función que calcule el porcentaje de una **lista** de aminoácidos. Y que el *default* sea aminoácidos hidrofílicos aa_list=['A','I','L','M','F','W','Y','V']
-
-]
-
-- Input: 1) Secuencia protéica, 2) Lista de aminoácidos.
-
-- Output: Porcentaje del aminoácido en la secuencia. 
-
-Asegurate que pasen estas pruebas 
-
-```
-assert get_aa_percentage("MSRSLLLRFLLFLLLLPPLP", ["M"]) == 5
-assert get_aa_percentage("MSRSLLLRFLLFLLLLPPLP", ['M', 'L']) == 55
-assert get_aa_percentage("MSRSLLLRFLLFLLLLPPLP", ['F', 'S', 'L']) == 70
-assert get_aa_percentage("MSRSLLLRFLLFLLLLPPLP") == 65
-```
-
-**Tip:* recuerda que podemos ocupar `for` en listas y contar.
-
----
+- [PEP8](https://peps.python.org/pep-0008/)
+- [Documentación oficial de funciones](https://docs.python.org/es/3/tutorial/controlflow.html#defining-functions)
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
