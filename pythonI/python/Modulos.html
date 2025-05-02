@@ -3,7 +3,7 @@
   <head>
     <title>Módulos y Paquetes</title>
     <meta charset="utf-8" />
-    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -22,7 +22,7 @@ class: center, middle, inverse, title-slide
 ### Licenciatura en Ciencias Genómicas,UNAM
 ]
 .date[
-### 02 May, 2024
+### 02 May, 2025
 ]
 
 ---
@@ -30,962 +30,1035 @@ class: center, middle, inverse, title-slide
 
 
 
-&lt;!--
-Programa que calcula La frecuencia de todos los codones en una secuencia de ADN. El archivo de DNA debe ser introducido por linea de comando con la libreria argparse. Aplicar validación de errores con try, y organizarlo en funciones. Seguir las recomendaciones de PEP8 y documenta con docstring. También aplicar algunos asserts. Agrega un encabezado al programa como documentación interna tipo ayuda de unix.
 
-Programa que calcula el Contenido de AT de una secuencia de ADN. El archivo de DNA debe ser introducido por linea de comando con la libreria argparse.Seguir Aplicar validación de errores con try, y organizarlo en funciones. las recomendaciones de PEP8 y documenta con docstring.También aplicar algunos asserts.Agrega un encabezado al programa como documentación interna tipo ayuda de unix.
+## 🎯 Objetivo de la unidad
 
-Programa para Identificar Sitios de Restricción en una Secuencia de ADN. El archivo de DNA debe ser introducido por linea de comando con la libreria argparse.Seguir Aplicar validación de errores con try, y organizarlo en funciones. las recomendaciones de PEP8 y documenta con docstring.También aplicar algunos asserts.Agrega un encabezado al programa como documentación interna tipo ayuda de unix.
---&gt;
-
-# Programación modular
-
-"La **programación modular** es un paradigma de programación que consiste en dividir un programa en módulos o subprogramas con el fin de hacerlo más legible y manejable."[Wikipedia](https://es.wikipedia.org/wiki/Programaci%C3%B3n_modular)
-
-**Divide y vencerás**. 
-
-
-&lt;img src="https://www.atalayar.com/asset/thumbnail,1920,1080,center,center/media/atalayar/images/2019/06/16/20190616161257008800.jpg" width="550px" style="display: block; margin: auto;" /&gt;
+&gt; **Comprender cómo reutilizar y organizar código en Python mediante el uso de la instrucción `import`, la creación de módulos y la estructuración de paquetes, promoviendo buenas prácticas de legibilidad, reutilización y escalabilidad.**
 
 ---
 
-# Programación modular
+## 🧠 Introducción
 
- Ventajas:
+Cuando comenzamos a desarrollar en Python, lo más natural es escribir nuestras propias funciones para resolver un problema. Pero antes de hacer eso, es importante saber que **Python ya viene con una gran cantidad de funciones, módulos y librerías** listas para usarse.
 
-- Simple
+Estas herramientas nos permiten **resolver muchas tareas comunes sin tener que programarlas desde cero**: operaciones matemáticas, manejo de archivos, manipulación de texto, fechas, estadísticas, generación de números aleatorios, entre muchas otras.
 
-- Fácilita su mantenimiento
-
-- Reusable
-
-
-&lt;img src="https://hi-static.z-dn.net/files/d03/9870a48eb374a30f5f2905d53c7ba036.jpg" width="500px" style="display: block; margin: auto;" /&gt;
+&gt; Por eso, una buena práctica es **primero conocer qué funcionalidades ya existen en Python** y cómo podemos usarlas en nuestros programas.
 
 ---
-# Escenario
+## 🧠 Introducción
 
-Programas:
+Las **funciones integradas** (_built-in functions_) son funciones que **ya vienen incluidas en Python**, por lo que puedes usarlas **sin necesidad de importar ninguna librería**.
 
-- **Cálculo del Contenido de AT**: Determina el porcentaje de adenina (A) y timina (T) en la secuencia de ADN proporcionada. Esto es útil para identificar regiones ricas en AT que pueden ser de interés especial en estudios genómicos.
+&gt; Son herramientas básicas que te permiten realizar tareas comunes como contar, convertir tipos, redondear, trabajar con texto, números, listas, etc.
 
-- **Análisis de Frecuencia de Codones**: .tiny[Evalúa la frecuencia con la que cada codón aparece en la secuencia de ADN. Esta información es fundamental para estudios de expresión génica y optimización de la expresión de proteínas en organismos modelados.]
 
-- **Identificación de Sitios de Restricción**: .tiny[Busca secuencias específicas que son reconocidas por enzimas de restricción conocidas. Esto es esencial para planificar experimentos de clonación y manipulación genética.]
-
-.content-box-green[
-Revisa cada uno de los programas: 
-qué funciones manejan?, 
-qué argumentos reciben? 
-qué tienen en común?
-
-]
-
----
-# Escenario
-
-Crear un **paquete dna_analysis**. Este paquete será una suite de herramientas de bioinformática diseñada para realizar diversos análisis en secuencias de ADN:
-
-- Cálculo del Contenido de AT
-- Análisis de Frecuencia de Codones
-- Identificación de Sitios de Restricción
-
----
-# Estructura del paquete dna_analysis
-
-.pull-left[
-
+``` python
+print("Operaciones")
+size = len("ATTTGGTG")
+print(round(3.141602,2))
 ```
-dna_analysis/
-│
-├── __init__.py
-├── utils/
-│   ├── __init__.py
-│   ├── file_io.py
-│   └── validators.py
-│
-├── operations/ # tools|core|components
-│   ├── __init__.py
-│   ├── at_content.py
-│   ├── codon_frequency.py
-│   └── restriction_sites.py
-│
-├── scripts/
-│   ├── __init__.py
-│   ├── calculate_at_content.py
-│   ├── calculate_codon_frequency.py
-│   └── find_restriction_sites.py
-│
-```
-]
 
-.pull-right[
-
-```
-├── tests/
-│   ├── __init__.py
-│   ├── test_utils/
-│   │   ├── __init__.py
-│   │   ├── test_file_io.py
-│   │   └── test_validators.py
-│   ├── test_operations/
-│   │   ├── __init__.py
-│   │   ├── test_at_content.py
-│   │   ├── test_codon_frequency.py
-│   │   └── test_restriction_sites.py
-│   └── test_scripts/
-│       ├── __init__.py
-│       ├── test_calculate_at_content.py
-│       ├── test_calculate_codon_frequency.py
-│       └── test_find_restriction_sites.py
-└── docs/
-    ├── user_manual.md
-    ├── api_reference.md
-    └── developer_guide.md
-```
-]
+PERO ... hay muchas más disponbile.
 
 ---
-## Descripción de los Componentes
+## 🧠 Introducción
 
-- `__init__.py`: .tiny[ Los archivos `__init__.py` hacen que Python trate los directorios como paquetes. Esto es necesario para poder importar módulos de subdirectorios.]
+La forma de acceder a estas OTRAS herramientas es mediante la instrucción `import`. A lo largo de esta unidad aprenderemos a:
 
-- `utils/`: .tiny[Este paquete incluirá módulos de utilidades como:]
-  - `file_io.py` : .tiny[Funciones para leer y escribir secuencias de ADN.]
-  - `validators.py`: .tiny[Funciones para validar las secuencias de ADN, como asegurarse de que sólo contienen caracteres válidos.]
-
-- `operations/`: .tiny[Aquí se colocarán los módulos que realizan cálculos específicos:]
-  - `at_content.py`: .tiny[Funciones para calcular el contenido de AT.]
-  - `codon_frequency.py`: .tiny[Funciones para calcular la frecuencia de codones.]
-  - `restriction_sites.py`: .tiny[Funciones para encontrar sitios de restricción en la secuencia de ADN.]
-
-- `scripts/`: .tiny[Scripts que pueden ser ejecutados directamente desde la línea de comando y hacen uso de las funcionalidades definidas en `operations/`. Cada script hará uso de `argparse` para manejar la entrada de la línea de comandos y llamará a las funciones adecuadas del paquete `operations`.]
+-   Usar `import` para **reutilizar funciones de las librerías de Python**
     
----
-# Documentación del Paquete
-
-.pull-left[
-
-**Por Cada Programa del Paquete**
-
-En este enfoque, cada script o módulo en el paquete tendría su documento dedicado que describe su uso, argumentos, ejemplos, y cualquier otra información relevante.
-
-.tiny[
-
-Ventajas:
-
-- **Específico y detallado**: Esta forma permite detalles exhaustivos que son específicos para cada módulo o script, lo que puede ser extremadamente útil para usuarios que solo están interesados en una parte particular del paquete.
-- **Mejor organizado para grandes paquetes**: En paquetes grandes con muchos módulos o funcionalidades, esta organización puede ayudar a mantener la documentación clara y manejable.
-
-```
-docs/
-│
-├── at_content.md
-├── codon_frequency.md
-├── restriction_sites.md
-└── ...
-```
-
-]
-]
-
-
-.pull-right[
-
-**Del Paquete Completo**
-
-Aquí, se escribe un manual o varios documentos que cubren todo el paquete, potencialmente organizados por categorías o funcionalidades pero dentro de un conjunto unificado de documentos.
-
-.tiny[
-Ventajas:
-
-- **Visión holística**: Ofrece una visión general del paquete, lo que es útil para usuarios o desarrolladores que necesitan entender cómo interactúan las diferentes partes del paquete.
-- **Evita la redundancia**: Puede evitar la duplicación de información común, como la configuración del entorno, instalación, y problemas de solución de errores, que sería relevante para múltiples módulos.
-
-```
-docs/
-│
-├── user_manual.md
-├── api_reference.md
-└── developer_guide.md
-```
-
-]]
+-   Explorar cómo están organizadas estas librerías y módulos
+    
+-   Y finalmente, aprenderemos a **crear nuestros propios módulos, paquetes y aplicaciones**, tal como lo hace Python
 
 ---
-# Actividad: Crear Paquete `dna_analysis`
 
-.pull-left[
+### Conceptos Clave
 
-- Genera las carpetas para organizar el paquete. 
+| **Concepto**| **¿Qué es?**                        | **Ejemplo de uso **               |
+|------------|--------------------------------------|-------------------------------|
+| `import`   | Instrucción que carga otros archivos | `import math`                 |
+| Módulo     | Un archivo `.py` con funciones       | `saludos.py`, `utilidades.py` |
+| Paquete    | Carpeta con varios módulos `.py`     | `bioinfo/`, `analisis/`       |
 
-- Genera los archivos `__init__.py` (paquete y subpaquetes). 
 
-- Y copia los programas dentro de `scripts`.
+&lt;img src="https://miro.medium.com/v2/resize:fit:1030/format:webp/1*iL3Hq35sZ3sG26WGpjv8rg.png" width="300px" style="display: block; margin: auto;" /&gt;
 
-- Carga la carpeta dentro de VSC (visual)
+.tiny[Source:https://medium.com/pythoneers/6-must-know-words-in-python-ac87ab420ab7]
+---
 
-]
+## 🧱 ¿Cómo organiza Python sus librerías?
 
-.pull-right[
+| Tipo de librería       | Ubicación típica                            | Cómo se usa                        |
+|------------------------|---------------------------------------------|------------------------------------|
+| 📦 Librería estándar   | Incluida en la instalación de Python        | `import os`, `import math`         |
+| 🌐 Librería externa    | Instalada con `pip` en `site-packages/`     | `import pandas as pd`, `import Bio` |
+| 📝 Módulo propio       | Archivo `.py` en tu proyecto                | `from utilidades import funcion`   |
+| 📁 Paquete propio      | Carpeta con `__init__.py` y varios módulos  | `from bioinfo.analisis import gc`  |
 
-.content-box-gray[
+---
+## 📁 Estructura típica de librerías en Python
+
+```bash
+which python
+```
 
 ```
-dna_analysis/
-│
-├── __init__.py
-├── docs
-├── operations
-│   └── __init__.py
-├── scripts
+python3.X/
+├── __pycache__/              ← Código compilado (.pyc)
+├── config-3.X/               ← Archivos de configuración del compilador
+├── lib-dynload/              ← Módulos compilados como `math.so`, `time.so`
+│   ├── math.cpython-310-x86_64-linux-gnu.so
+│   └── _datetime.cpython-310-x86_64-linux-gnu.so
+├── site-packages/            ← 📦 Librerías externas instaladas con pip
+│   ├── numpy/
+│   ├── pandas/
+│   ├── Bio/                  ← Ej. Biopython
+│   ├── __pycache__/
+│   └── pip/
+├── os.py                     ← Parte de la librería estándar (es Python puro)
+├── random.py
+├── re.py
+├── json/
 │   ├── __init__.py
-│   ├── at_content.py
-│   ├── frecuencia_codones.py
-│   └── sitios_restriccion.py
-├── tests
-│   └── __init__.py
-└── utils
-    └── __init__.py
+│   └── decoder.py
+└── ...                       ← Otros módulos estándar (textwrap, functools, etc.)
 ```
-]
-]
-
 
 ---
-# Estructura del paquete dna_analysis
 
-.pull-left[
+## ¿De dónde importa Python el código?
 
-```
-dna_analysis/
-│
-├── __init__.py &lt;==
-├── utils/      &lt;==
-│   ├── __init__.py  &lt;==
-│   ├── file_io.py
-│   └── validators.py
-│
-├── operations/    &lt;==
-│   ├── __init__.py   &lt;==
-│   ├── at_content.py
-│   ├── codon_frequency.py
-│   └── restriction_sites.py
-│
-├── scripts/        &lt;==
-│   ├── __init__.py  &lt;==
-│   ├── calculate_at_content.py
-│   ├── calculate_codon_frequency.py
-│   └── find_restriction_sites.py
-│
-```
-]
+Python sigue un orden para buscar el código que quieres importar. Este orden está definido en una lista especial llamada `sys.path`.
 
-.pull-right[
+### Orden de búsqueda:
 
-```
-├── tests/     &lt;==
-│   ├── __init__.py   &lt;==
-│   ├── test_utils/ 
-│   │   ├── __init__.py
-│   │   ├── test_file_io.py
-│   │   └── test_validators.py
-│   ├── test_operations/
-│   │   ├── __init__.py
-│   │   ├── test_at_content.py
-│   │   ├── test_codon_frequency.py
-│   │   └── test_restriction_sites.py
-│   └── test_scripts/
-│       ├── __init__.py
-│       ├── test_calculate_at_content.py
-│       ├── test_calculate_codon_frequency.py
-│       └── test_find_restriction_sites.py
-└── docs/   &lt;==
-    ├── user_manual.md
-    ├── api_reference.md
-    └── developer_guide.md
-```
-]
-
----
-# Módulos
-
-Los módulos son bloques de código con funciones y clases, almacenadas en ficheros separados, con extensión .py y sirven para realizar tareas comunes. 
-
-
-&lt;img src="https://files.realpython.com/media/Python-Modules-and-Packages-An-Introduction_Watermarked.20936240a94d.jpg" width="600px" style="display: block; margin: auto;" /&gt;
-
-
----
-# Overview
-
-Hay varias formas de definir un módulo en Python, entre ellas:
-
-1. Escribir un módulo en Python
-
-2. Escribir un módulo en C y cargarlo en Python
-
---
-
-&lt;br&gt;
-&lt;br&gt;
-
-Ejemplo de un módulo que contiene una función
-
-```
-# test.py
-# function
-def displayText():
-    print( "Yes! you are importing a function")
-
-```
+1.  📁 **Directorio actual** (donde está tu script)
+    
+2.  🗃️ **Variables de entorno** (como `PYTHONPATH`)
+    
+3.  🧰 **Librería estándar de Python** (`math`, `os`, `random`, etc.)
+    
+4.  🌐 **Librerías externas instaladas con `pip`** (en la carpeta `site-packages`)
+    
+5.  ⚙️ **Carpetas personalizadas** (si las agregas manualmente a `sys.path`)
 
 
 ---
 
-# Qué puede contener un módulo?
+## 📦 La Librería Estándar de Python
 
-- **Importaciones**: .tiny[Cualquier módulo que interactúe con otras partes del sistema o que utilice bibliotecas externas necesitará importar esos módulos o librerías. ]
+### 🧠 ¿Qué es?
 
---
+La **librería estándar de Python** (Standard Library) es un conjunto de **módulos y paquetes integrados** que vienen incluidos con Python.
 
-- **Variables**: .tiny[A veces es útil definir variables globales que se pueden usar en varias funciones dentro del mismo módulo. Por ejemplo VALID_DNA_CHARS = 'ACGT' ]
+&gt; Es como una **“caja de herramientas” lista para usar**: contiene funciones para trabajar con archivos, matemáticas, fechas, expresiones regulares, internet, sistema operativo, y más.
 
---
-
-- **Funciones Auxiliares Privadas**:.tiny[Aparte de las funciones principales que se espera que sean utilizadas fuera del módulo, también podrías definir funciones auxiliares internas que son útiles para abstraer y reducir la repetición dentro del mismo módulo. Estas funciones suelen ser precedidas por un guion bajo (_) para indicar que son privadas.]
-
---
-
-
-```python
-def _validate_sequence(sequence):
-    if any(char not in VALID_DNA_CHARS for char in sequence):
-        raise ValueError("La secuencia contiene caracteres no válidos.")
-```
-
----
-# Qué contiene un módulo?
-
-- **Bloques de Prueba**: .tiny[Si quieres hacer algunas pruebas rápidas o demostraciones de las funciones dentro del módulo, puedes incluir un bloque de código que solo se ejecuta si el módulo se ejecuta como script principal:]
-
-
-```python
-if __name__ == "__main__":
-    # Código de prueba aquí. Esto solo se ejecutará si este módulo es el script principal.
-    print(read_dna_sequence("example_dna.txt"))
-```
-
---
-
-- **Documentación de Módulo**: .tiny[Es una excelente práctica incluir una documentación al principio del módulo que explique el propósito del módulo, las funciones que proporciona, y cualquier otra información relevante como los autores, versiones, y cambios.]
-
-
-- ** Declaraciones de Meta-información**: .tiny[Puedes incluir meta-información como __author__, __version__, etc., para proporcionar más contexto sobre el módulo:]
-
----
-# Variable `__name__` :  ejecutable vs importable
-
-En una sesión de Python podemos encontrar la variable `__name__`, la cual está definida como `__main__`. 
-
-
-```python
-print(__name__)
-print(f'Variable __name__: {__name__}')
-```
-
---
-
-Cuando un archivo .py se importa como un módulo, Python establece la variable especial `__name__` con el nombre del módulo. Checa `module.py` e  `ìmporting_module.py`
-
-```
-python module.py 
-python importing_module.py 
-```
-
----
-# Módulo `utils/file_io.py`
-
-- Centraliza todas **las operaciones de archivos** en un solo lugar, lo que facilita el mantenimiento y las posibles optimizaciones futuras.
-
-- Separa la lógica de manejo de archivos de la lógica principal de análisis de ADN, lo que mejora la organización del código y lo hace más modular y fácil de entender.
-
-- Proporciona un punto único para mejorar la seguridad y el manejo de errores relacionados con las operaciones de archivos, crucial para la estabilidad y fiabilidad del software.
-
-.content-box-green[ 
-- Qué funciones puede contener éste módulo, de los 3 programas ?
-]
-
----
-# Módulo `utils file_io.py`
-
-- Revisa el archivo (módulo) `file_io.py`
-- Mueve el  archivo al subpaquete utils.
-
-
----
-# Módulo `utils validators.py`
-
-Módulo que incluya funciones que verifiquen y validen la entrada de datos para asegurar que cumplan con ciertos estándares o formatos esperados.
-
---
-
-- La validación de secuencias de ADN para asegurar que solo contienen los caracteres válidos (A, C, G, T).
-
---
-
-- Verifica que el archivo tenga el formato correcto de FASTA.
-
---
-
-.content-box-green[ 
-- Qué otras funciones de validación se te ocurren ?
-]
-
----
-# Módulo `utils/validators.py`
-
-- Revisa el archivo (módulo) `validators.py`
-- Mueve el  archivo al subpaquete utils.
-
-
----
-# SubPaquete `operations`
-
-`operations` dedica a realizar cálculos específicos, análisis y procesamientos sobre las secuencias de ADN. Este paquete es fundamental para la lógica de negocio del software de análisis de ADN y es aquí donde se encapsulan todas las transformaciones y evaluaciones de datos relevantes.  Es esencialmente el **corazón técnico** del paquete de análisis de ADN
-
---
-
-- **Análisis de Secuencias de ADN** : .tiny[ Realiza cálculos detallados como determinar el contenido de adenina y timina (AT content), frecuencia de codones, y otras características genéticas basadas en las secuencias de ADN. ]
-
---
-
-- **Interpretación y Reporte**: .tiny[ Podría ser responsable de interpretar los resultados de los análisis y ayudar a formatearlos en una forma que sea útil para los científicos o investigadores, como generar visualizaciones o resúmenes estadísticos.]
-
---
-
-- **Identificación de Características Genéticas**: .tiny[ Busca patrones específicos, como sitios de restricción para enzimas específicas, y podría también identificar motivos genéticos (secuencias cortas y comunes dentro del ADN que tienen una función biológica). ]
-
---
-
-- **Transformación de Datos**: .tiny[ Prepara y modifica secuencias de ADN para su análisis, lo cual puede incluir la normalización de secuencias, la conversión entre diferentes formatos de datos, y la manipulación de secuencias para facilitar comparaciones y análisis. ]
-
----
-# Módulo  `operations/at_content.py`
-
-El módulo `at_content.py` sería responsable de calcular el contenido de adenina (A) y timina (T) en una secuencia de ADN proporcionada. 
-
---
-
-Revisa el archivo (módulo) `at_content.py` y responde lo siguiente: 
-
-.content-box-green[ 
-
-Función calculate_at_content:
-
-- Argumentos:
-  
-- Validaciones:
-            
-- Cálculo:
-            
-- Bloque if __name__ == "__main__":
-
-]
+📌 No necesitas instalar nada con `pip`, solo **importarlos**.
 
 ---
 
-# Importar módulos
-
-Para importar módulos necesitamos:
-
-- `import`
-
--  nombre del módulo
-
---
-
-El script `test.py`  es un módulo
+### 🗂 ¿Cómo está organizada la librería estándar de Python?
 
 
-```python
-# test.py
-# function
-def displayText():
-    print( "Yes! you are importing a function")
-```
-
-Tenemos varias sintáxis que podemos ocupar para importarlo. 
-
-
-```python
-import test
-from test import displayText
-import test as f
-```
+| Categoría                 | Módulos típicos                          | Uso principal                         |
+|---------------------------|------------------------------------------|---------------------------------------|
+| 📐 Matemáticas            | `math`, `statistics`, `cmath`            | Funciones matemáticas y estadísticas  |
+| 🧪 Programación funcional | `functools`, `itertools`                 | Funciones de orden superior           |
+| 📅 Fechas y tiempos       | `datetime`, `time`, `calendar`           | Manejo de fechas y tiempos            |
+| 🗃️ Archivos               | `os`, `shutil`, `pathlib`                | Acceso al sistema de archivos         |
+| 🔐 Manejo de errores      | `warnings`, `traceback`                  | Depuración y advertencias             |
+| 🔤 Texto y regex          | `re`, `string`, `textwrap`               | Manipulación de texto y patrones      |
+| 📡 Internet y red         | `http`, `urllib`, `socket`               | Comunicación en red                   |
+| 🧪 Pruebas                | `unittest`, `doctest`                    | Testing de código                     |
+| 📄 Entrada/Salida         | `sys`, `argparse`, `fileinput`           | Argumentos y flujos de entrada        |
+| 🔁 Concurrencia           | `threading`, `asyncio`, `multiprocessing`| Procesamiento en paralelo y asincronía |
 
 
 ---
-# Import y from
 
-- **import**. La declaración import se usa cuando quieres importar un módulo completo. Esto te permite acceder a todas las funciones, clases y variables del módulo usando la notación de punto. Es útil cuando necesitas usar múltiples cosas del módulo o si simplemente quieres asegurarte de que el código indique claramente de qué módulo provienen las funciones o clases.
+## ✅ Ventajas
+
+-   Evitas instalar dependencias externas
+    
+-   Más rápido de aprender y mantener
+    
+-   Bien documentado y probado
+    
+-   Multiplataforma
+
+---
+
+## 📥 `import` y las librerías estándard en Python
+
+### ¿Qué es `import`?
+
+La instrucción `import` en Python permite **usar código que se encuentra en otros archivos**, ya sean módulos de la biblioteca estándar, librerías externas instaladas con `pip`, o archivos `.py` que tú mismo hayas escrito.
+
+&gt; `import` es la herramienta que hace posible **la reutilización del código** en Python.
+
+---
+## 🧩 ¿Cómo usar las funciones de la libreria estándar ?
+
+`math`: funciones matemáticas
 
 
-```python
+``` python
 import math
-
-result = math.sqrt(16)  # Utilizando sqrt del módulo math
+print(math.sqrt(49))
 ```
 
----
-# Import y from
-
-- **Uso de from ... import** La declaración from ... import te permite importar elementos específicos (funciones, clases, variables) de un módulo directamente al espacio de nombres local. Esto permite usar esos elementos directamente sin la notación de punto. Es útil cuando solo necesitas una parte específica de un módulo y no quieres cargar todo el módulo en memoria o cuando deseas simplificar tu código eliminando la necesidad de la notación de punto.
+`os`: operaciones del sistema
 
 
-```python
-from math import sqrt
-
-result = sqrt(16)  # Directamente utilizando sqrt sin prefijo de módulo
+``` python
+import os
+print(os.getcwd())  # Muestra el directorio actual
 ```
 
+
+`re`: expresiones regulares
+
+``` python
+import re
+print(re.findall(r"\d+", "Hoy es 2025-04-29"))  # ['2025', '04', '29']
+```
+
+
 ---
-# Import vs from
+## 🔍 ¿Qué hace import cuando se llama a una librería?
 
-.content-box-green[
+1.  **Busca el módulo o librería por nombre**
+    
+    -   Python revisa las rutas listadas en `sys.path`
+        
+    -   Busca un archivo o carpeta con ese nombre (`math.py`, `math/__init__.py`, o una extensión compilada como `.so` o `.pyd`)
+        
+2.  **Carga el módulo**
+    
+    -   Si lo encuentra, lo **lee y ejecuta su contenido** una sola vez (todo lo que esté fuera de funciones o clases se ejecuta)
+        
+3.  **Guarda en memoria**
+    
+    -   El módulo se **carga en caché** (en `sys.modules`) para evitar volver a leerlo si se importa otra vez
+        
+4.  **Lo vincula al nombre usado**
+    
+    -   Ahora puedes acceder a su contenido con el nombre que usaste: `math.sqrt()`, `math.pi`, etc.
+        
 
-Elige `import` cuando necesites múltiples funciones o cuando quieras que el código refleje claramente de dónde provienen las funciones o clases. 
+---
 
-Opta por `from ... import` cuando trabajes con unas pocas funcionalidades de un módulo y quieras simplificar tu código. 
+### 📥 Formas de usar `import` y `from ... import`
 
-Evita usar `from ... import *` en la medida de lo posible para mantener tu código claro y mantenible.
+| Sintaxis                           | ¿Qué hace?                                                              | Ejemplo                            |
+|------------------------------------|-------------------------------------------------------------------------|------------------------------------|
+| `import modulo`                    | Importa todo el módulo. Debes usar el prefijo para acceder a su contenido | `import math` → `math.sqrt(25)`    |
+| `import modulo as alias`          | Igual que arriba, pero con un nombre más corto o conveniente            | `import pandas as pd`              |
+| `from modulo import objeto`       | Importa solo una parte del módulo (función, clase, variable)            | `from math import pi`              |
+| `from modulo import objeto as x`  | Importa un objeto con un alias                                          | `from math import sqrt as raiz`    |
+| `from modulo import *` ❌         | Importa todo el contenido al espacio de nombres actual (**desaconsejado**) | `from math import *`               |
+| `from paquete.modulo import x`    | Importa desde un módulo dentro de un paquete                           | `from bioinfo.genes import gc`     |
 
+---
+
+### 🧠 ¿Cuál usar y cuándo?
+
+| Necesidad                                 | Recomendación                        |
+|-------------------------------------------|--------------------------------------|
+| Usar todo el módulo                       | `import modulo`                      |
+| Usar solo una función específica          | `from modulo import funcion`         |
+| Usar un nombre más corto o común          | `import modulo as alias`             |
+| Importar múltiples funciones              | `from modulo import f1, f2, f3`      |
+| Evitar conflictos y mantener claridad     | ❌ No usar `from modulo import *`     |
+| Modularizar desde tu propio paquete       | `from paquete.modulo import funcion` |
+
+
+
+---
+## 🧩 Ejemplos
+
+### 1. `import modulo`
+
+Importa todo el módulo. Se accede a sus funciones con el prefijo del módulo.
+
+
+``` python
+import math
+print(math.sqrt(16))
+```
+
+### 2. `import modulo as alias`
+
+Importa todo el módulo, pero usa un alias más corto.
+
+
+``` python
+import numpy as np
+arr = np.array([1, 2, 3])
+```
+
+.tiny[ 
+Crea un arreglo (array) de NumPy a partir de una lista de Python [1, 2, 3].
+
+Este arreglo arr es similar a una lista, pero con funcionalidades matemáticas más potentes y eficientes (como operaciones vectorizadas, matrices, etc.).
 ]
 
 ---
-# ¿Qué dice PEP-8 sobre los imports?
+## 🧩 Ejemplos
 
-Los imports siempre se deben de poner al principio del archivo, después de los comentarios del módulo y los docstrings y antes de las variables globales o constantes del módulo.
+### 3. `from modulo import objeto`
 
-
-Se deberán agrupar en el siguiente orden:
-
-1. Standard library imports.
-
-2. Related third party imports.
-
-3. Local application/library specific imports.
-
-4. Separados por un saltó de línea entre cada grupo.
-
----
-# PEP-8 sobre imports
-
-Ejemplo
+Importa solo un elemento (función, clase o variable) del módulo.
 
 
-```python
-# 1. Standard library imports.
-import random
-
-# 2. Related third party imports.
-from flask import Flask
-from flask_restful import Api
-from flask_sqlalchemy import SQLAlchemy
-
-# 3. Local application/lib specific imports.
-from lib import at_content
-```
-
----
-# PEP-8 sobre imports
-
-No sé recomienda:
-
-
-```python
-# No se sugiere
-from random import randint
-from random import funcion2
-from random import funcion3
-randint()
- 
-# No se sugiere
-from random import *
-randint()
-
-# No se sugiere
-from random import randint as numero_random
-numero_random()
+``` python
+from math import pi
+print(pi)
 ```
 
 
----
-#  Docstrings para Módulos
+###4. `from modulo import objeto as alias`
 
-Los docstrings de los módulos de Python deben listar todas las clases, funciones, objetos y excepciones disponibles que se importan cuando se importa el módulo.
-
---
-
-También deben tener un resumen de una línea para cada elemento.
-
---
-
-Se escriben al principio del archivo Python.
-
---
+Importa un elemento específico con un alias:
 
 
-
-```python
-import random
-print(random.__doc__)
-```
-
---
-
-Es lo mismo que hacer 
-
-
-```python
-help(random)
+``` python
+from math import log as logaritmo
+print(logaritmo(100, 10))
 ```
 
 ---
-# Módulos
 
-Los módulos pueden contener variables, clases, funciones.
+### 5. `from modulo import *` ❌
+
+Importa todo el contenido del módulo directamente al espacio de nombres actual.
 
 
-```python
-# test.py
-# function
+``` python
+from math import *
+print(sqrt(9))
+```
 
-def displayText():
-    print( "Yes! you are importing a function")
+¿Cuál es el problema?? Cuando hay un error o quieres rastrear la función, pierdes su trazabilidad o de donde proviene.
 
-class AmbiguousBaseError(Exception):
-    '''A new error class object'''
-    pass
+---
+
+## ✅ Buenas prácticas al usar `import` en Python
+
+- 🧼 1. **Coloca todos los `import` al inicio del archivo** permite identificar rápidamente las dependencias.
+
+- 📐 2. **Usa el orden correcto según PEP8**
+
+    Agrupa los `import` en este orden:
+
+    1.  Módulos de la librería estándar
+    2.  Librerías de terceros (pip)
+    3.  Módulos locales (propios)
     
-def get_at_content(dna):
-    '''Takes a DNA seq and calculates AT content'''
-    if dna.count("N") &gt; 0:
-        raise AmbiguousBaseError(f'Sequence contains {dna.count("N")} N\'s')
-    length = len(dna)
-    a_count = dna.count('A')
-    t_count = dna.count('T')
-    at_content = (a_count + t_count) / length
-    return at_content
-
-dna = 'ATGCCCTATACGTA' 
-```
-
----
-# Módulos
-
-Podemos pasar variables y acceder a ellas
+    Separa cada grupo con una línea en blanco:
 
 
-```python
-import test
-
-print(test.dna)
-```
-
-¿Qué es diferente?
-
-
----
-
-# Paths en Python
-
-Cuando el intérprete ejecuta `import`, busca en los siguientes paths:
-
-- `.`: en el directorio en el cual es ejecutó el intérpetre o el script `.py`.
-
-- En la lista de directorios contenidos en la variable de entorno `PYTHONPATH` y se puede consultar a traés de `sys.path`.
-
-
-
-```python
+``` python
+import os
 import sys
-sys.path
+
+import pandas as pd
+
+from mi_paquete import herramientas
 ```
 
 ---
-# Paths en Python
+## ✅ Buenas prácticas al usar `import` en Python
 
-Para poder acceder a los modulos podemos:
+- 🎯 3. **Importa solo lo necesario** Evita importar todo el módulo si solo usarás una función.
 
-- Poner el `test.py` en el mismo directorio donde está el script.
+- 🚫 4. **Evita `from modulo import *`** Esto puede sobrescribir variables sin que te des cuenta y hace que el código sea difícil de leer.
 
-- Poner el `test.py` en algún directorio de `PYTHONPATH`.
+- 🧠 5. **Usa alias cuando los nombres sean largos o conflictivos**
 
-- Modificar la variable de entorno `PYTHONPATH`. También puedes modificar la variable de entorno en el momento de ejecutar el script.
+- 🗂️67. **Evita importar desde archivos que ejecutan código al ser importados**. Si un archivo no está preparado como módulo, su código puede ejecutarse de forma no deseada.
+
+- 🧪 7. **En proyectos grandes, documenta bien tus dependencias**. Usa `requirements.txt` o `pyproject.toml` para listar qué librerías externas usas. Esto facilita la instalación y mantenimiento.
+
 
 ---
-# Ejecutando los componentes del paquete
-
-Correr el **módulo**  `file_io.py`, el archivo `example_dna.txt` debe estar creado.
-
-```bash
-pwd   # carpeta raiz de mi paquete dna_analysis
-cd utils
-python3 file_io.py
-```
-
---
-
-Ejecutar el **módulo**  `validators.py`
-Este no tiene la sección de validación, puedes agregar una validación de una secuencia
 
 
-```python
+
+---
+
+## 🧬 Proyecto
+
+**Analizador Genómico** es un programa en Python diseñado para analizar secuencias de ADN almacenadas en archivos FASTA.  
+Permite verificar la validez de las secuencias, calcular la frecuencia de bases (A, T, G, C), el contenido GC, y exportar los resultados en un formato tabular (.tsv).
+
+
+### Actividad
+
+- Descarga el archivo .zip de la plataforma
+- mueve el archivo a tu carpeta de proyectos y descomprimelo
+- Lee el README y detalles del proyecto
+- Checa los datos de entrada
+- Analiza el programa de python
+
+---
+## 🧩 ¿Qué aprenderemos a continuación?
+
+A organizar mejor nuestro código: separar funciones, reutilizarlas, construir módulos y paquetes…
+tal como lo hacen los proyectos profesionales de Python.
+
+###  Qué haremos?
+
+- Dividir el programa en módulos temáticos (fasta_utils.py, bio_stats.py, etc.)
+
+- Crear un paquete completo y reutilizable
+
+- Usar import para ensamblar las partes del sistema
+    
+---
+
+## 🧠 Introducción a los Módulos en Python
+
+Cuando los programas crecen, tener **todo el código en un solo archivo** los vuelve:
+
+-   Difíciles de mantener
+    
+-   Complicados de reutilizar
+    
+-   Poco legibles para otros
+    
+
+&gt; 🧩 Un **módulo** es simplemente un archivo `.py` que contiene funciones, clases o variables que puedes **importar desde otros archivos** para organizarlos mejor.
+
+---
+
+### ✅ Ventajas de usar módulos
+
+-   Organiza el código por tema o funcionalidad
+    
+-   Reutiliza código sin copiar y pegar
+    
+-   Facilita el trabajo en equipo y el mantenimiento
+    
+-   Da el primer paso para construir **paquetes**
+    
+
+---
+
+## 🛠️ ¿Qué se necesita para crear un módulo?
+
+1.  ✅ Un archivo `.py` que contiene funciones, variables o clases.
+    
+2.  ✅ Un nombre claro y sin espacios (`fasta_utils.py`, `bio_stats.py`, etc.)
+    
+3.  ✅ Un uso explícito de `import` para acceder desde otros scripts.
+    
+4.  📄 Documentación breve en forma de docstrings.
+    
+5.  ❌ No tener código ejecutable suelto (idealmente sin `print()`s fuera de funciones).
+    
+
+---
+
+
+``` python
+# nombre_modulo.py
+
+"""
+Docstring del módulo: explica qué contiene y para qué sirve.
+"""
+
+# 1. Importaciones necesarias
+import os
+from pathlib import Path
+
+# 2. Constantes (si aplica)
+BASES_VALIDAS = {"A", "T", "G", "C"}
+
+# 3. Funciones o clases
+def mi_funcion(x):
+    """Descripción de la función"""
+    return x * 2
+
+# 4. (Opcional) Código de prueba o demostración
 if __name__ == "__main__":
-    seq = "ATGCATCAG"
-    assert(validate_dna_sequence(seq)) == True
-```
-
-```bash
-python3 validators.py
-```
-
-Si a la secuencia le agregas una N, que pasa ?
-
----
-# Ejecutando los componentes del paquete
-
-Entrar a la carpeta de operations. 
-
-`at_content.py`tiene una sección de validación, asi que podemos probarlo:
-
-
-```bash
-cd operations
-python3 at_content.py 
-
+    print(mi_funcion(5))
 ```
 
 ---
-# Ejecutando el script
+### 📦 ¿Cómo se usa?
 
-Ahora vamos a correr el **script** `calculate_at_content.py.`
+Supongamos que tienes un archivo llamado `fasta_utils.py` con esta función:
 
-```bash
-cd scripts 
-python3 calculate_at_content.py 
+
+
+``` python
+# fasta_utils.py
+def leer_fasta(path):
+    ...
 ```
 
-**que pasa?**
-
---
-
-Dentro de `scripts` esta tratando de buscar la carpeta y marca
-
-```
-ModuleNotFoundError: No module named 'dna_analysis'
-```
-
---
-
-Si  copiamos el módulo dna_analysis/operations/calculate_at_content.py a este lugar correrá .. pero nuestros módulos estan organizados en otro lado!!
+En otro archivo, puedes usarla así:
 
 
----
-# Ejecutando el script
 
-Y si nos salimos hasta el directorio papá de `dna_analysis`
+``` python
+from fasta_utils import leer_fasta
 
-```
-python3 dna_analysis/scripts/calculate_at_content.py
-```
-
-**que pasa?? **
-
---
-
-&lt;br&gt;
-
-sigue sin identificar la estructura del paquete y los módulos, entonces
-
-```bash
-python --help
-```
-
-```
--m mod : run library module as a script (terminates option list)
-```
-
---
-
-Entonces lo corremos de esta manera:
-
-```
-python -m dna_analysis.scripts.calculate_at_content
-python -m dna_analysis.scripts.calculate_at_content --help
-```
----
-# Ejecutando los componentes del paquete
-
-Pero si quiero ejecutar mis scripts desde otro lugar que no sea el directorio papá del paquete?
-
---
-
-**Ajustar la Variable PYTHONPATH**: Si por alguna razón necesitas ejecutar el script desde otro lugar, puedes agregar el directorio que contiene el paquete dna_analysis a la variable de entorno PYTHONPATH. Esto le permite a Python saber dónde buscar paquetes y módulos adicionales.
-
---
-
-En una terminal de Unix o Linux, podrías ajustar PYTHONPATH temporalmente así:
-
-```bash
-export PYTHONPATH="/path/to/dna_analysis_parent_directory:$PYTHONPATH"
-```
-
-Y en Windows, lo harías así desde el Command Prompt:
-
-```bash
-set PYTHONPATH=C:\path\to\dna_analysis_parent_directory;%PYTHONPATH%
-```
-
---
-
-Y corro el script
-
-```bash
-python -m dna_analysis.scripts.calculate_at_content --help
+secuencias = leer_fasta("data/secuencias.fasta")
 ```
 
 ---
-# Testing en Python
+## 🧩 Análisis del programa actual
 
-Dentro de la ingeniería software y la programación en general, el testing es una de las partes más importantes que nos encontraremos en casi cualquier proyecto. 
+### 🔍 ¿Qué hace el programa?
 
--**Tests manuales**: Son tests ejecutados manualmente por una persona, probando diferentes combinaciones y viendo que el comportamiento del código es el esperado. Sin duda los has realizado alguna vez.
+--
 
--**Tests automáticos**: Se trata de código que testea que otro código se comporta correctamente. La ejecución es automática, y permite ejecutar gran cantidad de verificaciones en muy poco tiempo. Es la forma más común, pero no siempre es posible automatizar todo.
+-   **Entrada**: Lee un archivo FASTA con secuencias de ADN
+    
+-   **Validación**: Verifica que solo tenga bases A, T, G, C
+    
+-   **Procesamiento**:
+    
+    -   Cuenta bases
+        
+    -   Calcula contenido GC
+        
+-   **Salida**: Exporta un archivo `.tsv`
+    
+-   **Pruebas**: Contiene pruebas con `assert`
 
-  - asserts
-  - Tests Unitarios 
+---
+
+### 📦 Propuesta de división en módulos del proyecto
+
+| Módulo               | Funciones incluidas                             | Propósito                                                             |
+|----------------------|--------------------------------------------------|----------------------------------------------------------------------|
+| `fasta_utils.py`   | `leer_fasta()`                                   | Leer y cargar secuencias desde archivos en formato FASTA            |
+| `validador.py`       | `validar_secuencia()`                            | Validar que las secuencias contengan solo bases A, T, G y C          |
+| `bioestadisticas.py` | `contar_bases()`, `calcular_gc()`                | Calcular frecuencias de bases y contenido GC                         |
+| `exportador.py`      | `exportar_tsv()`                                 | Exportar resultados del análisis a archivo `.tsv`                    |
+| `analizador.py`      | Uso de los módulos anteriores para ejecutar todo | Coordinar lectura, validación, análisis y exportación               |
+| `test_analizador.py` | Pruebas con `assert` o `unittest`                | Verificar que las funciones de cada módulo se comporten correctamente  |
+
+---
+## Actividad
+
+&gt; Separa las funciones y Generar todos los módulos.
+
+```
+analizador_genomico/              ← Carpeta raíz del proyecto
+├── data/                         ← Entrada: archivos FASTA
+│   └── secuencias.fasta
+│
+├── salida/                       ← Salida: archivos de resultados
+│   └── resultados.tsv
+│
+├── fasta_utils.py               ← Módulo: lectura y manejo de archivos FASTA
+├── validador.py                 ← Módulo: validación de secuencias
+├── bioestadisticas.py           ← Módulo: conteo de bases y cálculo GC
+├── exportador.py                ← Módulo: exportación a archivo
+├── analizador.py                ← Script principal (orquestador del flujo)
+│
+├── test_analizador.py           ← Pruebas con assert o unittest
+│
+├── README.md                    ← Descripción general del proyecto
+└── detalles_proyecto.md         ← Objetivo, estructura y formatos
+```
+
+--
+
+&gt; Si. no logras terminarlo descarga `analizador_genomico_modulos.zip`. (puedes renombrar tu carpeta actual y copiar la nueva. O puedes borrar el actual proyecto y copiar la nueva)
+
+---
+## ▶️ 1. Ejecutar desde la terminal
+
+Estando en la carpeta `analizador_genomico/`, simplemente:
+
+
+``` python
+python analizador.py
+```
+
+Este comando:
+
+-   Importará funciones de los módulos `.py` vecinos
+    
+-   Leerá `data/secuencias.fasta`
+    
+-   Guardará `salida/resultados.tsv`
+
+---
+## Añadiendo funcionalidades
+
+Quieres un script `guardar_secuencias.py` que formatee de fasta a tsv. Entonces :
+
+-   Lee el archivo `data/secuencias.fasta`
+-   Genera un archivo `salida/secuencias.tsv` con dos columnas: `ID` y `Secuencia`
+
+&gt; Descarga y mueve a tu proyecto `guardar_secuencias.py`
+&gt; Ejecutalo
+
+---
+## ⚠️ Nota importante
+
+Si ejecutas el script desde otro directorio (por ejemplo, usando VSCode o desde una notebook en otra carpeta), Python no encontrará los módulos.
+
+Soluciones:
+
+- Ejecutar siempre desde la raíz del proyecto
+
+- Añadir el path manualmente a sys.path
+
+- O mejor aún, convertir el proyecto en paquete.
+
+---
+## 🧠 ¿Qué es `sys.path`?
+
+Es una **lista de rutas** que Python examina cuando haces un `import`. Si el módulo no está en ninguna de esas rutas, verás un error `ModuleNotFoundError: No module named 'fasta_utils'`
+
+
+** ✅ ¿Cómo añadir una ruta a `sys.path`? **
+
+Supón que estás en otro directorio y quieres importar desde `analizador_genomico/`:
+
+
+``` python
+import sys
+sys.path.append("ruta/a/analizador_genomico")
+from fasta_utils import leer_fasta
+```
+
+---
+## 🛑 Recomendación
+
+- 👉 Solo usa `sys.path.append()` en scripts o notebooks de desarrollo temporal. 
+
+- Para proyectos formales o producción, **mejor estructura el código como paquete**.
+
+---
+
+### ⚠️ ¿Por qué `analizador.py` necesita tratarse de forma distinta?
+
+Todos los módulos que hemos creado (`fasta_utils.py`, `validador.py`, etc.) **contienen exclusivamente funciones**.  
+
+Sin embargo, `analizador.py` es diferente: **contiene el flujo principal del programa**, es decir, **es el script que ejecuta** todo el análisis llamando a los demás módulos.
+
+&gt; 🛑 A simple vista, todos los archivos `.py` parecen ser "módulos" reutilizables.  
+Esto puede llevar a que **otro programador, sin conocer los detalles, intente importar `analizador.py` como si fuera un módulo más**. ¿Qué pasaría?
+
+---
+## ejemplo
+
+1. Tienes un modulo llamado `saludo.py`
+
+
+``` python
+def hola():
+    print("Hola")
+```
+
+2. y tienes un programa que usa ese módulo
+
+
+``` python
+from saludo import hola
+
+nombre = "Aby"
+```
+
+3. Qué pasa si al módulo `saludo.py` le agregamos una línea fuera de la función
+
+
+``` python
+print("mundo")
+```
+
+---
+
+### ❌ ¿Qué sucede si `analizador.py` tiene código suelto (fuera de funciones)?
+
+Si el archivo contiene instrucciones directamente ejecutables (por ejemplo, lectura de archivos, impresión, procesamiento), estas **se ejecutarán automáticamente al hacer el import**, incluso si solo se quería acceder a una función.
+
+Esto puede provocar:
+
+-   ❗ Procesos inesperados (lectura de archivos, ejecución completa)
+    
+-   ❗ Resultados incorrectos o repetidos
+    
+-   ❗ Dificultades para probar, extender o reutilizar el código
+
+---
+## ✅ ¿Cómo evitamos esto?
+
+La solución es **encapsular el flujo del análisis dentro de una función `main()`** y protegerlo con:
+
+
+``` python
+if __name__ == "__main__":
+    main()
+```
+
+
+---
+## 🧠 ¿Qué significa `__name__` ?
+
+- `__name__` es una **variable especial incorporada** (built-in) en cada archivo `.py` que se ejecuta o importa.  
+
+- Su valor **depende del contexto** en el que se está ejecutando el archivo.
+
+
+#### 🧪 Técnicamente: ¿Qué valor tiene `__name__`?
+
+| Contexto de ejecución                  | Valor de `__name__`  |
+|----------------------------------------|-----------------------|
+| Ejecutas el archivo directamente       | `"__main__"`         |
+| Importas el archivo desde otro script  | Nombre del archivo (sin `.py`) |
+
+
+---
+## Ejemplo
+
+1.  Agrega la siguiente linea de código al final del programa `analizador.py`
+
+
+``` python
+print(f"__name__ vale: {__name__}")
+```
+
+Desde la linea de comando, corre el programa analizador y tiene que imprimir 
+
+
+``` bash
+% python analizador.py 
+
+[OK] Resultados guardados en: output/resultados.tsv
+__name__ vale: __main__
+```
+
+---
+## Ejemplo
+
+Ahora, creemo un script que se llame `llama_analizador.py` que tenga las siguientes líneas de código:
+
+
+
+``` python
+import analizador  # estamos importanto analizador como módulo
+
+x = 10
+```
+
+Y ejecuta en `llama_analizador.py` , te debe regresar esto:
+
+
+
+``` python
+% python llama_analizador.py
+
+[OK] Resultados guardados en: output/resultados.tsv
+__name__ vale: analizador
+```
+
+**¿Cuál es el valor de __name__?**
+
+---
+## 🎯 ¿Para qué sirve?
+
+Permite diferenciar entre:
+
+-   👨‍💻 **Ejecutar un archivo como programa principal**
+    
+-   🧩 **Importarlo como módulo en otro script**
+    
+
+Por eso usamos esta estructura:
+
+
+``` python
+if __name__ == "__main__":
+    main()
+```
+
+Así controlamos **cuándo** debe ejecutarse el flujo principal del programa.
+
+---
+## Ejercicio
+
+1. Actualiza el programa `analizador.py` Usando esta estructura estándar:
+
+
+``` python
+def main():
+    # Código del análisis (leer, validar, calcular, exportar)
+
+if __name__ == "__main__":
+    main()
+```
+
+2. Vuelve a correr 
+
+```bash
+% python analizador.py 
+% python llama_analizador.py
+```
+
+--
+
+&gt; Si no has terminado copia el archivo `analizador2.py`
+
+---
+
+## 🧩 Módulo --&gt; Paquete ??
+
+** ✅ Señales claras de que es buen momento para convertir tu proyecto en paquete **
+
+| Situación                                           | ¿Conviene empaquetar? |
+|----------------------------------------------------|------------------------|
+| Ya tienes módulos reutilizables (`*.py`)           | ✔️ Sí                   |
+| Planeas usar el código en varios proyectos         | ✔️ Sí                   |
+| Lo vas a compartir públicamente o en equipo        | ✔️ Sí                   |
+| Solo es un script puntual con lógica específica    | ❌ No                  |
+
+--
+
+#### Qué hacer?
+
+- Convertirlo en un paquete con subcarpetas (`__init__.py`)
+- Mover los módulos a la carpeta `src/paquete/` (p.e. `src/analizador/`)
+- Usar `setup.py` o `pyproject.toml` para instalación
+- Añadir `notebooks/` para visualización o pruebas interactivas
     
 ---
-# Testing
+## 🧱 Estructura final de un paquete básico
 
-En proyectos grandes, es común que antes de permitirnos hacer merge de nuestro código en master, se nos obligue a ejecutar un conjunto de tests automatizados. Si todos pasan, se asumirá que nuestro código funciona y que no hemos “roto” nada, por lo que tendremos el visto bueno.
-
-Aunque el uso de assert() puede ser suficiente para nuestros tests, a veces no es suficiente y necesitamos librerías como unittest, que ofrecen alguna que otra funcionalidad que nos hará la vida más fácil.
-
----
-#Tests Unitarios en Python con unittest
-
-Podemos usar unittest para crear varios tests que verifiquen que nuestra función funciona correctamente. 
-
-- Creamos **una clase** `Test&lt;NombreDeLoQueSePrueba&gt;` que hereda de `unittest.TestCase`.
-
-- Definimos varios **tests como métodos de la clase**, usando `test_&lt;NombreDelTest&gt;` para nombrarlos.
-
-- En cada test ejecutamos las comprobaciones necesarias, usando `assertEqual` en vez de assert, pero su comportamiento es totalmente análogo.
-
-&lt;br&gt;
-&lt;br&gt;
-.tiny[Source: https://ellibrodepython.com/python-testing]
-
----
-#Tests Unitarios en Python con unittest
-
-
-```python
-import unittest
-from dna_analysis.operations.at_content import calculate_at_content
-
-class TestATContent(unittest.TestCase):
-    """
-    Clase de pruebas unitarias para la función `calculate_at_content` del módulo `at_content`.
-    
-    Esta clase contiene métodos para probar el correcto cálculo del contenido de adenina
-    y timina (AT) en secuencias de ADN, incluyendo el manejo correcto de entradas inesperadas
-    o inválidas.
-    
-    Métodos:
-        test_calculate_at_content: Prueba varios casos, incluyendo secuencias válidas e inválidas,
-        para asegurar el correcto comportamiento de la función `calculate_at_content`.
-    """
-
-    # casos de prueba
-    def test_calculate_at_content(self):
-        self.assertEqual(calculate_at_content("ATGC"), 50.0)
-        self.assertEqual(calculate_at_content("AAAA"), 100.0)
-        self.assertEqual(calculate_at_content("TGAAC", normalize=False), 60.0)
-
-if __name__ == '__main__':
-    unittest.main()
+```
+analizador_genomico/             ← Carpeta raíz del proyecto
+├── src/                         ← Código fuente del paquete
+│   └── analizador/              ← Nombre del paquete (import analizador)
+│       ├── __init__.py
+│       ├── fasta_utils.py
+│       ├── validador.py
+│       ├── bioestadisticas.py
+│       └── exportador.py
+│
+├── analizador.py                ← Script ejecutable
+├── guardar_secuencias.py        ← Script ejecutable
+├── tests/                       ← Carpeta para pruebas
+│   └── test_analizador.py
+│
+├── data/                        ← Entrada: FASTA
+├── output/                      ← Salida: resultados
+│
+├── README.md
+├── detalles_proyecto.md
+├── pyproject.toml               ← ⚙️ Configuración moderna del paquete
+└── setup.cfg                    ← (opcional) Configuración extendida
 ```
 
 ---
-#Tests Unitarios en Python con unittest
+## 🧠 ¿Qué es `__init__.py`?
 
-`unittest.main()` proporciona una interfaz de línea de comandos para el script de prueba. Básicamente, lo que hace es **recolectar todos los casos de prueba** que se encuentran en el módulo desde el cual se ejecuta, y luego **ejecutar todos los tests** que se han definido. Es decir, actúa como el punto de entrada principal para correr las pruebas, gestionando el proceso de ejecución de pruebas y la agregación de resultados.
+Es un **archivo especial** que se coloca dentro de un directorio para decirle a Python:
 
-Qué hace:
+&gt; “💡 Esta carpeta debe tratarse como un paquete Python.”
 
-- Detección de Test Cases: unittest.main() busca en el módulo las clases que heredan de unittest.TestCase, que es la forma estándar de definir casos de prueba en la biblioteca unittest.
+--
 
-- Ejecución de Pruebas: Ejecuta cada método de test que se haya definido en las clases de TestCase recopiladas. Estos métodos de test generalmente son aquellos que comienzan con el prefijo "test".
-
-- Recolección de Resultados: Recolecta los resultados de estas pruebas y proporciona un resumen al final de la ejecución, indicando cuántas pruebas fueron ejecutadas y cuántas fallaron, entre otros datos útiles.
-
-- Manejo de Flags: Permite el uso de flags en la línea de comandos para controlar la ejecución de las pruebas, como -v para el modo verboso, que proporciona una salida detallada de cada prueba ejecutada.
+| Propósito                                | Descripción                                                                 |
+|------------------------------------------|-----------------------------------------------------------------------------|
+| 🧭 Habilita el paquete                   | Python reconocerá la carpeta como un paquete válido                        |
+| 📂 Permite importar módulos internos     | Puedes hacer `from mi_paquete import modulo`                               |
+| 🧱 Define qué se exporta por defecto     | Puedes controlar qué se importa con `from paquete import *` usando `__all__` |
+| 🧪 Código de inicialización (opcional)   | Puedes ejecutar código cuando el paquete se importa por primera vez        |
 
 ---
-#Tests Unitarios en Python con unittest
+
+## ✏️ Contenido típico
+
+-   Puede estar vacío (`pass`)
+    
+-   O tener un docstring:
+
+```
+"""Este paquete contiene herramientas para analizar secuencias genómicas."""
+```
+
+-   O inicializar cosas si se requiere
+
+---
+## 📄 `pyproject.toml`
+
+Es el **archivo principal de configuración de un proyecto Python moderno**.  
+Define cómo se debe construir, instalar y empaquetar tu proyecto.
+
+### 🧠 ¿Para qué sirve?
+
+-   Especifica:
+    
+    -   Nombre del proyecto
+    -   Versión
+    -   Autor(es)
+    -   Requisitos de Python
+    -   Dependencias (`dependencies = []`)
+        
+-   Define el sistema de construcción (`setuptools`, `flit`, `poetry`, etc.). 🔧 setuptools es el motor que construye, empaqueta e instala tu proyecto
+    
+-   Es el **reemplazo moderno de `setup.py`**
+
+---
+## 📄 `setup.cfg`
+
+Es un archivo opcional para **definir metadatos y configuraciones adicionales**.  
+Se usa junto con `pyproject.toml` para separar la configuración del código Python.
+
+### 🧠 ¿Para qué sirve?
+
+-   Describe el paquete
+    
+-   Declara los paquetes y módulos a incluir
+    
+-   Define la versión mínima de Python
+    
+-   Permite usar `setuptools` sin código en `setup.py`
+
+---
+## Qué pasa si ejecuto `analizador.py`
+
+**¿Puedo ejecutar el paquete sin instalarlo?** Si corres `analizador.py` no encontrará los paquetes.
+
+¿Qué hacer? necesitas agregar la carpeta src/ al sys.path.
 
 
+``` python
+# analizador.py (ubicado en la raíz del proyecto)
+
+import sys
+from pathlib import Path
+
+# Agrega la carpeta src al path
+sys.path.append(str(Path(__file__).resolve().parent / "src"))
+
+# Ahora puedes importar tu paquete
+from analizador.fasta_utils import leer_fasta
+```
+
+---
+## 🧩 ¿Qué hace?
+
+
+``` python
+# Agrega la carpeta src al path
+sys.path.append(str(Path(__file__).resolve().parent / "src"))
+```
+
+
+- **`Path(__file__)`**	: Obtiene la ruta del archivo actual (`analizador.py`) como objeto `Path`
+- **`.resolve()`**	: Convierte esa ruta en una **ruta absoluta** (resuelve `..`, `.`)
+- **`.parent`**	: Obtiene el directorio que **contiene** ese archivo (el directorio raíz del proyecto)
+- **`Path(...) / "src"`**	: Une la ruta del directorio raíz con `"src"` → construye la ruta completa a `src/`
+- **`str(...)`** : Convierte ese `Path` en una cadena de texto, que es lo que `sys.path.append()` espera
+- **`sys.path.append(...)`**	: Agrega esa ruta a la lista de búsqueda de módulos de Python (`sys.path`)
+
+
+Corre `analizador.py` **funciona**?
+
+---
+
+## 🛠️ El problema
+
+Tienes un archivo llamado `analizador.py` en la raíz, y también una carpeta llamada `analizador` dentro de `src/`.  
+
+Python ve primero el archivo `analizador.py` y **lo confunde con un paquete**, lo cual **rompe la importación**.
+
+&gt; 🔄 Cambia el nombre del archivo `analizador.py` a, por ejemplo, `main.py` o `run.py`. Esto evitará el conflicto de nombres, y **la importación desde `src/analizador/` funcionará perfectamente**.
+
+
+**¿Funcionó??**
+
+---
+## ¿Cómo instalar tu paquete local en modo editable con pip?
+
+#### 1. Asegúrate de tener esta estructura mínima,  vista anteriormente.
+#### 2. Abre una terminal y cambia al directorio raíz del proyecto
+#### 3. Instala el paquete en modo *editable*
 
 ```bash
-python3 -m dna_analysis.test.operations.test_at_content
-
-python3 -m dna_analysis.test.operations.test_at_content -v  # mas detalle
-
+pip install -e .
 ```
 
----
-# Ejercicio
-
-- Implementa otra funcionalidad del paquete
- 
- - Análisis de Frecuencia de Codones
- 
- - Identificación de Sitios de Restricción.
-
-Usa las funciones ya creadas para otros módulos en `utils` y genera en `operations` el módulo con las funcionalidades requeridas. Y finalmente crea el script importando los módulos necesarios.
-
+Esto permite que cualquier cambio que hagas en `src/analizador/` se refleje sin necesidad de reinstalar.
 
 ---
-class: inverse, center, middle
 
-# Tarea final
+### 🧪 4. Verifica que todo está bien
+
+Desde cualquier parte, abre Python y ejecuta:
+
+
+``` python
+from analizador.fasta_utils import leer_fasta
+
+seqf = "seq.dna"
+secuencias = leer_fasta(seqf)
+
+print(secuencias)
+```
+
+✅ Si no hay errores, ¡tu paquete está funcionando!
+
+### 🧼 5. Recomendación
+
+Una vez instalado el paquete con `pip install -e .`, puedes eliminar cualquier línea como:
+
+
+``` python
+sys.path.append(...)
+```
+
 
 ---
-#  Proyecto Final
+## ✅ Conclusiones principales
 
-El proyecto final consiste en crear un paquete  (puedes trabajar con un compañero y la actividad del trabajo de ambos debe verse en el historial de GitHub).
+-   `import` permite **reutilizar código** desde otros archivos o librerías.
+    
+-   Un **módulo** es un archivo `.py` con funciones que puedes importar.
+    
+-   Un **paquete** es una carpeta con módulos y un `__init__.py`.
+    
+-   Usa `main()` y `if __name__ == "__main__"` para **controlar cuándo se ejecuta el programa**.
+    
+-   `__name__` es `"__main__"` solo si el archivo se ejecuta directamente.
+    
+-   `__init__.py` activa el paquete y puede definirse configuraciones iniciales.
+    
+-   `setuptools` se usa para **construir e instalar** tu paquete.
+    
+-   Con `pip install -e .` puedes usar tu código como paquete sin moverlo.
+    
+-   El uso correcto de módulos y paquetes hace tu código **más limpio, reutilizable y profesional**.
 
-Hacer una demostración de 15 min. El paquete debe
 
-.content-box-blue[
+---
 
-- Tener al menos 2 funcionalidades, que deben estar organizadas en módulos.
+## 🚀 Funcionalidades avanzadas con paquetes
 
-- Python: lectura de argumentos, uso de archivos, manejo de errores con try y realizar pruebas con assert y /unittest.
-
-- Seguir TODAS las recomendaciones FAIR y buenas prácticas (por ejemplo documentación interna y docstring).
-
-- Estar versionado y controlado por git y depositado en GitHub
-
-]
-
-
-
+-   ✅ **Distribución e instalación** con `pip` (`.whl`, `.tar.gz`)
+-   🧪 **Pruebas automatizadas** con `unittest`, `pytest`, `tox`
+-   🧩 **Definición de comandos ejecutables** (`console_scripts`)
+-   🧱 **Subpaquetes y namespaces** (`paquete.subpaquete.modulo`)
+-   🔐 **Control de visibilidad** con `__all__` y `__init__.py`
+-   📦 **Publicación en PyPI** para compartir con la comunidad
+-   🧬 **Compatibilidad con entornos virtuales** y `venv`
+-   📁 **Inclusión de archivos no Python** (datos, plantillas, scripts)
+-   🔁 **Integración continua (CI)** con GitHub Actions, GitLab CI, etc.
+-   📑 **Documentación automática** con `Sphinx` o `MkDocs`
+-   🗂️ **Organización multi-paquete** en proyectos grandes (monorepo)
+-   🔄 **Interoperabilidad con C/C++** usando extensiones compiladas (`.so`, `.pyd`)
+-   🧰 **Soporte para plugins** mediante `entry_points`
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
