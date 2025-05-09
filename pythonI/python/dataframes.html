@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Python II y GitHub</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Python II y GitHub
+]
+.institute[
+### Licenciatura en Ciencias Genómicas,UNAM
+]
+.date[
+### First version: yyy-mm-dd; Last update: 2025-05-07
+]
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+## 🎯 Objetivo
+
+Comprender y aplicar la biblioteca pandas de Python para el análisis de datos estructurados mediante el uso de DataFrames, permitiendo la exploración, limpieza, transformación y análisis de archivos comunes en bioinformática, como GFF3, TSV y CSV.
+
+---
+# Introducción a Pandas y los DataFrames
+
+# 🐼 ¿Qué es pandas?
+
+**`pandas`** es una **biblioteca de Python** especializada en el manejo y análisis de datos **estructurados** (es decir, organizados en filas y columnas, como tablas).
+
+Fue diseñada para ser **rápida, flexible y expresiva**, y permite trabajar fácilmente con datos tabulares, temporales o jerárquicos.
+
+&gt; El nombre viene de "**Panel Data**", un término usado en estadística y econometría.
+
+---
+## ✅ ¿Por qué usar pandas?
+
+-   Permite **leer, escribir, filtrar, agrupar, transformar y visualizar** datos de forma eficiente.
+-   Ofrece estructuras potentes como:
+    
+    -   **`Series`**: listas unidimensionales con índice.
+    -   **`DataFrames`**: tablas bidimensionales (¡la estrella de pandas!).
+        
+-   Es compatible con múltiples formatos de datos: **CSV, Excel, JSON, SQL, Parquet, HDF5**, etc.
+-   Es **altamente optimizada** y se integra perfectamente con NumPy, matplotlib, seaborn, scikit-learn, entre otras.
+
+---
+## 🧰 Instalación
+
+Si no tienes instalada la librería:
+
+```bash
+pip install pandas
+```
+
+---
+## 🧱 Estructuras principales de pandas
+
+### 🔹 `Series`
+
+Una lista con índice:
+
+``` python
+import pandas as pd
+
+s = pd.Series([10, 20, 30], index=['a', 'b', 'c'])
+print(s)
+```
+---
+### 🔸 `DataFrame`
+
+Una tabla con filas y columnas:
+
+
+``` python
+data = {
+    'Gene': ['thrL', 'thrA', 'thrB'],
+    'Longitud': [117, 2340, 1461]
+}
+
+df = pd.DataFrame(data)
+print(df)
+```
+
+---
+### 🐼 **Dato curioso sobre pandas**
+
+&gt; **¡pandas puede trabajar con millones de datos sin que uses loops!**
+
+Una de las cosas más sorprendentes para quienes vienen de otros lenguajes o apenas están comenzando en Python es que **`pandas` puede procesar conjuntos de datos enormes (millones de filas) sin necesidad de escribir bucles `for`**.
+
+🤯 Por ejemplo, si tienes un archivo con **10 millones de genes simulados** (o lecturas, o variantes), puedes agrupar, filtrar y resumir todo con una sola línea de código, gracias a la **vectorización interna** de pandas.
+
+
+---
+### 💡 Comparación 
+
+
+``` python
+# En un lenguaje tradicional, harías algo como:
+for fila in datos:
+    if fila['expresion'] &gt; 1000:
+        guardar(fila)
+
+# En pandas basta con:
+df[df['expresion'] &gt; 1000]
+```
+Y esto no solo es más **corto**, también es **más rápido** porque está implementado en **C internamente**. 🎯
+
+---
+## 📌 ¿Qué es un DataFrame?
+
+Un **DataFrame** es una **estructura de datos bidimensional** que forma parte de la biblioteca **pandas** en Python. Está diseñada para manejar datos de forma tabular, es decir, en **filas y columnas**, similar a una hoja de cálculo, una tabla SQL o una tabla de Excel.
+
+### ✅ Un DataFrame puede considerarse como:
+
+-   Una colección ordenada de **series** (columnas),
+    
+-   Cada columna puede tener un tipo de dato distinto (números, cadenas, booleanos),
+    
+-   Tiene **índices en las filas** y **nombres de columnas**.
+
+---
+
+### 📊 Comparativa: DataFrame vs otras estructuras de datos en Python
+
+| Característica               | `list` (Lista)       | `dict` (Diccionario)       | `DataFrame` (`pandas`)           |
+|-----------------------------|----------------------|-----------------------------|----------------------------------|
+| Dimensión                   | Unidimensional        | Unidimensional (clave-valor) | Bidimensional (filas y columnas) |
+| Soporte tabular             | ❌                   | ❌                          | ✅                                |
+| Tipos de datos por columna  | ✅                   | ✅                          | ✅ (cada columna puede tener su tipo) |
+| Acceso por etiqueta         | ❌                   | ✅ (claves)                 | ✅ (columnas e índices)          |
+| Indexación avanzada         | ❌                   | ❌                          | ✅ (`.loc[]`, `.iloc[]`)         |
+| Carga desde archivos        | ❌                   | ❌                          | ✅ (`read_csv`, `read_excel`, etc.) |
+| Operaciones vectorizadas    | ❌                   | ❌                          | ✅                                |
+| Filtrado por condiciones    | ❌                   | ❌                          | ✅ (`df[df['col'] &gt; x]`)         |
+| Agrupaciones y resumen      | ❌                   | ❌                          | ✅ (`groupby`, `describe`)       |
+| Ideal para datos estructurados | ❌                | ❌                          | ✅                                |
+---
+## 🎓 ¿Cuándo deberías usar un DataFrame?
+
+-   Cuando tus datos tienen forma de **tabla**
+-   Cuando necesitas **analizar, filtrar, agrupar, transformar o visualizar** información.
+-   Cuando trabajas con **grandes volúmenes de datos** y necesitas rendimiento.
+-   Cuando lees datos desde archivos estructurados como `.csv`, `.tsv`, `.xlsx`, o bases de datos.
+
+---
+
+## 🧬 Aplicación en bioinformática
+
+En bioinformática es común trabajar con datos genómicos que vienen en archivos como `.gff`, `.gtf`, `.csv`, `.bed`, `.tsv`, etc. 
+
+Ejemplos típicos:
+
+-   Tabla de genes: GeneID, nombre, función, longitud.
+-   Resultados de expresión génica: GeneID, condición1, condición2...
+-   Predicciones de reguladores, motivos, puntuaciones...
+   
+**Un DataFrame es ideal para almacenar, filtrar y analizar estos datos de forma flexible.**
+
+---
+## 📘 Métodos comunes de DataFrames (`pandas`)
+
+#### 📊 Métodos para explorar datos
+
+| Método                  | Descripción                                             |
+|------------------------|---------------------------------------------------------|
+| `df.head(n)`           | Muestra las primeras `n` filas del DataFrame           |
+| `df.tail(n)`           | Muestra las últimas `n` filas                          |
+| `df.shape`             | Devuelve una tupla con (número de filas, columnas)     |
+| `df.columns`           | Lista los nombres de las columnas                      |
+| `df.info()`            | Información general del DataFrame (columnas, tipos, nulos) |
+| `df.describe()`        | Estadísticas descriptivas de columnas numéricas        |
+| `df.dtypes`            | Tipo de dato de cada columna                           |
+
+
+---
+#### 🔍 Métodos para seleccionar y filtrar
+
+| Método                      | Descripción                                       |
+|----------------------------|---------------------------------------------------|
+| `df['columna']`            | Acceder a una columna                            |
+| `df[['col1', 'col2']]`     | Acceder a varias columnas                        |
+| `df.loc[fila]`             | Acceder a una fila por etiqueta de índice        |
+| `df.iloc[pos]`             | Acceder a una fila por posición numérica         |
+| `df[df['col'] &gt; valor]`    | Filtrado por condición booleana                  |
+
+---
+#### 🔄 Métodos para transformar o modificar
+
+| Método                         | Descripción                                     |
+|-------------------------------|-------------------------------------------------|
+| `df['nueva'] = ...`           | Crear o modificar una columna                   |
+| `df.drop()`                   | Eliminar columnas o filas                       |
+| `df.rename()`                 | Renombrar columnas                              |
+| `df.apply(función)`           | Aplicar una función personalizada a columnas o filas |
+| `df.replace()`                | Reemplazar valores       
+
+---
+#### 📚 Métodos útiles en bioinformática
+
+| Método                         | Descripción                                     |
+|-------------------------------|-------------------------------------------------|
+| `df.groupby()`                | Agrupar datos por una columna y resumir        |
+| `df.merge()`                 | Combinar dos DataFrames por una columna común  |
+| `df.sort_values()`            | Ordenar el DataFrame por valores                |
+| `df.isnull()` / `df.fillna()` | Identificar o rellenar valores nulos           |
+| `df.to_csv()` / `read_csv()`  | Exportar o leer archivos CSV/TSV               |
+
+
+---
+## 🧰 Sintaxis Básica de los DataFrames
+
+**Crear un DataFrame desde un diccionario**
+
+
+``` python
+import pandas as pd
+
+data = {
+    'Columna1': [valor1, valor2, valor3],
+    'Columna2': [valorA, valorB, valorC]
+}
+
+df = pd.DataFrame(data) # de diccionario --&gt; dataframe
+```
+
+✅ **Explicación**:
+
+-   Cada clave del diccionario es una columna.
+-   Cada lista contiene los valores de esa columna.
+-   `df` es ahora un DataFrame que puedes manipular.
+
+---
+
+## Ejemplo
+
+
+``` python
+import pandas as pd
+
+data = {
+    'Nombre': ['Ana', 'Luis', 'Sofía'],
+    'Edad': [28, 34, 22],
+    'Ciudad': ['CDMX', 'Guadalajara', 'Monterrey']
+}
+
+df = pd.DataFrame(data)
+print(df)
+```
+
+Resultado:
+
+```css
+    Nombre   Edad      Ciudad
+0   Ana      28        CDMX
+1   Luis     34        Guadalajara
+2   Sofía    22        Monterrey
+```
+
+
+👉 Fíjate que los índices (0, 1, 2) se generan automáticamente, pero también pueden personalizarse.
+
+---
+### 📌 Operaciones básicas con DataFrames
+
+#### Acceder a columnas:
+
+
+``` python
+df['Edad']              # Acceder a una sola columna
+df[['Nombre', 'Edad']]  # Acceder a varias columnas
+```
+
+--
+
+#### Acceder a una fila por índice:
+
+
+``` python
+df.loc[1]    # Accede a la fila con etiqueta de índice 1
+df.iloc[2]   # Accede a la tercera fila (posición 2)
+```
+
+---
+
+#### Filtrado (por condición):
+
+
+``` python
+df[df['Edad'] &gt; 25]
+```
+
+--
+
+#### Agregar una nueva columna:
+
+
+``` python
+df['Ocupación'] = ['Bióloga', 'Ingeniero', 'Estudiante']
+```
+
+---
+### Ejemplo con Genes
+
+Supongamos que tienes una tabla con información de genes:
+
+
+``` python
+genes = {
+    'GeneID': ['b0001', 'b0002', 'b0003'],
+    'Nombre': ['thrL', 'thrA', 'thrB'],
+    'Función': ['regulador', 'enzima', 'enzima'],
+    'Longitud': [117, 2340, 1461]
+}
+
+df_genes = pd.DataFrame(genes)
+```
+
+---
+
+**Filtrado por una condición**
+
+
+``` python
+# Genes cuya longitud es mayor a 1000 pb
+df[df['Longitud'] &gt; 1000]
+
+# Genes cuya función es "enzima"
+df[df['Función'] == 'enzima']
+
+# Genes cuya expresión es menor a 30
+df[df['Expresión'] &lt; 30]
+```
+
+**Filtrado compuesto**
+
+
+``` python
+# Genes de función 'enzima' y longitud mayor a 1500
+df[(df['Función'] == 'enzima') &amp; (df['Longitud'] &gt; 1500)]
+
+# Genes que NO son enzimas
+df[df['Función'] != 'enzima']
+```
+
+---
+
+**Seleccionar columnas después de un filtro**
+
+
+``` python
+# Mostrar solo Nombre y Expresión de genes con expresión alta
+df[df['Expresión'] &gt; 40][['Nombre', 'Expresión']]
+```
+
+** Usar  `.loc[]` con condiciones y selección**
+
+
+``` python
+# Mostrar GeneID y Función de genes con longitud &gt; 1000
+df.loc[df['Longitud'] &gt; 1000, ['GeneID', 'Función']]
+```
+
+**Usar `.iloc[]` para seleccionar por posición**
+
+
+``` python
+# Mostrar las dos primeras filas
+df.iloc[:2]
+```
+
+**Crear una nueva columna con condiciones**
+
+
+``` python
+df['Es_largo'] = df['Longitud'] &gt; 1000
+print(df)
+```
+
+✅ Aquí se crea una columna booleana que indica si el gen es largo.
+
+---
+
+### Resumen de filtrado
+
+| Expresión                         | Descripción                                                                 |
+|----------------------------------|----------------------------------------------|
+| `df['columna']`                  | Acceder a una sola columna                                                 |
+| `df[['col1', 'col2']]`           | Acceder a varias columnas                                                  |
+| `df.loc[fila]`                   | Acceder a una fila usando la etiqueta de índice                           |
+| `df.iloc[pos]`                   | Acceder a una fila por posición numérica (basado en la posición)          |
+| `df[df['col'] &gt; valor]`          | Filtrar filas con valores mayores a cierto umbral                         |
+| `df[df['col'] == 'valor']`       | Filtrar filas que cumplen una condición exacta                            |
+| `df[df['col'] != 'valor']`       | Filtrar filas que no cumplen con un valor específico                      |
+| `df[(cond1) &amp; (cond2)]`          | Filtrar con múltiples condiciones (AND lógico)                            |
+| `df[(cond1) | (cond2)]`          | Filtrar con múltiples condiciones (OR lógico)                             |
+| `df.loc[condición, ['col']]`     | Filtrar con condición y seleccionar columnas específicas con `.loc[]`     |
+| `df.iloc[filas, columnas]`       | Seleccionar filas y columnas por posición con `.iloc[]`                   |
+| `df['nueva'] = condición`        | Crear una nueva columna a partir de una condición                         |
+| `df['col'].apply(función)`       | Aplicar una función a una columna                                          |
+
+---
+
+## Otras formas comunes de crear un DataFrame:
+
+###  Desde una lista de diccionarios:
+
+
+``` python
+data = [
+    {'nombre': 'Ana', 'edad': 25},
+    {'nombre': 'Luis', 'edad': 30}
+]
+df = pd.DataFrame(data)
+```
+
+
+
+### Desde un archivo:
+
+
+``` python
+df = pd.read_csv("archivo.csv")
+```
+---
+
+## Caso:  Exploración y análisis del archivo de genes `genes.gff3`
+
+### Archivo de Entrada
+
+Guarda esto como un archivo de texto llamado **`genes.gff3`**:
+
+```
+##gff-version 3
+NC_000913.3	RefSeq	gene	190	255	.	+	.	ID=gene-b0001;Name=thrL
+NC_000913.3	RefSeq	gene	337	2799	.	+	.	ID=gene-b0002;Name=thrA
+NC_000913.3	RefSeq	gene	2550	4030	.	-	.	ID=gene-b0003;Name=thrB
+NC_000913.3	RefSeq	gene	5000	6000	.	+	.	ID=gene-b0004;Name=yaaX
+NC_000913.3	RefSeq	gene	6300	7100	.	-	.	ID=gene-b0005;Name=yaaY
+NC_000913.3	RefSeq	gene	9000	8500	.	-	.	ID=gene-b0006;Name=malFormado
+```
+
+---
+## 📘 Método `pd.read_csv()`
+
+`pd.read_csv()` es uno de los métodos más importantes y utilizados de la biblioteca `pandas`. Sirve para **leer archivos de texto con datos estructurados**, como archivos **CSV** (valores separados por comas), **TSV** (por tabulaciones), o incluso **archivos bioinformáticos como GFF, BED o VCF** (cuando se adaptan sus columnas).
+
+Es la **puerta de entrada para convertir un archivo plano en un DataFrame**, lo que permite explorar, filtrar, analizar y visualizar los datos fácilmente desde Python.
+
+### ✅ **Sintaxis general**
+
+
+``` python
+pd.read_csv(filepath_or_buffer, sep=',', header='infer', names=None, comment=None, usecols=None, dtype=None, na_values=None, ...)
+```
+
+---
+### ⚙️ **Ejemplo**
+
+
+``` python
+import pandas as pd
+
+# Leer archivo GFF3 ignorando comentarios
+df = pd.read_csv(
+    "genes.gff3",
+    sep="\t",                # Separador tabulado
+    comment="#",             # Ignorar líneas que comienzan con #
+    header=None,             # No hay cabecera en el archivo
+    names=["seqid", "source", "type", "start", "end", "score", "strand", "phase", "attributes"]
+)
+
+print(df)
+```
+
+---
+## 🔧 Métodos para **explorar** un DataFrame 
+
+**`.head()`** : El método `.head()` permite **visualizar las primeras filas** de un DataFrame. Es una herramienta muy útil durante la **exploración inicial de datos**, para comprobar cómo se cargaron las columnas, qué valores hay y si la estructura es la esperada.
+
+ **`df.tail(n)`** : Muestra las **últimas `n` filas** del DataFrame. Útil para ver si hay filas incompletas o mal formateadas al final.
+
+** ✅ Sintaxis: **
+
+
+``` python
+df.head(n) # `n`: número de filas a mostrar (por defecto 5)
+```
+  
+
+**Ejemplo**
+
+
+``` python
+print(df.head(3))
+print(df.tail(3))
+```
+
+---
+
+**`.info()` **:  Muestra un **resumen de la estructura** del DataFrame: columnas, tipos de datos, valores nulos y uso de memoria.
+
+#### ✅ Sintaxis:
+
+
+``` python
+df.info()
+```
+
+**`.describe()` ** Calcula **estadísticas descriptivas** para columnas numéricas: media, desviación, min, max, percentiles...
+
+ ✅ Sintaxis:
+
+
+``` python
+df.describe()
+```
+
+---
+
+** `df.shape` **
+
+**🔎 ¿Qué hace?**  
+Devuelve una tupla `(n_filas, n_columnas)` que indica la **dimensión** del DataFrame.
+
+**✅ Sintaxis:**
+
+
+``` python
+df.shape
+```
+
+#### Ejemplo 
+
+
+``` python
+print("Número de filas y columnas:", df.shape)
+```
+
+---
+
+**`df.columns` **:  Devuelve una lista con los **nombres de las columnas**. Útil para verificar que las cabeceras están correctas.
+
+**✅ Sintaxis:**
+
+
+``` python
+df.columns
+```
+
+---
+### 🔁 Recomendación práctica para estudiantes
+
+Cuando usas un notebook, es recomendable  justo después de cargar tus datos, siempre ejecuta:
+
+
+``` python
+df.head()
+df.info()
+df.describe()
+```
+
+Esto te da un **panorama general** de cómo están estructurados los datos.
+
+Pero si el dataframe forma parte de un programa (que no es un notebook), es recomendable explorar tus datos previo a cargarlos.
+
+---
+## Ejemplo : **Análisis de expresión génica**
+
+Tienes un archivo `expresion_genica.tsv` con los siguientes datos (separados por tabulador):
+
+```
+gene_id	cond1	cond2	cond3
+b0001	55	80	70
+b0002	1500	2000	1800
+b0003	100	95	120
+b0004	2300	2500	2100
+```
+
+**Objetivo:**
+
+1.  Identificar genes altamente expresados (mayores a 1000) en las tres condiciones.
+2.  Calcular el promedio de expresión por gen.
+3.  Ordenar de mayor a menor por promedio.
+4.  Exportar el resultado.
+
+
+---
+## Ejemplo : **Análisis de expresión génica**
+
+
+
+``` python
+import pandas as pd
+```
+
+--
+
+- Leer el archivo
+
+
+``` python
+df = pd.read_csv("expresion_genica.tsv", sep="\t")
+```
+
+--
+
+- Filtrar genes con expresión &gt; 1000 en las 3 condiciones
+
+
+``` python
+altos = df[(df['cond1'] &gt; 1000) &amp; (df['cond2'] &gt; 1000) &amp; (df['cond3'] &gt; 1000)]
+```
+
+--
+
+- Calcular promedio por fila
+
+
+``` python
+altos['promedio'] = altos[['cond1', 'cond2', 'cond3']].mean(axis=1)
+```
+
+---
+## Ejemplo : **Análisis de expresión génica**
+
+- Ordenar de mayor a menor
+
+
+``` python
+altos = altos.sort_values(by='promedio', ascending=False)
+```
+
+- Exportar
+
+
+``` python
+altos.to_csv("genes_altamente_expresados.tsv", sep="\t", index=False)
+```
+
+---
+## 🔧 Métodos para **transformar o modificar** un DataFrame en `pandas`.
+
+Una vez que exploramos y filtramos los datos, el siguiente paso en el análisis es **modificarlos**. Esto puede implicar:
+
+-   Cambiar nombres de columnas
+-   Reemplazar valores
+-   Eliminar o agregar columnas/filas
+-   Cambiar el tipo de datos
+-   Aplicar funciones a columnas o filas
+-   Reorganizar el DataFrame
+
+
+---
+## Caso Práctico: Análisis de Información Genética 
+
+Eres parte de un laboratorio de genética que está analizando información de genes bacterianos almacenados en un archivo llamado `genes.csv`. 
+
+Este archivo contiene datos sobre identificadores de genes, nombres, funciones biológicas, longitud en pares de bases y niveles de expresión.
+
+Tu tarea es **realizar una serie de transformaciones al conjunto de datos para facilitar su análisis y visualización**. A continuación, aprenderás cómo modificar este `DataFrame` usando herramientas de `pandas`.
+
+---
+
+## 📥 Paso 1: Cargar los datos
+
+
+``` python
+import pandas as pd
+
+df = pd.read_csv('genes.csv')
+print(df.head())
+```
+
+📌 **Este archivo contiene:**
+```
+GeneID,Nombre,Función,Longitud,Expresión
+b0001,thrL,regulador,117,20.5
+b0002,thrA,enzima,2340,50.2
+b0003,thrB,enzima,1461,45.0
+b0004,recA,reparación,1038,10.1
+```
+
+---
+### 1. 🔤 Cambiar el nombre de una columna
+
+&gt; Queremos que la columna `Función` se llame `Tipo_funcional` para que sea más descriptiva.
+
+
+``` python
+df_renombrado = df.rename(columns={'Función': 'Tipo_funcional'})
+print(df_renombrado.columns)
+```
+
+---
+### 2. 🔁 Estandarizar valores
+
+&gt; Necesitamos homogeneizar el nombre de las funciones: reemplazar `enzima` por `enzima_metabólica`.
+
+
+``` python
+df_estandarizado = df.replace({'Función': {'enzima': 'enzima_metabólica'}})
+print(df_estandarizado)
+```
+
+---
+### 3. ❌ Eliminar columnas o filas innecesarias
+
+&gt; Para ciertos análisis no necesitamos la columna `Expresión`, y eliminaremos también una fila duplicada.
+
+
+``` python
+df_sin_col = df.drop(columns=['Expresión'])  # Eliminar columna
+df_sin_fila = df.drop(index=1)              # Eliminar fila con índice 1
+```
+
+---
+### 4. 🔢 Asegurar el tipo correcto de datos
+
+&gt; Vamos a asegurarnos de que la columna `Longitud` sea de tipo `float`.
+
+
+``` python
+df['Longitud'] = df['Longitud'].astype(float)
+print(df.dtypes)
+```
+
+
+---
+### 5. 🏷️ Clasificación de genes por longitud
+
+#### 🧩 Método: `.apply()` + `lambda`
+
+**¿Qué hace `.apply()`?**  
+Es un método que aplica una función a cada elemento de una columna o fila de un `DataFrame`. Es muy útil para crear nuevas columnas o transformar datos existentes de forma flexible.
+
+**¿Qué es `lambda`?**  
+Es una forma de definir funciones pequeñas y anónimas (sin nombre). Por ejemplo:}
+
+
+
+``` python
+lambda x: x + 1
+```
+es equivalente a:
+
+
+``` python
+def f(x):
+    return x + 1
+```
+
+---
+## ️ Clasificación de genes por longitud
+
+Queremos clasificar los genes como **"Largo"** si tienen más de 1000 pb (pares de bases), o **"Corto"** en caso contrario.
+
+
+``` python
+df['Clasificación'] = df['Longitud'].apply(lambda x: 'Largo' if x &gt; 1000 else 'Corto')
+print(df[['GeneID', 'Longitud', 'Clasificación']])
+```
+
+📌 **Comentario:** Se añade una nueva columna `Clasificación` que indica la longitud relativa de cada gen de forma categórica.
+
+---
+
+### 6. 🧮 Crear una columna con valores derivados
+
+#### 🧩 Método: `.assign()` + `.apply()` + `lambda`
+
+**¿Qué hace `.assign()`?**  
+Crea una nueva columna sin modificar el `DataFrame` original, devolviendo una copia con la columna añadida.
+
+**¿Qué hacemos aquí?**  
+Vamos a derivar una nueva medida: el logaritmo cuadrado (raíz cuadrada) del nivel de expresión, como una forma de normalizar los valores.
+
+
+``` python
+df_nuevo = df.assign(LogExpresión=lambda x: x['Expresión'].apply(lambda val: round(val ** 0.5, 2)))
+print(df_nuevo[['GeneID', 'Expresión', 'LogExpresión']])
+```
+
+📌 **Comentario:** Se crea una nueva columna `LogExpresión` con valores transformados
+
+---
+### 7. 🔽 Ordenar el DataFrame
+
+#### 🧩 Método: `.sort_values()`
+
+**¿Qué hace `.sort_values()`?**  
+Ordena un `DataFrame` en función de los valores de una columna específica. Se puede ordenar ascendente o descendente.
+
+**Aplicación en contexto:** Queremos ver primero los genes más largos.
+
+
+``` python
+df_ordenado = df.sort_values(by='Longitud', ascending=False)
+print(df_ordenado[['GeneID', 'Longitud']])
+```
+📌 **Comentario:** El DataFrame queda ordenado desde el gen más largo hasta el más corto según la columna `Longitud`.
+
+---
+### 8. 🔄 Reiniciar el índice
+
+#### 🧩 Método: `.reset_index()`
+
+**¿Qué hace `.reset_index()`?**  
+Restaura el índice del `DataFrame` a valores consecutivos (0, 1, 2...). Si habías eliminado filas o habías establecido un índice diferente, esto limpia la numeración.
+
+**Opción `drop=True`:** evita que el índice anterior quede como una nueva columna.
+
+
+``` python
+df_reset = df.reset_index(drop=True)
+print(df_reset.head())
+```
+
+---
+### 9. 📌 Establecer una columna como índice
+
+#### 🧩 Método: `.set_index()`
+
+**¿Qué hace `.set_index()`?**  
+Reemplaza el índice del `DataFrame` con una columna, lo cual puede facilitar búsquedas o agrupamientos.
+
+**Aplicación en contexto:** Queremos que el identificador del gen (`GeneID`) sea el índice principal del `DataFrame`.
+
+
+``` python
+df_indexado = df.set_index('GeneID')
+print(df_indexado.head())
+```
+📌 **Comentario:** Ahora puedes acceder a los datos directamente usando el ID del gen, por ejemplo: `df_indexado.loc['b0002']`.
+
+
+---
+
+---
+
+## 🧪 Ejercicios adicionales: `.apply()` + `lambda`
+
+---
+### 🧬 Ejercicio 1: Clasificación de expresión génica
+
+**Contexto:**  
+En tu laboratorio, se necesita categorizar los niveles de expresión génica en `'baja'`, `'media'` o `'alta'`, usando los siguientes criterios:
+
+-   `alta` si la expresión es mayor a 40
+    
+-   `media` si es mayor a 15 pero menor o igual a 40
+    
+-   `baja` si es 15 o menos
+    
+
+**Instrucción:**  
+Agrega una nueva columna llamada `"NivelExp"` con esta clasificación.
+
+📌 Pista: usa `.apply()` con un `lambda` sobre la columna `Expresión`.
+
+
+---
+
+### 🧠 Ejercicio 2: Clasificación funcional
+
+**Contexto:**  
+Necesitas clasificar los genes de acuerdo con su función:
+
+-   Si la función contiene la palabra `'enzima'`, clasifícalo como `'Metabólico'`.
+    
+-   En caso contrario, como `'Otro'`.
+    
+
+**Instrucción:**  
+Crea una nueva columna `"Tipo"` que contenga esta clasificación.
+
+📌 Pista: usa `.lower()` para que el filtro funcione con mayúsculas y minúsculas.
+
+---
+### 🧬 Ejercicio 3: Normalización de identificadores
+
+**Contexto:**  
+Para integrar tus datos con otra base, todos los identificadores de gen deben comenzar con el prefijo `"eco_"`.
+
+**Instrucción:**  
+Crea una nueva columna `"GeneID_modificado"` que contenga el ID del gen con el prefijo añadido.
+
+📌 Ejemplo: `b0001` → `eco_b0001`
+
+
+
+---
+
+## 📚 Métodos útiles en bioinformática
+
+Vamos a trabajar con el archivo `genes.csv` que contiene información como:
+
+```
+GeneID,Nombre,Función,Longitud,Expresión
+b0001,thrL,regulador,117,20.5
+b0002,thrA,enzima,2340,50.2
+b0003,thrB,enzima,1461,45.0
+b0004,recA,reparación,1038,10.1
+```
+
+---
+### 1. 🔗 `df.groupby()`: Agrupar y resumir datos
+
+**¿Qué hace?**  
+Permite **agrupar filas** que comparten un mismo valor en una columna y aplicar funciones agregadas (como `mean`, `sum`, `count`, etc.).
+
+**Ejemplo:** ¿Cuál es la **media de expresión** por tipo de función?
+
+
+``` python
+import pandas as pd
+df = pd.read_csv('genes.csv')
+
+media_por_funcion = df.groupby('Función')['Expresión'].mean()
+print(media_por_funcion)
+```
+📌 **Comentario:** Este método es muy útil para comparar promedios entre clases funcionales de genes.
+
+
+---
+### 🧪 Ejemplo 2: Número de genes por tipo funcional
+
+🎯 **Objetivo:** Contar cuántos genes pertenecen a cada función.
+
+
+``` python
+conteo = df.groupby('Función')['GeneID'].count()
+print(conteo)
+```
+📌 **Comentario:** Útil para estadística descriptiva o ver qué procesos dominan en la muestra.
+
+
+---
+### 🧪 Ejemplo 3: Longitud promedio por tipo de función
+
+🎯 **Objetivo:** Ver si los genes de cierta función tienden a ser más largos.
+
+
+``` python
+longitudes = df.groupby('Función')['Longitud'].mean()
+print(longitudes)
+```
+📌 **Comentario:** Esto puede sugerir complejidad estructural o funcional.
+
+---
+### 🧪 Ejemplo 4: Expresión total por función
+
+🎯 **Objetivo:** Ver qué grupo funcional tiene mayor impacto global en términos de expresión.
+
+
+``` python
+suma_exp = df.groupby('Función')['Expresión'].sum()
+print(suma_exp)
+```
+📌 **Comentario:** Esto da idea de la carga transcripcional total por clase funcional.
+
+---
+
+### 🧩 ¿Qué es `.agg()`?
+
+El método `.agg()` (abreviación de _aggregate_) permite aplicar **una o más funciones de resumen o transformación** a uno o varios campos de un `DataFrame`, ya sea agrupado o no.
+
+### 📌 Sintaxis general
+
+```
+df.agg(función)
+df.agg([func1, func2, ...])             # múltiples funciones sobre columnas
+df.groupby(columna).agg(func_dict)      # agrupado con funciones por columna
+```
+
+---
+🔬 Ejemplo
+
+
+``` python
+import pandas as pd
+
+df = pd.DataFrame({
+    'Expresión': [10, 20, 30, 40]
+})
+
+resumen = df.agg(['mean', 'max', 'min'])
+print(resumen)
+```
+
+```css
+Expresión
+mean         25.0
+max          40.0
+min          10.0
+```
+
+---
+### 🧪 Ejemplo 5: Múltiples funciones estadísticas ( `groupby`  + `agg` )
+
+🎯 **Objetivo:** Obtener estadísticas múltiples por grupo (`mean`, `max`, `min`).
+
+
+``` python
+resumen = df.groupby('Función')['Expresión'].agg(['mean', 'max', 'min', 'count'])
+print(resumen)
+```
+
+Esto produce un resumen estadístico por tipo de función:
+
+```matlab
+               mean   max   min  count
+Función                               
+enzima         31.73 50.2   0.0      3
+regulador      20.50 20.5  20.5      1
+reparación     19.05 28.0  10.1      2
+```
+
+---
+### 🧪 Ejemplo 6: Agrupamiento por múltiples columnas
+
+🎯 **Objetivo:** Agrupar por dos columnas (ej. función y clasificación por longitud).
+
+
+
+``` python
+# Añadir clasificación por longitud
+df['Clasificación'] = df['Longitud'].apply(lambda x: 'Largo' if x &gt; 1500 else 'Corto')
+
+# Agrupar por Función y Clasificación
+agrupado = df.groupby(['Función', 'Clasificación'])['GeneID'].count()
+print(agrupado)
+```
+📌 **Comentario:** Se obtienen combinaciones únicas de tipo y tamaño funcional.
+
+
+---
+
+## 🧪 Ejercicios: Agrupación con `groupby()`
+
+---
+
+### 🧩 Ejercicio 1 (básico): Conteo de genes por función
+
+**Objetivo:**  
+Determinar cuántos genes hay de cada tipo funcional (por ejemplo: `'enzima'`, `'regulador'`, etc.).
+
+**Instrucción:**  
+Usa `groupby()` para agrupar el DataFrame por la columna `"Función"` y contar cuántos genes hay en cada grupo. Muestra el resultado como una serie con la función y el conteo.
+
+📌 **Tip:** Usa `.count()` o `.size()`.
+
+---
+
+### 🧩 Ejercicio 2 (intermedio): Promedio de longitud por función
+
+**Objetivo:**  
+Comparar el tamaño promedio de los genes según su función.
+
+**Instrucción:**  
+Agrupa los datos por `"Función"` y calcula la **longitud promedio** usando la columna `"Longitud"`. Muestra los resultados ordenados de mayor a menor.
+
+📌 **Tip:** Usa `.mean()` y luego `.sort_values()`.
+
+
+---
+### 🧩 Ejercicio 3 (intermedio-avanzado): Estadísticas múltiples de expresión
+
+**Objetivo:**  
+Obtener un resumen detallado del nivel de expresión por tipo funcional.
+
+**Instrucción:**  
+Agrupa los datos por `"Función"` y calcula:
+
+-   la media (`mean`)
+    
+-   el valor máximo (`max`)
+    
+-   el valor mínimo (`min`)
+    
+-   el número de genes (`count`)
+    
+
+Presenta el resultado como un `DataFrame` con estas 4 columnas para cada grupo.
+
+📌 **Tip:** Usa `.agg()` pasando una lista de funciones estadísticas.
+
+---
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
