@@ -335,7 +335,7 @@ kbd {
 
 <!-- Metadata -->
 
-<p><strong>Nombre del autor:</strong>   Hely Salgado
+<p><strong>Nombre del autor:</strong>   Hely Salgado.<br>
 <strong>Email:</strong> <a href="mailto:heladia@ccg.unam.mx">heladia@ccg.unam.mx</a><br>
 <strong>Fecha:</strong> 13/sep/2024   </p>
 
@@ -451,14 +451,16 @@ NC_000913.3     RefSeq  CDS     337     2799    .       +       0       ID=cds-N
 
 <p>Formato: </p>
 
+<ul>
+<li><p>a. Es un formato gff tabular, es decir cada dato es separado por tabulador.   </p></li>
+<li><p>b. Cada renglón en el formato gff es una elemento genético anotado en el genoma, que se le denomina <code>feature</code>, éstos features pueden ser genes, secuencias de inserción, promotores, sitios de regulación, todo aquello que este codificado en el DNA y ocupe una región en el genoma de  E. coli.   </p></li>
+</ul>
+
 <blockquote>
-<p>a. Es un formato gff tabular, es decir cada dato es separado por tabulador.</p>
+<p>c. Los atributos de cada columna par cada elemento genético son:  </p>
+</blockquote>
 
-<p>b. Cada renglón en el formato gff es una elemento genético anotado en el genoma, que se le denomina <code>feature</code>, éstos features pueden ser genes, secuencias de inserción, promotores, sitios de regulación, todo aquello que este codificado en el DNA y ocupe una región en el genoma de  E. coli.</p>
-
-<p>c. Los atributos de cada columna par cada elemento genético son
-<code>
-1. seqname. Nombre del cromosoma
+<div><pre><code class="language-none">1. seqname. Nombre del cromosoma
 2. source. Nombre del programa que generó ese elemento
 3. feature. Tipo de elemento
 4. start. Posición de inicio
@@ -466,9 +468,7 @@ NC_000913.3     RefSeq  CDS     337     2799    .       +       0       ID=cds-N
 6. score. Un valor de punto flotante
 7. strand. La cadena (+ , - )
 8. frame. Marco de lectura
-9.  attribute. Pares tag-value, separados por coma, que proveen información adicional
-</code></p>
-</blockquote>
+9.  attribute. Pares tag-value, separados por coma, que proveen información adicional</code></pre></div>
 
 <p><br></p>
 
