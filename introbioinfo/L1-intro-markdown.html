@@ -3,7 +3,7 @@
   <head>
     <title>Introducción a la Bioinformática</title>
     <meta charset="utf-8" />
-    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 ### Licenciatura en Ciencias Genómicas,UNAM
 ]
 .date[
-### First version: 2021-01-18; Last update: 2024-08-07
+### First version: 2021-01-18; Last update: 2025-08-13
 ]
 
 ---
@@ -50,8 +50,7 @@ pre {
 
 ## Objetivo
 
-Conocer y usar el lenguaje de marcado markdown
-
+Al finalizar la sesión, el participante **identificará y aplicará** la sintaxis básica de Markdown para estructurar y dar formato a documentos, elaborando dos plantillas (reporte de análisis de datos y reporte de lectura) que cumplan con los elementos solicitados en el curso, garantizando claridad, organización y estandarización en la documentación de resultados bioinformáticos.
 
 ---
 ## ¿Qué haremos en el curso?
@@ -85,51 +84,118 @@ dependen de las finalidades mismas de los estudios.
 .tiny[[Ver Fuente: Reporte de investigación](http://ri.uaemex.mx/bitstream/handle/20.500.11799/70832/secme-2549_2.pdf?sequence=2&amp;isAllowed=y)]
 
 ---
+
+# 📌 Formato IMRyD
+
+El formato **IMRyD** es una manera estándar de organizar reportes y artículos científicos.  
+Sus siglas vienen de: **Introducción, Materiales y Métodos, Resultados y Discusión**.  
+
+Se utiliza en ciencias experimentales, medicina y bioinformática para que la información sea **clara, ordenada y fácil de reproducir**.  
+
+La idea es contar una historia científica en cuatro pasos:
+
+1. **Introducción** → Presentar el problema y objetivos (*¿por qué se hizo?*).  
+2. **Materiales y Métodos** → Describir exactamente cómo se hizo (*¿cómo se hizo?*).  
+3. **Resultados** → Mostrar lo que se encontró (*¿qué se encontró?*).  
+4. **Discusión** → Interpretar y analizar los resultados (*¿qué significan?*).  
+
+💡 **En bioinformática:** Seguir este formato ayuda a que otros puedan **repetir el análisis**, entender los pasos y comparar resultados.
+
+---
+
+## Reporte de investigación
+
+**Título:**
+-   **Breve pero descriptivo** → debe resumir el tema principal del trabajo.
+-   **Específico** → evita títulos genéricos como “Reporte de bioinformática”.
+-   **Informativo** → incluye palabras clave del contenido (por ejemplo, “Análisis de secuencias FASTA con herramientas Unix en genómica bacteriana”).
+-   **Sin abreviaturas poco conocidas**.
+
+
+**Metadatos** → Es la sección inicial donde se registran los datos básicos del documento, como autor, título, fecha, versión y palabras clave. 
+
+Su función es **identificar el documento**, dar contexto sobre su creación y facilitar su búsqueda, organización y citación.  
+
+---
+## Reporte de investigación
+
+**Abstract o Resúmen** → Es un párrafo breve (150–250 palabras) que **resume todo el trabajo**:   
+-   **Qué se hizo** (objetivo). 
+-   **Cómo se hizo** (método principal)
+-   **Qué se encontró** (resultados clave)
+-   **Qué significa** (conclusión principal)
+    
+💡 Debe ser **claro, conciso y sin detalles innecesarios**. Generalmente **no incluye citas ni abreviaturas** poco comunes.
+
+**Introducción**.   
+-   Explica el **contexto y la justificación** del trabajo.  
+-   Plantea el **problema o pregunta de investigación** y los **objetivos**.  
+-   Debe responder a: _¿Por qué se hizo este trabajo?_. 
+-   Ejemplo: Breve descripción de la importancia del análisis bioinformático en genómica y el motivo de este estudio.  
+
+---
+
+## Reporte de investigación
+
+**Metodología o Materiales y Métodos**.   
+-   Describe de forma clara y reproducible **qué se hizo** y **cómo se hizo**.
+-   Incluye:
+    -   Herramientas, software y versiones.
+    -   Bases de datos usadas.
+    -   Procedimientos y comandos (en bioinformática: scripts, pipelines).
+-   Responde a: _¿Cómo se hizo?_
+
+
+**Resultados**. 
+-   Presenta los **hallazgos** obtenidos.
+-   Usa tablas, figuras o capturas para mostrar los datos procesados.
+-   No se interpreta aún; solo se reporta.
+-   Responde a: _¿Qué se encontró?_
+
+---
+## Reporte de investigación
+
+**Discusión**. 
+-   Analiza e interpreta los resultados.
+-   Compara con estudios previos.
+-   Señala limitaciones y posibles mejoras.
+-   Responde a: _¿Qué significan los resultados?_ y _¿Cómo se comparan con otros trabajos?_
+
+
+**Referencias** → Lista ordenada de todas las fuentes que sustentan tu trabajo: artículos, libros, páginas web, bases de datos, etc.
+
+-   **Propósito:** Dar crédito a los autores originales y permitir que otros consulten las fuentes.
+-   **Formato:** Depende del estilo elegido (APA, Vancouver, IEEE, etc.)  
+-   **Recomendaciones:**
+    -   Incluye **solo** las fuentes citadas en el texto.
+    -   Sé consistente con el formato elegido.
+    -   En bioinformática, incluye también **enlaces a bases de datos y repositorios de código**.
+        
+💡 **Tip:** Un buen manejo de referencias aumenta la credibilidad y la reproducibilidad del trabajo.
+
+
+---
 ## Reporte de investigación
 
  TITULO  
  METADATA (Nombre de autor, Email, fecha)  
  RESUMEN (ABSTRACT)  
  INTRODUCCIÓN  
- METODOLOGIA  
-   - Adquisición de datos (Fuente de datos, versión, fecha de descarga)  
-   - Descubrimiento de inconsistencias  
-   - Limpieza de datos  
-   - Mejora de los datos  
-   
+ METODOLOGIA/MATERIALES Y MÉTODOS 
  RESULTADOS  
  CONCLUSIONES  
  REFERENCIAS  
 
-
-
 ---
-## Reporte de investigación
-
-**Resúmen**. En el resumen se redacta brevemente el problema de investigación, el diseño,  el o los resultados y la o las conclusiones más importantes.
-
-**Introducción**. Debe describir de manera clara y precisa el propósito de la investigación, la
-teoría o teorías en las que se apoya y los antecedentes más importantes, teorías y trabajos de
-investigación con los que se relaciona.
-
-**Metodología**. Esta parte del reporte describe cómo fue llevada a cabo la investigación, las herramientas usadas, algoritmos, procedimientos y la descripción de los datos a usar.
-
-**Resultados**. Descripción detallada de los procedimientos de análisis utilizados, es decir, toda la manipulación estadística que se hizo de los datos y pruebas que se aplicaron, incluyendo representaciones gráficas, cuadros, tablas, etc.
-
-**Discusión**. Se incluye información sobre la relación entre los resultados y el problema de
-investigación; si se confirmaron o no las hipótesis y las implicaciones y generalización de los resultados.
-
-**Referencias**. En formato APA.
-
 ---
 
 ## Ejemplo
 
 Reporte sobre el genoma de *E. coli*
 
-- [Archivo markdown](https://lcg-cursos.github.io/material/introbioinfo/ejemplos/ReporteGenomaEcoli.md)
+- [Archivo markdown](https://lcg-cursos.github.io/material/introbioinfo/ejemplos/ReporteGenomeEcoli_Formato_v2.md)
 
-- [Archivo html](https://lcg-cursos.github.io/material/introbioinfo/ejemplos/ReporteGenomaEcoli.html)
+- [Archivo html](https://lcg-cursos.github.io/material/introbioinfo/ejemplos/ReporteGenomeEcoli_Formato_v2.html)
 
 ---
 ## Reporte de lectura
@@ -218,8 +284,6 @@ Markdown es una excelente fórmula de escribir texto sin formato para la web.
 
 ## Markdown
 
-
-
 **Markdown** es un lenguaje de marcado sencillo que sirve para agregar formato, vínculos e imágenes con facilidad al texto simple. 
 
 [Guía de markdown](https://www.markdownguide.org/basic-syntax/)
@@ -240,19 +304,20 @@ Genera 2 archivos templates que te serviran para generar los reportes de lectura
 ---
 ## Práctica
 
-- Reporte de análisis de datos `Reporte_Analisis.md`
+- Formato para el Protocolo de análisis de datos `formato_protocolo_v1.0.md`
 
-  * Título  
-  * Metadata (Autor, Email, fecha)  
-  * Introducción  
-  * Metodología  
+* Título  
+* Metadata (Autor, Email, fecha)  
+* Introducción  
+* Metodología  
     - Adquisición de datos (Fuente de datos, versión, fecha de descarga)  
     - Descubrimiento de inconsistencias  
     - Limpieza de datos  
     - Mejora de los datos  
-  * Resultados
-  * Conclusiones
-  * Referencias
+    - Análisis de los datos
+* Resultados
+* Conclusiones
+* Referencias
 
 
     </textarea>
