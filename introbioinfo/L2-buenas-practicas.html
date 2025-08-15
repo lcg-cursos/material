@@ -3,7 +3,7 @@
   <head>
     <title>Introducción a la Bioinformática</title>
     <meta charset="utf-8" />
-    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -66,11 +66,11 @@ Hace algunos años cuando la bioinformática no existía...
 
 
 &lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC336192/bin/pnas00669-0100.tif" alt="DNA sequence of the araBAD promoter in Escherichia coli" width="60%" /&gt;
+&lt;img src="https://cdn.ncbi.nlm.nih.gov/pmc/blobs/8776/336192/d9cb89c5734d/pnas00669-0100-a.jpg" alt="DNA sequence of the araBAD promoter in Escherichia coli" width="30%" /&gt;
 &lt;p class="caption"&gt;DNA sequence of the araBAD promoter in Escherichia coli&lt;/p&gt;
 &lt;/div&gt;
 
-https://www.ncbi.nlm.nih.gov/pmc/articles/PMC336192/bin/pnas00669-0100.tif
+.tiny[Fuente: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC336192/bin/pnas00669-0100.tif]
 
 ---
 ## ¿Por qué aprender bioinformática?
@@ -154,7 +154,7 @@ Tenemos otra región de DNA de otro organismo, como un posible gene, pero **no c
 ## Alineamientos
 
 
-&lt;img src="https://slideplayer.es/slide/4255221/14/images/4/Tipos+de+alineamiento+de+dos+secuencias.jpg" width="85%" style="display: block; margin: auto;" /&gt;
+&lt;img src="https://www.researchgate.net/profile/Jeongkyu-Kim-5/publication/347266558/figure/fig2/AS:1003714143850505@1616315508601/Example-of-global-and-local-alignment-in-two-sequence-In-the-figure-A-is-an-example-of.png" width="85%" style="display: block; margin: auto;" /&gt;
 
 ---
 # ¿Cómo lo resolvemos?
@@ -317,6 +317,45 @@ Anota las respuestas en nuestra bitácora del curso para compartirlas con el gru
 
 ---
 
+## 🧭 ¿Qué son los metadatos?
+
+Son **“datos sobre los datos”**. Describen el contenido, estructura, contexto y condiciones de uso de un conjunto de datos, permitiendo que sean:
+    
+- Encontrables (Findable)
+- Accesibles (Accessible)
+- Interoperables (Interoperable)
+- Reutilizables (Reusable)    
+
+---
+
+## 📚 Recomendaciones y estándares más relevantes
+
+#### 1. Dublin Core Metadata Initiative (DCMI)
+
+Uno de los estándares más simples y generalizados. Usa 15 elementos clave:
+***📌 Título, creador, descripción, fecha, formato, identificador, fuente, tipo, tema, derechos, etc.***
+
+➡️ Muy útil para datasets simples, documentos, imágenes, artículos.
+
+--
+
+#### 2. DataCite Metadata Schema
+
+Desarrollado para identificar, citar y compartir datos científicos.
+Incluye campos como:
+📌 Autores, título, editor, año, tipo de recurso, versión, DOI, palabras clave, descripción técnica.
+
+➡️ Recomendado para datos que serán depositados en repositorios académicos o científicos.
+
+---
+## FAIRsharing.org
+
+Un catálogo actualizado de estándares y modelos de metadatos para distintas disciplinas.
+🔗 https://fairsharing.org
+
+➡️ Te permite buscar qué estándar usar según el tipo de datos (biomédicos, sociales, ambientales, etc.)
+
+---
 ## Principios FAIR
 
 
@@ -370,6 +409,24 @@ Ejemplo de publicación de datos de un proyecto de investigación
 .content-box-blue[
 Zenodo es un repositorio de datos de investigación abierto, creado por el proyecto OpenAire y el CERN en el año 2013 con el apoyo de la Comisión Europea, para la preservación y puesta a disposición de contenidos de investigación, tanto publicaciones como datos de investigación.
 ]
+
+---
+## Actividad
+
+- `datos_pacientes.csv`  
+  Archivo con datos simulados de pacientes (peso, altura, edad, etc.) **sin documentación ni descripciones**.
+
+
+- Analizar el contenido del archivo.
+   - Redactar un archivo `metadatos_datos_pacientes.md` que contenga:
+     - Título y descripción del dataset
+     - Información de autoría y fuente
+     - Formato y número de columnas
+     - Diccionario de variables: nombre, descripción, tipo, unidad
+     - Fecha, licencia y palabras clave
+     - Consideraciones éticas (anonimización, uso responsable)
+     - Observaciones adicionales
+
 
 ---
 
@@ -523,9 +580,27 @@ Organización propuesta:
 
 * Carpeta **resultados**: Con los resultados generados por el proyecto.
 
---
+---
+## Organización de los proyectos
 
+
+Un proyecto sencillo:
+
+```
+nombre_proyecto/
+├── bin/        # Scripts ejecutables o binarios del proyecto
+├── data/       # Archivos de datos originales o de entrada
+├── doc/        # Documentación, manuales o reportes
+├── results/    # Resultados generados (tablas, gráficas, informes)
+└── src/        # Código fuente del proyecto
+└── README.md
+```
+
+&lt;br&gt;
+
+Proyecto con múltiples etapas:
 &lt;img src="img/estructura-proyecto.png" width="800px" style="display: block; margin: auto;" /&gt;
+
 
 ---
 ## Importante
@@ -537,6 +612,22 @@ Organización propuesta:
 * Los nombres de directorios y archivos son case-sensitive en unix, así que procura no mezclar mucho mayúsculas o minúsculas. Recomendable todo minúsculas.
 
 
+
+---
+# Actividad 
+
+Esta actividad tiene como objetivo a que el alumno comprenda la importancia de organizar e identificar donde colocar los archivos de un proyecto.
+
+Indicaciones:
+
+1. Se te mostrarán una lista de tarjetas.
+2. Arrastra las tarjetas a las categorías que tu pienses que encaja mejor o pertenece. Guíate por los nombres. La categoría Otros sirve para tarjetas que no pertenecen a ninguna categoría.
+3. Si cambias de opinión, mueve las tarjetas de categorías hasta que estés satisfecho.
+4. Cuando termines, da Click en Finish para terminar. 
+
+Da click en el siguiente link:
+
+https://study.uxtweak.com/cardsort/BkEEcvwbK5Lqm9Uei2fQ2
 
 
     </textarea>
