@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introducción a la Bioinformática</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Introducción a la Bioinformática
+]
+.institute[
+### Licenciatura en Ciencias Genómicas,UNAM
+]
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+---
+
+class: center, middle
+
+# Archivos en Unix: tipos, compresión y permisos
+
+
+---
+## 🧩 Tipos de archivos
+
+¿Qué tipos de archivos conoces?
+
+- **Texto plano**: `.txt`, `.tsv`, `.csv`, `.fasta`, `.fastq`, `.gff`, `.sam` (bioinfo usa mucho esto)
+
+- **Binarios/contenerizados**: `.docx`, `.xlsx`, `.pptx` (ZIP + XML)
+
+- **Multimedia**: audio, video, imágenes
+
+- **Comprimidos**: `.gz`, `.bz2`, `.xz`, `.zip`, `.7z`
+
+- **Empaquetados**: `.tar`, `.tar.gz` (`.tgz`), `.tar.xz`
+
+**Nota:** cambiar la *extensión* **no** convierte un binario en texto.
+
+---
+## 🔎 Conociendo el tipo de archivo
+
+El comando `file` inspecciona el **contenido**, no solo la extensión.
+
+
+```bash
+cd /home/compu2/WelcomeBioinfo/datos/practica2/
+ls
+
+file excel.xlsx word.docx texto-plano3.txt texto-plano3.txt.gz
+
+file *
+```
+
+
+-   Verás que `docx/xlsx` → “Zip archive data”.
+
+
+---
+## Visualizando distintos tipos de archivos en Unix
+
+Al saber el tipo de archivo, sabrás que utilizar para ver su "contenido"
+
+- Para texto plano: `less`, `head`, `tail`, `nl`
+- Para comprimidos de texto: **`zless`**, **`zcat`**, **`zgrep`**
+- Para binarios: `hexdump -C`, `xxd`, `strings`
+
+```bash
+less texto-plano3.txt
+
+zless texto-plano3.txt.gz
+
+strings word.docx
+
+hexdump -C excel.xlsx
+```
+
+**Idea clave**:   
+- ** solo texto plano** se ve “bonito” en la CLI.
+- No es suficiente con cambiar el nombre del archivo o su extensión para ver su "contenido".
+
+
+---
+## 📦 Archivos **comprimidos** vs **empaquetados**
+
+- **Comprimido**: el *mismo archivo* pero con *menos tamaño* (se aplica un algoritmo de compresión).  
+  *Ej.:* `gzip`, `bzip2`, `xz` → `.gz`, `.bz2`, `.xz`
+
+- **Empaquetado**: *varios archivos/directorios* reunidos en *un solo contenedor* (sin comprimir por sí mismo).  
+  *Ej.:* `tar` → `.tar`
+
+- **Combinado**: primero *empaquetar* y luego *comprimir*.  
+  *Ej.:* `tar + gzip` → `.tar.gz` o `.tgz`; `tar + xz` → `.tar.xz`
+
+- **Zip** hace **ambas cosas en un paso** (empaquetar + comprimir).  
+  *Ej.:* `zip datos.zip archivo1 archivo2/`
+
+&gt; Tip: muchas veces puedes **ver sin extraer**: `zless`/`zcat` para `.gz`, `tar -tf archivo.tar.gz` para listar su contenido.
+
+
+---
+
+### Comandos para Archivos comprimidos / empaquetados
+
+| Herramienta | Acción                | Extensiones típicas     | Ejemplos de uso                         |
+|-------------|-----------------------|--------------------------|-----------------------------------------|
+| `gzip`      | comprime              | `.gz`                    | `gzip file.txt` → `file.txt.gz`         |
+| `bzip2`     | comprime              | `.bz2`                   | `bzip2 file.txt`                        | 
+| `xz`        | comprime              | `.xz`                    | `xz file.txt`                           |
+| `zip`       | empaqueta + comprime  | `.zip`                   | `zip data.zip file1 file2 dir/`         |
+| `tar`       | empaqueta (opcional)  | `.tar`, `.tar.gz`, `.tgz`| `tar -czf data.tgz dir/`                |
+
+
+---
+## Descomprimir y visualizar
+
+Practiquemos un poco
+
+```bash
+# vamos a la carpeta de practica2 de compu2
+cd /home/compu2/WelcomeBioinfo/datos/practica2/
+
+# Copia a tu home texto-plano3.txt.gz y ve a tu home
+cp texto-plano3.txt.gz ~
+cd ~
+
+# Visualiza SIN descomprimir (recomendado)
+zless texto-plano3.txt.gz
+
+# Descomprime (conservando original)
+gunzip -k texto-plano3.txt.gz
+ls
+less texto-plano3.txt
+```
+
+---
+### 🗜️ Comprimir UN archivo
+
+Ahora, hagamos lo opuesto. Vamos a comprimir!
+
+```bash
+ls
+
+# Crea/comprime texto-plano3.txt.gz y conserva el original
+gzip -k texto-plano3.txt   
+ls
+```
+
+---
+### 🗂️ Empaquetar/comprimir varios
+
+Comando:
+
+```
+zip [options] zipfile files_list
+```
+
+- `options`: opciones que modifican el comportamiento del comando
+- `zipfile`: es el nombre del archivo que empaqueta y comprime todos los archivos
+- `files_list`: es la lista de archivos a empaquetar y comprimir
+
+
+```bash
+# zip: empaqueta + comprime
+zip texto-plano_archivos.zip texto-plano3.txt texto-plano4.txt texto-plano5.txt
+
+# tar + gzip (tgz)
+tar -czf textos.tgz texto-plano3.txt texto-plano4.txt texto-plano5.txt
+
+```
+
+---
+## 🧪 Ejercicio 
+
+
+Asegúrate de tener: `texto-plano3.txt`, `texto-plano4.txt`, `texto-plano5.txt`
+
+```bash
+cp texto-plano3.txt texto-plano4.txt
+cp texto-plano3.txt texto-plano5.txt
+```
+
+Empaquetar y comprimir los 3 archivos.
+
+```bash
+# zip
+zip textos.zip texto-plano3.txt texto-plano4.txt texto-plano5.txt
+
+# tar.gz
+tar -czf textos.tgz texto-plano3.txt texto-plano4.txt texto-plano5.txt
+```
+
+---
+## 🔐 Permisos
+
+.content-box-blue[
+Los **permisos** definen **qué puede hacer quién** con un archivo o directorio. Son clave para la **seguridad** y el **trabajo multiusuario**.
+]
+
+#### 1) Tres **acciones**
+| Permiso | En **archivo** significa…        | En **directorio** significa…          |
+|:--:|:--|:--|
+| **r**  | leer su contenido                 | **listar** nombres dentro del dir     |
+| **w**  | modificar su contenido            | **crear/borrar/renombrar** entradas   |
+| **x**  | ejecutar (si es programa/script)  | **entrar/travesar** (`cd`) el dir     |
+
+---
+## 🔐 Permisos
+
+#### 2) Tres **sujetos**
+- **u** = **propietario** (dueño)  
+- **g** = **grupo**  
+- **o** = **otros** (resto de usuarios)
+
+
+#### 3) ¿Cómo se **ven**?
+
+Cadena de 10 caracteres: **tipo + (u)(g)(o)**  
+
+Ejemplos:
+
+- `-rwxr-xr--` :  `-` (archivo), `rwx` dueño, `r-x` grupo, `r--` otros  
+- `drwxr-x---` :  `d` (directorio), dueño `rwx`, grupo `r-x`, otros `---`
+
+.tiny[
+Idea clave: 
+  - en directorios, 
+    - **x** permite **entrar**; 
+    - **r** solo **lista**; 
+    - **w** permite **cambios** dentro. (Veremos **cómo cambiarlos** más adelante).]
+
+
+---
+## 🔎 Ejemplos de permisos
+
+### Cómo leer `-rwxr-xr--`
+
+```
+-rwxr-xr--
+^^^^^^^^^^
+||  |  └─ otros (o): r--
+||  └───── grupo (g): r-x
+|└───────── dueño (u): rwx
+└─────────── tipo: '-' (archivo regular)
+```
+
+- **Dueño (u)**: `rwx` → puede *leer, escribir y ejecutar*
+- **Grupo (g)**: `r-x` → *lee y ejecuta*, no escribe
+- **Otros (o)**: `r--` → solo *lee*
+- **Equivalente numérico**: `754`
+
+
+---
+## 🔢 ¿Cómo obtener el **equivalente numérico** (octal) de los permisos?
+
+**Regla básica (por cada columna u / g / o):**  
+
+r = 4, w = 2, x = 1, - = 0  → **suma** los que estén presentes.
+
+| Combinación | Valor | Combinación | Valor |
+|:--|:--:|:--|:--:|
+| `rwx` | 7 | `-wx` | 3 |
+| `rw-` | 6 | `-w-` | 2 |
+| `r-x` | 5 | `--x` | 1 |
+| `r--` | 4 | `---` | 0 |
+
+**Pasos:**  
+1) Ignora el primer carácter (tipo: `-`, `d`, `l`).  
+2) Divide en **tres bloques** de 3: **u** (dueño), **g** (grupo), **o** (otros).  
+3) Convierte cada bloque a número con la tabla y **concatena** → `ugo`.
+
+---
+
+### 🧪 Ejemplos resueltos
+
+
+- `-rwxr-xr--` : **u:** `rwx`=7 · **g:** `r-x`=5 · **o:** `r--`=4 → **754**  
+- `drwxr-xr-x` : **u:** 7 · **g:** 5 · **o:** 5 → **755** *(directorio típico)*  
+  
+  
+- `-r--r--r--` : 4 4 4 → **444**  
+- `-rwx------` : 7 0 0 → **700**  
+- `-r--r--rwx` : 4 4 7 → **447**  
+- `-rwx--x--x` : 7 1 1 → **711**  
+- `----------` : 0 0 0 → **000**
+
+
+### ✍️ Tip
+
+- Simbólico: `chmod u=rwx,g=rx,o=r archivo`  
+- Numérico:  `chmod 754 archivo`
+
+
+---
+### Ejercicio A — Interpreta estas cadenas
+
+Completa para cada una: **tipo** (archivo/directorio), **u/g/o**, y **octal**.
+
+1) `drwxr-xr-x`  
+2) `-r--r--r--`  
+3) `-rwx------`  
+4) `-r--r--rwx`  
+
+
+
+### Ejercicio B — Revisa permisos en tu usuario
+
+1) Tu **home** y tu carpeta de práctica:
+
+```bash
+ls -ld ~
+ls -ld ~/intro-bioinfo
+```
+
+---
+
+## 🧪 Ejercicio C — Observa (sin modificar) permisos ajenos*
+
+&gt; _Solo en entorno de práctica y con consentimiento del compañero / o usa el usuario de demo indicado por el instructor._
+
+```bash
+# directorio home del compañero
+ls -ld /home/USUARIO_COMPANERO
+
+# su carpeta de práctica (si existe)
+ls -ld /home/USUARIO_COMPANERO/intro-bioinfo
+
+# ejemplo de ruta más profunda (si el docente la preparó)
+ls -l /home/USUARIO_COMPANERO/intro-bioinfo/variacion_genetica/mutaciones/mutacion3.txt 2&gt;&amp;1 | head -n 1
+```
+
+---
+
+**Preguntas guía**
+
+-   ¿Puedes **entrar** (cd) a su home? Si no, ¿falta `x` en u/g/o?
+-   ¿Puedes **listar** su home? Si no, ¿falta `r`?
+-   ¿Por qué **no deberías** poder crear/borrar ahí? (falta `w`)
+
+&gt; 🔒 **Ética y seguridad:** observa, **no cambies** permisos ni contenido de otros. Este ejercicio es para **interpretar** permisos, no para acceder a datos ajenos.
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

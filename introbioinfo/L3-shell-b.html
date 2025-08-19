@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introducción a la Bioinformática</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Introducción a la Bioinformática
+]
+.institute[
+### Licenciatura en Ciencias Genómicas,UNAM
+]
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+---
+
+class: center, middle
+
+# El sistema de archivos en Unix
+
+---
+
+## 🎯 Objetivo general de la lección
+
+.content-box-yellow[
+El participante comprenderá la estructura jerárquica del sistema de archivos en Unix y el uso de rutas absolutas y relativas, para organizar, localizar y gestionar información con precisión; asimismo ejecutará de forma segura operaciones esenciales sobre archivos y directorios.
+]
+
+---
+
+## 🗂️ Introducción al sistema de archivos (Unix)
+
+.content-box-yellow[
+El sistema de archivos es la **estructura jerárquica** que el sistema operativo usa para **guardar y organizar** información.
+]
+
+.pull-left[
+
+```
+/                      
+├─ bin/
+├─ sbin/
+├─ etc/
+├─ home/
+│  └─ usuario/
+├─ root/
+├─ usr/
+│  ├─ bin/
+│  ├─ sbin/
+│  ├─ lib/  lib64/
+│  └─ local/
+├─ var/
+```
+]
+
+.pull-right[
+
+.tiny[
+
+- Es un **árbol** que comienza en la **raíz**: `/`.
+
+- **Directorios** (carpetas) contienen **archivos** y otros directorios.
+
+- Cada elemento tiene un **nombre** y una **ubicación** en el árbol (su **ruta**).
+
+- El sistema es **sensible a mayúsculas**: `datos.txt` ≠ `Datos.txt`.
+
+- En Unix, “**todo es un archivo**” (incluye dispositivos y enlaces).
+
+- Existen **propietarios y permisos** que controlan el acceso.
+
+
+.content-box-blue[
+Idea clave: piensa en un “mapa” único del equipo, con una entrada principal (`/`) y caminos que llevan a cada recurso.
+]
+]
+]
+
+---
+## 🗂️ Introducción al sistema de archivos (Unix)
+
+```
+/                      # raíz del sistema de archivos
+├─ bin/                # ejecutables básicos para todos los usuarios
+├─ sbin/               # ejecutables de administración (root)
+├─ etc/                # archivos de configuración del sistema
+├─ home/               # carpetas personales de usuarios
+│  └─ usuario/         # directorio "home" de un usuario
+├─ root/               # directorio "home" del superusuario (root)
+├─ usr/                # software y datos de solo lectura de usuarios
+│  ├─ bin/             # programas "de usuario"
+│  ├─ sbin/            # utilidades administrativas
+│  ├─ lib/  lib64/     # bibliotecas compartidas
+│  └─ local/           # software instalado localmente por el admin
+├─ var/                # datos cambiantes (logs, colas, cachés)
+```
+
+---
+## 📄 ¿Qué es un archivo (fichero)?
+
+.content-box-blue[
+**Unidad básica de almacenamiento** en el sistema de archivos: guarda **datos relacionados** creados por una persona o programa.
+]
+
+- En esencia, es una **secuencia de bytes**; cómo se interpreta depende de su **formato** (texto, imagen, audio, ejecutable).
+
+- Se identifica por un **nombre** y una **ruta**; la **extensión** es una **convención** (no siempre determina el contenido).
+
+- Tiene **propiedades**: tamaño, fechas (creación/modificación/acceso), **propietario** y **permisos**.
+
+- **No** es lo mismo que un **directorio** (carpeta) ni que un **enlace**.
+
+.tiny[En Unix, “todo es (como) un archivo”: también hay dispositivos, sockets, etc.]
+
+
+---
+
+## 📄 Propiedades de un archivo
+
+| Propiedad          | ¿Qué describe?                                                                        |
+|:-------------------|:---------------------------------------------------------------------------------------|
+| **Nombre**         | Identificador simbólico elegido por el usuario. Puede tener o no **extensión**.       |
+| **Ruta**           | Ubicación dentro del **árbol** del sistema de archivos (carpeta donde vive).          |
+| **Tipo**           | Naturaleza del objeto: **archivo regular**, **directorio**, **enlace**, **dispositivo**. |
+| **Tamaño**         | Espacio que ocupa (bytes).                                                             |
+| **Propietario/Grupo** | Quién es el dueño y a qué grupo pertenece (control de acceso).                     |
+| **Permisos (r,w,x)** | Qué puede hacer **propietario / grupo / otros** (leer, escribir, ejecutar/entrar).  |
+| **Fechas**         | Tiempos de **modificación** y **acceso** (y cambio de metadatos).                     |
+
+.tiny[ 
+La **extensión** (`.txt`, `.csv`, `.xlsx`) es una **convención**: sugiere el formato/aplicación, pero no lo garantiza. En Unix, la “fecha de creación” no siempre existe como tal; suele registrarse cambio de metadatos (ctime).
+]
+
+---
+
+## 🛠️ Operaciones sobre archivos y directorios
+
+- **Crear** y **abrir/cerrar** (generar y usar archivos). 
+
+- **Leer / escribir** (consultar y modificar contenido).  
+
+- **Listar** (ver contenido de un directorio).  
+
+- **Buscar** (localizar por nombre o contenido).  
+
+- **Copiar** (duplicar) y **mover/renombrar** (cambiar ubicación/nombre).  
+
+- **Eliminar** (quitar del sistema de archivos).  
+
+- **Cambiar permisos/propietario** (gestionar acceso).  
+
+.tiny[
+Idea clave:   
+  - archivos = **datos**;   
+  directorios = **organización**;   
+  propiedades = **metadatos** que controlan acceso y trazabilidad.  
+  ]
+
+---
+
+## 📁 ¿Qué es un directorio?
+
+.content-box-blue[
+Un **directorio** es un **contenedor** (tipo especial de archivo) que **organiza** y **agrupa** otros **archivos** y **subdirectorios** dentro del sistema de archivos.
+]
+
+- Funciona como una **estructura de datos** con **entradas** (nombre → referencia a un archivo o a otro directorio).
+- Forma parte de una **estructura jerárquica** en **árbol** que comienza en la **raíz** `/`.
+- Cada directorio puede tener un **número arbitrario** de entradas (archivos/subdirectorios).
+
+- Incluye **dos entradas predeterminadas**:
+  - `.` → **directorio actual**
+  - `..` → **directorio padre**  
+    *(en la raíz `/`, `..` apunta a la propia raíz)*
+
+---
+
+## Sistema de Archivos
+
+.pull-left[
+
+.tiny[
+-   El árbol tiene una **raíz**: `/` (punto de partida único).
+    
+-   Cada **directorio** es un **nodo** que puede contener otros directorios o **archivos** (sus “hijos”).
+    
+-   Un **archivo** es una **hoja** del árbol (no contiene otros elementos).
+    
+-   A cualquier elemento se llega por su **ruta**:
+    
+    -   **Absoluta:** desde `/` (ej. `/home/compu2/WelcomeBioinfo/datos/practica1/geranio.txt`).
+        
+    -   **Relativa:** desde donde te encuentras (ej. desde `datos` → `practica2/`).
+        
+-   El árbol **crece** al crear directorios y **cambia** al mover/eliminar ramas.
+    
+-   _Sensibilidad a mayúsculas:_ `datos/` ≠ `Datos/`.  
+
+]
+
+]
+
+.pull-right[
+&lt;img src="img/sistema-archivos.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## 🧭 ¿Cómo nos movemos en el sistema de archivos?
+
+**Ruta (path)** = la “dirección” de un archivo/carpeta dentro del árbol.
+
+- **Ruta absoluta**: empieza en la **raíz** `/` y no depende de dónde estés.  
+  *Ej.* `/home/compu2/WelcomeBioinfo/datos/practica1/panda.txt`
+
+- **Ruta relativa**: parte de tu **ubicación actual** y no empieza con `/`.  
+  *Ej.* si estás en `/home/compu2`, `WelcomeBioinfo/datos/`  
+
+.tiny[Idea clave: usa **absolutas** para ubicaciones inequívocas; **relativas** para trabajar rápido dentro de un proyecto.]
+
+
+---
+
+## 📌 Rutas absolutas
+
+- **Siempre** comienzan con `/`.  
+- **No** cambian aunque te muevas a otro directorio.  
+- Útiles en scripts que deben funcionar sin ambigüedad.
+
+**Ejemplos (según el diagrama):**
+
+```text
+/home/compu2/WelcomeBioinfo/datos/practica1/geranio.txt
+/home/compu2/WelcomeBioinfo/datos/practica3/
+```
+
+---
+## 📌 Rutas relativas
+
+-   **No** comienzan con `/`.
+    
+-   Dependen del **directorio donde estás**.
+    
+-   Más cortas y cómodas dentro de un proyecto.
+    
+
+**Ejemplos:**
+
+```
+# Estando en /home/compu2
+ WelcomeBioinfo                   # → /home/compu2/WelcomeBioinfo
+ WelcomeBioinfo/datos/practica2   # → /home/compu2/WelcomeBioinfo/datos/practica2
+```
+
+---
+
+## 🔹 Atajos y entradas especiales
+
+| Símbolo | Significa…                          | Ejemplo útil                              |
+|:------:|-------------------------------------|-------------------------------------------|
+| `.`    | Directorio **actual**               | `./script.sh` (ejecuta script aquí)       |
+| `..`   | Directorio **padre**                | `cd ..` (sube un nivel)                   |
+| `../..`| **Dos** niveles arriba              | `cd ../../`                               |
+| `~/`   | Tu **HOME** (p. ej., `/home/user/`) | `cd ~/proyectos`                          |
+
+&gt; Nota: en Unix **importa** mayúsculas/minúsculas (`datos/` ≠ `Datos/`). Usa **TAB** para autocompletar rutas.
+
+---
+## en resumen .. nos movemos
+
+&lt;img src="img/papas-hijos.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+## Ejercicio: 
+
+.pull-left[
+&lt;img src="img/sistema-archivos.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+
+.pull-right[
+
+**Completa las rutas.**  
+_Pista:_ **absoluta** empieza con `/`; **relativa** no. Importan mayúsculas/minúsculas.
+
+.tiny[ 
+
+### A) Rutas **absolutas**
+- `bin` → `__________`
+- `compu2` → `__________`
+- `practica2` → `__________`
+- `panda.txt` → `__________`
+
+### B) Rutas **relativas** (partiendo de **/home/compu2**)
+- `WelcomeBioinfo` → `__________`
+- `practica2` → `__________`
+- `home` → `__________`
+- `/` (raíz) → `__________`
+]
+]
+---
+## 🧰 Comandos básicos del sistema de archivos
+
+| Comando | ¿Para qué sirve? | Ejemplo útil |
+|:--|:--|:--|
+| `ls` | Listar contenido de un directorio | `ls -lah` (incluye ocultos y tamaños legibles) |
+| `cd` | Cambiar de directorio | `cd ~/proyectos` · `cd ..` (subir) |
+| `pwd` | Mostrar ruta actual | `pwd` |
+| `mkdir` | Crear directorio(s) | `mkdir -p data/raw` (crea árbol) |
+| `rmdir` | Borrar **directorio vacío** | `rmdir carpeta_vacia` |
+| `rm` | Borrar archivos/directorios | `rm -i archivo.txt` · `rm -r carpeta/` *(recursivo)* |
+| `chmod` | Cambiar permisos (r,w,x) | `chmod 640 datos.tsv` · `chmod u+x script.sh` |
+| `chown` | Cambiar propietario/grupo | `sudo chown user:grupo datos.tsv` |
+| `df` | Uso de disco por volumen | `df -h` |
+| `du` | Tamaño por ruta/archivo | `du -sh *` |
+
+.tiny[**Seguridad:** prueba primero con `ls` antes de borrar; usa `rm -i` para confirmar; respeta tu `~/` y evita modificar `/` y directorios del sistema.]
+
+---
+
+## ⚡ Tips básicos de terminal (resumen)
+
+- **TAB**: autocompleta (doble TAB = muestra opciones).  
+
+- **↑ / ↓**: recorre el historial · **Ctrl+R**: busca en el historial.  
+
+- **Copiar/pegar**:  
+  - Linux: **Ctrl+Shift+C / Ctrl+Shift+V**  
+  - macOS: **Cmd+C / Cmd+V**  
+  - Windows/MobaXterm: **Ctrl+C / Ctrl+V** (clic derecho suele pegar)
+  
+- **Ctrl+C** interrumpe · **Ctrl+L** limpia · **q** sale de *man*  
+
+- **Ctrl+A / Ctrl+E**: ir al inicio/fin de la línea.
+
+
+---
+
+## 🧪 Ejercicio: Navegar el sistema de archivos (servidor)
+
+**Objetivo:** reconocer la raíz `/`, moverte con **rutas absolutas** y verificar dónde estás.
+
+**Paso a paso (cópialo tal cual):**
+
+```bash
+# 1) Conéctate al servidor (tepeu)
+ssh TU_USUARIO@tepeu.lcg.unam.mx   # o ssh TU_USUARIO@132.248.220.14
+
+# 2) Punto de partida
+pwd            # muestra tu ruta actual
+ls -lah        # lista lo que hay aquí
+
+# 3) Ir a la raíz y revisar
+cd /
+pwd
+ls
+
+# 4) Movernos con rutas absolutas (según el diagrama)
+cd /home
+pwd
+cd /home/compu2/WelcomeBioinfo/datos
+pwd
+ls
+
+```
+
+---
+## 🧪 Ejercicio: Navegar el sistema de archivos (servidor)
+
+```bash
+
+# 5) Volver al directorio de compu2
+cd /home/compu2
+pwd
+
+# 6) Error intencional: sensibilidad a MAYÚSCULAS/minúsculas
+cd /home/compu2/WelcomebioInfo/datos   # &lt;- debe fallar: No such file or directory
+# Corrección:
+cd /home/compu2/WelcomeBioinfo/datos
+
+# 7) Atajos útiles
+cd ~     # a tu HOME
+cd -     # al directorio anterior
+
+# 8) Cerrar sesión
+exit
+
+```
+
+---
+
+## 🧭 Ejercicio: moverte con **rutas relativas**
+
+&gt; Supón que partes en: **/home/compu2**  
+&gt; *(Ojo con mayúsculas/minúsculas: es **WelcomeBioinfo** exactamente como está escrito en el diagrama).*
+
+```bash
+# 1) Desde /home/compu2 entra a WelcomeBioinfo
+pwd
+cd WelcomeBioinfo
+pwd
+
+# 2) Entra a datos y luego a practica1
+cd datos
+cd practica1
+pwd
+
+# 3) Lista TODO, incluidos ocultos (verás . y ..)
+ls -la
+
+# 4) Sube un nivel (a datos) y verifica
+cd ..
+pwd
+```
+
+---
+## 🧭 Ejercicio: moverte con **rutas relativas**
+
+```bash
+# 5) Sube otro nivel (a WelcomeBioinfo)
+cd ..
+pwd
+
+# 6) Desde WelcomeBioinfo, sube DOS niveles (a /home). ¿Dónde estás?
+cd ../..
+pwd
+
+# 7) Estando en /home, ve a practica1 usando solo RUTAS RELATIVAS
+cd compu2/WelcomeBioinfo/datos/practica1
+pwd
+
+# 8) Desde practica1, muévete a practica3 (ruta relativa)
+cd ../practica3
+pwd
+ls
+
+# 9) Error intencional (para notar sensibilidad a mayúsculas)
+cd ../Practica2           # &lt;- debe fallar (No such file or directory)
+# Corrige:
+cd ../practica2
+pwd
+```
+
+---
+
+## 🏗️ Creando directorios
+
+**Objetivo:** organizar tu trabajo creando carpetas de forma segura y reproducible.
+
+.content-box-gray[
+mkdir nombre_directorio
+]
+
+**Opciones clave:**  `-p` ,  `-v`, `-m`, etc.
+
+**Buenas prácticas de nombres:**
+- Sin espacios (o pon **comillas**): `mi_carpeta`, `proyecto-ec0301`
+- Evita tildes y caracteres raros
+- Usa minúsculas y separadores (`_` o `-`)
+
+**Ejemplos útiles:**
+
+```bash
+# 1) Carpeta simple
+mkdir practica_ec0301
+```
+
+---
+## 🏗️ Práctica: crear y navegar directorios
+
+**Objetivo:** crear una estructura simple de carpetas y verificarla.
+
+
+```bash
+# 1) Ve a tu HOME y crea la carpeta raíz del ejercicio
+cd ~
+mkdir intro-bioinfo
+cd intro-bioinfo
+
+# 2) Crea y entra a practica1
+mkdir practica1
+cd practica1
+
+# 3) Crea dos carpetas: animales y plantas
+mkdir animales plantas
+
+# 4) Entra a animales y crea la subcarpeta osos
+cd animales
+mkdir osos
+
+# 5) Entra a osos (confirmar la ruta) y vuelve a HOME
+cd osos
+pwd
+cd ~
+
+```
+
+
+
+---
+
+```bash
+# --- Preparación (si aún no existe la estructura local) ---
+mkdir -p ~/intro-bioinfo/practica1/{animales/osos,plantas}
+
+# 1) Ir al directorio `osos`
+cd ~/intro-bioinfo/practica1/animales/osos
+pwd
+
+# 2) Copiar con RUTA ABSOLUTA el archivo panda.txt
+#    Origen: /home/compu2/WelcomeBioinfo/datos/practica1/panda.txt
+cp /home/compu2/WelcomeBioinfo/datos/practica1/panda.txt .
+ls -lh
+
+# 3) Mover panda.txt al directorio padre `animales` usando RUTA RELATIVA
+mv panda.txt ..
+ls -lh ..           # (opcional) confirmar que ya no está en `osos`
+
+# 4) Entrar a la carpeta `plantas` con RUTA ABSOLUTA
+cd ~/intro-bioinfo/practica1/plantas
+pwd
+
+# 5) Copiar geranio.txt usando RUTA RELATIVA (desde `plantas`)
+#    Objetivo: /home/compu2/WelcomeBioinfo/datos/practica1/geranio.txt
+#    Desde /home/&lt;tu_usuario&gt;/intro-bioinfo/practica1/plantas
+cp ../../../../compu2/WelcomeBioinfo/datos/practica1/geranio.txt .
+ls -lh
+
+# 6) Listar los archivos que hay en el directorio `animales` SIN salir de `plantas`
+ls -lh ../animales
+
+```
+
+
+
+---
+## ... ya casi
+
+```bash
+# 1) Colócate en tu directorio practica1
+cd ~/intro-bioinfo/practica1
+ls -laR .
+
+# 2) Elimina el archivo geranio.txt (interactivo para confirmar)
+rm -i plantas/geranio.txt
+
+# 3) Elimina la carpeta osos (interactivo y recursivo)
+rm -ri animales/osos
+
+# 4) Vuelve a imprimir la estructura de directorios
+ls -laR .
+```
+
+
+
+---
+
+## ⚡ Atajos de teclado en la terminal (Unix)
+
+### Movimiento en la línea
+- **Ctrl + A** → ir al **inicio** de la línea  
+- **Ctrl + E** → ir al **final** de la línea  
+- **Alt + B** → mover **una palabra atrás**  
+- **Alt + F** → mover **una palabra adelante**
+
+### Edición rápida
+- **Ctrl + K** → borrar desde el **cursor → fin**  
+- **Ctrl + U** → borrar desde **inicio → cursor**  
+- **Ctrl + W** → borrar **palabra atrás**  
+- **Alt + D** → borrar **palabra adelante**  
+- **Ctrl + Y** → **pegar** lo último borrado (yank)
+
+---
+## ⚡ Atajos de teclado en la terminal (Unix)
+
+### Historial y búsqueda
+- **↑ / ↓** → navegar el **historial**  
+- **Ctrl + R** → **buscar** en el historial (repítelo para la siguiente coincidencia)
+
+### Control y pantalla
+- **Ctrl + C** → **interrumpir** el proceso en curso  
+- **Ctrl + Z** → **suspender** (luego `fg` para volver, `bg` al fondo)  
+- **Ctrl + L** → **limpiar** la pantalla  
+- **TAB** → **autocompletar** (doble TAB muestra opciones)
+
+.tiny[
+**Notas:**  
+- **Alt** = tecla **Meta** (en macOS puedes activar “Use Option as Meta” o usar **Esc** y luego la letra).  
+- Copiar/pegar: Linux (**Ctrl+Shift+C / Ctrl+Shift+V**), macOS (**Cmd+C / Cmd+V**), Windows Terminal/MobaXterm (**Ctrl+C / Ctrl+V**).
+]
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

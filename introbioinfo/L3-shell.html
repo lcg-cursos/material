@@ -3,7 +3,7 @@
   <head>
     <title>Introducción a la Bioinformática</title>
     <meta charset="utf-8" />
-    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -38,10 +38,29 @@ pre {
 &lt;/style&gt;
 
 
-## Objetivo
+## 🎯 Objetivo
 
-Lxs alumnxs serán capaces de comprender qué es el shell, acceder de manera remota a un servidor Unix y comprender el sistema de archivos en unix.
+.content-box-yellow[
 
+El participante comprenderá los conceptos fundamentales de conexión a internet, protocolos de comunicación, sistemas operativos y formas de interacción (GUI y CLI), de manera que pueda establecer conexiones remotas a servidores mediante el protocolo SSH y ejecutar sus primeros comandos en un sistema tipo Unix aplicados a la bioinformática.
+
+]
+
+##### 🎯 Objetivos específicos de la sección
+
+.tiny[
+
+Al finalizar la sección, el participante será capaz de:
+
+- Identificar los recursos necesarios para conectarse a internet y trabajar con sistemas remotos en bioinformática.
+
+- Distinguir las características y diferencias entre los sistemas operativos y sus formas de interacción (GUI vs CLI).
+
+- Ejecutar comandos básicos en la terminal (pwd, hostname, whoami, tree) para explorar el entorno Unix.
+
+- Aplicar el protocolo SSH para establecer conexiones remotas seguras a un servidor y validar su acceso mediante comandos iniciales.
+
+]
 ---
 
 class: center, middle
@@ -60,92 +79,224 @@ class: center, middle
 
 ---
 
-## Cuando conectas tu computadora a internet...
+## 🖥️ Cuando conectas tu computadora a internet…
 
-1. Se conecta a la red por un protocolo llamado *Internet Protocol* (IP).
 
-2. Se asigna una dirección IP tipo 189.183.114.100,  PERO si te conectas via Wi-fi esta dirección no es fija.
+Cada dispositivo que se conecta a internet necesita una “**identidad numérica única**” para poder comunicarse. Esa identidad es la **dirección IP (Internet Protocol)**, algo así como la “dirección postal” de tu computadora en la red.
 
---
+.content-box-yellow[
 
-La familia de protocolos de internet es un conjunto de protocolos de red en los que se basa internet y que permiten **la transmisión de datos entre computadoras**.
+Dirección IP:   **189.183.114.100**
 
-&lt;img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Suite_de_Protocolos_TCPIP.png" width="350px" style="display: block; margin: auto;" /&gt;
+Consta de cuatro números separados por puntos [ 0 - 255 ].
+
+]
+
+
+- IP fija vs IP dinámica
+  - **Por cable (Ethernet)**: el proveedor de internet te asignq una IP fija (no cambia).
+  - **Por Wi-Fi**:  normalmente obtienes una IP dinámica, tu dirección puede cambiar cada vez que te reconectas o reinicias el router.
+
 
 ---
-## Protocolo HTTP
 
-El protocolo de transferencia de hipertexto (en inglés: Hypertext Transfer Protocol, abreviado HTTP) es el protocolo de comunicación que permite las transferencias de información a través de archivos (XML, HTML…) en la World Wide Web. 
+## 🌐 Familia de Protocolos de Internet
 
-&lt;img src="img/protocolo-http.png" width="700px" style="display: block; margin: auto;" /&gt;
+PROTOCOLO: Es el **conjunto de reglas** que permiten que las computadoras se comuniquen entre sí en internet. Los datos viajan de forma ordenada y confiable entre computadoras.
+
+Se organiza en **capas**, cada una con funciones específicas:
+
+  - **Aplicación** → Cómo usamos la red (ej. HTTP, FTP, SSH).
+  - **Transporte** → Asegura que los datos lleguen completos (ej. TCP, UDP).
+  - **Internet** → Direcciona la información con direcciones IP.
+  - **Interfaz de red** → Conecta el hardware (ej. Ethernet, Wi-Fi).
+
+
+&lt;img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Suite_de_Protocolos_TCPIP.png" width="250px" style="display: block; margin: auto;" /&gt;
+
+---
+## 🌐 Protocolo HTTP
+
+**HTTP (Hypertext Transfer Protocol)** es el protocolo que permite la comunicación en la **World Wide Web.**
+- Se utiliza para **transferir información** entre usuarios, navegadores y servidores.
+- Los datos pueden ser archivos **HTML, XML, imágenes, texto**, etc.
+
+
+&lt;img src="img/protocolo-http.png" width="600px" style="display: block; margin: auto;" /&gt;
 
 
 ---
-## Protocolo FTP
+## 📂 Protocolo FTP
 
-El Protocolo de transferencia de archivos (en inglés File Transfer Protocol o FTP) es un protocolo de red para la transferencia de archivos entre sistemas conectados a una red TCP (Transmission Control Protocol), basado en la arquitectura cliente-servidor.
+**FTP (File Transfer Protocol)** es un protocolo de red para **transferir archivos** entre computadoras.
 
-&lt;img src="https://www.cloudcenterandalucia.es/wp-content/uploads/2021/08/CCA_Protocolo-FTP-1.png" width="700px" style="display: block; margin: auto;" /&gt;
+Usa la arquitectura **cliente–servidor**:
+
+-   **Cliente** → solicita o envía archivos.
+    
+-   **Servidor** → guarda los archivos y responde a las peticiones.
+
+
+&lt;img src="https://www.cloudcenterandalucia.es/wp-content/uploads/2021/08/CCA_Protocolo-FTP-1.png" width="500px" style="display: block; margin: auto;" /&gt;
 
 .tiny[Source: https://www.cloudcenterandalucia.es/wp-content/uploads/2021/08/CCA_Protocolo-FTP-1.png]
+
 ---
 # Transferencia de Archivos
 
 &lt;img src="img/sftp-protocol.png" width="700px" style="display: block; margin: auto;" /&gt;
 
----
-## Protocolo SSH: secure shell
+#### 🔹 Acceso a un servidor de archivos
 
-SSH (o Secure SHell) es el nombre de un protocolo y del programa que lo implementa cuya principal función es el **acceso remoto a un servidor** por medio de un canal seguro en el que toda la información está cifrada. 
-
-&lt;img src="https://i0.wp.com/lab.wallarm.com/wp-content/uploads/2024/05/160.2.jpg?w=770&amp;ssl=1" width="700px" style="display: block; margin: auto;" /&gt;
-
----
-
----
-**¿Qué tienen en común estos dispositivos?**
-
-&lt;img src="http://1.bp.blogspot.com/-ZGAVLgs4Aas/UT1arCZsL-I/AAAAAAAAGus/L3-M6-jHm7Q/s280/productos+fragmentados.png" width="400px" style="display: block; margin: auto;" /&gt;
-
---
-Sistema Operativo
-
-Un sistema operativo (SO) es el **conjunto de programas** de un sistema informático que **gestiona los recursos de hardware** (memoria, disco duro...) y provee servicios a los programas de aplicación de software. 
+-   **Navegador (browser)** → permite explorar y descargar archivos desde la URL FTP.
+    
+-   **Cliente FTP (ej. FileZilla)** → facilita subir y bajar archivos mostrando carpetas locales y remotas.
 
 
 ---
-## Tipos de sistemas operativos
+## 🔐 Protocolo SSH (Secure Shell)
 
-&lt;img src="https://www.areatecnologia.com/informatica/imagenes/so.jpg" width="400px" style="display: block; margin: auto;" /&gt;
+**SSH** es un protocolo y programa para el **acceso remoto seguro** a servidores.
+    
+-   Toda la comunicación viaja **cifrada**, protegiendo usuario, contraseña y datos.
+    
+-   Funciona mediante un **sistema de claves** (pública y privada) para autenticar la conexión.
+    
+-   👉 Es la forma más usada en bioinformática para trabajar en **servidores Unix/Linux**.
 
-¿Cuál es tu sistema operativo?
+
+&lt;img src="https://i0.wp.com/lab.wallarm.com/wp-content/uploads/2024/05/160.2.jpg?w=770&amp;ssl=1" width="400px" style="display: block; margin: auto;" /&gt;
 
 ---
-## Algunas características
 
-&lt;img src="https://qph.cf2.quoracdn.net/main-qimg-ddd75f97d8583d092d3c8b9a0f553cf9" width="600px" style="display: block; margin: auto;" /&gt;
+## 🌐 En resumen: Protocolos de Internet
 
-
-.tiny[ Te recomiendo este artículo : https://www.freecodecamp.org/news/an-introduction-to-operating-systems/ ]
+-   Toda computadora conectada a internet tiene una **dirección IP**.
+    
+-   Los **protocolos** permiten la comunicación:
+    
+    -   **HTTP** → acceder a páginas web.
+        
+    -   **FTP** → transferir archivos.
+        
+    -   **SSH** → conexión remota segura a servidores.
+        
+-   Gracias a estos protocolos, podemos **compartir información, trabajar de manera remota y colaborar en bioinformática**.
 
 ---
 
-# GUI vs CLI
+## 🧪 Práctica: ver los protocolos en acción
 
-Para interactuar con el sistema operativo podemos hacerlo usando una **interfaz gráfica (GUI)** o a través de **linea de comandos (CLI)**.
+**Objetivo:** reconocer el protocolo en la URL y distinguir dominio vs IP.
 
-.content-box-blue[
-En una **interfaz gráfica**, se usa el **mouse** u otro dispositivo **apuntador** con el que se hace "click" en cada elemento de la pantalla. Por otra parte la **interfaz de línea de comando** muestra un "prompt" o inductor donde **escribimos comandos** y argumentos que ejecutarán las tareas que le asignemos.
+1. **HTTPS (web segura)**  
+.tiny[
+   Abre **https://www.ncbi.nlm.nih.gov/** → observa el **candado** y el esquema **https://**.
 ]
 
-&lt;img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*9cp4T0Hz-Gmcpku3.png" width="400px" style="display: block; margin: auto;" /&gt;
+2. **HTTP → redirección a HTTPS**  
+.tiny[
+   Cambia a **http://www.ncbi.nlm.nih.gov/** → recarga.   *Qué observar:* suele redirigir a **https**   
+]
 
+3. **Índice de archivos (FTP servido por web)**  
+.tiny[
+   Abre **https://ftp.ncbi.nlm.nih.gov/genomes/** → navega un directorio y descarga un archivo pequeño.  
+   *Qué observar:* aunque el host dice “ftp”, el **protocolo** real es **https**.
+]
+
+4. **IP directa**  
+.tiny[
+   Escribe **132.248.166.18** en el navegador.  
+   *Qué observar:* si no hay servicio web en esa IP, **no cargará**.  
+   **Conclusión:** IP identifica el host; el **protocolo** y el **servicio** deben estar activos.
+]
+
+**Cierre:**  
+
+.tiny[
+- El protocolo define **cómo** se comunica (HTTP/HTTPS/FTP/SSH).  
+- El dominio se **traduce a IP** (DNS).  
+- Una misma IP puede alojar **múltiples servicios**.
+
+]
+
+---
+
+## De la red a la computadora: el rol del Sistema Operativo
+
+👉 Para poder **usar** estos protocolos y manejar la computadora, necesitamos entender primero el Sistema Operativo.
+
+Los **protocolos de internet** nos permiten **comunicar computadoras**, transferir archivos y conectarnos a servidores.
+
+Pero, ¿qué hace posible que una computadora funcione, organice sus recursos y ejecute programas?
+
+
+.content-box-yellow[
+
+El SO es el “puente” entre el hardware y los programas que usamos.
+
+]
+
+---
+
+## ¿Qué hace funcionar a estos dispositivos?
+
+&lt;img src="http://1.bp.blogspot.com/-ZGAVLgs4Aas/UT1arCZsL-I/AAAAAAAAGus/L3-M6-jHm7Q/s280/productos+fragmentados.png" width="500px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## ⚙️ ¿Qué es un Sistema Operativo (SO)?
+
+-   Es el **conjunto de programas** que hacen funcionar una computadora.
+    
+-   **Administra** los recursos de hardware (memoria, procesador, disco, dispositivos).
+    
+-   **Facilita la comunicación** entre el usuario y la máquina.
+    
+-   Permite que podamos **ejecutar aplicaciones** como navegadores, editores de texto, programas de análisis, etc.
+
+
+&lt;img src="https://ejerciciosdocencia.wordpress.com/wp-content/uploads/2020/01/135-recursos-gestion-so.jpg?w=768" width="400px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Tipos de sistemas operativos
+
+&lt;img src="https://www.areatecnologia.com/informatica/imagenes/so.jpg" width="500px" style="display: block; margin: auto;" /&gt;
+
+**Clasificación por uso**:
+-   **Escritorio** → Windows, MacOS, Linux.        
+-   **Móvil** → Android, iOS. 
+-   **Servidores** → Linux, Unix.
+        
+**¿Qué sistema operativo usas en tu computadora personal y cuál en tu celular?**
+        
+
+Linux y Unix son los más usados en **ciencia y bioinformática**.
+
+
+---
+
+## 💡 ¿Cómo interactuamos con el Sistema Operativo?
+
+
+&lt;img src="https://miro.medium.com/v2/resize:fit:1400/format:webp/0*9cp4T0Hz-Gmcpku3.png" width="450px" style="display: block; margin: auto;" /&gt;
+
+Podemos comunicarnos con el SO de **dos formas principales**:
+    
+-   **GUI (Graphical User Interface)** → usando ventanas, íconos y el mouse 🖱️
+        
+-   **CLI (Command Line Interface)** → escribiendo comandos en la terminal.
+        
+
+👉 Ambas permiten realizar tareas, pero la **CLI** es la más usada en bioinformática por su potencia y flexibilidad.
 
 ---
 
 # GUI vs CLI
 
-Si los entornos gráficos son fáciles de usar y bonitos, porqué usar un CLI ?
+Las interfaces gráficas (GUI) son intuitivas y fáciles de usar, pero tienen limitaciones cuando trabajamos con grandes volúmenes de archivos o tareas repetitivas.
 
 .content-box-yellow[
 **Escenario 1**. Imagina que tienes muchos **archivos de texto** en tu escritorio y quieres **eliminar** solo aquellos archivos que **inician con a y terminan con n**. Cómo lo harias usando la interfaz gráfica?
@@ -158,17 +309,26 @@ Si los entornos gráficos son fáciles de usar y bonitos, porqué usar un CLI ?
 ]
 
 ---
-## En Resúmen
 
-- Toda computadora conectada a internet tiene una dirección IP.
+## 📌 Resumen de la sección: Conceptos básicos
 
-- Para comunicar las computadoras se usan los protocolos de internet.
+-   Toda computadora conectada a internet tiene una **dirección IP**.
+    
+-   La comunicación se realiza mediante **protocolos** (HTTP, FTP, SSH).
+    
+-   El **Sistema Operativo (SO)** es el puente entre el **hardware** y las **aplicaciones**.
+    
+-   Existen distintos **tipos de SO** (Windows, MacOS, Linux, Android…).
+    
+-   Podemos interactuar con el SO mediante:
+    
+    -   **GUI** (interfaz gráfica, fácil de usar).
+        
+    -   **CLI** (línea de comandos, más potente y flexible).
+        
 
-- Los protocolos nos permiten acceder a  páginas html, acceder a archivos de datos, trabajar en un servidor remoto, etc.
+👉 Estos conceptos son la base para comprender por qué en **bioinformática** se utiliza principalmente **Unix** y su entorno de comandos.
 
-- Toda computadora tiene un sistema operativo que la hace funcionar.
-
-- Para comunicarnos con el SO de una computadora puede ser a través de una interfaz GUI o CLI.
 
 ---
 
@@ -176,41 +336,47 @@ class: center, middle
 
 # Sistema Operativo Unix
 
-
 ---
 
-## Qué se requiere en Bioinformática ?
+## 🔹 ¿Qué se requiere en Bioinformática?
 
-Muchos concuerdan en que alguien que piense dedicarse a la bioinformática debe manejar :
+Necesitamos que la computadora sea una **herramienta de trabajo científico** capaz de manejar grandes volúmenes de datos, ejecutar programas especializados y, muchas veces, aprovechar servidores o clusters de alto rendimiento.
 
-1. Un sistema operativo tipo **Unix**.
-2. Un lenguaje de programación compilado, preferiblemente C que es el que mejor se integra con Linux
-3. Un lenguaje de programación interpretado como Perl o Python, que permite escribir rápidamente scripts
-4. Un lenguaje de análisis y graficación de datos como R.
+👉 Herramientas esenciales que todo bioinformático debe dominar:
 
-En Bioinformática algunas veces se requiere procesamiento en paralelo por la complejidad y cantidad de operaciones y cálculos (se usan clusters).
+1.  🖥️ **Sistema operativo tipo Unix** → base para el trabajo en servidores y análisis de datos.
+2.  ⚙️ **Lenguaje compilado (C)** → rápido, eficiente y muy integrado con Linux.
+3.  🐍 **Lenguaje interpretado (Python o Perl)** → ideal para escribir scripts y automatizar tareas.
+4.  📊 **Lenguaje de análisis y graficación (R)** → manejo de datos y visualización científica.
+5.  🖧 **Procesamiento en paralelo / clusters** → para datos muy grandes o complejos.
 
----
-## Sistema Operativo Unix
-
-El sistema operativo más usado para el desarrollo de la bioinformática es **Unix**; por el excelente rendimiento en el **procesamiento de datos** nativos, por el **aprovechamiento óptimo de los recursos de hardware** y sobre todo, por ser distribuido en forma **gratuita** bajo la filosofía de código abierto.
-
-Esto ha permitido que se puedan desarrollar muchos programas por individuos, universidades, centros de investigación y empresas.
-
-Es difícil pensar que un solo fabricante pueda desarrollar todo el software necesario en todas las áreas.
-
-Linux mismo evoluciona según las mejoras y correcciones que hace una comunidad y no una empresa.
+&gt; .tiny[ 
+Nota de referencia: Según [la Cranfield University (2018)](https://blogs.cranfield.ac.uk/agrifood/10-skills-every-bioinformatician-master/?utm_source=chatgpt.com), un bioinformático debe dominar al menos uno de los siguientes: R, Python, Perl, Java o C. 
+]
 
 ---
-## Características
+## 🧰 Sistema Operativo Unix 
 
-**Unix** es un sistema operativo que nace a principios de los años 70, creado principalmente por Dennis Ritchie y Ken Thompson.
+-   En bioinformática, **Unix/Linux** es el estándar de facto.
+    
+-   Destaca por: **rendimiento en datos**, **uso eficiente de hardware** y **software libre / abierto**.
+    
+-   Su ecosistema crece gracias a la **comunidad** (universidades, centros, empresas).
+    
+-   Linux evoluciona con **mejoras colaborativas**, no por una sola compañía.
 
-Sus características técnicas principales son su **portabilidad**, su capacidad **multiusuario** y **multitarea**, su **eficiencia**, su **alta seguridad** y su buen **desempeño** en tareas de red.
 
-Pero Unix, más que una marca, también es una filosofía, que tiene por principios el **minimalismo** y la **modularidad**: hacer ***programas que hagan una sola cosa bien hecha***, y que al comunicarse entre sí, ejecuten tareas más complejas.
+&lt;img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjz7d2lx7ovSFF94vR0YZznml3rjilqeGQTRlt6xeNKj73PnVCh2KPtkdRBx8pt-CviDOolybncQLC9lS4gCIvitDw8v6ycFMWVzNssv679E9__thk2OGt_HX_Ec8DT6JfUKfBwDz5PVEQ/s320/list_640px.jpg" width="370px" style="display: block; margin: auto;" /&gt;
 
-&lt;img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjz7d2lx7ovSFF94vR0YZznml3rjilqeGQTRlt6xeNKj73PnVCh2KPtkdRBx8pt-CviDOolybncQLC9lS4gCIvitDw8v6ycFMWVzNssv679E9__thk2OGt_HX_Ec8DT6JfUKfBwDz5PVEQ/s320/list_640px.jpg" width="300px" style="display: block; margin: auto;" /&gt;
+
+---
+## ⚙️ Características de Unix
+
+-   Origen en los 70 (Ken Thompson, Dennis Ritchie).
+    
+-   **Portabilidad**, **multiusuario**, **multitarea**, **seguridad** y **excelente red**.
+    
+-   Filosofía: **minimalismo** + **modularidad** → _“haz una cosa y hazla bien”_; compón tareas complejas encadenando herramientas.
 
 ---
 ## Un sistema tipo Unix
@@ -220,26 +386,18 @@ Pero Unix, más que una marca, también es una filosofía, que tiene por princip
 ]
 
 .pull-right[
-&lt;img src="https://ejerciciosdocencia.wordpress.com/wp-content/uploads/2020/01/135-recursos-gestion-so.jpg?w=768" width="400px" style="display: block; margin: auto;" /&gt;
 
-]
+#### 🧩 ¿Qué compone un sistema tipo Unix?
 
----
-## ¿Qué es el shell?
-
-* Es un programa que ejecuta los comandos o programas de unix.
-
-* Es la interfaz para comunicarnos con el sistema Unix.
-
-* Es un lenguaje de programación.
-
-
-.content-box-blue[
-
-"Unix was not designed to stop its users from doing stupid things, as that would
-also stop them from doing clever things".
-
-.pull-right[ .tiny[-- Doug Gwyn (ficcticio o real..)]]
+-   **Kernel**: gestiona CPU, memoria, dispositivos.
+    
+-   **Shell**: interfaz de comandos (bash, zsh).
+    
+-   **Utilidades**: `ls`, `grep`, `awk`, `sed`, etc.
+    
+-   **Sistema de archivos**: jerárquico, rutas y permisos.
+    
+-   **Servicios de red**: SSH, SFTP, demonios/daemons.
 
 ]
 
@@ -249,28 +407,90 @@ Páginas web de interés:
 - [Filosofía de Unix.](https://opensource.com/business/14/12/linux-philosophy)
 - [Shell Style Guides.](https://google.github.io/styleguide/shellguide.html)
 ]
+---
+
+## ⚙️ ¿Qué es _el shell_ (en Unix/Linux)?
+
+**El shell es un intérprete de comandos:** lee lo que tecleas, lo traduce y **ejecuta programas**.
+
+🧠 _el shell es la capa de control por texto que te permite “orquestar” Unix a base de comandos y scripts._
+
+- Además de ejecutar, hace **expansiones** (variables, `*.txt`) y **redirecciones/pipes** (`&gt;`, `|`).
+- Permite **automatizar** tareas como **lenguaje de scripting** (p. ej., bash, zsh).
+- Actúa como **interfaz de texto** entre el usuario y el **kernel**.
+- **Terminal ≠ shell**: la _terminal_ es la ventana; el **shell** es el intérprete que corre dentro.
+
+.content-box-gray[
+
+```
+Usuario → Terminal → Shell → Programas/Comandos → Syscalls → Kernel → Hardware
+                         ↑-----------------------------------------------↓
+                                 resultados/errores en texto
+```
+
+]
 
 ---
-## ¿Cómo accedemos al shell?
 
-.bold[Unix/Linux]
+## Tipos de SHELLs
 
-- Tiene un programa integrado: **Terminal**.
+`bash`, `zsh`, `sh`, `fish`, `tcsh` (en bioinfo predominan **bash/zsh**).  
 
-
-.bold[Mac]
-
-- Tiene un programa integrado: **Terminal**.
-
-- La encuentras en el directorio Aplicaciones/Utilidades.
+Tu shell actual: `echo $SHELL`
 
 
-.bold[Windows]
+**¿Por qué hay varios shells?**
 
-- Se necesita descargar un programa emulador del ambiente Linux.
+-   Diferentes **objetivos**: portabilidad, scripting, usabilidad.
+    
+-   **Historia** y comunidades: AT&amp;T, Berkeley, GNU, etc.
+    
+-   **Compatibilidad** con millones de scripts existentes.
+    
+-   **Decisiones de sistema**: macOS → zsh; Linux → bash (frecuente).
+    
 
-- Windows incluye un emulador a partir de Windows 10.  
-Una opción amigable: [MobaXTerm](https://mobaxterm.mobatek.net/).
+.content-box-green[
+👉 **Elige** `sh` para scripts portables, `bash` para scripting potente, `zsh/fish` para trabajo interactivo.
+]
+
+---
+## Tipos de SHELLs
+
+-   **sh (Bourne / POSIX sh)**  
+    El estándar mínimo y más **portátil** para scripts. En muchas distros `/bin/sh` apunta a **dash** (Debian/Ubuntu) o a **bash en modo sh**. Pocas “comodidades”, pero máxima compatibilidad.
+    
+-   **bash (Bourne Again SHell)**  
+    El más difundido en Linux. Potente para **scripting** (arrays, `[[ … ]]`, sustitución de procesos) y cómodo interactivo. Gran ecosistema de ejemplos y documentación.
+    
+-   **zsh (Z Shell)**  
+    Excelente para uso **interactivo** (autocompletado avanzado, globbing potente, corrección de tipeo). Es el **shell por defecto en macOS**. Bastante compatible con bash, pero tiene diferencias si usas features propias.
+
+
+---
+
+## 🖥️ ¿Cómo accedemos al shell?
+
+**Unix/Linux**
+
+-   App **Terminal** (atajo frecuente: `Ctrl+Alt+T`).
+    
+
+**macOS**
+
+-   **Terminal** (Aplicaciones → Utilidades) o **iTerm2** (opcional).
+    
+-   Spotlight: `⌘ + Espacio` y escribe “Terminal”.
+    
+
+**Windows**
+
+-   Opción 1 (recomendada): **WSL** (Ubuntu) + **Windows Terminal**.
+    
+-   Opción 2: [**MobaXTerm**](https://mobaxterm.mobatek.net/). (todo-en-uno, incluye SSH/SFTP).
+    
+-   Opción 3: **Git Bash** (sencillo para comandos básicos).
+
 
 ---
 
@@ -283,21 +503,47 @@ Una opción amigable: [MobaXTerm](https://mobaxterm.mobatek.net/).
 ## ¿Cómo accedemos al shell? Windows
 
 .pull-left[
-&lt;img src="img/mobaXTerm.png" width="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/mobaXTerm.png" width="500px" style="display: block; margin: auto;" /&gt;
 ]
 
 .pull-right[
-&lt;img src="img/moba-terminal.png" width="400px" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/moba-terminal.png" width="500px" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 # La terminal
 
-&lt;img src="img/componentes-terminal.png" width="700px" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/componentes-terminal.png" width="600px" style="display: block; margin: auto;" /&gt;
 
-Desde aqui podemos acceder a todos los recursos de la computadora a través de comandos.
+.pull-left[
 
-Teclea `ls` es un comando para listar los archivos/carpetas que se encuentran donde estamos.
+.tiny[
+
+- **Prompt**: indicador de que el shell espera un comando.  
+  *Ej.* `heladia@MacBook:~/network $`
+  - `heladia` = usuario, `MacBook` = equipo, `~/network` = directorio actual
+  - **$** usuario normal 
+  - **#** superusuario (root)
+- **Cursor**: posición donde se escribe.  
+- **Línea de comandos**: tecleas el **comando [opciones] [argumentos]**.   
+- **Salida del programa**: resultados y mensajes (STDOUT/STDERR).
+
+] ]
+
+.pull-right[
+
+.tiny[
+
+Tips: 
+
+• *Enter* ejecuta   
+• **Ctrl+C** interrumpe   
+• `q` cierra `man`   
+• No escribas el **$**.  
+
+]
+
+]
 
 ---
 ## Sintáxis de los comandos
@@ -305,29 +551,46 @@ Teclea `ls` es un comando para listar los archivos/carpetas que se encuentran do
 &lt;img src="img/sintaxis-comando.png" width="800px" style="display: block; margin: auto;" /&gt;
 
 ---
-# Práctica
 
-1. Abre una `Terminal` en tu computadora. MacOS y Unix busca la `Terminal`, y para Windows abre MobaXTerm y busca la opción de `Terminal`.
+## 🧪 Práctica (LOCAL): Primeros comandos en la Terminal
 
-2. Prueba los siguientes comandos en la terminal y brevemente indica lo que obtienes.
+**Objetivo:** familiarizarte con la Terminal (macOS/Linux) o MobaXTerm/WSL (Windows), reconociendo usuario, equipo, carpeta actual y manipulando archivos con comandos básicos.  
 
-`whoami` 
+**Requisitos:**   
+- macOS/Linux: **Terminal**.  
+- Windows: **MobaXTerm → Terminal** o **Windows Terminal + WSL (Ubuntu)**
 
-`hostname` 
+- *Tip:* No escribas el símbolo del prompt (`$`). Sal del manual con **`q`**. Interrumpe un proceso con **`Ctrl+C`**.
 
-`pwd` 
+```bash
+echo $SHELL      # shell actual (bash, zsh, etc.)
+whoami           # tu usuario local
+hostname         # nombre de TU equipo
+pwd              # carpeta actual (ruta absoluta)
+uname -a         # tipo de sistema (kernel/arquitectura)
+
+```
 
 ---
+
 ## ¿Qué es un servidor?
 
-.content-box-blue[
-"Un servidor es un sistema que proporciona recursos, datos, servicios o programas
-a otros ordenadores, conocidos como clientes, a través de una red. En teoría, se
-consideran servidores aquellos ordenadores que comparten recursos con máquinas
-cliente".
 
-.pull-right[ .tiny[-- Paessler, the monitoring experts]]
+.content-box-blue[
+
+Una computadora (o servicio en la nube) que **ofrece recursos** a otras computadoras (**clientes**) por una red.
+
 ]
+
+- **Cliente–servidor:** el cliente **pide**, el servidor **responde**.
+
+- Puede brindar: **páginas web (HTTP)**, **archivos (FTP/SFTP)**, **acceso remoto (SSH)**.
+
+- Permite que **muchas personas** usen datos y programas **desde cualquier lugar**.
+
+&gt; **Analogía:** como una **biblioteca**: guarda recursos y los entrega a quien los solicita.
+
+
 ---
 
 &lt;img src="img/diagrama-cliente-servidor.jpeg.webp" width="800px" style="display: block; margin: auto;" /&gt;
@@ -349,28 +612,20 @@ cliente".
 - Acceso a los datos e infraestructura desde cualquier parte del mundo.
 
 ---
-## ¿Cómo conectarnos a un servidor?
+## ¿Cómo conectarnos a un servidor (SSH)?
 
-Necesitamos:
+**Objetivo:** reunir los datos necesarios y realizar una **primera conexión SSH** al servidor; verificar identidad y cerrar sesión.
 
-- Credenciales de acceso del usuario:
+**Necesitas:**
 
-    - Nombre.
-
-    - Contraseña.
-
-- Identidad del servidor
-
-    - Nombre o IP del servidor:
-
-      `132.248.220.14`
-
-      `tepeu.lcg.unam.mx`
+- **Usuario:** (ej. `user1` o tu usuario asignado)
+- **Servidor (nombre o IP):** ej. `132.248.220.14` ,  `132.248.248.139`
+- **Puerto:** 22 (por defecto)
+- **Contraseña** de tu cuenta (si no usas llaves SSH)
 
 
 ---
-
-## Conectándose a un servidor por protocolo ssh
+## ¿Cómo conectarnos a un servidor (SSH)?
 
 Usando la `Terminal` de MobaXTerm o la de MacOS
 
@@ -399,29 +654,6 @@ Nota: Después de un comando va **espacio**.
 
 ---
 
-## Práctica: Tu primera conexión
-
-- Conéctate al servidor `tepeu`, usa tu usuario y tu password.
-
-.content-box[
-.remark-inline-code[
-$ ssh user@SERVER
-]
-]
-
-- Te mostrará un mensaje de bienvenida al servidor, y quizás te haga una pregunta.
-
-- Prueba los mismos comandos de la práctica 1, `pwd`, `hostname`, `whoami`
-
-- Desconectate del servidor con el comando `exit`
-
-- Conectate al servidor una y otra vez para practicar ( `ssh y exit`).
-
-.tiny[
-Nota: Aunque hay formas de guardar los datos de conexión para no volver a teclearlos, te recomiendo no hacerlo, para que los memorices (nunca sabes cuando se te olvide la compu y tengas que recordarlos.)
-]
-
----
 ## Aprendiendo más sobre un comando
 
 .content-box[
@@ -459,6 +691,7 @@ Veamos la ayuda de los siguiente comandos
 
 - pwd 
 
+
 ---
 ## Aprendiendo más sobre un comando
 
@@ -475,11 +708,14 @@ qué hace el comando pwd en unix
 
 - Chat-gpt
 
+Usa el [asistente de chatgpt](https://chatgpt.com/g/g-6893cf2451d88191b11cd0c87de045ab-profeunix-bioinfo).
+
 
 ---
 ## Nuestros primeros comandos
 
 Siempre es bueno saber dónde estamos conectadxs.
+
 .content-box[
 .remark-inline-code[
 $ hostname
@@ -509,685 +745,33 @@ $ tree
 
 ---
 
-class: center, middle
+## Práctica: Tu primera conexión
 
-# El sistema de archivos en Unix
+**Objetivo:** conectarte al servidor por **SSH**, verificar que estás en el remoto y cerrar sesión.
 
-
----
-
-## Sistema de archivos
-
-.content-box-blue[ 
-Un sistema de archivos en Unix es una **estructura organizada** que el sistema operativo utiliza para **almacenar, organizar, y gestionar archivos y directorios** en un disco o en otros dispositivos de almacenamiento. 
-]
-
-### Características Principales de un Sistema de Archivos en Unix
-
-1. **Jerarquía de Directorios**:
-   - Los sistemas de archivos en Unix están organizados en una **estructura jerárquica** de directorios, también conocida como **árbol de directorios**. El **directorio raíz ("/")** es el punto de partida de esta jerarquía.
-
----
-## Sistema de archivos
-
-2. **Archivos y Directorios**:
-   - **Archivos**: Son las unidades básicas de almacenamiento de datos. Pueden contener texto, datos binarios, programas ejecutables, etc.
-   - **Directorios**: Son contenedores que pueden almacenar archivos y otros directorios (subdirectorios).
-
-3. **Permisos y Propiedades**:
-   - Cada archivo y directorio tiene permisos asociados que controlan quién puede leer, escribir o ejecutar el archivo. Estos permisos se dividen en tres categorías: propietario, grupo y otros.
-   - Además, cada archivo y directorio tiene propiedades como el propietario, el grupo, el tamaño, las marcas de tiempo (creación, modificación, acceso), entre otras.
-   
-
-[Tree File system](https://www.ibm.com/docs/es/aix/7.3?topic=tree-root-file-system)
-
-
----
-## ¿Que es un fichero/archivo ?
-
-• Ente que sirve para el almacenamiento de información.
-
-• Conjunto de información relacionada definida por su creador.
-
-• En general es una secuencia de bits, bytes, líneas o registros definidos por su creador y el usuario.
-
-
-&lt;img src="img/archivo.png" width="35%" style="display: block; margin: auto;" /&gt;
-
----
-
-# Propiedades de archivo
-
-|Propiedad        | Descripción     |
-|:--              |:--               |
-|Nombre de archivo| Nombre simbólico dado por el usuario. Generalmente tiene nombre.extension*|
-|Tipo de archivo  | para sistemas que permiten varios tipos.|
-|Tamaño           | tamaño del archivo en bits,bytes, bloques.. etc.|
-|Protección       |información sobre el control de acceso.|
-|Propietario      |usuario que creo el archivo.|
-|Hora, fecha…     |información referente a hora y fecha de creación, ultima modificación, último acceso|
-
-* La extensión de un archivo nos indica generalmente el tipo o aplicación que lo generó, por ejemplo una extensión .xlsx viene de excel, .ppt de power point, .txt es un archivo de texto plano.
-
----
-## Operaciones sobre archivos
-
-- búsqueda
-- creación
-- eliminación
-- listado ( en caso de directorios)
-- copiado
-- renombrar
-
----
-## ¿Qué es un directorio?
-
-Directorio como tipo especial de archivo
-
-• Es un mecanismo o estructura para organizar los archivos.
-
-• En general un directorio es una estructura de datos que
-contiene un **conjunto de entradas o registros** que hacen
-referencia a un archivo u otro directorio.
-
-• Un directorio es una Estructura arborescente
-
-• con un número Nº arbitrario de entradas (archivos)
-
-• Pero tiene 2 entradas predeterminadas `"."` y `".."`
-
----
-## Estructura de la Organización de los archivos (tipo árbol)
-
-.pull-left[
-&lt;img src="img/sistema-archivos.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
-.pull-right[
-
-- El árbol tiene una **raíz** "/"
-
-- Se puede llegar a un archivo usando rutas absolutas o relativas.
-
-- Podemos desplazarnos a cualquier parte del árbol.
-
-- Podemos Borrar directorios (ramas)
-
-- Podemos Crear directorios (ramas)
-
-]
-
----
-## Estructura de la Organización de los archivos
-
-
-| elemento   | descripción |
-|----   |-----|
-| /     | root, raíz |
-| /dev  | Contiene nodos de dispositivos para archivos especiales de dispositivos locales. El directorio /dev contiene archivos especiales para unidades de cintas, impresoras, particiones de disco y terminales. |
-| /etc  | Contiene archivos de configuración  |
-| /export | Contiene los directorios y archivos de un servidor destinados a clientes remotos.  |
-| /home  | /home contiene archivos y directorios organizados por usuario.  |
-
----
-## Cómo nos movemos en el sistema de archivos?
-
-#### Rutas Absolutas
-Una ruta absoluta es una ruta que especifica la **ubicación completa** de un archivo o directorio desde el directorio raíz (`/`). No depende del directorio de trabajo actual.
-
-```
-/home/compu2
-/var/mail
-/export/home
-```
-
-#### Ventajas:
-- No importa en qué directorio te encuentres, una ruta absoluta siempre te llevará al mismo archivo o directorio.
-
-- Es útil para scripts y configuraciones donde necesitas especificar ubicaciones exactas.
-
----
-## Cómo nos movemos en el sistema de archivos?
-
-**Ruta relativa**: Una ruta relativa es una ruta que especifica la **ubicación de un archivo o directorio** en relación con el **directorio de trabajo actual**.
-
-#### Características:
-- No comienza con `/`.
-- Depende del directorio en el que te encuentres actualmente.
-
-#### Ventajas:
-- Más cortas y fáciles de escribir.
-- Útiles para scripts y comandos que se ejecutan en diferentes contextos de directorios.
-
-
-Ejemplos
-
-```
-# Si estoy en /home/compu2 y quiero moverme al directorio WelcomeBioInfo
-cd WelcomeBioInfo
-```
-
----
-
-## Rutas Relativas
-
-`.` y `..` son entradas especiales que se encuentran en cada directorio y tienen significados específicos. Estan ocultos pero los puedes visualzar con `ls -la`
-
-|        |Descripción|
-|----    |----  |
-|.       |El directorio donde estás parado.|
-|..      |Un directorio arriba en la estructura de directorios.|
-|../../  |Dos directorios arriba en la estructura de directorios.|
-|../otro_directorio/| Se refiere a `otro_directorio` en el directorio padre.|
-|~/      |Directorio HOME.|
-
----
-## como movernos
-
-&lt;img src="img/papas-hijos.png" width="100%" style="display: block; margin: auto;" /&gt;
-
----
-## Ejercicio: 
-
-.pull-left[
-&lt;img src="img/sistema-archivos.png" width="100%" style="display: block; margin: auto;" /&gt;
-]
-
-
-.pull-right[
-
-**Rutas absolutas** 
-
-De `bin` es:   
-De `compu2` es:  
-De `practica2` es:  
-De `panda.txt`es:   
-
-** Rutas relativas, partiendo de compu2**
-
-De `WelcomeBioInfo` es  
-De `practica2` es :  
-De `home` es:  
-De `/`es :   
-
-]
----
-## Algunos comandos básicos relacionados con el sistema de archivos
-
-- `ls`: Lista el contenido de un directorio.
-- `cd`: Cambia el directorio actual.
-- `pwd`: Muestra el directorio de trabajo actual.
-- `mkdir`: Crea un nuevo directorio.
-- `rmdir`: Elimina un directorio vacío.
-- `rm`: Elimina archivos o directorios.
-- `chmod`: Cambia los permisos de un archivo o directorio.
-- `chown`: Cambia el propietario de un archivo o directorio.
-- `df`: Muestra el uso del espacio en disco.
-- `du`: Muestra el uso del espacio en disco por archivos y directorios.
-
----
-## Algunos tips básicos
-
-|Comando|Función|
-|----    |----  |
-|TAB     |Autocompletar comandos y nombres de archivos.|
-|Flechas arriba y abajo |Navegar en la historia de comandos.|
-|Botón derecho del ratón |Copiar y pegar texto.|
-
-
----
-
-## Hagamos algunos ejercicios
-
-- Vamos a conectarnos al servidor `tepeu`
-
-- Vamos a ver donde estamos parados dentro del sistema de archivos (el árbol)
-
-- listemos lo que hay en esa parte del árbol
-
-- Movámonos a la raíz del árbol y chequemos donde estamos parados
-
-- listemos lo que hay en raíz
-
-- Nos movemos dentro del directorio home usando rutas absolutas.
-
-- Voy a moverme al directorio `datos` usando rutas absolutas
-
-- Voy a moverme al directorio `compu2` usando rutas absolutas
-
-
-
----
-## rutas relativas
-
-- Estoy en compu2, voy a entrar a WelcomeBioInfo
-
-- Estando en WelcomeBioInfo, voy a entrar a `datos`
-
-- Estando en `datos`, entrar al directorio `practica1` y listar.
-
-- Listemos TODO lo que hay en el directori de `practica1` incluyendo lo oculto (ver directorio . y ..)
-
-- Estando en `practica1` y vamos a subir un nivel, es decir a `datos`
-
-- Estamos en `datos` subimos otro nivel.
-
-- Estamos en `WelcomeBioInfo` vamos a subir 2 niveles. Dónde estamos?
-
-- Si estamos en `home` queremos ir a practica1 usando rutas relativas
-
-- Estando en `practica1` nos movemos dentro del `practica3`
-
-
-
----
-# Creando directorios
-
-```
-man mkdir
-```
-
----
-## Hagamos algo más complejo
-
-
-- En tu home crea un directorio llamado intro-bioinfo
-
-- Vamos a movernos dentro de esa rama o directorio
-
-- Creamos un directorio llamado `practica1`.
-
-- Muévete dentro del directorio `practica1`.
-
-- Crea un directorio llamado `animales`.
-
-- Crea un directorio llamado `plantas`.
-
-- Entra al directorio animales y crea el directorio `osos`.
-
-- Entra al directorio `osos`.
-
-- Regresa a tu directorio `home`.
-
-- Imprime la estructura de directorios que has creado.
-
-
-
-
----
-## ... unos más
-
-- Regresa al directorio `osos`
-
-- Copia el archivo `panda.txt` (ubicado en
-`/home/compu2/WelcomeBioinfo/datos/practica1/` ) utilizando rutas absolutas.
-
-- Mueve el archivo `panda.txt` al directorio `animales` utilizando rutas relativas.
-
-- Entra a la carpeta `plantas` utilizando rutas absolutas
-
-- Copia el archivo `geranio.txt` (ubicado en
-`/home/compu2/WelcomeBioinfo/datos/practica1/`) utilizando rutas
-relativas.
-
-- Lista los archivos que se encuentran en el directorio `animales`.
-
-
-
----
-## ... ya casi
-
-- Colócate en tu directorio `practica1` e imprime la estructura de directorios desde ahí. 
-
-- Elimina el archivo `geranio.txt`.
-
-- Elimina la carpeta `osos`.
-
-- Vuelve a imprimir la estructura de directorios desde tu directorio
-`practica1`.
-
-
-
----
-## Atajos de teclado en Unix
-
-&lt;br&gt;
-
-|Atajo|Función|
-|----    |----  |
-|Ctrl + E |Ir al final de la línea.|
-|Ctrl + A |Ir al principio de la línea.|
-|Ctrl + N |Ir a la línea siguiente.|
-|Ctrl + P |Ir a la línea anterior.|
-|Ctrl + K |Borrar hasta el final de la línea.|
-
-
----
-
-class: center, middle
-
-# Archivos
-
-
----
-## ¿Cuáles tipos de archivos conoces?
-
-- Archivos de música.
-
-- Archivos de video.
-
-- Archivos binarios  
-  - Archivos de Word  (.doc, .docx)
-  - Archivos de Excel  (.xls)
-  - Archivos de PowerPoint. (.pptx)
-  
-- Archivos de texto plano. (.txt)
-
-- Archivos comprimidos. 
-
-&lt;br&gt;
-
-En bioinformática la mayoría de los archivos con los que se trabaja son
-archivos de texto plano.
-
-
----
-## Conociendo el tipo de archivo
-
-Utilizaremos el comando `file` para conocer el tipo de un archivo.
-
-Muevete a la carpeta  
-`/home/compu2/WelcomeBioinfo/datos/practica2/`
-
---
-.content-box[
-.remark-inline-code[
-$ cd /home/compu2/WelcomeBioinfo/datos/practica2/]]
-
---
-Lista los archivos existentes
-
---
-.content-box[
-.remark-inline-code[
-$ ls]]
-
---
-Imprime el tipo de un archivo
---
-.content-box[
-.remark-inline-code[
-$ file excel.xlsx]]
---
-
-Imprime el tipo de todos los archivos
-
---
-.content-box[
-.remark-inline-code[
-$ file *]]
-
----
-## Visualizando distintos tipos de archivos
-
-¿Cómo creen que se vean los distintos tipos de archivos en la terminal si
-los abrimos con las herramientas diseñadas para abrir archivos de texto?
-
-&lt;br&gt;
-
---
-Para visualizar el contenido de un archivo utilizaremos el comando `less`
-
---
-&lt;br&gt;
+**Necesitas:** tu **usuario** y el **servidor** (nombre o IP).  
+**Formato:** `ssh usuario@servidor` (ej.: `ssh user1@132.248.248.139`)
 
 .content-box[
 .remark-inline-code[
-`### Visualiza cada archivo`  
-less word.docx]]
-
---
-
-&lt;br&gt;
-
-- Los archivos de texto plano son los únicos que pueden ser visualizados
-correctamente en una CLI.
-
-- No es suficiente con cambiar el nombre del archivo o su extensión para visualizarlos.
-
-
----
-## Archivos comprimidos
-
-.content-box-blue[
-Un archivo comprimido prácticamente es idéntico al original, pero reduciendo su tamaño, mediante algoritmos de comprensión de datos. 
+$ ssh user@SERVER
+]
 ]
 
-Las herramientas de compresión permiten reducir el espacio de disco de uno o varios archivos basándose en diferentes algoritmos de compresión. Algunos de ellos permiten al mismo tiempo **empaquetar** varios archivos o carpetas dentro de un mismo archivador. 
+-   **Primera vez:** verás un aviso de autenticidad del host → escribe `yes`.
+    
+-   **Contraseña:** al teclearla **no** se ve (es normal).
 
-Tipos: Zip, Gzip, Bzip2, TAR, Rar, 7z
-
-
-Comandos:
-
-- `gzip` - `gunzip`
-
-- `zip` - `unzip`
-
-- hay más...
-
----
-## Descomprimir y visualizar
-
-- Estando en `/home/compu2/WelcomeBioinfo/datos/practica2/`
-
-- Copia el archivo `texto-plano3.txt.gz` a tu `home`.
-
-- Regresa a tu `home`.
-
-- Visualiza el archivo `texto-plano3.txt.gz`. Cómo se ve?
-
-- Descomprímelo, lista el directorio, ¿qué pasó?
-
-- Ahora visualiza el archivo
-
-
-
----
-## Comprimir UN archivo
-
-- lista el directorio
-
-- Vamos a comprimir el archivo `texto-plano3.txt.gz`
-
-- lista el directorio, ¿qué pasó?
-
-
-
----
-# Comprimir y empaquetar un directorio o varios archivos
-
-Empaquetar. Es agrupar en un solo fichero varios ficheros y/o directorios. 
+Prueba los comandos:
 
 ```
-zip [options] zipfile files_list
+whoami      # tu usuario en el servidor
+hostname    # nombre del servidor
+pwd         # tu HOME remoto
+echo $SHELL # bash/zsh/etc.
+uname -a    # info del sistema
+date        # fecha/hora del servidor
 ```
-
-- options: opciones que modifican el comportamiento del comando
-- zipfile: es el nombre del archivo que empaqueta y comprime todos los archivos
-- files_list: es la lista de archivos a empaquetar y comprimir
-
----
-
-# Ejercicio
-
-- Descomprime el archivo `texto-plano3.txt`
-- Genera 2 copias del archivo `texto-plano3.txt`, con el nombre `texto-plano4.txt` y `texto-plano5.txt`
-- Empaquetar y comprimir los 3 archivos.
-
-
-
-
----
-## Trabajando con archivos comprimidos
-
-No es necesario descomprimir un archivo de texto para usarlo.
-
----
-## Los permisos
-
-.content-box-blue[
-Los permisos de archivos y directorios son fundamentales para la seguridad y la gestión de recursos. Los permisos determinan quién puede leer, escribir o ejecutar un archivo o directorio.
-]
-
-Cada archivo y directorio en Unix tiene tres tipos de permisos:
-
-1. **Lectura (r)**: Permite ver el contenido del archivo o listar el contenido del directorio.
-2. **Escritura (w)**: Permite modificar el contenido del archivo o hacer cambios en el contenido del directorio (crear, eliminar, renombrar archivos).
-3. **Ejecución (x)**: Permite ejecutar el archivo (si es un programa o script) o acceder al directorio (entrar en él con `cd`).
-
----
-
-### Categorías de Usuarios
-
-Los permisos se aplican a tres categorías de usuarios:
-
-1. **Propietario (u)**: El usuario que posee el archivo o directorio.
-2. **Grupo (g)**: Un grupo de usuarios que tienen permisos específicos sobre el archivo o directorio.
-3. **Otros (o)**: Todos los demás usuarios que no son el propietario ni pertenecen al grupo.
-
----
-## Representación de Permisos
-
-Los permisos se representan en una cadena de 10 caracteres, por ejemplo: 
-
-`-rwxr-xr--`.
-
-- El primer carácter indica el tipo de archivo:
-  - `-` para un archivo regular.
-  - `d` para un directorio.
-  - `l` para un enlace simbólico.
-  - Otros caracteres pueden indicar otros tipos de archivos especiales.
-
-- Los siguientes nueve caracteres se dividen en tres grupos de tres:
-  - **Propietario**: Los primeros tres caracteres (`rwx` en el ejemplo) indican los permisos del propietario.
-  - **Grupo**: Los siguientes tres caracteres (`r-x` en el ejemplo) indican los permisos del grupo.
-  - **Otros**: Los últimos tres caracteres (`r--` en el ejemplo) indican los permisos de otros usuarios.
-
-
----
-## Ejemplo
-
-### Ejemplo de Permisos
-
-- `-rwxr-xr--`:
-  - `-`: Archivo regular.
-  - `rwx`: El propietario tiene permisos de lectura, escritura y ejecución.
-  - `r-x`: El grupo tiene permisos de lectura y ejecución.
-  - `r--`: Otros usuarios tienen permisos de lectura.
-  
----
-## Ejercicio
-
-a. Qué permisos describe la siguiente representación ?
-
-`drwxr-xr-x`:   
-`-r--r--r--`:  
-`-rwx------`:  
-`-r--r--rwx`:    
-
-
---
-
-b. Chequemos los permisos de algunos directorios y archivos en tu usuario  
-  - Tu directorio (usuario) en home.  
-  - Tu directorio intro-bioinfo.  
-
-c. Pídele a tu compañero su usuario de unix y revisa los permisos de lo siguiente:
-  - El directorio home de tu compañero
-  - El directorio `intro-bioinfo`
-  - intro-bioinfo/variacion_genetica/mutaciones/mutacion3.txt
-
----
-## Comandos para Gestionar Permisos
-
-#### `ls -l`
-
-El comando `ls -l` muestra una lista detallada de archivos y directorios, incluyendo sus permisos.
-
-```sh
-ls -l
-```
-
-#### `chmod`
-
-El comando `chmod` se utiliza para cambiar los permisos de un archivo o directorios. El símbolo `+` otorga y `-` quita los permisos.
-
-- **Modo simbólico**:
-
-  ```sh
-  chmod u+rwx,g+rx,o+r archivo.txt
-  ```
-  
-Esto otorga permisos de lectura, escritura y ejecución al propietario, permisos de lectura y ejecución al grupo, y permisos de lectura a otros.
-
----
-
-- **Modo numérico**:
-  Los permisos también se pueden representar con números:
-  - `r` = 4
-  - `w` = 2
-  - `x` = 1
-
-  Por ejemplo, `chmod 755 archivo.txt` otorga:
-  - `7` (rwx) al propietario.
-  - `5` (r-x) al grupo.
-  - `5` (r-x) a otros.
-
----
-
-## Ejercicio
-
-a. Establece los permisos usando ambos formatos simbólico y numérico:
-
-`drwxr-xr-x`:   `chmod grwx,gorx file`  --    `chmod 755 file`   
-`-r--r--r--`:  
-`-rwx------`:  
-`-r--r--rwx`:   
-`-rwx--x--x`:  
-`----------`:
-
---
-
-b. Realiza lo siguiente:
-
-- Cambia los permisos de tu directorio `intro-bioinfo` para que solo tú tengas todos los permisos.
-- Quita los permisos de ejecución del directorio `tmp` para el grupo y otros.
-- Dale permisos al grupo y a otros de rw sobre el archivo `texto-plano3.txt` en tu home
-- Trata de entrar al directorio `intro-bioinfo` de tu compañero. ¿Qué pasa?
-- Trata de entrar al directorio `tmp` de tu compañero. ¿Qué pasa?
-- Borra el archivo `texto-plano3.txt` de tu compañero. Lista el directorio de tu compañero. ¿Qué paso?
-
----
-## Referencias
-
-Búalo, V. (2015).
-Bioinformatics data skills: Reproducible and robust research with open
-source tools.
-" O'Reilly Media, Inc.".
-
-&lt;!-- https://rsg-ecuador.github.io/unix.bioinfo.rsgecuador/content/Curso_basico/03_Manejo_terminal/4_directorios.html --&gt;
-
-
----
-
-
----
-## Sobre tamaño de los archivos
-
-&lt;img src="https://cdn.goconqr.com/uploads/node/image/102751001/desktop_72629b71-21e6-4640-b2aa-d83db4448892.PNG" width="100%" style="display: block; margin: auto;" /&gt;
-
-
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
