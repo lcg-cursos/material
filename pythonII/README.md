@@ -5,7 +5,7 @@ Bienvenidos al curso de Python II.
 
 ### GitHub intermedio
 
-1. [Buenas prácticas para el desarrollo de software colaborativo] ()
+1. [Buenas prácticas para el desarrollo de software colaborativo] (pythonII/git/leccion0-bp-software-colab/0-bp-software-colab.html)
 2. [Versionando usando tags](https://lcg-cursos.github.io/material/pythonII/git/git-tags/1-Etiquetas.html)
 
 3. [Trabajar con ramas en Git](https://lcg-cursos.github.io/material/pythonII/git/git-branches/2-Ramas.html)
