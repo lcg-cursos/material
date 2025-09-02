@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Python II y GitHub
 ### Licenciatura en Ciencias Genómicas, UNAM
-### First version: 2021-08-13; Last update: 2023-08-15
+### First version: 2021-08-13; Last update: 2025-09-02
 
 ---
 
@@ -38,13 +38,15 @@ pre {
 
 ## Contenido
 
-1. [Especificar versiones en Git con tag](1-Etiquetas.html)
+1. Buenas prácticas para el desarrollo de software colaborativo 
 
-2. [Trabajar con ramas en Git: git branch](./leccion2/2-Ramas.html) 
+2. [Especificar versiones en Git con tag](./leccion1-etiquetas/1-Etiquetas.html)  
 
-3. [Manejo de issues en GitHub](./leccion3/3-issues.html)  
+3. **[Trabajar con ramas en Git: git branch](./leccion2-ramas/2-Ramas.html)**  
 
-4. [Gestión de un proyecto con GitHub](./leccion4/4-project.html)  
+4. [Manejo de issues en GitHub](./leccion3-issues/3-issues.html)  
+
+5. [Gestión de un proyecto con GitHub](../leccion4-project/4-project.html)  
 
 ---
 
@@ -59,10 +61,29 @@ Al finalizar la lección, podremos trabajar con ramas en Git. Conoceremos cómo 
 
 ---
 
-## Introducción
-Imaginemos que estamos trabajando en el proyecto de software para la clase de Python  y queremos implementar una nueva funcionalidad en la que sabemos que quizás tengamos que invertir varios días. 
+### Antes de ir a las ramas 🌳 ...  
 
-Posiblemente sea algo experimental, que no sabemos si llegará a incorporarse a nuestro proyecto global, o bien, es algo que tenemos claro que vamos a querer completar, pero que, dado que nos va a ocupar un tiempo indeterminado, es posible que en medio de nuestro trabajo tengamos que tocar el código "base", en el estado en el que lo tenemos en funcionamiento actualmente.
+📖 *Libro – Capítulos alternativos*
+
+Un escritor tiene un manuscrito (master branch). En lugar de modificar directamente ese texto, crea una copia para probar un capítulo con un final alternativo.  
+👉 Las ramas permiten trabajar en paralelo en diferentes versiones de la historia, y luego decidir cuál integrar al libro final.  
+
+
+🛠️ * Construcción – Planos de remodelación*
+
+Tenemos la casa original (main branch). Un arquitecto hace una copia de los planos para diseñar una remodelación (nueva branch).  
+Si el diseño nos gusta, se integra al plano original; si no, se descarta sin afectar la casa existente.  
+
+🎼 *Música – Versiones de una canción*
+
+Un músico compone una melodía principal (master branch). Después crea una versión acústica, otra con batería, y otra en remix.  
+👉 Cada versión es una branch: comparten la base pero exploran direcciones diferentes, y en cualquier momento puede decidirse cuál publicar o combinarlas.  
+
+---
+## Introducción
+Imaginemos que estamos trabajando en nuestro proyecto de clase y queremos implementar una nueva funcionalidad en la que sabemos que quizás tengamos que invertir varios días. 
+
+Posiblemente sea algo experimental, que no sabemos si llegará a incorporarse a nuestro proyecto global, o bien, es algo que tenemos claro que vamos a querer completar, pero que, dado que necesitaremos un tiempo indeterminado, es posible que en medio de nuestro trabajo tengamos que tocar el código "base/principal", en el estado en que lo tenemos en funcionamiento actualmente.
 
 &lt;img src="img/twoBranches.png" width="400px" style="display: block; margin: auto;" /&gt;
 
@@ -70,21 +91,21 @@ Posiblemente sea algo experimental, que no sabemos si llegará a incorporarse a 
 
 ## Introducción
 
-Durante este proceso quisieramos que el código base principal no se vea afectado por cambios o código inestable. 
+Durante este proceso quisieramos que el código base/principal no se vea afectado por cambios o código inestable. 
 
 ¿Para qué nos ayudan las ramas (branches)?
 
 - Añadir una nueva función
 - Solucionar un error
 - Trabajar de manera paralela
-- Controlar que código dudoso que fusione con el código principal 
+- Controlar que código dudoso se fusione con el código principal 
 
 
 &lt;img src="img/branchesOctopus.jpeg" width="450px" style="display: block; margin: auto;" /&gt;
 
 ---
 
-## Ramas (Branches)
+## Ramas (Branches) 🌳
 
 Las ramas son caminos que puede tomar el desarrollo de un software, algo que ocurre naturalmente para resolver problemas o crear nuevas funcionalidades.
 
@@ -95,9 +116,22 @@ Una rama representa una línea independiente de desarrollo.
 Pensemos en las ramas como un forma de solicitar un nuevo directorio de trabajo, un nuevo entorno de desarrollo o un nuevo historial de proyecto. Los nuevos commits  se registrarán en el historial de la rama actual, lo que crea una bifurcación en el historial del proyecto.
 
 ---
-## La rama "master"
 
-Cuando inicializamos un proyecto con Git automáticamente nos encontramos en una rama a la que se denomina *master*.
+## 📌 Idea central
+
+Las branches en Git/GitHub son como líneas de tiempo paralelas del proyecto.
+
+- Sirven para experimentar sin riesgo.
+
+- Permiten que varias personas trabajen en diferentes partes a la vez.
+
+- Luego, los cambios se pueden fusionar (merge) a la rama principal.
+
+
+---
+## La rama "master" o "main"
+
+Cuando inicializamos un proyecto con Git automáticamente nos encontramos en una rama a la que se denomina *master* o *main*.
 
 Esta rama es la principal de nuestro proyecto y a partir de la que podremos crear nuevas ramas cuando lo necesitemos.
 
@@ -179,7 +213,7 @@ Para verificar que hayamos cambiado de rama podemos usar el comando _git branch_
 
 Ejemplo:  
 
-.full-width[.content-box-yellow[$ git checkout feature]]
+.full-width[.content-box-yellow[$ git branch]]
 
 Resultado:  
 
@@ -198,16 +232,16 @@ Resultado:
 .full-width[.content-box-yellow[git status]]
 --
 
-4. Crear la rama _feature_
-.full-width[.content-box-yellow[git branch feature]]
+4. Asegurate de estar en la rama _master/main_ y crea la rama _[tu nombre]_
+.full-width[.content-box-yellow[git branch sah]]
 --
 
 6. Revisar las ramas de nuestro repositorio
 .full-width[.content-box-yellow[git branch]]
 --
 
-6. Pasar de la rama _master_ a la rama _feature_
-.full-width[.content-box-yellow[git checkout feature]]
+6. Pasar de la rama _master/main_ a la rama _[tu nombre]_
+.full-width[.content-box-yellow[git checkout sah]]
 --
 
 ---
@@ -217,13 +251,13 @@ Resultado:
 Al pasar de una rama a otra Git nos cambiará automáticamente todos los archivos de nuestro proyecto para que tengan el contenido en el que se encuentren en la rama correspondiente.
 
 
-Por ahora, las dos ramas tienen exactamente el mismo contenido, pero ahora podríamos empezar a hacer cambios en la rama _feature_ y sus correspondientes commits; entonces los archivos de la rama _master_ y la rama _feature_ tendrán códigos diferentes, de modo que al pasar de una rama a otra habrá cambios en los archivos.
+Por ahora, **las dos ramas tienen exactamente el mismo contenido**, pero ahora podríamos empezar a hacer cambios en la rama _[tu nombre]_ y sus correspondientes commits; entonces los archivos de la rama _master/main_ y la rama _[tu nombre]_ tendrán contenido diferente, de modo que al pasar de una rama a otra habrá cambios en los archivos.
 
 
 &lt;img src="img/gitCheckout.png" width="450px" style="display: block; margin: auto;" /&gt;
 
 
-Si hacemos cambios en la rama _feature_ y usamos el comando _git show-branch_ veremos una descripción más detallada de las ramas. 
+Si hacemos cambios en la rama _[tu nombre]_ y usamos el comando _git show-branch_ veremos una descripción más detallada de las ramas. 
 
 
 ---
@@ -236,63 +270,41 @@ Si hacemos cambios en la rama _feature_ y usamos el comando _git show-branch_ ve
 2. Localizar nuestro repositorio local de trabajo 
 --
 
-3. Estando en la rama _feature_ ejecuta el comando:
+3. Estando en la rama _[tu nombre]_ ejecuta el comando:
 .full-width[.content-box-yellow[git show-branch]]
 --
 
-4. Editemos el archivo _reverse-complement.py_. Recuerda usar: 
+4. Editemos un archivo de su elección. Recuerda usar: 
 git add  
 git commit -m "[mensaje]"
 --
 
-5. Edita el archivo _sequence.txt_ y confirma lo cambios.
---
-
-6. Revisa la descripción detallada de las ramas.
+5. Revisa la descripción detallada de las ramas.
 .full-width[.content-box-yellow[git show-branch]]
 --
 
-¿Notas que los nuevos commits solo se encuentran en la rama _feature_?
+¿Notas que el nuevo commit solo se encuentra en la rama _[tu nombre]_?
 
 
 ---
 
 ## Práctica
 
-7. Pasa a la rama _master_
+7. Pasa a la rama _master_ o _main_
 .full-width[.content-box-yellow[$  git checkout master]]
 --
 
-8. Revisa el contenido del archivo _reverse-complement.py_ y _sequence.txt_
+8. Revisa el contenido del archivo editado
 --
 
 
-¿Estos archivos tienen los cambios que realizamos en la rama _feature_?
-
----
-
-## Creando una nueva rama y pasar a ella inmediatamente
-
-El comando _checkout_ tiene la posibilidad de permitirnos crear una rama nueva y movernos a ella en un único paso. Para crear una nueva rama y situarnos sobre ella tendremos que darle un nombre y usar el parámetro **-b**.
-
-
-Sintaxis:  
-
-.full-width[.content-box-yellow[git checkout -b [branch_name]]]
-
-Actividad:  
-
-.full-width[.content-box-yellow[$ git checkout -b develop]]
-
-Resultado:  
-
-&lt;img src="img/developBranch.png" width="500px" style="display: block; margin: auto;" /&gt;
+¿Este archivo tiene los cambios que realizamos en la rama _[tu nombre]_?
 
 ---
 
 ## Fusionando ramas
 
-A medida que creemos ramas y cambiemos el estado de las carpetas o archivos en el proyecto llegará el momento en el que nos interese fusionar ramas para poder incorporar el trabajo realizado a la rama __master__.
+A medida que creemos ramas y cambiemos el estado de las carpetas o archivos en el proyecto llegará el momento en el que nos interese fusionar ramas para poder incorporar el trabajo realizado a la rama __master__ o __main__.
 
 El proceso de fusionado se conoce como __merge__. Git para procesar los merge comprueba los cambios que se han introducido al proyecto, combinando el código de ambas ramas.
 
@@ -302,9 +314,9 @@ El proceso de fusionado se conoce como __merge__. Git para procesar los merge co
 
 ## Fusionando ramas
 
-Para hacer un merge nos situamos en una rama, en este caso la __master__, y decimos con qué otra rama se debe fusionar el código.
+Para hacer un *merge* nos situamos en una rama, en este caso la __master__ o __main__, y decimos con qué otra rama se debe fusionar el código.
 
-El siguiente comando, lanzado desde la rama _master_, permite fusionarla con la rama _feature_.
+El siguiente comando, lanzado desde la rama _master o main_, permite fusionarla con la rama _[tu nombre]_.
 
 Sintaxis:  
 
@@ -312,7 +324,7 @@ Sintaxis:
 
 Ejemplo:  
 
-.full-width[.content-box-yellow[$ git merge feature -m "fusionando cambios de la rama feature a la master"]]
+.full-width[.content-box-yellow[$ git merge sah -m "fusionando cambios de la rama sah a la master"]]
 
 ---
 
@@ -322,34 +334,19 @@ Ejemplo:
 .full-width[.content-box-yellow[$ git branch]]
 --
 
-2. Si no estamos en la rama _master_ cambiarnos a la rama principal.
+2. Si no estamos en la rama _master o main_ cambiarnos a la rama principal.
 .full-width[.content-box-yellow[$ git checkout master]]
 --
 
-3. Fusiona el contenido de la rama _feature_ con la rama _master_
-.full-width[.content-box-yellow[$ git merge feature -m "fusionando cambios de la rama feature a la master"]]
+3. Fusiona el contenido de la rama _[tu nombre]_ con la rama _master o main_
+.full-width[.content-box-yellow[$ git merge sah -m "fusionando cambios de la rama sha a la master"]]
 --
 
-4. Revisa el mensaje obtenido al hacer el merge el contenido de los archivos _reverse-complement.py_ y _sequence.txt_.  
+4. Revisa el mensaje obtenido al hacer el merge
 
 --
 
-5. Revisa el contenido de los archivos  _reverse-complement.py_ y _sequence.txt_.
-
----
-
-## Fusionando cambios de la rama _master_ en una rama en desarrollo
-
-Durante el desarrollo del proyecto puede ser normal que se vayamos haciendo cambios en la rama _master_, o en otras ramas en desarrollo, y queramos traerlos a nuestra rama actual. Por ejemplo, la rama _feature_ está tardando varios días en completarse y mientras tanto se han agregado nuevas funcionalidades que queramos que estén disponibles también en la rama _feature_. Entonces seguramente queramos traer los cambios de la rama _master_. Para ello, estando en la rama  _feature_, lanzaremos el siguiente comando:
-
-Sintaxis:  
-
-.full-width[.content-box-yellow[git merge [branch_name] -m "mensaje"]]
-Ejemplo:  
-
-.full-width[.content-box-yellow[$ git merge master -m "Merge de master en la rama feature"]]
-
-La rama _feature_ estará actualizada con todos los cambios de _master_.
+5. Revisa el contenido del archivo  
 
 ---
 
@@ -357,7 +354,7 @@ La rama _feature_ estará actualizada con todos los cambios de _master_.
 ## Eliminando de ramas
 
 En algunas circunstancias puede ser necesario eliminar una rama de nuestro repositorio local, por ejemplo, porque nos hayamos equivocado en el nombre al crearla. 
-Para ello utilizaremos el comando git branch, pero agregaremos la opción __-d__ para indicar que es esa rama la que queremos eliminar.
+Para ello utilizaremos el comando __git branch__, pero agregaremos la opción __-d__ para indicar que es esa rama la que queremos eliminar.
 
 Sintaxis:  
 
@@ -374,17 +371,22 @@ IMPORTANTE: Puede que esta acción no nos funcione porque hayamos hecho cambios 
 
 ## Práctica
 
-Eliminaremos la rama develop .... 
+Eliminaremos la rama develop-# .... 
 
-1. Revisar la rama en la que estamos actualmente (asegurate estar fuera de la rama)
+1. Revisar la rama en la que estamos actualmente  
 .full-width[.content-box-yellow[$ git branch]]
 --
 
-2. Eliminar la rama _develop_
-.full-width[.content-box-yellow[$ git branch -d develop]]
+2. Crear la etiqueta _develop-#_
+.full-width[.content-box-yellow[$ git branch develop-1]]
+
+
+--
+3. Eliminar la rama _develop-#_ (asegurate de estar fuera de la rama)  
+.full-width[.content-box-yellow[$ git branch -d develop-1]]
 --
 
-3. Revisar las ramas disponibles
+4. Revisar las ramas disponibles
 .full-width[.content-box-yellow[$ git branch]]
 
 
@@ -399,7 +401,7 @@ Sintaxis:
 
 Ejemplo:  
 
-.full-width[.content-box-yellow[$ git push -u origin feature]]
+.full-width[.content-box-yellow[$ git push -u origin docs]]
 
 
 .tiny[
@@ -428,21 +430,21 @@ Ejemplo:
 
 ## Práctica
 
-1. Crear una nueva rama llamada _test_
-.full-width[.content-box-yellow[$ git branch test]]
+1. Crear una nueva rama llamada _test#_
+.full-width[.content-box-yellow[$ git branch test1]]
 
 --
 
-2. Subir la rama _test_ al repositorio remoto
-.full-width[.content-box-yellow[$ git push -u origin test]]
+2. Subir la rama _test#_ al repositorio remoto
+.full-width[.content-box-yellow[$ git push -u origin test1]]
 --
 
-3. Borrar localmente la rama _test_ 
-.full-width[.content-box-yellow[$ git branch -d test]]
+3. Borrar localmente la rama _test#_ 
+.full-width[.content-box-yellow[$ git branch -d test1]]
 --
 
-4. Borrar la rama _test_ del repositorio remoto
-.full-width[.content-box-yellow[$ git push origin --delete test]]
+4. Borrar la rama _test#_ del repositorio remoto
+.full-width[.content-box-yellow[$ git push origin --delete test1]]
 
 
 
@@ -469,8 +471,8 @@ Por medio del uso de ramas podremos llevar un mejor control de nuestro código. 
 
 
 ---
-
-## Flujo de trabajo - entrega/evaluación
+---
+## Flujo de trabajo  
 
 
 &lt;img src="img/flujoTrabajo.png" width="750px" style="display: block; margin: auto;" /&gt;
