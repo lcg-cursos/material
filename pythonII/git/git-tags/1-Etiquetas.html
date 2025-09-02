@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Python II y GitHub
 ### Licenciatura en Ciencias Genómicas, UNAM
-### First version: 2021-08-03; Last update: 2025-08-26
+### First version: 2021-08-03; Last update: 2025-09-02
 
 ---
 
@@ -71,6 +71,26 @@ Sin embargo, durante todo ese proceso, a veces quisieramos guardar una "foto" de
 - Obtener resultados de versiones pasadas
 - Ejecutar programas anteriores
 - Rastreo de programas o cambios significativos.
+
+---
+### Ejemplos  
+
+** 📖 Libro de texto – Ediciones oficiales**  
+Imagina que un libro de bioquímica tiene muchas correcciones mientras se escribe (como los *commits*).  
+Pero cuando se publica la **1ra edición**, la editorial coloca un **sello de edición**. Luego habrá 2da y 3ra edición.  
+
+👉 Esas “ediciones oficiales” son las **tags** en Git: no cambian y permiten identificar una versión específica.  
+
+** 🎶 Música – Álbumes y sencillos**  
+Un artista graba muchas canciones (*commits*) y trabaja en su música constantemente.  
+Pero cuando decide lanzar un **álbum oficial**, etiqueta ese conjunto de canciones como una “Versión publicada”.  
+
+👉 Los *commits* son ensayos y grabaciones, pero las **tags** son los lanzamientos oficiales.  
+
+** 📌 Idea central**
+
+Las tags son etiquetas permanentes que marcan un punto específico en la historia de un proyecto, para que todos sepan que esa versión es importante o estable.  
+
 
 ---
 
@@ -297,7 +317,7 @@ Hemos trabajado mucho en nuestro repositorio de git y ahora que tenemos una vers
 .full-width[.content-box-yellow[git status]]
 --
 
-3. Modifica tanto el Readme. 
+3. Modifica el Readme. 
 .full-width[.content-box-yellow[git add Readme.md]]
 .full-width[.content-box-yellow[git commit -m "Modificando el archivo Readme.md"]]
 --
@@ -311,7 +331,7 @@ Hemos trabajado mucho en nuestro repositorio de git y ahora que tenemos una vers
 
 5. Repite el paso 3 y 4 agregando el archivo .gitignore  
 
-6. Revisa las etiquetas creada en el repositorio  
+6. Revisa las etiquetas creadas en el repositorio  
 
 .full-width[.content-box-yellow[git tag]]
 --
@@ -329,7 +349,7 @@ Sintaxis:
 
 .full-width[.content-box-yellow[git push origin master --tags]]  
 
-Nota: Puede ser que su rama principal no sea master sino main.
+Nota: Puede ser que su rama principal no sea *master* sino *main*.
 
 ---
 
@@ -362,15 +382,15 @@ Ejemplo:
 ---
 ## Repaso
 
-git tag [tag_name] -m "[mensaje]": Crear una etiqueta  
+*git tag [tag_name] -m "[mensaje]"*: Crear una etiqueta  
 
-git tag: listado de etiquetas  
+*git tag*: listado de etiquetas  
 
-git show [tag_name]: Consultar una etiqueta en particular  
+*git show [tag_name]*: Consultar una etiqueta en particular  
 
-git push origin master --tags: Enviar al repositorio remoto las etiquetas y hacer push de los commits al mismo tiempo  
+*git push origin master --tags*: Enviar al repositorio remoto las etiquetas y hacer push de los commits al mismo tiempo  
 
-git pull origin master --tags: Descargar del repositorio remoto las etiquetas y los últimos cambios  
+*git pull origin master --tags*: Descargar del repositorio remoto las etiquetas y los últimos cambios  
 
 *Recuerda que en tu repositorio de trabajo por equipo debes de contar con las etiquetas creadas por el resto de los integrantes.
 
