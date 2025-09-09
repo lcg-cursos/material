@@ -11,9 +11,9 @@ Bienvenidos al curso de Python II.
 
 4. [Trabajar con ramas en Git](https://lcg-cursos.github.io/material/pythonII/git/git-branches/2-Ramas.html)
 
-5. [Pull Request con Git](https://lcg-cursos.github.io/material/pythonII/git/git-issues/3-issues.html)
+5. [Issues](https://lcg-cursos.github.io/material/pythonII/git/git-issues/3-issues.html)
  
-6. [Tips](https://lcg-cursos.github.io/material/pythonII/git/git-project/4-project.html)
+6. [Project](https://lcg-cursos.github.io/material/pythonII/git/git-project/4-project.html)
 
 
 ### Python Intermedio
