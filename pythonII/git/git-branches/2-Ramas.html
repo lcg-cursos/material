@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Python II y GitHub
 ### Licenciatura en Ciencias Genómicas, UNAM
-### First version: 2021-08-13; Last update: 2025-09-02
+### First version: 2021-08-13; Last update: 2025-09-09
 
 ---
 
@@ -53,7 +53,7 @@ pre {
 # Trabajar con ramas en Git
 
 ## Objetivo
-Al finalizar la lección, podremos trabajar con ramas en Git. Conoceremos cómo crear ramas dentro de nuestro repositorio, nos movernos entre distintas ramas, podremos fusionarlas, así como trabajar con ramas de repositorios remotos.
+Al finalizar la lección, podremos trabajar con ramas en Git. Conoceremos cómo crear ramas dentro de nuestro repositorio, nos movernos entre distintas ramas y podremos fusionarlas.
 
 
 
@@ -113,13 +113,13 @@ Una rama representa una línea independiente de desarrollo.
 
 &lt;img src="img/branchesColab.png" width="350px" style="display: block; margin: auto;" /&gt;
 
-Pensemos en las ramas como un forma de solicitar un nuevo directorio de trabajo, un nuevo entorno de desarrollo o un nuevo historial de proyecto. Los nuevos commits  se registrarán en el historial de la rama actual, lo que crea una bifurcación en el historial del proyecto.
+Pensemos en las ramas como un forma de solicitar un **nuevo directorio de trabajo**, un nuevo entorno de desarrollo o un nuevo historial de proyecto. **Los nuevos commits  se registrarán en el historial de la rama actual**, lo que crea una bifurcación en el historial del proyecto.
 
 ---
 
 ## 📌 Idea central
 
-Las branches en Git/GitHub son como líneas de tiempo paralelas del proyecto.
+Las ramas en Git/GitHub son como líneas de tiempo paralelas del proyecto.
 
 - Sirven para experimentar sin riesgo.
 
@@ -131,7 +131,7 @@ Las branches en Git/GitHub son como líneas de tiempo paralelas del proyecto.
 ---
 ## La rama "master" o "main"
 
-Cuando inicializamos un proyecto con Git automáticamente nos encontramos en una rama a la que se denomina *master* o *main*.
+Cuando inicializamos un proyecto con Git automáticamente nos encontramos en una rama a la que se denomina **master** o **main**.
 
 Esta rama es la principal de nuestro proyecto y a partir de la que podremos crear nuevas ramas cuando lo necesitemos.
 
@@ -248,9 +248,6 @@ Resultado:
 
 ## Pasando de una rama a otra
 
-Al pasar de una rama a otra Git nos cambiará automáticamente todos los archivos de nuestro proyecto para que tengan el contenido en el que se encuentren en la rama correspondiente.
-
-
 Por ahora, **las dos ramas tienen exactamente el mismo contenido**, pero ahora podríamos empezar a hacer cambios en la rama _[tu nombre]_ y sus correspondientes commits; entonces los archivos de la rama _master/main_ y la rama _[tu nombre]_ tendrán contenido diferente, de modo que al pasar de una rama a otra habrá cambios en los archivos.
 
 
@@ -304,7 +301,7 @@ git commit -m "[mensaje]"
 
 ## Fusionando ramas
 
-A medida que creemos ramas y cambiemos el estado de las carpetas o archivos en el proyecto llegará el momento en el que nos interese fusionar ramas para poder incorporar el trabajo realizado a la rama __master__ o __main__.
+A medida que creemos ramas y cambiemos el estado de las carpetas o archivos en el proyecto llegará el momento en el que nos interese **fusionar ramas** para poder incorporar el trabajo realizado a la rama __master__ o __main__.
 
 El proceso de fusionado se conoce como __merge__. Git para procesar los merge comprueba los cambios que se han introducido al proyecto, combinando el código de ambas ramas.
 
@@ -377,7 +374,7 @@ Eliminaremos la rama develop-# ....
 .full-width[.content-box-yellow[$ git branch]]
 --
 
-2. Crear la etiqueta _develop-#_
+2. Crear la rama _develop-#_
 .full-width[.content-box-yellow[$ git branch develop-1]]
 
 
