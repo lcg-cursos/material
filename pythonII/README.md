@@ -5,13 +5,15 @@ Bienvenidos al curso de Python II.
 
 ### GitHub intermedio
 
-1. [Versionando usando tags](https://lcg-cursos.github.io/material/pythonII/git/git-tags/1-Etiquetas.html)
+1. [Buenas prácticas para el desarrollo de software colaborativo](https://lcg-cursos.github.io/material/pythonII/git/leccion0-bp-software-colab/0-bp-software-colab.html)
+   
+3. [Versionando usando tags](https://lcg-cursos.github.io/material/pythonII/git/git-tags/1-Etiquetas.html)
 
-2. [Trabajar con ramas en Git](https://lcg-cursos.github.io/material/pythonII/git/git-branches/2-Ramas.html)
+4. [Trabajar con ramas en Git](https://lcg-cursos.github.io/material/pythonII/git/git-branches/2-Ramas.html)
 
-3. [Pull Request con Git](https://lcg-cursos.github.io/material/pythonII/git/git-issues/3-issues.html)
+5. [Issues](https://lcg-cursos.github.io/material/pythonII/git/git-issues/3-issues.html)
  
-4. [Tips](https://lcg-cursos.github.io/material/pythonII/git/git-project/4-project.html)
+6. [Project](https://lcg-cursos.github.io/material/pythonII/git/git-project/4-project.html)
 
 
 ### Python Intermedio
