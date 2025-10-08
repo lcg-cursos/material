@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introducción a la Bioinformática</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Introducción a la Bioinformática
+]
+.institute[
+### Licenciatura en Ciencias Genómicas,UNAM
+]
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+# ¿Qué aprenderás hoy?
+
+- Cómo usar expresiones regulares (regex) en bioinformática
+- Detectar patrones como codones, sitios de restricción y regiones repetidas
+- Probar tus expresiones en [regex101.com](https://regex101.com)
+
+---
+## 🖥️ Introducción a regex101.com
+
+[regex101.com](https://regex101.com/) es una herramienta interactiva para **escribir, probar y depurar expresiones regulares** en distintos lenguajes.
+
+### 🔍 Secciones principales de la interfaz
+
+1. **Regular Expression** (parte superior central):
+   - Aquí escribes tu patrón de búsqueda.
+   - Se activa la opción `/gm` (global y multiline) por defecto.
+
+2. **Test String** (panel grande abajo):
+   - Zona donde escribes tu texto de prueba, como secuencias de ADN o líneas de archivo.
+   - Puedes usar varias líneas para simular archivos FASTA, GFF, etc.
+
+3. **Explanation** (panel derecho superior):
+   - Muestra una explicación automática de tu regex en tiempo real.
+
+---
+## 🖥️ Introducción a regex101.com
+
+4. **Match Information** (derecha inferior):
+   - Indica qué partes coinciden, cuántas veces y en qué posiciones.
+
+5. **Flavor (izquierda)**:
+   - Selecciona el lenguaje de destino (sugerimos **PCRE2** o **Python**).
+
+6. **Quick Reference** (abajo a la derecha):
+   - Tabla útil con todos los **metacaracteres**, sus funciones y ejemplos (`^`, `$`, `\b`, `\w`, etc).
+
+7. **Substitution / Unit Tests / List** (opcional):
+   - Funciones avanzadas para sustituir texto o probar múltiples entradas.
+
+
+---
+
+# Archivo base de secuencias 🔬
+
+Estas secuencias se usarán en varios ejercicios del curso, aqui las numeramos porque en el texto haremos referencia al número para facilitar su referencia:
+
+```text
+1. ATGCGTAC
+2. AATTGGCCAATTGGCC
+3. GCTAGCTGATCGATC
+4. ATGATGATG
+5. AAAAAA
+6. CGTATGCGTAGCTAGCGT
+7. AGCTTCTGAAGCT
+8. TGACCTGAAGCTTAGC
+9. ATCGTACGTAGCTACGATCG
+10. GATCGATCGATCGATCGATC
+11. GAGAGA
+12. ATATAT
+13. gene1    100    ATGCGT
+14. atgtaa
+15. &gt;seq1 description of sequence
+```
+
+---
+
+## 
+
+Pega este texto en TEST STRING
+
+```text
+ATGCGTAC
+AATTGGCCAATTGGCC
+GCTAGCTGATCGATC
+ATGATGATG
+AAAAAA
+CGTATGCGTAGCTAGCGT
+AGCTTCTGAAGCT
+TGACCTGAAGCTTAGC
+ATCGTACGTAGCTACGATCG
+GATCGATCGATCGATCGATC
+GAGAGA
+ATATAT
+gene1    100    ATGCGT
+atgtaa
+&gt;seq1 description of sequence
+```
+
+---
+
+## Metacaracteres de RegEx
+
+Vamos a revisar en esta clase:
+
+1. **Caracteres literales**
+2. `.` punto
+3. `*`, `+`, `?`, `{m,n}` (cuantificadores)
+4. `^` y `$` (anclas de inicio/fin)
+5. `[ ]` y `[^ ]` (clases y negaciones)
+6. `|` (alternancia lógica)
+7. `( ... )` (agrupamiento)
+8. `\1` (retroreferencia)
+9. `(?=X)` (lookahead)
+10. `(?&lt;=X)` (lookbehind)
+11. `(?i)` (modificador: case-insensitive)
+12. `\w`, `\b`, `\t` (palabras, límites, tabulador)
+13. **Integración final**: ORF completo con codones de inicio y parada
+
+---
+
+# Ejemplo 1: Caracteres literales
+
+Buscar exactamente `ATG`
+
+```regex
+ATG
+```
+
+✅ Coincide en: `ATGCGTAC`
+
+
+❓ Intenta:  
+
+- Buscar `GCC`
+- Ver si coincide `TTT`
+
+---
+
+# Ejemplo 2: Punto `.`
+
+Cualquier letra entre A y G
+
+```regex
+A.G
+```
+
+✅ Coincide en: `ATG` de `ATGCGTAC`
+
+
+❓ Intenta:
+
+- `G.T` ¿coincide?
+- `A..T` ¿funciona?
+
+---
+
+# Ejemplo 3: Cuantificadores `+`, `*`, `{}`
+
+Los cuantificadores nos dicen **cuántas veces debe repetirse un patrón** para que haya coincidencia.
+
+### 🔹 `+` — Uno o más.  
+Coincide con **al menos una** repetición del carácter o grupo.
+
+- `A+` → una o más A seguidas.
+
+**Ejemplos en las secuencias:**
+
+- `A+` → coincide en: `AAAAAA` (sec. 5)
+
+---
+# Ejemplo 3: Cuantificadores `+`, `*`, `{}`
+
+#### 🔸 `*` — Cero o más
+Coincide con **cero o más** repeticiones (es decir, incluso si no aparece).
+
+- `T*G` → cualquier número de T seguidas de una G.
+
+**Ejemplos en las secuencias:**
+- `T*G` → coincide en: `ATGCGTAC` (sec. 1)
+
+---
+# Ejemplo 3: Cuantificadores `+`, `*`, `{}`
+
+#### 🔹 `{n}` — Exactamente n repeticiones
+- `A{3}` → exactamente tres A seguidas.
+
+#### 🔸 `{n,}` — Al menos n repeticiones
+- `G{2,}` → dos o más G seguidas.
+
+#### 🔸 `{n,m}` — Entre n y m repeticiones
+- `C{2,4}` → entre dos y cuatro C.
+
+**Ejemplos en las secuencias:**
+- `A{3}` → coincide en: `AAAAAA` (sec. 5)
+- `G{2,}` → coincide en: `AATTGGCCAATTGGCC` (sec. 2)
+
+---
+
+# Ejemplo 4: Anclas ^ y $
+
+Solo si está al principio.
+
+```regex
+^ATG
+```
+
+✅ Coincide en: `ATGCGTAC`
+
+❓ Intenta:
+
+- Buscar `^GAT`
+- Probar `^TGA` en medio
+
+---
+# Ejemplo 4: Anclas ^ y $
+
+Solo si está **al final** de la secuencia.
+
+```regex
+TGA$
+```
+
+✅ Coincide en: `ATGCGTACTGA`   
+❌ No coincide en: `GGCATCTAGGAC`
+
+❓ Intenta:
+
+-   Modificar una secuencia que termine en `TAA` o `TAG`.  
+-   ¿Qué pasa si pones `$` al inicio por error?
+    
+
+**Recuerda:**.  
+-   `^` significa "empieza con..."
+-   `$` significa "termina con..."
+
+
+---
+
+## Ejemplo 5: Clases `[ ]` y negaciones `[^ ]`
+
+Una **clase de caracteres** permite definir un **conjunto de letras o símbolos válidos** para una posición en la secuencia. 
+
+- Los corchetes [ ] indican que **una sola posición** puede coincidir con **varias opciones**.
+- El símbolo `^` dentro del grupo **niega** (excepto).
+
+Ejemplo: G precedida de A o T.
+
+```regex
+[AT]G
+```
+
+✅ Coincide en: `ATG` y `TGA`
+
+❓ Intenta:   
+
+- `[CT]C`
+- `[^AG]T`
+
+---
+
+# Ejemplo 6: Alternancia `|`
+
+Coincide con ATG o GTG.
+
+```regex
+ATG|GTG
+```
+
+✅ Coincide en: `ATGATGATG`
+
+
+❓ Intenta:  
+- `TAG|TAA`
+- `CTG|AAC`
+
+---
+
+# Ejemplo 7: Agrupamiento `(...)`
+
+Un **grupo** se define entre paréntesis `()` y sirve para:
+
+1. **Agrupar varios caracteres como una sola unidad.**
+2. Aplicar **cuantificadores** al grupo completo.
+3. Capturar lo que coincide, para usarlo después (como en retroreferencias).
+
+
+Por ejemplo: Uno o más repeticiones del grupo.
+
+```regex
+(ATG)+
+```
+
+✅ Coincide en: `ATGATG`
+
+❓ Intenta:   
+- `(GC)+`
+- `(TA)+`
+
+---
+
+# Ejemplo 8: Retroreferencia `\1`
+
+Una **retroreferencia** te permite **volver a usar un grupo que ya hiciste coincidir antes** en la misma expresión.
+
+Cuando usas paréntesis `( )` en una regex, estás **capturando** lo que coincidió.
+
+Luego puedes referirte a ese grupo con:
+
+- `\1` para el **primer grupo**
+- `\2` para el segundo, y así sucesivamente
+
+Ejemplo: Busca repeticiones exactas.
+
+```regex
+(GA)\1
+```
+
+✅ Coincide en: `GAGAGA`
+
+❓ Intenta:    
+
+- `(AT)\1`
+- `(CG)\1`
+
+---
+
+# Ejemplo 9: Lookahead `(?=X)`
+
+Un **lookahead** se escribe así: `X(?=Y)`
+
+Significa: **"Encuentra X solo si está seguido por Y"**, pero **sin incluir Y** en la coincidencia.
+
+Ejemplo: A que venga antes de T.
+
+```regex
+A(?=T)
+```
+
+✅ Coincide en: `AGCTTCTGAAGCT`
+
+❓ Intenta:
+
+- `G(?=C)`
+- `T(?=A)`
+
+---
+
+# Ejemplo 10: Lookbehind `(?&lt;=X)`
+
+Un **lookbehind** se escribe así: `(?&lt;=Y)X`
+
+Significa: **"Encuentra X solo si está precedido por Y"**, pero **sin incluir Y** en la coincidencia.
+
+
+Por ejemplo: A precedido por G.
+
+
+```regex
+(?&lt;=G)A
+```
+
+✅ Coincide en: `TGACCTGAAGCTTAGC`
+
+❓ Intenta:   
+- `(?&lt;=T)C`
+- `(?&lt;=C)T`
+
+---
+
+# Modificadores `(?i)`
+
+Los **modificadores** permiten alterar cómo funciona una expresión regular. Se escriben al inicio con `(?...)`, o se activan con casillas en regex101.
+
+### 🔧 Modificadores más comunes:
+
+| Modificador | Qué hace                      | Ejemplo                   |
+|-------------|-------------------------------|---------------------------|
+| `(?i)`      | Ignora mayúsculas/minúsculas  | `(?i)atg` → ATG o atg     |
+| `(?m)`      | Modo multilínea (`^` y `$`)    | `^&gt;` en FASTA multilinea  |
+| `(?s)`      | `.` también incluye saltos de línea | útil con secuencias largas |
+| `(?x)`      | Ignora espacios en la regex y permite comentarios (modo extendido) | para expresiones legibles |
+
+---
+
+**🧠 ¿Dónde se usan?**
+
+- (?i) es útil cuando no sabes si el texto está en mayúsculas o minúsculas.
+- (?m) se usa para analizar archivos con varias líneas como .fasta.
+- (?s) permite que . incluya saltos de línea (por defecto no lo hace).
+
+
+**✅ En regex101:**
+
+Puedes activarlos con las casillas:
+
+- i (insensitive)
+- m (multiline)
+- s (dotall)
+
+---
+
+# Ejemplo 11: Modificadores `(?i)`
+
+Ignora mayúsculas/minúsculas.
+
+```regex
+(?i)atg
+```
+
+
+✅ Coincide en: `atgtaa`, `ATGCGTAC`
+
+❓ Intenta:  
+- `(?i)taa`
+- `atg` sin `(?i)`
+
+---
+
+# Ejemplo 12: Palabras y tabuladores
+
+`ATG` como palabra aislada.
+
+```regex
+\bATG\b
+```
+
+✅ Coincide en: `gene1    100    ATGCGT`
+
+❓ Intenta:    
+- `\w{4}`
+- `\bTGA\b`
+
+---
+
+# Ejemplo 13: ORF completo
+
+Un marco abierto de lectura completo.
+
+```regex
+^ATG[ATGC]{3,}(TAA|TAG|TGA)$
+```
+
+✅ Coincide en: `ATGCGTAGCTAA`
+
+❓ Intenta:   
+- Uno sin codón de parada
+
+---
+
+# Ejercicios de aplicación en biología real 🧬
+
+En esta sección aplicaremos expresiones regulares para identificar motivos biológicos comunes. Cada ejercicio incluye:
+
+- Una **descripción del motivo**.
+- Una **secuencia ejemplo**.
+- Vamos a encontrar una **regex sugerida**.
+- Lo que se espera **encontrar en la secuencia** si la expresión funciona correctamente.
+
+
+---
+
+# Caja TATA (promotor eucariota)
+
+**¿Qué buscamos?**
+Una **caja TATA** es una secuencia promotora rica en T y A que marca el inicio de transcripción en genes eucariotas. Su forma canónica es `TATAAA`, pero puede variar ligeramente.
+
+**Se espera encontrar:** una subcadena como `TATAAA`, `TATATA`, `TATATT`, etc.
+
+```text
+ACGTATATAAAGCT
+```
+
+Regex:
+
+```regex
+
+```
+
+---
+
+# Codones de inicio
+
+**¿Qué buscamos?**
+Codones como `ATG`, `GTG` o `TTG`, que pueden servir como **inicio de traducción** en distintos contextos genéticos.
+
+**Se esperan:** coincidencias exactas con uno de esos tres codones, al inicio de un ORF o dentro de un marco de lectura.
+
+Secuencias ejemplo:
+
+```text
+GCCATGCGTACTG
+TTGGTCGTGACC
+AAGTTGGGCTTGATC
+```
+
+Regex:
+
+```regex
+
+```
+
+---
+
+# Codones de parada
+
+**¿Qué buscamos?**
+Los codones `TAA`, `TAG` y `TGA` indican el **fin de un marco de lectura** (ORF). Suelen encontrarse después de una región codificante.
+
+**Se espera encontrar:** cada vez que uno de estos codones aparece en la secuencia al final de un ORF.
+
+Secuencia ejemplo 1:
+```text
+ATGCGTACCTAA
+GGCATCTAGGAC
+AAGGGTGACTGAATC
+```
+
+Regex:
+
+```regex
+
+```
+
+---
+
+# Región GC rica
+
+**¿Qué buscamos?**
+Zonas con muchas **guaninas (G)** y **citosinas (C)** juntas, comunes en promotores bacterianos o regiones reguladoras.
+
+**Se espera encontrar:** secuencias como `GGCC`, `GGGCCC`.
+
+Secuencia ejemplo:
+
+```text
+GGCCATGGGCCT
+```
+
+Regex:
+```regex
+
+```
+
+---
+
+# Microsatélites (repeticiones CA)
+
+**¿Qué buscamos?**
+Repeticiones de **CA** como motivo **microsatélite**, útiles en estudios poblacionales y genómicos.
+
+**Se espera encontrar:** al menos 5 repeticiones consecutivas de `CA`.
+
+
+```text
+CACACACACACAATG
+```
+
+Regex:
+```regex
+
+```
+
+---
+
+# Sitio de splicing (intrones eucariotas)
+
+**¿Qué buscamos?**
+Los intrones eucariotas típicamente inician con `GT` y terminan con `AG`, separados por una secuencia variable.
+
+**Se espera encontrar:** patrones que comiencen con `GT`, tengan entre 3 y 100 nucleótidos, y terminen en `AG`.
+
+
+```text
+GTACGTAGCTAG
+```
+
+Regex:
+```regex
+
+```
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(logos/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
