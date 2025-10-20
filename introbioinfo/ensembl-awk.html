@@ -3,7 +3,7 @@
   <head>
     <title>Introducción a la Bioinformática</title>
     <meta charset="utf-8" />
-    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 ### Licenciatura en Ciencias Genómicas,UNAM
 ]
 .date[
-### First version: yyy-mm-dd; Last update: 2024-10-29
+### First version: yyy-mm-dd; Last update: 2025-10-19
 ]
 
 ---
@@ -1070,7 +1070,7 @@ Nota:
 `$1` representa la primera columna de cada línea del archivo, y sí lleva `$`.
 
 ---
-## Tarea ¿Y para otros organismos?
+## Ejercicio 1:  ¿Y para otros organismos?
 
 
 .content-box-blue[
@@ -1094,22 +1094,30 @@ Respondan las siguientes preguntas:
 
 ## Ejercicio 2: Interacciones reguladoras
 
-Descarga el archivo  `RISet` de la página de descargas de RegulonDB.
-Este archivo contiene las interacciones reguladoras (RIs) de los reguladores conocidos y anotados en RegulonDB. [ **5 min exploración del archivo** ]
+Descarga el archivo  `RISet` de la página de descargas de RegulonDB (https://regulondb.ccg.unam.mx/, "Releses &amp; Downloads", ve a la sección "REGULATORY INTERACTION", selecciona RISet File)
 
-1. Cualés son los tipos de RIs anotados ? (columna 2)
+Este archivo contiene las interacciones reguladoras (RIs) de los reguladores conocidos anotados en RegulonDB. 
 
-2. Cuántas RIs hay de cada tipo ?
+1. Explora el archivo, ¿Cuáles son los valores en las siguientes columnas 2,4,9,11,15,20 ?
 
-3. Obtener las RIs de los TFs (Tipo: TF-promotor, TF-tu, TF-gene) y obtener aquellas RIs cuyo nivel de confianza es Strong ( (20) confidenceLevel = S ).
+2. Cualés son los tipos de RIs anotados ? (columna 2)
 
-4. Cuantás RIs de los TFs (Tipo: TF-promotor, TF-tu, TF-gene) hay para cada nivel de confianza ?
+3. Cuántas RIs hay de cada tipo ?
 
-5. Obtener todas aquellas RIs que no tienen nivel de confianza, cuántas son? y cuantas son de cada tipo?
+4. Obtener las RIs de los TFs (Tipo: TF-promotor, TF-tu, TF-gene).
 
-6. Extrae todas las interacciones relacionadas con small RNAs (identificadas en la columna 2 que contiene "srna-" al inicio) y calcular su distancia promedio al primer gen transcrito (columna 18, tfrsDistTo1Gene). Tomar en cuenta sólo las que tienen un valor en tfrsDistTo1Gene.
+5. Obtener las RIS de los TFS cuyo nivel de confianza sea Strong ( (20) confidenceLevel = S ).
 
-7. Qué otra pregunta se te ocurre indagar sobre los datos?
+---
+## Ejercicio 2: Interacciones reguladoras
+
+
+6. Cuantás RIs de los TFs (Tipo: TF-promotor, TF-tu, TF-gene) hay para cada nivel de confianza ?
+
+7. Obtener todas aquellas RIs que no tienen nivel de confianza, cuántas son? y cuantas son de cada tipo?
+
+8. Extrae todas las RIs relacionadas con small RNAs (identificadas en la columna 2 que contiene "srna-" al inicio) y calcular su distancia promedio al primer gen transcrito (columna 18, tfrsDistTo1Gene). Tomar en cuenta sólo las que tienen un valor en tfrsDistTo1Gene.
+
 
 
 
