@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>listas</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="📝-estructuras-de-datos-en-python-listas">📝 <strong>Estructuras de Datos en Python</strong>: Listas</h1>
+<p>Las listas, tuplas, sets y diccionarios son estructuras de datos fundamentales en Python. Cada una tiene características únicas y se utilizan en diferentes contextos según la necesidad del problema.</p>
+<h2 id="📌-listas-list">📌 <strong>Listas (<code>list</code>)</strong></h2>
+<h3 id="concepto"><strong>Concepto</strong></h3>
+<p>Una <strong>lista</strong> es una colección “ordenada” y <strong>mutable</strong> de elementos. Puede contener diferentes tipos de datos y permite modificaciones.</p>
+<h3 id="creación-de-listas"><strong>1. Creación de Listas</strong></h3>
+<h4 id="sintaxis"><strong>Sintaxis</strong></h4>
+<p>En Python, una lista se define colocando los elementos entre corchetes <code>[]</code>, separados por comas.</p>
+<pre class=" language-python"><code class="prism  language-python">lista_vacia <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+lista_numeros <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span>
+lista_mixta <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"Hola"</span><span class="token punctuation">,</span> <span class="token number">3.14</span><span class="token punctuation">,</span> <span class="token boolean">True</span><span class="token punctuation">]</span>
+lista_anidada <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+lista_mixta <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"Python"</span><span class="token punctuation">,</span> <span class="token number">3.14</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+</code></pre>
+<h4 id="características"><strong>Características</strong></h4>
+<p>✔ Ordenadas (se accede por índice)<br>
+✔ Mutables (se pueden modificar: agregar, eliminar o cambiar elementos)<br>
+✔ Permiten duplicados</p>
+<h4 id="uso-de-list-para-crear-listas"><strong>Uso de <code>list()</code> para crear listas</strong></h4>
+<p>También puedes usar la función <code>list()</code> para convertir otro tipo de datos en listas.</p>
+<pre class=" language-python"><code class="prism  language-python">lista_desde_cadena <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token string">"Python"</span><span class="token punctuation">)</span>  <span class="token comment"># ['P', 'y', 't', 'h', 'o', 'n']</span>
+lista_desde_tupla <span class="token operator">=</span> <span class="token builtin">list</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># [1, 2, 3]</span>
+</code></pre>
+<h3 id="acceso-y-modificación-de-elementos"><strong>2. Acceso y Modificación de Elementos</strong></h3>
+<h4 id="acceso-por-índices"><strong>Acceso por Índices</strong></h4>
+<p>Cada elemento en una lista tiene un índice que empieza en <code>0</code>. Puedes acceder a los elementos usando el índice:</p>
+<pre class=" language-python"><code class="prism  language-python">lista <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">,</span> <span class="token string">"c"</span><span class="token punctuation">,</span> <span class="token string">"d"</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>lista<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># 'a'</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>lista<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># 'c'</span>
+</code></pre>
+<h4 id="índices-negativos"><strong>Índices Negativos</strong></h4>
+<p>Puedes acceder a los elementos desde el final usando índices negativos:</p>
+<pre class=" language-python"><code class="prism  language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>lista<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># 'd'</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>lista<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># 'b'</span>
+</code></pre>
+<h4 id="modificación-de-elementos"><strong>Modificación de Elementos</strong></h4>
+<p>Las listas son <strong>mutables</strong>, lo que significa que podemos cambiar sus valores:</p>
+<pre class=" language-python"><code class="prism  language-python">lista<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"z"</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>lista<span class="token punctuation">)</span>  <span class="token comment"># ['a', 'z', 'c', 'd']</span>
+</code></pre>
+<h3 id="slicing-corte-en-listas"><strong>3. Slicing (Corte) en Listas</strong></h3>
+<p>El slicing permite obtener sublistas sin modificar la original.</p>
+<p><strong>Sintáxis</strong></p>
+<pre><code>lista[inicio:fin:paso]
+</code></pre>
+<ul>
+<li></li>
+<li><code>inicio</code>: Índice donde comienza el corte (por defecto <code>0</code>).  Se *<strong>incluye</strong> en el resultado.</li>
+<li><code>fin</code>: Índice donde termina el corte. <strong>NO se incluye</strong> en el resultado.</li>
+<li><code>paso</code>: De cuántos en cuántos elementos se avanza. Si es <strong>negativo</strong>, la lista se recorre hacia atrás.</li>
+</ul>
+<pre class=" language-python"><code class="prism  language-python">lista <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">,</span> <span class="token number">70</span><span class="token punctuation">]</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>lista<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span>   <span class="token comment"># [20, 30, 40]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>lista<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>    <span class="token comment"># [10, 20, 30]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>lista<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">:</span><span class="token punctuation">]</span><span class="token punctuation">)</span>    <span class="token comment"># [40, 50, 60, 70]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>lista<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>   <span class="token comment"># [10, 30, 50, 70] (de 2 en 2)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>lista<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># [70, 50, 30, 10] (de 2 en 2 invertida)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>lista<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># [70, 60, 50, 40, 30, 20, 10] (inversión) # igual a lista_nucleotidos.reverse()</span>
+
+secuencia <span class="token operator">=</span> <span class="token string">"AATTAA"</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>secuencia <span class="token operator">==</span> secuencia<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment"># Palindromos</span>
+</code></pre>
+<h3 id="métodos-de-listas"><strong>4. Métodos de Listas</strong></h3>
+<p>Las listas en Python tienen varios métodos útiles.</p>
+<h4 id="agregar-elementos"><strong>Agregar elementos</strong></h4>
+<ul>
+<li><code>append(x)</code>: Agrega un elemento al final.</li>
+<li><code>extend(iterable)</code>: Agrega varios elementos al final.</li>
+<li><code>insert(i, x)</code>: Inserta un elemento en una posición específica.</li>
+</ul>
+<pre class=" language-python"><code class="prism  language-python">numeros <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
+numeros<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>        <span class="token comment"># [1, 2, 3, 4]</span>
+numeros<span class="token punctuation">.</span>extend<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">)</span>   <span class="token comment"># [1, 2, 3, 4, 5, 6]</span>
+numeros<span class="token punctuation">.</span>insert<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>    <span class="token comment"># [1, 10, 2, 3, 4, 5, 6]</span>
+</code></pre>
+<h4 id="eliminar-elementos"><strong>Eliminar elementos</strong></h4>
+<ul>
+<li><code>remove(x)</code>: Elimina la primera aparición de <code>x</code>.</li>
+<li><code>pop(i)</code>: Elimina el elemento en la posición <code>i</code> (o el último si no se especifica <code>i</code>).</li>
+<li><code>clear()</code>: Borra todos los elementos de la lista.</li>
+</ul>
+<pre class=" language-python"><code class="prism  language-python">numeros<span class="token punctuation">.</span>remove<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>   <span class="token comment"># [1, 2, 3, 4, 5, 6]</span>
+numeros<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>       <span class="token comment"># [1, 2, 4, 5, 6]</span>
+numeros<span class="token punctuation">.</span>clear<span class="token punctuation">(</span><span class="token punctuation">)</span>      <span class="token comment"># []</span>
+</code></pre>
+<h4 id="buscar-elementos"><strong>Buscar elementos</strong></h4>
+<ul>
+<li><code>index(x)</code>: Retorna la posición de <code>x</code> en la lista.</li>
+<li><code>count(x)</code>: Cuenta cuántas veces aparece <code>x</code>.</li>
+</ul>
+<pre class=" language-python"><code class="prism  language-python">letras <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"b"</span><span class="token punctuation">,</span> <span class="token string">"c"</span><span class="token punctuation">,</span> <span class="token string">"a"</span><span class="token punctuation">,</span> <span class="token string">"d"</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>letras<span class="token punctuation">.</span>index<span class="token punctuation">(</span><span class="token string">"c"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 2</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>letras<span class="token punctuation">.</span>count<span class="token punctuation">(</span><span class="token string">"a"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 2</span>
+</code></pre>
+<h4 id="ordenar-y-revertir"><strong>Ordenar y revertir</strong></h4>
+<ul>
+<li><code>sort()</code>: Ordena la lista en orden ascendente.</li>
+<li><code>reverse()</code>: Invierte el orden de la lista.</li>
+</ul>
+<pre class=" language-python"><code class="prism  language-python">numeros <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span>
+numeros<span class="token punctuation">.</span>sort<span class="token punctuation">(</span><span class="token punctuation">)</span>     <span class="token comment"># [1, 2, 3, 4, 5]</span>
+numeros<span class="token punctuation">.</span>reverse<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># [5, 4, 3, 2, 1]</span>
+</code></pre>
+<h3 id="listas-por-comprensión-list-comprehension"><strong>5. Listas por Comprensión (List Comprehension)</strong></h3>
+<p>Es una forma concisa de crear listas.</p>
+<h4 id="sintáxis">Sintáxis</h4>
+<pre class=" language-python"><code class="prism  language-python"><span class="token punctuation">[</span>expresión <span class="token keyword">for</span> variable <span class="token keyword">in</span> iterable <span class="token keyword">if</span> condición<span class="token punctuation">]</span>
+</code></pre>
+<h3 id="componentes"><strong>Componentes</strong></h3>
+<ol>
+<li><strong>Expresión:</strong> La operación o transformación que se aplicará a cada elemento.</li>
+<li><strong><code>for variable in iterable</code></strong>: Un bucle <code>for</code> que itera sobre una secuencia (lista, rango, tupla, etc.).</li>
+<li><strong>Condición opcional (<code>if</code>)</strong>: Un filtro que determina si un elemento debe incluirse en la lista resultante.</li>
+</ol>
+<h4 id="ejemplo-básico"><strong>Ejemplo Básico</strong></h4>
+<p>El cuadrado de los números 0-4 (5 números)</p>
+<pre class=" language-python"><code class="prism  language-python"><span class="token comment">## equivale a</span>
+cuadrados <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    cuadrados<span class="token punctuation">.</span>append<span class="token punctuation">(</span>x<span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">)</span>
+</code></pre>
+<pre class=" language-python"><code class="prism  language-python">cuadrados <span class="token operator">=</span> <span class="token punctuation">[</span>x<span class="token operator">**</span><span class="token number">2</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>cuadrados<span class="token punctuation">)</span>  <span class="token comment"># [0, 1, 4, 9, 16]</span>
+</code></pre>
+<h5 id="desglose"><strong>Desglose</strong></h5>
+<ul>
+<li><strong>Expresión:</strong> <code>x**2</code> → Calcula el cuadrado de <code>x</code></li>
+<li><strong>Bucle <code>for</code></strong>: <code>for x in range(5)</code> → Itera sobre los números <code>0, 1, 2, 3, 4</code></li>
+<li><strong>Condición:</strong> No hay condición en este caso.</li>
+</ul>
+<h5 id="cómo-se-ejecuta"><strong>Cómo se ejecuta?</strong></h5>
+<ol>
+<li><strong><code>range(5)</code></strong> genera los números del 0 al 4.</li>
+<li><strong><code>x**2</code></strong> eleva cada número al cuadrado.</li>
+<li><strong>Lista por comprensión</strong> crea la lista final.</li>
+</ol>
+<h4 id="ejemplo-con-condición-if"><strong>Ejemplo con Condición (<code>if</code>)</strong></h4>
+<pre><code>pares = [x for x in range(10) if x % 2 == 0]
+print(pares)  # [0, 2, 4, 6, 8]
+</code></pre>
+<h5 id="desglose-1"><strong>Desglose</strong></h5>
+<ul>
+<li><strong>Expresión:</strong> <code>x</code></li>
+<li><strong>Bucle <code>for</code></strong>: <code>for x in range(10)</code> → Itera sobre <code>0, 1, 2, ..., 9</code></li>
+<li><strong>Condición:</strong> <code>if x % 2 == 0</code> → Solo se incluyen los números pares.</li>
+</ul>
+<h4 id="estructura-con-if-else"><strong>Estructura con <code>if-else</code></strong></h4>
+<p>Si se necesita modificar los elementos de la lista basados en una condición, el <code>if-else</code> <strong>se coloca antes del <code>for</code></strong>:</p>
+<pre class=" language-python"><code class="prism  language-python">clasificacion <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"Par"</span> <span class="token keyword">if</span> x <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token keyword">else</span> <span class="token string">"Impar"</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>clasificacion<span class="token punctuation">)</span>  <span class="token comment"># ['Par', 'Impar', 'Par', 'Impar', 'Par']</span>
+</code></pre>
+<h5 id="desglose-2"><strong>Desglose</strong></h5>
+<ul>
+<li><strong>Expresión:</strong> <code>"Par" if x % 2 == 0 else "Impar"</code><br>
+(<code>if-else</code>):
+<ul>
+<li>Si <code>x</code> es par → <code>"Par"</code></li>
+<li>Si <code>x</code> es impar → <code>"Impar"</code></li>
+</ul>
+</li>
+<li><strong>Bucle <code>for</code></strong>: <code>for x in range(5)</code> → Itera sobre <code>0, 1, 2, 3, 4</code></li>
+</ul>
+<h2 id="ejercicios">Ejercicios</h2>
+<h3 id="crear-una-lista-de-bases-nitrogenadas"><strong>1. Crear una lista de bases nitrogenadas</strong></h3>
+<p>Crea una lista con las bases nitrogenadas del ADN: <code>["A", "T", "C", "G"]</code>. Luego:</p>
+<ul>
+<li>Accede a la base en la segunda posición.</li>
+<li>Cambia la base “T” por “U” (ARN).</li>
+<li>Imprime la lista resultante.</li>
+</ul>
+<h3 id="generar-una-lista-de-nucleótidos-a-partir-de-una-secuencia"><strong>2. Generar una lista de nucleótidos a partir de una secuencia</strong></h3>
+<p>Dada la secuencia <code>"ATGCGTAGC"</code>, conviértela en una lista de caracteres.</p>
+<p><strong>Salida esperada:</strong></p>
+<pre class=" language-python"><code class="prism  language-python"><span class="token punctuation">[</span><span class="token string">'A'</span><span class="token punctuation">,</span> <span class="token string">'T'</span><span class="token punctuation">,</span> <span class="token string">'G'</span><span class="token punctuation">,</span> <span class="token string">'C'</span><span class="token punctuation">,</span> <span class="token string">'G'</span><span class="token punctuation">,</span> <span class="token string">'T'</span><span class="token punctuation">,</span> <span class="token string">'A'</span><span class="token punctuation">,</span> <span class="token string">'G'</span><span class="token punctuation">,</span> <span class="token string">'C'</span><span class="token punctuation">]</span>
+</code></pre>
+<h3 id="extraer-un-fragmento-de-una-secuencia"><strong>3. Extraer un fragmento de una secuencia</strong></h3>
+<p>Dada la lista de nucleótidos <code>["A", "T", "G", "C", "G", "T", "A", "G", "C"]</code>, usa slicing para obtener:</p>
+<ul>
+<li>Los primeros 5 nucleótidos.</li>
+<li>Los últimos 3 nucleótidos.</li>
+<li>La secuencia en orden inverso.</li>
+</ul>
+<h2 id="ejercicios-intermedios"><strong>Ejercicios Intermedios</strong></h2>
+<h3 id="contar-la-frecuencia-de-bases-en-una-secuencia-de-adn"><strong>4. Contar la frecuencia de bases en una secuencia de ADN</strong></h3>
+<p>Dada la secuencia <code>"ATGCTTCGA"</code>, cuenta cuántas veces aparece cada base (<code>A</code>, <code>T</code>, <code>C</code>, <code>G</code>) y almacénalo en una lista.</p>
+<p><strong>Salida esperada:</strong></p>
+<pre class=" language-python"><code class="prism  language-python">`<span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token string">'A'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">'T'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">'G'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token string">'C'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">]</span>`
+</code></pre>
+<h3 id="filtrar-bases-nitrogenadas-raras"><strong>5. Filtrar bases nitrogenadas raras</strong></h3>
+<p>Dada la lista <code>["A", "T", "G", "C", "N", "R", "Y", "A", "T", "G", "C"]</code>, elimina cualquier base que <strong>no</strong> sea <code>"A"</code>, <code>"T"</code>, <code>"G"</code> o <code>"C"</code>, utilizando comprensión de listas.</p>
+<p><strong>Salida esperada:</strong></p>
+<pre class=" language-python"><code class="prism  language-python"><span class="token punctuation">[</span><span class="token string">"A"</span><span class="token punctuation">,</span> <span class="token string">"T"</span><span class="token punctuation">,</span> <span class="token string">"G"</span><span class="token punctuation">,</span> <span class="token string">"C"</span><span class="token punctuation">,</span> <span class="token string">"A"</span><span class="token punctuation">,</span> <span class="token string">"T"</span><span class="token punctuation">,</span> <span class="token string">"G"</span><span class="token punctuation">,</span> <span class="token string">"C"</span><span class="token punctuation">]</span>
+</code></pre>
+<h3 id="generar-una-lista-con-los-codones-de-una-secuencia"><strong>6. Generar una lista con los codones de una secuencia</strong></h3>
+<p>Dada la secuencia <code>"ATGCTTCGAGGG"</code>, divide la secuencia en codones de 3 nucleótidos usando comprensión de listas.</p>
+<p><strong>Salida esperada:</strong></p>
+<pre class=" language-python"><code class="prism  language-python"><span class="token punctuation">[</span><span class="token string">"ATG"</span><span class="token punctuation">,</span> <span class="token string">"CTT"</span><span class="token punctuation">,</span> <span class="token string">"CGA"</span><span class="token punctuation">,</span> <span class="token string">"GGG"</span><span class="token punctuation">]</span>
+</code></pre>
+<h2 id="ejercicios-avanzados"><strong>Ejercicios Avanzados</strong></h2>
+<h3 id="transcripción-de-adn-a-arn"><strong>7. Transcripción de ADN a ARN</strong></h3>
+<p>Dada una secuencia de ADN en forma de lista,  reemplaza <code>"T"</code> por <code>"U"</code> y generar una secuencia de ARN en formato de lista.</p>
+<p>Entrada</p>
+<pre class=" language-python"><code class="prism  language-python"><span class="token punctuation">[</span><span class="token string">"A"</span><span class="token punctuation">,</span> <span class="token string">"T"</span><span class="token punctuation">,</span> <span class="token string">"G"</span><span class="token punctuation">,</span> <span class="token string">"C"</span><span class="token punctuation">]</span>
+</code></pre>
+<p>Salida esperada</p>
+<pre class=" language-python"><code class="prism  language-python"><span class="token punctuation">[</span><span class="token string">'A'</span><span class="token punctuation">,</span> <span class="token string">'U'</span><span class="token punctuation">,</span> <span class="token string">'G'</span><span class="token punctuation">,</span> <span class="token string">'C'</span><span class="token punctuation">]</span>
+</code></pre>
+</div>
+</body>
+
+</html>

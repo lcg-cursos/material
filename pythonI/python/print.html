@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>print</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h2 id="la-función-print-en-python">La función <code>print()</code> en Python</h2>
+<p>La función <code>print()</code> es una de las funciones más básicas y utilizadas en Python. Su propósito es mostrar información en la consola. Es útil para depuración, mostrar resultados de cálculos y mejorar la interacción con el usuario.</p>
+<h3 id="uso-básico-de-print"><strong>1. Uso Básico de <code>print()</code></strong></h3>
+<p>La sintaxis más simple de <code>print()</code> consiste en escribir la función seguida de los valores que queremos mostrar entre paréntesis:</p>
+<pre class=" language-python"><code class="prism  language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hola, mundo!"</span><span class="token punctuation">)</span>
+</code></pre>
+<p>También se pueden imprimir números y otros tipos de datos:</p>
+<pre class=" language-python"><code class="prism  language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token number">3.1416</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="print-con-múltiples-argumentos"><strong>2. <code>print()</code> con Múltiples Argumentos</strong></h3>
+<p>Podemos imprimir varios valores separándolos con comas. Python agregará automáticamente un espacio entre ellos.</p>
+<pre class=" language-python"><code class="prism  language-python">nombre <span class="token operator">=</span> <span class="token string">"Ana"</span>
+edad <span class="token operator">=</span> <span class="token number">25</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Nombre:"</span><span class="token punctuation">,</span> nombre<span class="token punctuation">,</span> <span class="token string">"Edad:"</span><span class="token punctuation">,</span> edad<span class="token punctuation">)</span>
+</code></pre>
+<h3 id="uso-del-parámetro-sep"><strong>3. Uso del Parámetro <code>sep</code></strong></h3>
+<p>El parámetro <code>sep</code> permite especificar cómo separar los valores cuando se imprimen múltiples argumentos.</p>
+<pre class=" language-python"><code class="prism  language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">,</span> <span class="token string">"B"</span><span class="token punctuation">,</span> <span class="token string">"C"</span><span class="token punctuation">,</span> sep<span class="token operator">=</span><span class="token string">"-"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Python"</span><span class="token punctuation">,</span> <span class="token string">"es"</span><span class="token punctuation">,</span> <span class="token string">"genial"</span><span class="token punctuation">,</span> sep<span class="token operator">=</span><span class="token string">" * "</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="uso-del-parámetro-end"><strong>4. Uso del Parámetro <code>end</code></strong></h3>
+<p>El parámetro <code>end</code> define qué debe imprimirse al final de la salida en lugar del salto de línea por defecto.</p>
+<pre class=" language-python"><code class="prism  language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hola"</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">" "</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Mundo!"</span><span class="token punctuation">)</span>
+</code></pre>
+<p>Otro ejemplo:</p>
+<pre class=" language-python"><code class="prism  language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Procesando..."</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Listo!"</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="print-con-f-strings-cadenas-formateadas"><strong>5. <code>print()</code> con <code>f-strings</code> (Cadenas Formateadas)</strong></h3>
+<p>Desde Python 3.6, se introdujeron las cadenas formateadas (<code>f-strings</code>), que permiten insertar variables dentro de una cadena de manera más legible.</p>
+<pre class=" language-python"><code class="prism  language-python">nombre <span class="token operator">=</span> <span class="token string">"Carlos"</span>
+edad <span class="token operator">=</span> <span class="token number">30</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"Mi nombre es {nombre} y tengo {edad} años."</span><span class="token punctuation">)</span>
+</code></pre>
+<p>También se pueden hacer cálculos dentro de <code>f-strings</code>:</p>
+<pre class=" language-python"><code class="prism  language-python">a <span class="token operator">=</span> <span class="token number">5</span>
+b <span class="token operator">=</span> <span class="token number">3</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"La suma de {a} y {b} es {a + b}."</span><span class="token punctuation">)</span>
+</code></pre>
+<p>Se pueden aplicar formatos a los valores, por ejemplo, para números decimales:</p>
+<pre class=" language-python"><code class="prism  language-python">pi <span class="token operator">=</span> <span class="token number">3.1415926535</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">"El valor de pi con dos decimales es: {pi:.2f}"</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="imprimir-caracteres-especiales"><strong>6. Imprimir Caracteres Especiales</strong></h3>
+<p>Podemos usar caracteres de escape para dar formato al texto:</p>
+<ul>
+<li><code>\n</code> → Salto de línea</li>
+<li><code>\t</code> → Tabulación</li>
+</ul>
+<pre class=" language-python"><code class="prism  language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Primera línea\nSegunda línea"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Columna 1\tColumna 2"</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="ejercicios-para-resolver"><strong>Ejercicios para Resolver</strong></h3>
+<ol>
+<li>Escribe un programa que imprima tu nombre y edad usando <code>print()</code>.</li>
+<li>Muestra tres palabras separadas por <code>---</code> utilizando el parámetro <code>sep</code>.</li>
+<li>Escribe un programa que imprima en la misma línea dos mensajes diferentes usando el parámetro <code>end</code>.</li>
+<li>Usa <code>f-strings</code> para imprimir una oración que incluya tu nombre y la cantidad de caracteres que tiene tu nombre.</li>
+<li>Imprime el valor de <code>π</code> con 4 decimales usando <code>f-strings</code>.</li>
+</ol>
+<pre class=" language-python"><code class="prism  language-python">
+</code></pre>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>if</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="condicionales-en-programación">Condicionales en Programación</h1>
+<h2 id="introducción">Introducción</h2>
+<p>Los <strong>condicionales</strong> son estructuras fundamentales en programación que permiten tomar decisiones en función de ciertas condiciones. Esto significa que un programa puede ejecutar diferentes bloques de código dependiendo de si una condición es verdadera o falsa.</p>
+<h2 id="concepto-básico">Concepto Básico</h2>
+<p>Un <strong>condicional</strong> evalúa una expresión lógica (que devuelve <code>True</code> o <code>False</code>) y ejecuta un bloque de código dependiendo del resultado.</p>
+<h3 id="sintaxis-en-python">Sintaxis en Python</h3>
+<p>En Python, el condicional más común es <code>if</code>, que se usa junto con <code>elif</code> (opcional) y <code>else</code> (opcional) para manejar múltiples casos.</p>
+<pre class=" language-python"><code class="prism  language-python"><span class="token keyword">if</span> condicion<span class="token punctuation">:</span>
+    <span class="token comment"># Código a ejecutar si la condición es verdadera</span>
+<span class="token keyword">elif</span> otra_condicion<span class="token punctuation">:</span>
+    <span class="token comment"># Código a ejecutar si la otra condición es verdadera</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    <span class="token comment"># Código a ejecutar si ninguna condición es verdadera</span>
+
+</code></pre>
+<h2 id="condicional-if">Condicional <code>if</code></h2>
+<p>Ejemplo básico:</p>
+<pre class=" language-python"><code class="prism  language-python">edad <span class="token operator">=</span> <span class="token number">18</span>
+<span class="token keyword">if</span> edad <span class="token operator">&gt;=</span> <span class="token number">18</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Eres mayor de edad"</span><span class="token punctuation">)</span>
+</code></pre>
+<p>🔹 <strong>Explicación:</strong> Si la variable <code>edad</code> es mayor o igual a 18, se ejecutará la línea <code>print("Eres mayor de edad")</code>. Si <code>edad</code> fuera menor a 18, no se ejecutaría nada.</p>
+<h2 id="condicional-if-con-else">Condicional <code>if</code> con <code>else</code></h2>
+<p>Si queremos ejecutar una acción cuando la condición no se cumple, usamos <code>else</code>.</p>
+<pre class=" language-python"><code class="prism  language-python">edad <span class="token operator">=</span> <span class="token number">16</span>
+<span class="token keyword">if</span> edad <span class="token operator">&gt;=</span> <span class="token number">18</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Eres mayor de edad"</span><span class="token punctuation">)</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Eres menor de edad"</span><span class="token punctuation">)</span>
+</code></pre>
+<p>🔹 <strong>Explicación:</strong> Si <code>edad</code> es menor a 18, se ejecuta la parte del <code>else</code>.</p>
+<h2 id="condicional-if-con-elif">Condicional <code>if</code> con <code>elif</code></h2>
+<p><code>elif</code> (abreviatura de “else if”) permite evaluar múltiples condiciones.</p>
+<pre class=" language-python"><code class="prism  language-python">temperatura <span class="token operator">=</span> <span class="token number">25</span>
+
+<span class="token keyword">if</span> temperatura <span class="token operator">&gt;</span> <span class="token number">30</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hace mucho calor"</span><span class="token punctuation">)</span>
+<span class="token keyword">elif</span> temperatura <span class="token operator">&gt;</span> <span class="token number">20</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"El clima es agradable"</span><span class="token punctuation">)</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hace frío"</span><span class="token punctuation">)</span>
+</code></pre>
+<p>🔹 <strong>Explicación:</strong></p>
+<ul>
+<li>Si la temperatura es mayor a 30, imprime “Hace mucho calor”.</li>
+<li>Si la temperatura está entre 21 y 30, imprime “El clima es agradable”.</li>
+<li>Si la temperatura es menor o igual a 20, imprime “Hace frío”.</li>
+<li></li>
+</ul>
+<h2 id="condicionales-anidados">Condicionales Anidados</h2>
+<p>Podemos colocar condicionales dentro de otros para evaluar más de una condición.</p>
+<pre class=" language-python"><code class="prism  language-python">edad <span class="token operator">=</span> <span class="token number">20</span>
+tiene_identificacion <span class="token operator">=</span> <span class="token boolean">True</span>
+
+<span class="token keyword">if</span> edad <span class="token operator">&gt;=</span> <span class="token number">18</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> tiene_identificacion<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Puedes entrar al evento"</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Necesitas una identificación"</span><span class="token punctuation">)</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"No puedes entrar al evento"</span><span class="token punctuation">)</span>
+
+</code></pre>
+<p>🔹 <strong>Explicación:</strong> Solo se permite la entrada si la persona es mayor de 18 <strong>y</strong> tiene identificación.</p>
+<h2 id="operadores-lógicos-en-condicionales">Operadores Lógicos en Condicionales</h2>
+<p>Podemos combinar condiciones con operadores lógicos (<code>and</code>, <code>or</code>, <code>not</code>).</p>
+<p>Los <strong>operadores lógicos</strong>  permiten combinar condiciones y evaluar expresiones booleanas (<code>True</code> o <code>False</code>). Las <strong>tablas de verdad</strong> son una herramienta que nos ayuda a entender el comportamiento de estos operadores.</p>
+
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>NOT A</th>
+<th>A AND B</th>
+<th>A OR B</th>
+<th>A XOR B (A ≠ B)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+</tr>
+<tr>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+</tr>
+</tbody>
+</table><pre class=" language-python"><code class="prism  language-python">usuario_activo <span class="token operator">=</span> <span class="token boolean">True</span>
+tiene_permisos <span class="token operator">=</span> <span class="token boolean">False</span>
+
+<span class="token keyword">if</span> usuario_activo <span class="token operator">and</span> tiene_permisos<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Acceso concedido"</span><span class="token punctuation">)</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Acceso denegado"</span><span class="token punctuation">)</span>
+</code></pre>
+<p><strong>operadores en Python</strong> que se utilizan con frecuencia en <strong>genómica y bioinformática</strong>, especialmente en <strong>condicionales</strong> (<code>if</code>, <code>elif</code>, <code>else</code>).</p>
+<h2 id="🔹-1.-operadores-de-comparación------">🔹 <strong>1. Operadores de Comparación</strong> (<code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>)</h2>
+<p>Se usan para comparar valores y evaluar condiciones.</p>
+
+<table>
+<thead>
+<tr>
+<th>Operador</th>
+<th>Descripción</th>
+<th>Ejemplo en Bioinformática</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>==</code></td>
+<td>Igual a</td>
+<td><code>if secuencia == "ATGC":</code> (Verifica si la secuencia es <code>"ATGC"</code>)</td>
+</tr>
+<tr>
+<td><code>!=</code></td>
+<td>Distinto de</td>
+<td><code>if mutacion != "C&gt;T":</code> (Verifica si la mutación <strong>no</strong> es <code>"C&gt;T"</code>)</td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>Menor que</td>
+<td><code>if longitud &lt; 500:</code> (Evalúa si la longitud de la secuencia es menor a 500)</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>Mayor que</td>
+<td><code>if expresion &gt; 10:</code> (Evalúa si la expresión génica es mayor a 10)</td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td>Menor o igual que</td>
+<td><code>if score &lt;= 0.05:</code> (Evalúa si el valor <code>score</code> es significativo)</td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td>Mayor o igual que</td>
+<td><code>if cobertura &gt;= 30:</code> (Verifica si la cobertura de secuenciación es suficiente)</td>
+</tr>
+</tbody>
+</table><h2 id="🔹-2.-operadores-lógicos-and-or-not">🔹 <strong>2. Operadores Lógicos</strong> (<code>and</code>, <code>or</code>, <code>not</code>)</h2>
+<p>Se utilizan para combinar condiciones en análisis complejos.</p>
+
+<table>
+<thead>
+<tr>
+<th>Operador</th>
+<th>Descripción</th>
+<th>Ejemplo en Bioinformática</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>and</code></td>
+<td><strong>Ambas condiciones</strong> deben ser <code>True</code></td>
+<td><code>if gc_porcentaje &gt; 40 and gc_porcentaje &lt; 60:</code> (Evalúa si el contenido GC está dentro del rango óptimo)</td>
+</tr>
+<tr>
+<td><code>or</code></td>
+<td><strong>Al menos una</strong> condición debe ser <code>True</code></td>
+<td><code>if "N" in secuencia or "?" in secuencia:</code> (Verifica si la secuencia contiene caracteres ambiguos)</td>
+</tr>
+<tr>
+<td><code>not</code></td>
+<td>Invierte la condición</td>
+<td><code>if not mutacion_encontrada:</code> (Ejecuta el código solo si no se encuentra la mutación)</td>
+</tr>
+</tbody>
+</table><h2 id="🔹-3.-operadores-de-pertenencia-in-not-in">🔹 <strong>3. Operadores de Pertenencia</strong> (<code>in</code>, <code>not in</code>)</h2>
+<p>Se utilizan para verificar si un <strong>elemento está presente</strong> en una secuencia, lista o conjunto.</p>
+
+<table>
+<thead>
+<tr>
+<th>Operador</th>
+<th>Descripción</th>
+<th>Ejemplo en Bioinformática</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>in</code></td>
+<td>Verifica si un elemento <strong>está presente</strong></td>
+<td><code>if "ATG" in secuencia:</code> (Verifica si la secuencia contiene el codón de inicio <code>ATG</code>)</td>
+</tr>
+<tr>
+<td><code>not in</code></td>
+<td>Verifica si un elemento <strong>no está presente</strong></td>
+<td><code>if "N" not in secuencia:</code> (Evalúa si no hay bases ambiguas en la secuencia)</td>
+</tr>
+</tbody>
+</table><h2 id="🔹-4.-operadores-de-identidad-is-is-not">🔹 <strong>4. Operadores de Identidad</strong> (<code>is</code>, <code>is not</code>)</h2>
+<p>Se usan para comparar si <strong>dos variables hacen referencia al mismo objeto</strong> en memoria.</p>
+
+<table>
+<thead>
+<tr>
+<th>Operador</th>
+<th>Descripción</th>
+<th>Ejemplo en Bioinformática</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>is</code></td>
+<td>Verifica si dos variables <strong>son el mismo objeto</strong></td>
+<td><code>if resultado is None:</code> (Verifica si <code>resultado</code> es <code>None</code>)</td>
+</tr>
+<tr>
+<td><code>is not</code></td>
+<td>Verifica si dos variables <strong>son diferentes objetos</strong></td>
+<td><code>if secuencia is not otra_secuencia:</code> (Evalúa si las secuencias no son la misma instancia)</td>
+</tr>
+</tbody>
+</table><p>1️⃣ <strong>Validación de secuencias de ADN</strong> con operadores lógicos:</p>
+<p><strong>Determinando si una secuencia es larga o corta</strong></p>
+<pre class=" language-python"><code class="prism  language-python">longitud <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span><span class="token string">"ATGCGTACGTA"</span><span class="token punctuation">)</span>  
+<span class="token keyword">if</span> longitud <span class="token operator">&gt;</span> <span class="token number">10</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"La secuencia es larga"</span><span class="token punctuation">)</span>
+</code></pre>
+<p><strong>Determinando si el contenido de gc es óptimo</strong></p>
+<pre class=" language-python"><code class="prism  language-python">gc_porcentaje <span class="token operator">=</span> <span class="token number">55</span>
+<span class="token keyword">if</span> gc_porcentaje <span class="token operator">&gt;</span> <span class="token number">40</span> <span class="token operator">and</span> gc_porcentaje <span class="token operator">&lt;</span> <span class="token number">60</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"El contenido GC es óptimo"</span><span class="token punctuation">)</span>
+</code></pre>
+<p><strong>Verificando si la secuencia de dna contiene A y Ts</strong>.</p>
+<pre class=" language-python"><code class="prism  language-python">secuencia <span class="token operator">=</span> <span class="token string">"ATGCGTAA"</span>
+
+<span class="token keyword">if</span> <span class="token string">"A"</span> <span class="token keyword">in</span> secuencia <span class="token operator">and</span> <span class="token string">"T"</span> <span class="token keyword">in</span> secuencia<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"La secuencia contiene A y T"</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="ejercicios-prácticos-aplicados-a-genómica">Ejercicios Prácticos (Aplicados a Genómica)</h2>
+<h3 id="️⃣-verificación-de-longitud-de-secuencia">1️⃣ Verificación de Longitud de Secuencia</h3>
+<p>Escribe un programa que verifique si una secuencia de ADN tiene más de 1000 bases.</p>
+<pre class=" language-python"><code class="prism  language-python">secuencia <span class="token operator">=</span> <span class="token string">"ATGCGT..."</span> <span class="token comment"># Coloca aquí una secuencia de ADN`</span>
+
+<span class="token keyword">if</span> ________________ <span class="token punctuation">:</span>
+   <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Secuencia larga"</span><span class="token punctuation">)</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Secuencia corta"</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="️⃣-clasificación-de-genes">2️⃣ Clasificación de Genes</h3>
+<p>Dado un valor de expresión génica, clasifica el gen como <strong>sobreexpresado</strong>, <strong>expresión normal</strong> o <strong>baja expresión</strong>.</p>
+<pre class=" language-python"><code class="prism  language-python">expresion <span class="token operator">=</span> <span class="token number">5.2</span>  <span class="token comment"># Cambia este valor</span>
+
+<span class="token keyword">if</span>   _________ <span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Gen sobreexpresado"</span><span class="token punctuation">)</span>
+<span class="token keyword">elif</span> _________<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Expresión normal"</span><span class="token punctuation">)</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Baja expresión"</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="️⃣-identificación-de-bases-en-secuencia">3️⃣ Identificación de Bases en Secuencia</h3>
+<p>Escribe un código que determine si una secuencia contiene la base <code>N</code> (indica una base desconocida).</p>
+<pre class=" language-python"><code class="prism  language-python">secuencia <span class="token operator">=</span> <span class="token string">"ATGNCGTAGC"</span>
+
+<span class="token keyword">if</span> ___________ <span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Secuencia con bases desconocidas"</span><span class="token punctuation">)</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Secuencia válida"</span><span class="token punctuation">)</span>
+
+</code></pre>
+</div>
+</body>
+
+</html>
