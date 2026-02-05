@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introducción al Desarrollo de Software Científico</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Introducción al Desarrollo de Software Científico
+]
+.institute[
+### Licenciatura en Ciencias Genómicas,UNAM
+]
+.date[
+### First version: yyy-mm-dd; Last update: 2026-02-05
+]
+
+---
+
+
+
+
+&lt;style type="text/css"&gt;
+/* From https://github.com/yihui/xaringan/issues/147  */
+.scroll-output {
+  height: 80%;
+  overflow-y: scroll;
+}
+/* https://stackoverflow.com/questions/50919104/horizontally-scrollable-output-on-xaringan-slides */
+pre {
+  max-width: 100%;
+  overflow-x: scroll;
+}
+&lt;/style&gt;
+
+
+
+# Propósito de la sesión
+
+-   Introducir una **visión general** del desarrollo de software científico
+    
+-   Comprender que desarrollar software **no es solo escribir código**
+    
+-   Conocer el **lenguaje básico** y la forma de trabajo del curso
+    
+-   Alinear expectativas sobre **qué se hará y cómo se evaluará**
+    
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+&gt; Esta sesión no busca dominio técnico,    
+&gt; sino **entender el panorama completo** del curso.
+
+
+---
+
+## Contenido de la sesión
+
+1. Propósito del curso y alineación de expectativas  
+2. ¿Qué es desarrollar software?  
+3. Software en ciencias genómicas  
+4. Ciclo de vida del desarrollo de software  
+5. Requisitos y contexto  
+6. Análisis y diseño  
+7. Codificación y buenas prácticas  
+8. Pruebas  
+9. Liberación (Release)  
+10. Mantenimiento y evolución  
+11. Modelado básico de sistemas  
+12. Infraestructura y herramientas  
+13. Actividad guiada y cierre
+
+
+---
+# Alinear expectativas del curso
+
+-   **Programar** no es lo mismo que **desarrollar software**
+    
+-   Escribir código es solo **una parte** del proceso
+    
+-   En el curso trabajaremos con:
+    
+    -   organización,  
+    -   documentación,  
+    -   pruebas,  
+    -   y uso responsable de IA
+        
+-   El objetivo es producir software **comprensible, reproducible y validable**
+    
+
+.content-box-gray[
+&gt; En este curso, _que el código “funcione” no es suficiente_.
+]
+
+---
+# ¿Qué es el desarrollo de software?
+
+-   Es un **proceso estructurado** para resolver un problema
+    
+-   No comienza escribiendo código
+    
+-   Incluye:
+    
+    -   comprender el problema,
+        
+    -   diseñar una solución,
+        
+    -   implementarla,
+        
+    -   verificar que funciona,
+        
+    -   mantenerla en el tiempo
+        
+
+
+.content-box-gray[
+&gt; El desarrollo de software es un **proceso**, no una acción aislada.
+&gt; El código es **un resultado**, no el punto de partida.
+
+]
+
+---
+
+## Programar vs desarrollar software
+
+| Programar | Desarrollar software |
+|----------|----------------------|
+| Escribir código | Diseñar una solución |
+| Resolver una tarea puntual | Resolver un problema completo |
+| Enfocado en la implementación | Enfocado en el proceso |
+| Puede no documentarse | Requiere documentación |
+| Difícil de reproducir | Reproducible y verificable |
+
+
+&lt;br&gt;
+&lt;br&gt;
+
+
+.content-box-gray[
+&gt; En este curso **no solo programamos**,  
+&gt; **desarrollamos software científico**.
+]
+
+
+---
+## El papel del software en ciencias genómicas
+
+En las ciencias genómicas, el software se utiliza para:
+
+-   Analizar **grandes volúmenes de datos**
+    
+-   Automatizar análisis complejos y repetitivos
+    
+-   Garantizar la **reproducibilidad** de los resultados
+    
+-   Documentar de forma clara los procedimientos computacionales
+    
+-   Compartir análisis con otros investigadores
+    
+&lt;br&gt;
+
+.content-box-gray[
+&gt; En genómica, el software **no es accesorio**:  
+&gt; es parte integral del método científico.
+
+&gt; Si no puedes repetir el análisis, el resultado no es confiable
+]
+---
+
+## Tipos de software científico
+
+En la práctica científica encontramos distintos tipos de software:
+
+-   **Scripts**  
+    Programas pequeños para tareas específicas o exploratorias.
+    
+-   **Pipelines de análisis**  
+    Conjunto de pasos encadenados para procesar datos de forma sistemática.
+    
+-   **Notebooks computacionales**  
+    Mezclan código, resultados y explicación (exploración y docencia).
+    
+-   **Herramientas especializadas**  
+    Software más complejo y reutilizable para análisis específicos.
+    
+
+&gt; El curso trabajará principalmente con **scripts y proyectos pequeños**, aplicando principios que escalan a herramientas más grandes.
+
+&gt; No todos los problemas requieren el mismo tipo de software.
+
+---
+## Ciclo de vida del desarrollo de software
+
+El desarrollo de software se organiza en **etapas** que permiten pasar:
+
+-   de una **idea inicial**
+    
+-   a una **solución funcional**,
+    
+-   mantenible y reproducible en el tiempo.
+    
+
+Estas etapas forman el **ciclo de vida del desarrollo de software**.
+
+&lt;br&gt;
+
+
+.content-box-gray[
+&gt; Cada etapa genera productos  
+&gt; y aporta criterios de calidad.
+] 
+
+---
+## Fases del ciclo de vida
+
+De forma general, el ciclo incluye:
+
+-   💡 **Planificación** → idea / foco
+    
+-   📋 **Requisitos** → checklist / documento
+    
+-   🧩 **Análisis y diseño** → diagrama / nodos
+    
+-   💻 **Codificación** → código / Python
+    
+-   🔍 **Pruebas** → lupa / check
+    
+-   🚀 **Liberación (Release)** → paquete / etiqueta
+    
+-   🔧 **Mantenimiento** → engrane
+    
+
+
+.content-box-gray[
+&gt; No todas las fases tienen la misma duración,  
+&gt; pero **todas son necesarias**.
+] 
+
+---
+
+&lt;img src="img/software_ia.png" width="900px" style="display: block; margin: auto;" /&gt;
+
+---
+## El ciclo como proceso iterativo
+
+### El desarrollo no es lineal
+
+Aunque se presenta como una secuencia, el desarrollo de software es **iterativo**:
+
+-   Se regresa a requisitos cuando aparecen nuevas necesidades
+    
+-   El diseño se ajusta al encontrar problemas
+    
+-   El código se refina después de probar
+    
+-   El mantenimiento puede generar nuevos ciclos
+    
+
+&gt; Desarrollar software es un proceso  
+&gt; de **mejora continua**, no una línea recta.
+
+---
+## 📋 La fase de requisitos
+
+La fase de **requisitos** define:
+
+-   **qué debe hacer el software**
+    
+-   **bajo qué condiciones debe hacerlo**
+    
+
+Es el punto donde se traduce una idea general  
+en una **descripción concreta del problema**.
+
+&lt;br&gt;
+&lt;br&gt;
+
+.content-box-gray[
+&gt; Sin requisitos claros,  
+&gt; no hay forma de saber si el software es correcto.
+]
+
+
+---
+### Requisitos funcionales
+
+Los **requisitos funcionales** describen:
+
+-   las **acciones** que el software debe realizar
+    
+-   el **comportamiento esperado** del sistema
+    
+
+&lt;br&gt;
+
+Responden a la pregunta:
+
+&gt; **¿Qué hace el software?**
+
+&lt;br&gt;
+
+Ejemplos:
+
+-   El sistema debe filtrar genes con baja expresión.  
+-   El sistema debe normalizar los datos de entrada. 
+-   El sistema debe calcular la expresión diferencial entre dos condiciones.
+-   El sistema debe generar archivos de salida en formato CSV.   
+
+---
+### Requisitos no funcionales
+
+Los **requisitos no funcionales** describen:
+
+-   **cómo debe comportarse** el software
+-   restricciones y cualidades del sistema
+
+Ejemplos:
+
+- Rendimiento:  
+   - El sistema debe procesar un archivo de **hasta 10 GB en menos de 5 minutos**.  
+   - El tiempo de respuesta para una consulta no debe exceder 2 segundos.  
+- Usabilidad:    
+   - El software debe poder ejecutarse desde la línea de comandos **con una sola instrucción**.  
+   - El sistema debe proporcionar mensajes de **error claros y comprensibles**.
+- Portabilidad:
+   - El programa debe funcionar **en Linux, macOS y Windows**.
+- El código debe seguir las convenciones PEP8.
+
+---
+### 🧠 Dinámica. Proyecto: `suma_numeros`
+
+**Lista de requisitos**
+
+1.  El sistema debe solicitar dos números al usuario.
+    
+2.  El sistema debe calcular la suma de los números ingresados.
+    
+3.  El sistema debe mostrar el resultado en pantalla.
+    
+4.  El sistema debe ejecutarse desde la línea de comandos.
+    
+5.  El sistema debe manejar entradas no numéricas sin fallar.
+    
+6.  El sistema debe responder en menos de un segundo.
+    
+7.  El código debe ser fácil de entender y modificar.
+    
+8.  El programa debe funcionar en Linux, macOS y Windows.
+    
+9.  El sistema debe incluir un archivo `README.md` con instrucciones de uso.
+
+
+&gt; ¿Cuáles describen _qué hace_ el sistema  
+&gt; y cuáles describen _cómo debe comportarse_?
+
+---
+
+## Documento de contexto
+
+Durante la fase de requisitos se genera un **documento de contexto**, que puede ser:
+
+-   `README.md`.  
+-   un documento Markdown.  
+-   una sección inicial de un notebook
+    
+
+Este documento describe:
+
+-   el problema. 
+-   los requisitos funcionales. 
+-   los requisitos no funcionales. 
+-   los supuestos y limitaciones
+    
+&lt;br&gt;
+
+.content-box-gray[
+&gt; El documento de contexto guía  
+&gt; todo el desarrollo posterior.
+]
+
+---
+## Requisitos como contexto para la IA
+
+Cuando se utiliza inteligencia artificial para apoyar el desarrollo:
+
+-   los **requisitos** son el **contexto del problema**. 
+-   definen lo que la IA debe entender.  
+-   reducen ambigüedades e interpretaciones incorrectas
+    
+.content-box-red[
+&gt; Una IA sin contexto claro  
+&gt; **infiere o inventa** la solución.
+] 
+
+Definir bien los requisitos mejora:
+
+-   la calidad del código generado. 
+-   la coherencia de las respuestas. 
+-   la validación posterior mediante pruebas
+
+&lt;br&gt;
+&gt; La IA no piensa: responde al contexto que le damos
+
+---
+## Análisis y diseño
+
+Después de definir los requisitos, el siguiente paso es   **pensar la solución antes de programar**.
+
+-   Los requisitos definen **el problema**
+    
+-   El análisis y el diseño definen **la solución**
+    
+&lt;br&gt;
+&lt;br&gt;
+
+.content-box-gray[
+&gt; Programar sin análisis y diseño  
+&gt; suele generar código frágil y difícil de mantener.
+
+&gt; Esta es la parte que más se salta… y la que más problemas evita
+]
+
+---
+
+## Análisis: entender el problema
+
+El **análisis** consiste en:
+
+-   descomponer el problema en partes más pequeñas
+    
+-   identificar:
+    
+    -   entradas,
+        
+    -   procesos,
+        
+    -   salidas
+        
+-   detectar ambigüedades y casos especiales
+    
+&lt;br&gt;
+
+.content-box-gray[
+&gt; Analizar es **entender bien el problema**  
+&gt; antes de pensar en código.
+]
+
+---
+
+### 🧠 Dinámica. Análisis : `suma_numeros`
+
+-   ¿Qué datos entran al sistema?  
+-   ¿Qué datos salen?  
+-   ¿Qué casos pueden fallar?  
+-   ¿Qué suposiciones estamos haciendo?  
+-   ¿Qué no vamos a resolver en este proyecto?
+
+--
+
+Respuesta:
+
+-   **Entradas:** dos valores numéricos.
+-   **Salidas:** un número (la suma).
+-   **Casos límite:** entradas no numéricas, valores vacíos, números grandes.
+-   **Suposiciones:** solo dos números, suma simple.
+-   **Fuera de alcance:** interfaz gráfica, múltiples operaciones.
+    
+👉 Aquí todavía **no hay funciones ni módulos**.
+
+---
+
+## Diseño: estructurar la solución
+
+El **diseño** consiste en:
+
+-   organizar los pasos del análisis
+    
+-   definir el flujo de trabajo
+    
+-   decidir:
+    
+    -   funciones,
+        
+    -   módulos,
+        
+    -   scripts
+        
+-   establecer convenciones básicas
+    
+&lt;br&gt;
+
+.content-box-gray[
+&gt; Diseñar es decidir **cómo se implementará**  
+&gt; la solución antes de escribir código.
+]
+
+---
+### 🧠 Dinámica. Diseño : `suma_numeros`
+
+**Preguntas guía:**
+
+-   ¿Qué componentes o funciones necesitamos?  
+-   ¿Cómo se comunican entre sí?  
+-   ¿Qué decisiones de estructura tomamos?  
+-   ¿Dónde se manejarán los errores?  
+-   ¿Qué requisitos influyen en el diseño?
+
+--
+
+Respuesta:
+
+-   Función para leer entradas.
+-   Función para validar números.
+-   Función para realizar la suma.
+-   Función principal (`main`).
+-   Separación entre lógica y entrada/salida.
+
+---
+
+## Análisis y diseño como contexto
+
+### Contexto del problema y de la solución
+
+En este curso, el **contexto completo** se entiende como:
+
+-   **Contexto del problema**
+    
+    -   requisitos funcionales
+        
+    -   requisitos no funcionales
+        
+-   **Contexto de la solución**
+    
+    -   análisis
+        
+    -   diseño
+        
+.content-box-gray[
+&gt; Ambos contextos son necesarios  
+&gt; para desarrollar software y usar IA de forma efectiva.
+
+
+&gt; Sin diseño, la IA inventa; con diseño, la IA colabora
+]
+---
+
+## Qué se espera en este curso
+
+### Análisis y diseño en este curso
+
+En este curso **no se espera**:
+
+-   documentación extensa
+    
+-   diagramas formales complejos
+    
+
+Sí se espera que el estudiante:
+
+-   explique el flujo general del análisis
+    
+-   justifique decisiones importantes
+    
+-   use esquemas simples o texto estructurado
+    
+-   piense antes de programar
+    
+
+&gt; El objetivo no es documentar más,  
+&gt; sino **pensar mejor**.
+
+---
+## 💻  Codificación
+
+La **codificación** consiste en implementar el diseño en forma de código.
+
+En este curso se utilizará:
+
+-   **Visual Studio Code (VSC)** como entorno de desarrollo
+    
+-   Extensiones básicas para edición y ejecución
+    
+-   **Inteligencia artificial** como apoyo al desarrollo
+    
+&lt;br&gt;
+
+.content-box-gray[
+&gt; El código se escribe  
+&gt; a partir del **contexto definido previamente**.
+]
+
+---
+## IA como asistente, no sustituto
+
+### Uso de IA durante la codificación
+
+En este curso, la IA se utiliza como:
+
+-   apoyo para explorar soluciones.  
+-   ayuda para escribir o refinar código. 
+-   herramienta para aprender y comprender
+    
+
+La IA **no sustituye**:
+
+-   el razonamiento del estudiante. 
+-   la responsabilidad sobre el código.  
+-   la validación de resultados
+    
+&lt;br&gt;
+
+.content-box-red[
+&gt; El estudiante es responsable  
+&gt; del código que entrega.
+
+]
+
+---
+## Orden en software científico
+
+### ¿Por qué importa el orden?
+
+En software científico, el orden no es estético:
+
+-   permite entender qué hace el software
+    
+-   facilita la reproducibilidad
+    
+-   ayuda a detectar errores
+    
+-   permite que otros reutilicen el trabajo
+    
+&lt;br&gt;
+
+**¿Cómo conseguimos ese orden?**
+
+.content-box-gray[
+&gt; Código desordenado  
+&gt; produce resultados poco confiables.
+]
+
+---
+## Estándares básicos del curso
+
+En el curso se trabajará con estándares prácticos:
+
+-   **Markdown** para documentación (`README.md`)
+    
+-   **PEP8** para estilo de código en Python
+    
+-   **pytest** para pruebas automatizadas
+    
+-   Convenciones claras de nombres
+    
+&lt;br&gt;
+
+&gt; Los estándares permiten  
+&gt; que el software sea entendible y compartible.
+
+
+---
+## Buenas prácticas al codificar
+
+Durante la codificación se espera:
+
+-   mantenga una **estructura clara del proyecto**
+
+-   separe **código, datos y documentación**
+    
+-   escriba código **legible y modular**
+    
+-   documentación interna mínima
+    
+-   definición de casos de prueba
+    
+&lt;br&gt;
+&lt;br&gt;
+
+&gt; Código que funciona pero no se entiende  
+&gt; **no es buen software científico**.
+
+---
+## Convenciones de nombres
+
+Se recomienda seguir **PEP8**:
+
+-   **snake_case** para:
+    
+    -   variables
+        
+    -   funciones
+        
+    -   archivos  
+        _Ejemplo:_ `sumar_numeros`
+        
+-   **PascalCase** para:
+    
+    -   clases  
+        _Ejemplo:_ `AnalizadorDatos`
+        
+&lt;br&gt;
+
+&gt; Nombrar bien facilita leer, entender y mantener el código.
+
+
+---
+## 🔍 La fase de pruebas
+
+La etapa de **pruebas** tiene como objetivo verificar que:
+
+-   el software **cumple con los requisitos definidos**.  
+-   el comportamiento es el esperado.  
+-   los errores se detectan de forma temprana. 
+    
+    
+En el curso se trabajará con:
+
+-   **Casos normales**.  
+    -   situaciones esperadas de uso
+-   **Casos límite**.  
+    -   condiciones extremas o poco comunes
+        
+
+.content-box-gray[
+&gt; Probar no es desconfiar del código,  
+&gt; es **validar científicamente** su comportamiento.
+]
+
+---
+## Casos de prueba
+
+### ¿De dónde salen los casos de prueba?
+
+-   **Requisitos**  
+    Definen _qué debe cumplirse_.  
+    → Aquí nace la **intención de probar**.
+    
+-   **Análisis**  
+    Identifica _situaciones relevantes_.  
+    → Entradas válidas, inválidas y casos límite.
+    
+-   **Diseño**  
+    Decide _cómo será posible probar_.  
+    → Separación de lógica, manejo de errores, funciones testeables.
+    
+-   **Pruebas**  
+    Formalizan y verifican.  
+    → Casos de prueba explícitos con entradas y salidas esperadas.
+    
+
+👉 Aquí ya aparece la **estructura**, pero aún no el código.
+
+---
+## 🧠 Dinámica. Pruebas :`suma_numeros`
+
+**¿Qué deberíamos probar?**
+
+--
+
+| Caso | Entrada | ¿Qué esperamos? |
+|-----|--------|------------------|
+| 1 | `2`, `3` | Muestra `5` |
+| 2 | `-1`, `4` | Muestra `3` |
+| 3 | `0`, `0` | Muestra `0` |
+| 4 | `a`, `3` | Mensaje de error |
+| 5 | *(vacío)*, `5` | Mensaje de error |
+
+
+- ¿Qué requisito verifica cada caso?
+- ¿Cuáles prueban funcionalidad?
+- ¿Cuáles prueban manejo de errores?
+- ¿Qué caso falta?
+
+&gt; **Idea clave:**  
+&gt; Probar es verificar requisitos usando ejemplos concretos.
+
+---
+
+## Pruebas automatizadas
+
+### Pruebas automatizadas con pytest
+
+Además de documentar casos de prueba, se utilizará:
+
+-   **pytest** para pruebas automatizadas. 
+-   ejecución sistemática y repetible.  
+-   detección rápida de errores al modificar código
+    
+
+pytest se usa para:
+
+-   formalizar los casos de prueba.  
+-   validar cambios, incluidos los generados con IA.  
+-   mantener confianza en el software
+    
+&lt;br&gt;
+
+.content-box-blue[
+&gt; La IA puede proponer código;  
+&gt; **las pruebas deciden si es correcto**.
+]
+
+---
+## ¿Qué significa liberar software?
+
+La **liberación** es la etapa en la que el software se prepara para que:
+
+-   otras personas puedan **descargarlo**
+    
+-   puedan **instalarlo**
+    
+-   puedan **usarlo**
+    
+-   **sin depender del autor**
+    
+&lt;br&gt;
+
+.content-box-gray[
+&gt; Subir código a GitHub no es lo mismo que liberar software.
+
+&gt; Liberar software es hacerlo **reproducible y utilizable por terceros**.
+]
+
+---
+## Elementos mínimos de una liberación
+
+### ¿Cuándo un software está correctamente liberado?
+
+Un proyecto liberado debe incluir, al menos:
+
+-   **Código organizado**
+    
+-   **Documentación de uso**
+    
+-   **Licencia clara**
+    
+
+Si falta alguno de estos elementos:
+
+.content-box-red[
+&gt; el software **no es reproducible**  
+&gt; o **no es reutilizable**.
+]
+
+---
+## Documento `RELEASE.md`
+
+En este curso, la liberación incluye un documento específico:
+
+📄 **`RELEASE.md`**
+
+Este documento debe contener:
+
+-   descripción breve del software.  
+-   requisitos (lenguaje, versión, dependencias). 
+-   instrucciones para descargar el proyecto.  
+-   pasos de instalación. 
+-   ejemplo mínimo de uso. 
+-   referencia a la licencia
+    
+
+.content-box-gray[
+&gt; `RELEASE.md` permite que cualquier usuario  
+&gt; **repita el uso del software sin ayuda del autor**.
+]
+
+---
+## Licencia de uso del software
+
+Todo software público debe incluir una **licencia** que indique:
+
+-   qué se puede hacer con el código
+    
+-   qué no se permite
+    
+-   bajo qué condiciones se puede reutilizar
+    
+
+La licencia debe incluirse en un archivo:
+
+📄 **`LICENSE`**
+
+&gt; Sin licencia explícita,  
+&gt; el código **no es legalmente reutilizable**.
+
+---
+## Mantenimiento del software
+
+Después de la liberación, el software entra en una etapa de **mantenimiento**, donde se:
+
+-   corrigen errores detectados
+    
+-   ajusta el software a nuevas necesidades
+    
+-   mejora la claridad o el rendimiento
+    
+-   adapta el código a nuevos entornos o datos
+    
+&lt;b&gt;
+
+&gt; El desarrollo de software  
+&gt; **no termina con la liberación**.
+
+---
+## Evolución e iteración
+
+### El software como proceso evolutivo
+
+En la práctica, el desarrollo de software es:
+
+-   **iterativo**, no lineal
+    
+-   un proceso de mejora continua
+    
+-   sensible a nuevos requisitos y descubrimientos
+    
+
+Cambios en:
+
+-   el problema científico
+    
+-   los datos
+    
+-   las herramientas  
+    pueden requerir volver a etapas anteriores.
+    
+
+&gt; Volver atrás no es fallar,  
+&gt; es **mejorar el software**.
+
+---
+
+class: inverse, center, middle
+
+# 
+
+---
+## Infraestructura de trabajo del curso
+
+Para desarrollar software de forma ordenada se requiere una infraestructura mínima:
+
+-   un **entorno de desarrollo** configurado
+    
+-   un **editor de código**
+    
+-   una **estructura clara de proyecto**
+    
+-   uso básico de la **línea de comandos**
+    
+
+&gt; La infraestructura no es un obstáculo,  
+&gt; es lo que permite trabajar de forma reproducible.
+
+---
+## Herramientas principales
+
+Durante el curso se trabajará con:
+
+-   **Visual Studio Code (VSC)**  
+    Editor de código principal.
+    
+-   **Línea de comandos**  
+    Para ejecutar programas y pruebas.
+    
+-   **Gestión de entornos y dependencias**  
+    Para asegurar reproducibilidad.
+    
+
+---
+## Actividad Exploratoria
+
+1. Verificar la instalación del entorno. Siguiendo la guía de instalación.
+
+2. Crear proyecto `hola`
+
+3. Explorar Visual Studio Code
+
+4. Abrir proyecto `hola`. 
+  - Crear un programa `main.py` que imprima "Hola! que tal!".
+  - Correr el programa
+  
+5. Explorar el proyecto suma_numeros
+
+
+---
+
+### Entregable / Evidencia (formativa)
+
+En la página del curso, subir:
+
+-   **Dos capturas de pantalla de Visual Studio Code**:
+    
+    1.  Proyecto `hola`, mostrando:
+        
+        -   El archivo `main.py`
+            
+        -   La terminal con el mensaje impreso correctamente.
+            
+    2.  Proyecto `suma_numeros`, mostrando:
+        
+        -   El proyecto abierto en VSC
+            
+        -   La ejecución del programa en la terminal.
+
+---
+
+### Cierre de la sesión
+
+Para finalizar la sesión:
+
+-   reflexionaremos sobre:
+    
+    -   qué implica desarrollar software
+        
+    -   cómo se trabajará durante el curso
+        
+-   resolveremos dudas iniciales
+    
+-   conectaremos esta sesión con las siguientes
+    
+
+&gt; Este material servirá como **referencia base**  
+&gt; para el resto del curso.
+
+
+
+---
+
+class: inverse, center, middle
+
+# 
+
+---
+
+
+## ¿Por qué modelar antes de programar?
+
+### Modelado básico de sistemas
+
+Antes de escribir código, es útil **representar el sistema** de forma gráfica o conceptual.
+
+El modelado ayuda a:
+
+-   clarificar ideas
+    
+-   entender el flujo del análisis
+    
+-   comunicar la solución a otros
+    
+-   detectar problemas tempranamente
+    
+
+&gt; Modelar no es burocracia,  
+&gt; es **pensar con claridad**.
+
+---
+## Tipos de diagramas simples
+
+En el curso se usarán diagramas **simples**, como:
+
+-   **Diagramas de flujo**
+    
+    -   representan pasos y decisiones
+        
+-   **Casos de uso**
+    
+    -   describen qué puede hacer el sistema y quién lo usa
+        
+-   **Diagramas de componentes (ligeros)**
+    
+    -   muestran partes principales del sistema
+        
+&lt;br&gt;
+
+.content-box-gray[
+&gt; Los diagramas buscan **entender**,  
+&gt; no documentar formalmente.
+]
+---
+
+## Diagramas en Markdown
+
+### Diagramas con Mermaid
+
+En este curso se usarán herramientas ligeras como:
+
+-   **Mermaid**
+    
+-   **PlantUML**
+    
+
+Ventajas:
+
+-   se integran en documentos Markdown
+    
+-   permiten versionar diagramas junto con el código
+    
+-   no requieren herramientas externas complejas
+    
+&lt;br&gt;
+
+.content-box-gray[
+&gt; El diagrama es parte del **contexto del proyecto**.
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+  .logo {
+    background-image: url(img/LCG-UNAM.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    width: 110px;
+    height: 128px;
+    z-index: 0;
+  }
+  </style>
+  
+  <script>
+  document
+    .querySelectorAll(
+      '.remark-slide-content' +
+      ':not(.title-slide)' +
+      // add additional classes to exclude here, e.g.
+      // ':not(.inverse)' +
+      ':not(.hide-logo)'
+    )
+    .forEach(el => {
+      el.innerHTML += '<div class="logo"></div>';
+    });
+  </script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

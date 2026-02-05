@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>1.introduccion_al_desarrollo_de_software</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+  body {
+    padding: 2cm; 
+  }
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">Introducción al desarrollo de software</h1>
+
+<blockquote>
+<p><strong>Material de apoyo detallado para el curso</strong><br>
+Este documento acompaña a las diapositivas y sirve como material de lectura y consulta para el estudiante.</p>
+</blockquote>
+
+<hr>
+
+<h2 id="toc_1">Prerrequisitos</h2>
+
+<p>Para cursar esta asignatura se espera que el estudiante:</p>
+
+<ul>
+<li>Disponga de una computadora personal con sistema operativo Windows, macOS o Linux.</li>
+<li>Siga la <strong>Guía de infraestructura del curso</strong> para instalar y configurar:
+
+<ul>
+<li><strong>Python</strong></li>
+<li><strong>uv</strong> para la gestión de entornos y dependencias</li>
+<li><strong>Visual Studio Code (VSC)</strong> como entorno de desarrollo</li>
+</ul></li>
+<li>Tenga nociones básicas del uso de sistemas tipo <strong>Unix/Linux</strong>, incluyendo:
+
+<ul>
+<li>navegación de directorios,</li>
+<li>ejecución de comandos en la terminal.</li>
+</ul></li>
+<li>Conozca conceptos básicos de <strong>algoritmos</strong>, como secuencias, condicionales y ciclos.</li>
+</ul>
+
+<blockquote>
+<p>La correcta instalación del entorno forma parte del trabajo inicial del curso y será acompañada mediante la guía proporcionada.</p>
+</blockquote>
+
+<hr>
+
+<h2 id="toc_2">1. Propósito de la sesión</h2>
+
+<p>El objetivo de esta primera clase es proporcionar una <strong>visión general</strong> de lo que implica el desarrollo de software, particularmente en contextos científicos y de ciencias genómicas. No se espera que el estudiante domine herramientas ni técnicas en esta sesión, sino que <strong>comprenda el panorama</strong>, el lenguaje básico y la forma de trabajo que se seguirá durante el curso.</p>
+
+<p>Esta clase también busca <strong>alinear expectativas</strong>: desarrollar software no es solo escribir código, sino trabajar de manera organizada, reproducible y colaborativa.</p>
+
+<h3 id="toc_3">Objetivos de aprendizaje</h3>
+
+<ul>
+<li><p>El estudiante será competente para explicar las fases del ciclo de vida del software y los productos típicos de cada fase.</p></li>
+<li><p>El estudiante será competente para distinguir requisitos funcionales vs. no funcionales en un caso sencillo.</p></li>
+<li><p>El estudiante será competente para representar una solución simple mediante un diagrama (flujo o caso de uso) en Mermaid.</p></li>
+<li><p>El estudiante será competente para describir la infraestructura mínima del curso (VS Code, CLI, estructura de proyecto) y verificar que su entorno funciona.</p></li>
+<li><p>El estudiante será competente para usar IA de forma responsable para clarificar dudas sin sustituir el aprendizaje (con reglas del curso).</p></li>
+</ul>
+
+<h2 id="toc_4">2. ¿Qué es el desarrollo de software?</h2>
+
+<p>El desarrollo de software es un <strong>proceso estructurado</strong> para crear soluciones computacionales a problemas específicos. Incluye actividades como:</p>
+
+<ul>
+<li>Comprender el problema</li>
+<li>Diseñar una solución</li>
+<li>Implementarla mediante código</li>
+<li>Verificar que funcione correctamente</li>
+<li>Mantenerla y mejorarla con el tiempo</li>
+</ul>
+
+<p>Es importante distinguir entre:</p>
+
+<ul>
+<li><strong>Programar</strong>: escribir instrucciones en un lenguaje de programación.</li>
+<li><strong>Desarrollar software</strong>: diseñar, construir, probar y mantener una solución completa.</li>
+</ul>
+
+<blockquote>
+<p>Desarrollar software implica también generar el contexto necesario para que otros entiendan y usen la solución.</p>
+</blockquote>
+
+<p>En este curso se trabajará con esta segunda visión.</p>
+
+<hr>
+
+<h2 id="toc_5">3. El desarrollo de software en ciencias genómicas</h2>
+
+<p>En las ciencias genómicas, el software es una herramienta central para:</p>
+
+<ul>
+<li>Analizar grandes volúmenes de datos</li>
+<li>Automatizar procesos repetitivos</li>
+<li>Garantizar la reproducibilidad de los análisis</li>
+<li>Documentar de forma clara los procedimientos computacionales</li>
+</ul>
+
+<p>Ejemplos comunes de software científico incluyen:</p>
+
+<ul>
+<li>Scripts para análisis de datos</li>
+<li>Pipelines de procesamiento</li>
+<li>Notebooks computacionales</li>
+<li>Herramientas especializadas de análisis genómico</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_6">4. Ciclo de vida del desarrollo de software</h2>
+
+<p>El desarrollo de software suele organizarse en una serie de etapas conocidas como <strong>ciclo de vida del desarrollo de software</strong>. La figura incluida en el material ilustra este ciclo como una ruta que va <strong>desde la idea inicial hasta el mantenimiento del software</strong>, destacando que en cada etapa se generan productos y se aplican estándares de calidad.</p>
+
+<p><img src="img/fases.png" alt="Ciclo">
+<strong>Figura Ciclo de vida clásico del desarrollo de software y sus entregables</strong>. Cada fase (planificación, requisitos, análisis y diseño, codificación, pruebas, liberación y mantenimiento) produce artefactos específicos, documentados mediante estándares y buenas prácticas para asegurar calidad y reproducibilidad.</p>
+
+<p>La siguiente figura refuerza este ciclo incorporando explícitamente el papel de la IA como apoyo en distintas etapas.</p>
+
+<p><img src="img/software_ia.png" alt="">
+<strong>Figura Ciclo de vida de software con IA</strong>. Ciclo de vida del desarrollo de software con apoyo de inteligencia artificial, donde los requisitos y el análisis–diseño definen el contexto que guía la codificación. La IA actúa como asistente proponiendo soluciones, mientras que el humano decide, valida y mantiene la responsabilidad sobre el software.</p>
+
+<p>Veamos cada etapa del ciclo de vida</p>
+
+<h3 id="toc_7">💡 Planificación</h3>
+
+<p>En esta etapa se define el alcance general del proyecto. Se identifican los objetivos, los recursos disponibles y las restricciones. El producto típico de esta fase es un <strong>documento de descripción del proyecto</strong>, que sirve como punto de partida para todo el desarrollo.</p>
+
+<h3 id="toc_8">📋 Requisitos</h3>
+
+<p>La etapa de requisitos define <strong>qué debe hacer el software</strong> y <strong>bajo qué condiciones debe hacerlo</strong>. En el contexto actual, donde se utilizan herramientas de inteligencia artificial para apoyar el desarrollo, esta fase es especialmente crítica, ya que los requisitos constituyen el <strong>contexto que permite a la IA entender correctamente el problema</strong>.</p>
+
+<p>Los requisitos se pueden clasificar en dos grandes tipos:</p>
+
+<p><strong>Requisitos funcionales</strong></p>
+
+<ul>
+<li>Describen las funciones o acciones que el software debe realizar.</li>
+<li>Responden a la pregunta: <em>¿qué hace el sistema?</em></li>
+</ul>
+
+<p><strong>Requisitos no funcionales</strong></p>
+
+<ul>
+<li>Describen restricciones o cualidades del software.</li>
+<li>Responden a la pregunta: <em>¿cómo debe comportarse el sistema?</em></li>
+</ul>
+
+<p>En esta etapa también se espera generar un <strong>documento de contexto</strong>, que puede tomar la forma de:</p>
+
+<ul>
+<li><code>README.md</code></li>
+<li>Documento de contexto</li>
+<li>Texto estructurado en un notebook</li>
+</ul>
+
+<p>Este documento debe describir:</p>
+
+<ul>
+<li>El problema que se quiere resolver</li>
+<li>Los requisitos funcionales y no funcionales</li>
+<li>Los supuestos y limitaciones</li>
+</ul>
+
+<p>Definir buenos requisitos y documentarlos de forma clara es fundamental para:</p>
+
+<ul>
+<li>Diseñar adecuadamente el análisis</li>
+<li>Guiar la implementación</li>
+<li>Interactuar eficazmente con herramientas de IA mediante prompts bien contextualizados</li>
+</ul>
+
+<p>El documento que usaremos en este curso será <code>README.md</code>, mas tarde veremos lo que contiene para que lo uses como una plantilla para tus proyectos (ver <a href="../plantillas/plantillas.md">plantillas propuestas</a>).</p>
+
+<h3 id="toc_9">🧩 Análisis y diseño</h3>
+
+<p>La etapa de <strong>análisis y diseño</strong> tiene como objetivo transformar los requisitos en una <strong>idea clara de solución</strong>. Mientras que los requisitos definen el <em>problema</em>, el análisis y el diseño definen <em>cómo se va a resolver</em>.</p>
+
+<p>En el contexto del desarrollo de software apoyado por inteligencia artificial, esta etapa adquiere un papel central, ya que permite construir el <strong>contexto de la solución</strong> que guiará tanto al desarrollador humano como a la IA.</p>
+
+<h4 id="toc_10">Análisis: entender y descomponer el problema</h4>
+
+<p>El análisis consiste en:</p>
+
+<ul>
+<li>Descomponer el problema en partes más pequeñas</li>
+<li>Identificar los pasos necesarios para resolverlo</li>
+<li>Reconocer entradas, procesos y salidas</li>
+<li>Detectar posibles dificultades o ambigüedades</li>
+</ul>
+
+<p>Desde el punto de vista del contexto para la IA, el análisis ayuda a:</p>
+
+<ul>
+<li>Reducir interpretaciones incorrectas</li>
+<li>Limitar el espacio de soluciones posibles</li>
+<li>Hacer explícitas las decisiones implícitas del problema</li>
+</ul>
+
+<h4 id="toc_11">Diseño: estructurar la solución</h4>
+
+<p>El diseño consiste en:
+- Organizar los pasos del análisis en una estructura lógica
+- Definir el flujo de datos
+- Decidir cómo se dividirá el programa (funciones, módulos, scripts)
+- Establecer convenciones básicas de nombres y formatos</p>
+
+<p>El diseño no implica aún escribir código detallado, sino <strong>tomar decisiones previas</strong> que orienten la implementación.</p>
+
+<h4 id="toc_12">Análisis y diseño como parte del contexto</h4>
+
+<p>En este curso se propone entender el contexto para el desarrollo de software —y para el uso efectivo de IA— como la suma de dos componentes:</p>
+
+<ul>
+<li><strong>Contexto del problema</strong>: definido por los requisitos funcionales y no funcionales.</li>
+<li><strong>Contexto de la solución</strong>: definido por el análisis y el diseño.</li>
+</ul>
+
+<p>Ambos tipos de contexto son complementarios. Cuando solo se proporcionan requisitos, la IA tiende a inferir o inventar el diseño. Cuando se incluye también el análisis y el diseño, las respuestas de la IA son más coherentes, precisas y alineadas con la intención del análisis científico.</p>
+
+<h4 id="toc_13">Aplicación para nuestro curso</h4>
+
+<p>En este curso, el análisis y el diseño no se documentarán de forma extensa ni formal. En su lugar, se espera que los estudiantes:  </p>
+
+<ul>
+<li>Expliquen con claridad el flujo general del análisis</li>
+<li>Justifiquen las decisiones principales de la solución</li>
+<li>Utilicen esquemas simples, texto estructurado o diagramas ligeros</li>
+</ul>
+
+<p>El objetivo no es producir documentación exhaustiva, sino <strong>pensar antes de programar</strong> y generar un contexto sólido que permita desarrollar software científico reproducible, comprensible y apoyado eficazmente por herramientas de IA.</p>
+
+<h3 id="toc_14">💻 Codificación</h3>
+
+<p>La <strong>codificación</strong> corresponde a la implementación del diseño en forma de código. En este curso, esta etapa se realizará utilizando:</p>
+
+<ul>
+<li><strong>Visual Studio Code (VSC)</strong> como entorno de desarrollo</li>
+<li>Extensiones seleccionadas para apoyar el trabajo (formato, análisis, ejecución)</li>
+<li><strong>GitHub Copilot</strong> como asistente de programación basado en inteligencia artificial</li>
+</ul>
+
+<p>La codificación no se realiza de manera aislada: el código que se escribe —o que propone la IA— está guiado por el <strong>contexto definido en las etapas previas</strong> del desarrollo de software.</p>
+
+<h4 id="toc_15">Rol de requisitos, análisis y diseño</h4>
+
+<p>En este curso:</p>
+
+<ul>
+<li>Los <strong>requisitos</strong> proporcionan el <em>contexto del problema</em>.</li>
+<li>El <strong>análisis y el diseño</strong> proporcionan el <em>contexto de la solución</em>.</li>
+<li>El estudiante es responsable de <strong>evaluar, comprender y justificar</strong> el código generado, independientemente de si fue escrito manualmente o con apoyo de IA.</li>
+</ul>
+
+<h4 id="toc_16">Codificación en el contexto del software científico</h4>
+
+<p>En el desarrollo de <strong>software científico</strong>, el orden y el uso de estándares no son un requisito estético, sino una <strong>condición necesaria para producir resultados confiables, reproducibles y verificables</strong>.</p>
+
+<p>El <strong>orden</strong> se refleja en:</p>
+
+<ul>
+<li>una estructura clara del proyecto,</li>
+<li>la separación entre código, datos, documentación y pruebas,</li>
+<li>la definición explícita del problema antes de comenzar a programar.</li>
+</ul>
+
+<p>Trabajar de forma ordenada permite:</p>
+
+<ul>
+<li>entender qué hace el software,</li>
+<li>reproducir resultados,</li>
+<li>detectar errores de manera más sencilla.</li>
+</ul>
+
+<p>Los <strong>estándares</strong> proporcionan un lenguaje común que permite que otras personas —y uno mismo en el futuro— puedan entender, ejecutar y reutilizar el software. En este curso, los estándares se entienden como acuerdos prácticos y ampliamente aceptados, por ejemplo:</p>
+
+<ul>
+<li>el uso de documentos Markdown (<code>README.md</code>) para describir el contexto del proyecto,</li>
+<li>convenciones de estilo como <strong>PEP8</strong> en Python,</li>
+<li>herramientas de prueba como <strong>pytest</strong> para validar el comportamiento del código.</li>
+</ul>
+
+<h4 id="toc_17">Buenas prácticas durante la codificación</h4>
+
+<p>Durante la codificación se espera que el estudiante aplique buenas prácticas básicas, entre ellas:</p>
+
+<ul>
+<li>escribir código <strong>legible, modular y organizado</strong>,</li>
+<li>utilizar nombres consistentes y significativos,</li>
+<li>documentar decisiones relevantes dentro del código,</li>
+<li>definir y ejecutar <strong>casos de prueba</strong>, incluyendo casos límite.</li>
+</ul>
+
+<p>En esta etapa se espera también la <strong>documentación interna del código</strong>, que incluye:</p>
+
+<ul>
+<li>comentarios claros cuando sea necesario,</li>
+<li>docstrings en funciones o módulos,</li>
+<li>indicaciones básicas de uso y supuestos del programa.</li>
+</ul>
+
+<h4 id="toc_18">Convenciones de nombres y estilo de código</h4>
+
+<p>El uso de <strong>convenciones de nombres consistentes</strong> es una parte fundamental del orden y las buenas prácticas. Nombrar correctamente variables, funciones y archivos facilita la lectura del código, reduce ambigüedades y mejora la colaboración.</p>
+
+<p>En este curso se recomienda seguir las convenciones establecidas por <strong>PEP8</strong>, ampliamente utilizadas en Python y en proyectos científicos:</p>
+
+<ul>
+<li><p><strong>snake_case</strong> para:</p>
+
+<ul>
+<li>nombres de funciones</li>
+<li>variables</li>
+<li>archivos de código<br>
+<em>Ejemplo:</em> <code>sumar_numeros</code>, <code>archivo_entrada</code></li>
+</ul></li>
+<li><p><strong>PascalCase</strong> para:</p>
+
+<ul>
+<li>nombres de clases<br>
+<em>Ejemplo:</em> <code>AnalizadorDatos</code>, <code>ProcesadorGenomico</code></li>
+</ul></li>
+</ul>
+
+<p>Estas convenciones permiten distinguir rápidamente el rol de cada elemento dentro del código.</p>
+
+<p>Cuando se utilicen herramientas de inteligencia artificial para generar código, el estudiante deberá:</p>
+
+<ul>
+<li>verificar que las convenciones de estilo se respeten,</li>
+<li>ajustar el código si la IA no sigue el estilo recomendado,</li>
+<li>mantener consistencia a lo largo de todo el proyecto.</li>
+</ul>
+
+<blockquote>
+<p>En este curso se enfatiza que <strong>la IA se entiende como un asistente</strong>, no como un sustituto del razonamiento del estudiante, y que <strong>escribir código sin orden, sin documentación y sin validación no constituye desarrollo de software científico</strong>, incluso si el código fue generado con ayuda de IA.</p>
+</blockquote>
+
+<h3 id="toc_19">🔍 Pruebas</h3>
+
+<p>La etapa de <strong>pruebas</strong> tiene como objetivo verificar que el software desarrollado cumple con los requisitos definidos inicialmente. En un entorno de desarrollo apoyado por IA, esta fase se vuelve <strong>crítica</strong>, ya que permite validar de manera objetiva que el código generado responde correctamente al problema planteado.</p>
+
+<p>Las pruebas se basan directamente en los <strong>casos de prueba definidos en la etapa de requisitos</strong>, incluyendo:</p>
+
+<ul>
+<li><strong>Casos normales</strong> (situaciones esperadas de uso)</li>
+<li><strong>Casos límite</strong> (condiciones extremas o poco comunes)</li>
+</ul>
+
+<p>En este curso se trabajará con dos estrategias complementarias:</p>
+
+<ul>
+<li><strong>Documento de casos de prueba</strong>: los estudiantes definirán explícitamente los casos de prueba en un documento sencillo (por ejemplo, en Markdown), donde se especifique la entrada, la salida esperada y la justificación del caso.</li>
+<li><strong>Pruebas automatizadas</strong>: cuando sea pertinente, se utilizará la herramienta <strong>pytest</strong> para implementar pruebas automáticas que permitan verificar de forma sistemática el comportamiento del programa.</li>
+</ul>
+
+<p>El uso de pytest no se plantea como un ejercicio de ingeniería de software avanzada, sino como una herramienta para:</p>
+
+<ul>
+<li>Formalizar los casos de prueba</li>
+<li>Detectar errores de forma temprana</li>
+<li>Validar modificaciones al código, incluyendo aquellas generadas con apoyo de IA</li>
+</ul>
+
+<p>Esta etapa devuelve al estudiante un rol activo y crítico frente al desarrollo: la IA puede proponer código, pero las pruebas —manuales y automatizadas— permiten decidir si la solución es correcta desde el punto de vista funcional y científico.</p>
+
+<h3 id="toc_20">🚀 Liberación (Release)</h3>
+
+<p>Una vez que el software ha sido probado, se prepara para su <strong>liberación</strong>, es decir, para que <strong>otras personas puedan descargarlo, instalarlo y utilizarlo sin depender del autor</strong>. En esta fase, el software deja de ser un proyecto personal y pasa a convertirse en un producto reproducible.</p>
+
+<p>La liberación no consiste únicamente en subir código a GitHub. Un proyecto se considera correctamente liberado cuando incluye, al menos, los siguientes elementos:</p>
+
+<h4 id="toc_21">1. Código organizado</h4>
+
+<p>El repositorio debe presentar una estructura clara de directorios y archivos, de modo que un usuario externo pueda identificar fácilmente:</p>
+
+<ul>
+<li>el código fuente,</li>
+<li>los datos de ejemplo (si aplica),</li>
+<li>los scripts principales,</li>
+<li>y los archivos de configuración.</li>
+</ul>
+
+<p>La complejidad de la estructura dependerá de la etapa del curso; en las primeras prácticas se trabajará con estructuras simples después aplicaremos una estructura más adecuada ( ver <a href="estructura_proyecto.md">estructura del proyecto</a></p>
+
+<h4 id="toc_22">2. Documento de liberación</h4>
+
+<p>Todo proyecto liberado debe incluir <strong>un documento explícito que guíe al usuario externo</strong> en el uso del software.<br>
+Este documento debe permitir que cualquier persona pueda <strong>replicar el funcionamiento del proyecto sin contacto adicional con el autor</strong>.</p>
+
+<p>En este curso, dicho documento se denomina: <code>RELEASE.md</code></p>
+
+<p>El archivo <code>RELEASE.md</code> debe contener como mínimo:</p>
+
+<ul>
+<li>una breve descripción del software,</li>
+<li>los requisitos necesarios (lenguaje, versión, dependencias),</li>
+<li>instrucciones claras para descargar el proyecto,</li>
+<li>pasos de instalación,</li>
+<li>un ejemplo mínimo de uso,</li>
+<li>y una referencia explícita a la licencia de uso.</li>
+</ul>
+
+<p>Este documento <strong>no sustituye al README</strong>, sino que lo complementa.<br>
+Mientras el README describe el proyecto de forma general, <code>RELEASE.md</code> se enfoca exclusivamente en su <strong>uso práctico y reproducible</strong>.</p>
+
+<h4 id="toc_23">3. Licencia de uso</h4>
+
+<p>Todo software público debe incluir una licencia que indique claramente:</p>
+
+<ul>
+<li>qué se permite hacer con el código,</li>
+<li>qué restricciones existen,</li>
+<li>y bajo qué condiciones puede reutilizarse.</li>
+</ul>
+
+<p>La licencia debe incluirse en un archivo llamado <code>LICENSE</code>, ubicado en la raíz del repositorio.<br>
+Sin una licencia explícita, el código <strong>no se considera legalmente reutilizable</strong>, aunque sea público.</p>
+
+<p>En resumen, un software se considera correctamente liberado cuando:</p>
+
+<ul>
+<li>está disponible en un repositorio público,</li>
+<li>incluye documentación suficiente para su reproducción,</li>
+<li>y cuenta con una licencia clara de uso.</li>
+</ul>
+
+<h3 id="toc_24">🔧 Mantenimiento</h3>
+
+<p>Después del lanzamiento, el software entra en una etapa de mantenimiento. Aquí se corrigen errores, se realizan mejoras y se adapta el sistema a nuevas necesidades. Esta fase refuerza la idea de que el desarrollo de software es un proceso continuo.</p>
+
+<p>Es importante notar que, aunque el ciclo se presenta de forma secuencial, en la práctica es <strong>iterativo</strong>: se puede regresar a etapas anteriores conforme se detectan nuevos requisitos o problemas.</p>
+
+<hr>
+
+<h2 id="toc_25">5. Modelado básico de sistemas</h2>
+
+<p>Antes de escribir código, es útil <strong>representar el sistema</strong> de forma gráfica o conceptual. El modelado ayuda a:</p>
+
+<ul>
+<li>Clarificar ideas</li>
+<li>Comunicar soluciones</li>
+<li>Detectar problemas tempranamente</li>
+</ul>
+
+<p>Algunos diagramas comunes son:</p>
+
+<ul>
+<li><strong>Casos de uso</strong>: describen qué puede hacer el sistema y quién lo usa.</li>
+<li><strong>Diagramas de flujo</strong>: representan la secuencia de pasos de un proceso.</li>
+<li><strong>Diagramas de componentes</strong>: muestran las partes principales del sistema y cómo se relacionan.</li>
+</ul>
+
+<p>En el curso se usarán herramientas sencillas como <strong>Mermaid</strong> o <strong>plantUML</strong>, que permiten integrar diagramas directamente en documentos Markdown.</p>
+
+<h3 id="toc_26">Ejemplos de diagramas con Mermaid</h3>
+
+<p><strong>Ejemplo 1: Diagrama de flujo simple</strong></p>
+
+<div><pre><code class="language-mermaid">flowchart TD
+    A[Inicio] --&gt; B[Leer archivo de entrada]
+    B --&gt; C{¿Archivo válido?}
+    C -- Sí --&gt; D[Procesar datos]
+    C -- No --&gt; E[Mostrar error]
+    D --&gt; F[Generar resultados]
+    F --&gt; G[Fin]</code></pre></div>
+
+<p><strong>Ejemplo 2: Caso de uso básico</strong></p>
+
+<div><pre><code class="language-mermaid">flowchart LR
+    Usuario((Usuario)) --&gt; |Ejecuta| Sistema[Programa de análisis]
+    Sistema --&gt; |Genera| Resultados[Resultados]</code></pre></div>
+
+<p>Estos diagramas no buscan ser formales ni exhaustivos, sino servir como apoyo para pensar y comunicar la solución antes de codificar.</p>
+
+<hr>
+
+<h2 id="toc_27">6. Infraestructura de trabajo del curso</h2>
+
+<p>Para desarrollar software de forma ordenada se requiere una infraestructura básica:</p>
+
+<ul>
+<li>Un <strong>entorno de desarrollo</strong> configurado</li>
+<li>Un <strong>editor de código</strong> (Visual Studio Code)</li>
+<li>Una <strong>estructura clara de proyecto</strong></li>
+<li>Uso básico de la <strong>línea de comandos</strong></li>
+</ul>
+
+<p>Durante el curso, esta infraestructura permitirá trabajar de manera consistente y reproducible.</p>
+
+<hr>
+
+<h2 id="toc_28">7. Uso de inteligencia artificial como asistente</h2>
+
+<p>En este curso, la inteligencia artificial se utilizará como <strong>herramienta de apoyo</strong>, no como sustituto del aprendizaje.</p>
+
+<p>Algunos usos iniciales incluyen:
+- Explorar ideas
+- Entender fragmentos de código
+- Sugerir mejoras o correcciones</p>
+
+<p>Se introducirá el uso de GitHub Copilot dentro de Visual Studio Code, así como buenas prácticas de interacción mediante prompts claros y responsables.</p>
+
+<h3 id="toc_29">Lineamientos para el uso responsable de IA en el curso</h3>
+
+<ul>
+<li><p>La IA puede utilizarse como <strong>asistente de apoyo</strong> para:</p>
+
+<ul>
+<li>  aclarar conceptos,<br></li>
+<li>  proponer ejemplos de código,<br></li>
+<li>  sugerir estructuras o ideas.</li>
+</ul></li>
+<li><p>El estudiante es responsable de <strong>comprender, evaluar y justificar</strong> cualquier resultado generado con apoyo de IA.</p></li>
+<li><p>No se permite el uso de IA como <strong>sustituto del proceso de aprendizaje</strong>, por ejemplo, entregar código que no se comprende.</p></li>
+<li><p>Cuando se utilice IA en una actividad o proyecto, el estudiante deberá <strong>indicar brevemente</strong> cómo fue utilizada.</p></li>
+<li><p>La ejecución, depuración y validación del código son siempre responsabilidad del estudiante.</p></li>
+<li><p>No se deben compartir con herramientas de IA datos sensibles, credenciales o información personal.</p></li>
+</ul>
+
+<hr>
+
+<h2 id="toc_30">8. Actividad guiada: Primer contacto con el entorno de desarrollo</h2>
+
+<h3 id="toc_31">Propósito</h3>
+
+<p>Familiarizarse con el entorno de desarrollo que se utilizará a lo largo del curso (estructura de proyectos, ejecución de programas y uso básico de Visual Studio Code), <strong>sin evaluar conocimientos previos de programación</strong>.</p>
+
+<h3 id="toc_32">Instrucciones</h3>
+
+<ol>
+<li><p><strong>Verificar la instalación del entorno</strong></p>
+
+<ul>
+<li><p>Seguir la <em>Guía de instalación</em> del curso.</p></li>
+<li><p>Confirmar que es posible abrir Visual Studio Code y ejecutar programas en Python.</p></li>
+</ul></li>
+<li><p><strong>Crear un proyecto inicial (<code>hola</code>)</strong></p>
+
+<ul>
+<li><p>Crear una proyecto llamado <code>hola</code> con ( <code>uv init</code>).</p></li>
+<li><p>Abrir el proyecto en Visual Studio Code.</p></li>
+<li><p>Crear un archivo <code>main.py</code> que imprima el mensaje:</p>
+
+<p><code>Hola! ¿qué tal?</code> </p></li>
+<li><p>Ejecutar el programa y verificar que el mensaje aparece correctamente en la terminal.</p></li>
+</ul></li>
+<li><p><strong>Explorar Visual Studio Code</strong></p>
+
+<ul>
+<li><p>Identificar:</p>
+
+<ul>
+<li><p>Explorador de archivos</p></li>
+<li><p>Editor de código</p></li>
+<li><p>Terminal integrada</p></li>
+</ul></li>
+<li><p>Observar cómo se ejecuta un programa desde el editor.</p></li>
+</ul></li>
+<li><p><strong>Explorar el proyecto <code>suma_numeros</code></strong></p>
+
+<ul>
+<li><p>Abrir el proyecto proporcionado <code>suma_numeros</code>.</p></li>
+<li><p>Explora los archivos</p></li>
+<li><p>Ejecutar el programa.</p></li>
+<li><p>Observar la estructura del proyecto y el comportamiento del código (no es necesario entender todos los detalles).</p></li>
+</ul></li>
+</ol>
+
+<blockquote>
+<p>⚠️ <strong>Nota importante</strong><br>
+El objetivo de esta actividad es <strong>familiarizarse con el entorno</strong>, no evaluar desempeño técnico ni conocimientos previos de programación. Si algo no funciona, documentarlo es suficiente.</p>
+</blockquote>
+
+<h3 id="toc_33">Entregable / Evidencia (formativa)</h3>
+
+<p>En la página del curso, subir:</p>
+
+<ul>
+<li><p><strong>Dos capturas de pantalla de Visual Studio Code</strong>:</p>
+
+<ol>
+<li><p>Proyecto <code>hola</code>, mostrando:</p>
+
+<ul>
+<li><p>El archivo <code>main.py</code></p></li>
+<li><p>La terminal con el mensaje impreso correctamente.</p></li>
+</ul></li>
+<li><p>Proyecto <code>suma_numeros</code>, mostrando:</p>
+
+<ul>
+<li><p>El proyecto abierto en VSC</p></li>
+<li><p>La ejecución del programa en la terminal.</p></li>
+</ul></li>
+</ol></li>
+</ul>
+
+<p><em>(No se evaluará el contenido del código, solo la evidencia de ejecución.)</em></p>
+
+<h2 id="toc_34">9. Cierre de la sesión</h2>
+
+<p>Para finalizar la clase se realizará una breve reflexión sobre:</p>
+
+<ul>
+<li>Qué implica desarrollar software</li>
+<li>Cómo se trabajará durante el curso</li>
+<li>Dudas iniciales de los estudiantes</li>
+</ul>
+
+<p>Este material servirá como referencia para las siguientes sesiones, donde se profundizará gradualmente en los conceptos y herramientas.</p>
+
+
+
+
+</body>
+
+</html>
