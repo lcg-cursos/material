@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>variables</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+  body {
+    padding: 2cm; 
+  }
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">🧬 Sesión 4 — Python básico con ADN</h1>
+
+<h2 id="toc_1">Variables, tipos y strings</h2>
+
+<h1 id="toc_2">🎯 Objetivo de la sesión</h1>
+
+<p>Al finalizar la sesión, el estudiante será competente para:</p>
+
+<ul>
+<li>Escribir scripts simples en Python usando variables y tipos básicos.</li>
+<li>Manipular secuencias de ADN utilizando operaciones sobre strings.</li>
+<li>Aplicar reglas básicas de estilo (PEP8).</li>
+<li>Utilizar IA como tutor para mejorar comprensión del código.</li>
+</ul>
+
+<h1 id="toc_3">🔁 Conexión con sesiones previas</h1>
+
+<p>Ya sabes:</p>
+
+<ul>
+<li>Crear un proyecto con <code>uv</code></li>
+<li>Abrirlo en VSC</li>
+<li>Ejecutar scripts</li>
+<li>Usar Git y GitHub</li>
+</ul>
+
+<p>Hoy comenzamos a trabajar el contenido del programa:
+qué escribir dentro del archivo para modelar información biológica.</p>
+
+<h1 id="toc_4">🐍 ¿Qué es Python?</h1>
+
+<p>Python es un lenguaje de programación:</p>
+
+<ul>
+<li>Interpretado</li>
+<li>De alto nivel</li>
+<li>Multipropósito</li>
+<li>Con sintaxis clara y legible</li>
+</ul>
+
+<p>Fue creado por Guido van Rossum y hoy es uno de los lenguajes más utilizados en:</p>
+
+<ul>
+<li>Bioinformática</li>
+<li>Ciencia de datos</li>
+<li>Inteligencia artificial</li>
+<li>Automatización</li>
+<li>Desarrollo web</li>
+</ul>
+
+<h3 id="toc_5">🌎 ¿Por qué Python en ciencias genómicas?</h3>
+
+<ul>
+<li>Sintaxis sencilla → menor barrera de entrada</li>
+<li>Gran ecosistema científico</li>
+<li>Comunidad amplia y documentación abundante</li>
+<li>Integración con herramientas bioinformáticas</li>
+</ul>
+
+<p>Algunas bibliotecas importantes que verán más adelante:</p>
+
+<ul>
+<li><code>Biopython</code></li>
+<li><code>pandas</code></li>
+<li><code>matplotlib</code></li>
+<li><code>scikit-learn</code></li>
+</ul>
+
+<h3 id="toc_6">📦 Ecosistema y entornos</h3>
+
+<p>Python no es solo el lenguaje, también es su ecosistema.</p>
+
+<p>Existen distintas formas de gestionar entornos y paquetes:</p>
+
+<ul>
+<li><code>venv</code> → entornos virtuales básicos incluidos en Python</li>
+<li><code>conda</code> → gestor de entornos muy usado en ciencia</li>
+<li><code>uv</code> → herramienta moderna y rápida para manejar proyectos y dependencias</li>
+</ul>
+
+<p>En este curso usamos <strong>uv</strong> para:</p>
+
+<ul>
+<li>Crear proyectos reproducibles</li>
+<li>Gestionar dependencias</li>
+<li>Mantener orden en el entorno</li>
+</ul>
+
+<p>📌 Concepto clave: Un entorno evita conflictos entre versiones de paquetes.</p>
+
+<h3 id="toc_7">✨ Características interesantes de Python</h3>
+
+<ul>
+<li>Todo es un objeto</li>
+<li>Tipado dinámico (no declaramos el tipo explícitamente)</li>
+<li>Sintaxis limpia basada en indentación</li>
+<li>Gran legibilidad (PEP8)</li>
+<li>Filosofía explícita (&quot;Explicit is better than implicit&quot;)</li>
+</ul>
+
+<p>Python prioriza claridad sobre complejidad.</p>
+
+<p>Si en Python todo es claro y explícito, entonces lo primero que necesitamos aprender es cómo guardar información de manera clara. En programación, eso se logra usando <strong>variables</strong>.</p>
+
+<h1 id="toc_8">1️⃣ ¿Qué es una variable?</h1>
+
+<p>Una variable es un nombre que guarda un valor.</p>
+
+<blockquote>
+<p>Nos permite darle un nombre <strong><em>significativo</em></strong> a un dato.</p>
+</blockquote>
+
+<p>En bioinformática, ese valor puede ser una secuencia.</p>
+
+<div><pre><code class="language-python">dna_sequence = &quot;ATGCGTA&quot;</code></pre></div>
+
+<h3 id="toc_9">Sintaxis</h3>
+
+<ul>
+<li><code>dna_sequence</code> → nombre de la variable</li>
+<li><code>=</code> → operador de asignación</li>
+<li><code>&quot;ATGCGTA&quot;</code> → string (cadena de texto)</li>
+</ul>
+
+<p>📌 Tip: Los nombres deben ser descriptivos y usar <code>snake_case</code>.</p>
+
+<h1 id="toc_10">2️⃣ Tipos básicos de datos</h1>
+
+<p>En Python existen distintos tipos de datos.</p>
+
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Ejemplo</th>
+<th>Contexto biológico</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>&quot;ATGC&quot;</td>
+<td>Secuencia ADN</td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td>1500</td>
+<td>Longitud</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td>42.85</td>
+<td>Porcentaje GC</td>
+</tr>
+<tr>
+<td><code>bool</code></td>
+<td>True</td>
+<td>¿Tiene codón start?</td>
+</tr>
+</tbody>
+</table>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">length = 7
+gc_content = 42.85
+has_start = True</code></pre></div>
+
+<p>Puedes verificar el tipo con:</p>
+
+<div><pre><code class="language-python">type(dna_sequence)</code></pre></div>
+
+<h3 id="toc_11">🧠 Concepto clave: En Python todo es un objeto</h3>
+
+<p>En Python, todo es un objeto.</p>
+
+<p>Eso significa que cada dato:</p>
+
+<ul>
+<li>Tiene un <strong>tipo</strong></li>
+<li>Tiene <strong>propiedades</strong></li>
+<li>Tiene <strong>funciones asociadas</strong> (llamadas métodos)</li>
+</ul>
+
+<p>Por ejemplo, un string tiene métodos como:</p>
+
+<ul>
+<li><code>.upper()</code></li>
+<li><code>.strip()</code></li>
+<li><code>.count()</code></li>
+</ul>
+
+<p>No necesitamos estudiar Programación Orientada a Objetos aún.</p>
+
+<p>Solo necesitamos entender que:</p>
+
+<blockquote>
+<p>Si algo es un string, puede usar métodos de string. Igual sucede con otros tipos de datos.</p>
+</blockquote>
+
+<h1 id="toc_12">3️⃣ Strings como secuencias biológicas</h1>
+
+<p>Un string es una secuencia ordenada.</p>
+
+<p>El ADN también es una secuencia ordenada.</p>
+
+<p>El orden importa.</p>
+
+<div><pre><code class="language-python">dna_sequence = &quot;ATGCGTA&quot;</code></pre></div>
+
+<h2 id="toc_13">🔎 Indexing</h2>
+
+<p>Podemos acceder a posiciones individuales:</p>
+
+<div><pre><code class="language-python">dna_sequence[0]
+dna_sequence[1]</code></pre></div>
+
+<p>📌 Importante: Python empieza a contar desde 0.</p>
+
+<table>
+<thead>
+<tr>
+<th>Posición</th>
+<th>Base</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>A</td>
+</tr>
+<tr>
+<td>1</td>
+<td>T</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_14">🔠 <code>.upper()</code></h2>
+
+<p>Convierte todo a mayúsculas.</p>
+
+<div><pre><code class="language-python">dna_sequence = dna_sequence.upper()</code></pre></div>
+
+<p>📌 Tip: En datos reales, puede haber mezcla de mayúsculas y minúsculas.</p>
+
+<h2 id="toc_15">✂ <code>.strip()</code></h2>
+
+<p>Elimina espacios al inicio y al final.</p>
+
+<div><pre><code class="language-python">dna_sequence = dna_sequence.strip()</code></pre></div>
+
+<p>📌 Tip: Muchos errores en bioinformática vienen de caracteres invisibles.</p>
+
+<h2 id="toc_16">🔢 <code>.count()</code></h2>
+
+<p>Cuenta cuántas veces aparece un carácter.</p>
+
+<div><pre><code class="language-python">dna_sequence.count(&quot;A&quot;)</code></pre></div>
+
+<p>Devuelve un número entero (<code>int</code>).</p>
+
+<h1 id="toc_17">🖨 Salida en pantalla: <code>print()</code> y formato</h1>
+
+<p>Hasta ahora hemos creado variables, pero necesitamos mostrar resultados.</p>
+
+<p>En Python usamos la función:</p>
+
+<div><pre><code class="language-python">print()</code></pre></div>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">length = 10
+print(length)</code></pre></div>
+
+<h3 id="toc_18">🧾 Imprimir texto y variables</h3>
+
+<div><pre><code class="language-python">print(&quot;Length:&quot;, length)</code></pre></div>
+
+<p>Aquí estamos pasando múltiples <strong>argumentos</strong> a <code>print()</code>. Python los separa automáticamente con un espacio.</p>
+
+<p>📌 Tip: <code>print()</code> es una función incorporada (built‑in) es decir, viene incluida en Python y no necesitamos importarla.</p>
+
+<h3 id="toc_19">🎯 Formato tipo &quot;printf&quot; (formateo de strings)</h3>
+
+<p>En Python moderno se recomienda usar <strong>f-strings</strong>.</p>
+
+<div><pre><code class="language-python">print(f&quot;Length: {length}&quot;)</code></pre></div>
+
+<p>La <code>f</code> antes de las comillas indica que podemos insertar variables dentro de <code>{}</code>.</p>
+
+<p>Ejemplo con float:</p>
+
+<div><pre><code class="language-python">gc_content = 42.85789
+print(f&quot;GC content: {gc_content:.2f}%&quot;)</code></pre></div>
+
+<h3 id="toc_20">¿Qué significa <code>:.2f</code>?</h3>
+
+<ul>
+<li><code>:</code> inicia el formato</li>
+<li><code>.2</code> indica 2 decimales</li>
+<li><code>f</code> indica número tipo float</li>
+</ul>
+
+<p>Esto es el equivalente moderno a &quot;printf&quot; en otros lenguajes.</p>
+
+<p>📌 Recomendación: usar desde ahora f-strings para fomentar claridad.</p>
+
+<h1 id="toc_21">🚀 Preparación del proyecto</h1>
+
+<p>Antes de comenzar el ejercicio, asegúrate de trabajar dentro de un proyecto correctamente configurado.</p>
+
+<h2 id="toc_22">1️⃣ Crear el proyecto con uv</h2>
+
+<p>Desde la terminal:</p>
+
+<div><pre><code class="language-bash">uv init nucleotide_project
+cd nucleotide_project</code></pre></div>
+
+<p>Esto crea la estructura básica del proyecto y el archivo <code>pyproject.toml</code>.</p>
+
+<p>Revisa los archivos ocultos desde la <em>terminal</em> con <code>ls -la</code>. Si tienes <code>git</code> instalado y configurado, puede crearte los archivos ocultos <code>.git</code> y <code>.gitignore</code>. Si esos archivos estan dentro de tu carpeta ignora el punto 2 siguiente.</p>
+
+<h2 id="toc_23">2️⃣ Inicializar Git</h2>
+
+<p>Solo si tu carpeta no contiene los archivos <code>.git</code> y <code>.gitignore</code>, entonces dentro del directorio del proyecto:</p>
+
+<div><pre><code class="language-bash">git init</code></pre></div>
+
+<p>Crear un primer commit:</p>
+
+<div><pre><code class="language-bash">git add .
+git commit -m &quot;Initial project structure&quot;</code></pre></div>
+
+<h2 id="toc_24">3️⃣ Conectar con GitHub</h2>
+
+<p>Para conectar tu repositorio local con GitHub existen <strong>dos alternativas</strong>.</p>
+
+<p>⚠ Ambas hacen exactamente lo mismo: crear (o conectar) un repositorio remoto y enlazarlo con tu proyecto local.</p>
+
+<p>La diferencia es solo la interfaz que utilizas (terminal o VSC).</p>
+
+<h3 id="toc_25">🔹 Opción A — Desde la terminal (modo explícito)</h3>
+
+<ol>
+<li><p>Crear un repositorio vacío en GitHub (mismo nombre recomendado).</p></li>
+<li><p>Conectar el repositorio local con el remoto:</p></li>
+</ol>
+
+<div><pre><code class="language-bash">git remote add origin &lt;URL_DEL_REPOSITORIO&gt;
+git branch -M main
+git push -u origin main</code></pre></div>
+
+<p>Este método es más explícito y permite entender qué está ocurriendo.</p>
+
+<blockquote>
+<p>Nota:<br>
+<code>git branch -M main</code>.<br>
+Una <strong>branch</strong> es una rama de desarrollo (lo veremos después).
+Cuando haces <code>git init</code>, Git crea una rama inicial.<br>
+Dependiendo de la versión de Git, puede llamarse:</p>
+
+<ul>
+<li>  <code>master</code> (viejo estándar). </li>
+<li>  <code>main</code> (estándar moderno)</li>
+</ul>
+
+<p>GitHub ahora usa <code>main</code> como rama principal por defecto.</p>
+
+<p>Si no la renombras, puede pasar que:</p>
+
+<ul>
+<li>  Tu repo local tenga <code>master</code>.<br></li>
+<li>  GitHub espere <code>main</code><br></li>
+<li>  Se cree una rama adicional innecesaria</li>
+</ul>
+
+<p>Entonces se estandariza todo como <code>main</code>.</p>
+</blockquote>
+
+<h3 id="toc_26">🔹 Opción B — Desde Visual Studio Code (más guiado)</h3>
+
+<ol>
+<li>Ir a la pestaña <strong>Source Control</strong> (Despúes del ícono de Explorer y Búsqueda, barra izquierda).</li>
+<li>Si es necesario, hacer clic en <strong>Initialize Repository</strong>.</li>
+<li>Clic en <strong>Publish to GitHub</strong>.</li>
+<li>Elegir si el repositorio será público o privado.</li>
+</ol>
+
+<p>VSC automáticamente:</p>
+
+<ul>
+<li>Crea el repositorio en GitHub</li>
+<li>Configura el remote</li>
+<li>Hace el primer push</li>
+</ul>
+
+<p>Es una alternativa más visual y reduce errores en etapas iniciales.</p>
+
+<p>📌 Verifica siempre que el repositorio esté visible en tu cuenta de GitHub después de publicar.</p>
+
+<h2 id="toc_27">4️⃣ Abrir el proyecto en Visual Studio Code</h2>
+
+<p>Desde la terminal:</p>
+
+<div><pre><code class="language-bash">code .</code></pre></div>
+
+<p>O abre VSC y selecciona &quot;Open Folder&quot;.</p>
+
+<p>Verifica lo siguiente antes de comenzar:</p>
+
+<p>A. <strong>Intérprete correcto</strong>.<br>
+En la esquina inferior derecha de VSC debe aparecer el Python del proyecto.<br>
+Si no es correcto: Ctrl+Shift+P → Python: Select Interpreter.</p>
+
+<p>B. <strong>Entorno funcional</strong> 
+Ejecuta en terminal:    <code>uv run python --version</code><br>
+Si responde correctamente, el entorno está activo.</p>
+
+<p>C. <strong>Git detectado</strong><br>
+En la pestaña <strong>Source Control</strong> deben aparecer los cambios del proyecto (una &quot;U&quot; verde a un lado de los nombres de los archivos).<br>
+También puedes verificar con: <code>git status</code> en la terminal.</p>
+
+<p>Una vez confirmado lo anterior, crea el archivo:</p>
+
+<div><pre><code class="language-none">nucleotide_count.py</code></pre></div>
+
+<p>Y comienza el ejercicio.</p>
+
+<h1 id="toc_28">🧪 Ejercicio 1 — Conteo de nucleótidos</h1>
+
+<h3 id="toc_29">🎯 Propósito del ejercicio</h3>
+
+<p>En este ejercicio aplicarás por primera vez todo lo visto en la sesión:</p>
+
+<ul>
+<li>Variables</li>
+<li>Strings</li>
+<li>Métodos como <code>.strip()</code>, <code>.upper()</code> y <code>.count()</code></li>
+<li>Uso de <code>print()</code> y formateo</li>
+</ul>
+
+<p>Y el uso de lo que vimos anteriormente como:</p>
+
+<ul>
+<li><code>uv</code></li>
+<li><code>git</code> y <code>github</code></li>
+<li>buenas practicas (requisitos, AD, pruebas)</li>
+</ul>
+
+<h3 id="toc_30">Contexto: requisitos y AD</h3>
+
+<p>Antes de escribir código, recuerda:</p>
+
+<blockquote>
+<p>Todo programa responde a requisitos y al análisis y diseño (AD).</p>
+</blockquote>
+
+<p>Copia y pega el siguiente contenido en un archivo llamado <code>contexto.md</code> y leelo.</p>
+
+<div><pre><code class="language-markdown"># 🧬 Contexto del ejercicio — Conteo de nucleótidos
+
+## 📌 Problema
+
+Desarrollar un script en Python que analice una secuencia de ADN
+y reporte el conteo de nucleótidos.
+
+
+## 🎯 Requisitos funcionales
+
+- La secuencia estará definida directamente en el script (hardcoded).
+- Debe ignorar espacios al inicio y al final.
+- Debe convertir la secuencia a mayúsculas.
+- Debe contar A, T, G y C.
+- Debe calcular la longitud total.
+- Debe mostrar los resultados en pantalla.
+
+
+## ⚙ Requisitos no funcionales
+
+- Código legible y ordenado.
+- Uso de nombres descriptivos (snake_case).
+- Uso de f-strings para imprimir resultados.
+- Uso responsable de IA (documentado en `ai_log.md`).
+
+
+## 🧠 Análisis
+
+La secuencia puede contener:
+
+- Espacios innecesarios.
+- Letras minúsculas.
+
+Por lo tanto, es necesario limpiar la secuencia antes de realizar los cálculos.
+
+
+## 🧩 Diseño (versión simple)
+
+Pasos generales del algoritmo:
+
+1. Guardar la secuencia en una variable.
+2. Limpiar la secuencia (`strip()` y `upper()`).
+3. Calcular el conteo de cada nucleótido.
+4. Calcular la longitud total.
+5. Imprimir los resultados con formato claro.
+</code></pre></div>
+
+<h3 id="toc_31">Casos de prueba</h3>
+
+<p>Recuerda que los casos de prueba son necesarios para validar tu programa.</p>
+
+<p>Crea un archivo llamado <code>casos_prueba.md</code> y copia el bloque markdown siguiente.
+Después, <strong>ejecuta el programa con cada entrada</strong> (cambiando temporalmente <code>dna_sequence</code>)
+y documenta el resultado.</p>
+
+<div><pre><code class="language-markdown">### 🧪 Casos de prueba manuales
+
+| Entrada        | Resultado esperado                  |
+|---------------|-------------------------------------|
+| &quot;ATGC&quot;        | A=1, T=1, G=1, C=1, longitud=4      |
+| &quot;aaaa&quot;        | A=4, longitud=4                     |
+| &quot; at gc &quot;     | A=1, T=1, G=1, C=1, longitud=4      |
+| &quot;&quot;            | longitud=0                          |
+
+### ✅ Resultados (completa al correr el programa)
+
+- Caso 1 (&quot;ATGC&quot;):
+  - Obtuve: ...
+  - ¿Coincide? Sí / No
+
+- Caso 2 (&quot;aaaa&quot;):
+  - Obtuve: ...
+  - ¿Coincide? Sí / No
+
+- Caso 3 (&quot; at gc &quot;):
+  - Obtuve: ...
+  - ¿Coincide? Sí / No
+
+- Caso 4 (&quot;&quot;):
+  - Obtuve: ...
+  - ¿Coincide? Sí / No
+</code></pre></div>
+
+<h2 id="toc_32">📓 Registro continuo en <code>ai_log.md</code></h2>
+
+<p>Durante todo el ejercicio debes ir registrando el uso de IA, desde VSC con github copilot.</p>
+
+<p>No lo hagas al final.</p>
+
+<p>Cada vez que:</p>
+
+<ul>
+<li>Hagas una pregunta.</li>
+<li>Detectes un error.</li>
+<li>Implementes una corrección.</li>
+<li>Pruebes una alternativa.</li>
+</ul>
+
+<p>Regístralo inmediatamente.</p>
+
+<p>Estructura mínima:</p>
+
+<div><pre><code class="language-none">## Interacción 1
+Modo: ASK
+Pregunta: ...
+Aprendí: ...
+
+</code></pre></div>
+
+<h2 id="toc_33">Programa: Esqueleto sugerido</h2>
+
+<p>Usa este esqueleto para resolver el ejercicio. Completa lo que haga falta. </p>
+
+<p>El archivo nombralo como <code>nucleotide_count.py</code></p>
+
+<div><pre><code class="language-python"># Hardcoded sequence
+dna_sequence = &quot; atg cga tta &quot;
+
+# Limpieza
+dna_sequence = dna_sequence.strip()
+dna_sequence = dna_sequence.upper()
+
+# Conteos
+count_a = ...
+count_t = ...
+count_g = ...
+count_c = ...
+
+# Longitud
+length = ...
+
+# Output
+print(f&quot;Length:&quot;, length)</code></pre></div>
+
+<h3 id="toc_34">🔍 Exploración con IA (Copilot modo &quot;ASK&quot;)</h3>
+
+<p>El esqueleto puede contener pequeños errores o inconsistencias.</p>
+
+<p>Tu tarea:</p>
+
+<ol>
+<li> Detectar el problema,<br></li>
+<li> Preguntar a Copilot (modo ASK).<br></li>
+<li> Entender la explicación.<br></li>
+<li> Corregir el código manualmente.</li>
+</ol>
+
+<h4 id="toc_35">🧠 Qué puedes preguntar</h4>
+
+<p>Ejemplos de prompts adecuados:  </p>
+
+<ul>
+<li><code>¿Hay algo incorrecto o inconsistente en este código?</code></li>
+<li> <code>Revisa este script y dime si hay algún problema o mejora posible.</code></li>
+</ul>
+
+<p>⚠ No copies la solución sin comprenderla.</p>
+
+<h3 id="toc_36">🧪 Ejecución de casos de prueba</h3>
+
+<p>Una vez implementado el script:</p>
+
+<ol>
+<li>Modifica temporalmente la secuencia en el código (tomando los ejemplos de tus casos de prueba) .</li>
+<li>Ejecuta el programa.</li>
+<li>Verifica que el resultado coincida con el esperado.</li>
+<li>Documenta los resultados en <code>casos_prueba.md</code>.</li>
+</ol>
+
+<p>Agrega una sección como esta:</p>
+
+<div><pre><code class="language-markdown">## Resultados obtenidos
+
+### Caso 1: &quot;ATGC&quot;
+Resultado:
+...
+
+¿Coincide con lo esperado? Sí / No
+
+### Caso 2: &quot;aaaa&quot;
+Resultado:
+...
+
+¿Coincide con lo esperado? Sí / No</code></pre></div>
+
+<p>Si un caso no coincide, corrige el código antes de continuar.</p>
+
+<h3 id="toc_37">🔎 Extensión (requiere apoyo de IA)</h3>
+
+<p>Agrega una verificación que detecte si la secuencia contiene caracteres distintos de A, T, G o C.</p>
+
+<p>Si encuentra un carácter inválido, mostrar un mensaje de advertencia.</p>
+
+<p>No hemos visto aún cómo hacer validaciones.
+Investiga con IA cómo podrías hacerlo.</p>
+
+<p>Registra en <code>ai_log.md</code>:</p>
+
+<ul>
+<li>Qué preguntaste.<br></li>
+<li>Qué entendiste.<br></li>
+<li>Qué solución implementaste.<br></li>
+</ul>
+
+<h1 id="toc_38">🧪 Ejercicio 2 (Opcional) — GC Content</h1>
+
+<h3 id="toc_39">🎯 Propósito del ejercicio</h3>
+
+<p>En este ejercicio extenderás el análisis anterior para calcular una métrica biológica real:</p>
+
+<ul>
+<li>Uso de variables</li>
+<li>Operaciones aritméticas</li>
+<li>Tipo <code>float</code></li>
+<li>Formateo con 2 decimales</li>
+<li>Aplicación de análisis previo</li>
+</ul>
+
+<p>Este ejercicio introduce una pequeña capa de complejidad adicional:
+ahora no solo contamos, también calculamos.</p>
+
+<h3 id="toc_40">Contexto: requisitos y AD</h3>
+
+<p>Antes de escribir código, recuerda:</p>
+
+<blockquote>
+<p>El código debe responder a requisitos definidos.</p>
+</blockquote>
+
+<p>Copia el siguiente contenido en un archivo llamado <code>contexto_gc.md</code>.</p>
+
+<div><pre><code class="language-markdown"># 🧬 Contexto del ejercicio — GC Content
+
+## 📌 Problema
+
+Desarrollar un script que calcule el porcentaje de contenido GC
+en una secuencia de ADN.
+
+## 🎯 Requisitos funcionales
+
+- La secuencia estará definida directamente en el script.
+- Debe ignorar espacios.
+- Debe convertir la secuencia a mayúsculas.
+- Debe calcular el porcentaje de G y C respecto a la longitud total.
+- Debe mostrar el resultado con 2 decimales.
+
+## ⚙ Requisitos no funcionales
+
+- Código legible y ordenado.
+- Uso de f-strings para mostrar resultados.
+- Evitar división entre cero.
+- Uso responsable de IA documentado en `ai_log.md`.
+
+## 🧠 Análisis
+
+El porcentaje GC se calcula como:
+
+(G + C) / longitud_total * 100
+
+Debe considerarse el caso donde la longitud sea 0.
+
+## 🧩 Diseño (versión simple)
+
+1. Guardar la secuencia.
+2. Limpiar la secuencia.
+3. Contar G y C.
+4. Calcular la longitud total.
+5. Calcular porcentaje.
+6. Imprimir resultado con formato adecuado.</code></pre></div>
+
+<h3 id="toc_41">🧪 Casos de prueba</h3>
+
+<p>Crea o actualiza un archivo llamado <code>casos_prueba_gc.md</code>.</p>
+
+<div><pre><code class="language-markdown">### 🧪 Casos de prueba manuales
+
+| Entrada    | Resultado esperado |
+|------------|-------------------|
+| &quot;GGCC&quot;     | 100.00%           |
+| &quot;ATAT&quot;     | 0.00%             |
+| &quot;ATGC&quot;     | 50.00%            |
+| &quot;&quot;         | 0% o mensaje claro|
+
+### ✅ Resultados obtenidos
+
+- Caso 1 (&quot;GGCC&quot;):
+  - Obtuve: ...
+  - ¿Coincide? Sí / No
+
+- Caso 2 (&quot;ATAT&quot;):
+  - Obtuve: ...
+  - ¿Coincide? Sí / No
+
+- Caso 3 (&quot;ATGC&quot;):
+  - Obtuve: ...
+  - ¿Coincide? Sí / No
+
+- Caso 4 (&quot;&quot;):
+  - Obtuve: ...
+  - ¿Coincide? Sí / No</code></pre></div>
+
+<h2 id="toc_42">📓 Registro en <code>ai_log.md</code></h2>
+
+<p>Registra solo interacciones relevantes.</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-markdown">## Interacción GC-1
+Modo: ASK
+Pregunta: ¿Cómo formateo un float a 2 decimales en una f-string?
+Aprendí: Se usa {variable:.2f}</code></pre></div>
+
+<h2 id="toc_43">Programa: Esqueleto sugerido</h2>
+
+<p>Crea el archivo <code>gc_content.py</code>.</p>
+
+<p>⚠ El esqueleto puede incluir un error o una inconsistencia:
+tu trabajo es detectarla y corregirla.</p>
+
+<div><pre><code class="language-python"># Hardcoded sequence
+dna_sequence = &quot; atg cga tta &quot;
+
+# Limpieza
+dna_sequence = dna_sequence.strip()
+dna_sequence = dna_sequence.upper()
+
+# Conteos
+count_g = dna_sequence.count(&quot;G&quot;)
+count_c = dna_sequence.count(&quot;C&quot;)
+
+# Longitud
+length = len(dna_sequence)
+
+# Cálculo GC
+gc_content = (count_g + count_c) / length * 100
+
+# Output
+print(f&quot;GC content: {gc_content}%&quot;)</code></pre></div>
+
+<h3 id="toc_44">🔍 Exploración con IA (Copilot modo &quot;ASK&quot;)</h3>
+
+<p>El código puede funcionar parcialmente pero no cumplir todos los requisitos.</p>
+
+<p>Tu tarea:</p>
+
+<ol>
+<li>Detectar posibles problemas.</li>
+<li>Preguntar a Copilot.</li>
+<li>Entender la explicación.</li>
+<li>Corregir manualmente.</li>
+</ol>
+
+<h4 id="toc_45">🧠 Posibles preguntas</h4>
+
+<ul>
+<li>¿Qué ocurre si la longitud es 0?</li>
+<li>¿Estoy mostrando el resultado con 2 decimales?</li>
+<li>¿Este cálculo puede generar un error?</li>
+<li>¿El resultado cumple con los requisitos definidos en el contexto?</li>
+</ul>
+
+<p>⚠ No copies soluciones completas.</p>
+
+<h1 id="toc_46">📊 Rúbrica (10 puntos)</h1>
+
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Puntos</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Resultados correctos según casos de prueba</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Código legible y ordenado</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Manejo correcto de mayúsculas y espacios</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Uso responsable de IA <code>(ai_log.md)</code></td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+</body>
+
+</html>
