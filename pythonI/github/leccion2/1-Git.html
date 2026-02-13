@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Python I
 ### Licenciatura en Ciencias Genómicas, UNAM
-### First version: 2022-01-31; Last update: 2024-04-03
+### First version: 2022-01-31; Last update: 2026-02-13
 
 ---
 
@@ -47,7 +47,11 @@ pre {
 4.4. Inicializar repositorio  
 4.5  Crear un programa y agregarlo a git  
 4.6. Commit  
-4.7. Ignorando archivos  
+4.7. Ignorando archivos 
+5. GitHub  
+5.1 Pull Request (PR)
+6. GitHub Desktop
+7. GitHub + VSC
 ---
 
 ## FAIR-BioRS guidelines
@@ -84,8 +88,9 @@ __Para lograrlo necesito...__
 
 
 - Utilizar notaciones o estándares de nombrado  
-  - Camel case  
-  - Upper case  
+  **- Snake case: (snake_case) para Python (PEP8)**  
+  - Camel case:  (camelCase) para JavaScript      
+  - Upper case: UPPER_CASE  -&gt; para constantes  
 
 - Buenas prácticas  
   - Encabezado de programas  
@@ -93,9 +98,9 @@ __Para lograrlo necesito...__
   - Nombrado adecuado de variables y métodos/funciones  
   - Nombrado adecuado de los programas  
   - Organización adecuada del código (carpetas y archivos)  
-  - Compartir el código con mis compañeros para obtener retroalimentación  
+  - Compartir el código con mis compañeros para obtener retroalimentación (REVISIÓN POR PARES)  
 
-- Control de versiones del código  
+**- Control de versiones del código**  
 
 
 ---
@@ -114,7 +119,25 @@ __Para lograrlo necesito...__
 
 ## Control de versiones 
 
-&lt;img src="img/word.gif" width="450px" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/word.gif" width="550px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## ¿¿Qué pasa si no controlamos versiones?
+
+Situaciones comunes:
+
+- Perdemos cambios en scripts  
+
+- No sabemos qué versión generó un resultado  
+
+- Archivos duplicados
+
+```
+analisis_final_v2_ok_ahora_si.py
+```
+.full-width[.content-box-red[Sin control de versiones, la **reproducibilidad** se vuelve difícil.]]
+
 
 ---
 
@@ -139,13 +162,12 @@ __Forma manual__
 
 Aplicando las reglas...  
 
-- Agregar línea de código (algunos print, comentarios internos):   myScript_v0.1.py  
+- Agregar línea de código (algunos print, comentarios internos):   myScript_v0.**1**.py  
 
-- Cambiar el nombre de una variable:                               myScript_v0.2.py  
+- Cambiar el nombre de una variable:                               myScript_v0.**2**.py  
 
-- Borrar varias funciones del código:                              myScript_v1.0.py  
+- Borrar varias funciones del código:                              myScript_v**1**.0.py  
 
-- Agregar un método:                                               myScript_v2.0.py  
 
 
 ---
@@ -163,30 +185,51 @@ por medio de un sistema de control de versiones.
 
 ## ¿Cómo puedo controlar mi código? 
 
-Un sistema de control de versiones es una herramienta que se encarga por nosotros de __controlar__ todos los cambios que realicemos en nuestros programas, creando __diferentes versiones de nuestros archivos__.  
-
-Además, nos permite decidir cuales cambios serán aplicados para la siguiente versión (cada registro de estos cambios es llamado como _commit_), además de presentar metadatos acerca de ellos.  
-
-Los sistemas de control de versiones no son nuevos. Herramientas como CVS, o Subversion han estado presentes desde inicios de 1980. Sin embargo, estos han sido considerados anticuados debido a limitaciones en sus capacidades. Actualmente, existen modernos sistemas como Git y Mercurial, que incluyen poderosas herramientas para el trabajo colaborativo y concurrente en los archivos. 
+Un sistema de control de versiones automático es una herramienta que se encarga por nosotros de __controlar__ todos los cambios que realicemos en nuestros programas, permitiendo:
 
 
----
+- Registrar los cambios que suceden en los archivos
 
-## ¿Cómo puedo controlar mi código? 
+- Regresar a versiones anteriores
 
-- Usar un sistema de control de versiones es como si tuvieramos un “undo” o “deshacer” ilimitado.  
+- Guardar quién hizo cada cambio
 
-- Un sistema de control de versiones también permite que muchas personas trabajen en paralelo.  
+- Tener un “undo” o “deshacer” ilimitado
 
-&lt;img src="img/admiracion.png" width="250px" style="display: block; margin: auto 0 auto auto;" /&gt;
+&lt;img src="img/admiracion.png" width="150px" style="display: block; margin: auto 0 auto auto;" /&gt;
 
 ---
 
-## Pero… ¿Qué es Git?
+## Evolución de estas herramientas
 
-- Es un sistema de control de versiones para _rastrear los cambios de nuestro código_ durante el desarrollo del software.  
+Antes:
 
-- Está diseñado para coordinar el trabajo entre los programadores o contribuidores.  
+- CVS
+
+- Subversion
+
+Ahora:  
+
+- Mercurial
+
+**- Git**: Surgió en abril de 2005, creado por Linus Torvalds, el creador de Linux.  
+
+
+&lt;img src="img/controladores.png" width="350px" style="display: block; margin: auto;" /&gt;
+    
+---
+
+## ¿Por qué Git domina actualmente?
+
+- Trabajo colaborativo: Permite que varias personas pueden trabajar en el mismo proyecto sin sobrescribir el trabajo de otros.
+
+- Distribuido: Que cada persona tiene una copia completa del repositorio (con todo el historial).
+
+- Muy eficiente con el manejo del código: Git está optimizado para manejar **archivos de texto** (como código).
+
+"Es el **Instagram** de los desarrolladores"  
+
+Git es la herramienta estándar actual en investigación y desarrollo.  
 
 
 &lt;img src="img/logo_git.png" width="250px" style="display: block; margin: auto 0 auto auto;" /&gt;
@@ -222,15 +265,15 @@ __Git + GitHub:__
 2. Esquema de trabajo de Git  
 3. Crear un repositorio  
 4. Inicializar repositorio  
-5. Crear un programa y agregarlo a git  
+5. Crear archivos y agregarlos a git  
 6. Commit  
 7. Ignorando archivos  
+8. Licencias  
+9. Pull Request (PR)  
 
 &lt;img src="img/gitLocal.png" width="450px" style="display: block; margin: auto;" /&gt;
 
 ---
-
-# Tarea
 
 ## Instalación de Git 
 
@@ -262,19 +305,25 @@ Fedora: `sudo dnf install git`
 ----- Correo electrónico  
 ----- Contraseña  
 
-*Verificar cuenta de correo electrónico  
+**RECOMENDACIÓN**: [Activa la autenticación de 2 pasos.](https://docs.github.com/es/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication)
 
 
 ---
 
 ## Configuración de Git
 
+- Abrir una terminal (Git bash en Windows):  
+
+`git --version` 
+
 Definiendo mi nombre y correo electrónico:  
 
-`git config --global user.name ”[tuNombre]”`  
-`git config --global user.email [tuEmail]`  
+`git config --global user.name ”tuNombre”`  
+`git config --global user.email "tuEmail"`  
 
-El username e email estarán asociados a las siguientes actividades con Git, así como con la interacción GitHub, por lo que se sugiere que el email que se defina sea el mismo que se utilice al momento de crear nuestra cuenta de GitHub.
+Nota: usa las comillas para especificar los valores.  
+
+El **user.name** e **user.email** estarán asociados a las siguientes actividades con Git, así como con la interacción _GitHub_, por lo que el email que se defina debe ser el mismo que el de nuestra cuenta de GitHub.
 
 Para ver los valores de configuración de Git:  
 `git config --list`
@@ -294,41 +343,53 @@ _Repositorio_: carpeta que contiene el seguimiento de los cambios que se realice
 
 ## Creando un repositorio controlado por Git
 
-- Localizar la carpeta creada github-rs   
-`/Users/tuUsuario/Desktop/github-rs`  
+- Crear una carpeta llamada python-class   
+`uv init python-class`  
 
-- Entrar a la carpeta github-rs  
-`cd github-rs`  
+- Entrar a la carpeta python-class  
+`cd python-class`  
 
-__Buenas prácticas__  
-Revisar que estamos siguiendo una estructura de organización de carpetas y archivos para nuestros proyectos/programas.
-
-&lt;img src="img/estructuraDir.png" width="650px" style="display: block; margin: auto;" /&gt;
-
+- Listar el contenido de la carpeta
+`ls -la`  
+o en Windows  
+`dir /a:h`
 
 ---
 
-## Creando un repositorio controlado por Git
+## Repositorio Git
 
-- Inicializar el repositorio Git  
+- Inicializar el repositorio Git (SOLO EN CASO DE QUE NO SE HAYA CREADO POR DEFAULT)  
 `git init`  
 
 - Revisar el repositorio  
 `ls -la`  
+o en Windows  
+`dir /a:h`  
 
 - Comprobar repositorio  
 `git status`  
 
-&lt;img src="img/gitInit.png" width="750px" style="display: block; margin: auto;" /&gt;
+- Indicar a Git que comience a controlar dichos archivos     
+`git add .`  
+
+- Confirmar los cambios realizados  		
+`git commit –m “Agregando los archivos default”`  
+
+&lt;img src="img/gitInit.png" width="350px" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
+##  Controlando los cambios con Git
+
+&lt;img src="img/flujoGit.png" width="750px" style="display: block; margin: auto;" /&gt;
+
+---
 ##  Actividad
 
-Imaginemos que dentro del directorio `github-rs`:
+**Imaginemos** que dentro del directorio `python-class`:
 
-\# Vamos al directorio template-repo  
+\# Tenemos el directorio template-repo y entramos a él    
 `$ cd template-repo/`  
 
 \# Inicializamos un repositorio Git  
@@ -344,10 +405,11 @@ __¿Les parece que esta sea una buena idea?__
 
 ## Creando un repositorio controlado por Git
 
-`git init` inicializa un repositorio Git.
+`git init` inicializa un repositorio Git.  
 
+En caso de que usemos la herramienta **uv** para gestionar proyectos en Python el repositorio git es creado por default.  
 
-Git almacena y controla todos los cambios que se hagan en el contenido del repositorio mediante el directorio `.git`
+Git almacena y controla todos los cambios que se hagan en el contenido del repositorio mediante el **directorio `.git`**
 
 &lt;img src="img/admiracion.png" width="150px" style="display: block; margin: auto;" /&gt;
 
@@ -355,25 +417,19 @@ Git almacena y controla todos los cambios que se hagan en el contenido del repos
 
 ##  Controlando los cambios con Git
 
-1.  Entrar al directorio  			
-`cd template-repo/docs`
+1.  Crear y entrar al directorio  			
+`mkdir templates`  
+`cd templates`
 
-2. Indicar a Git que controle los cambios de mi programa  
-`git add detalles_proyecto.md test_cases.md`
+2. Descargar de la plataforma de cursos las plantillas: README.md y casos_prueba.md  
 
-3. Confirmar los cambios realizados  		
-`git commit –m “Mensaje”`  
+3. Mover los archivos a la carpeta *templates*  
 
+4. Indicar a Git que comience a controlar dichos archivos     
+`git add README.md casos_prueba.md `  
 
-
-
-** Práctica: ahora confirma que quieres controlar el archivo README.md y template_program.py**  
-
----
-
-##  Controlando los cambios con Git
-
-&lt;img src="img/flujoGit.png" width="750px" style="display: block; margin: auto;" /&gt;
+5. Confirmar los cambios realizados  		
+`git commit –m “Agregar plantillas”`  
 
 ---
 
@@ -387,7 +443,7 @@ __Comandos Git:__
 
 `git init` inicializar repositorio Git
 
-`git add` agregar y dar seguimiento a los archivos del repositorio Git
+`git add [archivo(s)]` agregar y dar seguimiento a los archivos del repositorio Git
 
 `git commit –m “Mensaje”` Formalizar/asegurar los cambios realizados en el repositorio
 
@@ -399,16 +455,11 @@ __Comandos Git:__
 
 `git log` lista todos los commits realizados en el repositorio en orden cronológico inverso.  
 
-`git log –N` donde N indica el número de commits que queremos obtener.  
-
 `git log --oneline` información reducida  
 
 `git status` indica el estado de los archivos que pueden ser controlados por Git, o aquellos que ya están controlados pero se han modificado  
 
-&lt;img src="img/gitlog.png" width="350px" style="display: block; margin: auto;" /&gt;
-
-`git commit --amend -m ”Mensaje”` modifica el mensaje del commit más reciente  
-
+&lt;img src="img/gitlog.png" width="550px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -436,18 +487,45 @@ Por ejemplo, archivos de respaldo creados automáticamente por nuestro editor, p
 
 **Archivo:    .gitignore**
 
-Ir a la raíz de la carpeta template-repo y crear directorio y archivos de prueba  
-`$ mkdir results`  
-`$ touch a.dat b.dat c.dat results/a.out results/b.out`  
+Ir a la raíz de la carpeta python-class y crear directorio y archivos de prueba 
+`cd ..`  
+`pwd`  
+`mkdir results`  
+`touch results/a.out results/b.out`  
 Comprobando el estado de nuestro repositorio  
-`$ git status`  
-Creando archivo .gitignore en el *directorio raíz*  
-`$ nano .gitignore`  
-Agregar las líneas:  
-`*.dat`   
+`git status`  
+Abre el archivo .gitignore en el *directorio raíz*  
+`nano .gitignore`  
+O bien, puedes abrirlo desde un editor gráfico  
+Agregar la línea y guardar los cambios:  
 `results/`  
 Comprobando el estado de nuestro repositorio  
-`$ git status`  
+`git status`  
+
+---
+
+Ahora, ¿qué debo hacer para que no tenga nada pendiente por confirmar en mi repositorio?
+
+---
+Ahora, ¿qué debo hacer para que no tenga nada pendiente por confirmar en mi repositorio?  
+
+Comprobando el estado de nuestro repositorio  
+`git status` 
+
+Indicar a Git que comience a controlar dicho archivo     
+`git add .gitignore`
+
+Confirmar los cambios realizados  		
+`git commit –m “Agregar carpeta results a gitignore”`
+
+---
+
+__Buenas prácticas__  
+Crear la siguiente estructura de organización de carpetas y archivos para nuestros proyectos/programas.
+
+&lt;img src="img/estructuraDir.png" width="650px" style="display: block; margin: auto;" /&gt;
+
+`mkdir doc lib src test`
 
 ---
 
@@ -486,15 +564,25 @@ Comprobando el estado de nuestro repositorio
 
 ## Conectar dos repositorios
 
-¡Asegurate que no haya nada pendiente por confirmar en repositorio!  
+**¡Asegurate que no haya nada pendiente por confirmar en repositorio!**  
 
-&lt;img src="img/conectarRepos.png" width="800px" style="display: block; margin: auto;" /&gt;
+NOTA 1: Revisa el nombre de la rama por defecto en el repositorio local y el repositorio remoto, ambas deben coincidir. **master** o **main**  
+
+`git branch`
+
+NOTA 2: Conservar el mismo nombre  
+
+`git remote add origin https://github.com/shirleyah/python_class.git`  
+`git branch -M main`  
+`git remote -v`  
+
+&lt;img src="img/conectarRepos.png" width="300px" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## _Push_ : llevando los cambios al servidor remoto
 
-`git push origin master`  
+`git push origin main`  
 
 &lt;img src="img/push.png" width="800px" style="display: block; margin: auto;" /&gt;
 ---
@@ -506,9 +594,30 @@ Comprobando el estado de nuestro repositorio
 &lt;img src="img/esquemaGeneral.png" width="800px" style="display: block; margin: auto;" /&gt;
 ---
 
+## Resumen
+
+Comando vistos:
+
+git init: Inicializa un repositorio  
+
+git add: Agregar un archivo (o los cambios de este) al área de preparación  
+
+git commit -m "MENSAJE": Confirma los cambios realizados en determinados archivos  
+
+git status: Muestra el estado de nuestro repositorio  
+
+git log: Despliega el listado de _commits_ realizados en el repositorio
+
+git push: Permite subir los cambios del repositorio local al repositorio remoto  
+
+
+[Más comandos](https://education.github.com/git-cheat-sheet-education.pdf)
+
+
+---
 ## _Pull_ : bajando los cambios del servidor remoto (GitHub) a mi repositorio local
 
-`git pull origin master`  
+`git pull origin main`  
 
 &lt;img src="img/pull.png" width="600px" style="display: block; margin: auto;" /&gt;
 
@@ -523,6 +632,153 @@ Comprobando el estado de nuestro repositorio
 - Revisa el log de commits en tu repositorio  
 
 ---
+
+## GitHub Desktop
+
+Interfaz gráfica que permite la interacción con GitHub desde nuestra computadora.  
+
+&lt;https://desktop.github.com/&gt;  
+&lt;img src="img/githubDesktop.png" width="200px" style="display: block; margin: auto;" /&gt;
+
+Disponible para: Windows y MacOS.  
+
+GitHub Desktop para GNU/Linux no está oficialmente respaldada por GitHub, pero... existe un desarrollo independiente: (https://github.com/shiftkey/desktop)  
+
+
+---
+
+## Actividad
+
+- Descargar GitHub Desktop en nuestra computadora e instalarlo   
+
+&lt;https://desktop.github.com/&gt;
+
+- Conocer la interfaz de GitHub Desktop  
+*ATENCIÓN: Debes tener instalado Git antes de utilizar GitHub Desktop*  
+
+- Configura tu cuenta de GitHub  
+
+`Menú GitHub Desktop -&gt; Preferences -&gt; Accounts` 
+
+- Ingresar correo y contraseña de la cuenta creada en GitHub Desktop  
+
+- Agregar nuestro repositorio    
+
+----&gt; Quienes trabajaron de manera local seleccionar "File&gt;Add Local Repository" o "Add an Existing Repository from your local drive ..."  
+----&gt; Quienes trabajaron en el servidor deberán que *clonar* el repositorio, "File&gt;Clone Repository"   
+
+---
+
+
+## Hasta ahora hemos hecho .....
+
+
+&lt;img src="img/esquemaGeneraLicense.png" width="800px" style="display: block; margin: auto;" /&gt;
+---
+
+## Pull request (PR)
+
+.full-width[.content-box-red[Un _pull request_ es una petición para integrar propuestas o cambios de código a un proyecto.]]
+
+Un _pull request_ nos sirve para _compartir cambios_ con el resto del equipo. 
+
+También mediante un _pull request_ podremos enviar nuestras **propuestas** a un repositorio de acceso abierto.
+
+Antes de __aprobar__ un pull request se debe _analizar y revisar el código_ que ha sido modificado, y una vez validado se podrán fusionar los cambios a la *rama master/main*.
+
+&lt;img src="img/githubflowPR.png" width="250px" style="display: block; margin: auto;" /&gt;
+---
+## Pull request (PR)
+
+__¿Cómo puedo contribuir en un proyecto (repositorio en GitHub)?__  
+
+Para contribuir en un proyecto que está publicado en GitHub tendremos que hacer uso de un _Pull Request_.  
+
+Nota: Para enviar nuestras observaciones/cambios __no es necesario ser colaborador del proyecto__.  
+
+*Actividad:*  
+
+1. Localizar un repositorio de interés en GitHub  
+
+2. Seleccionar un archivo, intentar editarlo para realizar un "fork" (crear una copia de un repositorio en tu cuenta de GitHub) y hacer los cambios.  
+
+3. Realizar los cambios necesarios en el o los archivos y hacer commit: Commit changes... -&gt; Propose changes. Revisar sección: "Comparando cambios"  
+
+4. Crear un pull request: título, descripción, menciones, formatos, etc.
+
+&lt;img src="img/pull-requests.jpeg" width="90px" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Actividad
+
+1. Registra en el archivo excel "Repositorios GitHub de Alumnos" tu repositorio en GitHub  
+
+2. Selecciona un repositorio de tus compañerxs y pon tu nombre enseguida  
+
+3. **Colaborador**: Ve al repositorio seleccionado e identifica un archivo en el que quieras colaborar  
+
+4. Realiza una modificación (utiliza el ícono de lapiz para editar), y realiza el *fork* del repositorio  
+
+5. Confirma los cambios   
+
+6. Realizar un pull request  
+
+---
+
+## Pull request
+
+__¿Cómo revisar/aceptar un pull request?__  
+
+Por parte del propietario o propietaria del repositorio:
+
+1. Recibirá una notificación por email del pull request. Ver también el ícono se "notificaciones" en la interfaz de GitHub (a un costado de la foto de perfil)
+
+2. Revisar los cambios propuestos (commits, archivos modificados, etc.)  
+
+3. Escribir un mensaje sobre lo visto en el pull request  
+
+4. Hacer "Merge pull request" y confirmar pull request  
+
+5. Descargar los cambios al repositorio local  
+
+Nota: En el paso 3 y 4 el contribuidor recibirá los mensajes de notificación por email.
+---
+
+## Formas de trabajar con Git/GitHub
+
+
+&lt;img src="img/formasAccesoGit.png" width="800px" style="display: block; margin: auto;" /&gt;
+
+---
+## Conectando git con Visual Studio Code (VS Code)
+
+1. Abrir VS Code  
+
+2. Ir al menú _File_ &gt; _Open folder_ y seleccionar nuestro repositorio _python-class_
+
+3. En VS Code, ir al menú izquierdo y ver el comportamiento del repositorio  
+
+4. Dar clic sobre el ícono de "Source Control"  
+
+5. Verificar que desde ahí se puede hacer de manera gráfica: *git add*, *git commit*, *git push*, *git pull* y más  
+
+6. También se puede seguir trabajando con línea de comandos: Menú *Terminal* &gt; _New terminal_ 
+
+---
+## Actividad
+
+1. Edita el archivo README.md modificando el encabezado    
+
+2. Confirma los cambios realizados  
+
+3. Sube los cambios al repositorio remoto  
+
+4. Asegurate que las modificaciones se encuentran en GitHub  
+
+5. Edita desde GitHub el archivo y descarga los cambios al repositorio local  
+---
+
 
 ## FAIR-BioRS guidelines
 
@@ -562,196 +818,16 @@ __Licencia__
 Analiza las diferentes licencias que existen y agrega una a tu repositorio.  
 
 
-- Agrega un archivo a tu repositorio:  
+- Desde la interfaz de GitHub, agrega un archivo a tu repositorio:  
 `Add file -&gt; Create new file`
 
 - Nombra al archivo como: LICENSE.md  
 - Selecciona una licencia  
 - Da clic en Review and submit  
 - Agrega un commit de este nuevo archivo  
-- Descarga los cambios usando el comando pull  
+- Descarga los cambios a tu repositorio local. Usa **GitHub Desktop, la terminal o VSC**    
 
----
 
-## Hasta ahora hemos hecho .....
-
-
-&lt;img src="img/esquemaGeneraLicense.png" width="800px" style="display: block; margin: auto;" /&gt;
----
-
-## Pull request (PR)
-
-.full-width[.content-box-red[Un _pull request_ es una petición para integrar propuestas o cambios de código a un proyecto.]]
-
-Un _pull request_ nos sirve para _agregar cambios_ a nuestro repositorio de trabajo, o bien para compartir cambios en el proyecto con el resto del equipo. 
-
-También mediante un _pull request_ podremos enviar nuestras propuestas a un repositorio de acceso abierto.
-
-Antes de __aprobar__ un pull request se debe _analizar y revisar el código_ que ha sido modificado, y una vez validado se podrán fusionar los cambios a la *rama master*.
-
-&lt;img src="img/githubflowPR.png" width="250px" style="display: block; margin: auto;" /&gt;
-
----
-
-## Pull request
-
-__¿Cómo revisar/aceptar un pull request?__  
-
-Por parte del propietario o propietaria del repositorio:
-
-1. Recibirá una notificación en GitHub de un pull request
-
-2. Revisar los cambios propuestos (commits, archivos modificados, etc.)  
-
-3. Escribir un mensaje sobre lo visto en el pull request  
-
-4. Hacer "Merge pull request"  y confirmar pull request  
-
----
-
-## Actividad
-
-Cada uno de nosotros ha recibido un pull request (PR) el cual debemos revisar y decidir si aceptamos los cambios propuestos o no.  
-
-NOTA: Verificar que nuestro repositorio este al día, es decir, sin cambios pendientes por agregar o confirmar.  
-
-1. Ir a nuestra cuenta en GitHub  
-
-2. Localizar nuestro repositorio: github-rs  
-
-3. Ir al menú Pull requests  
-
-4. Hacer clic en el enlace del pull request recibido  
-
-5. Identificar al usuario que hizo el PR y revisar el mensaje enviado por su parte   
-
-6. Ir al menú Files changed y revisar las modificaciones sugeridas
-
-7. Aprobar el pull request    
-
-8. Revisar que los archivos presenten los cambios aceptados  
-
-**No olvides descargar los cambios a tu repositorio local**
-
-
-
----
-
-
-## Pull request (PR)
-
-__¿Cómo puedo contribuir en un proyecto (repositorio en GitHub)?__  
-
-Para contribuir en un proyecto que está publicado en GitHub tendremos que hacer uso de un _Pull Request_.  
-
-Nota: Para enviar nuestras observaciones/cambios __no es necesario ser colaborador del proyecto__.  
-
-*Pasos:*  
-
-1. Localizar un repositorio de interés en GitHub  
-
-2. Seleccionar un archivo, intentar editarlo para realizar un "fork" (crear una copia de un repositorio en tu cuenta de GitHub) y hacer los cambios.  
-
-3. Realizar los cambios necesarios en el o los archivos y hacer commit: Commit changes... -&gt; Propose changes. Revisar sección: "Comparando cambios"  
-
-4. Crear un pull request: título, descripción, menciones, formatos, etc.
-
-&lt;img src="img/pull-requests.jpeg" width="150px" style="display: block; margin: auto;" /&gt;
-
----
-
-## Actividad
-
-1. Registra en el archivo excel tu cuenta de usuario y URL de tu repositorio en GitHub  
-
-2. Selecciona un repositorio de tus compañerxs y pon tu nombre enseguida  
-
-3. Realizar un pull request (colaborador)  
-
-4. Revisar el pull request y aceptar los cambios (propietario del repositorio)  
-
-**No olvides descargar los cambios a tu repositorio local (propietario del repositorio)**  
-
-
----
-
-## GitHub Desktop
-
-Interfaz gráfica que permite la interacción con GitHub desde nuestra computadora.  
-
-&lt;https://desktop.github.com/&gt;  
-&lt;img src="img/githubDesktop.png" width="300px" style="display: block; margin: auto;" /&gt;
-
-Disponible para: Windows y MacOS.  
-
-
-GitHub Desktop para GNU/Linux no está oficialmente respaldada por GitHub.
-
----
-
-## Actividad
-
-- Descargar GitHub Desktop en nuestra computadora e instalarlo   
-
-&lt;https://desktop.github.com/&gt;
-
-- Conocer la interfaz de GitHub Desktop  
-*ATENCIÓN: Debes tener instalado Git antes de utilizar GitHub Desktop*  
-
-- Configura tu cuenta de GitHub  
-
-`Menú GitHub Desktop -&gt; Preferences -&gt; Accounts` 
-
-- Ingresar correo y contraseña de la cuenta creada en GitHub Desktop  
-
-- Agregar nuestro repositorio    
-
-----&gt; Quienes trabajaron de manera local seleccionar "File&gt;Add Local Repository"  
-----&gt; Quienes trabajaron en tepeu deberán que *clonar* el repositorio, "File&gt;Clone Repository"   
-
----
-
-## Actividad
-
-Una vez que tengamos vinculado el repositorio con GitHub Desktop  
-
-- Hacer un cambio a un archivo  
-
-- Hacer un commit desde GitHub Desktop  
-
-- Subir los cambios al repositorio remoto usando GitHub Desktop  
-
----
-
-## Actividad: Crearemos un nuevo repositorio local y lo llevaremos a GitHub
-
-- Desde la aplicación de GitHub Desktop, crear un repositorio llamado "python-class": File-&gt;New Repository. Se puede agregar desde aquí el archivo .gitignore, así como una licencia.  
-- Entrar a la carpeta (Show in Finder) y crear el directorio "template-repo". Crear la siguiente estructura de carpetas.     
-
-&lt;img src="img/estructuraCarpeta.png" width="200px" style="display: block; margin: auto;" /&gt;
-
-- Copiar los archivos de nuestro repositorio github-rs. Estas plantillas ya deben ser las estables/finales.
-
----
-
-
-## Actividad: Crearemos un nuevo repositorio local y lo llevaremos a GitHub
-
-- Desde la interfaz de GitHub Desktop, agregar todos los archivos y hacer commit.  
-- Ir al menú Repository y seleccionar la opción Push. 
-- Ir a nuestra cuenta GitHub y verificar que se encuentre el repositorio.  
-- Cambiar la visibilidad a Público. Ir al menú Settings-&gt; General -&gt;  Change repository visibility -&gt; Change to public  
-- Ir a la carpeta python-class y hacer una copia de la carpeta template-repo, renombrarla con: count-atgc  
-- Desde la interfaz de GitHub Desktop, agregar todos los archivos y hacer commit.   
-- Hacer push al repositorio remoto y verificar el contenido este en web. 
-- Agregar la URL del nuevo repositorio python-class al archivo excel: repositorios github alumnos  
-
----
-
-## Formas de trabajar con Git/GitHub
-
-
-&lt;img src="img/formasAccesoGit.png" width="800px" style="display: block; margin: auto;" /&gt;
 ---
 ## Conclusión
 
@@ -760,10 +836,9 @@ Una vez que tengamos vinculado el repositorio con GitHub Desktop
 _¡Colabora en otros proyectos y comparte tus conocimientos!_
 
 ---
-
-
-
 ## ¡Gracias!
+
+---
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
