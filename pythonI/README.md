@@ -8,7 +8,7 @@ Curso básico de programación usando buenas prácticas de desarrollo de softwar
 
 * [Mejores Prácticas para el desarrollo de software](https://lcg-cursos.github.io/material/pythonI/mejorespracticas/DesarrolloSoftware_v1.0.html)
 
-### [GitHub](https://lcg-cursos.github.io/material/pythonI/git/git.html)
+### [GitHub](https://lcg-cursos.github.io/material/pythonI/git/1-git.html)
 
 * Introducción
 
