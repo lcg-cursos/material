@@ -1,0 +1,1954 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Heladia Salgado">
+
+<title>from-prompt-to-answer – Prompting Científico con Inteligencia Artificial</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/images/favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-95759c9b5f0a9d12ebf0c1dbe5c47530.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d271f10569e7254d5269ff747e9d5db2.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-95759c9b5f0a9d12ebf0c1dbe5c47530.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e0f64a05f2c9985a109e347d2886874d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-d1268c8e4f19edb023b62fc8da355448.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-e0f64a05f2c9985a109e347d2886874d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../assets/css/styles.css">
+<link rel="stylesheet" href="../../assets/css/components.css">
+<meta property="og:title" content="Prompting Científico con Inteligencia Artificial">
+<meta property="og:description" content="Course description">
+<meta property="og:image" content="https://lcg-cursos.github.io/material/prompting-cientifico/chapters/apendices/assets/images/og-image.png">
+<meta property="og:site_name" content="Prompting Científico con Inteligencia Artificial">
+<meta name="twitter:title" content="Prompting Científico con Inteligencia Artificial">
+<meta name="twitter:description" content="Pensamiento científico, validación y reproducibilidad con IA">
+<meta name="twitter:image" content="https://lcg-cursos.github.io/material/prompting-cientifico/chapters/apendices/assets/images/twitter-card.png">
+<meta name="twitter:creator" content="@yourusername">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/images/logo.png" alt="Course Logo" class="navbar-logo light-content">
+    <img src="../../assets/images/logo.png" alt="Course Logo" class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page"> <i class="bi bi-house-fill" role="img">
+</i> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapters" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-book-fill" role="img">
+</i> 
+ <span class="menu-text">Chapters</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapters">    
+        <li>
+    <a class="dropdown-item" href="../../chapters/capitulo1/index.html"><i class="bi bi-brain" role="img">
+</i> 
+ <span class="dropdown-text">Introducción al Prompting</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../chapters/sesion-01-fundamentos/index.html"><i class="bi bi-brain" role="img">
+</i> 
+ <span class="dropdown-text">Sesión 1: Fundamentos de IA</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../../chapters/example-chapter-01/index.qmd"><i class="bi bi-rocket-takeoff" role="img">
+</i> 
+ <span class="dropdown-text">Getting Started (Example)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../chapters/example-chapter-02/index.qmd"><i class="bi bi-stars" role="img">
+</i> 
+ <span class="dropdown-text">Advanced Topics (Example)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../exercises/index.html"> <i class="bi bi-pencil-square" role="img">
+</i> 
+<span class="menu-text">Exercises</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources/index.html"> <i class="bi bi-box-arrow-down" role="img">
+</i> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/yourusername/your-course"> <i class="bi bi-github" role="img" aria-label="GitHub Repository">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/yourusername"> <i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="" title="Dark Mode" class="quarto-navigation-tool px-1" aria-label="Dark Mode"><i class="bi bi-moon"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../assets/images/logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../../assets/images/logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏠 Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/capitulo1/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🧠 Introducción al Prompting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/capitulo2/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🔬 Prompting Científico</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/capitulo3/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🔬 Diseño de Protocolos de Prompting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">---</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">✏️ Exercises</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📥 Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/component-examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🧩 Components</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ℹ️ About</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#cómo-los-llm-convierten-los-prompts-en-respuestas" id="toc-cómo-los-llm-convierten-los-prompts-en-respuestas" class="nav-link active" data-scroll-target="#cómo-los-llm-convierten-los-prompts-en-respuestas"><span class="header-section-number">1</span> Cómo los LLM convierten los prompts en respuestas</a>
+  <ul class="collapse">
+  <li><a href="#algoritmo-conceptual-de-generación-autoregresiva-con-términos-técnicos-básicos" id="toc-algoritmo-conceptual-de-generación-autoregresiva-con-términos-técnicos-básicos" class="nav-link" data-scroll-target="#algoritmo-conceptual-de-generación-autoregresiva-con-términos-técnicos-básicos"><span class="header-section-number">1.1</span> Algoritmo conceptual de generación autoregresiva (con términos técnicos básicos)</a></li>
+  <li><a href="#variables-y-conceptos" id="toc-variables-y-conceptos" class="nav-link" data-scroll-target="#variables-y-conceptos"><span class="header-section-number">1.2</span> Variables y conceptos</a></li>
+  </ul></li>
+  <li><a href="#algoritmo-paso-a-paso" id="toc-algoritmo-paso-a-paso" class="nav-link" data-scroll-target="#algoritmo-paso-a-paso"><span class="header-section-number">2</span> Algoritmo paso a paso</a>
+  <ul class="collapse">
+  <li><a href="#paso-1-leer-el-prompt-texto-del-usuario" id="toc-paso-1-leer-el-prompt-texto-del-usuario" class="nav-link" data-scroll-target="#paso-1-leer-el-prompt-texto-del-usuario"><span class="header-section-number">2.1</span> Paso 1 — Leer el prompt (texto del usuario)</a></li>
+  <li><a href="#paso-2-tokenización-texto-tokens" id="toc-paso-2-tokenización-texto-tokens" class="nav-link" data-scroll-target="#paso-2-tokenización-texto-tokens"><span class="header-section-number">2.2</span> Paso 2 — Tokenización (texto → tokens)</a></li>
+  <li><a href="#paso-3-embeddings-tokens-vectores" id="toc-paso-3-embeddings-tokens-vectores" class="nav-link" data-scroll-target="#paso-3-embeddings-tokens-vectores"><span class="header-section-number">2.3</span> Paso 3 — Embeddings (tokens → vectores)</a></li>
+  <li><a href="#paso-4-añadir-orden-positional-embeddings" id="toc-paso-4-añadir-orden-positional-embeddings" class="nav-link" data-scroll-target="#paso-4-añadir-orden-positional-embeddings"><span class="header-section-number">2.4</span> Paso 4 — Añadir orden: positional embeddings</a></li>
+  <li><a href="#paso-5-pasar-por-múltiples-capas-transformer" id="toc-paso-5-pasar-por-múltiples-capas-transformer" class="nav-link" data-scroll-target="#paso-5-pasar-por-múltiples-capas-transformer"><span class="header-section-number">2.5</span> Paso 5 — Pasar por múltiples capas Transformer</a></li>
+  <li><a href="#paso-6-matriz-de-salida-proyección-al-vocabulario-embeddings-logits" id="toc-paso-6-matriz-de-salida-proyección-al-vocabulario-embeddings-logits" class="nav-link" data-scroll-target="#paso-6-matriz-de-salida-proyección-al-vocabulario-embeddings-logits"><span class="header-section-number">2.6</span> Paso 6 — Matriz de salida / proyección al vocabulario (embeddings → logits)</a></li>
+  <li><a href="#paso-7-softmax-logits-distribución-de-probabilidad" id="toc-paso-7-softmax-logits-distribución-de-probabilidad" class="nav-link" data-scroll-target="#paso-7-softmax-logits-distribución-de-probabilidad"><span class="header-section-number">2.7</span> Paso 7 — Softmax (logits → distribución de probabilidad)</a></li>
+  <li><a href="#paso-8-selección-del-siguiente-token-muestreo" id="toc-paso-8-selección-del-siguiente-token-muestreo" class="nav-link" data-scroll-target="#paso-8-selección-del-siguiente-token-muestreo"><span class="header-section-number">2.8</span> Paso 8 — Selección del siguiente token (muestreo)</a></li>
+  <li><a href="#paso-9-autoregresión-agregar-el-token-al-contexto" id="toc-paso-9-autoregresión-agregar-el-token-al-contexto" class="nav-link" data-scroll-target="#paso-9-autoregresión-agregar-el-token-al-contexto"><span class="header-section-number">2.9</span> Paso 9 — Autoregresión: agregar el token al contexto</a></li>
+  <li><a href="#paso-10-parar-criterio-de-detención" id="toc-paso-10-parar-criterio-de-detención" class="nav-link" data-scroll-target="#paso-10-parar-criterio-de-detención"><span class="header-section-number">2.10</span> Paso 10 — Parar (criterio de detención)</a></li>
+  </ul></li>
+  <li><a href="#resumen-en-flujo" id="toc-resumen-en-flujo" class="nav-link" data-scroll-target="#resumen-en-flujo"><span class="header-section-number">3</span> Resumen en flujo</a></li>
+  <li><a href="#ejemplo" id="toc-ejemplo" class="nav-link" data-scroll-target="#ejemplo"><span class="header-section-number">4</span> Ejemplo</a>
+  <ul class="collapse">
+  <li><a href="#prompt-usuario" id="toc-prompt-usuario" class="nav-link" data-scroll-target="#prompt-usuario"><span class="header-section-number">4.1</span> Prompt (usuario)</a>
+  <ul class="collapse">
+  <li><a href="#iteración-1-elegir-el-primer-token" id="toc-iteración-1-elegir-el-primer-token" class="nav-link" data-scroll-target="#iteración-1-elegir-el-primer-token"><span class="header-section-number">4.1.1</span> Iteración 1: elegir el primer token</a></li>
+  <li><a href="#iteración-2-elegir-el-segundo-token" id="toc-iteración-2-elegir-el-segundo-token" class="nav-link" data-scroll-target="#iteración-2-elegir-el-segundo-token"><span class="header-section-number">4.1.2</span> Iteración 2: elegir el segundo token</a></li>
+  <li><a href="#iteración-3-elegir-el-tercer-token" id="toc-iteración-3-elegir-el-tercer-token" class="nav-link" data-scroll-target="#iteración-3-elegir-el-tercer-token"><span class="header-section-number">4.1.3</span> Iteración 3: elegir el tercer token</a></li>
+  </ul></li>
+  <li><a href="#cómo-influyen-las-capas-en-este-ejemplo" id="toc-cómo-influyen-las-capas-en-este-ejemplo" class="nav-link" data-scroll-target="#cómo-influyen-las-capas-en-este-ejemplo"><span class="header-section-number">4.2</span> ¿Cómo influyen las capas en este ejemplo?</a>
+  <ul class="collapse">
+  <li><a href="#idea-clave-final" id="toc-idea-clave-final" class="nav-link" data-scroll-target="#idea-clave-final"><span class="header-section-number">4.2.1</span> Idea clave final</a></li>
+  <li><a href="#aclaración-clave-qué-significa-vocabulario-del-modelo" id="toc-aclaración-clave-qué-significa-vocabulario-del-modelo" class="nav-link" data-scroll-target="#aclaración-clave-qué-significa-vocabulario-del-modelo"><span class="header-section-number">4.2.2</span> Aclaración clave: ¿Qué significa “vocabulario del modelo”?</a></li>
+  </ul></li>
+  <li><a href="#qué-es-el-vocabulario-del-modelo" id="toc-qué-es-el-vocabulario-del-modelo" class="nav-link" data-scroll-target="#qué-es-el-vocabulario-del-modelo"><span class="header-section-number">4.3</span> ¿Qué es el vocabulario del modelo?</a></li>
+  <li><a href="#el-vocabulario-no-cambia-según-el-prompt" id="toc-el-vocabulario-no-cambia-según-el-prompt" class="nav-link" data-scroll-target="#el-vocabulario-no-cambia-según-el-prompt"><span class="header-section-number">4.4</span> El vocabulario NO cambia según el prompt</a></li>
+  <li><a href="#no-existe-un-vocabulario-del-prompt" id="toc-no-existe-un-vocabulario-del-prompt" class="nav-link" data-scroll-target="#no-existe-un-vocabulario-del-prompt"><span class="header-section-number">4.5</span> No existe un “vocabulario del prompt”</a></li>
+  </ul></li>
+  <li><a href="#ejemplo-mejorado" id="toc-ejemplo-mejorado" class="nav-link" data-scroll-target="#ejemplo-mejorado"><span class="header-section-number">5</span> Ejemplo mejorado</a>
+  <ul class="collapse">
+  <li><a href="#conclusión" id="toc-conclusión" class="nav-link" data-scroll-target="#conclusión"><span class="header-section-number">5.0.1</span> Conclusión</a></li>
+  </ul></li>
+  <li><a href="#es-el-prompt-un-embedding-estadístico-de-todas-sus-palabras" id="toc-es-el-prompt-un-embedding-estadístico-de-todas-sus-palabras" class="nav-link" data-scroll-target="#es-el-prompt-un-embedding-estadístico-de-todas-sus-palabras"><span class="header-section-number">6</span> ¿Es el prompt “un embedding estadístico de todas sus palabras”?</a>
+  <ul class="collapse">
+  <li><a href="#lo-que-no-ocurre" id="toc-lo-que-no-ocurre" class="nav-link" data-scroll-target="#lo-que-no-ocurre"><span class="header-section-number">6.0.1</span> Lo que NO ocurre</a></li>
+  <li><a href="#lo-que-sí-ocurre" id="toc-lo-que-sí-ocurre" class="nav-link" data-scroll-target="#lo-que-sí-ocurre"><span class="header-section-number">6.0.2</span> Lo que SÍ ocurre</a></li>
+  <li><a href="#dónde-vive-esa-representación" id="toc-dónde-vive-esa-representación" class="nav-link" data-scroll-target="#dónde-vive-esa-representación"><span class="header-section-number">6.0.3</span> ¿Dónde vive esa representación?</a></li>
+  <li><a href="#cómo-pasa-de-esa-representación-a-elegir-una-palabra" id="toc-cómo-pasa-de-esa-representación-a-elegir-una-palabra" class="nav-link" data-scroll-target="#cómo-pasa-de-esa-representación-a-elegir-una-palabra"><span class="header-section-number">6.0.4</span> ¿Cómo pasa de esa representación a elegir una palabra?</a></li>
+  <li><a href="#conclusión-1" id="toc-conclusión-1" class="nav-link" data-scroll-target="#conclusión-1"><span class="header-section-number">6.0.5</span> Conclusión</a></li>
+  <li><a href="#referencia" id="toc-referencia" class="nav-link" data-scroll-target="#referencia"><span class="header-section-number">6.0.6</span> Referencia</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/yourusername/your-course/edit/main/chapters/apendices/from-prompt-to-answer.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/yourusername/your-course/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><div class="quarto-title-block"><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Heladia Salgado </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="cómo-los-llm-convierten-los-prompts-en-respuestas" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Cómo los LLM convierten los prompts en respuestas</h1>
+<section id="algoritmo-conceptual-de-generación-autoregresiva-con-términos-técnicos-básicos" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="algoritmo-conceptual-de-generación-autoregresiva-con-términos-técnicos-básicos"><span class="header-section-number">1.1</span> Algoritmo conceptual de generación autoregresiva (con términos técnicos básicos)</h2>
+<p>Este documento describe <strong>cómo</strong> genera texto un modelo autoregresivo tipo GPT, distinguiendo claramente entre:</p>
+<ul>
+<li><strong>Prompt / texto del usuario</strong> (externo, visible)</li>
+<li><strong>Modelo</strong> (red neuronal entrenada)</li>
+<li><strong>Embeddings y capas</strong> (representación interna)</li>
+<li><strong>Distribución de probabilidad</strong> (qué token sigue)</li>
+<li><strong>Texto generado</strong> (externo, visible)</li>
+</ul>
+<p>Incluye además una <strong>justificación de por qué se hace cada paso</strong> y un <strong>ejemplo concreto</strong>.</p>
+</section>
+<section id="variables-y-conceptos" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="variables-y-conceptos"><span class="header-section-number">1.2</span> Variables y conceptos</h2>
+<ul>
+<li><strong>Prompt (usuario):</strong> texto de entrada.</li>
+<li><strong>Tokens:</strong> unidades discretas (palabras, subtokens, signos).</li>
+<li><strong>Vocabulario:</strong> conjunto de tokens posibles.</li>
+<li><strong>Embedding:</strong> vector numérico que representa un token.</li>
+<li><strong>Positional embedding:</strong> vector que codifica el orden/posición.</li>
+<li><strong>Transformer:</strong> conjunto de capas con self-attention + MLP.</li>
+<li><strong>Logits:</strong> puntajes sin normalizar para cada token del vocabulario.</li>
+<li><strong>Softmax:</strong> conversión de logits a probabilidades.</li>
+<li><strong>Temperatura / muestreo:</strong> reglas para elegir el próximo token.</li>
+</ul>
+</section>
+</section>
+<section id="algoritmo-paso-a-paso" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Algoritmo paso a paso</h1>
+<p><img src="https://www.producttalk.org/content/images/size/w2000/2026/02/How-LLMs-Turn-Prompts-Into-Answers-with-PT-Logo-2.png" class="img-fluid"> Fuente: <a href="https://www.producttalk.org/how-does-chatgpt-work/?srsltid=AfmBOooZXBLxGw6V5c_CEd131trfksU79p1LAqdCTyKJW31i13rsnnKQ">How LLMs turns prompts into answers</a></p>
+<section id="paso-1-leer-el-prompt-texto-del-usuario" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="paso-1-leer-el-prompt-texto-del-usuario"><span class="header-section-number">2.1</span> Paso 1 — Leer el prompt (texto del usuario)</h2>
+<p><strong>Qué ocurre:</strong> el modelo recibe el prompt completo.</p>
+<p><strong>Por qué se hace:</strong></p>
+<ul>
+<li>El prompt define <em>qué tarea</em> se espera (explicar, comparar, resumir).</li>
+<li>Define <em>dominio</em> (p.&nbsp;ej., genética molecular) y <em>audiencia</em>.</li>
+<li>Actúa como condición inicial: sin prompt no hay contexto.</li>
+</ul>
+</section>
+<section id="paso-2-tokenización-texto-tokens" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="paso-2-tokenización-texto-tokens"><span class="header-section-number">2.2</span> Paso 2 — Tokenización (texto → tokens)</h2>
+<p><strong>Qué ocurre:</strong> el prompt se divide en <strong>tokens</strong>.</p>
+<p><strong>Por qué se hace:</strong></p>
+<ul>
+<li>El modelo necesita unidades discretas para indexar significado y frecuencia.</li>
+<li>Permite manejar palabras raras o nuevas usando subtokens.</li>
+<li>Hace el problema computable: trabajar con un vocabulario fijo.</li>
+</ul>
+</section>
+<section id="paso-3-embeddings-tokens-vectores" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="paso-3-embeddings-tokens-vectores"><span class="header-section-number">2.3</span> Paso 3 — Embeddings (tokens → vectores)</h2>
+<p><strong>Qué ocurre:</strong> cada token se convierte en un <strong>embedding</strong> (vector numérico).</p>
+<p><strong>Por qué se hace:</strong></p>
+<ul>
+<li>Las redes neuronales procesan números, no texto.</li>
+<li>Los embeddings permiten representar similitud: tokens relacionados quedan cerca en el espacio.</li>
+<li>Facilitan combinar información (semántica + estilo + dominio) de forma continua.</li>
+</ul>
+</section>
+<section id="paso-4-añadir-orden-positional-embeddings" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="paso-4-añadir-orden-positional-embeddings"><span class="header-section-number">2.4</span> Paso 4 — Añadir orden: positional embeddings</h2>
+<p><strong>Qué ocurre:</strong> se suma/integra una señal de posición a cada embedding.</p>
+<p><strong>Por qué se hace:</strong></p>
+<ul>
+<li>Un Transformer no “sabe” el orden por defecto.</li>
+<li>El significado depende del orden (“A regula B” ≠ “B regula A”).</li>
+<li>Permite que la atención distinga qué vino antes y qué vino después.</li>
+</ul>
+</section>
+<section id="paso-5-pasar-por-múltiples-capas-transformer" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="paso-5-pasar-por-múltiples-capas-transformer"><span class="header-section-number">2.5</span> Paso 5 — Pasar por múltiples capas Transformer</h2>
+<p><strong>Qué ocurre:</strong> los embeddings atraviesan varias capas con:</p>
+<ul>
+<li><strong>Self-attention:</strong> cada token “mira” a otros tokens relevantes.</li>
+<li><strong>MLP (feed-forward):</strong> transforma la información atendida.</li>
+</ul>
+<p><strong>Por qué se hace (justificación de profundidad):</strong></p>
+<ul>
+<li>Una capa captura patrones simples; varias capas construyen abstracciones.</li>
+<li>Capas tempranas: gramática, patrones locales.</li>
+<li>Capas medias: relaciones semánticas (quién hace qué a quién).</li>
+<li>Capas profundas: intención discursiva (definir/explicar) y estilo para la audiencia.</li>
+</ul>
+<p>En otras palabras: <strong>cada capa refina el contexto</strong> y mejora la representación.</p>
+</section>
+<section id="paso-6-matriz-de-salida-proyección-al-vocabulario-embeddings-logits" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="paso-6-matriz-de-salida-proyección-al-vocabulario-embeddings-logits"><span class="header-section-number">2.6</span> Paso 6 — Matriz de salida / proyección al vocabulario (embeddings → logits)</h2>
+<p><strong>Qué ocurre:</strong> el estado interno final se transforma en un conjunto de <strong>logits</strong>, uno por cada token del vocabulario.</p>
+<p><strong>Por qué se hace:</strong></p>
+<ul>
+<li>El modelo debe convertir una representación continua (vector) en una decisión discreta (qué token sigue).</li>
+<li>La proyección al vocabulario permite puntuar <em>todas</em> las opciones posibles.</li>
+</ul>
+</section>
+<section id="paso-7-softmax-logits-distribución-de-probabilidad" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="paso-7-softmax-logits-distribución-de-probabilidad"><span class="header-section-number">2.7</span> Paso 7 — Softmax (logits → distribución de probabilidad)</h2>
+<p><strong>Qué ocurre:</strong> los logits se convierten en probabilidades.</p>
+<p><strong>Por qué se hace:</strong></p>
+<ul>
+<li>Para interpretar los puntajes como “qué tan probable es cada siguiente token”.</li>
+<li>Permite control de la generación mediante reglas de muestreo.</li>
+</ul>
+<p>Resultado:</p>
+<ul>
+<li>Una <strong>distribución de probabilidad</strong> sobre el vocabulario.</li>
+</ul>
+</section>
+<section id="paso-8-selección-del-siguiente-token-muestreo" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="paso-8-selección-del-siguiente-token-muestreo"><span class="header-section-number">2.8</span> Paso 8 — Selección del siguiente token (muestreo)</h2>
+<p><strong>Qué ocurre:</strong> se elige el próximo token a partir de la distribución.</p>
+<p><strong>Por qué se hace:</strong></p>
+<ul>
+<li>Elegir siempre el más probable (modo determinista) produce texto más estable, pero puede ser repetitivo.</li>
+<li>Muestrear entre opciones probables produce diversidad.</li>
+<li><strong>Temperatura</strong> ajusta cuánta diversidad se permite.</li>
+</ul>
+</section>
+<section id="paso-9-autoregresión-agregar-el-token-al-contexto" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="paso-9-autoregresión-agregar-el-token-al-contexto"><span class="header-section-number">2.9</span> Paso 9 — Autoregresión: agregar el token al contexto</h2>
+<p><strong>Qué ocurre:</strong> el token elegido se añade al final de la secuencia y se repite el proceso.</p>
+<p><strong>Por qué se hace:</strong></p>
+<ul>
+<li>El modelo es <strong>autoregresivo</strong>: cada token nuevo se convierte en parte del contexto para el siguiente paso.</li>
+<li>Esto permite coherencia: lo que se dijo afecta lo que sigue.</li>
+</ul>
+</section>
+<section id="paso-10-parar-criterio-de-detención" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="paso-10-parar-criterio-de-detención"><span class="header-section-number">2.10</span> Paso 10 — Parar (criterio de detención)</h2>
+<p><strong>Qué ocurre:</strong> se detiene cuando:</p>
+<ul>
+<li>se genera un token de fin, o</li>
+<li>se alcanza un límite de longitud.</li>
+</ul>
+<p><strong>Por qué se hace:</strong></p>
+<ul>
+<li>Control de seguridad/longitud.</li>
+<li>Evita generación infinita.</li>
+</ul>
+</section>
+</section>
+<section id="resumen-en-flujo" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Resumen en flujo</h1>
+<p>→ Prompt (usuario).<br>
+→ Tokenización.<br>
+→ Embeddings + Posición.<br>
+→ Capas Transformer (atención + MLP).<br>
+→ Proyección al vocabulario (logits).<br>
+→ Softmax (probabilidades).<br>
+→ Selección del token.<br>
+→ Añadir al contexto.<br>
+→ Repetir.</p>
+</section>
+<section id="ejemplo" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Ejemplo</h1>
+<section id="prompt-usuario" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="prompt-usuario"><span class="header-section-number">4.1</span> Prompt (usuario)</h2>
+<blockquote class="blockquote">
+<p>“Explica qué es un gen desde la perspectiva de la genética molecular, dirigido a estudiantes de licenciatura en ciencias genómicas, incluyendo su estructura, función y las limitaciones del concepto clásico.”</p>
+</blockquote>
+<section id="iteración-1-elegir-el-primer-token" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="iteración-1-elegir-el-primer-token"><span class="header-section-number">4.1.1</span> Iteración 1: elegir el primer token</h3>
+<ul>
+<li><strong>Entrada interna:</strong> embeddings del prompt + orden</li>
+<li><strong>Salida probabilística (conceptual):</strong>
+<ul>
+<li>“Un” (alta)</li>
+<li>“La” (media)</li>
+<li>“En” (media)</li>
+</ul></li>
+</ul>
+<p>Se elige: <strong>“Un”</strong></p>
+<p><strong>Texto generado (externo):</strong> &gt; Un</p>
+<p><strong>Por qué:</strong> en textos académicos en español, definiciones suelen empezar con “Un X es…” o “La X es…”.</p>
+</section>
+<section id="iteración-2-elegir-el-segundo-token" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="iteración-2-elegir-el-segundo-token"><span class="header-section-number">4.1.2</span> Iteración 2: elegir el segundo token</h3>
+<p>Ahora el contexto incluye:</p>
+<ul>
+<li>Prompt (usuario) + “Un”</li>
+</ul>
+<p>La distribución cambia y favorece continuaciones compatibles:</p>
+<ul>
+<li>“gen” (alta)</li>
+<li>“concepto” (media)</li>
+<li>“elemento” (baja)</li>
+</ul>
+<p>Se elige: <strong>“gen”</strong></p>
+<p><strong>Texto generado:</strong> &gt; Un gen</p>
+</section>
+<section id="iteración-3-elegir-el-tercer-token" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="iteración-3-elegir-el-tercer-token"><span class="header-section-number">4.1.3</span> Iteración 3: elegir el tercer token</h3>
+<p>Contexto: - Prompt + “Un gen”</p>
+<p>Probabilidades típicas:</p>
+<ul>
+<li>“es” (muy alta)</li>
+<li>“se” (baja)</li>
+</ul>
+<p>Se elige: <strong>“es”</strong></p>
+<p><strong>Texto generado:</strong> &gt; Un gen es</p>
+</section>
+</section>
+<section id="cómo-influyen-las-capas-en-este-ejemplo" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="cómo-influyen-las-capas-en-este-ejemplo"><span class="header-section-number">4.2</span> ¿Cómo influyen las capas en este ejemplo?</h2>
+<ul>
+<li><strong>Capas tempranas:</strong> detectan que el prompt pide <em>explicar/definir</em> y que el registro debe ser académico.</li>
+<li><strong>Capas medias:</strong> conectan “genética molecular” con términos esperables (ADN, ARN, transcripción) y detectan los campos requeridos: estructura + función.</li>
+<li><strong>Capas profundas:</strong> integran “limitaciones del concepto clásico” y abren probabilidad a ideas como regulación, splicing, ARN no codificante, contexto genómico.</li>
+</ul>
+<p>Esto no es “planificación consciente”; es refinamiento progresivo de representaciones que termina sesgando la distribución del siguiente token.</p>
+<section id="idea-clave-final" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="idea-clave-final"><span class="header-section-number">4.2.1</span> Idea clave final</h3>
+<p>El modelo genera texto porque repite un ciclo:</p>
+<blockquote class="blockquote">
+<p><strong>representar el contexto → producir probabilidades → elegir un token → añadirlo → repetir</strong></p>
+</blockquote>
+<p>La profundidad (múltiples capas) existe para que la representación del contexto sea lo bastante rica como para que las probabilidades reflejen coherencia, estilo, dominio y requisitos del prompt.</p>
+</section>
+<section id="aclaración-clave-qué-significa-vocabulario-del-modelo" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="aclaración-clave-qué-significa-vocabulario-del-modelo"><span class="header-section-number">4.2.2</span> Aclaración clave: ¿Qué significa “vocabulario del modelo”?</h3>
+<p>Cuando hablamos de vocabulario en este contexto, nos referimos al <strong>vocabulario fijo del modelo</strong>, no al vocabulario del prompt.</p>
+</section>
+</section>
+<section id="qué-es-el-vocabulario-del-modelo" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="qué-es-el-vocabulario-del-modelo"><span class="header-section-number">4.3</span> ¿Qué es el vocabulario del modelo?</h2>
+<p>Es el conjunto finito y predefinido de <strong>tokens</strong> que el modelo puede generar.</p>
+<p>Puede contener, por ejemplo: - 32,000 - 50,000 - 100,000 tokens</p>
+<p>Incluye: - Palabras frecuentes completas - Subtokens (por ejemplo: “gen”, “ética”, “##ción”) - Signos de puntuación - Números - Fragmentos comunes</p>
+<p>No son todas las palabras posibles del mundo, sino todas las unidades que el modelo aprendió a representar durante el entrenamiento.</p>
+</section>
+<section id="el-vocabulario-no-cambia-según-el-prompt" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="el-vocabulario-no-cambia-según-el-prompt"><span class="header-section-number">4.4</span> El vocabulario NO cambia según el prompt</h2>
+<p>El vocabulario es fijo después del entrenamiento.</p>
+<p>Lo que cambia con el prompt es:</p>
+<blockquote class="blockquote">
+<p>La <strong>distribución de probabilidad</strong> sobre ese vocabulario.</p>
+</blockquote>
+<p>El modelo siempre calcula probabilidades para todos los tokens del vocabulario.</p>
+<p>Pero el prompt hace que:</p>
+<ul>
+<li>Algunos tokens tengan probabilidad alta.</li>
+<li>Otros tengan probabilidad extremadamente baja.</li>
+</ul>
+</section>
+<section id="no-existe-un-vocabulario-del-prompt" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="no-existe-un-vocabulario-del-prompt"><span class="header-section-number">4.5</span> No existe un “vocabulario del prompt”</h2>
+<p>El prompt no crea un subconjunto explícito de palabras permitidas.</p>
+<p>Lo que hace es mover la representación interna (h_final) a una región del espacio latente donde:</p>
+<ul>
+<li>Ciertos tokens están muy alineados.</li>
+<li>Otros están mal alineados.</li>
+</ul>
+<p>Es un filtrado probabilístico, no estructural.</p>
+</section>
+</section>
+<section id="ejemplo-mejorado" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Ejemplo mejorado</h1>
+<p>Supongamos que el vocabulario del modelo (simplificado) contiene estos tokens:</p>
+<ul>
+<li>“Un”</li>
+<li>“La”</li>
+<li>“ADN”</li>
+<li>“Transcripción”</li>
+<li>“Fútbol”</li>
+<li>“Pizza”</li>
+<li>“Parlamento”</li>
+</ul>
+<p>Y el prompt del usuario es:</p>
+<blockquote class="blockquote">
+<p>“Explica qué es un gen desde la perspectiva de la genética molecular.”</p>
+</blockquote>
+<p>Después de procesar el prompt por las capas Transformer obtenemos un vector contextual h_final.</p>
+<p>Ese vector se compara con todos los tokens del vocabulario.</p>
+<p>La distribución podría verse conceptualmente así:</p>
+<ul>
+<li>“Un” → 0.31</li>
+<li>“La” → 0.22</li>
+<li>“ADN” → 0.15</li>
+<li>“Transcripción” → 0.09</li>
+<li>“Fútbol” → 0.0003</li>
+<li>“Pizza” → 0.0001</li>
+<li>“Parlamento” → 0.00005</li>
+</ul>
+<p>Observa:</p>
+<ul>
+<li>“Fútbol” sigue en el vocabulario.</li>
+<li>“Pizza” sigue en el vocabulario.</li>
+<li>“Parlamento” sigue en el vocabulario.</li>
+</ul>
+<p>Pero su alineación con h_final es casi nula.</p>
+<p>El prompt no eliminó palabras. Solo cambió su probabilidad.</p>
+<section id="conclusión" class="level3" data-number="5.0.1">
+<h3 data-number="5.0.1" class="anchored" data-anchor-id="conclusión"><span class="header-section-number">5.0.1</span> Conclusión</h3>
+<ul>
+<li>El vocabulario es global y fijo.</li>
+<li>El prompt produce un vector contextual.</li>
+<li>Ese vector se compara con todos los tokens del vocabulario.</li>
+<li>Se obtiene una distribución de probabilidad.</li>
+<li>Se elige un token.</li>
+<li>Se repite el proceso.</li>
+</ul>
+<p>El modelo no reduce el vocabulario. Reduce el espacio probabilístico efectivo.</p>
+</section>
+</section>
+<section id="es-el-prompt-un-embedding-estadístico-de-todas-sus-palabras" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> ¿Es el prompt “un embedding estadístico de todas sus palabras”?</h1>
+<p>Una intuición común es pensar que el prompt termina siendo algo así como:</p>
+<blockquote class="blockquote">
+<p>“el promedio de los embeddings de todas sus palabras”</p>
+</blockquote>
+<p>Pero esto <strong>no es correcto</strong>.</p>
+<p>El prompt no se convierte en un simple promedio estadístico.</p>
+<p>Veamos qué ocurre realmente.</p>
+<section id="lo-que-no-ocurre" class="level3" data-number="6.0.1">
+<h3 data-number="6.0.1" class="anchored" data-anchor-id="lo-que-no-ocurre"><span class="header-section-number">6.0.1</span> Lo que NO ocurre</h3>
+<p>No sucede que:</p>
+<ul>
+<li>Se tomen los embeddings individuales.</li>
+<li>Se sumen.</li>
+<li>Se dividan entre el número de palabras.</li>
+</ul>
+<p>Eso sería un modelo tipo <em>bolsa de palabras</em> (bag of words).</p>
+<p>Un Transformer no funciona así.</p>
+</section>
+<section id="lo-que-sí-ocurre" class="level3" data-number="6.0.2">
+<h3 data-number="6.0.2" class="anchored" data-anchor-id="lo-que-sí-ocurre"><span class="header-section-number">6.0.2</span> Lo que SÍ ocurre</h3>
+<p>El proceso real es:</p>
+<ol type="1">
+<li>Cada token tiene un embedding inicial.</li>
+<li>Se añade información de posición (positional embedding).</li>
+<li>Los tokens pasan por múltiples capas de:
+<ul>
+<li>Self-attention</li>
+<li>MLP (feed-forward)</li>
+</ul></li>
+<li>En cada capa, cada token puede modificar su representación según los otros tokens.</li>
+</ol>
+<p>Es decir:</p>
+<p>Cada palabra puede “mirar” a las demás y ajustar su embedding.</p>
+<p>Después de varias capas, obtenemos una representación altamente transformada.</p>
+<p>El embedding final del último token contiene información integrada sobre:</p>
+<ul>
+<li>El significado global del prompt.</li>
+<li>La tarea solicitada.</li>
+<li>El dominio disciplinar.</li>
+<li>El estilo esperado.</li>
+<li>La audiencia.</li>
+</ul>
+<p>No es un promedio. Es el resultado de múltiples transformaciones no lineales.</p>
+</section>
+<section id="dónde-vive-esa-representación" class="level3" data-number="6.0.3">
+<h3 data-number="6.0.3" class="anchored" data-anchor-id="dónde-vive-esa-representación"><span class="header-section-number">6.0.3</span> ¿Dónde vive esa representación?</h3>
+<p>Vive en el espacio latente interno del modelo.</p>
+<p>Por ejemplo:<br>
+- Un espacio de 4096 dimensiones. - O 8192 dimensiones.</p>
+<p>Ese espacio no es el vocabulario.</p>
+<p>Es un espacio semántico interno donde se organizan patrones aprendidos.</p>
+</section>
+<section id="cómo-pasa-de-esa-representación-a-elegir-una-palabra" class="level3" data-number="6.0.4">
+<h3 data-number="6.0.4" class="anchored" data-anchor-id="cómo-pasa-de-esa-representación-a-elegir-una-palabra"><span class="header-section-number">6.0.4</span> ¿Cómo pasa de esa representación a elegir una palabra?</h3>
+<p>Aquí ocurre el paso clave:</p>
+<ol type="1">
+<li>El embedding contextual final (h_final) es un vector en el espacio latente.</li>
+<li>Cada token del vocabulario tiene su propio vector de salida (en la matriz de salida W).</li>
+<li>El modelo calcula la similitud (producto punto) entre h_final y cada vector del vocabulario.</li>
+<li>Eso produce logits.</li>
+<li>Softmax convierte esos logits en probabilidades.</li>
+<li>Se selecciona el token más alineado (o uno probable según muestreo).</li>
+</ol>
+<p>Por lo tanto:</p>
+<p>El prompt no es una palabra. No es un promedio.</p>
+<p>Es una <strong>dirección en el espacio latente</strong>.</p>
+<p>Y el siguiente token será aquel cuya dirección esté más alineada con esa representación.</p>
+</section>
+<section id="conclusión-1" class="level3" data-number="6.0.5">
+<h3 data-number="6.0.5" class="anchored" data-anchor-id="conclusión-1"><span class="header-section-number">6.0.5</span> Conclusión</h3>
+<p>El prompt no es un embedding estadístico simple.</p>
+<p>Es una representación contextual profunda construida capa por capa.</p>
+<p>Esa representación se compara con todo el vocabulario del modelo, produciendo una distribución de probabilidad sobre los posibles siguientes tokens.</p>
+<p>La generación ocurre porque el modelo repite este proceso autoregresivamente.</p>
+</section>
+<section id="referencia" class="level3" data-number="6.0.6">
+<h3 data-number="6.0.6" class="anchored" data-anchor-id="referencia"><span class="header-section-number">6.0.6</span> Referencia</h3>
+<p>Teresa Torres, <a href="https://www.producttalk.org/how-does-chatgpt-work/?srsltid=AfmBOooZXBLxGw6V5c_CEd131trfksU79p1LAqdCTyKJW31i13rsnnKQ"><strong>How Does ChatGPT Work? A Guide for the Rest of Us</strong></a>. 21 Jan 2026.</p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div></main> <!-- /main -->
+<script src="assets/js/custom.js"></script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("^(?:http:|https:)\/\/(?:www\.)?yourdomain\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Cómo los LLM convierten los prompts en respuestas</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">## Algoritmo conceptual de generación autoregresiva (con términos técnicos básicos)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>Este documento describe **cómo** genera texto un modelo autoregresivo tipo GPT, distinguiendo claramente entre:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Prompt / texto del usuario** (externo, visible)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Modelo** (red neuronal entrenada)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Embeddings y capas** (representación interna)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Distribución de probabilidad** (qué token sigue)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Texto generado** (externo, visible)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>Incluye además una **justificación de por qué se hace cada paso** y un **ejemplo concreto**.</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Variables y conceptos</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Prompt (usuario):** texto de entrada.</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Tokens:** unidades discretas (palabras, subtokens, signos).</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Vocabulario:** conjunto de tokens posibles.</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Embedding:** vector numérico que representa un token.</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Positional embedding:** vector que codifica el orden/posición.</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Transformer:** conjunto de capas con self-attention + MLP.</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Logits:** puntajes sin normalizar para cada token del vocabulario.</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Softmax:** conversión de logits a probabilidades.</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Temperatura / muestreo:** reglas para elegir el próximo token.</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu"># Algoritmo paso a paso</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="al">![](https://www.producttalk.org/content/images/size/w2000/2026/02/How-LLMs-Turn-Prompts-Into-Answers-with-PT-Logo-2.png)</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>Fuente: <span class="co">[</span><span class="ot">How LLMs turns prompts into answers</span><span class="co">](https://www.producttalk.org/how-does-chatgpt-work/?srsltid=AfmBOooZXBLxGw6V5c_CEd131trfksU79p1LAqdCTyKJW31i13rsnnKQ)</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## Paso 1 — Leer el prompt (texto del usuario)</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>**Qué ocurre:** el modelo recibe el prompt completo.</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>**Por qué se hace:**</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>El prompt define *qué tarea* se espera (explicar, comparar, resumir).</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Define *dominio* (p. ej., genética molecular) y *audiencia*.</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Actúa como condición inicial: sin prompt no hay contexto.</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## Paso 2 — Tokenización (texto → tokens)</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>**Qué ocurre:** el prompt se divide en **tokens**.</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>**Por qué se hace:**</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>El modelo necesita unidades discretas para indexar significado y frecuencia.</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Permite manejar palabras raras o nuevas usando subtokens.</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Hace el problema computable: trabajar con un vocabulario fijo.</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="fu">## Paso 3 — Embeddings (tokens → vectores)</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>**Qué ocurre:** cada token se convierte en un **embedding** (vector numérico).</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>**Por qué se hace:**</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Las redes neuronales procesan números, no texto.</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Los embeddings permiten representar similitud: tokens relacionados quedan cerca en el espacio.</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Facilitan combinar información (semántica + estilo + dominio) de forma continua.</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="fu">## Paso 4 — Añadir orden: positional embeddings</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>**Qué ocurre:** se suma/integra una señal de posición a cada embedding.</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>**Por qué se hace:**</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Un Transformer no “sabe” el orden por defecto.</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>El significado depende del orden (“A regula B” ≠ “B regula A”).</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Permite que la atención distinga qué vino antes y qué vino después.</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## Paso 5 — Pasar por múltiples capas Transformer</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>**Qué ocurre:** los embeddings atraviesan varias capas con:</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Self-attention:** cada token “mira” a otros tokens relevantes.</span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**MLP (feed-forward):** transforma la información atendida.</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>**Por qué se hace (justificación de profundidad):**</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Una capa captura patrones simples; varias capas construyen abstracciones.</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Capas tempranas: gramática, patrones locales.</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Capas medias: relaciones semánticas (quién hace qué a quién).</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Capas profundas: intención discursiva (definir/explicar) y estilo para la audiencia.</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>En otras palabras: **cada capa refina el contexto** y mejora la representación.</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a><span class="fu">## Paso 6 — Matriz de salida / proyección al vocabulario (embeddings → logits)</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>**Qué ocurre:** el estado interno final se transforma en un conjunto de **logits**, uno por cada token del vocabulario.</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>**Por qué se hace:**</span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>El modelo debe convertir una representación continua (vector) en una decisión discreta (qué token sigue).</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>La proyección al vocabulario permite puntuar *todas* las opciones posibles.</span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a><span class="fu">## Paso 7 — Softmax (logits → distribución de probabilidad)</span></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>**Qué ocurre:** los logits se convierten en probabilidades.</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>**Por qué se hace:**</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Para interpretar los puntajes como “qué tan probable es cada siguiente token”.</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Permite control de la generación mediante reglas de muestreo.</span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>Resultado:</span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Una **distribución de probabilidad** sobre el vocabulario.</span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a><span class="fu">## Paso 8 — Selección del siguiente token (muestreo)</span></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>**Qué ocurre:** se elige el próximo token a partir de la distribución.</span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>**Por qué se hace:**</span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Elegir siempre el más probable (modo determinista) produce texto más estable, pero puede ser repetitivo.</span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Muestrear entre opciones probables produce diversidad.</span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Temperatura** ajusta cuánta diversidad se permite.</span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a><span class="fu">## Paso 9 — Autoregresión: agregar el token al contexto</span></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>**Qué ocurre:** el token elegido se añade al final de la secuencia y se repite el proceso.</span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>**Por qué se hace:**</span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>El modelo es **autoregresivo**: cada token nuevo se convierte en parte del contexto para el siguiente paso.</span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Esto permite coherencia: lo que se dijo afecta lo que sigue.</span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a><span class="fu">## Paso 10 — Parar (criterio de detención)</span></span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>**Qué ocurre:** se detiene cuando:</span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>se genera un token de fin, o</span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>se alcanza un límite de longitud.</span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>**Por qué se hace:**</span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Control de seguridad/longitud.</span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Evita generación infinita.</span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a><span class="fu"># Resumen en flujo</span></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>→ Prompt (usuario).  </span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>→ Tokenización.  </span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>→ Embeddings + Posición.  </span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>→ Capas Transformer (atención + MLP).  </span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>→ Proyección al vocabulario (logits).  </span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>→ Softmax (probabilidades).  </span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>→ Selección del token.  </span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>→ Añadir al contexto.  </span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>→ Repetir.  </span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="fu"># Ejemplo</span></span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a><span class="fu">## Prompt (usuario)</span></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "Explica qué es un gen desde la perspectiva de la genética molecular, dirigido a estudiantes de licenciatura en ciencias genómicas, incluyendo su estructura, función y las limitaciones del concepto clásico."</span></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a><span class="fu">### Iteración 1: elegir el primer token</span></span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Entrada interna:** embeddings del prompt + orden</span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Salida probabilística (conceptual):**</span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>"Un" (alta)</span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>"La" (media)</span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>"En" (media)</span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>Se elige: **"Un"**</span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a>**Texto generado (externo):**</span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Un</span></span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a>**Por qué:** en textos académicos en español, definiciones suelen empezar con “Un X es…” o “La X es…”.</span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a><span class="fu">### Iteración 2: elegir el segundo token</span></span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a>Ahora el contexto incluye:</span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Prompt (usuario) + "Un"</span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a>La distribución cambia y favorece continuaciones compatibles:</span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"gen" (alta)</span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"concepto" (media)</span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"elemento" (baja)</span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a>Se elige: **"gen"**</span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>**Texto generado:**</span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Un gen</span></span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a><span class="fu">### Iteración 3: elegir el tercer token</span></span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a>Contexto:</span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Prompt + "Un gen"</span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a>Probabilidades típicas:</span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"es" (muy alta)</span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"se" (baja)</span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>Se elige: **"es"**</span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a>**Texto generado:**</span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Un gen es</span></span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a><span class="fu">## ¿Cómo influyen las capas en este ejemplo?</span></span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Capas tempranas:** detectan que el prompt pide *explicar/definir* y que el registro debe ser académico.</span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Capas medias:** conectan “genética molecular” con términos esperables (ADN, ARN, transcripción) y detectan los campos requeridos: estructura + función.</span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Capas profundas:** integran “limitaciones del concepto clásico” y abren probabilidad a ideas como regulación, splicing, ARN no codificante, contexto genómico.</span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a>Esto no es “planificación consciente”; es refinamiento progresivo de representaciones que termina sesgando la distribución del siguiente token.</span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a><span class="fu">### Idea clave final</span></span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a>El modelo genera texto porque repite un ciclo:</span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **representar el contexto → producir probabilidades → elegir un token → añadirlo → repetir**</span></span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a>La profundidad (múltiples capas) existe para que la representación del contexto sea lo bastante rica como para que las probabilidades reflejen coherencia, estilo, dominio y requisitos del prompt.</span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a><span class="fu">### Aclaración clave: ¿Qué significa “vocabulario del modelo”?</span></span>
+<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a>Cuando hablamos de vocabulario en este contexto, nos referimos al **vocabulario fijo del modelo**, no al vocabulario del prompt.</span>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a><span class="fu">## ¿Qué es el vocabulario del modelo?</span></span>
+<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a>Es el conjunto finito y predefinido de **tokens** que el modelo puede generar.</span>
+<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a>Puede contener, por ejemplo:</span>
+<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>32,000</span>
+<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>50,000</span>
+<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>100,000 tokens</span>
+<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a>Incluye:</span>
+<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Palabras frecuentes completas</span>
+<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Subtokens (por ejemplo: "gen", "ética", "##ción")</span>
+<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Signos de puntuación</span>
+<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Números</span>
+<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Fragmentos comunes</span>
+<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a>No son todas las palabras posibles del mundo, sino todas las unidades que el modelo aprendió a representar durante el entrenamiento.</span>
+<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a><span class="fu">## El vocabulario NO cambia según el prompt</span></span>
+<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a>El vocabulario es fijo después del entrenamiento.</span>
+<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a>Lo que cambia con el prompt es:</span>
+<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; La **distribución de probabilidad** sobre ese vocabulario.</span></span>
+<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a>El modelo siempre calcula probabilidades para todos los tokens del vocabulario.</span>
+<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a>Pero el prompt hace que:</span>
+<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Algunos tokens tengan probabilidad alta.</span>
+<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Otros tengan probabilidad extremadamente baja.</span>
+<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a><span class="fu">## No existe un “vocabulario del prompt”</span></span>
+<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a>El prompt no crea un subconjunto explícito de palabras permitidas.</span>
+<span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a>Lo que hace es mover la representación interna (h_final) a una región del espacio latente donde:</span>
+<span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-301"><a href="#cb1-301" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ciertos tokens están muy alineados.</span>
+<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Otros están mal alineados.</span>
+<span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a>Es un filtrado probabilístico, no estructural.</span>
+<span id="cb1-305"><a href="#cb1-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-306"><a href="#cb1-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-307"><a href="#cb1-307" aria-hidden="true" tabindex="-1"></a><span class="fu"># Ejemplo mejorado</span></span>
+<span id="cb1-308"><a href="#cb1-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-309"><a href="#cb1-309" aria-hidden="true" tabindex="-1"></a>Supongamos que el vocabulario del modelo (simplificado) contiene estos tokens:</span>
+<span id="cb1-310"><a href="#cb1-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-311"><a href="#cb1-311" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"Un"</span>
+<span id="cb1-312"><a href="#cb1-312" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"La"</span>
+<span id="cb1-313"><a href="#cb1-313" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"ADN"</span>
+<span id="cb1-314"><a href="#cb1-314" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"Transcripción"</span>
+<span id="cb1-315"><a href="#cb1-315" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"Fútbol"</span>
+<span id="cb1-316"><a href="#cb1-316" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"Pizza"</span>
+<span id="cb1-317"><a href="#cb1-317" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"Parlamento"</span>
+<span id="cb1-318"><a href="#cb1-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-319"><a href="#cb1-319" aria-hidden="true" tabindex="-1"></a>Y el prompt del usuario es:</span>
+<span id="cb1-320"><a href="#cb1-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-321"><a href="#cb1-321" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "Explica qué es un gen desde la perspectiva de la genética molecular."</span></span>
+<span id="cb1-322"><a href="#cb1-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-323"><a href="#cb1-323" aria-hidden="true" tabindex="-1"></a>Después de procesar el prompt por las capas Transformer obtenemos un vector contextual h_final.</span>
+<span id="cb1-324"><a href="#cb1-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-325"><a href="#cb1-325" aria-hidden="true" tabindex="-1"></a>Ese vector se compara con todos los tokens del vocabulario.</span>
+<span id="cb1-326"><a href="#cb1-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-327"><a href="#cb1-327" aria-hidden="true" tabindex="-1"></a>La distribución podría verse conceptualmente así:</span>
+<span id="cb1-328"><a href="#cb1-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-329"><a href="#cb1-329" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"Un" → 0.31</span>
+<span id="cb1-330"><a href="#cb1-330" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"La" → 0.22</span>
+<span id="cb1-331"><a href="#cb1-331" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"ADN" → 0.15</span>
+<span id="cb1-332"><a href="#cb1-332" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"Transcripción" → 0.09</span>
+<span id="cb1-333"><a href="#cb1-333" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"Fútbol" → 0.0003</span>
+<span id="cb1-334"><a href="#cb1-334" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"Pizza" → 0.0001</span>
+<span id="cb1-335"><a href="#cb1-335" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"Parlamento" → 0.00005</span>
+<span id="cb1-336"><a href="#cb1-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-337"><a href="#cb1-337" aria-hidden="true" tabindex="-1"></a>Observa:</span>
+<span id="cb1-338"><a href="#cb1-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-339"><a href="#cb1-339" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"Fútbol" sigue en el vocabulario.</span>
+<span id="cb1-340"><a href="#cb1-340" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"Pizza" sigue en el vocabulario.</span>
+<span id="cb1-341"><a href="#cb1-341" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"Parlamento" sigue en el vocabulario.</span>
+<span id="cb1-342"><a href="#cb1-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-343"><a href="#cb1-343" aria-hidden="true" tabindex="-1"></a>Pero su alineación con h_final es casi nula.</span>
+<span id="cb1-344"><a href="#cb1-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-345"><a href="#cb1-345" aria-hidden="true" tabindex="-1"></a>El prompt no eliminó palabras.</span>
+<span id="cb1-346"><a href="#cb1-346" aria-hidden="true" tabindex="-1"></a>Solo cambió su probabilidad.</span>
+<span id="cb1-347"><a href="#cb1-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-348"><a href="#cb1-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-349"><a href="#cb1-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-350"><a href="#cb1-350" aria-hidden="true" tabindex="-1"></a><span class="fu">### Conclusión</span></span>
+<span id="cb1-351"><a href="#cb1-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-352"><a href="#cb1-352" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>El vocabulario es global y fijo.</span>
+<span id="cb1-353"><a href="#cb1-353" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>El prompt produce un vector contextual.</span>
+<span id="cb1-354"><a href="#cb1-354" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ese vector se compara con todos los tokens del vocabulario.</span>
+<span id="cb1-355"><a href="#cb1-355" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Se obtiene una distribución de probabilidad.</span>
+<span id="cb1-356"><a href="#cb1-356" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Se elige un token.</span>
+<span id="cb1-357"><a href="#cb1-357" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Se repite el proceso.</span>
+<span id="cb1-358"><a href="#cb1-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-359"><a href="#cb1-359" aria-hidden="true" tabindex="-1"></a>El modelo no reduce el vocabulario.</span>
+<span id="cb1-360"><a href="#cb1-360" aria-hidden="true" tabindex="-1"></a>Reduce el espacio probabilístico efectivo.</span>
+<span id="cb1-361"><a href="#cb1-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-362"><a href="#cb1-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-363"><a href="#cb1-363" aria-hidden="true" tabindex="-1"></a><span class="fu"># ¿Es el prompt “un embedding estadístico de todas sus palabras”?</span></span>
+<span id="cb1-364"><a href="#cb1-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-365"><a href="#cb1-365" aria-hidden="true" tabindex="-1"></a>Una intuición común es pensar que el prompt termina siendo algo así como:</span>
+<span id="cb1-366"><a href="#cb1-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-367"><a href="#cb1-367" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; "el promedio de los embeddings de todas sus palabras"</span></span>
+<span id="cb1-368"><a href="#cb1-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-369"><a href="#cb1-369" aria-hidden="true" tabindex="-1"></a>Pero esto **no es correcto**.</span>
+<span id="cb1-370"><a href="#cb1-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-371"><a href="#cb1-371" aria-hidden="true" tabindex="-1"></a>El prompt no se convierte en un simple promedio estadístico.</span>
+<span id="cb1-372"><a href="#cb1-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-373"><a href="#cb1-373" aria-hidden="true" tabindex="-1"></a>Veamos qué ocurre realmente.</span>
+<span id="cb1-374"><a href="#cb1-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-375"><a href="#cb1-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-376"><a href="#cb1-376" aria-hidden="true" tabindex="-1"></a><span class="fu">### Lo que NO ocurre</span></span>
+<span id="cb1-377"><a href="#cb1-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-378"><a href="#cb1-378" aria-hidden="true" tabindex="-1"></a>No sucede que:</span>
+<span id="cb1-379"><a href="#cb1-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-380"><a href="#cb1-380" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Se tomen los embeddings individuales.</span>
+<span id="cb1-381"><a href="#cb1-381" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Se sumen.</span>
+<span id="cb1-382"><a href="#cb1-382" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Se dividan entre el número de palabras.</span>
+<span id="cb1-383"><a href="#cb1-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-384"><a href="#cb1-384" aria-hidden="true" tabindex="-1"></a>Eso sería un modelo tipo *bolsa de palabras* (bag of words).</span>
+<span id="cb1-385"><a href="#cb1-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-386"><a href="#cb1-386" aria-hidden="true" tabindex="-1"></a>Un Transformer no funciona así.</span>
+<span id="cb1-387"><a href="#cb1-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-388"><a href="#cb1-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-389"><a href="#cb1-389" aria-hidden="true" tabindex="-1"></a><span class="fu">### Lo que SÍ ocurre</span></span>
+<span id="cb1-390"><a href="#cb1-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-391"><a href="#cb1-391" aria-hidden="true" tabindex="-1"></a>El proceso real es:</span>
+<span id="cb1-392"><a href="#cb1-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-393"><a href="#cb1-393" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Cada token tiene un embedding inicial.</span>
+<span id="cb1-394"><a href="#cb1-394" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Se añade información de posición (positional embedding).</span>
+<span id="cb1-395"><a href="#cb1-395" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Los tokens pasan por múltiples capas de:</span>
+<span id="cb1-396"><a href="#cb1-396" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Self-attention</span>
+<span id="cb1-397"><a href="#cb1-397" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>MLP (feed-forward)</span>
+<span id="cb1-398"><a href="#cb1-398" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>En cada capa, cada token puede modificar su representación según los otros tokens.</span>
+<span id="cb1-399"><a href="#cb1-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-400"><a href="#cb1-400" aria-hidden="true" tabindex="-1"></a>Es decir:</span>
+<span id="cb1-401"><a href="#cb1-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-402"><a href="#cb1-402" aria-hidden="true" tabindex="-1"></a>Cada palabra puede “mirar” a las demás y ajustar su embedding.</span>
+<span id="cb1-403"><a href="#cb1-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-404"><a href="#cb1-404" aria-hidden="true" tabindex="-1"></a>Después de varias capas, obtenemos una representación altamente transformada.</span>
+<span id="cb1-405"><a href="#cb1-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-406"><a href="#cb1-406" aria-hidden="true" tabindex="-1"></a>El embedding final del último token contiene información integrada sobre:</span>
+<span id="cb1-407"><a href="#cb1-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-408"><a href="#cb1-408" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>El significado global del prompt.</span>
+<span id="cb1-409"><a href="#cb1-409" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>La tarea solicitada.</span>
+<span id="cb1-410"><a href="#cb1-410" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>El dominio disciplinar.</span>
+<span id="cb1-411"><a href="#cb1-411" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>El estilo esperado.</span>
+<span id="cb1-412"><a href="#cb1-412" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>La audiencia.</span>
+<span id="cb1-413"><a href="#cb1-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-414"><a href="#cb1-414" aria-hidden="true" tabindex="-1"></a>No es un promedio.</span>
+<span id="cb1-415"><a href="#cb1-415" aria-hidden="true" tabindex="-1"></a>Es el resultado de múltiples transformaciones no lineales.</span>
+<span id="cb1-416"><a href="#cb1-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-417"><a href="#cb1-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-418"><a href="#cb1-418" aria-hidden="true" tabindex="-1"></a><span class="fu">### ¿Dónde vive esa representación?</span></span>
+<span id="cb1-419"><a href="#cb1-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-420"><a href="#cb1-420" aria-hidden="true" tabindex="-1"></a>Vive en el espacio latente interno del modelo.</span>
+<span id="cb1-421"><a href="#cb1-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-422"><a href="#cb1-422" aria-hidden="true" tabindex="-1"></a>Por ejemplo:   </span>
+<span id="cb1-423"><a href="#cb1-423" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Un espacio de 4096 dimensiones.</span>
+<span id="cb1-424"><a href="#cb1-424" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>O 8192 dimensiones.</span>
+<span id="cb1-425"><a href="#cb1-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-426"><a href="#cb1-426" aria-hidden="true" tabindex="-1"></a>Ese espacio no es el vocabulario.</span>
+<span id="cb1-427"><a href="#cb1-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-428"><a href="#cb1-428" aria-hidden="true" tabindex="-1"></a>Es un espacio semántico interno donde se organizan patrones aprendidos.</span>
+<span id="cb1-429"><a href="#cb1-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-430"><a href="#cb1-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-431"><a href="#cb1-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-432"><a href="#cb1-432" aria-hidden="true" tabindex="-1"></a><span class="fu">### ¿Cómo pasa de esa representación a elegir una palabra?</span></span>
+<span id="cb1-433"><a href="#cb1-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-434"><a href="#cb1-434" aria-hidden="true" tabindex="-1"></a>Aquí ocurre el paso clave:</span>
+<span id="cb1-435"><a href="#cb1-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-436"><a href="#cb1-436" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>El embedding contextual final (h_final) es un vector en el espacio latente.</span>
+<span id="cb1-437"><a href="#cb1-437" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Cada token del vocabulario tiene su propio vector de salida (en la matriz de salida W).</span>
+<span id="cb1-438"><a href="#cb1-438" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>El modelo calcula la similitud (producto punto) entre h_final y cada vector del vocabulario.</span>
+<span id="cb1-439"><a href="#cb1-439" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Eso produce logits.</span>
+<span id="cb1-440"><a href="#cb1-440" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Softmax convierte esos logits en probabilidades.</span>
+<span id="cb1-441"><a href="#cb1-441" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Se selecciona el token más alineado (o uno probable según muestreo).</span>
+<span id="cb1-442"><a href="#cb1-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-443"><a href="#cb1-443" aria-hidden="true" tabindex="-1"></a>Por lo tanto:</span>
+<span id="cb1-444"><a href="#cb1-444" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-445"><a href="#cb1-445" aria-hidden="true" tabindex="-1"></a>El prompt no es una palabra.</span>
+<span id="cb1-446"><a href="#cb1-446" aria-hidden="true" tabindex="-1"></a>No es un promedio.</span>
+<span id="cb1-447"><a href="#cb1-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-448"><a href="#cb1-448" aria-hidden="true" tabindex="-1"></a>Es una **dirección en el espacio latente**.</span>
+<span id="cb1-449"><a href="#cb1-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-450"><a href="#cb1-450" aria-hidden="true" tabindex="-1"></a>Y el siguiente token será aquel cuya dirección esté más alineada con esa representación.</span>
+<span id="cb1-451"><a href="#cb1-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-452"><a href="#cb1-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-453"><a href="#cb1-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-454"><a href="#cb1-454" aria-hidden="true" tabindex="-1"></a><span class="fu">### Conclusión</span></span>
+<span id="cb1-455"><a href="#cb1-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-456"><a href="#cb1-456" aria-hidden="true" tabindex="-1"></a>El prompt no es un embedding estadístico simple.</span>
+<span id="cb1-457"><a href="#cb1-457" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-458"><a href="#cb1-458" aria-hidden="true" tabindex="-1"></a>Es una representación contextual profunda construida capa por capa.</span>
+<span id="cb1-459"><a href="#cb1-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-460"><a href="#cb1-460" aria-hidden="true" tabindex="-1"></a>Esa representación se compara con todo el vocabulario del modelo,</span>
+<span id="cb1-461"><a href="#cb1-461" aria-hidden="true" tabindex="-1"></a>produciendo una distribución de probabilidad sobre los posibles siguientes tokens.</span>
+<span id="cb1-462"><a href="#cb1-462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-463"><a href="#cb1-463" aria-hidden="true" tabindex="-1"></a>La generación ocurre porque el modelo repite este proceso autoregresivamente.</span>
+<span id="cb1-464"><a href="#cb1-464" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-465"><a href="#cb1-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-466"><a href="#cb1-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-467"><a href="#cb1-467" aria-hidden="true" tabindex="-1"></a><span class="fu">### Referencia</span></span>
+<span id="cb1-468"><a href="#cb1-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-469"><a href="#cb1-469" aria-hidden="true" tabindex="-1"></a>Teresa Torres, <span class="co">[</span><span class="ot">**How Does ChatGPT Work? A Guide for the Rest of Us**</span><span class="co">](https://www.producttalk.org/how-does-chatgpt-work/?srsltid=AfmBOooZXBLxGw6V5c_CEd131trfksU79p1LAqdCTyKJW31i13rsnnKQ)</span>. 21 Jan 2026.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<div class="footer-left">
+<p>© <span class="math inline">\(year\)</span> <span class="math inline">\(author\)</span>. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+</div>
+</div>   
+    <div class="nav-footer-center">
+<div class="footer-center">
+<p>Built with ❤️ using <a href="https://quarto.org/">Quarto</a></p>
+</div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/yourusername/your-course/edit/main/chapters/apendices/from-prompt-to-answer.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/yourusername/your-course/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/yourusername/your-course">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/yourusername">
+      <i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:helysalgado@gmail.com">
+      <i class="bi bi-envelope" role="img" aria-label="Email">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

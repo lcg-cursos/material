@@ -1,0 +1,2613 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Heladia Salgado">
+<meta name="dcterms.date" content="2026-02-25">
+<meta name="description" content="Aprende a transformar prompts aislados en protocolos científicos reproducibles, diseñando flujos de interacción con control explícito del riesgo epistemológico.">
+
+<title>Arquitectura de Protocolos de Prompting Científico – Prompting Científico con Inteligencia Artificial</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../chapters/capitulo2/index.html" rel="prev">
+<link href="../../assets/images/favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-95759c9b5f0a9d12ebf0c1dbe5c47530.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d271f10569e7254d5269ff747e9d5db2.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-95759c9b5f0a9d12ebf0c1dbe5c47530.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e0f64a05f2c9985a109e347d2886874d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-d1268c8e4f19edb023b62fc8da355448.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-e0f64a05f2c9985a109e347d2886874d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true });</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../assets/css/styles.css">
+<link rel="stylesheet" href="../../assets/css/components.css">
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Prompting Científico con Inteligencia Artificial">
+<meta property="og:description" content="Course description">
+<meta property="og:image" content="https://lcg-cursos.github.io/material/prompting-cientifico/chapters/capitulo3/assets/images/og-image.png">
+<meta property="og:site_name" content="Prompting Científico con Inteligencia Artificial">
+<meta name="twitter:title" content="Arquitectura de Protocolos de Prompting Científico – Prompting Científico con Inteligencia Artificial">
+<meta name="twitter:description" content="Aprende a transformar prompts aislados en protocolos científicos reproducibles, diseñando flujos de interacción con control explícito del riesgo epistemológico.">
+<meta name="twitter:image" content="https://lcg-cursos.github.io/material/prompting-cientifico/chapters/capitulo3/assets/images/twitter-card.png">
+<meta name="twitter:creator" content="@yourusername">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/images/logo.png" alt="Course Logo" class="navbar-logo light-content">
+    <img src="../../assets/images/logo.png" alt="Course Logo" class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page"> <i class="bi bi-house-fill" role="img">
+</i> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapters" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-book-fill" role="img">
+</i> 
+ <span class="menu-text">Chapters</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapters">    
+        <li>
+    <a class="dropdown-item" href="../../chapters/capitulo1/index.html"><i class="bi bi-brain" role="img">
+</i> 
+ <span class="dropdown-text">Introducción al Prompting</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../chapters/sesion-01-fundamentos/index.html"><i class="bi bi-brain" role="img">
+</i> 
+ <span class="dropdown-text">Sesión 1: Fundamentos de IA</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../../chapters/example-chapter-01/index.qmd"><i class="bi bi-rocket-takeoff" role="img">
+</i> 
+ <span class="dropdown-text">Getting Started (Example)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../chapters/example-chapter-02/index.qmd"><i class="bi bi-stars" role="img">
+</i> 
+ <span class="dropdown-text">Advanced Topics (Example)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../exercises/index.html"> <i class="bi bi-pencil-square" role="img">
+</i> 
+<span class="menu-text">Exercises</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources/index.html"> <i class="bi bi-box-arrow-down" role="img">
+</i> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/yourusername/your-course"> <i class="bi bi-github" role="img" aria-label="GitHub Repository">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/yourusername"> <i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="" title="Dark Mode" class="quarto-navigation-tool px-1" aria-label="Dark Mode"><i class="bi bi-moon"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/capitulo3/index.html">🔬 Diseño de Protocolos de Prompting</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../assets/images/logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../../assets/images/logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏠 Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/capitulo1/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🧠 Introducción al Prompting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/capitulo2/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🔬 Prompting Científico</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/capitulo3/index.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">🔬 Diseño de Protocolos de Prompting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">---</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">✏️ Exercises</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📥 Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/component-examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🧩 Components</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ℹ️ About</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#propósito-del-capítulo" id="toc-propósito-del-capítulo" class="nav-link active" data-scroll-target="#propósito-del-capítulo"><span class="header-section-number">1</span> Propósito del capítulo</a></li>
+  <li><a href="#concepto-central-el-prompting-como-diseño-de-sistema" id="toc-concepto-central-el-prompting-como-diseño-de-sistema" class="nav-link" data-scroll-target="#concepto-central-el-prompting-como-diseño-de-sistema"><span class="header-section-number">2</span> Concepto central — El Prompting como Diseño de Sistema</a></li>
+  <li><a href="#del-prompt-individual-al-protocolo" id="toc-del-prompt-individual-al-protocolo" class="nav-link" data-scroll-target="#del-prompt-individual-al-protocolo"><span class="header-section-number">3</span> Del Prompt Individual al Protocolo</a>
+  <ul class="collapse">
+  <li><a href="#qué-significa-flujo-en-un-protocolo-científico" id="toc-qué-significa-flujo-en-un-protocolo-científico" class="nav-link" data-scroll-target="#qué-significa-flujo-en-un-protocolo-científico"><span class="header-section-number">3.1</span> Qué significa “flujo” en un protocolo científico</a></li>
+  </ul></li>
+  <li><a href="#componentes-estructurales-de-un-protocolo-de-prompting-científico" id="toc-componentes-estructurales-de-un-protocolo-de-prompting-científico" class="nav-link" data-scroll-target="#componentes-estructurales-de-un-protocolo-de-prompting-científico"><span class="header-section-number">4</span> Componentes estructurales de un Protocolo de Prompting Científico</a>
+  <ul class="collapse">
+  <li><a href="#definición-explícita-del-problema-científico" id="toc-definición-explícita-del-problema-científico" class="nav-link" data-scroll-target="#definición-explícita-del-problema-científico"><span class="header-section-number">4.1</span> 1. Definición explícita del problema científico</a></li>
+  <li><a href="#descomposición-en-fases-según-nivel-de-inferencia" id="toc-descomposición-en-fases-según-nivel-de-inferencia" class="nav-link" data-scroll-target="#descomposición-en-fases-según-nivel-de-inferencia"><span class="header-section-number">4.2</span> 2. Descomposición en fases según nivel de inferencia</a></li>
+  <li><a href="#coherencia-con-los-principios-del-capítulo-2" id="toc-coherencia-con-los-principios-del-capítulo-2" class="nav-link" data-scroll-target="#coherencia-con-los-principios-del-capítulo-2"><span class="header-section-number">4.3</span> 3. Coherencia con los principios del Capítulo 2</a></li>
+  <li><a href="#trazabilidad-epistemológica" id="toc-trazabilidad-epistemológica" class="nav-link" data-scroll-target="#trazabilidad-epistemológica"><span class="header-section-number">4.4</span> Trazabilidad Epistemológica</a></li>
+  </ul></li>
+  <li><a href="#caso-aplicado-regulación-del-regulón-de-maltosa-malt" id="toc-caso-aplicado-regulación-del-regulón-de-maltosa-malt" class="nav-link" data-scroll-target="#caso-aplicado-regulación-del-regulón-de-maltosa-malt"><span class="header-section-number">5</span> Caso aplicado: Regulación del regulón de maltosa (MalT)</a>
+  <ul class="collapse">
+  <li><a href="#problema-científico" id="toc-problema-científico" class="nav-link" data-scroll-target="#problema-científico"><span class="header-section-number">5.1</span> Problema científico</a></li>
+  <li><a href="#fase-1-exploración-y-delimitación-de-dominio" id="toc-fase-1-exploración-y-delimitación-de-dominio" class="nav-link" data-scroll-target="#fase-1-exploración-y-delimitación-de-dominio"><span class="header-section-number">5.2</span> Fase 1 — Exploración y delimitación de dominio</a></li>
+  <li><a href="#fase-2-extracción-literal-estructurada" id="toc-fase-2-extracción-literal-estructurada" class="nav-link" data-scroll-target="#fase-2-extracción-literal-estructurada"><span class="header-section-number">5.3</span> Fase 2 — Extracción literal estructurada</a></li>
+  <li><a href="#fase-3-normalización-y-curación" id="toc-fase-3-normalización-y-curación" class="nav-link" data-scroll-target="#fase-3-normalización-y-curación"><span class="header-section-number">5.4</span> Fase 3 — Normalización y curación</a></li>
+  <li><a href="#fase-4-evaluación-crítica-de-evidencia" id="toc-fase-4-evaluación-crítica-de-evidencia" class="nav-link" data-scroll-target="#fase-4-evaluación-crítica-de-evidencia"><span class="header-section-number">5.5</span> Fase 4 — Evaluación crítica de evidencia</a></li>
+  <li><a href="#fase-5-integración-y-juicio-científico" id="toc-fase-5-integración-y-juicio-científico" class="nav-link" data-scroll-target="#fase-5-integración-y-juicio-científico"><span class="header-section-number">5.6</span> Fase 5 — Integración y juicio científico</a></li>
+  <li><a href="#final-del-protocolo" id="toc-final-del-protocolo" class="nav-link" data-scroll-target="#final-del-protocolo"><span class="header-section-number">5.7</span> Final del protocolo</a></li>
+  <li><a href="#ejecución-operativa-de-un-protocolo-chatgpt-vs-apinotebooks" id="toc-ejecución-operativa-de-un-protocolo-chatgpt-vs-apinotebooks" class="nav-link" data-scroll-target="#ejecución-operativa-de-un-protocolo-chatgpt-vs-apinotebooks"><span class="header-section-number">5.8</span> Ejecución operativa de un protocolo (ChatGPT vs API/Notebooks)</a></li>
+  <li><a href="#regla-didáctica" id="toc-regla-didáctica" class="nav-link" data-scroll-target="#regla-didáctica"><span class="header-section-number">5.9</span> Regla didáctica</a></li>
+  </ul></li>
+  <li><a href="#ejercicio" id="toc-ejercicio" class="nav-link" data-scroll-target="#ejercicio"><span class="header-section-number">6</span> Ejercicio</a></li>
+  <li><a href="#rúbrica" id="toc-rúbrica" class="nav-link" data-scroll-target="#rúbrica"><span class="header-section-number">7</span> Rúbrica</a></li>
+  <li><a href="#conclusión" id="toc-conclusión" class="nav-link" data-scroll-target="#conclusión"><span class="header-section-number">8</span> Conclusión</a>
+  <ul class="collapse">
+  <li><a href="#la-estructura-textual-no-garantiza-rigor" id="toc-la-estructura-textual-no-garantiza-rigor" class="nav-link" data-scroll-target="#la-estructura-textual-no-garantiza-rigor"><span class="header-section-number">8.1</span> 1. La estructura textual no garantiza rigor</a></li>
+  <li><a href="#el-flujo-no-es-automatización" id="toc-el-flujo-no-es-automatización" class="nav-link" data-scroll-target="#el-flujo-no-es-automatización"><span class="header-section-number">8.2</span> 2. El flujo no es automatización</a></li>
+  <li><a href="#gates-como-reglas-epistémicas" id="toc-gates-como-reglas-epistémicas" class="nav-link" data-scroll-target="#gates-como-reglas-epistémicas"><span class="header-section-number">8.3</span> 3. Gates como reglas epistémicas</a></li>
+  <li><a href="#proporcionalidad-inferencial" id="toc-proporcionalidad-inferencial" class="nav-link" data-scroll-target="#proporcionalidad-inferencial"><span class="header-section-number">8.4</span> 4. Proporcionalidad inferencial</a></li>
+  <li><a href="#el-rol-irreductible-del-investigador" id="toc-el-rol-irreductible-del-investigador" class="nav-link" data-scroll-target="#el-rol-irreductible-del-investigador"><span class="header-section-number">8.5</span> 5. El rol irreductible del investigador</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/yourusername/your-course/edit/main/chapters/capitulo3/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/yourusername/your-course/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Arquitectura de Protocolos de Prompting Científico</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">Diseño de Protocolos para Investigación</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">flujo</div>
+    <div class="quarto-category">metodología</div>
+    <div class="quarto-category">protocolo</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Aprende a transformar prompts aislados en protocolos científicos reproducibles, diseñando flujos de interacción con control explícito del riesgo epistemológico.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Heladia Salgado </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 25, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="propósito-del-capítulo" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="propósito-del-capítulo"><span class="header-section-number">1</span> Propósito del capítulo</h2>
+<p>En este capítulo cambia la unidad de diseño.</p>
+<p>En los capítulos anteriores trabajamos sobre el <strong>prompt individual</strong>: cómo estructurarlo y cómo controlar su nivel de inferencia.</p>
+<p>Ahora la pregunta es distinta:</p>
+<blockquote class="blockquote">
+<p>¿Cómo resolver un problema científico complejo cuando un solo prompt no es suficiente?</p>
+</blockquote>
+<p>El foco deja de ser la redacción de instrucciones y pasa a ser la <strong>arquitectura del proceso completo de interacción</strong> con el modelo.</p>
+<p>El estudiante ya no optimiza respuestas. Diseña secuencias metodológicamente justificadas.</p>
+<hr>
+</section>
+<section id="concepto-central-el-prompting-como-diseño-de-sistema" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="concepto-central-el-prompting-como-diseño-de-sistema"><span class="header-section-number">2</span> Concepto central — El Prompting como Diseño de Sistema</h2>
+<p>Un protocolo de prompting científico es una arquitectura que organiza fases diferenciadas de interacción con un sistema generativo probabilístico.</p>
+<p>Dado que el modelo opera bajo el esquema P(y|x), todas las operaciones solicitadas en un mismo contexto se resuelven como un único proceso autoregresivo.</p>
+<p>Por ello, cuando un problema involucra distintos niveles de inferencia, es necesario:</p>
+<ul>
+<li>Separar fases según función epistémica.</li>
+<li>Controlar las transiciones.</li>
+<li>Introducir verificación proporcional.</li>
+<li>Registrar el proceso para auditoría.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p>El protocolo no cambia el modelo (LLM). Cambia el <strong>contexto sobre el cual el modelo opera</strong> y la forma en que el investigador controla su salida.</p>
+</blockquote>
+</div>
+</div>
+<hr>
+</section>
+<section id="del-prompt-individual-al-protocolo" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="del-prompt-individual-al-protocolo"><span class="header-section-number">3</span> Del Prompt Individual al Protocolo</h2>
+<p>Muchos errores metodológicos ocurren cuando se intenta resolver un problema científico complejo con una sola instrucción extensa.</p>
+<p>Ejemplo defectuoso:</p>
+<blockquote class="blockquote">
+<p>“Extrae todos los reguladores, sus promotores, la evidencia experimental y evalúa la calidad metodológica.”</p>
+</blockquote>
+<p>Aquí se mezclan en un único acto generativo:</p>
+<ul>
+<li><strong>“Extrae todos los reguladores”</strong> → Extracción literal.</li>
+<li><strong>“sus promotores”</strong> → Organización estructural.</li>
+<li><strong>“la evidencia experimental”</strong> → Identificación e interpretación de soporte empírico.</li>
+<li><strong>“evalúa la calidad metodológica”</strong> → Evaluación crítica y juicio metodológico.</li>
+</ul>
+<p>Aunque la instrucción esté bien redactada, el modelo la resuelve como <strong>un solo proceso condicionado por el mismo contexto</strong>.</p>
+<p>El resultado puede ser fluido y coherente, pero no separa niveles de inferencia ni distribuye el riesgo.</p>
+<p>El protocolo surge precisamente para evitar ese colapso.</p>
+<section id="qué-significa-flujo-en-un-protocolo-científico" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="qué-significa-flujo-en-un-protocolo-científico"><span class="header-section-number">3.1</span> Qué significa “flujo” en un protocolo científico</h3>
+<p>En este contexto, <em>flujo</em> no significa automatización ciega ni encadenamiento mecánico de salidas.</p>
+<p>Significa:</p>
+<ul>
+<li>Secuencialidad metodológica.</li>
+<li>Progresión en el nivel de inferencia.</li>
+<li>Distribución del control epistemológico.</li>
+<li>Trazabilidad acumulativa del proceso.</li>
+</ul>
+<p>Existen dos formas posibles de flujo:</p>
+<section id="flujo-sobre-la-misma-fuente-primaria" class="level4">
+<h4 class="anchored" data-anchor-id="flujo-sobre-la-misma-fuente-primaria">1. Flujo sobre la misma fuente primaria</h4>
+<p>Cada fase opera directamente sobre el mismo documento (por ejemplo, el mismo paper).</p>
+<p>Las fases son funcionalmente dependientes, pero no necesariamente se encadenan automáticamente.</p>
+<p>Este enfoque:</p>
+<ul>
+<li>Reduce propagación de error.</li>
+<li>Mantiene referencia directa a la fuente original.</li>
+<li>Permite control humano proporcional.</li>
+</ul>
+</section>
+<section id="flujo-encadenado-salida-entrada" class="level4">
+<h4 class="anchored" data-anchor-id="flujo-encadenado-salida-entrada">2. Flujo encadenado (salida → entrada)</h4>
+<p>La salida estructurada de una fase se utiliza como entrada para la siguiente.</p>
+<p>Esto permite:</p>
+<ul>
+<li>Modularidad.</li>
+<li>Reutilización estructurada.</li>
+<li>Automatización parcial.</li>
+</ul>
+<p>Pero introduce un riesgo adicional:</p>
+<blockquote class="blockquote">
+<p>Una inferencia incorrecta en una fase temprana puede propagarse y adquirir apariencia de dato consolidado.</p>
+</blockquote>
+<p>Por ello, el encadenamiento solo debe realizarse después de una verificación proporcional al nivel de inferencia involucrado.</p>
+</section>
+<section id="principio-clave-del-flujo" class="level4">
+<h4 class="anchored" data-anchor-id="principio-clave-del-flujo">Principio clave del flujo</h4>
+<p>Los fragmentos identificados en una fase temprana no “enseñan” nada al modelo.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p>Se convierten en el nuevo contexto operativo para la siguiente fase.</p>
+</blockquote>
+</div>
+</div>
+<p>Formalmente:</p>
+<p>P(y | paper completo) → P(y | fragmentos seleccionados)</p>
+<p>El flujo no modifica el modelo. Modifica el <strong>contexto</strong> sobre el cual el modelo opera.</p>
+<blockquote class="blockquote">
+<p>El investigador no entrena al modelo. Delimita el dominio de análisis.</p>
+</blockquote>
+</section>
+</section>
+</section>
+<section id="componentes-estructurales-de-un-protocolo-de-prompting-científico" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="componentes-estructurales-de-un-protocolo-de-prompting-científico"><span class="header-section-number">4</span> Componentes estructurales de un Protocolo de Prompting Científico</h2>
+<p>Un protocolo no es una colección de prompts, sino una arquitectura metodológica que controla un proceso generativo probabilístico.</p>
+<p>Debe incluir:</p>
+<section id="definición-explícita-del-problema-científico" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="definición-explícita-del-problema-científico"><span class="header-section-number">4.1</span> 1. Definición explícita del problema científico</h3>
+<p>La definición del problema científico no es una instrucción al modelo.</p>
+<p>Es el antecedente epistemológico del protocolo.</p>
+<p>Antes de diseñar cualquier fase, el investigador debe formular con precisión:</p>
+<ul>
+<li>Qué pregunta científica está intentando responder.</li>
+<li>Qué tipo de evidencia sería relevante.</li>
+<li>Qué nivel de inferencia será necesario.</li>
+<li>Qué contará como validación suficiente.</li>
+</ul>
+<p>El problema orienta el flujo. Las tareas orientan al modelo. El protocolo conecta ambos niveles.</p>
+</section>
+<section id="descomposición-en-fases-según-nivel-de-inferencia" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="descomposición-en-fases-según-nivel-de-inferencia"><span class="header-section-number">4.2</span> 2. Descomposición en fases según nivel de inferencia</h3>
+<p>Cada fase debe cumplir una función epistémica clara:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Fase</th>
+<th>Función epistémica</th>
+<th>Nivel de inferencia</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exploración</td>
+<td>Delimitación de dominio</td>
+<td>Bajo</td>
+</tr>
+<tr class="even">
+<td>Extracción</td>
+<td>Identificación literal</td>
+<td>Bajo</td>
+</tr>
+<tr class="odd">
+<td>Normalización</td>
+<td>Organización estructural</td>
+<td>Medio</td>
+</tr>
+<tr class="even">
+<td>Evaluación</td>
+<td>Clasificación e interpretación</td>
+<td>Alto</td>
+</tr>
+<tr class="odd">
+<td>Integración</td>
+<td>Juicio científico</td>
+<td>No delegable</td>
+</tr>
+</tbody>
+</table>
+<p>La separación de fases evita que distintos niveles de inferencia colapsen en un único acto generativo.</p>
+</section>
+<section id="coherencia-con-los-principios-del-capítulo-2" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="coherencia-con-los-principios-del-capítulo-2"><span class="header-section-number">4.3</span> 3. Coherencia con los principios del Capítulo 2</h3>
+<p>Un protocolo multi-etapa no sustituye los principios del prompting científico; los distribuye.</p>
+<p>Cada fase debe diseñarse incorporando:</p>
+<ul>
+<li>Restricciones explícitas.</li>
+<li>Salida estructurada evaluable.</li>
+<li>Identificación del nivel de inferencia.</li>
+<li>Riesgo epistemológico declarado.</li>
+<li>Verificación proporcional.</li>
+</ul>
+<p>Principio de proporcionalidad epistemológica:</p>
+<blockquote class="blockquote">
+<p>El grado de control debe ser proporcional al nivel de inferencia involucrado.</p>
+</blockquote>
+<p>Las fases de alta inferencia requieren mayor estructura, criterios explícitos y revisión humana obligatoria.</p>
+</section>
+<section id="trazabilidad-epistemológica" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="trazabilidad-epistemológica"><span class="header-section-number">4.4</span> Trazabilidad Epistemológica</h3>
+<p>Un protocolo científicamente robusto debe poder auditarse.</p>
+<p>Para cada fase deben documentarse:</p>
+<ul>
+<li>Prompt utilizado.</li>
+<li>Rol funcional asignado.</li>
+<li>Tipo de operación solicitada.</li>
+<li>Nivel de inferencia permitido.</li>
+<li>Riesgo epistemológico asociado.</li>
+<li>Estrategia de verificación aplicada.</li>
+</ul>
+<p>Preguntas que el protocolo debe poder responder:</p>
+<ul>
+<li>¿Dónde se generó una hipótesis?</li>
+<li>¿Dónde comenzó la interpretación?</li>
+<li>¿Dónde se aplicó verificación?</li>
+<li>¿Qué parte depende del modelo?</li>
+<li>¿Qué parte depende del juicio humano?</li>
+</ul>
+<p>Sin trazabilidad:</p>
+<ul>
+<li>No hay control epistemológico.</li>
+<li>No hay reproducibilidad.</li>
+<li>No hay responsabilidad distribuida.</li>
+</ul>
+</section>
+</section>
+<section id="caso-aplicado-regulación-del-regulón-de-maltosa-malt" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="caso-aplicado-regulación-del-regulón-de-maltosa-malt"><span class="header-section-number">5</span> Caso aplicado: Regulación del regulón de maltosa (MalT)</h2>
+<section id="problema-científico" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="problema-científico"><span class="header-section-number">5.1</span> Problema científico</h3>
+<p>Identificar evidencia experimental que demuestre regulación transcripcional mediada por MalT en <em>E. coli</em> y clasificar su robustez metodológica.</p>
+<p>El objetivo no es resumir el paper, sino construir una estructura evaluable y auditada de evidencia regulatoria.</p>
+<p>El protocolo se organiza como un flujo secuencial con control epistemológico distribuido y puntos explícitos de intervención humana.</p>
+</section>
+<section id="fase-1-exploración-y-delimitación-de-dominio" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="fase-1-exploración-y-delimitación-de-dominio"><span class="header-section-number">5.2</span> Fase 1 — Exploración y delimitación de dominio</h3>
+<p><strong>Nivel de inferencia:</strong> Bajo<br>
+<strong>Función epistémica:</strong> Localización sin interpretación</p>
+<section id="prompt" class="level4">
+<h4 class="anchored" data-anchor-id="prompt">Prompt</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode txt prompt code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Rol: Explorador de contenido científico.</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Tarea:</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Identifica párrafos del documento que mencionen explícitamente:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>- MalT</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>- Regulación transcripcional</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>- Promotores</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>- Experimentos regulatorios</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>- Ensayos funcionales asociados</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>Restricciones:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>- No interpretar resultados.</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>- No resumir.</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>- No inferir relaciones implícitas.</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>- Citar fragmentos textuales literalmente.</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Salida estructurada obligatoria:</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>| ID | Sección | Fragmento literal | Palabras clave detectadas |</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Riesgo epistemológico:<br>
+- Bajo (posible omisión de fragmentos relevantes).</p>
+<p>Verificación:<br>
+- Revisión humana de cobertura.</p>
+</section>
+<section id="punto-de-control-humano-1" class="level4">
+<h4 class="anchored" data-anchor-id="punto-de-control-humano-1">Punto de control humano 1</h4>
+<p>El investigador:<br>
+- Evalúa si la cobertura es suficiente.<br>
+- Decide si se requiere nueva exploración.<br>
+- Aprueba fragmentos que se convertirán en contexto operativo.</p>
+<p>Principio aplicado:<br>
+Los fragmentos seleccionados se convierten en el nuevo contexto para la Fase 2.<br>
+No hay aprendizaje del modelo; hay delimitación del dominio.</p>
+</section>
+</section>
+<section id="fase-2-extracción-literal-estructurada" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="fase-2-extracción-literal-estructurada"><span class="header-section-number">5.3</span> Fase 2 — Extracción literal estructurada</h3>
+<p><strong>Nivel de inferencia:</strong> Bajo<br>
+<strong>Función epistémica:</strong> Identificación explícita</p>
+<section id="prompt-1" class="level4">
+<h4 class="anchored" data-anchor-id="prompt-1">Prompt</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode txt prompt code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Rol: Extractor de información literal.</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Tarea:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>Extraer únicamente información explícita sobre:</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>- Regulador</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>- Gen regulado</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>- Tipo de evidencia experimental</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>- Condición experimental</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>- Resultado reportado</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>Restricciones:</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>- No inferir relaciones no explícitas.</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>- No completar información ausente.</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>- Si no está explícito, marcar “No especificado”.</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>- Cada entrada debe incluir cita textual exacta.</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>Salida estructurada obligatoria:</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>| Regulador | Gen regulado | Evidencia | Condición | Resultado reportado | Cita textual |</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Riesgo epistemológico:</p>
+<ul>
+<li>Bajo a medio (inferencia inadvertida).</li>
+</ul>
+<p>Verificación:</p>
+<ul>
+<li>Confirmación humana de correspondencia entre fila y cita.</li>
+</ul>
+</section>
+<section id="punto-de-control-humano-2" class="level4">
+<h4 class="anchored" data-anchor-id="punto-de-control-humano-2">Punto de control humano 2</h4>
+<p>El investigador:<br>
+- Elimina entradas sin respaldo textual claro.<br>
+- Marca ambigüedades.<br>
+- Decide si es necesario regresar a Fase 1.</p>
+<p>Criterio de transición:<br>
+No avanzar si existen filas sin cita o con inferencia implícita.</p>
+</section>
+</section>
+<section id="fase-3-normalización-y-curación" class="level3" data-number="5.4">
+<h3 data-number="5.4" class="anchored" data-anchor-id="fase-3-normalización-y-curación"><span class="header-section-number">5.4</span> Fase 3 — Normalización y curación</h3>
+<p><strong>Nivel de inferencia:</strong> Medio<br>
+<strong>Función epistémica:</strong> Organización estructural</p>
+<section id="prompt-2" class="level4">
+<h4 class="anchored" data-anchor-id="prompt-2">Prompt</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode txt prompt code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Rol: Curador bioinformático.</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>Tarea:</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>- Estandarizar nombres génicos usando nomenclatura oficial.</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>- Reportar equivalencias.</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>- Indicar ambigüedades explícitamente.</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>Restricciones:</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>- No eliminar el nombre original.</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>- No asumir equivalencias no verificables.</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>- Reportar múltiples posibles correspondencias.</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>Salida estructurada:</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>| Nombre original | Nombre estandarizado | Fuente | Ambigüedad (Sí/No) | Comentario |</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Riesgo epistemológico:<br>
+- Medio (sobre-inferencia de equivalencias).</p>
+<p>Verificación:<br>
+- Confirmación manual en base de datos oficial (ej. RegulonDB).</p>
+</section>
+<section id="punto-de-control-humano-3" class="level4">
+<h4 class="anchored" data-anchor-id="punto-de-control-humano-3">Punto de control humano 3</h4>
+<p>El investigador:<br>
+- Resuelve ambigüedades.<br>
+- Decide si alguna entrada debe marcarse como incierta.<br>
+- Puede regresar a Fase 2 si detecta error de extracción.</p>
+</section>
+</section>
+<section id="fase-4-evaluación-crítica-de-evidencia" class="level3" data-number="5.5">
+<h3 data-number="5.5" class="anchored" data-anchor-id="fase-4-evaluación-crítica-de-evidencia"><span class="header-section-number">5.5</span> Fase 4 — Evaluación crítica de evidencia</h3>
+<p><strong>Nivel de inferencia:</strong> Alto<br>
+<strong>Función epistémica:</strong> Clasificación interpretativa</p>
+<section id="prompt-3" class="level4">
+<h4 class="anchored" data-anchor-id="prompt-3">Prompt</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode txt prompt code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Rol: Revisor metodológico.</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Tarea:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>Clasificar cada evidencia como:</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>- Directa</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>- Indirecta</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>- Correlacional</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>Definir criterio explícito para cada categoría antes de clasificar.</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>Restricciones:</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>- Justificar cada clasificación con cita textual.</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>- No asumir robustez metodológica sin evidencia explícita.</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>- Declarar limitaciones experimentales si existen.</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>Salida estructurada obligatoria:</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>| Gen | Evidencia | Clasificación | Criterio aplicado | Justificación textual | Limitaciones detectadas |</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Riesgo epistemológico:<br>
+- Alto (interpretación metodológica).</p>
+<p>Verificación:<br>
+- Revisión humana obligatoria. - Posible contraste con literatura externa.</p>
+</section>
+<section id="punto-de-control-humano-4-obligatorio" class="level4">
+<h4 class="anchored" data-anchor-id="punto-de-control-humano-4-obligatorio">Punto de control humano 4 (Obligatorio)</h4>
+<p>El investigador:<br>
+- Evalúa consistencia del criterio.<br>
+- Revisa correspondencia entre cita y clasificación.<br>
+- Puede reclasificar evidencia.<br>
+- Puede detener flujo si criterios son débiles.</p>
+<p>Criterio de transición:<br>
+- No aceptar clasificación sin revisión explícita.</p>
+</section>
+</section>
+<section id="fase-5-integración-y-juicio-científico" class="level3" data-number="5.6">
+<h3 data-number="5.6" class="anchored" data-anchor-id="fase-5-integración-y-juicio-científico"><span class="header-section-number">5.6</span> Fase 5 — Integración y juicio científico</h3>
+<p><strong>Nivel de inferencia:</strong> No delegable</p>
+<p>El investigador integra:</p>
+<ul>
+<li>Consistencia entre extracción y clasificación.</li>
+<li>Robustez global de evidencia.</li>
+<li>Vacíos experimentales.</li>
+<li>Necesidad de validación adicional.</li>
+</ul>
+<p>Puede:</p>
+<ul>
+<li>Reabrir fases anteriores.</li>
+<li>Ajustar criterios.</li>
+<li>Reformular hipótesis.</li>
+</ul>
+<p>Salida final (producida por el investigador):</p>
+<ul>
+<li>Tabla consolidada de evidencia validada.</li>
+<li>Declaración explícita de incertidumbre.</li>
+<li>Identificación de evidencia fuerte vs provisional.</li>
+</ul>
+</section>
+<section id="final-del-protocolo" class="level3" data-number="5.7">
+<h3 data-number="5.7" class="anchored" data-anchor-id="final-del-protocolo"><span class="header-section-number">5.7</span> Final del protocolo</h3>
+<p>El modelo genera estructuras condicionadas por el contexto. El protocolo distribuye y controla el riesgo epistemológico. El investigador valida, integra y decide qué cuenta como conocimiento provisional.</p>
+</section>
+<section id="ejecución-operativa-de-un-protocolo-chatgpt-vs-apinotebooks" class="level3" data-number="5.8">
+<h3 data-number="5.8" class="anchored" data-anchor-id="ejecución-operativa-de-un-protocolo-chatgpt-vs-apinotebooks"><span class="header-section-number">5.8</span> Ejecución operativa de un protocolo (ChatGPT vs API/Notebooks)</h3>
+<p>Un protocolo multi-etapa no es solo un diagrama: debe ejecutarse de forma que preserve los <strong>puntos de control</strong> y la <strong>verificación proporcional</strong>.</p>
+<p>La regla central es:</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p>La separación de fases debe reflejarse en la ejecución.<br>
+Si todo se pega en un solo bloque, vuelve a colapsar en un único proceso generativo.</p>
+</blockquote>
+</div>
+</div>
+<section id="a-ejecución-en-un-chat-p.-ej.-chatgpt" class="level4">
+<h4 class="anchored" data-anchor-id="a-ejecución-en-un-chat-p.-ej.-chatgpt">A) Ejecución en un chat (p.&nbsp;ej., ChatGPT)</h4>
+<p><strong>Recomendado: fase por fase.</strong></p>
+<ol type="1">
+<li><strong>Enviar Fase 1</strong> (exploración / delimitación).</li>
+<li><strong>Revisar</strong> cobertura y pertinencia (Punto de control humano 1).</li>
+<li>Con los fragmentos aprobados, <strong>enviar Fase 2</strong> usando esos fragmentos como contexto operativo.</li>
+<li>Repetir (Fase 3, 4…), validando en cada transición.</li>
+</ol>
+<p>Por qué no conviene “pegar todo el flujo completo”:</p>
+<ul>
+<li>Aunque esté escrito como “Paso 1, Paso 2…”, el modelo lo resuelve como <strong>un solo acto autoregresivo</strong>.</li>
+<li>Se pierde el control en transiciones y la verificación intermedia se vuelve nominal.</li>
+</ul>
+<p><strong>Práctica sugerida:</strong><br>
+- Copiar y pegar la salida estructurada de cada fase (tablas) en un documento de trabajo (Markdown/CSV).<br>
+- Reingresar al chat solo lo necesario para la fase siguiente.<br>
+- Registrar prompts + salidas para trazabilidad.</p>
+<hr>
+</section>
+<section id="b-ejecución-en-notebooks-semi-automatizado-con-control-humano" class="level4">
+<h4 class="anchored" data-anchor-id="b-ejecución-en-notebooks-semi-automatizado-con-control-humano">B) Ejecución en notebooks (semi-automatizado con control humano)</h4>
+<p>En un Jupyter notebook, el flujo puede ser <strong>asistido</strong> sin volverse automático:</p>
+<ul>
+<li>Cada fase corre en una celda.</li>
+<li>La salida se guarda en una variable (tabla).</li>
+<li>El investigador revisa antes de ejecutar la siguiente celda.</li>
+<li>Se guardan artefactos (CSV/JSON) para reproducibilidad.</li>
+</ul>
+<p>Ejemplo conceptual de flujo:</p>
+<ol type="1">
+<li>Celda 1: pegar texto del paper (o fragmentos) y correr <strong>Fase 1</strong>.</li>
+<li>Celda 2: revisar lista de fragmentos; seleccionar subset.</li>
+<li>Celda 3: correr <strong>Fase 2</strong> sobre fragmentos seleccionados; producir tabla.</li>
+<li>Celda 4: correr <strong>Fase 3</strong> (normalización) sobre tabla.</li>
+<li>Celda 5: correr <strong>Fase 4</strong> (evaluación) con criterios explícitos.</li>
+<li>Celda 6: integración humana (síntesis final, decisiones, incertidumbre).</li>
+</ol>
+<p>Ventaja metodológica: - Se preserva “output → input” con <strong>puntos de control</strong> explícitos (el investigador decide cuándo avanzar).</p>
+<p><a href="files/Prompting_Cientifico_Caso_MalT.ipynb" download="" class="btn btn-primary"> ⬇ Descargar notebook editable </a></p>
+</section>
+<section id="c-ejecución-con-api-automatización-responsable" class="level4">
+<h4 class="anchored" data-anchor-id="c-ejecución-con-api-automatización-responsable">C) Ejecución con API (automatización responsable)</h4>
+<p>En API, sí puede existir un “pipeline”, pero <strong>no debe ser ciego</strong>.</p>
+<p>Principio:</p>
+<blockquote class="blockquote">
+<p>Automatizar fases de bajo riesgo es razonable;<br>
+automatizar fases de alto riesgo requiere validaciones, umbrales y gates.</p>
+</blockquote>
+<p>Patrón recomendado (“gated pipeline”):</p>
+<ol type="1">
+<li>Ejecutar Fase 1.</li>
+<li>Aplicar un <em>gate</em> <sup>1</sup>:
+<ul>
+<li>Si la cobertura es baja o hay ambigüedad, detener y pedir revisión humana.</li>
+</ul></li>
+<li>Ejecutar Fase 2 con fragmentos aprobados.</li>
+<li>Validar: cada fila debe tener cita textual; si no, marcar para revisión.</li>
+<li>Ejecutar Fase 3 y validar normalización con fuente externa.</li>
+<li>Ejecutar Fase 4 y <strong>obligar</strong> a revisión humana antes de aceptar clasificación.</li>
+</ol>
+<p>En otras palabras: - La API puede encadenar pasos, - pero el protocolo sigue exigiendo <strong>puntos de decisión humanos</strong> donde aumenta la inferencia.</p>
+<p>nota <sup>1</sup> <strong>Definición operativa</strong></p>
+<p><strong>Checkpoint</strong> → Punto de revisión humana.<br>
+<strong>Gate</strong> → Regla metodológica que impide avanzar si no se cumple una condición mínima verificable.</p>
+<p>Todo gate implica un checkpoint.<br>
+Pero no todo checkpoint es un gate.</p>
+<p>Ejemplos:</p>
+<ul>
+<li>Revisar estilo de redacción → checkpoint.<br>
+</li>
+<li>No avanzar si falta cita textual → gate.</li>
+</ul>
+<p>Un gate no es un mecanismo técnico; es una decisión epistémica formalizada.</p>
+</section>
+</section>
+<section id="regla-didáctica" class="level3" data-number="5.9">
+<h3 data-number="5.9" class="anchored" data-anchor-id="regla-didáctica"><span class="header-section-number">5.9</span> Regla didáctica</h3>
+<ul>
+<li>En chat: <strong>siempre fase por fase</strong>.</li>
+<li>En notebooks: <strong>semi-automatizado con checkpoints</strong>.</li>
+<li>En API: <strong>automatización con gates</strong> (validación + detención ante riesgo).</li>
+</ul>
+</section>
+</section>
+<section id="ejercicio" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="ejercicio"><span class="header-section-number">6</span> Ejercicio</h2>
+<div class="exercise-box">
+<section id="escenario" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="escenario"><span class="header-section-number">6.1</span> Escenario</h3>
+<p>Un equipo de investigación desea utilizar IA para analizar resultados de RNA-seq y propone el siguiente protocolo/prompt:</p>
+</section>
+<section id="prompt-propuesto-por-el-equipo-de-investigación" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="prompt-propuesto-por-el-equipo-de-investigación"><span class="header-section-number">6.2</span> Prompt propuesto por el equipo de investigación</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode txt prompt code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Rol: Asistente experto en análisis transcriptómico y biología molecular.</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Contexto:</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>Se dispone de una tabla de expresión diferencial derivada de un experimento de RNA-seq comparando condición control vs tratamiento.</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>Tarea:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>Paso 1 — Identificación de genes relevantes  </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>Analiza la tabla de expresión diferencial y selecciona los genes que cumplan:</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>- |log2FoldChange| &gt; 1</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>- p-valor ajustado &lt; 0.05  </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>Ordena los genes por magnitud de cambio y reporta los 20 más significativos.</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>Paso 2 — Análisis funcional  </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>Con base en la lista obtenida en el Paso 1:</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>- Identifica vías metabólicas significativamente afectadas.</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>- Determina procesos biológicos enriquecidos.</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>- Resume los patrones funcionales principales.</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>Paso 3 — Evaluación estadística  </span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>Evalúa la solidez estadística del análisis considerando:</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>- Tamaño de muestra.</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>- Corrección por múltiples pruebas.</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>- Magnitud del efecto.</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>- Posible presencia de sesgos experimentales.</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>Paso 4 — Generación de hipótesis mecanísticas  </span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>Integra los resultados anteriores y propone hipótesis biológicas que expliquen el mecanismo molecular subyacente al tratamiento.</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>Salida esperada:</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>- Lista estructurada de genes relevantes.</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>- Tabla de vías afectadas.</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>- Evaluación metodológica.</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>- Conclusión integradora con hipótesis biológicas.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El equipo planea ejecutar esta instrucción como un solo prompt.</p>
+<p>Analiza si realmente constituye un protocolo metodológicamente robusto o si sigue siendo un único acto generativo con riesgo epistemológico acumulativo.</p>
+</section>
+<section id="parte-a-diagnóstico-crítico" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="parte-a-diagnóstico-crítico"><span class="header-section-number">6.3</span> Parte A — Diagnóstico crítico</h3>
+<ol type="1">
+<li>Identifica al menos cinco fallas metodológicas del protocolo.<br>
+</li>
+<li>Clasifica cada falla según:
+<ul>
+<li>Mezcla de niveles de inferencia.<br>
+</li>
+<li>Ausencia de delimitación de dominio.<br>
+</li>
+<li>Falta de salida estructurada evaluable.<br>
+</li>
+<li>Ausencia de verificación.<br>
+</li>
+<li>Delegación implícita de juicio científico.<br>
+</li>
+</ul></li>
+<li>Explica cómo cada falla puede generar conclusiones plausibles pero no validadas.</li>
+</ol>
+</section>
+<section id="parte-b-rediseño-arquitectónico" class="level3" data-number="6.4">
+<h3 data-number="6.4" class="anchored" data-anchor-id="parte-b-rediseño-arquitectónico"><span class="header-section-number">6.4</span> Parte B — Rediseño arquitectónico</h3>
+<p>Rediseña el protocolo bajo los siguientes criterios:</p>
+<ul>
+<li>Separación de fases según nivel de inferencia.<br>
+</li>
+<li>Inclusión explícita de restricciones.<br>
+</li>
+<li>Salidas estructuradas.<br>
+</li>
+<li>Al menos tres gates epistémicos.<br>
+</li>
+<li>Definición clara de intervención humana.</li>
+</ul>
+<p>Debe incluir:</p>
+<ol type="1">
+<li>Definición precisa del problema.<br>
+</li>
+<li>Esquema de flujo.<br>
+</li>
+<li>Descripción breve de cada fase.<br>
+</li>
+<li>Justificación metodológica.</li>
+</ol>
+</section>
+<section id="parte-c-análisis-de-riesgo" class="level3" data-number="6.5">
+<h3 data-number="6.5" class="anchored" data-anchor-id="parte-c-análisis-de-riesgo"><span class="header-section-number">6.5</span> Parte C — Análisis de riesgo</h3>
+<p>Responde:</p>
+<ul>
+<li>¿En qué momento el protocolo pasa de análisis estadístico a interpretación biológica?<br>
+</li>
+<li>¿Cuál es el mayor punto de riesgo epistemológico?<br>
+</li>
+<li>¿Qué tipo de error se propagaría si no se incluyeran gates?</li>
+</ul>
+</section>
+</div>
+</section>
+<section id="rúbrica" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="rúbrica"><span class="header-section-number">7</span> Rúbrica</h2>
+<p>ver <a href="./rubrica_capitulo3.html">rubrica</a></p>
+</section>
+<section id="conclusión" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="conclusión"><span class="header-section-number">8</span> Conclusión</h2>
+<p>En el Capítulo 1 aprendimos que un prompt configura un proceso generativo probabilístico.</p>
+<p>En el Capítulo 2 comprendimos que el control epistemológico depende de:</p>
+<ul>
+<li>Restricciones explícitas.</li>
+<li>Salidas estructuradas.</li>
+<li>Verificación.</li>
+<li>Declaración del nivel de inferencia.</li>
+</ul>
+<p>En este capítulo dimos un paso adicional:</p>
+<blockquote class="blockquote">
+<p>El problema científico no se resuelve con un prompt mejor redactado,<br>
+sino con una arquitectura metodológica explícita.</p>
+</blockquote>
+<section id="la-estructura-textual-no-garantiza-rigor" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="la-estructura-textual-no-garantiza-rigor"><span class="header-section-number">8.1</span> 1. La estructura textual no garantiza rigor</h3>
+<p>Dividir una instrucción en pasos no equivale a separar niveles de inferencia.</p>
+<p>Un prompt multistep puede seguir siendo:</p>
+<ul>
+<li>Un único acto generativo.</li>
+<li>Un colapso inferencial.</li>
+<li>Una automatización con riesgo acumulativo.</li>
+</ul>
+<p>La separación epistémica no es textual. Es arquitectónica.</p>
+</section>
+<section id="el-flujo-no-es-automatización" class="level3" data-number="8.2">
+<h3 data-number="8.2" class="anchored" data-anchor-id="el-flujo-no-es-automatización"><span class="header-section-number">8.2</span> 2. El flujo no es automatización</h3>
+<p>Un flujo en prompting científico implica:</p>
+<ul>
+<li>Secuencialidad controlada.</li>
+<li>Delimitación progresiva del contexto.</li>
+<li>Distribución del riesgo.</li>
+<li>Puntos de transición explícitos.</li>
+</ul>
+<p>No implica ejecutar todo de una vez.</p>
+<p>Formalmente:</p>
+<p>El protocolo no modifica el modelo.<br>
+Modifica el contexto sobre el cual el modelo opera.</p>
+<p>P(y | x₁) → P(y | x₂) → P(y | x₃)</p>
+<p>Cada transición debe estar justificada.</p>
+</section>
+<section id="gates-como-reglas-epistémicas" class="level3" data-number="8.3">
+<h3 data-number="8.3" class="anchored" data-anchor-id="gates-como-reglas-epistémicas"><span class="header-section-number">8.3</span> 3. Gates como reglas epistémicas</h3>
+<p>Un gate no es una herramienta técnica.</p>
+<p>Es una decisión metodológica:</p>
+<blockquote class="blockquote">
+<p>No avanzar si no se cumple una condición mínima de validez.</p>
+</blockquote>
+<p>Sin gates, el flujo es automático.<br>
+Con gates, el flujo es científico.</p>
+</section>
+<section id="proporcionalidad-inferencial" class="level3" data-number="8.4">
+<h3 data-number="8.4" class="anchored" data-anchor-id="proporcionalidad-inferencial"><span class="header-section-number">8.4</span> 4. Proporcionalidad inferencial</h3>
+<p>No todas las fases requieren el mismo nivel de control.</p>
+<ul>
+<li>Extracción → bajo riesgo.</li>
+<li>Normalización → riesgo medio.</li>
+<li>Evaluación → alto riesgo.</li>
+<li>Hipótesis → no delegable.</li>
+</ul>
+<p>El control debe aumentar con la inferencia.</p>
+</section>
+<section id="el-rol-irreductible-del-investigador" class="level3" data-number="8.5">
+<h3 data-number="8.5" class="anchored" data-anchor-id="el-rol-irreductible-del-investigador"><span class="header-section-number">8.5</span> 5. El rol irreductible del investigador</h3>
+<p>El modelo:</p>
+<ul>
+<li>Genera estructuras plausibles.</li>
+<li>Organiza información.</li>
+<li>Explicita patrones.</li>
+</ul>
+<p>Pero no:</p>
+<ul>
+<li>Asume responsabilidad metodológica.</li>
+<li>Valida experimentalmente.</li>
+<li>Decide qué cuenta como conocimiento.</li>
+</ul>
+<p>El juicio científico no se automatiza. Se estructura.</p>
+<hr>
+<p>Si el Capítulo 2 trataba del control interno del prompt,<br>
+y el Capítulo 3 del diseño de arquitecturas de interacción,</p>
+<p>el siguiente nivel implica preguntarse:</p>
+<p>¿Cómo integrar estos protocolos en flujos de trabajo científicos reales, con datos, herramientas externas y criterios formales de validación?</p>
+<p>Ese será el siguiente paso.</p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div></main> <!-- /main -->
+<script src="assets/js/custom.js"></script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("^(?:http:|https:)\/\/(?:www\.)?yourdomain\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../chapters/capitulo2/index.html" class="pagination-link" aria-label="🔬 Prompting Científico">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">🔬 Prompting Científico</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Arquitectura de Protocolos de Prompting Científico"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Diseño de Protocolos para Investigación"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> last-modified</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Aprende a transformar prompts aislados en protocolos científicos reproducibles, diseñando flujos de interacción con control explícito del riesgo epistemológico."</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [flujo, metodología, protocolo]</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">    css: styles.css</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">    include-in-header:</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">      - text: |</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"&gt;&lt;/script&gt;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">          &lt;script&gt;mermaid.initialize({ startOnLoad: true });&lt;/script&gt;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">  cache: false</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Propósito del capítulo</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>En este capítulo cambia la unidad de diseño.</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>En los capítulos anteriores trabajamos sobre el **prompt individual**:</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>cómo estructurarlo y cómo controlar su nivel de inferencia.</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>Ahora la pregunta es distinta:</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; ¿Cómo resolver un problema científico complejo cuando un solo prompt no es suficiente?</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>El foco deja de ser la redacción de instrucciones y pasa a ser la **arquitectura del proceso completo de interacción** con el modelo.</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>El estudiante ya no optimiza respuestas.</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>Diseña secuencias metodológicamente justificadas.</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## Concepto central — El Prompting como Diseño de Sistema</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>Un protocolo de prompting científico es una arquitectura que organiza fases diferenciadas de interacción con un sistema generativo probabilístico.</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>Dado que el modelo opera bajo el esquema P(y|x), todas las operaciones solicitadas en un mismo contexto se resuelven como un único proceso autoregresivo.</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>Por ello, cuando un problema involucra distintos niveles de inferencia, es necesario:</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Separar fases según función epistémica.</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Controlar las transiciones.</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Introducir verificación proporcional.</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Registrar el proceso para auditoría.</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; El protocolo no cambia el modelo (LLM).</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Cambia el **contexto sobre el cual el modelo opera** y la forma en que el investigador controla su salida.</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="fu">## Del Prompt Individual al Protocolo</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>Muchos errores metodológicos ocurren cuando se intenta resolver un problema científico complejo con una sola instrucción extensa.</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>Ejemplo defectuoso:</span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; “Extrae todos los reguladores, sus promotores, la evidencia experimental y evalúa la calidad metodológica.”</span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>Aquí se mezclan en un único acto generativo:</span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**“Extrae todos los reguladores”** → Extracción literal.</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**“sus promotores”** → Organización estructural.</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**“la evidencia experimental”** → Identificación e interpretación de soporte empírico.</span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**“evalúa la calidad metodológica”** → Evaluación crítica y juicio metodológico.</span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>Aunque la instrucción esté bien redactada, el modelo la resuelve como **un solo proceso condicionado por el mismo contexto**.</span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>El resultado puede ser fluido y coherente,</span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>pero no separa niveles de inferencia ni distribuye el riesgo.</span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>El protocolo surge precisamente para evitar ese colapso.</span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a><span class="fu">### Qué significa “flujo” en un protocolo científico</span></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>En este contexto, *flujo* no significa automatización ciega ni encadenamiento mecánico de salidas.</span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>Significa:</span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Secuencialidad metodológica.</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Progresión en el nivel de inferencia.</span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Distribución del control epistemológico.</span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Trazabilidad acumulativa del proceso.</span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>Existen dos formas posibles de flujo:</span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1. Flujo sobre la misma fuente primaria</span></span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>Cada fase opera directamente sobre el mismo documento (por ejemplo, el mismo paper).</span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a>Las fases son funcionalmente dependientes, pero no necesariamente se encadenan automáticamente.</span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>Este enfoque:</span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Reduce propagación de error.</span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Mantiene referencia directa a la fuente original.</span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Permite control humano proporcional.</span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 2. Flujo encadenado (salida → entrada)</span></span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a>La salida estructurada de una fase se utiliza como entrada para la siguiente.</span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a>Esto permite:</span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Modularidad.</span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Reutilización estructurada.</span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Automatización parcial.</span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a>Pero introduce un riesgo adicional:</span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Una inferencia incorrecta en una fase temprana puede propagarse y adquirir apariencia de dato consolidado.</span></span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a>Por ello, el encadenamiento solo debe realizarse después de una verificación proporcional al nivel de inferencia involucrado.</span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Principio clave del flujo</span></span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a>Los fragmentos identificados en una fase temprana no “enseñan” nada al modelo.</span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Se convierten en el nuevo contexto operativo para la siguiente fase.</span></span>
+<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a>Formalmente:</span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a>P(y | paper completo)  →  P(y | fragmentos seleccionados)</span>
+<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a>El flujo no modifica el modelo.</span>
+<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a>Modifica el **contexto** sobre el cual el modelo opera.</span>
+<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; El investigador no entrena al modelo.</span></span>
+<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Delimita el dominio de análisis.</span></span>
+<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a><span class="fu">## Componentes estructurales de un Protocolo de Prompting Científico</span></span>
+<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a>Un protocolo no es una colección de prompts, sino una arquitectura metodológica que controla un proceso generativo probabilístico.</span>
+<span id="cb6-152"><a href="#cb6-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-153"><a href="#cb6-153" aria-hidden="true" tabindex="-1"></a>Debe incluir:</span>
+<span id="cb6-154"><a href="#cb6-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-155"><a href="#cb6-155" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. Definición explícita del problema científico</span></span>
+<span id="cb6-156"><a href="#cb6-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a>La definición del problema científico no es una instrucción al modelo.</span>
+<span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a>Es el antecedente epistemológico del protocolo.</span>
+<span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a>Antes de diseñar cualquier fase, el investigador debe formular con precisión:</span>
+<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-163"><a href="#cb6-163" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Qué pregunta científica está intentando responder.</span>
+<span id="cb6-164"><a href="#cb6-164" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Qué tipo de evidencia sería relevante.</span>
+<span id="cb6-165"><a href="#cb6-165" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Qué nivel de inferencia será necesario.</span>
+<span id="cb6-166"><a href="#cb6-166" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Qué contará como validación suficiente.</span>
+<span id="cb6-167"><a href="#cb6-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-168"><a href="#cb6-168" aria-hidden="true" tabindex="-1"></a>El problema orienta el flujo.</span>
+<span id="cb6-169"><a href="#cb6-169" aria-hidden="true" tabindex="-1"></a>Las tareas orientan al modelo.</span>
+<span id="cb6-170"><a href="#cb6-170" aria-hidden="true" tabindex="-1"></a>El protocolo conecta ambos niveles.</span>
+<span id="cb6-171"><a href="#cb6-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-172"><a href="#cb6-172" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. Descomposición en fases según nivel de inferencia</span></span>
+<span id="cb6-173"><a href="#cb6-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-174"><a href="#cb6-174" aria-hidden="true" tabindex="-1"></a>Cada fase debe cumplir una función epistémica clara:</span>
+<span id="cb6-175"><a href="#cb6-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-176"><a href="#cb6-176" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Fase <span class="pp">|</span> Función epistémica <span class="pp">|</span> Nivel de inferencia <span class="pp">|</span></span>
+<span id="cb6-177"><a href="#cb6-177" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|--------------------|---------------------|</span></span>
+<span id="cb6-178"><a href="#cb6-178" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Exploración <span class="pp">|</span> Delimitación de dominio <span class="pp">|</span> Bajo <span class="pp">|</span></span>
+<span id="cb6-179"><a href="#cb6-179" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Extracción <span class="pp">|</span> Identificación literal <span class="pp">|</span> Bajo <span class="pp">|</span></span>
+<span id="cb6-180"><a href="#cb6-180" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Normalización <span class="pp">|</span> Organización estructural <span class="pp">|</span> Medio <span class="pp">|</span></span>
+<span id="cb6-181"><a href="#cb6-181" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Evaluación <span class="pp">|</span> Clasificación e interpretación <span class="pp">|</span> Alto <span class="pp">|</span></span>
+<span id="cb6-182"><a href="#cb6-182" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Integración <span class="pp">|</span> Juicio científico <span class="pp">|</span> No delegable <span class="pp">|</span></span>
+<span id="cb6-183"><a href="#cb6-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-184"><a href="#cb6-184" aria-hidden="true" tabindex="-1"></a>La separación de fases evita que distintos niveles de inferencia colapsen en un único acto generativo.</span>
+<span id="cb6-185"><a href="#cb6-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-186"><a href="#cb6-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-187"><a href="#cb6-187" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. Coherencia con los principios del Capítulo 2</span></span>
+<span id="cb6-188"><a href="#cb6-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-189"><a href="#cb6-189" aria-hidden="true" tabindex="-1"></a>Un protocolo multi-etapa no sustituye los principios del prompting científico; los distribuye.</span>
+<span id="cb6-190"><a href="#cb6-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-191"><a href="#cb6-191" aria-hidden="true" tabindex="-1"></a>Cada fase debe diseñarse incorporando:</span>
+<span id="cb6-192"><a href="#cb6-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-193"><a href="#cb6-193" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Restricciones explícitas.</span>
+<span id="cb6-194"><a href="#cb6-194" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Salida estructurada evaluable.</span>
+<span id="cb6-195"><a href="#cb6-195" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Identificación del nivel de inferencia.</span>
+<span id="cb6-196"><a href="#cb6-196" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Riesgo epistemológico declarado.</span>
+<span id="cb6-197"><a href="#cb6-197" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Verificación proporcional.</span>
+<span id="cb6-198"><a href="#cb6-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-199"><a href="#cb6-199" aria-hidden="true" tabindex="-1"></a>Principio de proporcionalidad epistemológica:</span>
+<span id="cb6-200"><a href="#cb6-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-201"><a href="#cb6-201" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; El grado de control debe ser proporcional al nivel de inferencia involucrado.</span></span>
+<span id="cb6-202"><a href="#cb6-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-203"><a href="#cb6-203" aria-hidden="true" tabindex="-1"></a>Las fases de alta inferencia requieren mayor estructura, criterios explícitos y revisión humana obligatoria.</span>
+<span id="cb6-204"><a href="#cb6-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-205"><a href="#cb6-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-206"><a href="#cb6-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-207"><a href="#cb6-207" aria-hidden="true" tabindex="-1"></a><span class="fu">### Trazabilidad Epistemológica</span></span>
+<span id="cb6-208"><a href="#cb6-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-209"><a href="#cb6-209" aria-hidden="true" tabindex="-1"></a>Un protocolo científicamente robusto debe poder auditarse.</span>
+<span id="cb6-210"><a href="#cb6-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-211"><a href="#cb6-211" aria-hidden="true" tabindex="-1"></a>Para cada fase deben documentarse:</span>
+<span id="cb6-212"><a href="#cb6-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-213"><a href="#cb6-213" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Prompt utilizado.</span>
+<span id="cb6-214"><a href="#cb6-214" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Rol funcional asignado.</span>
+<span id="cb6-215"><a href="#cb6-215" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tipo de operación solicitada.</span>
+<span id="cb6-216"><a href="#cb6-216" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Nivel de inferencia permitido.</span>
+<span id="cb6-217"><a href="#cb6-217" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Riesgo epistemológico asociado.</span>
+<span id="cb6-218"><a href="#cb6-218" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Estrategia de verificación aplicada.</span>
+<span id="cb6-219"><a href="#cb6-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-220"><a href="#cb6-220" aria-hidden="true" tabindex="-1"></a>Preguntas que el protocolo debe poder responder:</span>
+<span id="cb6-221"><a href="#cb6-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-222"><a href="#cb6-222" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Dónde se generó una hipótesis?</span>
+<span id="cb6-223"><a href="#cb6-223" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Dónde comenzó la interpretación?</span>
+<span id="cb6-224"><a href="#cb6-224" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Dónde se aplicó verificación?</span>
+<span id="cb6-225"><a href="#cb6-225" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Qué parte depende del modelo?</span>
+<span id="cb6-226"><a href="#cb6-226" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Qué parte depende del juicio humano?</span>
+<span id="cb6-227"><a href="#cb6-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-228"><a href="#cb6-228" aria-hidden="true" tabindex="-1"></a>Sin trazabilidad:</span>
+<span id="cb6-229"><a href="#cb6-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-230"><a href="#cb6-230" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No hay control epistemológico.</span>
+<span id="cb6-231"><a href="#cb6-231" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No hay reproducibilidad.</span>
+<span id="cb6-232"><a href="#cb6-232" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No hay responsabilidad distribuida.</span>
+<span id="cb6-233"><a href="#cb6-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-234"><a href="#cb6-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-235"><a href="#cb6-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-236"><a href="#cb6-236" aria-hidden="true" tabindex="-1"></a><span class="fu">## Caso aplicado: Regulación del regulón de maltosa (MalT)</span></span>
+<span id="cb6-237"><a href="#cb6-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-238"><a href="#cb6-238" aria-hidden="true" tabindex="-1"></a><span class="fu">### Problema científico</span></span>
+<span id="cb6-239"><a href="#cb6-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-240"><a href="#cb6-240" aria-hidden="true" tabindex="-1"></a>Identificar evidencia experimental que demuestre regulación transcripcional mediada por MalT en *E. coli* y clasificar su robustez metodológica.</span>
+<span id="cb6-241"><a href="#cb6-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-242"><a href="#cb6-242" aria-hidden="true" tabindex="-1"></a>El objetivo no es resumir el paper, sino construir una estructura evaluable y auditada de evidencia regulatoria.</span>
+<span id="cb6-243"><a href="#cb6-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-244"><a href="#cb6-244" aria-hidden="true" tabindex="-1"></a>El protocolo se organiza como un flujo secuencial con control epistemológico distribuido y puntos explícitos de intervención humana.</span>
+<span id="cb6-245"><a href="#cb6-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-246"><a href="#cb6-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-247"><a href="#cb6-247" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fase 1 — Exploración y delimitación de dominio  </span></span>
+<span id="cb6-248"><a href="#cb6-248" aria-hidden="true" tabindex="-1"></a>**Nivel de inferencia:** Bajo  </span>
+<span id="cb6-249"><a href="#cb6-249" aria-hidden="true" tabindex="-1"></a>**Función epistémica:** Localización sin interpretación  </span>
+<span id="cb6-250"><a href="#cb6-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-251"><a href="#cb6-251" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Prompt</span></span>
+<span id="cb6-252"><a href="#cb6-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-253"><a href="#cb6-253" aria-hidden="true" tabindex="-1"></a><span class="in">```txt {.prompt}</span></span>
+<span id="cb6-254"><a href="#cb6-254" aria-hidden="true" tabindex="-1"></a><span class="in">Rol: Explorador de contenido científico.</span></span>
+<span id="cb6-255"><a href="#cb6-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-256"><a href="#cb6-256" aria-hidden="true" tabindex="-1"></a><span class="in">Tarea:</span></span>
+<span id="cb6-257"><a href="#cb6-257" aria-hidden="true" tabindex="-1"></a><span class="in">Identifica párrafos del documento que mencionen explícitamente:</span></span>
+<span id="cb6-258"><a href="#cb6-258" aria-hidden="true" tabindex="-1"></a><span class="in">- MalT</span></span>
+<span id="cb6-259"><a href="#cb6-259" aria-hidden="true" tabindex="-1"></a><span class="in">- Regulación transcripcional</span></span>
+<span id="cb6-260"><a href="#cb6-260" aria-hidden="true" tabindex="-1"></a><span class="in">- Promotores</span></span>
+<span id="cb6-261"><a href="#cb6-261" aria-hidden="true" tabindex="-1"></a><span class="in">- Experimentos regulatorios</span></span>
+<span id="cb6-262"><a href="#cb6-262" aria-hidden="true" tabindex="-1"></a><span class="in">- Ensayos funcionales asociados</span></span>
+<span id="cb6-263"><a href="#cb6-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-264"><a href="#cb6-264" aria-hidden="true" tabindex="-1"></a><span class="in">Restricciones:</span></span>
+<span id="cb6-265"><a href="#cb6-265" aria-hidden="true" tabindex="-1"></a><span class="in">- No interpretar resultados.</span></span>
+<span id="cb6-266"><a href="#cb6-266" aria-hidden="true" tabindex="-1"></a><span class="in">- No resumir.</span></span>
+<span id="cb6-267"><a href="#cb6-267" aria-hidden="true" tabindex="-1"></a><span class="in">- No inferir relaciones implícitas.</span></span>
+<span id="cb6-268"><a href="#cb6-268" aria-hidden="true" tabindex="-1"></a><span class="in">- Citar fragmentos textuales literalmente.</span></span>
+<span id="cb6-269"><a href="#cb6-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-270"><a href="#cb6-270" aria-hidden="true" tabindex="-1"></a><span class="in">Salida estructurada obligatoria:</span></span>
+<span id="cb6-271"><a href="#cb6-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-272"><a href="#cb6-272" aria-hidden="true" tabindex="-1"></a><span class="in">| ID | Sección | Fragmento literal | Palabras clave detectadas |</span></span>
+<span id="cb6-273"><a href="#cb6-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-274"><a href="#cb6-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-275"><a href="#cb6-275" aria-hidden="true" tabindex="-1"></a>Riesgo epistemológico:  </span>
+<span id="cb6-276"><a href="#cb6-276" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bajo (posible omisión de fragmentos relevantes).</span>
+<span id="cb6-277"><a href="#cb6-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-278"><a href="#cb6-278" aria-hidden="true" tabindex="-1"></a>Verificación:  </span>
+<span id="cb6-279"><a href="#cb6-279" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Revisión humana de cobertura.</span>
+<span id="cb6-280"><a href="#cb6-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-281"><a href="#cb6-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-282"><a href="#cb6-282" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Punto de control humano 1</span></span>
+<span id="cb6-283"><a href="#cb6-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-284"><a href="#cb6-284" aria-hidden="true" tabindex="-1"></a>El investigador:  </span>
+<span id="cb6-285"><a href="#cb6-285" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Evalúa si la cobertura es suficiente.  </span>
+<span id="cb6-286"><a href="#cb6-286" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Decide si se requiere nueva exploración.  </span>
+<span id="cb6-287"><a href="#cb6-287" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Aprueba fragmentos que se convertirán en contexto operativo.  </span>
+<span id="cb6-288"><a href="#cb6-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-289"><a href="#cb6-289" aria-hidden="true" tabindex="-1"></a>Principio aplicado:  </span>
+<span id="cb6-290"><a href="#cb6-290" aria-hidden="true" tabindex="-1"></a>Los fragmentos seleccionados se convierten en el nuevo contexto para la Fase 2.  </span>
+<span id="cb6-291"><a href="#cb6-291" aria-hidden="true" tabindex="-1"></a>No hay aprendizaje del modelo; hay delimitación del dominio.  </span>
+<span id="cb6-292"><a href="#cb6-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-293"><a href="#cb6-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-294"><a href="#cb6-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-295"><a href="#cb6-295" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fase 2 — Extracción literal estructurada  </span></span>
+<span id="cb6-296"><a href="#cb6-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-297"><a href="#cb6-297" aria-hidden="true" tabindex="-1"></a>**Nivel de inferencia:** Bajo  </span>
+<span id="cb6-298"><a href="#cb6-298" aria-hidden="true" tabindex="-1"></a>**Función epistémica:** Identificación explícita  </span>
+<span id="cb6-299"><a href="#cb6-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-300"><a href="#cb6-300" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Prompt</span></span>
+<span id="cb6-301"><a href="#cb6-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-302"><a href="#cb6-302" aria-hidden="true" tabindex="-1"></a><span class="in">```txt {.prompt}</span></span>
+<span id="cb6-303"><a href="#cb6-303" aria-hidden="true" tabindex="-1"></a><span class="in">Rol: Extractor de información literal.</span></span>
+<span id="cb6-304"><a href="#cb6-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-305"><a href="#cb6-305" aria-hidden="true" tabindex="-1"></a><span class="in">Tarea:</span></span>
+<span id="cb6-306"><a href="#cb6-306" aria-hidden="true" tabindex="-1"></a><span class="in">Extraer únicamente información explícita sobre:</span></span>
+<span id="cb6-307"><a href="#cb6-307" aria-hidden="true" tabindex="-1"></a><span class="in">- Regulador</span></span>
+<span id="cb6-308"><a href="#cb6-308" aria-hidden="true" tabindex="-1"></a><span class="in">- Gen regulado</span></span>
+<span id="cb6-309"><a href="#cb6-309" aria-hidden="true" tabindex="-1"></a><span class="in">- Tipo de evidencia experimental</span></span>
+<span id="cb6-310"><a href="#cb6-310" aria-hidden="true" tabindex="-1"></a><span class="in">- Condición experimental</span></span>
+<span id="cb6-311"><a href="#cb6-311" aria-hidden="true" tabindex="-1"></a><span class="in">- Resultado reportado</span></span>
+<span id="cb6-312"><a href="#cb6-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-313"><a href="#cb6-313" aria-hidden="true" tabindex="-1"></a><span class="in">Restricciones:</span></span>
+<span id="cb6-314"><a href="#cb6-314" aria-hidden="true" tabindex="-1"></a><span class="in">- No inferir relaciones no explícitas.</span></span>
+<span id="cb6-315"><a href="#cb6-315" aria-hidden="true" tabindex="-1"></a><span class="in">- No completar información ausente.</span></span>
+<span id="cb6-316"><a href="#cb6-316" aria-hidden="true" tabindex="-1"></a><span class="in">- Si no está explícito, marcar “No especificado”.</span></span>
+<span id="cb6-317"><a href="#cb6-317" aria-hidden="true" tabindex="-1"></a><span class="in">- Cada entrada debe incluir cita textual exacta.</span></span>
+<span id="cb6-318"><a href="#cb6-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-319"><a href="#cb6-319" aria-hidden="true" tabindex="-1"></a><span class="in">Salida estructurada obligatoria:</span></span>
+<span id="cb6-320"><a href="#cb6-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-321"><a href="#cb6-321" aria-hidden="true" tabindex="-1"></a><span class="in">| Regulador | Gen regulado | Evidencia | Condición | Resultado reportado | Cita textual |</span></span>
+<span id="cb6-322"><a href="#cb6-322" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-323"><a href="#cb6-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-324"><a href="#cb6-324" aria-hidden="true" tabindex="-1"></a>Riesgo epistemológico:</span>
+<span id="cb6-325"><a href="#cb6-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-326"><a href="#cb6-326" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bajo a medio (inferencia inadvertida).</span>
+<span id="cb6-327"><a href="#cb6-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-328"><a href="#cb6-328" aria-hidden="true" tabindex="-1"></a>Verificación:</span>
+<span id="cb6-329"><a href="#cb6-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-330"><a href="#cb6-330" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Confirmación humana de correspondencia entre fila y cita.</span>
+<span id="cb6-331"><a href="#cb6-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-332"><a href="#cb6-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-333"><a href="#cb6-333" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Punto de control humano 2</span></span>
+<span id="cb6-334"><a href="#cb6-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-335"><a href="#cb6-335" aria-hidden="true" tabindex="-1"></a>El investigador:  </span>
+<span id="cb6-336"><a href="#cb6-336" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Elimina entradas sin respaldo textual claro.   </span>
+<span id="cb6-337"><a href="#cb6-337" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Marca ambigüedades.   </span>
+<span id="cb6-338"><a href="#cb6-338" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Decide si es necesario regresar a Fase 1.</span>
+<span id="cb6-339"><a href="#cb6-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-340"><a href="#cb6-340" aria-hidden="true" tabindex="-1"></a>Criterio de transición:  </span>
+<span id="cb6-341"><a href="#cb6-341" aria-hidden="true" tabindex="-1"></a>No avanzar si existen filas sin cita o con inferencia implícita.</span>
+<span id="cb6-342"><a href="#cb6-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-343"><a href="#cb6-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-344"><a href="#cb6-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-345"><a href="#cb6-345" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fase 3 — Normalización y curación    </span></span>
+<span id="cb6-346"><a href="#cb6-346" aria-hidden="true" tabindex="-1"></a>**Nivel de inferencia:** Medio  </span>
+<span id="cb6-347"><a href="#cb6-347" aria-hidden="true" tabindex="-1"></a>**Función epistémica:** Organización estructural  </span>
+<span id="cb6-348"><a href="#cb6-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-349"><a href="#cb6-349" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Prompt</span></span>
+<span id="cb6-350"><a href="#cb6-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-351"><a href="#cb6-351" aria-hidden="true" tabindex="-1"></a><span class="in">```txt {.prompt}</span></span>
+<span id="cb6-352"><a href="#cb6-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-353"><a href="#cb6-353" aria-hidden="true" tabindex="-1"></a><span class="in">Rol: Curador bioinformático.</span></span>
+<span id="cb6-354"><a href="#cb6-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-355"><a href="#cb6-355" aria-hidden="true" tabindex="-1"></a><span class="in">Tarea:</span></span>
+<span id="cb6-356"><a href="#cb6-356" aria-hidden="true" tabindex="-1"></a><span class="in">- Estandarizar nombres génicos usando nomenclatura oficial.</span></span>
+<span id="cb6-357"><a href="#cb6-357" aria-hidden="true" tabindex="-1"></a><span class="in">- Reportar equivalencias.</span></span>
+<span id="cb6-358"><a href="#cb6-358" aria-hidden="true" tabindex="-1"></a><span class="in">- Indicar ambigüedades explícitamente.</span></span>
+<span id="cb6-359"><a href="#cb6-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-360"><a href="#cb6-360" aria-hidden="true" tabindex="-1"></a><span class="in">Restricciones:</span></span>
+<span id="cb6-361"><a href="#cb6-361" aria-hidden="true" tabindex="-1"></a><span class="in">- No eliminar el nombre original.</span></span>
+<span id="cb6-362"><a href="#cb6-362" aria-hidden="true" tabindex="-1"></a><span class="in">- No asumir equivalencias no verificables.</span></span>
+<span id="cb6-363"><a href="#cb6-363" aria-hidden="true" tabindex="-1"></a><span class="in">- Reportar múltiples posibles correspondencias.</span></span>
+<span id="cb6-364"><a href="#cb6-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-365"><a href="#cb6-365" aria-hidden="true" tabindex="-1"></a><span class="in">Salida estructurada:</span></span>
+<span id="cb6-366"><a href="#cb6-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-367"><a href="#cb6-367" aria-hidden="true" tabindex="-1"></a><span class="in">| Nombre original | Nombre estandarizado | Fuente | Ambigüedad (Sí/No) | Comentario |</span></span>
+<span id="cb6-368"><a href="#cb6-368" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-369"><a href="#cb6-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-370"><a href="#cb6-370" aria-hidden="true" tabindex="-1"></a>Riesgo epistemológico:    </span>
+<span id="cb6-371"><a href="#cb6-371" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Medio (sobre-inferencia de equivalencias).</span>
+<span id="cb6-372"><a href="#cb6-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-373"><a href="#cb6-373" aria-hidden="true" tabindex="-1"></a>Verificación:    </span>
+<span id="cb6-374"><a href="#cb6-374" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Confirmación manual en base de datos oficial (ej. RegulonDB).</span>
+<span id="cb6-375"><a href="#cb6-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-376"><a href="#cb6-376" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Punto de control humano 3</span></span>
+<span id="cb6-377"><a href="#cb6-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-378"><a href="#cb6-378" aria-hidden="true" tabindex="-1"></a>El investigador:  </span>
+<span id="cb6-379"><a href="#cb6-379" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Resuelve ambigüedades.  </span>
+<span id="cb6-380"><a href="#cb6-380" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Decide si alguna entrada debe marcarse como incierta.  </span>
+<span id="cb6-381"><a href="#cb6-381" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Puede regresar a Fase 2 si detecta error de extracción.</span>
+<span id="cb6-382"><a href="#cb6-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-383"><a href="#cb6-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-384"><a href="#cb6-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-385"><a href="#cb6-385" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fase 4 — Evaluación crítica de evidencia  </span></span>
+<span id="cb6-386"><a href="#cb6-386" aria-hidden="true" tabindex="-1"></a>**Nivel de inferencia:** Alto  </span>
+<span id="cb6-387"><a href="#cb6-387" aria-hidden="true" tabindex="-1"></a>**Función epistémica:** Clasificación interpretativa  </span>
+<span id="cb6-388"><a href="#cb6-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-389"><a href="#cb6-389" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Prompt</span></span>
+<span id="cb6-390"><a href="#cb6-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-391"><a href="#cb6-391" aria-hidden="true" tabindex="-1"></a><span class="in">```txt {.prompt}</span></span>
+<span id="cb6-392"><a href="#cb6-392" aria-hidden="true" tabindex="-1"></a><span class="in">Rol: Revisor metodológico.</span></span>
+<span id="cb6-393"><a href="#cb6-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-394"><a href="#cb6-394" aria-hidden="true" tabindex="-1"></a><span class="in">Tarea:</span></span>
+<span id="cb6-395"><a href="#cb6-395" aria-hidden="true" tabindex="-1"></a><span class="in">Clasificar cada evidencia como:</span></span>
+<span id="cb6-396"><a href="#cb6-396" aria-hidden="true" tabindex="-1"></a><span class="in">- Directa</span></span>
+<span id="cb6-397"><a href="#cb6-397" aria-hidden="true" tabindex="-1"></a><span class="in">- Indirecta</span></span>
+<span id="cb6-398"><a href="#cb6-398" aria-hidden="true" tabindex="-1"></a><span class="in">- Correlacional</span></span>
+<span id="cb6-399"><a href="#cb6-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-400"><a href="#cb6-400" aria-hidden="true" tabindex="-1"></a><span class="in">Definir criterio explícito para cada categoría antes de clasificar.</span></span>
+<span id="cb6-401"><a href="#cb6-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-402"><a href="#cb6-402" aria-hidden="true" tabindex="-1"></a><span class="in">Restricciones:</span></span>
+<span id="cb6-403"><a href="#cb6-403" aria-hidden="true" tabindex="-1"></a><span class="in">- Justificar cada clasificación con cita textual.</span></span>
+<span id="cb6-404"><a href="#cb6-404" aria-hidden="true" tabindex="-1"></a><span class="in">- No asumir robustez metodológica sin evidencia explícita.</span></span>
+<span id="cb6-405"><a href="#cb6-405" aria-hidden="true" tabindex="-1"></a><span class="in">- Declarar limitaciones experimentales si existen.</span></span>
+<span id="cb6-406"><a href="#cb6-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-407"><a href="#cb6-407" aria-hidden="true" tabindex="-1"></a><span class="in">Salida estructurada obligatoria:</span></span>
+<span id="cb6-408"><a href="#cb6-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-409"><a href="#cb6-409" aria-hidden="true" tabindex="-1"></a><span class="in">| Gen | Evidencia | Clasificación | Criterio aplicado | Justificación textual | Limitaciones detectadas |</span></span>
+<span id="cb6-410"><a href="#cb6-410" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-411"><a href="#cb6-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-412"><a href="#cb6-412" aria-hidden="true" tabindex="-1"></a>Riesgo epistemológico:  </span>
+<span id="cb6-413"><a href="#cb6-413" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Alto (interpretación metodológica).</span>
+<span id="cb6-414"><a href="#cb6-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-415"><a href="#cb6-415" aria-hidden="true" tabindex="-1"></a>Verificación:  </span>
+<span id="cb6-416"><a href="#cb6-416" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Revisión humana obligatoria.</span>
+<span id="cb6-417"><a href="#cb6-417" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Posible contraste con literatura externa.</span>
+<span id="cb6-418"><a href="#cb6-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-419"><a href="#cb6-419" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Punto de control humano 4 (Obligatorio)</span></span>
+<span id="cb6-420"><a href="#cb6-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-421"><a href="#cb6-421" aria-hidden="true" tabindex="-1"></a>El investigador:  </span>
+<span id="cb6-422"><a href="#cb6-422" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Evalúa consistencia del criterio.  </span>
+<span id="cb6-423"><a href="#cb6-423" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Revisa correspondencia entre cita y clasificación.  </span>
+<span id="cb6-424"><a href="#cb6-424" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Puede reclasificar evidencia.  </span>
+<span id="cb6-425"><a href="#cb6-425" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Puede detener flujo si criterios son débiles.</span>
+<span id="cb6-426"><a href="#cb6-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-427"><a href="#cb6-427" aria-hidden="true" tabindex="-1"></a>Criterio de transición:  </span>
+<span id="cb6-428"><a href="#cb6-428" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No aceptar clasificación sin revisión explícita.</span>
+<span id="cb6-429"><a href="#cb6-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-430"><a href="#cb6-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-431"><a href="#cb6-431" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fase 5 — Integración y juicio científico  </span></span>
+<span id="cb6-432"><a href="#cb6-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-433"><a href="#cb6-433" aria-hidden="true" tabindex="-1"></a>**Nivel de inferencia:** No delegable  </span>
+<span id="cb6-434"><a href="#cb6-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-435"><a href="#cb6-435" aria-hidden="true" tabindex="-1"></a>El investigador integra:</span>
+<span id="cb6-436"><a href="#cb6-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-437"><a href="#cb6-437" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Consistencia entre extracción y clasificación.</span>
+<span id="cb6-438"><a href="#cb6-438" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Robustez global de evidencia.</span>
+<span id="cb6-439"><a href="#cb6-439" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Vacíos experimentales.</span>
+<span id="cb6-440"><a href="#cb6-440" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Necesidad de validación adicional.</span>
+<span id="cb6-441"><a href="#cb6-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-442"><a href="#cb6-442" aria-hidden="true" tabindex="-1"></a>Puede:</span>
+<span id="cb6-443"><a href="#cb6-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-444"><a href="#cb6-444" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Reabrir fases anteriores.</span>
+<span id="cb6-445"><a href="#cb6-445" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ajustar criterios.</span>
+<span id="cb6-446"><a href="#cb6-446" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Reformular hipótesis.</span>
+<span id="cb6-447"><a href="#cb6-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-448"><a href="#cb6-448" aria-hidden="true" tabindex="-1"></a>Salida final (producida por el investigador):</span>
+<span id="cb6-449"><a href="#cb6-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-450"><a href="#cb6-450" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tabla consolidada de evidencia validada.</span>
+<span id="cb6-451"><a href="#cb6-451" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Declaración explícita de incertidumbre.</span>
+<span id="cb6-452"><a href="#cb6-452" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Identificación de evidencia fuerte vs provisional.</span>
+<span id="cb6-453"><a href="#cb6-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-454"><a href="#cb6-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-455"><a href="#cb6-455" aria-hidden="true" tabindex="-1"></a><span class="fu">### Final del protocolo</span></span>
+<span id="cb6-456"><a href="#cb6-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-457"><a href="#cb6-457" aria-hidden="true" tabindex="-1"></a>El modelo genera estructuras condicionadas por el contexto.</span>
+<span id="cb6-458"><a href="#cb6-458" aria-hidden="true" tabindex="-1"></a>El protocolo distribuye y controla el riesgo epistemológico.</span>
+<span id="cb6-459"><a href="#cb6-459" aria-hidden="true" tabindex="-1"></a>El investigador valida, integra y decide qué cuenta como conocimiento provisional.</span>
+<span id="cb6-460"><a href="#cb6-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-461"><a href="#cb6-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-462"><a href="#cb6-462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-463"><a href="#cb6-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-464"><a href="#cb6-464" aria-hidden="true" tabindex="-1"></a><span class="fu">### Ejecución operativa de un protocolo (ChatGPT vs API/Notebooks)</span></span>
+<span id="cb6-465"><a href="#cb6-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-466"><a href="#cb6-466" aria-hidden="true" tabindex="-1"></a>Un protocolo multi-etapa no es solo un diagrama: debe ejecutarse de forma que preserve los **puntos de control** y la **verificación proporcional**.</span>
+<span id="cb6-467"><a href="#cb6-467" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-468"><a href="#cb6-468" aria-hidden="true" tabindex="-1"></a>La regla central es:</span>
+<span id="cb6-469"><a href="#cb6-469" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-470"><a href="#cb6-470" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb6-471"><a href="#cb6-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-472"><a href="#cb6-472" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; La separación de fases debe reflejarse en la ejecución.</span>  </span>
+<span id="cb6-473"><a href="#cb6-473" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Si todo se pega en un solo bloque, vuelve a colapsar en un único proceso generativo.</span></span>
+<span id="cb6-474"><a href="#cb6-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-475"><a href="#cb6-475" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-476"><a href="#cb6-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-477"><a href="#cb6-477" aria-hidden="true" tabindex="-1"></a><span class="fu">#### A) Ejecución en un chat (p. ej., ChatGPT)</span></span>
+<span id="cb6-478"><a href="#cb6-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-479"><a href="#cb6-479" aria-hidden="true" tabindex="-1"></a>**Recomendado: fase por fase.**</span>
+<span id="cb6-480"><a href="#cb6-480" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-481"><a href="#cb6-481" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Enviar Fase 1** (exploración / delimitación).</span>
+<span id="cb6-482"><a href="#cb6-482" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Revisar** cobertura y pertinencia (Punto de control humano 1).</span>
+<span id="cb6-483"><a href="#cb6-483" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Con los fragmentos aprobados, **enviar Fase 2** usando esos fragmentos como contexto operativo.</span>
+<span id="cb6-484"><a href="#cb6-484" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Repetir (Fase 3, 4…), validando en cada transición.</span>
+<span id="cb6-485"><a href="#cb6-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-486"><a href="#cb6-486" aria-hidden="true" tabindex="-1"></a>Por qué no conviene “pegar todo el flujo completo”:</span>
+<span id="cb6-487"><a href="#cb6-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-488"><a href="#cb6-488" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Aunque esté escrito como “Paso 1, Paso 2…”, el modelo lo resuelve como **un solo acto autoregresivo**.</span>
+<span id="cb6-489"><a href="#cb6-489" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Se pierde el control en transiciones y la verificación intermedia se vuelve nominal.</span>
+<span id="cb6-490"><a href="#cb6-490" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-491"><a href="#cb6-491" aria-hidden="true" tabindex="-1"></a>**Práctica sugerida:**  </span>
+<span id="cb6-492"><a href="#cb6-492" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Copiar y pegar la salida estructurada de cada fase (tablas) en un documento de trabajo (Markdown/CSV).  </span>
+<span id="cb6-493"><a href="#cb6-493" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Reingresar al chat solo lo necesario para la fase siguiente.  </span>
+<span id="cb6-494"><a href="#cb6-494" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Registrar prompts + salidas para trazabilidad.  </span>
+<span id="cb6-495"><a href="#cb6-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-496"><a href="#cb6-496" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb6-497"><a href="#cb6-497" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-498"><a href="#cb6-498" aria-hidden="true" tabindex="-1"></a><span class="fu">#### B) Ejecución en notebooks (semi-automatizado con control humano)</span></span>
+<span id="cb6-499"><a href="#cb6-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-500"><a href="#cb6-500" aria-hidden="true" tabindex="-1"></a>En un Jupyter notebook, el flujo puede ser **asistido** sin volverse automático:</span>
+<span id="cb6-501"><a href="#cb6-501" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-502"><a href="#cb6-502" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Cada fase corre en una celda.</span>
+<span id="cb6-503"><a href="#cb6-503" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>La salida se guarda en una variable (tabla).</span>
+<span id="cb6-504"><a href="#cb6-504" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>El investigador revisa antes de ejecutar la siguiente celda.</span>
+<span id="cb6-505"><a href="#cb6-505" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Se guardan artefactos (CSV/JSON) para reproducibilidad.</span>
+<span id="cb6-506"><a href="#cb6-506" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-507"><a href="#cb6-507" aria-hidden="true" tabindex="-1"></a>Ejemplo conceptual de flujo:</span>
+<span id="cb6-508"><a href="#cb6-508" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-509"><a href="#cb6-509" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Celda 1: pegar texto del paper (o fragmentos) y correr **Fase 1**.</span>
+<span id="cb6-510"><a href="#cb6-510" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Celda 2: revisar lista de fragmentos; seleccionar subset.</span>
+<span id="cb6-511"><a href="#cb6-511" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Celda 3: correr **Fase 2** sobre fragmentos seleccionados; producir tabla.</span>
+<span id="cb6-512"><a href="#cb6-512" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Celda 4: correr **Fase 3** (normalización) sobre tabla.</span>
+<span id="cb6-513"><a href="#cb6-513" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Celda 5: correr **Fase 4** (evaluación) con criterios explícitos.</span>
+<span id="cb6-514"><a href="#cb6-514" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Celda 6: integración humana (síntesis final, decisiones, incertidumbre).</span>
+<span id="cb6-515"><a href="#cb6-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-516"><a href="#cb6-516" aria-hidden="true" tabindex="-1"></a>Ventaja metodológica:</span>
+<span id="cb6-517"><a href="#cb6-517" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Se preserva “output → input” con **puntos de control** explícitos (el investigador decide cuándo avanzar).</span>
+<span id="cb6-518"><a href="#cb6-518" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-519"><a href="#cb6-519" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-520"><a href="#cb6-520" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">"files/Prompting_Cientifico_Caso_MalT.ipynb"</span><span class="ot"> download class</span><span class="op">=</span><span class="st">"btn btn-primary"</span><span class="dt">&gt;</span></span>
+<span id="cb6-521"><a href="#cb6-521" aria-hidden="true" tabindex="-1"></a>⬇ Descargar notebook editable</span>
+<span id="cb6-522"><a href="#cb6-522" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
+<span id="cb6-523"><a href="#cb6-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-524"><a href="#cb6-524" aria-hidden="true" tabindex="-1"></a><span class="fu">#### C) Ejecución con API (automatización responsable)</span></span>
+<span id="cb6-525"><a href="#cb6-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-526"><a href="#cb6-526" aria-hidden="true" tabindex="-1"></a>En API, sí puede existir un “pipeline”, pero **no debe ser ciego**.</span>
+<span id="cb6-527"><a href="#cb6-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-528"><a href="#cb6-528" aria-hidden="true" tabindex="-1"></a>Principio:</span>
+<span id="cb6-529"><a href="#cb6-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-530"><a href="#cb6-530" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Automatizar fases de bajo riesgo es razonable;</span>  </span>
+<span id="cb6-531"><a href="#cb6-531" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; automatizar fases de alto riesgo requiere validaciones, umbrales y gates.</span></span>
+<span id="cb6-532"><a href="#cb6-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-533"><a href="#cb6-533" aria-hidden="true" tabindex="-1"></a>Patrón recomendado (“gated pipeline”):</span>
+<span id="cb6-534"><a href="#cb6-534" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-535"><a href="#cb6-535" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Ejecutar Fase 1.</span>
+<span id="cb6-536"><a href="#cb6-536" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Aplicar un *gate* ^1^:</span>
+<span id="cb6-537"><a href="#cb6-537" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Si la cobertura es baja o hay ambigüedad, detener y pedir revisión humana.</span>
+<span id="cb6-538"><a href="#cb6-538" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Ejecutar Fase 2 con fragmentos aprobados.</span>
+<span id="cb6-539"><a href="#cb6-539" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Validar: cada fila debe tener cita textual; si no, marcar para revisión.</span>
+<span id="cb6-540"><a href="#cb6-540" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Ejecutar Fase 3 y validar normalización con fuente externa.</span>
+<span id="cb6-541"><a href="#cb6-541" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Ejecutar Fase 4 y **obligar** a revisión humana antes de aceptar clasificación.</span>
+<span id="cb6-542"><a href="#cb6-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-543"><a href="#cb6-543" aria-hidden="true" tabindex="-1"></a>En otras palabras:</span>
+<span id="cb6-544"><a href="#cb6-544" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>La API puede encadenar pasos,</span>
+<span id="cb6-545"><a href="#cb6-545" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>pero el protocolo sigue exigiendo **puntos de decisión humanos** donde aumenta la inferencia.</span>
+<span id="cb6-546"><a href="#cb6-546" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-547"><a href="#cb6-547" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-548"><a href="#cb6-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-549"><a href="#cb6-549" aria-hidden="true" tabindex="-1"></a>nota ^1^ **Definición operativa**</span>
+<span id="cb6-550"><a href="#cb6-550" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-551"><a href="#cb6-551" aria-hidden="true" tabindex="-1"></a>**Checkpoint** → Punto de revisión humana.  </span>
+<span id="cb6-552"><a href="#cb6-552" aria-hidden="true" tabindex="-1"></a>**Gate** → Regla metodológica que impide avanzar si no se cumple una condición mínima verificable.</span>
+<span id="cb6-553"><a href="#cb6-553" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-554"><a href="#cb6-554" aria-hidden="true" tabindex="-1"></a>Todo gate implica un checkpoint.  </span>
+<span id="cb6-555"><a href="#cb6-555" aria-hidden="true" tabindex="-1"></a>Pero no todo checkpoint es un gate.</span>
+<span id="cb6-556"><a href="#cb6-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-557"><a href="#cb6-557" aria-hidden="true" tabindex="-1"></a>Ejemplos:</span>
+<span id="cb6-558"><a href="#cb6-558" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-559"><a href="#cb6-559" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Revisar estilo de redacción → checkpoint.  </span>
+<span id="cb6-560"><a href="#cb6-560" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No avanzar si falta cita textual → gate.</span>
+<span id="cb6-561"><a href="#cb6-561" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-562"><a href="#cb6-562" aria-hidden="true" tabindex="-1"></a>Un gate no es un mecanismo técnico; es una decisión epistémica formalizada.</span>
+<span id="cb6-563"><a href="#cb6-563" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-564"><a href="#cb6-564" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-565"><a href="#cb6-565" aria-hidden="true" tabindex="-1"></a><span class="fu">### Regla didáctica </span></span>
+<span id="cb6-566"><a href="#cb6-566" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-567"><a href="#cb6-567" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>En chat: **siempre fase por fase**.</span>
+<span id="cb6-568"><a href="#cb6-568" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>En notebooks: **semi-automatizado con checkpoints**.</span>
+<span id="cb6-569"><a href="#cb6-569" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>En API: **automatización con gates** (validación + detención ante riesgo).</span>
+<span id="cb6-570"><a href="#cb6-570" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-571"><a href="#cb6-571" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-572"><a href="#cb6-572" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-573"><a href="#cb6-573" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ejercicio</span></span>
+<span id="cb6-574"><a href="#cb6-574" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-575"><a href="#cb6-575" aria-hidden="true" tabindex="-1"></a>::: {.exercise-box}</span>
+<span id="cb6-576"><a href="#cb6-576" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-577"><a href="#cb6-577" aria-hidden="true" tabindex="-1"></a><span class="fu">### Escenario</span></span>
+<span id="cb6-578"><a href="#cb6-578" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-579"><a href="#cb6-579" aria-hidden="true" tabindex="-1"></a>Un equipo de investigación desea utilizar IA para analizar resultados de RNA-seq y propone el siguiente protocolo/prompt:</span>
+<span id="cb6-580"><a href="#cb6-580" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-581"><a href="#cb6-581" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-582"><a href="#cb6-582" aria-hidden="true" tabindex="-1"></a><span class="fu">### Prompt propuesto por el equipo de investigación</span></span>
+<span id="cb6-583"><a href="#cb6-583" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-584"><a href="#cb6-584" aria-hidden="true" tabindex="-1"></a><span class="in">```txt {.prompt}</span></span>
+<span id="cb6-585"><a href="#cb6-585" aria-hidden="true" tabindex="-1"></a><span class="in">Rol: Asistente experto en análisis transcriptómico y biología molecular.</span></span>
+<span id="cb6-586"><a href="#cb6-586" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-587"><a href="#cb6-587" aria-hidden="true" tabindex="-1"></a><span class="in">Contexto:</span></span>
+<span id="cb6-588"><a href="#cb6-588" aria-hidden="true" tabindex="-1"></a><span class="in">Se dispone de una tabla de expresión diferencial derivada de un experimento de RNA-seq comparando condición control vs tratamiento.</span></span>
+<span id="cb6-589"><a href="#cb6-589" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-590"><a href="#cb6-590" aria-hidden="true" tabindex="-1"></a><span class="in">Tarea:</span></span>
+<span id="cb6-591"><a href="#cb6-591" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-592"><a href="#cb6-592" aria-hidden="true" tabindex="-1"></a><span class="in">Paso 1 — Identificación de genes relevantes  </span></span>
+<span id="cb6-593"><a href="#cb6-593" aria-hidden="true" tabindex="-1"></a><span class="in">Analiza la tabla de expresión diferencial y selecciona los genes que cumplan:</span></span>
+<span id="cb6-594"><a href="#cb6-594" aria-hidden="true" tabindex="-1"></a><span class="in">- |log2FoldChange| &gt; 1</span></span>
+<span id="cb6-595"><a href="#cb6-595" aria-hidden="true" tabindex="-1"></a><span class="in">- p-valor ajustado &lt; 0.05  </span></span>
+<span id="cb6-596"><a href="#cb6-596" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-597"><a href="#cb6-597" aria-hidden="true" tabindex="-1"></a><span class="in">Ordena los genes por magnitud de cambio y reporta los 20 más significativos.</span></span>
+<span id="cb6-598"><a href="#cb6-598" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-599"><a href="#cb6-599" aria-hidden="true" tabindex="-1"></a><span class="in">Paso 2 — Análisis funcional  </span></span>
+<span id="cb6-600"><a href="#cb6-600" aria-hidden="true" tabindex="-1"></a><span class="in">Con base en la lista obtenida en el Paso 1:</span></span>
+<span id="cb6-601"><a href="#cb6-601" aria-hidden="true" tabindex="-1"></a><span class="in">- Identifica vías metabólicas significativamente afectadas.</span></span>
+<span id="cb6-602"><a href="#cb6-602" aria-hidden="true" tabindex="-1"></a><span class="in">- Determina procesos biológicos enriquecidos.</span></span>
+<span id="cb6-603"><a href="#cb6-603" aria-hidden="true" tabindex="-1"></a><span class="in">- Resume los patrones funcionales principales.</span></span>
+<span id="cb6-604"><a href="#cb6-604" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-605"><a href="#cb6-605" aria-hidden="true" tabindex="-1"></a><span class="in">Paso 3 — Evaluación estadística  </span></span>
+<span id="cb6-606"><a href="#cb6-606" aria-hidden="true" tabindex="-1"></a><span class="in">Evalúa la solidez estadística del análisis considerando:</span></span>
+<span id="cb6-607"><a href="#cb6-607" aria-hidden="true" tabindex="-1"></a><span class="in">- Tamaño de muestra.</span></span>
+<span id="cb6-608"><a href="#cb6-608" aria-hidden="true" tabindex="-1"></a><span class="in">- Corrección por múltiples pruebas.</span></span>
+<span id="cb6-609"><a href="#cb6-609" aria-hidden="true" tabindex="-1"></a><span class="in">- Magnitud del efecto.</span></span>
+<span id="cb6-610"><a href="#cb6-610" aria-hidden="true" tabindex="-1"></a><span class="in">- Posible presencia de sesgos experimentales.</span></span>
+<span id="cb6-611"><a href="#cb6-611" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-612"><a href="#cb6-612" aria-hidden="true" tabindex="-1"></a><span class="in">Paso 4 — Generación de hipótesis mecanísticas  </span></span>
+<span id="cb6-613"><a href="#cb6-613" aria-hidden="true" tabindex="-1"></a><span class="in">Integra los resultados anteriores y propone hipótesis biológicas que expliquen el mecanismo molecular subyacente al tratamiento.</span></span>
+<span id="cb6-614"><a href="#cb6-614" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-615"><a href="#cb6-615" aria-hidden="true" tabindex="-1"></a><span class="in">Salida esperada:</span></span>
+<span id="cb6-616"><a href="#cb6-616" aria-hidden="true" tabindex="-1"></a><span class="in">- Lista estructurada de genes relevantes.</span></span>
+<span id="cb6-617"><a href="#cb6-617" aria-hidden="true" tabindex="-1"></a><span class="in">- Tabla de vías afectadas.</span></span>
+<span id="cb6-618"><a href="#cb6-618" aria-hidden="true" tabindex="-1"></a><span class="in">- Evaluación metodológica.</span></span>
+<span id="cb6-619"><a href="#cb6-619" aria-hidden="true" tabindex="-1"></a><span class="in">- Conclusión integradora con hipótesis biológicas.</span></span>
+<span id="cb6-620"><a href="#cb6-620" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-621"><a href="#cb6-621" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-622"><a href="#cb6-622" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-623"><a href="#cb6-623" aria-hidden="true" tabindex="-1"></a>El equipo planea ejecutar esta instrucción como un solo prompt.</span>
+<span id="cb6-624"><a href="#cb6-624" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-625"><a href="#cb6-625" aria-hidden="true" tabindex="-1"></a>Analiza si realmente constituye un protocolo metodológicamente robusto o si sigue siendo un único acto generativo con riesgo epistemológico acumulativo.</span>
+<span id="cb6-626"><a href="#cb6-626" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-627"><a href="#cb6-627" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-628"><a href="#cb6-628" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-629"><a href="#cb6-629" aria-hidden="true" tabindex="-1"></a><span class="fu">### Parte A — Diagnóstico crítico</span></span>
+<span id="cb6-630"><a href="#cb6-630" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-631"><a href="#cb6-631" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Identifica al menos cinco fallas metodológicas del protocolo.  </span>
+<span id="cb6-632"><a href="#cb6-632" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Clasifica cada falla según:  </span>
+<span id="cb6-633"><a href="#cb6-633" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Mezcla de niveles de inferencia.  </span>
+<span id="cb6-634"><a href="#cb6-634" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Ausencia de delimitación de dominio.  </span>
+<span id="cb6-635"><a href="#cb6-635" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Falta de salida estructurada evaluable.  </span>
+<span id="cb6-636"><a href="#cb6-636" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Ausencia de verificación.  </span>
+<span id="cb6-637"><a href="#cb6-637" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Delegación implícita de juicio científico.  </span>
+<span id="cb6-638"><a href="#cb6-638" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Explica cómo cada falla puede generar conclusiones plausibles pero no validadas.</span>
+<span id="cb6-639"><a href="#cb6-639" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-640"><a href="#cb6-640" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-641"><a href="#cb6-641" aria-hidden="true" tabindex="-1"></a><span class="fu">### Parte B — Rediseño arquitectónico</span></span>
+<span id="cb6-642"><a href="#cb6-642" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-643"><a href="#cb6-643" aria-hidden="true" tabindex="-1"></a>Rediseña el protocolo bajo los siguientes criterios:</span>
+<span id="cb6-644"><a href="#cb6-644" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-645"><a href="#cb6-645" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Separación de fases según nivel de inferencia.  </span>
+<span id="cb6-646"><a href="#cb6-646" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Inclusión explícita de restricciones.  </span>
+<span id="cb6-647"><a href="#cb6-647" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Salidas estructuradas.  </span>
+<span id="cb6-648"><a href="#cb6-648" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Al menos tres gates epistémicos.  </span>
+<span id="cb6-649"><a href="#cb6-649" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Definición clara de intervención humana.  </span>
+<span id="cb6-650"><a href="#cb6-650" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-651"><a href="#cb6-651" aria-hidden="true" tabindex="-1"></a>Debe incluir:</span>
+<span id="cb6-652"><a href="#cb6-652" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-653"><a href="#cb6-653" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Definición precisa del problema.  </span>
+<span id="cb6-654"><a href="#cb6-654" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Esquema de flujo.  </span>
+<span id="cb6-655"><a href="#cb6-655" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Descripción breve de cada fase.  </span>
+<span id="cb6-656"><a href="#cb6-656" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Justificación metodológica.  </span>
+<span id="cb6-657"><a href="#cb6-657" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-658"><a href="#cb6-658" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-659"><a href="#cb6-659" aria-hidden="true" tabindex="-1"></a><span class="fu">### Parte C — Análisis de riesgo</span></span>
+<span id="cb6-660"><a href="#cb6-660" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-661"><a href="#cb6-661" aria-hidden="true" tabindex="-1"></a>Responde:</span>
+<span id="cb6-662"><a href="#cb6-662" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-663"><a href="#cb6-663" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿En qué momento el protocolo pasa de análisis estadístico a interpretación biológica?  </span>
+<span id="cb6-664"><a href="#cb6-664" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Cuál es el mayor punto de riesgo epistemológico?  </span>
+<span id="cb6-665"><a href="#cb6-665" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Qué tipo de error se propagaría si no se incluyeran gates?  </span>
+<span id="cb6-666"><a href="#cb6-666" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-667"><a href="#cb6-667" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-668"><a href="#cb6-668" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-669"><a href="#cb6-669" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-670"><a href="#cb6-670" aria-hidden="true" tabindex="-1"></a><span class="fu">## Rúbrica</span></span>
+<span id="cb6-671"><a href="#cb6-671" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-672"><a href="#cb6-672" aria-hidden="true" tabindex="-1"></a>ver <span class="co">[</span><span class="ot">rubrica</span><span class="co">](./rubrica_capitulo3.html)</span> </span>
+<span id="cb6-673"><a href="#cb6-673" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-674"><a href="#cb6-674" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-675"><a href="#cb6-675" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-676"><a href="#cb6-676" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusión</span></span>
+<span id="cb6-677"><a href="#cb6-677" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-678"><a href="#cb6-678" aria-hidden="true" tabindex="-1"></a>En el Capítulo 1 aprendimos que un prompt configura un proceso generativo probabilístico.</span>
+<span id="cb6-679"><a href="#cb6-679" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-680"><a href="#cb6-680" aria-hidden="true" tabindex="-1"></a>En el Capítulo 2 comprendimos que el control epistemológico depende de:</span>
+<span id="cb6-681"><a href="#cb6-681" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-682"><a href="#cb6-682" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Restricciones explícitas.</span>
+<span id="cb6-683"><a href="#cb6-683" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Salidas estructuradas.</span>
+<span id="cb6-684"><a href="#cb6-684" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Verificación.</span>
+<span id="cb6-685"><a href="#cb6-685" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Declaración del nivel de inferencia.</span>
+<span id="cb6-686"><a href="#cb6-686" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-687"><a href="#cb6-687" aria-hidden="true" tabindex="-1"></a>En este capítulo dimos un paso adicional:</span>
+<span id="cb6-688"><a href="#cb6-688" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-689"><a href="#cb6-689" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; El problema científico no se resuelve con un prompt mejor redactado,</span>  </span>
+<span id="cb6-690"><a href="#cb6-690" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; sino con una arquitectura metodológica explícita.</span></span>
+<span id="cb6-691"><a href="#cb6-691" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-692"><a href="#cb6-692" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1. La estructura textual no garantiza rigor</span></span>
+<span id="cb6-693"><a href="#cb6-693" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-694"><a href="#cb6-694" aria-hidden="true" tabindex="-1"></a>Dividir una instrucción en pasos no equivale a separar niveles de inferencia.</span>
+<span id="cb6-695"><a href="#cb6-695" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-696"><a href="#cb6-696" aria-hidden="true" tabindex="-1"></a>Un prompt multistep puede seguir siendo:</span>
+<span id="cb6-697"><a href="#cb6-697" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-698"><a href="#cb6-698" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Un único acto generativo.</span>
+<span id="cb6-699"><a href="#cb6-699" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Un colapso inferencial.</span>
+<span id="cb6-700"><a href="#cb6-700" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Una automatización con riesgo acumulativo.</span>
+<span id="cb6-701"><a href="#cb6-701" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-702"><a href="#cb6-702" aria-hidden="true" tabindex="-1"></a>La separación epistémica no es textual.</span>
+<span id="cb6-703"><a href="#cb6-703" aria-hidden="true" tabindex="-1"></a>Es arquitectónica.</span>
+<span id="cb6-704"><a href="#cb6-704" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-705"><a href="#cb6-705" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2. El flujo no es automatización</span></span>
+<span id="cb6-706"><a href="#cb6-706" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-707"><a href="#cb6-707" aria-hidden="true" tabindex="-1"></a>Un flujo en prompting científico implica:</span>
+<span id="cb6-708"><a href="#cb6-708" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-709"><a href="#cb6-709" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Secuencialidad controlada.</span>
+<span id="cb6-710"><a href="#cb6-710" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Delimitación progresiva del contexto.</span>
+<span id="cb6-711"><a href="#cb6-711" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Distribución del riesgo.</span>
+<span id="cb6-712"><a href="#cb6-712" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Puntos de transición explícitos.</span>
+<span id="cb6-713"><a href="#cb6-713" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-714"><a href="#cb6-714" aria-hidden="true" tabindex="-1"></a>No implica ejecutar todo de una vez.</span>
+<span id="cb6-715"><a href="#cb6-715" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-716"><a href="#cb6-716" aria-hidden="true" tabindex="-1"></a>Formalmente:</span>
+<span id="cb6-717"><a href="#cb6-717" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-718"><a href="#cb6-718" aria-hidden="true" tabindex="-1"></a>El protocolo no modifica el modelo.  </span>
+<span id="cb6-719"><a href="#cb6-719" aria-hidden="true" tabindex="-1"></a>Modifica el contexto sobre el cual el modelo opera.</span>
+<span id="cb6-720"><a href="#cb6-720" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-721"><a href="#cb6-721" aria-hidden="true" tabindex="-1"></a>P(y | x₁) → P(y | x₂) → P(y | x₃)</span>
+<span id="cb6-722"><a href="#cb6-722" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-723"><a href="#cb6-723" aria-hidden="true" tabindex="-1"></a>Cada transición debe estar justificada.</span>
+<span id="cb6-724"><a href="#cb6-724" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-725"><a href="#cb6-725" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-726"><a href="#cb6-726" aria-hidden="true" tabindex="-1"></a><span class="fu">### 3. Gates como reglas epistémicas</span></span>
+<span id="cb6-727"><a href="#cb6-727" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-728"><a href="#cb6-728" aria-hidden="true" tabindex="-1"></a>Un gate no es una herramienta técnica.</span>
+<span id="cb6-729"><a href="#cb6-729" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-730"><a href="#cb6-730" aria-hidden="true" tabindex="-1"></a>Es una decisión metodológica:</span>
+<span id="cb6-731"><a href="#cb6-731" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-732"><a href="#cb6-732" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; No avanzar si no se cumple una condición mínima de validez.</span></span>
+<span id="cb6-733"><a href="#cb6-733" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-734"><a href="#cb6-734" aria-hidden="true" tabindex="-1"></a>Sin gates, el flujo es automático.  </span>
+<span id="cb6-735"><a href="#cb6-735" aria-hidden="true" tabindex="-1"></a>Con gates, el flujo es científico.</span>
+<span id="cb6-736"><a href="#cb6-736" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-737"><a href="#cb6-737" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-738"><a href="#cb6-738" aria-hidden="true" tabindex="-1"></a><span class="fu">### 4. Proporcionalidad inferencial</span></span>
+<span id="cb6-739"><a href="#cb6-739" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-740"><a href="#cb6-740" aria-hidden="true" tabindex="-1"></a>No todas las fases requieren el mismo nivel de control.</span>
+<span id="cb6-741"><a href="#cb6-741" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-742"><a href="#cb6-742" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Extracción → bajo riesgo.</span>
+<span id="cb6-743"><a href="#cb6-743" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Normalización → riesgo medio.</span>
+<span id="cb6-744"><a href="#cb6-744" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Evaluación → alto riesgo.</span>
+<span id="cb6-745"><a href="#cb6-745" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Hipótesis → no delegable.</span>
+<span id="cb6-746"><a href="#cb6-746" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-747"><a href="#cb6-747" aria-hidden="true" tabindex="-1"></a>El control debe aumentar con la inferencia.</span>
+<span id="cb6-748"><a href="#cb6-748" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-749"><a href="#cb6-749" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-750"><a href="#cb6-750" aria-hidden="true" tabindex="-1"></a><span class="fu">### 5. El rol irreductible del investigador</span></span>
+<span id="cb6-751"><a href="#cb6-751" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-752"><a href="#cb6-752" aria-hidden="true" tabindex="-1"></a>El modelo:</span>
+<span id="cb6-753"><a href="#cb6-753" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-754"><a href="#cb6-754" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Genera estructuras plausibles.</span>
+<span id="cb6-755"><a href="#cb6-755" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Organiza información.</span>
+<span id="cb6-756"><a href="#cb6-756" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Explicita patrones.</span>
+<span id="cb6-757"><a href="#cb6-757" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-758"><a href="#cb6-758" aria-hidden="true" tabindex="-1"></a>Pero no:</span>
+<span id="cb6-759"><a href="#cb6-759" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-760"><a href="#cb6-760" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Asume responsabilidad metodológica.</span>
+<span id="cb6-761"><a href="#cb6-761" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Valida experimentalmente.</span>
+<span id="cb6-762"><a href="#cb6-762" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Decide qué cuenta como conocimiento.</span>
+<span id="cb6-763"><a href="#cb6-763" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-764"><a href="#cb6-764" aria-hidden="true" tabindex="-1"></a>El juicio científico no se automatiza.</span>
+<span id="cb6-765"><a href="#cb6-765" aria-hidden="true" tabindex="-1"></a>Se estructura.</span>
+<span id="cb6-766"><a href="#cb6-766" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-767"><a href="#cb6-767" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb6-768"><a href="#cb6-768" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-769"><a href="#cb6-769" aria-hidden="true" tabindex="-1"></a>Si el Capítulo 2 trataba del control interno del prompt,  </span>
+<span id="cb6-770"><a href="#cb6-770" aria-hidden="true" tabindex="-1"></a>y el Capítulo 3 del diseño de arquitecturas de interacción,</span>
+<span id="cb6-771"><a href="#cb6-771" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-772"><a href="#cb6-772" aria-hidden="true" tabindex="-1"></a>el siguiente nivel implica preguntarse:</span>
+<span id="cb6-773"><a href="#cb6-773" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-774"><a href="#cb6-774" aria-hidden="true" tabindex="-1"></a>¿Cómo integrar estos protocolos en flujos de trabajo científicos reales,</span>
+<span id="cb6-775"><a href="#cb6-775" aria-hidden="true" tabindex="-1"></a>con datos, herramientas externas y criterios formales de validación?</span>
+<span id="cb6-776"><a href="#cb6-776" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-777"><a href="#cb6-777" aria-hidden="true" tabindex="-1"></a>Ese será el siguiente paso.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<div class="footer-left">
+<p>© <span class="math inline">\(year\)</span> <span class="math inline">\(author\)</span>. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+</div>
+</div>   
+    <div class="nav-footer-center">
+<div class="footer-center">
+<p>Built with ❤️ using <a href="https://quarto.org/">Quarto</a></p>
+</div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/yourusername/your-course/edit/main/chapters/capitulo3/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/yourusername/your-course/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/yourusername/your-course">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/yourusername">
+      <i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:helysalgado@gmail.com">
+      <i class="bi bi-envelope" role="img" aria-label="Email">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

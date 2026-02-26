@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Heladia Salgado">
+<meta name="dcterms.date" content="2026-01-05">
+<meta name="description" content="Patrones reutilizables que fortalecen la calidad epistemológica de los prompts científicos">
+
+<title>Patrones Avanzados de Prompting Científico – Prompting Científico con Inteligencia Artificial</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/images/favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-95759c9b5f0a9d12ebf0c1dbe5c47530.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d271f10569e7254d5269ff747e9d5db2.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-95759c9b5f0a9d12ebf0c1dbe5c47530.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e0f64a05f2c9985a109e347d2886874d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-d1268c8e4f19edb023b62fc8da355448.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-e0f64a05f2c9985a109e347d2886874d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../assets/css/styles.css">
+<link rel="stylesheet" href="../../assets/css/components.css">
+<meta property="og:title" content="Prompting Científico con Inteligencia Artificial">
+<meta property="og:description" content="Course description">
+<meta property="og:image" content="https://lcg-cursos.github.io/material/prompting-cientifico/chapters/sesion-01-fundamentos/assets/images/og-image.png">
+<meta property="og:site_name" content="Prompting Científico con Inteligencia Artificial">
+<meta name="twitter:title" content="Patrones Avanzados de Prompting Científico – Prompting Científico con Inteligencia Artificial">
+<meta name="twitter:description" content="Patrones reutilizables que fortalecen la calidad epistemológica de los prompts científicos">
+<meta name="twitter:image" content="https://lcg-cursos.github.io/material/prompting-cientifico/chapters/sesion-01-fundamentos/assets/images/twitter-card.png">
+<meta name="twitter:creator" content="@yourusername">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/images/logo.png" alt="Course Logo" class="navbar-logo light-content">
+    <img src="../../assets/images/logo.png" alt="Course Logo" class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page"> <i class="bi bi-house-fill" role="img">
+</i> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapters" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-book-fill" role="img">
+</i> 
+ <span class="menu-text">Chapters</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapters">    
+        <li>
+    <a class="dropdown-item" href="../../chapters/capitulo1/index.html"><i class="bi bi-brain" role="img">
+</i> 
+ <span class="dropdown-text">Introducción al Prompting</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../chapters/sesion-01-fundamentos/index.html"><i class="bi bi-brain" role="img">
+</i> 
+ <span class="dropdown-text">Sesión 1: Fundamentos de IA</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../../chapters/example-chapter-01/index.qmd"><i class="bi bi-rocket-takeoff" role="img">
+</i> 
+ <span class="dropdown-text">Getting Started (Example)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../chapters/example-chapter-02/index.qmd"><i class="bi bi-stars" role="img">
+</i> 
+ <span class="dropdown-text">Advanced Topics (Example)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../exercises/index.html"> <i class="bi bi-pencil-square" role="img">
+</i> 
+<span class="menu-text">Exercises</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources/index.html"> <i class="bi bi-box-arrow-down" role="img">
+</i> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/yourusername/your-course"> <i class="bi bi-github" role="img" aria-label="GitHub Repository">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/yourusername"> <i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="" title="Dark Mode" class="quarto-navigation-tool px-1" aria-label="Dark Mode"><i class="bi bi-moon"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Patrones Avanzados de Prompting Científico</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../assets/images/logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../../assets/images/logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏠 Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/capitulo1/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🧠 Introducción al Prompting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/capitulo2/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🔬 Prompting Científico</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/capitulo3/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🔬 Diseño de Protocolos de Prompting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">---</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">✏️ Exercises</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📥 Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/component-examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🧩 Components</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ℹ️ About</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">1</span> Introducción</a></li>
+  <li><a href="#patrón-a.1-separar-pregunta-científica-de-tarea-al-asistente" id="toc-patrón-a.1-separar-pregunta-científica-de-tarea-al-asistente" class="nav-link" data-scroll-target="#patrón-a.1-separar-pregunta-científica-de-tarea-al-asistente"><span class="header-section-number">2</span> Patrón A.1: Separar Pregunta Científica de Tarea al Asistente</a></li>
+  <li><a href="#patrón-a.2-supuestos-y-riesgos-de-inferencia" id="toc-patrón-a.2-supuestos-y-riesgos-de-inferencia" class="nav-link" data-scroll-target="#patrón-a.2-supuestos-y-riesgos-de-inferencia"><span class="header-section-number">3</span> Patrón A.2: Supuestos y Riesgos de Inferencia</a></li>
+  <li><a href="#patrón-a.3-lenguaje-calibrado-y-niveles-de-certeza" id="toc-patrón-a.3-lenguaje-calibrado-y-niveles-de-certeza" class="nav-link" data-scroll-target="#patrón-a.3-lenguaje-calibrado-y-niveles-de-certeza"><span class="header-section-number">4</span> Patrón A.3: Lenguaje Calibrado y Niveles de Certeza</a></li>
+  <li><a href="#patrón-a.4-trazabilidad-hecho-vs-inferencia-vs-hipótesis" id="toc-patrón-a.4-trazabilidad-hecho-vs-inferencia-vs-hipótesis" class="nav-link" data-scroll-target="#patrón-a.4-trazabilidad-hecho-vs-inferencia-vs-hipótesis"><span class="header-section-number">5</span> Patrón A.4: Trazabilidad: Hecho vs Inferencia vs Hipótesis</a></li>
+  <li><a href="#patrón-a.5-contraejemplos-y-explicaciones-alternativas" id="toc-patrón-a.5-contraejemplos-y-explicaciones-alternativas" class="nav-link" data-scroll-target="#patrón-a.5-contraejemplos-y-explicaciones-alternativas"><span class="header-section-number">6</span> Patrón A.5: Contraejemplos y Explicaciones Alternativas</a></li>
+  <li><a href="#patrón-a.6-debugging-del-razonamiento" id="toc-patrón-a.6-debugging-del-razonamiento" class="nav-link" data-scroll-target="#patrón-a.6-debugging-del-razonamiento"><span class="header-section-number">7</span> Patrón A.6: Debugging del Razonamiento</a></li>
+  <li><a href="#patrón-a.7-delimitación-explícita-del-universo-de-datos" id="toc-patrón-a.7-delimitación-explícita-del-universo-de-datos" class="nav-link" data-scroll-target="#patrón-a.7-delimitación-explícita-del-universo-de-datos"><span class="header-section-number">8</span> Patrón A.7: Delimitación Explícita del Universo de Datos</a></li>
+  <li><a href="#patrón-a.8-salidas-listas-para-auditoría" id="toc-patrón-a.8-salidas-listas-para-auditoría" class="nav-link" data-scroll-target="#patrón-a.8-salidas-listas-para-auditoría"><span class="header-section-number">9</span> Patrón A.8: Salidas Listas para Auditoría</a></li>
+  <li><a href="#patrón-a.9-validación-independiente-triangulación" id="toc-patrón-a.9-validación-independiente-triangulación" class="nav-link" data-scroll-target="#patrón-a.9-validación-independiente-triangulación"><span class="header-section-number">10</span> Patrón A.9: Validación Independiente (Triangulación)</a></li>
+  <li><a href="#patrón-a.10-prompt-mínimo-vs-prompt-de-investigación" id="toc-patrón-a.10-prompt-mínimo-vs-prompt-de-investigación" class="nav-link" data-scroll-target="#patrón-a.10-prompt-mínimo-vs-prompt-de-investigación"><span class="header-section-number">11</span> Patrón A.10: Prompt Mínimo vs Prompt de Investigación</a></li>
+  <li><a href="#ejemplos-completos-de-prompts-científicos" id="toc-ejemplos-completos-de-prompts-científicos" class="nav-link" data-scroll-target="#ejemplos-completos-de-prompts-científicos"><span class="header-section-number">12</span> Ejemplos Completos de Prompts Científicos</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-a-análisis-de-calidad-previo-a-rna-seq" id="toc-ejemplo-a-análisis-de-calidad-previo-a-rna-seq" class="nav-link" data-scroll-target="#ejemplo-a-análisis-de-calidad-previo-a-rna-seq"><span class="header-section-number">12.1</span> Ejemplo A: Análisis de Calidad Previo a RNA-seq</a></li>
+  <li><a href="#ejemplo-b-priorización-de-variantes-post-gwas" id="toc-ejemplo-b-priorización-de-variantes-post-gwas" class="nav-link" data-scroll-target="#ejemplo-b-priorización-de-variantes-post-gwas"><span class="header-section-number">12.2</span> Ejemplo B: Priorización de Variantes Post-GWAS</a></li>
+  </ul></li>
+  <li><a href="#resumen-de-patrones" id="toc-resumen-de-patrones" class="nav-link" data-scroll-target="#resumen-de-patrones"><span class="header-section-number">13</span> Resumen de Patrones</a></li>
+  <li><a href="#mensaje-final" id="toc-mensaje-final" class="nav-link" data-scroll-target="#mensaje-final"><span class="header-section-number">14</span> Mensaje Final</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/yourusername/your-course/edit/main/chapters/sesion-01-fundamentos/patrones-avanzados.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/yourusername/your-course/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Patrones Avanzados de Prompting Científico</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">Técnicas epistemológicas para fortalecer el razonamiento</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">patrones</div>
+    <div class="quarto-category">epistemología</div>
+    <div class="quarto-category">avanzado</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Patrones reutilizables que fortalecen la calidad epistemológica de los prompts científicos
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Heladia Salgado </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 5, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introducción" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">1</span> Introducción</h2>
+<p>Este capítulo presenta <strong>patrones avanzados de prompting científico</strong> que ayudan a usar la IA como una herramienta que <strong>fortalece</strong> —y no sustituye— el razonamiento científico.</p>
+<p>Estos patrones son <strong>bloques reutilizables</strong> que puedes incorporar en tus prompts para mejorar su calidad epistemológica.</p>
+</section>
+<section id="patrón-a.1-separar-pregunta-científica-de-tarea-al-asistente" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="patrón-a.1-separar-pregunta-científica-de-tarea-al-asistente"><span class="header-section-number">2</span> Patrón A.1: Separar Pregunta Científica de Tarea al Asistente</h2>
+<div class="feature-box">
+<div class="feature-icon">
+<p><i class="fas fa-layer-group"></i></p>
+</div>
+<section id="idea-clave" class="level3 feature-content" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="idea-clave"><span class="header-section-number">2.1</span> Idea Clave</h3>
+<p>En ciencia, primero se define <em>qué se quiere saber</em> y después <em>qué apoyo se solicita</em>.</p>
+<p><strong>Bloque reutilizable:</strong></p>
+<pre class="text"><code>PREGUNTA CIENTÍFICA:
+(qué fenómeno biológico se desea entender)
+
+TAREA AL ASISTENTE:
+(qué tipo de apoyo se solicita: análisis conceptual, checklist, plan, etc.)</code></pre>
+</section>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Mensaje Clave
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p><em>El prompt no es la pregunta científica; es la forma de pedir ayuda para pensarla.</em></p>
+</blockquote>
+</div>
+</div>
+</section>
+<section id="patrón-a.2-supuestos-y-riesgos-de-inferencia" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="patrón-a.2-supuestos-y-riesgos-de-inferencia"><span class="header-section-number">3</span> Patrón A.2: Supuestos y Riesgos de Inferencia</h2>
+<div class="feature-box">
+<div class="feature-icon">
+<p><i class="fas fa-exclamation-triangle"></i></p>
+</div>
+<section id="idea-clave-1" class="level3 feature-content" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="idea-clave-1"><span class="header-section-number">3.1</span> Idea Clave</h3>
+<p>Toda inferencia depende de supuestos que deben hacerse explícitos.</p>
+<p><strong>Bloque reutilizable:</strong></p>
+<pre class="text"><code>SUPUESTOS:
+Enumera los supuestos necesarios para que la respuesta sea válida.
+
+RIESGOS DE INFERENCIA:
+Lista al menos 3 formas en que esta inferencia podría fallar (confusores).</code></pre>
+</section>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Mensaje Clave
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p><em>Una conclusión es tan fuerte como los supuestos que la sostienen.</em></p>
+</blockquote>
+</div>
+</div>
+</section>
+<section id="patrón-a.3-lenguaje-calibrado-y-niveles-de-certeza" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="patrón-a.3-lenguaje-calibrado-y-niveles-de-certeza"><span class="header-section-number">4</span> Patrón A.3: Lenguaje Calibrado y Niveles de Certeza</h2>
+<div class="feature-box">
+<div class="feature-icon">
+<p><i class="fas fa-balance-scale"></i></p>
+</div>
+<section id="idea-clave-2" class="level3 feature-content" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="idea-clave-2"><span class="header-section-number">4.1</span> Idea Clave</h3>
+<p>La ciencia rara vez permite afirmaciones categóricas.</p>
+<p><strong>Instrucciones útiles:</strong></p>
+<pre class="text"><code>Usa lenguaje calibrado ("sugiere", "es compatible con").
+Evita afirmaciones categóricas si la evidencia es observacional.</code></pre>
+</section>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Ejemplos de Lenguaje Calibrado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>❌ Categórico</th>
+<th>✅ Calibrado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“El gen X causa Y”</td>
+<td>“El gen X está asociado con Y”</td>
+</tr>
+<tr class="even">
+<td>“Esto demuestra que…”</td>
+<td>“Estos datos son compatibles con…”</td>
+</tr>
+<tr class="odd">
+<td>“Siempre ocurre…”</td>
+<td>“Frecuentemente se observa…”</td>
+</tr>
+<tr class="even">
+<td>“Es imposible que…”</td>
+<td>“Es poco probable que…”</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Mensaje Clave
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p><em>El lenguaje científico refleja el nivel de evidencia disponible.</em></p>
+</blockquote>
+</div>
+</div>
+</section>
+<section id="patrón-a.4-trazabilidad-hecho-vs-inferencia-vs-hipótesis" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="patrón-a.4-trazabilidad-hecho-vs-inferencia-vs-hipótesis"><span class="header-section-number">5</span> Patrón A.4: Trazabilidad: Hecho vs Inferencia vs Hipótesis</h2>
+<div class="feature-box">
+<div class="feature-icon">
+<p><i class="fas fa-tags"></i></p>
+</div>
+<section id="idea-clave-3" class="level3 feature-content" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="idea-clave-3"><span class="header-section-number">5.1</span> Idea Clave</h3>
+<p>No todo lo que se escribe tiene el mismo estatus epistemológico.</p>
+<p><strong>Bloque reutilizable:</strong></p>
+<pre class="text"><code>Etiqueta cada afirmación como:
+- HECHO (derivado directamente de datos o fuentes)
+- INFERENCIA (interpretación de los datos)
+- HIPÓTESIS (posible explicación que requiere prueba)</code></pre>
+</section>
+</div>
+<p><strong>Ejemplo de aplicación:</strong></p>
+<pre class="text"><code>- HECHO: El gen lacZ codifica para β-galactosidasa
+- INFERENCIA: La expresión de lacZ aumenta en presencia de lactosa
+- HIPÓTESIS: El aumento puede deberse a cambios en la estabilidad del mRNA</code></pre>
+</section>
+<section id="patrón-a.5-contraejemplos-y-explicaciones-alternativas" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="patrón-a.5-contraejemplos-y-explicaciones-alternativas"><span class="header-section-number">6</span> Patrón A.5: Contraejemplos y Explicaciones Alternativas</h2>
+<div class="feature-box">
+<div class="feature-icon">
+<p><i class="fas fa-random"></i></p>
+</div>
+<section id="idea-clave-4" class="level3 feature-content" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="idea-clave-4"><span class="header-section-number">6.1</span> Idea Clave</h3>
+<p>Una hipótesis científica debe sobrevivir a explicaciones alternativas.</p>
+<p><strong>Instrucciones útiles:</strong></p>
+<pre class="text"><code>Propón al menos 2 explicaciones alternativas a la hipótesis principal.
+Describe qué resultados esperaríamos si la hipótesis principal fuera falsa.</code></pre>
+</section>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Ejemplo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Hipótesis principal:</strong> La sobreexpresión del gen X causa fenotipo Y</p>
+<p><strong>Explicaciones alternativas:</strong> 1. El fenotipo Y es causado por un gen en el mismo locus 2. El efecto es indirecto a través de un regulador compartido 3. Es un artefacto experimental por condiciones de cultivo</p>
+</div>
+</div>
+</section>
+<section id="patrón-a.6-debugging-del-razonamiento" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="patrón-a.6-debugging-del-razonamiento"><span class="header-section-number">7</span> Patrón A.6: Debugging del Razonamiento</h2>
+<div class="feature-box">
+<div class="feature-icon">
+<p><i class="fas fa-bug"></i></p>
+</div>
+<section id="analogía" class="level3 feature-content" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="analogía"><span class="header-section-number">7.1</span> Analogía</h3>
+<p>Así como se depura código, se deben depurar inferencias.</p>
+<p><strong>Bloque reutilizable:</strong></p>
+<pre class="text"><code>Revisa tu razonamiento buscando saltos lógicos.
+Identifica supuestos no justificados.
+Reescribe la conclusión con las mínimas afirmaciones soportadas por los datos.</code></pre>
+</section>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Errores Lógicos Comunes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Post hoc ergo propter hoc</strong>: B ocurrió después de A, entonces A causó B</li>
+<li><strong>Generalización apresurada</strong>: Inferir una regla general de pocos casos</li>
+<li><strong>Falsa dicotomía</strong>: Presentar solo dos opciones cuando hay más</li>
+<li><strong>Argumento circular</strong>: Usar la conclusión como premisa</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="patrón-a.7-delimitación-explícita-del-universo-de-datos" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="patrón-a.7-delimitación-explícita-del-universo-de-datos"><span class="header-section-number">8</span> Patrón A.7: Delimitación Explícita del Universo de Datos</h2>
+<div class="feature-box">
+<div class="feature-icon">
+<p><i class="fas fa-database"></i></p>
+</div>
+<section id="idea-clave-5" class="level3 feature-content" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="idea-clave-5"><span class="header-section-number">8.1</span> Idea Clave</h3>
+<p>Sin delimitación, la IA tiende a generalizar incorrectamente.</p>
+<p><strong>Especificar cuando sea relevante:</strong> - Organismo y ensamblado (ej: <em>E. coli</em> K-12 MG1655) - Tipo de experimento (RNA-seq, ChIP-seq, GWAS, etc.) - Nivel de resolución (gen, transcrito, variante) - Unidad de medida (TPM, FPKM, counts)</p>
+</section>
+</div>
+<p><strong>Ejemplo:</strong></p>
+<pre class="text"><code>CONTEXTO:
+Datos de RNA-seq de Homo sapiens (GRCh38).
+Conteos normalizados como TPM.
+Comparación entre tejido sano vs tumor.
+n=5 réplicas biológicas por condición.</code></pre>
+</section>
+<section id="patrón-a.8-salidas-listas-para-auditoría" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="patrón-a.8-salidas-listas-para-auditoría"><span class="header-section-number">9</span> Patrón A.8: Salidas Listas para Auditoría</h2>
+<div class="feature-box">
+<div class="feature-icon">
+<p><i class="fas fa-clipboard-check"></i></p>
+</div>
+<section id="idea-clave-6" class="level3 feature-content" data-number="9.1">
+<h3 data-number="9.1" class="anchored" data-anchor-id="idea-clave-6"><span class="header-section-number">9.1</span> Idea Clave</h3>
+<p>El conocimiento científico debe ser auditable.</p>
+<p><strong>Formatos recomendados:</strong> - Checklist - Tablas de decisiones - Listas de comandos - Criterios explícitos de aceptación/rechazo</p>
+</section>
+</div>
+<p><strong>Ejemplo de salida auditable:</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Criterio</th>
+<th>Método de verificación</th>
+<th>Umbral aceptable</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Calidad de lecturas</td>
+<td>FastQC</td>
+<td>Q30 &gt; 90%</td>
+</tr>
+<tr class="even">
+<td>Profundidad</td>
+<td>samtools depth</td>
+<td>&gt; 30X</td>
+</tr>
+<tr class="odd">
+<td>Duplicados PCR</td>
+<td>Picard MarkDuplicates</td>
+<td>&lt; 20%</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="patrón-a.9-validación-independiente-triangulación" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="patrón-a.9-validación-independiente-triangulación"><span class="header-section-number">10</span> Patrón A.9: Validación Independiente (Triangulación)</h2>
+<div class="feature-box">
+<div class="feature-icon">
+<p><i class="fas fa-check-double"></i></p>
+</div>
+<section id="idea-clave-7" class="level3 feature-content" data-number="10.1">
+<h3 data-number="10.1" class="anchored" data-anchor-id="idea-clave-7"><span class="header-section-number">10.1</span> Idea Clave</h3>
+<p>Una sola vía de validación rara vez es suficiente.</p>
+<p><strong>Instrucción típica:</strong></p>
+<pre class="text"><code>Propón al menos dos vías independientes para validar estas conclusiones.</code></pre>
+</section>
+</div>
+<p><strong>Ejemplo de triangulación:</strong></p>
+<p>Para validar que el gen X regula Y:</p>
+<ol type="1">
+<li><strong>Evidencia transcriptómica</strong>: Coexpresión en múltiples datasets</li>
+<li><strong>Evidencia genómica</strong>: Presencia de sitio de unión en promotor de Y</li>
+<li><strong>Evidencia experimental</strong>: ChIP-seq confirmando unión directa</li>
+</ol>
+</section>
+<section id="patrón-a.10-prompt-mínimo-vs-prompt-de-investigación" class="level2" data-number="11">
+<h2 data-number="11" class="anchored" data-anchor-id="patrón-a.10-prompt-mínimo-vs-prompt-de-investigación"><span class="header-section-number">11</span> Patrón A.10: Prompt Mínimo vs Prompt de Investigación</h2>
+<div class="feature-box">
+<div class="feature-icon">
+<p><i class="fas fa-arrows-alt-h"></i></p>
+</div>
+<section id="idea-clave-8" class="level3 feature-content" data-number="11.1">
+<h3 data-number="11.1" class="anchored" data-anchor-id="idea-clave-8"><span class="header-section-number">11.1</span> Idea Clave</h3>
+<p>No todos los prompts requieren el mismo nivel de detalle.</p>
+</section>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 39%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tipo</th>
+<th>Uso Principal</th>
+<th>Características</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Prompt mínimo</strong></td>
+<td>Tareas operativas</td>
+<td>Corto, directo, específico</td>
+</tr>
+<tr class="even">
+<td><strong>Prompt de investigación</strong></td>
+<td>Análisis científico</td>
+<td>Largo, con supuestos, riesgos y validación</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Cuándo Usar Cada Uno
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Prompt mínimo:</strong> - Consultas rápidas de sintaxis - Explicación de conceptos conocidos - Tareas repetitivas bien definidas</p>
+<p><strong>Prompt de investigación:</strong> - Diseño de experimentos - Análisis de resultados complejos - Decisiones metodológicas críticas</p>
+</div>
+</div>
+</section>
+<section id="ejemplos-completos-de-prompts-científicos" class="level2" data-number="12">
+<h2 data-number="12" class="anchored" data-anchor-id="ejemplos-completos-de-prompts-científicos"><span class="header-section-number">12</span> Ejemplos Completos de Prompts Científicos</h2>
+<section id="ejemplo-a-análisis-de-calidad-previo-a-rna-seq" class="level3" data-number="12.1">
+<h3 data-number="12.1" class="anchored" data-anchor-id="ejemplo-a-análisis-de-calidad-previo-a-rna-seq"><span class="header-section-number">12.1</span> Ejemplo A: Análisis de Calidad Previo a RNA-seq</h3>
+<div class="card card-primary">
+<div class="card-header">
+<p>Prompt de Investigación Completo</p>
+</div>
+<div class="card-body">
+<pre class="text"><code>PREGUNTA CIENTÍFICA:
+¿Los datos de RNA-seq disponibles son adecuados para un análisis confiable
+de expresión diferencial?
+
+ROLE:
+Eres un asistente experto en bioinformática con énfasis en análisis reproducible
+de RNA-seq.
+
+CONTEXTO:
+Se dispone de lecturas RNA-seq de un organismo bacteriano.
+No se han evaluado métricas de calidad previamente.
+El objetivo es realizar análisis de expresión diferencial entre dos condiciones.
+
+TAREA AL ASISTENTE:
+Propón un checklist de control de calidad previo al análisis.
+
+SUPUESTOS:
+- Las lecturas provienen del mismo protocolo experimental.
+- No hay información previa de filtrado.
+
+RIESGOS DE INFERENCIA:
+- Sesgos por profundidad de secuenciación.
+- Contaminación o lecturas de baja calidad.
+- Diferencias técnicas entre condiciones.
+
+RESTRICCIONES:
+- No ejecutes código.
+- No inventes valores numéricos.
+- Limítate a razonamiento conceptual.
+
+SALIDA ESPERADA:
+Checklist estructurado con breve justificación por punto.
+
+VERIFICACIÓN:
+Indica cómo un humano puede verificar cada punto usando herramientas estándar
+(FastQC, MultiQC, etc.).
+
+VALIDACIÓN INDEPENDIENTE:
+Propón al menos dos métricas o enfoques distintos para evaluar la calidad global.</code></pre>
+</div>
+</div>
+<p><strong>Por qué es un buen prompt científico:</strong> - ✓ Separa claramente pregunta y tarea - ✓ Explicita supuestos y riesgos - ✓ Produce una salida auditable - ✓ No induce conclusiones categóricas</p>
+</section>
+<section id="ejemplo-b-priorización-de-variantes-post-gwas" class="level3" data-number="12.2">
+<h3 data-number="12.2" class="anchored" data-anchor-id="ejemplo-b-priorización-de-variantes-post-gwas"><span class="header-section-number">12.2</span> Ejemplo B: Priorización de Variantes Post-GWAS</h3>
+<div class="card card-info">
+<div class="card-header">
+<p>Prompt Avanzado con Todos los Patrones</p>
+</div>
+<div class="card-body">
+<pre class="text"><code>PREGUNTA CIENTÍFICA:
+¿Cómo priorizar variantes genéticas asociadas a una enfermedad compleja
+para estudios funcionales?
+
+ROLE:
+Actúa como bioinformático senior con experiencia en genética humana y GWAS.
+
+CONTEXTO:
+Se cuenta con un conjunto de SNPs asociados a una enfermedad compleja obtenidos
+de un GWAS. No se dispone aún de evidencia funcional directa.
+
+TAREA AL ASISTENTE:
+Propón un marco de priorización de variantes basado en criterios biológicos
+y estadísticos.
+
+SUPUESTOS:
+- Las asociaciones provienen de un GWAS bien controlado.
+- La enfermedad tiene un componente poligénico.
+
+RIESGOS DE INFERENCIA:
+- Confundir asociación con causalidad.
+- Sobreinterpretar efectos individuales.
+- Ignorar factores poblacionales.
+
+RESTRICCIONES:
+- No afirmes causalidad.
+- Usa lenguaje calibrado.
+- Declara explícitamente las limitaciones.
+
+SALIDA ESPERADA:
+Tabla con criterios de priorización y justificación.
+
+VERIFICACIÓN:
+Describe cómo cada criterio puede validarse con datos independientes
+(eQTL, anotaciones regulatorias, estudios funcionales).
+
+VALIDACIÓN INDEPENDIENTE:
+Propón al menos dos tipos de datos adicionales que fortalecerían la priorización.</code></pre>
+</div>
+</div>
+<p><strong>Por qué es un buen prompt científico:</strong> - ✓ Evita determinismo genético - ✓ Diferencia claramente predicción y explicación - ✓ Promueve triangulación de evidencia</p>
+</section>
+</section>
+<section id="resumen-de-patrones" class="level2" data-number="13">
+<h2 data-number="13" class="anchored" data-anchor-id="resumen-de-patrones"><span class="header-section-number">13</span> Resumen de Patrones</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Checklist de Patrones Avanzados
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Antes de enviar un prompt científico importante, verifica:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"><strong>A.1</strong>: ¿Separé la pregunta científica de la tarea al asistente?</label></li>
+<li><label><input type="checkbox"><strong>A.2</strong>: ¿Explicité supuestos y riesgos?</label></li>
+<li><label><input type="checkbox"><strong>A.3</strong>: ¿Usé lenguaje calibrado apropiado?</label></li>
+<li><label><input type="checkbox"><strong>A.4</strong>: ¿Distinguí hecho, inferencia e hipótesis?</label></li>
+<li><label><input type="checkbox"><strong>A.5</strong>: ¿Incluí explicaciones alternativas?</label></li>
+<li><label><input type="checkbox"><strong>A.6</strong>: ¿Revisé el razonamiento por saltos lógicos?</label></li>
+<li><label><input type="checkbox"><strong>A.7</strong>: ¿Delimité claramente el universo de datos?</label></li>
+<li><label><input type="checkbox"><strong>A.8</strong>: ¿La salida es auditable?</label></li>
+<li><label><input type="checkbox"><strong>A.9</strong>: ¿Propuse vías de validación independiente?</label></li>
+<li><label><input type="checkbox"><strong>A.10</strong>: ¿Elegí el nivel de detalle apropiado?</label></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="mensaje-final" class="level2" data-number="14">
+<h2 data-number="14" class="anchored" data-anchor-id="mensaje-final"><span class="header-section-number">14</span> Mensaje Final</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Reflexión Final
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p><em>Un buen prompt científico no busca respuestas rápidas, sino <strong>razonamiento defendible</strong>.</em></p>
+</blockquote>
+<p>La IA es una herramienta poderosa cuando se usa con criterio científico. Estos patrones te ayudan a:</p>
+<ul>
+<li>Mantener el control epistemológico</li>
+<li>Distinguir texto convincente de conocimiento válido</li>
+<li>Producir resultados verificables y reproducibles</li>
+<li>Fortalecer tu razonamiento científico</li>
+</ul>
+</div>
+</div>
+<div class="chapter-nav">
+<div class="chapter-nav-item chapter-nav-prev">
+<div class="chapter-nav-label">
+<p>Anterior</p>
+</div>
+<div class="chapter-nav-title">
+<p>Prompting Científico</p>
+</div>
+</div>
+<div class="chapter-nav-item chapter-nav-next">
+<div class="chapter-nav-label">
+<p>Siguiente</p>
+</div>
+<div class="chapter-nav-title">
+<p>Glosario</p>
+</div>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div></main> <!-- /main -->
+<script src="assets/js/custom.js"></script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("^(?:http:|https:)\/\/(?:www\.)?yourdomain\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Patrones Avanzados de Prompting Científico"</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Técnicas epistemológicas para fortalecer el razonamiento"</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> last-modified</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Patrones reutilizables que fortalecen la calidad epistemológica de los prompts científicos"</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [patrones, epistemología, avanzado]</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introducción</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>Este capítulo presenta **patrones avanzados de prompting científico** que ayudan a usar la IA como una herramienta que **fortalece** —y no sustituye— el razonamiento científico.</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>Estos patrones son **bloques reutilizables** que puedes incorporar en tus prompts para mejorar su calidad epistemológica.</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## Patrón A.1: Separar Pregunta Científica de Tarea al Asistente</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>::: {.feature-box}</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>::: {.feature-icon}</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">i</span><span class="ot"> class</span><span class="op">=</span><span class="st">"fas fa-layer-group"</span><span class="dt">&gt;&lt;/</span><span class="kw">i</span><span class="dt">&gt;</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>::: {.feature-content}</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="fu">### Idea Clave</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>En ciencia, primero se define *qué se quiere saber* y después *qué apoyo se solicita*.</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>**Bloque reutilizable:**</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="in">PREGUNTA CIENTÍFICA:</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="in">(qué fenómeno biológico se desea entender)</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="in">TAREA AL ASISTENTE:</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="in">(qué tipo de apoyo se solicita: análisis conceptual, checklist, plan, etc.)</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## Mensaje Clave</span></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *El prompt no es la pregunta científica; es la forma de pedir ayuda para pensarla.*</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## Patrón A.2: Supuestos y Riesgos de Inferencia</span></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>::: {.feature-box}</span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>::: {.feature-icon}</span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">i</span><span class="ot"> class</span><span class="op">=</span><span class="st">"fas fa-exclamation-triangle"</span><span class="dt">&gt;&lt;/</span><span class="kw">i</span><span class="dt">&gt;</span></span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>::: {.feature-content}</span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a><span class="fu">### Idea Clave</span></span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>Toda inferencia depende de supuestos que deben hacerse explícitos.</span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a>**Bloque reutilizable:**</span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a><span class="in">SUPUESTOS:</span></span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a><span class="in">Enumera los supuestos necesarios para que la respuesta sea válida.</span></span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a><span class="in">RIESGOS DE INFERENCIA:</span></span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a><span class="in">Lista al menos 3 formas en que esta inferencia podría fallar (confusores).</span></span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a><span class="fu">## Mensaje Clave</span></span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *Una conclusión es tan fuerte como los supuestos que la sostienen.*</span></span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a><span class="fu">## Patrón A.3: Lenguaje Calibrado y Niveles de Certeza</span></span>
+<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a>::: {.feature-box}</span>
+<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a>::: {.feature-icon}</span>
+<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">i</span><span class="ot"> class</span><span class="op">=</span><span class="st">"fas fa-balance-scale"</span><span class="dt">&gt;&lt;/</span><span class="kw">i</span><span class="dt">&gt;</span></span>
+<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a>::: {.feature-content}</span>
+<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a><span class="fu">### Idea Clave</span></span>
+<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a>La ciencia rara vez permite afirmaciones categóricas.</span>
+<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a>**Instrucciones útiles:**</span>
+<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a><span class="in">Usa lenguaje calibrado ("sugiere", "es compatible con").</span></span>
+<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a><span class="in">Evita afirmaciones categóricas si la evidencia es observacional.</span></span>
+<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ejemplos de Lenguaje Calibrado</span></span>
+<span id="cb12-109"><a href="#cb12-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-110"><a href="#cb12-110" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> ❌ Categórico <span class="pp">|</span> ✅ Calibrado <span class="pp">|</span></span>
+<span id="cb12-111"><a href="#cb12-111" aria-hidden="true" tabindex="-1"></a><span class="pp">|---------------|---------------|</span></span>
+<span id="cb12-112"><a href="#cb12-112" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> "El gen X causa Y" <span class="pp">|</span> "El gen X está asociado con Y" <span class="pp">|</span></span>
+<span id="cb12-113"><a href="#cb12-113" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> "Esto demuestra que..." <span class="pp">|</span> "Estos datos son compatibles con..." <span class="pp">|</span></span>
+<span id="cb12-114"><a href="#cb12-114" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> "Siempre ocurre..." <span class="pp">|</span> "Frecuentemente se observa..." <span class="pp">|</span></span>
+<span id="cb12-115"><a href="#cb12-115" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> "Es imposible que..." <span class="pp">|</span> "Es poco probable que..." <span class="pp">|</span></span>
+<span id="cb12-116"><a href="#cb12-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-117"><a href="#cb12-117" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-118"><a href="#cb12-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-119"><a href="#cb12-119" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb12-120"><a href="#cb12-120" aria-hidden="true" tabindex="-1"></a><span class="fu">## Mensaje Clave</span></span>
+<span id="cb12-121"><a href="#cb12-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-122"><a href="#cb12-122" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *El lenguaje científico refleja el nivel de evidencia disponible.*</span></span>
+<span id="cb12-123"><a href="#cb12-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-124"><a href="#cb12-124" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-125"><a href="#cb12-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-126"><a href="#cb12-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-127"><a href="#cb12-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-128"><a href="#cb12-128" aria-hidden="true" tabindex="-1"></a><span class="fu">## Patrón A.4: Trazabilidad: Hecho vs Inferencia vs Hipótesis</span></span>
+<span id="cb12-129"><a href="#cb12-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-130"><a href="#cb12-130" aria-hidden="true" tabindex="-1"></a>::: {.feature-box}</span>
+<span id="cb12-131"><a href="#cb12-131" aria-hidden="true" tabindex="-1"></a>::: {.feature-icon}</span>
+<span id="cb12-132"><a href="#cb12-132" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">i</span><span class="ot"> class</span><span class="op">=</span><span class="st">"fas fa-tags"</span><span class="dt">&gt;&lt;/</span><span class="kw">i</span><span class="dt">&gt;</span></span>
+<span id="cb12-133"><a href="#cb12-133" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-134"><a href="#cb12-134" aria-hidden="true" tabindex="-1"></a>::: {.feature-content}</span>
+<span id="cb12-135"><a href="#cb12-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a><span class="fu">### Idea Clave</span></span>
+<span id="cb12-137"><a href="#cb12-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-138"><a href="#cb12-138" aria-hidden="true" tabindex="-1"></a>No todo lo que se escribe tiene el mismo estatus epistemológico.</span>
+<span id="cb12-139"><a href="#cb12-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-140"><a href="#cb12-140" aria-hidden="true" tabindex="-1"></a>**Bloque reutilizable:**</span>
+<span id="cb12-141"><a href="#cb12-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-142"><a href="#cb12-142" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-143"><a href="#cb12-143" aria-hidden="true" tabindex="-1"></a><span class="in">Etiqueta cada afirmación como:</span></span>
+<span id="cb12-144"><a href="#cb12-144" aria-hidden="true" tabindex="-1"></a><span class="in">- HECHO (derivado directamente de datos o fuentes)</span></span>
+<span id="cb12-145"><a href="#cb12-145" aria-hidden="true" tabindex="-1"></a><span class="in">- INFERENCIA (interpretación de los datos)</span></span>
+<span id="cb12-146"><a href="#cb12-146" aria-hidden="true" tabindex="-1"></a><span class="in">- HIPÓTESIS (posible explicación que requiere prueba)</span></span>
+<span id="cb12-147"><a href="#cb12-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-148"><a href="#cb12-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-149"><a href="#cb12-149" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-150"><a href="#cb12-150" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-151"><a href="#cb12-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-152"><a href="#cb12-152" aria-hidden="true" tabindex="-1"></a>**Ejemplo de aplicación:**</span>
+<span id="cb12-153"><a href="#cb12-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-154"><a href="#cb12-154" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-155"><a href="#cb12-155" aria-hidden="true" tabindex="-1"></a><span class="in">- HECHO: El gen lacZ codifica para β-galactosidasa</span></span>
+<span id="cb12-156"><a href="#cb12-156" aria-hidden="true" tabindex="-1"></a><span class="in">- INFERENCIA: La expresión de lacZ aumenta en presencia de lactosa</span></span>
+<span id="cb12-157"><a href="#cb12-157" aria-hidden="true" tabindex="-1"></a><span class="in">- HIPÓTESIS: El aumento puede deberse a cambios en la estabilidad del mRNA</span></span>
+<span id="cb12-158"><a href="#cb12-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-159"><a href="#cb12-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-160"><a href="#cb12-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-161"><a href="#cb12-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-162"><a href="#cb12-162" aria-hidden="true" tabindex="-1"></a><span class="fu">## Patrón A.5: Contraejemplos y Explicaciones Alternativas</span></span>
+<span id="cb12-163"><a href="#cb12-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-164"><a href="#cb12-164" aria-hidden="true" tabindex="-1"></a>::: {.feature-box}</span>
+<span id="cb12-165"><a href="#cb12-165" aria-hidden="true" tabindex="-1"></a>::: {.feature-icon}</span>
+<span id="cb12-166"><a href="#cb12-166" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">i</span><span class="ot"> class</span><span class="op">=</span><span class="st">"fas fa-random"</span><span class="dt">&gt;&lt;/</span><span class="kw">i</span><span class="dt">&gt;</span></span>
+<span id="cb12-167"><a href="#cb12-167" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-168"><a href="#cb12-168" aria-hidden="true" tabindex="-1"></a>::: {.feature-content}</span>
+<span id="cb12-169"><a href="#cb12-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-170"><a href="#cb12-170" aria-hidden="true" tabindex="-1"></a><span class="fu">### Idea Clave</span></span>
+<span id="cb12-171"><a href="#cb12-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-172"><a href="#cb12-172" aria-hidden="true" tabindex="-1"></a>Una hipótesis científica debe sobrevivir a explicaciones alternativas.</span>
+<span id="cb12-173"><a href="#cb12-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-174"><a href="#cb12-174" aria-hidden="true" tabindex="-1"></a>**Instrucciones útiles:**</span>
+<span id="cb12-175"><a href="#cb12-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-176"><a href="#cb12-176" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-177"><a href="#cb12-177" aria-hidden="true" tabindex="-1"></a><span class="in">Propón al menos 2 explicaciones alternativas a la hipótesis principal.</span></span>
+<span id="cb12-178"><a href="#cb12-178" aria-hidden="true" tabindex="-1"></a><span class="in">Describe qué resultados esperaríamos si la hipótesis principal fuera falsa.</span></span>
+<span id="cb12-179"><a href="#cb12-179" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-180"><a href="#cb12-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-181"><a href="#cb12-181" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-182"><a href="#cb12-182" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-183"><a href="#cb12-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-184"><a href="#cb12-184" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb12-185"><a href="#cb12-185" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ejemplo</span></span>
+<span id="cb12-186"><a href="#cb12-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-187"><a href="#cb12-187" aria-hidden="true" tabindex="-1"></a>**Hipótesis principal:** La sobreexpresión del gen X causa fenotipo Y</span>
+<span id="cb12-188"><a href="#cb12-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-189"><a href="#cb12-189" aria-hidden="true" tabindex="-1"></a>**Explicaciones alternativas:**</span>
+<span id="cb12-190"><a href="#cb12-190" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>El fenotipo Y es causado por un gen en el mismo locus</span>
+<span id="cb12-191"><a href="#cb12-191" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>El efecto es indirecto a través de un regulador compartido</span>
+<span id="cb12-192"><a href="#cb12-192" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Es un artefacto experimental por condiciones de cultivo</span>
+<span id="cb12-193"><a href="#cb12-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-194"><a href="#cb12-194" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-195"><a href="#cb12-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-196"><a href="#cb12-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-197"><a href="#cb12-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-198"><a href="#cb12-198" aria-hidden="true" tabindex="-1"></a><span class="fu">## Patrón A.6: Debugging del Razonamiento</span></span>
+<span id="cb12-199"><a href="#cb12-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-200"><a href="#cb12-200" aria-hidden="true" tabindex="-1"></a>::: {.feature-box}</span>
+<span id="cb12-201"><a href="#cb12-201" aria-hidden="true" tabindex="-1"></a>::: {.feature-icon}</span>
+<span id="cb12-202"><a href="#cb12-202" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">i</span><span class="ot"> class</span><span class="op">=</span><span class="st">"fas fa-bug"</span><span class="dt">&gt;&lt;/</span><span class="kw">i</span><span class="dt">&gt;</span></span>
+<span id="cb12-203"><a href="#cb12-203" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-204"><a href="#cb12-204" aria-hidden="true" tabindex="-1"></a>::: {.feature-content}</span>
+<span id="cb12-205"><a href="#cb12-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-206"><a href="#cb12-206" aria-hidden="true" tabindex="-1"></a><span class="fu">### Analogía</span></span>
+<span id="cb12-207"><a href="#cb12-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-208"><a href="#cb12-208" aria-hidden="true" tabindex="-1"></a>Así como se depura código, se deben depurar inferencias.</span>
+<span id="cb12-209"><a href="#cb12-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-210"><a href="#cb12-210" aria-hidden="true" tabindex="-1"></a>**Bloque reutilizable:**</span>
+<span id="cb12-211"><a href="#cb12-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-212"><a href="#cb12-212" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-213"><a href="#cb12-213" aria-hidden="true" tabindex="-1"></a><span class="in">Revisa tu razonamiento buscando saltos lógicos.</span></span>
+<span id="cb12-214"><a href="#cb12-214" aria-hidden="true" tabindex="-1"></a><span class="in">Identifica supuestos no justificados.</span></span>
+<span id="cb12-215"><a href="#cb12-215" aria-hidden="true" tabindex="-1"></a><span class="in">Reescribe la conclusión con las mínimas afirmaciones soportadas por los datos.</span></span>
+<span id="cb12-216"><a href="#cb12-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-217"><a href="#cb12-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-218"><a href="#cb12-218" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-219"><a href="#cb12-219" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-220"><a href="#cb12-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-221"><a href="#cb12-221" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb12-222"><a href="#cb12-222" aria-hidden="true" tabindex="-1"></a><span class="fu">## Errores Lógicos Comunes</span></span>
+<span id="cb12-223"><a href="#cb12-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-224"><a href="#cb12-224" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Post hoc ergo propter hoc**: B ocurrió después de A, entonces A causó B</span>
+<span id="cb12-225"><a href="#cb12-225" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Generalización apresurada**: Inferir una regla general de pocos casos</span>
+<span id="cb12-226"><a href="#cb12-226" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Falsa dicotomía**: Presentar solo dos opciones cuando hay más</span>
+<span id="cb12-227"><a href="#cb12-227" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Argumento circular**: Usar la conclusión como premisa</span>
+<span id="cb12-228"><a href="#cb12-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-229"><a href="#cb12-229" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-230"><a href="#cb12-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-231"><a href="#cb12-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-232"><a href="#cb12-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-233"><a href="#cb12-233" aria-hidden="true" tabindex="-1"></a><span class="fu">## Patrón A.7: Delimitación Explícita del Universo de Datos</span></span>
+<span id="cb12-234"><a href="#cb12-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-235"><a href="#cb12-235" aria-hidden="true" tabindex="-1"></a>::: {.feature-box}</span>
+<span id="cb12-236"><a href="#cb12-236" aria-hidden="true" tabindex="-1"></a>::: {.feature-icon}</span>
+<span id="cb12-237"><a href="#cb12-237" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">i</span><span class="ot"> class</span><span class="op">=</span><span class="st">"fas fa-database"</span><span class="dt">&gt;&lt;/</span><span class="kw">i</span><span class="dt">&gt;</span></span>
+<span id="cb12-238"><a href="#cb12-238" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-239"><a href="#cb12-239" aria-hidden="true" tabindex="-1"></a>::: {.feature-content}</span>
+<span id="cb12-240"><a href="#cb12-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-241"><a href="#cb12-241" aria-hidden="true" tabindex="-1"></a><span class="fu">### Idea Clave</span></span>
+<span id="cb12-242"><a href="#cb12-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-243"><a href="#cb12-243" aria-hidden="true" tabindex="-1"></a>Sin delimitación, la IA tiende a generalizar incorrectamente.</span>
+<span id="cb12-244"><a href="#cb12-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-245"><a href="#cb12-245" aria-hidden="true" tabindex="-1"></a>**Especificar cuando sea relevante:**</span>
+<span id="cb12-246"><a href="#cb12-246" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Organismo y ensamblado (ej: *E. coli* K-12 MG1655)</span>
+<span id="cb12-247"><a href="#cb12-247" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tipo de experimento (RNA-seq, ChIP-seq, GWAS, etc.)</span>
+<span id="cb12-248"><a href="#cb12-248" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Nivel de resolución (gen, transcrito, variante)</span>
+<span id="cb12-249"><a href="#cb12-249" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Unidad de medida (TPM, FPKM, counts)</span>
+<span id="cb12-250"><a href="#cb12-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-251"><a href="#cb12-251" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-252"><a href="#cb12-252" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-253"><a href="#cb12-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-254"><a href="#cb12-254" aria-hidden="true" tabindex="-1"></a>**Ejemplo:**</span>
+<span id="cb12-255"><a href="#cb12-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-256"><a href="#cb12-256" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-257"><a href="#cb12-257" aria-hidden="true" tabindex="-1"></a><span class="in">CONTEXTO:</span></span>
+<span id="cb12-258"><a href="#cb12-258" aria-hidden="true" tabindex="-1"></a><span class="in">Datos de RNA-seq de Homo sapiens (GRCh38).</span></span>
+<span id="cb12-259"><a href="#cb12-259" aria-hidden="true" tabindex="-1"></a><span class="in">Conteos normalizados como TPM.</span></span>
+<span id="cb12-260"><a href="#cb12-260" aria-hidden="true" tabindex="-1"></a><span class="in">Comparación entre tejido sano vs tumor.</span></span>
+<span id="cb12-261"><a href="#cb12-261" aria-hidden="true" tabindex="-1"></a><span class="in">n=5 réplicas biológicas por condición.</span></span>
+<span id="cb12-262"><a href="#cb12-262" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-263"><a href="#cb12-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-264"><a href="#cb12-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-265"><a href="#cb12-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-266"><a href="#cb12-266" aria-hidden="true" tabindex="-1"></a><span class="fu">## Patrón A.8: Salidas Listas para Auditoría</span></span>
+<span id="cb12-267"><a href="#cb12-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-268"><a href="#cb12-268" aria-hidden="true" tabindex="-1"></a>::: {.feature-box}</span>
+<span id="cb12-269"><a href="#cb12-269" aria-hidden="true" tabindex="-1"></a>::: {.feature-icon}</span>
+<span id="cb12-270"><a href="#cb12-270" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">i</span><span class="ot"> class</span><span class="op">=</span><span class="st">"fas fa-clipboard-check"</span><span class="dt">&gt;&lt;/</span><span class="kw">i</span><span class="dt">&gt;</span></span>
+<span id="cb12-271"><a href="#cb12-271" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-272"><a href="#cb12-272" aria-hidden="true" tabindex="-1"></a>::: {.feature-content}</span>
+<span id="cb12-273"><a href="#cb12-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-274"><a href="#cb12-274" aria-hidden="true" tabindex="-1"></a><span class="fu">### Idea Clave</span></span>
+<span id="cb12-275"><a href="#cb12-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-276"><a href="#cb12-276" aria-hidden="true" tabindex="-1"></a>El conocimiento científico debe ser auditable.</span>
+<span id="cb12-277"><a href="#cb12-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-278"><a href="#cb12-278" aria-hidden="true" tabindex="-1"></a>**Formatos recomendados:**</span>
+<span id="cb12-279"><a href="#cb12-279" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Checklist</span>
+<span id="cb12-280"><a href="#cb12-280" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tablas de decisiones</span>
+<span id="cb12-281"><a href="#cb12-281" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Listas de comandos</span>
+<span id="cb12-282"><a href="#cb12-282" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Criterios explícitos de aceptación/rechazo</span>
+<span id="cb12-283"><a href="#cb12-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-284"><a href="#cb12-284" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-285"><a href="#cb12-285" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-286"><a href="#cb12-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-287"><a href="#cb12-287" aria-hidden="true" tabindex="-1"></a>**Ejemplo de salida auditable:**</span>
+<span id="cb12-288"><a href="#cb12-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-289"><a href="#cb12-289" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Criterio <span class="pp">|</span> Método de verificación <span class="pp">|</span> Umbral aceptable <span class="pp">|</span></span>
+<span id="cb12-290"><a href="#cb12-290" aria-hidden="true" tabindex="-1"></a><span class="pp">|----------|------------------------|-------------------|</span></span>
+<span id="cb12-291"><a href="#cb12-291" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Calidad de lecturas <span class="pp">|</span> FastQC <span class="pp">|</span> Q30 &gt; 90% <span class="pp">|</span></span>
+<span id="cb12-292"><a href="#cb12-292" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Profundidad <span class="pp">|</span> samtools depth <span class="pp">|</span> &gt; 30X <span class="pp">|</span></span>
+<span id="cb12-293"><a href="#cb12-293" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Duplicados PCR <span class="pp">|</span> Picard MarkDuplicates <span class="pp">|</span> &lt; 20% <span class="pp">|</span></span>
+<span id="cb12-294"><a href="#cb12-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-295"><a href="#cb12-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-296"><a href="#cb12-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-297"><a href="#cb12-297" aria-hidden="true" tabindex="-1"></a><span class="fu">## Patrón A.9: Validación Independiente (Triangulación)</span></span>
+<span id="cb12-298"><a href="#cb12-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-299"><a href="#cb12-299" aria-hidden="true" tabindex="-1"></a>::: {.feature-box}</span>
+<span id="cb12-300"><a href="#cb12-300" aria-hidden="true" tabindex="-1"></a>::: {.feature-icon}</span>
+<span id="cb12-301"><a href="#cb12-301" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">i</span><span class="ot"> class</span><span class="op">=</span><span class="st">"fas fa-check-double"</span><span class="dt">&gt;&lt;/</span><span class="kw">i</span><span class="dt">&gt;</span></span>
+<span id="cb12-302"><a href="#cb12-302" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-303"><a href="#cb12-303" aria-hidden="true" tabindex="-1"></a>::: {.feature-content}</span>
+<span id="cb12-304"><a href="#cb12-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-305"><a href="#cb12-305" aria-hidden="true" tabindex="-1"></a><span class="fu">### Idea Clave</span></span>
+<span id="cb12-306"><a href="#cb12-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-307"><a href="#cb12-307" aria-hidden="true" tabindex="-1"></a>Una sola vía de validación rara vez es suficiente.</span>
+<span id="cb12-308"><a href="#cb12-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-309"><a href="#cb12-309" aria-hidden="true" tabindex="-1"></a>**Instrucción típica:**</span>
+<span id="cb12-310"><a href="#cb12-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-311"><a href="#cb12-311" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-312"><a href="#cb12-312" aria-hidden="true" tabindex="-1"></a><span class="in">Propón al menos dos vías independientes para validar estas conclusiones.</span></span>
+<span id="cb12-313"><a href="#cb12-313" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-314"><a href="#cb12-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-315"><a href="#cb12-315" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-316"><a href="#cb12-316" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-317"><a href="#cb12-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-318"><a href="#cb12-318" aria-hidden="true" tabindex="-1"></a>**Ejemplo de triangulación:**</span>
+<span id="cb12-319"><a href="#cb12-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-320"><a href="#cb12-320" aria-hidden="true" tabindex="-1"></a>Para validar que el gen X regula Y:</span>
+<span id="cb12-321"><a href="#cb12-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-322"><a href="#cb12-322" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Evidencia transcriptómica**: Coexpresión en múltiples datasets</span>
+<span id="cb12-323"><a href="#cb12-323" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Evidencia genómica**: Presencia de sitio de unión en promotor de Y</span>
+<span id="cb12-324"><a href="#cb12-324" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Evidencia experimental**: ChIP-seq confirmando unión directa</span>
+<span id="cb12-325"><a href="#cb12-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-326"><a href="#cb12-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-327"><a href="#cb12-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-328"><a href="#cb12-328" aria-hidden="true" tabindex="-1"></a><span class="fu">## Patrón A.10: Prompt Mínimo vs Prompt de Investigación</span></span>
+<span id="cb12-329"><a href="#cb12-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-330"><a href="#cb12-330" aria-hidden="true" tabindex="-1"></a>::: {.feature-box}</span>
+<span id="cb12-331"><a href="#cb12-331" aria-hidden="true" tabindex="-1"></a>::: {.feature-icon}</span>
+<span id="cb12-332"><a href="#cb12-332" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">i</span><span class="ot"> class</span><span class="op">=</span><span class="st">"fas fa-arrows-alt-h"</span><span class="dt">&gt;&lt;/</span><span class="kw">i</span><span class="dt">&gt;</span></span>
+<span id="cb12-333"><a href="#cb12-333" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-334"><a href="#cb12-334" aria-hidden="true" tabindex="-1"></a>::: {.feature-content}</span>
+<span id="cb12-335"><a href="#cb12-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-336"><a href="#cb12-336" aria-hidden="true" tabindex="-1"></a><span class="fu">### Idea Clave</span></span>
+<span id="cb12-337"><a href="#cb12-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-338"><a href="#cb12-338" aria-hidden="true" tabindex="-1"></a>No todos los prompts requieren el mismo nivel de detalle.</span>
+<span id="cb12-339"><a href="#cb12-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-340"><a href="#cb12-340" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-341"><a href="#cb12-341" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-342"><a href="#cb12-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-343"><a href="#cb12-343" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Tipo <span class="pp">|</span> Uso Principal <span class="pp">|</span> Características <span class="pp">|</span></span>
+<span id="cb12-344"><a href="#cb12-344" aria-hidden="true" tabindex="-1"></a><span class="pp">|------|---------------|-----------------|</span></span>
+<span id="cb12-345"><a href="#cb12-345" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Prompt mínimo** <span class="pp">|</span> Tareas operativas <span class="pp">|</span> Corto, directo, específico <span class="pp">|</span></span>
+<span id="cb12-346"><a href="#cb12-346" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Prompt de investigación** <span class="pp">|</span> Análisis científico <span class="pp">|</span> Largo, con supuestos, riesgos y validación <span class="pp">|</span></span>
+<span id="cb12-347"><a href="#cb12-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-348"><a href="#cb12-348" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb12-349"><a href="#cb12-349" aria-hidden="true" tabindex="-1"></a><span class="fu">## Cuándo Usar Cada Uno</span></span>
+<span id="cb12-350"><a href="#cb12-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-351"><a href="#cb12-351" aria-hidden="true" tabindex="-1"></a>**Prompt mínimo:**</span>
+<span id="cb12-352"><a href="#cb12-352" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Consultas rápidas de sintaxis</span>
+<span id="cb12-353"><a href="#cb12-353" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Explicación de conceptos conocidos</span>
+<span id="cb12-354"><a href="#cb12-354" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Tareas repetitivas bien definidas</span>
+<span id="cb12-355"><a href="#cb12-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-356"><a href="#cb12-356" aria-hidden="true" tabindex="-1"></a>**Prompt de investigación:**</span>
+<span id="cb12-357"><a href="#cb12-357" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Diseño de experimentos</span>
+<span id="cb12-358"><a href="#cb12-358" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Análisis de resultados complejos</span>
+<span id="cb12-359"><a href="#cb12-359" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Decisiones metodológicas críticas</span>
+<span id="cb12-360"><a href="#cb12-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-361"><a href="#cb12-361" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-362"><a href="#cb12-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-363"><a href="#cb12-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-364"><a href="#cb12-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-365"><a href="#cb12-365" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ejemplos Completos de Prompts Científicos</span></span>
+<span id="cb12-366"><a href="#cb12-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-367"><a href="#cb12-367" aria-hidden="true" tabindex="-1"></a><span class="fu">### Ejemplo A: Análisis de Calidad Previo a RNA-seq</span></span>
+<span id="cb12-368"><a href="#cb12-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-369"><a href="#cb12-369" aria-hidden="true" tabindex="-1"></a>::: {.card .card-primary}</span>
+<span id="cb12-370"><a href="#cb12-370" aria-hidden="true" tabindex="-1"></a>::: {.card-header}</span>
+<span id="cb12-371"><a href="#cb12-371" aria-hidden="true" tabindex="-1"></a>Prompt de Investigación Completo</span>
+<span id="cb12-372"><a href="#cb12-372" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-373"><a href="#cb12-373" aria-hidden="true" tabindex="-1"></a>::: {.card-body}</span>
+<span id="cb12-374"><a href="#cb12-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-375"><a href="#cb12-375" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-376"><a href="#cb12-376" aria-hidden="true" tabindex="-1"></a><span class="in">PREGUNTA CIENTÍFICA:</span></span>
+<span id="cb12-377"><a href="#cb12-377" aria-hidden="true" tabindex="-1"></a><span class="in">¿Los datos de RNA-seq disponibles son adecuados para un análisis confiable</span></span>
+<span id="cb12-378"><a href="#cb12-378" aria-hidden="true" tabindex="-1"></a><span class="in">de expresión diferencial?</span></span>
+<span id="cb12-379"><a href="#cb12-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-380"><a href="#cb12-380" aria-hidden="true" tabindex="-1"></a><span class="in">ROLE:</span></span>
+<span id="cb12-381"><a href="#cb12-381" aria-hidden="true" tabindex="-1"></a><span class="in">Eres un asistente experto en bioinformática con énfasis en análisis reproducible</span></span>
+<span id="cb12-382"><a href="#cb12-382" aria-hidden="true" tabindex="-1"></a><span class="in">de RNA-seq.</span></span>
+<span id="cb12-383"><a href="#cb12-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-384"><a href="#cb12-384" aria-hidden="true" tabindex="-1"></a><span class="in">CONTEXTO:</span></span>
+<span id="cb12-385"><a href="#cb12-385" aria-hidden="true" tabindex="-1"></a><span class="in">Se dispone de lecturas RNA-seq de un organismo bacteriano.</span></span>
+<span id="cb12-386"><a href="#cb12-386" aria-hidden="true" tabindex="-1"></a><span class="in">No se han evaluado métricas de calidad previamente.</span></span>
+<span id="cb12-387"><a href="#cb12-387" aria-hidden="true" tabindex="-1"></a><span class="in">El objetivo es realizar análisis de expresión diferencial entre dos condiciones.</span></span>
+<span id="cb12-388"><a href="#cb12-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-389"><a href="#cb12-389" aria-hidden="true" tabindex="-1"></a><span class="in">TAREA AL ASISTENTE:</span></span>
+<span id="cb12-390"><a href="#cb12-390" aria-hidden="true" tabindex="-1"></a><span class="in">Propón un checklist de control de calidad previo al análisis.</span></span>
+<span id="cb12-391"><a href="#cb12-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-392"><a href="#cb12-392" aria-hidden="true" tabindex="-1"></a><span class="in">SUPUESTOS:</span></span>
+<span id="cb12-393"><a href="#cb12-393" aria-hidden="true" tabindex="-1"></a><span class="in">- Las lecturas provienen del mismo protocolo experimental.</span></span>
+<span id="cb12-394"><a href="#cb12-394" aria-hidden="true" tabindex="-1"></a><span class="in">- No hay información previa de filtrado.</span></span>
+<span id="cb12-395"><a href="#cb12-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-396"><a href="#cb12-396" aria-hidden="true" tabindex="-1"></a><span class="in">RIESGOS DE INFERENCIA:</span></span>
+<span id="cb12-397"><a href="#cb12-397" aria-hidden="true" tabindex="-1"></a><span class="in">- Sesgos por profundidad de secuenciación.</span></span>
+<span id="cb12-398"><a href="#cb12-398" aria-hidden="true" tabindex="-1"></a><span class="in">- Contaminación o lecturas de baja calidad.</span></span>
+<span id="cb12-399"><a href="#cb12-399" aria-hidden="true" tabindex="-1"></a><span class="in">- Diferencias técnicas entre condiciones.</span></span>
+<span id="cb12-400"><a href="#cb12-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-401"><a href="#cb12-401" aria-hidden="true" tabindex="-1"></a><span class="in">RESTRICCIONES:</span></span>
+<span id="cb12-402"><a href="#cb12-402" aria-hidden="true" tabindex="-1"></a><span class="in">- No ejecutes código.</span></span>
+<span id="cb12-403"><a href="#cb12-403" aria-hidden="true" tabindex="-1"></a><span class="in">- No inventes valores numéricos.</span></span>
+<span id="cb12-404"><a href="#cb12-404" aria-hidden="true" tabindex="-1"></a><span class="in">- Limítate a razonamiento conceptual.</span></span>
+<span id="cb12-405"><a href="#cb12-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-406"><a href="#cb12-406" aria-hidden="true" tabindex="-1"></a><span class="in">SALIDA ESPERADA:</span></span>
+<span id="cb12-407"><a href="#cb12-407" aria-hidden="true" tabindex="-1"></a><span class="in">Checklist estructurado con breve justificación por punto.</span></span>
+<span id="cb12-408"><a href="#cb12-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-409"><a href="#cb12-409" aria-hidden="true" tabindex="-1"></a><span class="in">VERIFICACIÓN:</span></span>
+<span id="cb12-410"><a href="#cb12-410" aria-hidden="true" tabindex="-1"></a><span class="in">Indica cómo un humano puede verificar cada punto usando herramientas estándar</span></span>
+<span id="cb12-411"><a href="#cb12-411" aria-hidden="true" tabindex="-1"></a><span class="in">(FastQC, MultiQC, etc.).</span></span>
+<span id="cb12-412"><a href="#cb12-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-413"><a href="#cb12-413" aria-hidden="true" tabindex="-1"></a><span class="in">VALIDACIÓN INDEPENDIENTE:</span></span>
+<span id="cb12-414"><a href="#cb12-414" aria-hidden="true" tabindex="-1"></a><span class="in">Propón al menos dos métricas o enfoques distintos para evaluar la calidad global.</span></span>
+<span id="cb12-415"><a href="#cb12-415" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-416"><a href="#cb12-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-417"><a href="#cb12-417" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-418"><a href="#cb12-418" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-419"><a href="#cb12-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-420"><a href="#cb12-420" aria-hidden="true" tabindex="-1"></a>**Por qué es un buen prompt científico:**</span>
+<span id="cb12-421"><a href="#cb12-421" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>✓ Separa claramente pregunta y tarea</span>
+<span id="cb12-422"><a href="#cb12-422" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>✓ Explicita supuestos y riesgos</span>
+<span id="cb12-423"><a href="#cb12-423" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>✓ Produce una salida auditable</span>
+<span id="cb12-424"><a href="#cb12-424" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>✓ No induce conclusiones categóricas</span>
+<span id="cb12-425"><a href="#cb12-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-426"><a href="#cb12-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-427"><a href="#cb12-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-428"><a href="#cb12-428" aria-hidden="true" tabindex="-1"></a><span class="fu">### Ejemplo B: Priorización de Variantes Post-GWAS</span></span>
+<span id="cb12-429"><a href="#cb12-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-430"><a href="#cb12-430" aria-hidden="true" tabindex="-1"></a>::: {.card .card-info}</span>
+<span id="cb12-431"><a href="#cb12-431" aria-hidden="true" tabindex="-1"></a>::: {.card-header}</span>
+<span id="cb12-432"><a href="#cb12-432" aria-hidden="true" tabindex="-1"></a>Prompt Avanzado con Todos los Patrones</span>
+<span id="cb12-433"><a href="#cb12-433" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-434"><a href="#cb12-434" aria-hidden="true" tabindex="-1"></a>::: {.card-body}</span>
+<span id="cb12-435"><a href="#cb12-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-436"><a href="#cb12-436" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-437"><a href="#cb12-437" aria-hidden="true" tabindex="-1"></a><span class="in">PREGUNTA CIENTÍFICA:</span></span>
+<span id="cb12-438"><a href="#cb12-438" aria-hidden="true" tabindex="-1"></a><span class="in">¿Cómo priorizar variantes genéticas asociadas a una enfermedad compleja</span></span>
+<span id="cb12-439"><a href="#cb12-439" aria-hidden="true" tabindex="-1"></a><span class="in">para estudios funcionales?</span></span>
+<span id="cb12-440"><a href="#cb12-440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-441"><a href="#cb12-441" aria-hidden="true" tabindex="-1"></a><span class="in">ROLE:</span></span>
+<span id="cb12-442"><a href="#cb12-442" aria-hidden="true" tabindex="-1"></a><span class="in">Actúa como bioinformático senior con experiencia en genética humana y GWAS.</span></span>
+<span id="cb12-443"><a href="#cb12-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-444"><a href="#cb12-444" aria-hidden="true" tabindex="-1"></a><span class="in">CONTEXTO:</span></span>
+<span id="cb12-445"><a href="#cb12-445" aria-hidden="true" tabindex="-1"></a><span class="in">Se cuenta con un conjunto de SNPs asociados a una enfermedad compleja obtenidos</span></span>
+<span id="cb12-446"><a href="#cb12-446" aria-hidden="true" tabindex="-1"></a><span class="in">de un GWAS. No se dispone aún de evidencia funcional directa.</span></span>
+<span id="cb12-447"><a href="#cb12-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-448"><a href="#cb12-448" aria-hidden="true" tabindex="-1"></a><span class="in">TAREA AL ASISTENTE:</span></span>
+<span id="cb12-449"><a href="#cb12-449" aria-hidden="true" tabindex="-1"></a><span class="in">Propón un marco de priorización de variantes basado en criterios biológicos</span></span>
+<span id="cb12-450"><a href="#cb12-450" aria-hidden="true" tabindex="-1"></a><span class="in">y estadísticos.</span></span>
+<span id="cb12-451"><a href="#cb12-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-452"><a href="#cb12-452" aria-hidden="true" tabindex="-1"></a><span class="in">SUPUESTOS:</span></span>
+<span id="cb12-453"><a href="#cb12-453" aria-hidden="true" tabindex="-1"></a><span class="in">- Las asociaciones provienen de un GWAS bien controlado.</span></span>
+<span id="cb12-454"><a href="#cb12-454" aria-hidden="true" tabindex="-1"></a><span class="in">- La enfermedad tiene un componente poligénico.</span></span>
+<span id="cb12-455"><a href="#cb12-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-456"><a href="#cb12-456" aria-hidden="true" tabindex="-1"></a><span class="in">RIESGOS DE INFERENCIA:</span></span>
+<span id="cb12-457"><a href="#cb12-457" aria-hidden="true" tabindex="-1"></a><span class="in">- Confundir asociación con causalidad.</span></span>
+<span id="cb12-458"><a href="#cb12-458" aria-hidden="true" tabindex="-1"></a><span class="in">- Sobreinterpretar efectos individuales.</span></span>
+<span id="cb12-459"><a href="#cb12-459" aria-hidden="true" tabindex="-1"></a><span class="in">- Ignorar factores poblacionales.</span></span>
+<span id="cb12-460"><a href="#cb12-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-461"><a href="#cb12-461" aria-hidden="true" tabindex="-1"></a><span class="in">RESTRICCIONES:</span></span>
+<span id="cb12-462"><a href="#cb12-462" aria-hidden="true" tabindex="-1"></a><span class="in">- No afirmes causalidad.</span></span>
+<span id="cb12-463"><a href="#cb12-463" aria-hidden="true" tabindex="-1"></a><span class="in">- Usa lenguaje calibrado.</span></span>
+<span id="cb12-464"><a href="#cb12-464" aria-hidden="true" tabindex="-1"></a><span class="in">- Declara explícitamente las limitaciones.</span></span>
+<span id="cb12-465"><a href="#cb12-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-466"><a href="#cb12-466" aria-hidden="true" tabindex="-1"></a><span class="in">SALIDA ESPERADA:</span></span>
+<span id="cb12-467"><a href="#cb12-467" aria-hidden="true" tabindex="-1"></a><span class="in">Tabla con criterios de priorización y justificación.</span></span>
+<span id="cb12-468"><a href="#cb12-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-469"><a href="#cb12-469" aria-hidden="true" tabindex="-1"></a><span class="in">VERIFICACIÓN:</span></span>
+<span id="cb12-470"><a href="#cb12-470" aria-hidden="true" tabindex="-1"></a><span class="in">Describe cómo cada criterio puede validarse con datos independientes</span></span>
+<span id="cb12-471"><a href="#cb12-471" aria-hidden="true" tabindex="-1"></a><span class="in">(eQTL, anotaciones regulatorias, estudios funcionales).</span></span>
+<span id="cb12-472"><a href="#cb12-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-473"><a href="#cb12-473" aria-hidden="true" tabindex="-1"></a><span class="in">VALIDACIÓN INDEPENDIENTE:</span></span>
+<span id="cb12-474"><a href="#cb12-474" aria-hidden="true" tabindex="-1"></a><span class="in">Propón al menos dos tipos de datos adicionales que fortalecerían la priorización.</span></span>
+<span id="cb12-475"><a href="#cb12-475" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-476"><a href="#cb12-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-477"><a href="#cb12-477" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-478"><a href="#cb12-478" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-479"><a href="#cb12-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-480"><a href="#cb12-480" aria-hidden="true" tabindex="-1"></a>**Por qué es un buen prompt científico:**</span>
+<span id="cb12-481"><a href="#cb12-481" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>✓ Evita determinismo genético</span>
+<span id="cb12-482"><a href="#cb12-482" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>✓ Diferencia claramente predicción y explicación</span>
+<span id="cb12-483"><a href="#cb12-483" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>✓ Promueve triangulación de evidencia</span>
+<span id="cb12-484"><a href="#cb12-484" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-485"><a href="#cb12-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-486"><a href="#cb12-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-487"><a href="#cb12-487" aria-hidden="true" tabindex="-1"></a><span class="fu">## Resumen de Patrones</span></span>
+<span id="cb12-488"><a href="#cb12-488" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-489"><a href="#cb12-489" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb12-490"><a href="#cb12-490" aria-hidden="true" tabindex="-1"></a><span class="fu">## Checklist de Patrones Avanzados</span></span>
+<span id="cb12-491"><a href="#cb12-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-492"><a href="#cb12-492" aria-hidden="true" tabindex="-1"></a>Antes de enviar un prompt científico importante, verifica:</span>
+<span id="cb12-493"><a href="#cb12-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-494"><a href="#cb12-494" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> **A.1**: ¿Separé la pregunta científica de la tarea al asistente?</span>
+<span id="cb12-495"><a href="#cb12-495" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> **A.2**: ¿Explicité supuestos y riesgos?</span>
+<span id="cb12-496"><a href="#cb12-496" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> **A.3**: ¿Usé lenguaje calibrado apropiado?</span>
+<span id="cb12-497"><a href="#cb12-497" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> **A.4**: ¿Distinguí hecho, inferencia e hipótesis?</span>
+<span id="cb12-498"><a href="#cb12-498" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> **A.5**: ¿Incluí explicaciones alternativas?</span>
+<span id="cb12-499"><a href="#cb12-499" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> **A.6**: ¿Revisé el razonamiento por saltos lógicos?</span>
+<span id="cb12-500"><a href="#cb12-500" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> **A.7**: ¿Delimité claramente el universo de datos?</span>
+<span id="cb12-501"><a href="#cb12-501" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> **A.8**: ¿La salida es auditable?</span>
+<span id="cb12-502"><a href="#cb12-502" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> **A.9**: ¿Propuse vías de validación independiente?</span>
+<span id="cb12-503"><a href="#cb12-503" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="va">[ ]</span> **A.10**: ¿Elegí el nivel de detalle apropiado?</span>
+<span id="cb12-504"><a href="#cb12-504" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-505"><a href="#cb12-505" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-506"><a href="#cb12-506" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-507"><a href="#cb12-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-508"><a href="#cb12-508" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-509"><a href="#cb12-509" aria-hidden="true" tabindex="-1"></a><span class="fu">## Mensaje Final</span></span>
+<span id="cb12-510"><a href="#cb12-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-511"><a href="#cb12-511" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb12-512"><a href="#cb12-512" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reflexión Final</span></span>
+<span id="cb12-513"><a href="#cb12-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-514"><a href="#cb12-514" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *Un buen prompt científico no busca respuestas rápidas, sino **razonamiento defendible**.*</span></span>
+<span id="cb12-515"><a href="#cb12-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-516"><a href="#cb12-516" aria-hidden="true" tabindex="-1"></a>La IA es una herramienta poderosa cuando se usa con criterio científico. Estos patrones te ayudan a:</span>
+<span id="cb12-517"><a href="#cb12-517" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-518"><a href="#cb12-518" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Mantener el control epistemológico</span>
+<span id="cb12-519"><a href="#cb12-519" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Distinguir texto convincente de conocimiento válido</span>
+<span id="cb12-520"><a href="#cb12-520" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Producir resultados verificables y reproducibles</span>
+<span id="cb12-521"><a href="#cb12-521" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Fortalecer tu razonamiento científico</span>
+<span id="cb12-522"><a href="#cb12-522" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-523"><a href="#cb12-523" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-524"><a href="#cb12-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-525"><a href="#cb12-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-526"><a href="#cb12-526" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-527"><a href="#cb12-527" aria-hidden="true" tabindex="-1"></a>::: {.chapter-nav}</span>
+<span id="cb12-528"><a href="#cb12-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-529"><a href="#cb12-529" aria-hidden="true" tabindex="-1"></a>::: {.chapter-nav-item .chapter-nav-prev}</span>
+<span id="cb12-530"><a href="#cb12-530" aria-hidden="true" tabindex="-1"></a>::: {.chapter-nav-label}</span>
+<span id="cb12-531"><a href="#cb12-531" aria-hidden="true" tabindex="-1"></a>Anterior</span>
+<span id="cb12-532"><a href="#cb12-532" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-533"><a href="#cb12-533" aria-hidden="true" tabindex="-1"></a>::: {.chapter-nav-title}</span>
+<span id="cb12-534"><a href="#cb12-534" aria-hidden="true" tabindex="-1"></a>Prompting Científico</span>
+<span id="cb12-535"><a href="#cb12-535" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-536"><a href="#cb12-536" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-537"><a href="#cb12-537" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-538"><a href="#cb12-538" aria-hidden="true" tabindex="-1"></a>::: {.chapter-nav-item .chapter-nav-next}</span>
+<span id="cb12-539"><a href="#cb12-539" aria-hidden="true" tabindex="-1"></a>::: {.chapter-nav-label}</span>
+<span id="cb12-540"><a href="#cb12-540" aria-hidden="true" tabindex="-1"></a>Siguiente</span>
+<span id="cb12-541"><a href="#cb12-541" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-542"><a href="#cb12-542" aria-hidden="true" tabindex="-1"></a>::: {.chapter-nav-title}</span>
+<span id="cb12-543"><a href="#cb12-543" aria-hidden="true" tabindex="-1"></a>Glosario</span>
+<span id="cb12-544"><a href="#cb12-544" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-545"><a href="#cb12-545" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-546"><a href="#cb12-546" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-547"><a href="#cb12-547" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<div class="footer-left">
+<p>© <span class="math inline">\(year\)</span> <span class="math inline">\(author\)</span>. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+</div>
+</div>   
+    <div class="nav-footer-center">
+<div class="footer-center">
+<p>Built with ❤️ using <a href="https://quarto.org/">Quarto</a></p>
+</div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/yourusername/your-course/edit/main/chapters/sesion-01-fundamentos/patrones-avanzados.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/yourusername/your-course/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/yourusername/your-course">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/yourusername">
+      <i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:helysalgado@gmail.com">
+      <i class="bi bi-envelope" role="img" aria-label="Email">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

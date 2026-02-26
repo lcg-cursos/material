@@ -1,0 +1,2306 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Heladia Salgado">
+<meta name="dcterms.date" content="2026-01-05">
+<meta name="description" content="Aprende a formular prompts científicos con estructura, contexto y criterios de verificación">
+
+<title>Prompting Científico – Prompting Científico con Inteligencia Artificial</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/images/favicon.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-95759c9b5f0a9d12ebf0c1dbe5c47530.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d271f10569e7254d5269ff747e9d5db2.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-95759c9b5f0a9d12ebf0c1dbe5c47530.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e0f64a05f2c9985a109e347d2886874d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-d1268c8e4f19edb023b62fc8da355448.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-e0f64a05f2c9985a109e347d2886874d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../assets/css/styles.css">
+<link rel="stylesheet" href="../../assets/css/components.css">
+<meta property="og:title" content="Prompting Científico con Inteligencia Artificial">
+<meta property="og:description" content="Course description">
+<meta property="og:image" content="https://lcg-cursos.github.io/material/prompting-cientifico/chapters/sesion-01-fundamentos/assets/images/og-image.png">
+<meta property="og:site_name" content="Prompting Científico con Inteligencia Artificial">
+<meta name="twitter:title" content="Prompting Científico – Prompting Científico con Inteligencia Artificial">
+<meta name="twitter:description" content="Aprende a formular prompts científicos con estructura, contexto y criterios de verificación">
+<meta name="twitter:image" content="https://lcg-cursos.github.io/material/prompting-cientifico/chapters/sesion-01-fundamentos/assets/images/twitter-card.png">
+<meta name="twitter:creator" content="@yourusername">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/images/logo.png" alt="Course Logo" class="navbar-logo light-content">
+    <img src="../../assets/images/logo.png" alt="Course Logo" class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../index.html" aria-current="page"> <i class="bi bi-house-fill" role="img">
+</i> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapters" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="bi bi-book-fill" role="img">
+</i> 
+ <span class="menu-text">Chapters</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapters">    
+        <li>
+    <a class="dropdown-item" href="../../chapters/capitulo1/index.html"><i class="bi bi-brain" role="img">
+</i> 
+ <span class="dropdown-text">Introducción al Prompting</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../chapters/sesion-01-fundamentos/index.html"><i class="bi bi-brain" role="img">
+</i> 
+ <span class="dropdown-text">Sesión 1: Fundamentos de IA</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li>
+    <a class="dropdown-item" href="../../chapters/example-chapter-01/index.qmd"><i class="bi bi-rocket-takeoff" role="img">
+</i> 
+ <span class="dropdown-text">Getting Started (Example)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../chapters/example-chapter-02/index.qmd"><i class="bi bi-stars" role="img">
+</i> 
+ <span class="dropdown-text">Advanced Topics (Example)</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../exercises/index.html"> <i class="bi bi-pencil-square" role="img">
+</i> 
+<span class="menu-text">Exercises</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../resources/index.html"> <i class="bi bi-box-arrow-down" role="img">
+</i> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/yourusername/your-course"> <i class="bi bi-github" role="img" aria-label="GitHub Repository">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/yourusername"> <i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="" title="Dark Mode" class="quarto-navigation-tool px-1" aria-label="Dark Mode"><i class="bi bi-moon"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Prompting Científico</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../assets/images/logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="../../assets/images/logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🏠 Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/capitulo1/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🧠 Introducción al Prompting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/capitulo2/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🔬 Prompting Científico</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/capitulo3/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🔬 Diseño de Protocolos de Prompting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">---</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exercises/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">✏️ Exercises</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../resources/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📥 Resources</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../components/component-examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">🧩 Components</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ℹ️ About</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">1</span> Introducción</a></li>
+  <li><a href="#prompting-creativo-vs-científico-comparación-detallada" id="toc-prompting-creativo-vs-científico-comparación-detallada" class="nav-link" data-scroll-target="#prompting-creativo-vs-científico-comparación-detallada"><span class="header-section-number">2</span> Prompting Creativo vs Científico: Comparación Detallada</a>
+  <ul class="collapse">
+  <li><a href="#prompting-creativo" id="toc-prompting-creativo" class="nav-link" data-scroll-target="#prompting-creativo"><span class="header-section-number">2.1</span> 🧠 PROMPTING CREATIVO</a></li>
+  <li><a href="#prompting-científico" id="toc-prompting-científico" class="nav-link" data-scroll-target="#prompting-científico"><span class="header-section-number">2.2</span> 🔬 PROMPTING CIENTÍFICO</a></li>
+  <li><a href="#regla-clave-fase-del-proceso-cognitivo" id="toc-regla-clave-fase-del-proceso-cognitivo" class="nav-link" data-scroll-target="#regla-clave-fase-del-proceso-cognitivo"><span class="header-section-number">2.3</span> Regla Clave: Fase del Proceso Cognitivo</a></li>
+  <li><a href="#uso-avanzado-combinación-estratégica" id="toc-uso-avanzado-combinación-estratégica" class="nav-link" data-scroll-target="#uso-avanzado-combinación-estratégica"><span class="header-section-number">2.4</span> Uso Avanzado: Combinación Estratégica</a></li>
+  </ul></li>
+  <li><a href="#ejemplos-prácticos-creativo-vs-científico" id="toc-ejemplos-prácticos-creativo-vs-científico" class="nav-link" data-scroll-target="#ejemplos-prácticos-creativo-vs-científico"><span class="header-section-number">3</span> Ejemplos Prácticos: Creativo vs Científico</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-1-regulación-genética" id="toc-ejemplo-1-regulación-genética" class="nav-link" data-scroll-target="#ejemplo-1-regulación-genética"><span class="header-section-number">3.1</span> Ejemplo 1: Regulación Genética</a></li>
+  <li><a href="#ejemplo-2-expresión-diferencial-rna-seq" id="toc-ejemplo-2-expresión-diferencial-rna-seq" class="nav-link" data-scroll-target="#ejemplo-2-expresión-diferencial-rna-seq"><span class="header-section-number">3.2</span> Ejemplo 2: Expresión Diferencial (RNA-seq)</a></li>
+  <li><a href="#ejemplo-3-interpretación-de-resultados-ómicos" id="toc-ejemplo-3-interpretación-de-resultados-ómicos" class="nav-link" data-scroll-target="#ejemplo-3-interpretación-de-resultados-ómicos"><span class="header-section-number">3.3</span> Ejemplo 3: Interpretación de Resultados Ómicos</a></li>
+  </ul></li>
+  <li><a href="#anatomía-de-un-buen-prompt-científico" id="toc-anatomía-de-un-buen-prompt-científico" class="nav-link" data-scroll-target="#anatomía-de-un-buen-prompt-científico"><span class="header-section-number">4</span> Anatomía de un Buen Prompt Científico</a>
+  <ul class="collapse">
+  <li><a href="#componente-1-role-rol-de-la-ia" id="toc-componente-1-role-rol-de-la-ia" class="nav-link" data-scroll-target="#componente-1-role-rol-de-la-ia"><span class="header-section-number">4.1</span> 🧩 Componente 1: ROLE — Rol de la IA</a></li>
+  <li><a href="#componente-2-contexto-datos-y-objetivo-biológico" id="toc-componente-2-contexto-datos-y-objetivo-biológico" class="nav-link" data-scroll-target="#componente-2-contexto-datos-y-objetivo-biológico"><span class="header-section-number">4.2</span> 🧩 Componente 2: CONTEXTO — Datos y Objetivo Biológico</a></li>
+  <li><a href="#componente-3-tarea-qué-se-quiere-que-haga-la-ia" id="toc-componente-3-tarea-qué-se-quiere-que-haga-la-ia" class="nav-link" data-scroll-target="#componente-3-tarea-qué-se-quiere-que-haga-la-ia"><span class="header-section-number">4.3</span> 🧩 Componente 3: TAREA — Qué se Quiere que Haga la IA</a></li>
+  <li><a href="#componente-4-restricciones-límites-explícitos" id="toc-componente-4-restricciones-límites-explícitos" class="nav-link" data-scroll-target="#componente-4-restricciones-límites-explícitos"><span class="header-section-number">4.4</span> 🧩 Componente 4: RESTRICCIONES — Límites Explícitos</a></li>
+  <li><a href="#componente-5-salida-esperada-formato-del-resultado" id="toc-componente-5-salida-esperada-formato-del-resultado" class="nav-link" data-scroll-target="#componente-5-salida-esperada-formato-del-resultado"><span class="header-section-number">4.5</span> 🧩 Componente 5: SALIDA ESPERADA — Formato del Resultado</a></li>
+  <li><a href="#componente-6-verificación-cómo-validar-la-respuesta" id="toc-componente-6-verificación-cómo-validar-la-respuesta" class="nav-link" data-scroll-target="#componente-6-verificación-cómo-validar-la-respuesta"><span class="header-section-number">4.6</span> 🧩 Componente 6: VERIFICACIÓN — Cómo Validar la Respuesta</a></li>
+  </ul></li>
+  <li><a href="#mensaje-clave" id="toc-mensaje-clave" class="nav-link" data-scroll-target="#mensaje-clave"><span class="header-section-number">5</span> Mensaje Clave</a></li>
+  <li><a href="#errores-frecuentes-en-genética-al-usar-ia" id="toc-errores-frecuentes-en-genética-al-usar-ia" class="nav-link" data-scroll-target="#errores-frecuentes-en-genética-al-usar-ia"><span class="header-section-number">6</span> Errores Frecuentes en Genética al Usar IA</a></li>
+  <li><a href="#ejemplos-de-prompts-buenos-y-malos" id="toc-ejemplos-de-prompts-buenos-y-malos" class="nav-link" data-scroll-target="#ejemplos-de-prompts-buenos-y-malos"><span class="header-section-number">7</span> Ejemplos de Prompts: Buenos y Malos</a>
+  <ul class="collapse">
+  <li><a href="#ejemplo-1-prompt-mal-hecho" id="toc-ejemplo-1-prompt-mal-hecho" class="nav-link" data-scroll-target="#ejemplo-1-prompt-mal-hecho"><span class="header-section-number">7.1</span> ❌ Ejemplo 1: Prompt Mal Hecho</a></li>
+  <li><a href="#ejemplo-2-prompt-aceptable-pero-mejorable" id="toc-ejemplo-2-prompt-aceptable-pero-mejorable" class="nav-link" data-scroll-target="#ejemplo-2-prompt-aceptable-pero-mejorable"><span class="header-section-number">7.2</span> ⚠️ Ejemplo 2: Prompt Aceptable (Pero Mejorable)</a></li>
+  <li><a href="#ejemplo-3-prompt-científico-correcto" id="toc-ejemplo-3-prompt-científico-correcto" class="nav-link" data-scroll-target="#ejemplo-3-prompt-científico-correcto"><span class="header-section-number">7.3</span> ✅ Ejemplo 3: Prompt Científico Correcto</a></li>
+  </ul></li>
+  <li><a href="#por-qué-es-buen-prompt-científico" id="toc-por-qué-es-buen-prompt-científico" class="nav-link" data-scroll-target="#por-qué-es-buen-prompt-científico"><span class="header-section-number">8</span> ¿Por qué es buen prompt científico?</a></li>
+  <li><a href="#ejemplo-4-prompt-con-estructura-científica-avanzada" id="toc-ejemplo-4-prompt-con-estructura-científica-avanzada" class="nav-link" data-scroll-target="#ejemplo-4-prompt-con-estructura-científica-avanzada"><span class="header-section-number">8.1</span> ⭐⭐⭐ Ejemplo 4: Prompt con Estructura Científica Avanzada</a></li>
+  <li><a href="#excelencia-científica" id="toc-excelencia-científica" class="nav-link" data-scroll-target="#excelencia-científica"><span class="header-section-number">9</span> Excelencia Científica</a></li>
+  <li><a href="#ejercicio-en-clase-mini-debate" id="toc-ejercicio-en-clase-mini-debate" class="nav-link" data-scroll-target="#ejercicio-en-clase-mini-debate"><span class="header-section-number">10</span> Ejercicio en Clase: Mini-Debate</a>
+  <ul class="collapse">
+  <li><a href="#debate-correlación-causalidad-y-evidencia" id="toc-debate-correlación-causalidad-y-evidencia" class="nav-link" data-scroll-target="#debate-correlación-causalidad-y-evidencia"><span class="header-section-number">10.1</span> Debate: Correlación, Causalidad y Evidencia</a></li>
+  </ul></li>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link" data-scroll-target="#resumen"><span class="header-section-number">11</span> Resumen</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/yourusername/your-course/edit/main/chapters/sesion-01-fundamentos/prompting-cientifico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/yourusername/your-course/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Prompting Científico</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">Anatomía y práctica del prompt verificable</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">prompting</div>
+    <div class="quarto-category">metodología</div>
+    <div class="quarto-category">ciencia</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Aprende a formular prompts científicos con estructura, contexto y criterios de verificación
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Heladia Salgado </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 5, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introducción" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">1</span> Introducción</h2>
+<p>En esta sección profundizaremos en el <strong>prompting científico</strong>: cómo estructurar instrucciones para la IA de manera que produzcan resultados verificables, reproducibles y científicamente válidos.</p>
+</section>
+<section id="prompting-creativo-vs-científico-comparación-detallada" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="prompting-creativo-vs-científico-comparación-detallada"><span class="header-section-number">2</span> Prompting Creativo vs Científico: Comparación Detallada</h2>
+<section id="prompting-creativo" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="prompting-creativo"><span class="header-section-number">2.1</span> 🧠 PROMPTING CREATIVO</h3>
+<blockquote class="blockquote">
+<p>Abierto, ambiguo, exploratorio</p>
+</blockquote>
+<p><strong>Es bueno aplicarlo cuando:</strong></p>
+<ol type="1">
+<li><strong>No sabes aún qué estás buscando</strong>
+<ul>
+<li>Fase de ideas, lluvia de ideas, generación de hipótesis o metáforas</li>
+<li>Ejemplo: <em>“Explora posibles analogías entre regulación genética y lenguajes simbólicos”</em></li>
+</ul></li>
+<li><strong>Quieres ampliar el espacio de posibilidades</strong>
+<ul>
+<li>Diseño conceptual, narrativas, enfoques alternativos</li>
+<li>Útil para romper marcos rígidos o sesgos previos</li>
+</ul></li>
+<li><strong>El valor está en la originalidad, no en la verificabilidad inmediata</strong>
+<ul>
+<li>Ensayos teóricos, pensamiento especulativo, divulgación, docencia creativa</li>
+</ul></li>
+<li><strong>Trabajas con sistemas complejos mal definidos</strong>
+<ul>
+<li>Sistemas biológicos, sociales o simbólicos aún no formalizados</li>
+</ul></li>
+</ol>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Riesgos del Prompting Creativo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Genera respuestas plausibles pero no falsables</li>
+<li>Favorece la sobreinterpretación y analogías engañosas</li>
+<li>No es adecuado para decisiones técnicas o conclusiones formales</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="prompting-científico" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="prompting-científico"><span class="header-section-number">2.2</span> 🔬 PROMPTING CIENTÍFICO</h3>
+<blockquote class="blockquote">
+<p>Contextualizado, acotado, verificable</p>
+</blockquote>
+<p><strong>Es bueno aplicarlo cuando:</strong></p>
+<ol type="1">
+<li><strong>La pregunta está bien definida</strong>
+<ul>
+<li>Variables claras, dominio específico, objetivo explícito</li>
+<li>Ejemplo: <em>“Resume los mecanismos de regulación transcripcional del operón lac en E. coli según RegulonDB”</em></li>
+</ul></li>
+<li><strong>Necesitas precisión, trazabilidad y control de supuestos</strong>
+<ul>
+<li>Revisión de literatura, análisis de datos, validación de hipótesis</li>
+</ul></li>
+<li><strong>El resultado debe ser evaluable por criterios externos</strong>
+<ul>
+<li>Reproducibilidad, referencias, consistencia lógica, datos observables</li>
+</ul></li>
+<li><strong>Estás en fase de convergencia</strong>
+<ul>
+<li>Refinar, comparar, decidir, escribir resultados, diseñar experimentos</li>
+</ul></li>
+</ol>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Caution</span>Riesgos del Prompting Científico
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Cierra prematuramente el espacio de exploración</li>
+<li>Reproduce sesgos del marco inicial si este es incorrecto</li>
+<li>Limita la emergencia de ideas nuevas</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="regla-clave-fase-del-proceso-cognitivo" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="regla-clave-fase-del-proceso-cognitivo"><span class="header-section-number">2.3</span> Regla Clave: Fase del Proceso Cognitivo</h3>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Guía de Decisión
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Fase del Trabajo</th>
+<th>→ Tipo de Prompting</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exploración</td>
+<td>→ Creativo</td>
+</tr>
+<tr class="even">
+<td>Generación de hipótesis</td>
+<td>→ Creativo → Científico</td>
+</tr>
+<tr class="odd">
+<td>Formalización</td>
+<td>→ Científico</td>
+</tr>
+<tr class="even">
+<td>Análisis / validación</td>
+<td>→ Científico</td>
+</tr>
+<tr class="odd">
+<td>Síntesis conceptual</td>
+<td>→ Mixto</td>
+</tr>
+<tr class="even">
+<td>Comunicación (según audiencia)</td>
+<td>→ Creativo o Mixto</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="uso-avanzado-combinación-estratégica" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="uso-avanzado-combinación-estratégica"><span class="header-section-number">2.4</span> Uso Avanzado: Combinación Estratégica</h3>
+<p>En proyectos complejos, la secuencia óptima suele ser:</p>
+<ol type="1">
+<li><strong>Prompt creativo</strong> → Abre el espacio conceptual</li>
+<li><strong>Prompt científico</strong> → Selecciona, filtra y valida</li>
+<li><strong>Prompt creativo acotado</strong> → Integra, sintetiza y comunica</li>
+</ol>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Criterio Práctico Rápido
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Antes de escribir un prompt, pregúntate:</p>
+<p><strong>“¿Busco sorprenderme o comprobar algo?”</strong></p>
+<ul>
+<li><strong>Sorprenderme</strong> → Prompting creativo</li>
+<li><strong>Comprobar, justificar, medir</strong> → Prompting científico</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="ejemplos-prácticos-creativo-vs-científico" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="ejemplos-prácticos-creativo-vs-científico"><span class="header-section-number">3</span> Ejemplos Prácticos: Creativo vs Científico</h2>
+<section id="ejemplo-1-regulación-genética" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="ejemplo-1-regulación-genética"><span class="header-section-number">3.1</span> Ejemplo 1: Regulación Genética</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Prompt Creativo</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Prompt Científico</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<pre class="text"><code>Imagina la regulación genética como un sistema de toma de decisiones.
+
+¿Qué metáforas o estructuras abstractas ayudan a entender cómo una célula
+elige entre múltiples programas de expresión?</code></pre>
+<p><strong>Uso</strong>: Exploración conceptual, generación de analogías para enseñanza</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<pre class="text"><code>Describe los mecanismos de regulación transcripcional dependientes de
+factores sigma en E. coli, indicando condiciones de activación y genes regulados,
+según la evidencia experimental reportada.</code></pre>
+<p><strong>Uso</strong>: Revisión técnica, preparación de materiales de curso</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo-2-expresión-diferencial-rna-seq" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="ejemplo-2-expresión-diferencial-rna-seq"><span class="header-section-number">3.2</span> Ejemplo 2: Expresión Diferencial (RNA-seq)</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Prompt Creativo</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Prompt Científico</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<pre class="text"><code>Si la expresión diferencial fuera un 'lenguaje de estados celulares',
+¿qué tipos de 'frases' o 'gramáticas' podrían emerger al comparar tejidos sanos
+y cancerosos?</code></pre>
+<p><strong>Uso</strong>: Exploración de marcos conceptuales, divulgación</p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<pre class="text"><code>Realiza un análisis de expresión diferencial entre muestras de leucemia
+y controles usando DESeq2. Reporta genes con FDR &lt; 0.05 y |log2FC| &gt; 1,
+indicando el tamaño del efecto y la dirección del cambio.</code></pre>
+<p><strong>Uso</strong>: Planificación de análisis, especificación de pipeline</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ejemplo-3-interpretación-de-resultados-ómicos" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="ejemplo-3-interpretación-de-resultados-ómicos"><span class="header-section-number">3.3</span> Ejemplo 3: Interpretación de Resultados Ómicos</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Prompt Creativo</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Prompt Científico</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<pre class="text"><code>Explora posibles narrativas funcionales que conecten los genes
+sobreexpresados en este conjunto de datos con procesos adaptativos
+del sistema celular.</code></pre>
+<p><strong>Uso</strong>: Generación de hipótesis, interpretación biológica exploratoria</p>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<pre class="text"><code>Realiza un análisis de enriquecimiento funcional (GO Biological Process)
+para los genes sobreexpresados. Reporta términos significativos con
+ajuste por múltiples pruebas.</code></pre>
+<p><strong>Uso</strong>: Análisis estadístico formal, manuscrito científico</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="anatomía-de-un-buen-prompt-científico" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="anatomía-de-un-buen-prompt-científico"><span class="header-section-number">4</span> Anatomía de un Buen Prompt Científico</h2>
+<p>Un <strong>buen prompt científico</strong> funciona como un <strong>protocolo experimental escrito</strong>: deja explícito <em>qué se quiere</em>, <em>bajo qué supuestos</em> y <em>cómo se evaluará la respuesta</em>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Componentes Esenciales
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Todo prompt científico debe incluir:</p>
+<ol type="1">
+<li><strong>ROLE</strong> - Rol de la IA</li>
+<li><strong>CONTEXTO</strong> - Datos y objetivo biológico</li>
+<li><strong>TAREA</strong> - Qué se quiere que haga la IA</li>
+<li><strong>RESTRICCIONES</strong> - Límites explícitos</li>
+<li><strong>SALIDA ESPERADA</strong> - Formato del resultado</li>
+<li><strong>VERIFICACIÓN</strong> - Cómo validar la respuesta</li>
+</ol>
+</div>
+</div>
+<section id="componente-1-role-rol-de-la-ia" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="componente-1-role-rol-de-la-ia"><span class="header-section-number">4.1</span> 🧩 Componente 1: ROLE — Rol de la IA</h3>
+<p><strong>¿Qué es?</strong> Define desde qué nivel de experiencia o perspectiva debe responder la IA.</p>
+<p><strong>¿Por qué es importante?</strong> - Evita respuestas genéricas - Ajusta profundidad y lenguaje - Simula el tipo de interlocutor académico esperado</p>
+<p><strong>Ejemplos de frases:</strong> - <em>“Eres un asistente experto en bioinformática.”</em> - <em>“Responde como bioinformático senior enfocado en reproducibilidad.”</em> - <em>“Actúa como asesor técnico, no como divulgador.”</em></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Discusión
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>¿Qué cambiaría en la respuesta si no se especifica el rol?</p>
+</div>
+</div>
+</section>
+<section id="componente-2-contexto-datos-y-objetivo-biológico" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="componente-2-contexto-datos-y-objetivo-biológico"><span class="header-section-number">4.2</span> 🧩 Componente 2: CONTEXTO — Datos y Objetivo Biológico</h3>
+<p><strong>¿Qué es?</strong> Describe los datos disponibles y el objetivo del análisis.</p>
+<p><strong>¿Por qué es importante?</strong> - Evita que la IA asuma información inexistente - Enmarca la respuesta en un problema biológico real</p>
+<p><strong>Ejemplos de frases:</strong> - <em>“Archivo FASTA con secuencias de DNA bacteriano.”</em> - <em>“No se cuenta con información de calidad PHRED.”</em> - <em>“El objetivo es análisis de motivos regulatorios.”</em></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Discusión
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>¿Qué suposiciones incorrectas podría hacer la IA si falta contexto?</p>
+</div>
+</div>
+</section>
+<section id="componente-3-tarea-qué-se-quiere-que-haga-la-ia" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="componente-3-tarea-qué-se-quiere-que-haga-la-ia"><span class="header-section-number">4.3</span> 🧩 Componente 3: TAREA — Qué se Quiere que Haga la IA</h3>
+<p><strong>¿Qué es?</strong> La instrucción central del prompt.</p>
+<p><strong>¿Por qué es importante?</strong> - Permite evaluar si la respuesta cumple o no - Reduce ambigüedad</p>
+<p><strong>Ejemplos de frases:</strong> - <em>“Describe qué métricas de calidad evaluarías.”</em> - <em>“Enumera posibles problemas que afectarían el análisis.”</em> - <em>“Propón un checklist previo al análisis.”</em></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Discusión
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>¿En qué se diferencia “describe” de “analiza” o “decide”?</p>
+</div>
+</div>
+</section>
+<section id="componente-4-restricciones-límites-explícitos" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="componente-4-restricciones-límites-explícitos"><span class="header-section-number">4.4</span> 🧩 Componente 4: RESTRICCIONES — Límites Explícitos</h3>
+<p><strong>¿Qué es?</strong> Reglas claras sobre lo que la IA no debe hacer.</p>
+<p><strong>¿Por qué es importante?</strong> - Reduce alucinaciones - Refuerza control humano</p>
+<p><strong>Ejemplos de frases:</strong> - <em>“No ejecutes código.”</em> - <em>“No inventes resultados ni cifras.”</em> - <em>“Declara explícitamente cualquier supuesto.”</em></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Discusión
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>¿Qué tipo de errores evita cada restricción?</p>
+</div>
+</div>
+</section>
+<section id="componente-5-salida-esperada-formato-del-resultado" class="level3" data-number="4.5">
+<h3 data-number="4.5" class="anchored" data-anchor-id="componente-5-salida-esperada-formato-del-resultado"><span class="header-section-number">4.5</span> 🧩 Componente 5: SALIDA ESPERADA — Formato del Resultado</h3>
+<p><strong>¿Qué es?</strong> Define cómo debe presentarse la respuesta.</p>
+<p><strong>¿Por qué es importante?</strong> - Facilita lectura y evaluación - Permite comparar respuestas</p>
+<p><strong>Ejemplos de frases:</strong> - <em>“Devuelve una lista con viñetas.”</em> - <em>“Usa una tabla con tres columnas.”</em> - <em>“Incluye secciones claramente tituladas.”</em></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Discusión
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>¿Por qué el formato también es parte del método científico?</p>
+</div>
+</div>
+</section>
+<section id="componente-6-verificación-cómo-validar-la-respuesta" class="level3" data-number="4.6">
+<h3 data-number="4.6" class="anchored" data-anchor-id="componente-6-verificación-cómo-validar-la-respuesta"><span class="header-section-number">4.6</span> 🧩 Componente 6: VERIFICACIÓN — Cómo Validar la Respuesta</h3>
+<p><strong>¿Qué es?</strong> Indica cómo un humano puede comprobar la respuesta.</p>
+<p><strong>¿Por qué es importante?</strong> - Convierte texto en conocimiento científico - Garantiza reproducibilidad</p>
+<p><strong>Ejemplos de frases:</strong> - <em>“Indica cómo verificar cada punto con herramientas estándar.”</em> - <em>“Sugiere sanity checks.”</em> - <em>“Describe cómo un humano confirmaría estas afirmaciones.”</em></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Discusión
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>¿Qué diferencia hay entre una respuesta convincente y una verificable?</p>
+</div>
+</div>
+</section>
+</section>
+<section id="mensaje-clave" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="mensaje-clave"><span class="header-section-number">5</span> Mensaje Clave</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Recuerda
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p><em>Un buen prompt no es para que la IA responda, sino para que tú puedas <strong>evaluar, verificar y reproducir</strong> la respuesta.</em></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><em>El prompt es tu hipótesis escrita. La respuesta no es tuya hasta que la validas.</em></p>
+</blockquote>
+</div>
+</div>
+</section>
+<section id="errores-frecuentes-en-genética-al-usar-ia" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="errores-frecuentes-en-genética-al-usar-ia"><span class="header-section-number">6</span> Errores Frecuentes en Genética al Usar IA</h2>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Confusiones Conceptuales Comunes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Homología ≠ función</strong></li>
+<li><strong>Coexpresión ≠ regulación directa</strong></li>
+<li><strong>Motivo encontrado ≠ regulador real</strong></li>
+<li><strong>Significativo estadístico ≠ biológicamente relevante</strong></li>
+</ul>
+<p>Estos errores se amplifican con prompts mal formulados.</p>
+</div>
+</div>
+</section>
+<section id="ejemplos-de-prompts-buenos-y-malos" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="ejemplos-de-prompts-buenos-y-malos"><span class="header-section-number">7</span> Ejemplos de Prompts: Buenos y Malos</h2>
+<section id="ejemplo-1-prompt-mal-hecho" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="ejemplo-1-prompt-mal-hecho"><span class="header-section-number">7.1</span> ❌ Ejemplo 1: Prompt Mal Hecho</h3>
+<pre class="text"><code>Analiza este FASTA y dime si está bien.</code></pre>
+<p><strong>Problemas detectables:</strong> - ¿Qué FASTA? - ¿Qué significa “bien”? - ¿Qué criterios de calidad? - ¿Cómo se verifica la respuesta?</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Conclusión
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este prompt no es científico: es vago e irreproducible.</p>
+</div>
+</div>
+</section>
+<section id="ejemplo-2-prompt-aceptable-pero-mejorable" class="level3" data-number="7.2">
+<h3 data-number="7.2" class="anchored" data-anchor-id="ejemplo-2-prompt-aceptable-pero-mejorable"><span class="header-section-number">7.2</span> ⚠️ Ejemplo 2: Prompt Aceptable (Pero Mejorable)</h3>
+<pre class="text"><code>Tengo un archivo FASTA con secuencias de DNA.
+Analiza su calidad y dime si sirve para análisis posteriores.</code></pre>
+<p><strong>Aspectos positivos:</strong> - Hay contexto - Hay intención analítica</p>
+<p><strong>Deficiencias:</strong> - No define criterios de calidad - No limita invención de resultados - No pide verificación</p>
+</section>
+<section id="ejemplo-3-prompt-científico-correcto" class="level3" data-number="7.3">
+<h3 data-number="7.3" class="anchored" data-anchor-id="ejemplo-3-prompt-científico-correcto"><span class="header-section-number">7.3</span> ✅ Ejemplo 3: Prompt Científico Correcto</h3>
+<pre class="text"><code>ROLE:
+Eres un asistente experto en bioinformática y análisis de secuencias.
+
+CONTEXTO:
+Tengo un archivo FASTA con secuencias de DNA (longitud variable, sin calidad PHRED).
+El objetivo es evaluar si los datos son adecuados para análisis posteriores
+como descubrimiento de motivos o conteo de k-mers.
+
+TAREA:
+Describe qué métricas de calidad revisarías en este FASTA
+y qué problemas potenciales podrían afectar el análisis.
+
+RESTRICCIONES:
+- No ejecutes código.
+- No inventes resultados.
+- Si falta información, indícalo explícitamente.
+- Limítate a razonamiento conceptual.
+
+SALIDA ESPERADA:
+- Lista de métricas de calidad
+- Posibles problemas asociados
+- Recomendaciones generales
+
+VERIFICACIÓN:
+Indica cómo un humano podría verificar cada métrica usando herramientas estándar.</code></pre>
+</section>
+</section>
+<section id="por-qué-es-buen-prompt-científico" class="level2 callout-success" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="por-qué-es-buen-prompt-científico"><span class="header-section-number">8</span> ¿Por qué es buen prompt científico?</h2>
+<ul>
+<li>✓ Se puede verificar cada punto</li>
+<li>✓ Evita alucinaciones</li>
+<li>✓ Proporciona criterios claros</li>
+<li>✓ Es reproducible</li>
+</ul>
+</section>
+<section id="ejemplo-4-prompt-con-estructura-científica-avanzada" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="ejemplo-4-prompt-con-estructura-científica-avanzada"><span class="header-section-number">8.1</span> ⭐⭐⭐ Ejemplo 4: Prompt con Estructura Científica Avanzada</h3>
+<pre class="text"><code>ROLE:
+Actúa como bioinformático senior enfocado en reproducibilidad.
+
+CONTEXTO:
+Archivo FASTA de DNA genómico (organismo bacteriano).
+Planeo usarlo para análisis de motivos regulatorios.
+
+TAREA:
+Propón un checklist de control de calidad previo al análisis,
+explicando por qué cada punto es relevante biológicamente.
+
+RESTRICCIONES:
+- No asumas datos que no se mencionan.
+- No generes cifras.
+- Declara supuestos explícitamente.
+
+FORMATO DE SALIDA:
+Tabla con columnas:
+1) Métrica
+2) Justificación biológica
+3) Herramienta típica de verificación
+
+VERIFICACIÓN:
+Incluye una sección final titulada:
+"Cómo validar que estas recomendaciones son correctas".</code></pre>
+</section>
+<section id="excelencia-científica" class="level2 callout-success" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="excelencia-científica"><span class="header-section-number">9</span> Excelencia Científica</h2>
+<blockquote class="blockquote">
+<p><em>Esto es pensar como científico, no como usuario de IA.</em></p>
+</blockquote>
+</section>
+<section id="ejercicio-en-clase-mini-debate" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="ejercicio-en-clase-mini-debate"><span class="header-section-number">10</span> Ejercicio en Clase: Mini-Debate</h2>
+<section id="debate-correlación-causalidad-y-evidencia" class="level3 exercise-box" data-number="10.1">
+<h3 data-number="10.1" class="anchored" data-anchor-id="debate-correlación-causalidad-y-evidencia"><span class="header-section-number">10.1</span> Debate: Correlación, Causalidad y Evidencia</h3>
+<p><strong>Prompt a analizar:</strong></p>
+<pre class="text"><code>ROLE:
+Eres un asistente experto en bioinformática.
+
+CONTEXTO:
+Tengo datos de expresión génica bajo dos condiciones.
+
+TAREA:
+Determina si el gen X regula al gen Y.</code></pre>
+<p><strong>Organización (10–15 minutos):</strong></p>
+<p>Dividir al grupo en dos equipos: - <strong>Equipo A</strong>: “Con estos datos <strong>sí</strong> se puede afirmar que X regula a Y” - <strong>Equipo B</strong>: “Con estos datos <strong>no</strong> se puede afirmar regulación”</p>
+<p><strong>Preguntas guía:</strong> - ¿Qué evidencia real aportan los datos de expresión? - ¿Qué afirmaciones <strong>no</strong> se pueden sostener? - ¿Qué experimentos o datos adicionales serían necesarios? - ¿Qué riesgos hay al usar lenguaje causal sin evidencia?</p>
+</section>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Mensaje del Debate
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p><em>Los datos responden solo a las preguntas que fueron diseñados para responder.</em></p>
+</blockquote>
+<p><strong>Discusión crítica:</strong></p>
+<p>Este prompt <strong>confunde correlación con causalidad</strong>. Los datos de expresión génica solo permiten observar asociaciones estadísticas, no regulación directa.</p>
+<p><strong>Conexión con Machine Learning:</strong> - Los modelos aprenden a <strong>predecir</strong> patrones - <strong>No aprenden causalidad biológica</strong> por sí mismos - En clases posteriores entrenarán modelos predictivos - <strong>No demostrarán causalidad</strong>, solo capacidad predictiva</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Advertencia Formativa
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<blockquote class="blockquote">
+<p><em>Un modelo puede predecir muy bien y aun así estar científicamente equivocado.</em></p>
+</blockquote>
+<p>Confundir predicción con causalidad puede llevar a: - Malas interpretaciones biológicas - Conclusiones exageradas - Errores en diseño experimental</p>
+</div>
+</div>
+</section>
+<section id="resumen" class="level2" data-number="11">
+<h2 data-number="11" class="anchored" data-anchor-id="resumen"><span class="header-section-number">11</span> Resumen</h2>
+<p>Has aprendido:</p>
+<ul>
+<li>✓ La diferencia fundamental entre prompting creativo y científico</li>
+<li>✓ Cuándo usar cada tipo según la fase del proceso cognitivo</li>
+<li>✓ Los 6 componentes esenciales de un prompt científico</li>
+<li>✓ Cómo identificar y evitar prompts deficientes</li>
+<li>✓ La importancia de distinguir correlación de causalidad</li>
+</ul>
+<div class="chapter-nav">
+<div class="chapter-nav-item chapter-nav-prev">
+<div class="chapter-nav-label">
+<p>Anterior</p>
+</div>
+<div class="chapter-nav-title">
+<p>Introducción y Marco Epistemológico</p>
+</div>
+</div>
+<div class="chapter-nav-item chapter-nav-next">
+<div class="chapter-nav-label">
+<p>Siguiente</p>
+</div>
+<div class="chapter-nav-title">
+<p>Patrones Avanzados</p>
+</div>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section></div></main> <!-- /main -->
+<script src="assets/js/custom.js"></script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("^(?:http:|https:)\/\/(?:www\.)?yourdomain\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Prompting Científico"</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Anatomía y práctica del prompt verificable"</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> last-modified</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> "Aprende a formular prompts científicos con estructura, contexto y criterios de verificación"</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [prompting, metodología, ciencia]</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introducción</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>En esta sección profundizaremos en el **prompting científico**: cómo estructurar instrucciones para la IA de manera que produzcan resultados verificables, reproducibles y científicamente válidos.</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Prompting Creativo vs Científico: Comparación Detallada</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="fu">### 🧠 PROMPTING CREATIVO</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Abierto, ambiguo, exploratorio</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>**Es bueno aplicarlo cuando:**</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**No sabes aún qué estás buscando**</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Fase de ideas, lluvia de ideas, generación de hipótesis o metáforas</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Ejemplo: *"Explora posibles analogías entre regulación genética y lenguajes simbólicos"*</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Quieres ampliar el espacio de posibilidades**</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Diseño conceptual, narrativas, enfoques alternativos</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Útil para romper marcos rígidos o sesgos previos</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**El valor está en la originalidad, no en la verificabilidad inmediata**</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Ensayos teóricos, pensamiento especulativo, divulgación, docencia creativa</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Trabajas con sistemas complejos mal definidos**</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Sistemas biológicos, sociales o simbólicos aún no formalizados</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## Riesgos del Prompting Creativo</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Genera respuestas plausibles pero no falsables</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Favorece la sobreinterpretación y analogías engañosas</span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No es adecuado para decisiones técnicas o conclusiones formales</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="fu">### 🔬 PROMPTING CIENTÍFICO</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Contextualizado, acotado, verificable</span></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>**Es bueno aplicarlo cuando:**</span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**La pregunta está bien definida**</span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Variables claras, dominio específico, objetivo explícito</span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Ejemplo: *"Resume los mecanismos de regulación transcripcional del operón lac en E. coli según RegulonDB"*</span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Necesitas precisión, trazabilidad y control de supuestos**</span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Revisión de literatura, análisis de datos, validación de hipótesis</span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**El resultado debe ser evaluable por criterios externos**</span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Reproducibilidad, referencias, consistencia lógica, datos observables</span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Estás en fase de convergencia**</span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Refinar, comparar, decidir, escribir resultados, diseñar experimentos</span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution}</span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a><span class="fu">## Riesgos del Prompting Científico</span></span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Cierra prematuramente el espacio de exploración</span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Reproduce sesgos del marco inicial si este es incorrecto</span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Limita la emergencia de ideas nuevas</span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a><span class="fu">### Regla Clave: Fase del Proceso Cognitivo</span></span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## Guía de Decisión</span></span>
+<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Fase del Trabajo <span class="pp">|</span> → Tipo de Prompting <span class="pp">|</span></span>
+<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a><span class="pp">|------------------|---------------------|</span></span>
+<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Exploración <span class="pp">|</span> → Creativo <span class="pp">|</span></span>
+<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Generación de hipótesis <span class="pp">|</span> → Creativo → Científico <span class="pp">|</span></span>
+<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Formalización <span class="pp">|</span> → Científico <span class="pp">|</span></span>
+<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Análisis / validación <span class="pp">|</span> → Científico <span class="pp">|</span></span>
+<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Síntesis conceptual <span class="pp">|</span> → Mixto <span class="pp">|</span></span>
+<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Comunicación (según audiencia) <span class="pp">|</span> → Creativo o Mixto <span class="pp">|</span></span>
+<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a><span class="fu">### Uso Avanzado: Combinación Estratégica</span></span>
+<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a>En proyectos complejos, la secuencia óptima suele ser:</span>
+<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Prompt creativo** → Abre el espacio conceptual</span>
+<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Prompt científico** → Selecciona, filtra y valida</span>
+<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Prompt creativo acotado** → Integra, sintetiza y comunica</span>
+<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a><span class="fu">## Criterio Práctico Rápido</span></span>
+<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a>Antes de escribir un prompt, pregúntate:</span>
+<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a>**"¿Busco sorprenderme o comprobar algo?"**</span>
+<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-109"><a href="#cb12-109" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Sorprenderme** → Prompting creativo</span>
+<span id="cb12-110"><a href="#cb12-110" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Comprobar, justificar, medir** → Prompting científico</span>
+<span id="cb12-111"><a href="#cb12-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-112"><a href="#cb12-112" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-113"><a href="#cb12-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-114"><a href="#cb12-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-115"><a href="#cb12-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-116"><a href="#cb12-116" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ejemplos Prácticos: Creativo vs Científico</span></span>
+<span id="cb12-117"><a href="#cb12-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-118"><a href="#cb12-118" aria-hidden="true" tabindex="-1"></a><span class="fu">### Ejemplo 1: Regulación Genética</span></span>
+<span id="cb12-119"><a href="#cb12-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-120"><a href="#cb12-120" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb12-121"><a href="#cb12-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-122"><a href="#cb12-122" aria-hidden="true" tabindex="-1"></a><span class="fu">## Prompt Creativo</span></span>
+<span id="cb12-123"><a href="#cb12-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-124"><a href="#cb12-124" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-125"><a href="#cb12-125" aria-hidden="true" tabindex="-1"></a><span class="in">Imagina la regulación genética como un sistema de toma de decisiones.</span></span>
+<span id="cb12-126"><a href="#cb12-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-127"><a href="#cb12-127" aria-hidden="true" tabindex="-1"></a><span class="in">¿Qué metáforas o estructuras abstractas ayudan a entender cómo una célula</span></span>
+<span id="cb12-128"><a href="#cb12-128" aria-hidden="true" tabindex="-1"></a><span class="in">elige entre múltiples programas de expresión?</span></span>
+<span id="cb12-129"><a href="#cb12-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-130"><a href="#cb12-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-131"><a href="#cb12-131" aria-hidden="true" tabindex="-1"></a>**Uso**: Exploración conceptual, generación de analogías para enseñanza</span>
+<span id="cb12-132"><a href="#cb12-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-133"><a href="#cb12-133" aria-hidden="true" tabindex="-1"></a><span class="fu">## Prompt Científico</span></span>
+<span id="cb12-134"><a href="#cb12-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-135"><a href="#cb12-135" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a><span class="in">Describe los mecanismos de regulación transcripcional dependientes de</span></span>
+<span id="cb12-137"><a href="#cb12-137" aria-hidden="true" tabindex="-1"></a><span class="in">factores sigma en E. coli, indicando condiciones de activación y genes regulados,</span></span>
+<span id="cb12-138"><a href="#cb12-138" aria-hidden="true" tabindex="-1"></a><span class="in">según la evidencia experimental reportada.</span></span>
+<span id="cb12-139"><a href="#cb12-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-140"><a href="#cb12-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-141"><a href="#cb12-141" aria-hidden="true" tabindex="-1"></a>**Uso**: Revisión técnica, preparación de materiales de curso</span>
+<span id="cb12-142"><a href="#cb12-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-143"><a href="#cb12-143" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-144"><a href="#cb12-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-145"><a href="#cb12-145" aria-hidden="true" tabindex="-1"></a><span class="fu">### Ejemplo 2: Expresión Diferencial (RNA-seq)</span></span>
+<span id="cb12-146"><a href="#cb12-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-147"><a href="#cb12-147" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb12-148"><a href="#cb12-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-149"><a href="#cb12-149" aria-hidden="true" tabindex="-1"></a><span class="fu">## Prompt Creativo</span></span>
+<span id="cb12-150"><a href="#cb12-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-151"><a href="#cb12-151" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-152"><a href="#cb12-152" aria-hidden="true" tabindex="-1"></a><span class="in">Si la expresión diferencial fuera un 'lenguaje de estados celulares',</span></span>
+<span id="cb12-153"><a href="#cb12-153" aria-hidden="true" tabindex="-1"></a><span class="in">¿qué tipos de 'frases' o 'gramáticas' podrían emerger al comparar tejidos sanos</span></span>
+<span id="cb12-154"><a href="#cb12-154" aria-hidden="true" tabindex="-1"></a><span class="in">y cancerosos?</span></span>
+<span id="cb12-155"><a href="#cb12-155" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-156"><a href="#cb12-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-157"><a href="#cb12-157" aria-hidden="true" tabindex="-1"></a>**Uso**: Exploración de marcos conceptuales, divulgación</span>
+<span id="cb12-158"><a href="#cb12-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-159"><a href="#cb12-159" aria-hidden="true" tabindex="-1"></a><span class="fu">## Prompt Científico</span></span>
+<span id="cb12-160"><a href="#cb12-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-161"><a href="#cb12-161" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-162"><a href="#cb12-162" aria-hidden="true" tabindex="-1"></a><span class="in">Realiza un análisis de expresión diferencial entre muestras de leucemia</span></span>
+<span id="cb12-163"><a href="#cb12-163" aria-hidden="true" tabindex="-1"></a><span class="in">y controles usando DESeq2. Reporta genes con FDR &lt; 0.05 y |log2FC| &gt; 1,</span></span>
+<span id="cb12-164"><a href="#cb12-164" aria-hidden="true" tabindex="-1"></a><span class="in">indicando el tamaño del efecto y la dirección del cambio.</span></span>
+<span id="cb12-165"><a href="#cb12-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-166"><a href="#cb12-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-167"><a href="#cb12-167" aria-hidden="true" tabindex="-1"></a>**Uso**: Planificación de análisis, especificación de pipeline</span>
+<span id="cb12-168"><a href="#cb12-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-169"><a href="#cb12-169" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-170"><a href="#cb12-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-171"><a href="#cb12-171" aria-hidden="true" tabindex="-1"></a><span class="fu">### Ejemplo 3: Interpretación de Resultados Ómicos</span></span>
+<span id="cb12-172"><a href="#cb12-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-173"><a href="#cb12-173" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb12-174"><a href="#cb12-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-175"><a href="#cb12-175" aria-hidden="true" tabindex="-1"></a><span class="fu">## Prompt Creativo</span></span>
+<span id="cb12-176"><a href="#cb12-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-177"><a href="#cb12-177" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-178"><a href="#cb12-178" aria-hidden="true" tabindex="-1"></a><span class="in">Explora posibles narrativas funcionales que conecten los genes</span></span>
+<span id="cb12-179"><a href="#cb12-179" aria-hidden="true" tabindex="-1"></a><span class="in">sobreexpresados en este conjunto de datos con procesos adaptativos</span></span>
+<span id="cb12-180"><a href="#cb12-180" aria-hidden="true" tabindex="-1"></a><span class="in">del sistema celular.</span></span>
+<span id="cb12-181"><a href="#cb12-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-182"><a href="#cb12-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-183"><a href="#cb12-183" aria-hidden="true" tabindex="-1"></a>**Uso**: Generación de hipótesis, interpretación biológica exploratoria</span>
+<span id="cb12-184"><a href="#cb12-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-185"><a href="#cb12-185" aria-hidden="true" tabindex="-1"></a><span class="fu">## Prompt Científico</span></span>
+<span id="cb12-186"><a href="#cb12-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-187"><a href="#cb12-187" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-188"><a href="#cb12-188" aria-hidden="true" tabindex="-1"></a><span class="in">Realiza un análisis de enriquecimiento funcional (GO Biological Process)</span></span>
+<span id="cb12-189"><a href="#cb12-189" aria-hidden="true" tabindex="-1"></a><span class="in">para los genes sobreexpresados. Reporta términos significativos con</span></span>
+<span id="cb12-190"><a href="#cb12-190" aria-hidden="true" tabindex="-1"></a><span class="in">ajuste por múltiples pruebas.</span></span>
+<span id="cb12-191"><a href="#cb12-191" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-192"><a href="#cb12-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-193"><a href="#cb12-193" aria-hidden="true" tabindex="-1"></a>**Uso**: Análisis estadístico formal, manuscrito científico</span>
+<span id="cb12-194"><a href="#cb12-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-195"><a href="#cb12-195" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-196"><a href="#cb12-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-197"><a href="#cb12-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-198"><a href="#cb12-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-199"><a href="#cb12-199" aria-hidden="true" tabindex="-1"></a><span class="fu">## Anatomía de un Buen Prompt Científico</span></span>
+<span id="cb12-200"><a href="#cb12-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-201"><a href="#cb12-201" aria-hidden="true" tabindex="-1"></a>Un **buen prompt científico** funciona como un **protocolo experimental escrito**: deja explícito *qué se quiere*, *bajo qué supuestos* y *cómo se evaluará la respuesta*.</span>
+<span id="cb12-202"><a href="#cb12-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-203"><a href="#cb12-203" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb12-204"><a href="#cb12-204" aria-hidden="true" tabindex="-1"></a><span class="fu">## Componentes Esenciales</span></span>
+<span id="cb12-205"><a href="#cb12-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-206"><a href="#cb12-206" aria-hidden="true" tabindex="-1"></a>Todo prompt científico debe incluir:</span>
+<span id="cb12-207"><a href="#cb12-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-208"><a href="#cb12-208" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**ROLE** - Rol de la IA</span>
+<span id="cb12-209"><a href="#cb12-209" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**CONTEXTO** - Datos y objetivo biológico</span>
+<span id="cb12-210"><a href="#cb12-210" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**TAREA** - Qué se quiere que haga la IA</span>
+<span id="cb12-211"><a href="#cb12-211" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**RESTRICCIONES** - Límites explícitos</span>
+<span id="cb12-212"><a href="#cb12-212" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**SALIDA ESPERADA** - Formato del resultado</span>
+<span id="cb12-213"><a href="#cb12-213" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**VERIFICACIÓN** - Cómo validar la respuesta</span>
+<span id="cb12-214"><a href="#cb12-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-215"><a href="#cb12-215" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-216"><a href="#cb12-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-217"><a href="#cb12-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-218"><a href="#cb12-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-219"><a href="#cb12-219" aria-hidden="true" tabindex="-1"></a><span class="fu">### 🧩 Componente 1: ROLE — Rol de la IA</span></span>
+<span id="cb12-220"><a href="#cb12-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-221"><a href="#cb12-221" aria-hidden="true" tabindex="-1"></a>**¿Qué es?**</span>
+<span id="cb12-222"><a href="#cb12-222" aria-hidden="true" tabindex="-1"></a>Define desde qué nivel de experiencia o perspectiva debe responder la IA.</span>
+<span id="cb12-223"><a href="#cb12-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-224"><a href="#cb12-224" aria-hidden="true" tabindex="-1"></a>**¿Por qué es importante?**</span>
+<span id="cb12-225"><a href="#cb12-225" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Evita respuestas genéricas</span>
+<span id="cb12-226"><a href="#cb12-226" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ajusta profundidad y lenguaje</span>
+<span id="cb12-227"><a href="#cb12-227" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Simula el tipo de interlocutor académico esperado</span>
+<span id="cb12-228"><a href="#cb12-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-229"><a href="#cb12-229" aria-hidden="true" tabindex="-1"></a>**Ejemplos de frases:**</span>
+<span id="cb12-230"><a href="#cb12-230" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"Eres un asistente experto en bioinformática."*</span>
+<span id="cb12-231"><a href="#cb12-231" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"Responde como bioinformático senior enfocado en reproducibilidad."*</span>
+<span id="cb12-232"><a href="#cb12-232" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"Actúa como asesor técnico, no como divulgador."*</span>
+<span id="cb12-233"><a href="#cb12-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-234"><a href="#cb12-234" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb12-235"><a href="#cb12-235" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discusión</span></span>
+<span id="cb12-236"><a href="#cb12-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-237"><a href="#cb12-237" aria-hidden="true" tabindex="-1"></a>¿Qué cambiaría en la respuesta si no se especifica el rol?</span>
+<span id="cb12-238"><a href="#cb12-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-239"><a href="#cb12-239" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-240"><a href="#cb12-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-241"><a href="#cb12-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-242"><a href="#cb12-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-243"><a href="#cb12-243" aria-hidden="true" tabindex="-1"></a><span class="fu">### 🧩 Componente 2: CONTEXTO — Datos y Objetivo Biológico</span></span>
+<span id="cb12-244"><a href="#cb12-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-245"><a href="#cb12-245" aria-hidden="true" tabindex="-1"></a>**¿Qué es?**</span>
+<span id="cb12-246"><a href="#cb12-246" aria-hidden="true" tabindex="-1"></a>Describe los datos disponibles y el objetivo del análisis.</span>
+<span id="cb12-247"><a href="#cb12-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-248"><a href="#cb12-248" aria-hidden="true" tabindex="-1"></a>**¿Por qué es importante?**</span>
+<span id="cb12-249"><a href="#cb12-249" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Evita que la IA asuma información inexistente</span>
+<span id="cb12-250"><a href="#cb12-250" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Enmarca la respuesta en un problema biológico real</span>
+<span id="cb12-251"><a href="#cb12-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-252"><a href="#cb12-252" aria-hidden="true" tabindex="-1"></a>**Ejemplos de frases:**</span>
+<span id="cb12-253"><a href="#cb12-253" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"Archivo FASTA con secuencias de DNA bacteriano."*</span>
+<span id="cb12-254"><a href="#cb12-254" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"No se cuenta con información de calidad PHRED."*</span>
+<span id="cb12-255"><a href="#cb12-255" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"El objetivo es análisis de motivos regulatorios."*</span>
+<span id="cb12-256"><a href="#cb12-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-257"><a href="#cb12-257" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb12-258"><a href="#cb12-258" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discusión</span></span>
+<span id="cb12-259"><a href="#cb12-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-260"><a href="#cb12-260" aria-hidden="true" tabindex="-1"></a>¿Qué suposiciones incorrectas podría hacer la IA si falta contexto?</span>
+<span id="cb12-261"><a href="#cb12-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-262"><a href="#cb12-262" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-263"><a href="#cb12-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-264"><a href="#cb12-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-265"><a href="#cb12-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-266"><a href="#cb12-266" aria-hidden="true" tabindex="-1"></a><span class="fu">### 🧩 Componente 3: TAREA — Qué se Quiere que Haga la IA</span></span>
+<span id="cb12-267"><a href="#cb12-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-268"><a href="#cb12-268" aria-hidden="true" tabindex="-1"></a>**¿Qué es?**</span>
+<span id="cb12-269"><a href="#cb12-269" aria-hidden="true" tabindex="-1"></a>La instrucción central del prompt.</span>
+<span id="cb12-270"><a href="#cb12-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-271"><a href="#cb12-271" aria-hidden="true" tabindex="-1"></a>**¿Por qué es importante?**</span>
+<span id="cb12-272"><a href="#cb12-272" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Permite evaluar si la respuesta cumple o no</span>
+<span id="cb12-273"><a href="#cb12-273" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Reduce ambigüedad</span>
+<span id="cb12-274"><a href="#cb12-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-275"><a href="#cb12-275" aria-hidden="true" tabindex="-1"></a>**Ejemplos de frases:**</span>
+<span id="cb12-276"><a href="#cb12-276" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"Describe qué métricas de calidad evaluarías."*</span>
+<span id="cb12-277"><a href="#cb12-277" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"Enumera posibles problemas que afectarían el análisis."*</span>
+<span id="cb12-278"><a href="#cb12-278" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"Propón un checklist previo al análisis."*</span>
+<span id="cb12-279"><a href="#cb12-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-280"><a href="#cb12-280" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb12-281"><a href="#cb12-281" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discusión</span></span>
+<span id="cb12-282"><a href="#cb12-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-283"><a href="#cb12-283" aria-hidden="true" tabindex="-1"></a>¿En qué se diferencia "describe" de "analiza" o "decide"?</span>
+<span id="cb12-284"><a href="#cb12-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-285"><a href="#cb12-285" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-286"><a href="#cb12-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-287"><a href="#cb12-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-288"><a href="#cb12-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-289"><a href="#cb12-289" aria-hidden="true" tabindex="-1"></a><span class="fu">### 🧩 Componente 4: RESTRICCIONES — Límites Explícitos</span></span>
+<span id="cb12-290"><a href="#cb12-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-291"><a href="#cb12-291" aria-hidden="true" tabindex="-1"></a>**¿Qué es?**</span>
+<span id="cb12-292"><a href="#cb12-292" aria-hidden="true" tabindex="-1"></a>Reglas claras sobre lo que la IA no debe hacer.</span>
+<span id="cb12-293"><a href="#cb12-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-294"><a href="#cb12-294" aria-hidden="true" tabindex="-1"></a>**¿Por qué es importante?**</span>
+<span id="cb12-295"><a href="#cb12-295" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Reduce alucinaciones</span>
+<span id="cb12-296"><a href="#cb12-296" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Refuerza control humano</span>
+<span id="cb12-297"><a href="#cb12-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-298"><a href="#cb12-298" aria-hidden="true" tabindex="-1"></a>**Ejemplos de frases:**</span>
+<span id="cb12-299"><a href="#cb12-299" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"No ejecutes código."*</span>
+<span id="cb12-300"><a href="#cb12-300" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"No inventes resultados ni cifras."*</span>
+<span id="cb12-301"><a href="#cb12-301" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"Declara explícitamente cualquier supuesto."*</span>
+<span id="cb12-302"><a href="#cb12-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-303"><a href="#cb12-303" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb12-304"><a href="#cb12-304" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discusión</span></span>
+<span id="cb12-305"><a href="#cb12-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-306"><a href="#cb12-306" aria-hidden="true" tabindex="-1"></a>¿Qué tipo de errores evita cada restricción?</span>
+<span id="cb12-307"><a href="#cb12-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-308"><a href="#cb12-308" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-309"><a href="#cb12-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-310"><a href="#cb12-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-311"><a href="#cb12-311" aria-hidden="true" tabindex="-1"></a><span class="fu">### 🧩 Componente 5: SALIDA ESPERADA — Formato del Resultado</span></span>
+<span id="cb12-312"><a href="#cb12-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-313"><a href="#cb12-313" aria-hidden="true" tabindex="-1"></a>**¿Qué es?**</span>
+<span id="cb12-314"><a href="#cb12-314" aria-hidden="true" tabindex="-1"></a>Define cómo debe presentarse la respuesta.</span>
+<span id="cb12-315"><a href="#cb12-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-316"><a href="#cb12-316" aria-hidden="true" tabindex="-1"></a>**¿Por qué es importante?**</span>
+<span id="cb12-317"><a href="#cb12-317" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Facilita lectura y evaluación</span>
+<span id="cb12-318"><a href="#cb12-318" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Permite comparar respuestas</span>
+<span id="cb12-319"><a href="#cb12-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-320"><a href="#cb12-320" aria-hidden="true" tabindex="-1"></a>**Ejemplos de frases:**</span>
+<span id="cb12-321"><a href="#cb12-321" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"Devuelve una lista con viñetas."*</span>
+<span id="cb12-322"><a href="#cb12-322" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"Usa una tabla con tres columnas."*</span>
+<span id="cb12-323"><a href="#cb12-323" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"Incluye secciones claramente tituladas."*</span>
+<span id="cb12-324"><a href="#cb12-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-325"><a href="#cb12-325" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb12-326"><a href="#cb12-326" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discusión</span></span>
+<span id="cb12-327"><a href="#cb12-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-328"><a href="#cb12-328" aria-hidden="true" tabindex="-1"></a>¿Por qué el formato también es parte del método científico?</span>
+<span id="cb12-329"><a href="#cb12-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-330"><a href="#cb12-330" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-331"><a href="#cb12-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-332"><a href="#cb12-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-333"><a href="#cb12-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-334"><a href="#cb12-334" aria-hidden="true" tabindex="-1"></a><span class="fu">### 🧩 Componente 6: VERIFICACIÓN — Cómo Validar la Respuesta</span></span>
+<span id="cb12-335"><a href="#cb12-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-336"><a href="#cb12-336" aria-hidden="true" tabindex="-1"></a>**¿Qué es?**</span>
+<span id="cb12-337"><a href="#cb12-337" aria-hidden="true" tabindex="-1"></a>Indica cómo un humano puede comprobar la respuesta.</span>
+<span id="cb12-338"><a href="#cb12-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-339"><a href="#cb12-339" aria-hidden="true" tabindex="-1"></a>**¿Por qué es importante?**</span>
+<span id="cb12-340"><a href="#cb12-340" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Convierte texto en conocimiento científico</span>
+<span id="cb12-341"><a href="#cb12-341" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Garantiza reproducibilidad</span>
+<span id="cb12-342"><a href="#cb12-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-343"><a href="#cb12-343" aria-hidden="true" tabindex="-1"></a>**Ejemplos de frases:**</span>
+<span id="cb12-344"><a href="#cb12-344" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"Indica cómo verificar cada punto con herramientas estándar."*</span>
+<span id="cb12-345"><a href="#cb12-345" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"Sugiere sanity checks."*</span>
+<span id="cb12-346"><a href="#cb12-346" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>*"Describe cómo un humano confirmaría estas afirmaciones."*</span>
+<span id="cb12-347"><a href="#cb12-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-348"><a href="#cb12-348" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb12-349"><a href="#cb12-349" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discusión</span></span>
+<span id="cb12-350"><a href="#cb12-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-351"><a href="#cb12-351" aria-hidden="true" tabindex="-1"></a>¿Qué diferencia hay entre una respuesta convincente y una verificable?</span>
+<span id="cb12-352"><a href="#cb12-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-353"><a href="#cb12-353" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-354"><a href="#cb12-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-355"><a href="#cb12-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-356"><a href="#cb12-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-357"><a href="#cb12-357" aria-hidden="true" tabindex="-1"></a><span class="fu">## Mensaje Clave</span></span>
+<span id="cb12-358"><a href="#cb12-358" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-359"><a href="#cb12-359" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb12-360"><a href="#cb12-360" aria-hidden="true" tabindex="-1"></a><span class="fu">## Recuerda</span></span>
+<span id="cb12-361"><a href="#cb12-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-362"><a href="#cb12-362" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *Un buen prompt no es para que la IA responda, sino para que tú puedas **evaluar, verificar y reproducir** la respuesta.*</span></span>
+<span id="cb12-363"><a href="#cb12-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-364"><a href="#cb12-364" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *El prompt es tu hipótesis escrita. La respuesta no es tuya hasta que la validas.*</span></span>
+<span id="cb12-365"><a href="#cb12-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-366"><a href="#cb12-366" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-367"><a href="#cb12-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-368"><a href="#cb12-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-369"><a href="#cb12-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-370"><a href="#cb12-370" aria-hidden="true" tabindex="-1"></a><span class="fu">## Errores Frecuentes en Genética al Usar IA</span></span>
+<span id="cb12-371"><a href="#cb12-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-372"><a href="#cb12-372" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb12-373"><a href="#cb12-373" aria-hidden="true" tabindex="-1"></a><span class="fu">## Confusiones Conceptuales Comunes</span></span>
+<span id="cb12-374"><a href="#cb12-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-375"><a href="#cb12-375" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Homología ≠ función**</span>
+<span id="cb12-376"><a href="#cb12-376" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Coexpresión ≠ regulación directa**</span>
+<span id="cb12-377"><a href="#cb12-377" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Motivo encontrado ≠ regulador real**</span>
+<span id="cb12-378"><a href="#cb12-378" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Significativo estadístico ≠ biológicamente relevante**</span>
+<span id="cb12-379"><a href="#cb12-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-380"><a href="#cb12-380" aria-hidden="true" tabindex="-1"></a>Estos errores se amplifican con prompts mal formulados.</span>
+<span id="cb12-381"><a href="#cb12-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-382"><a href="#cb12-382" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-383"><a href="#cb12-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-384"><a href="#cb12-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-385"><a href="#cb12-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-386"><a href="#cb12-386" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ejemplos de Prompts: Buenos y Malos</span></span>
+<span id="cb12-387"><a href="#cb12-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-388"><a href="#cb12-388" aria-hidden="true" tabindex="-1"></a><span class="fu">### ❌ Ejemplo 1: Prompt Mal Hecho</span></span>
+<span id="cb12-389"><a href="#cb12-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-390"><a href="#cb12-390" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-391"><a href="#cb12-391" aria-hidden="true" tabindex="-1"></a><span class="in">Analiza este FASTA y dime si está bien.</span></span>
+<span id="cb12-392"><a href="#cb12-392" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-393"><a href="#cb12-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-394"><a href="#cb12-394" aria-hidden="true" tabindex="-1"></a>**Problemas detectables:**</span>
+<span id="cb12-395"><a href="#cb12-395" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Qué FASTA?</span>
+<span id="cb12-396"><a href="#cb12-396" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Qué significa "bien"?</span>
+<span id="cb12-397"><a href="#cb12-397" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Qué criterios de calidad?</span>
+<span id="cb12-398"><a href="#cb12-398" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Cómo se verifica la respuesta?</span>
+<span id="cb12-399"><a href="#cb12-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-400"><a href="#cb12-400" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb12-401"><a href="#cb12-401" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusión</span></span>
+<span id="cb12-402"><a href="#cb12-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-403"><a href="#cb12-403" aria-hidden="true" tabindex="-1"></a>Este prompt no es científico: es vago e irreproducible.</span>
+<span id="cb12-404"><a href="#cb12-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-405"><a href="#cb12-405" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-406"><a href="#cb12-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-407"><a href="#cb12-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-408"><a href="#cb12-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-409"><a href="#cb12-409" aria-hidden="true" tabindex="-1"></a><span class="fu">### ⚠️ Ejemplo 2: Prompt Aceptable (Pero Mejorable)</span></span>
+<span id="cb12-410"><a href="#cb12-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-411"><a href="#cb12-411" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-412"><a href="#cb12-412" aria-hidden="true" tabindex="-1"></a><span class="in">Tengo un archivo FASTA con secuencias de DNA.</span></span>
+<span id="cb12-413"><a href="#cb12-413" aria-hidden="true" tabindex="-1"></a><span class="in">Analiza su calidad y dime si sirve para análisis posteriores.</span></span>
+<span id="cb12-414"><a href="#cb12-414" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-415"><a href="#cb12-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-416"><a href="#cb12-416" aria-hidden="true" tabindex="-1"></a>**Aspectos positivos:**</span>
+<span id="cb12-417"><a href="#cb12-417" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Hay contexto</span>
+<span id="cb12-418"><a href="#cb12-418" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Hay intención analítica</span>
+<span id="cb12-419"><a href="#cb12-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-420"><a href="#cb12-420" aria-hidden="true" tabindex="-1"></a>**Deficiencias:**</span>
+<span id="cb12-421"><a href="#cb12-421" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No define criterios de calidad</span>
+<span id="cb12-422"><a href="#cb12-422" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No limita invención de resultados</span>
+<span id="cb12-423"><a href="#cb12-423" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No pide verificación</span>
+<span id="cb12-424"><a href="#cb12-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-425"><a href="#cb12-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-426"><a href="#cb12-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-427"><a href="#cb12-427" aria-hidden="true" tabindex="-1"></a><span class="fu">### ✅ Ejemplo 3: Prompt Científico Correcto</span></span>
+<span id="cb12-428"><a href="#cb12-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-429"><a href="#cb12-429" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-430"><a href="#cb12-430" aria-hidden="true" tabindex="-1"></a><span class="in">ROLE:</span></span>
+<span id="cb12-431"><a href="#cb12-431" aria-hidden="true" tabindex="-1"></a><span class="in">Eres un asistente experto en bioinformática y análisis de secuencias.</span></span>
+<span id="cb12-432"><a href="#cb12-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-433"><a href="#cb12-433" aria-hidden="true" tabindex="-1"></a><span class="in">CONTEXTO:</span></span>
+<span id="cb12-434"><a href="#cb12-434" aria-hidden="true" tabindex="-1"></a><span class="in">Tengo un archivo FASTA con secuencias de DNA (longitud variable, sin calidad PHRED).</span></span>
+<span id="cb12-435"><a href="#cb12-435" aria-hidden="true" tabindex="-1"></a><span class="in">El objetivo es evaluar si los datos son adecuados para análisis posteriores</span></span>
+<span id="cb12-436"><a href="#cb12-436" aria-hidden="true" tabindex="-1"></a><span class="in">como descubrimiento de motivos o conteo de k-mers.</span></span>
+<span id="cb12-437"><a href="#cb12-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-438"><a href="#cb12-438" aria-hidden="true" tabindex="-1"></a><span class="in">TAREA:</span></span>
+<span id="cb12-439"><a href="#cb12-439" aria-hidden="true" tabindex="-1"></a><span class="in">Describe qué métricas de calidad revisarías en este FASTA</span></span>
+<span id="cb12-440"><a href="#cb12-440" aria-hidden="true" tabindex="-1"></a><span class="in">y qué problemas potenciales podrían afectar el análisis.</span></span>
+<span id="cb12-441"><a href="#cb12-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-442"><a href="#cb12-442" aria-hidden="true" tabindex="-1"></a><span class="in">RESTRICCIONES:</span></span>
+<span id="cb12-443"><a href="#cb12-443" aria-hidden="true" tabindex="-1"></a><span class="in">- No ejecutes código.</span></span>
+<span id="cb12-444"><a href="#cb12-444" aria-hidden="true" tabindex="-1"></a><span class="in">- No inventes resultados.</span></span>
+<span id="cb12-445"><a href="#cb12-445" aria-hidden="true" tabindex="-1"></a><span class="in">- Si falta información, indícalo explícitamente.</span></span>
+<span id="cb12-446"><a href="#cb12-446" aria-hidden="true" tabindex="-1"></a><span class="in">- Limítate a razonamiento conceptual.</span></span>
+<span id="cb12-447"><a href="#cb12-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-448"><a href="#cb12-448" aria-hidden="true" tabindex="-1"></a><span class="in">SALIDA ESPERADA:</span></span>
+<span id="cb12-449"><a href="#cb12-449" aria-hidden="true" tabindex="-1"></a><span class="in">- Lista de métricas de calidad</span></span>
+<span id="cb12-450"><a href="#cb12-450" aria-hidden="true" tabindex="-1"></a><span class="in">- Posibles problemas asociados</span></span>
+<span id="cb12-451"><a href="#cb12-451" aria-hidden="true" tabindex="-1"></a><span class="in">- Recomendaciones generales</span></span>
+<span id="cb12-452"><a href="#cb12-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-453"><a href="#cb12-453" aria-hidden="true" tabindex="-1"></a><span class="in">VERIFICACIÓN:</span></span>
+<span id="cb12-454"><a href="#cb12-454" aria-hidden="true" tabindex="-1"></a><span class="in">Indica cómo un humano podría verificar cada métrica usando herramientas estándar.</span></span>
+<span id="cb12-455"><a href="#cb12-455" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-456"><a href="#cb12-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-457"><a href="#cb12-457" aria-hidden="true" tabindex="-1"></a>::: {.callout-success}</span>
+<span id="cb12-458"><a href="#cb12-458" aria-hidden="true" tabindex="-1"></a><span class="fu">## ¿Por qué es buen prompt científico?</span></span>
+<span id="cb12-459"><a href="#cb12-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-460"><a href="#cb12-460" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>✓ Se puede verificar cada punto</span>
+<span id="cb12-461"><a href="#cb12-461" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>✓ Evita alucinaciones</span>
+<span id="cb12-462"><a href="#cb12-462" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>✓ Proporciona criterios claros</span>
+<span id="cb12-463"><a href="#cb12-463" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>✓ Es reproducible</span>
+<span id="cb12-464"><a href="#cb12-464" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-465"><a href="#cb12-465" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-466"><a href="#cb12-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-467"><a href="#cb12-467" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-468"><a href="#cb12-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-469"><a href="#cb12-469" aria-hidden="true" tabindex="-1"></a><span class="fu">### ⭐⭐⭐ Ejemplo 4: Prompt con Estructura Científica Avanzada</span></span>
+<span id="cb12-470"><a href="#cb12-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-471"><a href="#cb12-471" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-472"><a href="#cb12-472" aria-hidden="true" tabindex="-1"></a><span class="in">ROLE:</span></span>
+<span id="cb12-473"><a href="#cb12-473" aria-hidden="true" tabindex="-1"></a><span class="in">Actúa como bioinformático senior enfocado en reproducibilidad.</span></span>
+<span id="cb12-474"><a href="#cb12-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-475"><a href="#cb12-475" aria-hidden="true" tabindex="-1"></a><span class="in">CONTEXTO:</span></span>
+<span id="cb12-476"><a href="#cb12-476" aria-hidden="true" tabindex="-1"></a><span class="in">Archivo FASTA de DNA genómico (organismo bacteriano).</span></span>
+<span id="cb12-477"><a href="#cb12-477" aria-hidden="true" tabindex="-1"></a><span class="in">Planeo usarlo para análisis de motivos regulatorios.</span></span>
+<span id="cb12-478"><a href="#cb12-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-479"><a href="#cb12-479" aria-hidden="true" tabindex="-1"></a><span class="in">TAREA:</span></span>
+<span id="cb12-480"><a href="#cb12-480" aria-hidden="true" tabindex="-1"></a><span class="in">Propón un checklist de control de calidad previo al análisis,</span></span>
+<span id="cb12-481"><a href="#cb12-481" aria-hidden="true" tabindex="-1"></a><span class="in">explicando por qué cada punto es relevante biológicamente.</span></span>
+<span id="cb12-482"><a href="#cb12-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-483"><a href="#cb12-483" aria-hidden="true" tabindex="-1"></a><span class="in">RESTRICCIONES:</span></span>
+<span id="cb12-484"><a href="#cb12-484" aria-hidden="true" tabindex="-1"></a><span class="in">- No asumas datos que no se mencionan.</span></span>
+<span id="cb12-485"><a href="#cb12-485" aria-hidden="true" tabindex="-1"></a><span class="in">- No generes cifras.</span></span>
+<span id="cb12-486"><a href="#cb12-486" aria-hidden="true" tabindex="-1"></a><span class="in">- Declara supuestos explícitamente.</span></span>
+<span id="cb12-487"><a href="#cb12-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-488"><a href="#cb12-488" aria-hidden="true" tabindex="-1"></a><span class="in">FORMATO DE SALIDA:</span></span>
+<span id="cb12-489"><a href="#cb12-489" aria-hidden="true" tabindex="-1"></a><span class="in">Tabla con columnas:</span></span>
+<span id="cb12-490"><a href="#cb12-490" aria-hidden="true" tabindex="-1"></a><span class="in">1) Métrica</span></span>
+<span id="cb12-491"><a href="#cb12-491" aria-hidden="true" tabindex="-1"></a><span class="in">2) Justificación biológica</span></span>
+<span id="cb12-492"><a href="#cb12-492" aria-hidden="true" tabindex="-1"></a><span class="in">3) Herramienta típica de verificación</span></span>
+<span id="cb12-493"><a href="#cb12-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-494"><a href="#cb12-494" aria-hidden="true" tabindex="-1"></a><span class="in">VERIFICACIÓN:</span></span>
+<span id="cb12-495"><a href="#cb12-495" aria-hidden="true" tabindex="-1"></a><span class="in">Incluye una sección final titulada:</span></span>
+<span id="cb12-496"><a href="#cb12-496" aria-hidden="true" tabindex="-1"></a><span class="in">"Cómo validar que estas recomendaciones son correctas".</span></span>
+<span id="cb12-497"><a href="#cb12-497" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-498"><a href="#cb12-498" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-499"><a href="#cb12-499" aria-hidden="true" tabindex="-1"></a>::: {.callout-success}</span>
+<span id="cb12-500"><a href="#cb12-500" aria-hidden="true" tabindex="-1"></a><span class="fu">## Excelencia Científica</span></span>
+<span id="cb12-501"><a href="#cb12-501" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-502"><a href="#cb12-502" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *Esto es pensar como científico, no como usuario de IA.*</span></span>
+<span id="cb12-503"><a href="#cb12-503" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-504"><a href="#cb12-504" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-505"><a href="#cb12-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-506"><a href="#cb12-506" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-507"><a href="#cb12-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-508"><a href="#cb12-508" aria-hidden="true" tabindex="-1"></a><span class="fu">## Ejercicio en Clase: Mini-Debate</span></span>
+<span id="cb12-509"><a href="#cb12-509" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-510"><a href="#cb12-510" aria-hidden="true" tabindex="-1"></a>::: {.exercise-box}</span>
+<span id="cb12-511"><a href="#cb12-511" aria-hidden="true" tabindex="-1"></a><span class="fu">### Debate: Correlación, Causalidad y Evidencia</span></span>
+<span id="cb12-512"><a href="#cb12-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-513"><a href="#cb12-513" aria-hidden="true" tabindex="-1"></a>**Prompt a analizar:**</span>
+<span id="cb12-514"><a href="#cb12-514" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-515"><a href="#cb12-515" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb12-516"><a href="#cb12-516" aria-hidden="true" tabindex="-1"></a><span class="in">ROLE:</span></span>
+<span id="cb12-517"><a href="#cb12-517" aria-hidden="true" tabindex="-1"></a><span class="in">Eres un asistente experto en bioinformática.</span></span>
+<span id="cb12-518"><a href="#cb12-518" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-519"><a href="#cb12-519" aria-hidden="true" tabindex="-1"></a><span class="in">CONTEXTO:</span></span>
+<span id="cb12-520"><a href="#cb12-520" aria-hidden="true" tabindex="-1"></a><span class="in">Tengo datos de expresión génica bajo dos condiciones.</span></span>
+<span id="cb12-521"><a href="#cb12-521" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-522"><a href="#cb12-522" aria-hidden="true" tabindex="-1"></a><span class="in">TAREA:</span></span>
+<span id="cb12-523"><a href="#cb12-523" aria-hidden="true" tabindex="-1"></a><span class="in">Determina si el gen X regula al gen Y.</span></span>
+<span id="cb12-524"><a href="#cb12-524" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb12-525"><a href="#cb12-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-526"><a href="#cb12-526" aria-hidden="true" tabindex="-1"></a>**Organización (10–15 minutos):**</span>
+<span id="cb12-527"><a href="#cb12-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-528"><a href="#cb12-528" aria-hidden="true" tabindex="-1"></a>Dividir al grupo en dos equipos:</span>
+<span id="cb12-529"><a href="#cb12-529" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Equipo A**: "Con estos datos **sí** se puede afirmar que X regula a Y"</span>
+<span id="cb12-530"><a href="#cb12-530" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Equipo B**: "Con estos datos **no** se puede afirmar regulación"</span>
+<span id="cb12-531"><a href="#cb12-531" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-532"><a href="#cb12-532" aria-hidden="true" tabindex="-1"></a>**Preguntas guía:**</span>
+<span id="cb12-533"><a href="#cb12-533" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Qué evidencia real aportan los datos de expresión?</span>
+<span id="cb12-534"><a href="#cb12-534" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Qué afirmaciones **no** se pueden sostener?</span>
+<span id="cb12-535"><a href="#cb12-535" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Qué experimentos o datos adicionales serían necesarios?</span>
+<span id="cb12-536"><a href="#cb12-536" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>¿Qué riesgos hay al usar lenguaje causal sin evidencia?</span>
+<span id="cb12-537"><a href="#cb12-537" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-538"><a href="#cb12-538" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-539"><a href="#cb12-539" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-540"><a href="#cb12-540" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}</span>
+<span id="cb12-541"><a href="#cb12-541" aria-hidden="true" tabindex="-1"></a><span class="fu">## Mensaje del Debate</span></span>
+<span id="cb12-542"><a href="#cb12-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-543"><a href="#cb12-543" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *Los datos responden solo a las preguntas que fueron diseñados para responder.*</span></span>
+<span id="cb12-544"><a href="#cb12-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-545"><a href="#cb12-545" aria-hidden="true" tabindex="-1"></a>**Discusión crítica:**</span>
+<span id="cb12-546"><a href="#cb12-546" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-547"><a href="#cb12-547" aria-hidden="true" tabindex="-1"></a>Este prompt **confunde correlación con causalidad**. Los datos de expresión génica solo permiten observar asociaciones estadísticas, no regulación directa.</span>
+<span id="cb12-548"><a href="#cb12-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-549"><a href="#cb12-549" aria-hidden="true" tabindex="-1"></a>**Conexión con Machine Learning:**</span>
+<span id="cb12-550"><a href="#cb12-550" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Los modelos aprenden a **predecir** patrones</span>
+<span id="cb12-551"><a href="#cb12-551" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**No aprenden causalidad biológica** por sí mismos</span>
+<span id="cb12-552"><a href="#cb12-552" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>En clases posteriores entrenarán modelos predictivos</span>
+<span id="cb12-553"><a href="#cb12-553" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**No demostrarán causalidad**, solo capacidad predictiva</span>
+<span id="cb12-554"><a href="#cb12-554" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-555"><a href="#cb12-555" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-556"><a href="#cb12-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-557"><a href="#cb12-557" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb12-558"><a href="#cb12-558" aria-hidden="true" tabindex="-1"></a><span class="fu">## Advertencia Formativa</span></span>
+<span id="cb12-559"><a href="#cb12-559" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-560"><a href="#cb12-560" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; *Un modelo puede predecir muy bien y aun así estar científicamente equivocado.*</span></span>
+<span id="cb12-561"><a href="#cb12-561" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-562"><a href="#cb12-562" aria-hidden="true" tabindex="-1"></a>Confundir predicción con causalidad puede llevar a:</span>
+<span id="cb12-563"><a href="#cb12-563" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Malas interpretaciones biológicas</span>
+<span id="cb12-564"><a href="#cb12-564" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Conclusiones exageradas</span>
+<span id="cb12-565"><a href="#cb12-565" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Errores en diseño experimental</span>
+<span id="cb12-566"><a href="#cb12-566" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-567"><a href="#cb12-567" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-568"><a href="#cb12-568" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-569"><a href="#cb12-569" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-570"><a href="#cb12-570" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-571"><a href="#cb12-571" aria-hidden="true" tabindex="-1"></a><span class="fu">## Resumen</span></span>
+<span id="cb12-572"><a href="#cb12-572" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-573"><a href="#cb12-573" aria-hidden="true" tabindex="-1"></a>Has aprendido:</span>
+<span id="cb12-574"><a href="#cb12-574" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-575"><a href="#cb12-575" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>✓ La diferencia fundamental entre prompting creativo y científico</span>
+<span id="cb12-576"><a href="#cb12-576" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>✓ Cuándo usar cada tipo según la fase del proceso cognitivo</span>
+<span id="cb12-577"><a href="#cb12-577" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>✓ Los 6 componentes esenciales de un prompt científico</span>
+<span id="cb12-578"><a href="#cb12-578" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>✓ Cómo identificar y evitar prompts deficientes</span>
+<span id="cb12-579"><a href="#cb12-579" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>✓ La importancia de distinguir correlación de causalidad</span>
+<span id="cb12-580"><a href="#cb12-580" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-581"><a href="#cb12-581" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-582"><a href="#cb12-582" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-583"><a href="#cb12-583" aria-hidden="true" tabindex="-1"></a>::: {.chapter-nav}</span>
+<span id="cb12-584"><a href="#cb12-584" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-585"><a href="#cb12-585" aria-hidden="true" tabindex="-1"></a>::: {.chapter-nav-item .chapter-nav-prev}</span>
+<span id="cb12-586"><a href="#cb12-586" aria-hidden="true" tabindex="-1"></a>::: {.chapter-nav-label}</span>
+<span id="cb12-587"><a href="#cb12-587" aria-hidden="true" tabindex="-1"></a>Anterior</span>
+<span id="cb12-588"><a href="#cb12-588" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-589"><a href="#cb12-589" aria-hidden="true" tabindex="-1"></a>::: {.chapter-nav-title}</span>
+<span id="cb12-590"><a href="#cb12-590" aria-hidden="true" tabindex="-1"></a>Introducción y Marco Epistemológico</span>
+<span id="cb12-591"><a href="#cb12-591" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-592"><a href="#cb12-592" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-593"><a href="#cb12-593" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-594"><a href="#cb12-594" aria-hidden="true" tabindex="-1"></a>::: {.chapter-nav-item .chapter-nav-next}</span>
+<span id="cb12-595"><a href="#cb12-595" aria-hidden="true" tabindex="-1"></a>::: {.chapter-nav-label}</span>
+<span id="cb12-596"><a href="#cb12-596" aria-hidden="true" tabindex="-1"></a>Siguiente</span>
+<span id="cb12-597"><a href="#cb12-597" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-598"><a href="#cb12-598" aria-hidden="true" tabindex="-1"></a>::: {.chapter-nav-title}</span>
+<span id="cb12-599"><a href="#cb12-599" aria-hidden="true" tabindex="-1"></a>Patrones Avanzados</span>
+<span id="cb12-600"><a href="#cb12-600" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-601"><a href="#cb12-601" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb12-602"><a href="#cb12-602" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-603"><a href="#cb12-603" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<div class="footer-left">
+<p>© <span class="math inline">\(year\)</span> <span class="math inline">\(author\)</span>. Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+</div>
+</div>   
+    <div class="nav-footer-center">
+<div class="footer-center">
+<p>Built with ❤️ using <a href="https://quarto.org/">Quarto</a></p>
+</div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/yourusername/your-course/edit/main/chapters/sesion-01-fundamentos/prompting-cientifico.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/yourusername/your-course/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/yourusername/your-course">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/yourusername">
+      <i class="bi bi-twitter" role="img" aria-label="Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:helysalgado@gmail.com">
+      <i class="bi bi-envelope" role="img" aria-label="Email">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
