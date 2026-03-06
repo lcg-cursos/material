@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>control_flujo</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+  body {
+    padding: 2cm; 
+  }
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">Lección 2 — Control de Flujo y Pensamiento Algorítmico en Python</h1>
+
+<h2 id="toc_1">Repaso Clase 1</h2>
+
+<p><strong>Instrucciones:</strong> responde sin computadora. Cada respuesta correcta suma <strong>1 punto</strong>.</p>
+
+<ol>
+<li>¿Qué tipo de dato usamos en Python para almacenar una secuencia como <code>ATGCGT</code>?</li>
+<li>¿Cómo obtenemos la longitud de una secuencia en Python?</li>
+<li>Si tenemos la secuencia <code>ATGC</code>, ¿cuál es el primer índice <strong>y su valor</strong> en Python?</li>
+<li>¿Cómo convertimos una secuencia de DNA escrita en minúsculas a mayúsculas?</li>
+<li>Si queremos saber cuántas veces aparece una letra en una secuencia, ¿qué función usamos?</li>
+<li>En Python, todo es un objeto. Y todo objeto tiene tres cosas principales, ¿cuáles son?</li>
+</ol>
+
+<p><strong>Respuesta esperada (pregunta 6):</strong></p>
+
+<ul>
+<li><strong>Tipo (type)</strong> → qué tipo de objeto es</li>
+<li><strong>Valor (value)</strong> → la información que contiene</li>
+<li><strong>Métodos (methods)</strong> → las acciones que puede realizar</li>
+</ul>
+
+<h2 id="toc_2">Objetivos de aprendizaje</h2>
+
+<p>Al finalizar esta lección, el estudiante será capaz de:</p>
+
+<ul>
+<li><p>Explicar el uso de estructuras de control de flujo en Python (<code>if</code>, <code>elif</code>, <code>else</code>, <code>for</code>) y operadores lógicos básicos.</p></li>
+<li><p>Aplicar ciclos, <code>range()</code> y slicing para recorrer secuencias y manipular subsecuencias en Python.</p></li>
+<li><p>Diseñar e implementar un algoritmo simple para generar k-mers a partir de una secuencia de DNA, considerando casos límite básicos.</p></li>
+</ul>
+
+<h2 id="toc_3">Introducción</h2>
+
+<p>En la lección anterior aprendimos a trabajar con variables, tipos básicos y cadenas de texto en Python. También escribimos pequeños programas para manipular secuencias de DNA utilizando funciones ya existentes del lenguaje.</p>
+
+<p>En esta lección comenzaremos a construir <strong>programas más generales</strong> utilizando <strong>control de flujo</strong>. El control de flujo permite decidir <strong>qué instrucciones se ejecutan y cuántas veces se ejecutan</strong> dentro de un programa.</p>
+
+<p>Los dos mecanismos principales que estudiaremos son:</p>
+
+<ul>
+<li><strong>Condicionales</strong> → permiten tomar decisiones.</li>
+<li><strong>Ciclos (loops)</strong> → permiten repetir operaciones.</li>
+</ul>
+
+<p>Además reforzaremos tres prácticas importantes para la programación científica:</p>
+
+<ol>
+<li>Diseñar primero el <strong>algoritmo</strong> antes de escribir código.</li>
+<li>Realizar <strong>trazado manual</strong> para entender cómo evoluciona un programa.</li>
+<li>Pensar en <strong>casos límite</strong> para validar nuestras soluciones.</li>
+</ol>
+
+<p>Como ejemplo utilizaremos secuencias de DNA y aprenderemos a generar <strong>k-mers</strong>, subsecuencias de longitud <code>k</code> que se utilizan ampliamente en bioinformática.</p>
+
+<blockquote>
+<p><strong>Idea clave (por qué hoy NO basta con “buscar la función”):</strong>
+En Python existen funciones útiles (como <code>count()</code>), pero <strong>no siempre existe una función lista</strong> para resolver el problema que queremos. Por eso hoy aprenderemos a construir soluciones con <strong>algoritmos + loops</strong>.</p>
+</blockquote>
+
+<hr>
+
+<h1 id="toc_4">1. Valores booleanos (<code>True</code> y <code>False</code>)</h1>
+
+<p>Antes de entender los condicionales es importante comprender los <strong>valores booleanos</strong>.</p>
+
+<p>En Python un valor booleano puede ser:</p>
+
+<ul>
+<li><code>True</code> (verdadero)</li>
+<li><code>False</code> (falso)</li>
+</ul>
+
+<p>Estos valores aparecen cuando evaluamos <strong>expresiones lógicas</strong>.</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">5 &gt; 3</code></pre></div>
+
+<p>Resultado:</p>
+
+<div><pre><code class="language-none">True</code></pre></div>
+
+<hr>
+
+<h3 id="toc_5">Conversión a booleano</h3>
+
+<p>Python puede convertir muchos tipos de datos a valores booleanos utilizando la función <code>bool()</code>.</p>
+
+<div><pre><code class="language-python">bool(0)
+bool(1)
+bool(&quot;&quot;)
+bool(&quot;ATG&quot;)</code></pre></div>
+
+<p>Resultado:</p>
+
+<div><pre><code class="language-none">False
+True
+False
+True</code></pre></div>
+
+<p>Reglas generales:</p>
+
+<p>Reglas generales (valores considerados <strong>False</strong>):
+- <code>0</code>, <code>0.0</code>
+- <code>&quot;&quot;</code> (cadena vacía)
+- <code>[]</code> (lista vacía)
+- <code>None</code></p>
+
+<p>La mayoría de los otros valores se consideran <strong>True</strong>. Por ejemplo:</p>
+
+<div><pre><code class="language-none">bool(2)
+bool(-1)
+bool(&quot;atg&quot;)
+bool([27, &quot;octubre&quot;, 1997])</code></pre></div>
+
+<hr>
+
+<h1 id="toc_6">2. Condicionales (<code>if</code>)</h1>
+
+<p>Los condicionales permiten que un programa <strong>tome decisiones</strong> dependiendo del resultado de una condición lógica.</p>
+
+<p>Un programa puede ejecutar diferentes bloques de código dependiendo de si una condición es verdadera (<code>True</code>) o falsa (<code>False</code>).</p>
+
+<h3 id="toc_7">Sintaxis básica</h3>
+
+<div><pre><code class="language-python">if condicion:
+    instrucciones</code></pre></div>
+
+<p>Si la condición es verdadera, se ejecutan las instrucciones dentro del bloque.</p>
+
+<hr>
+
+<h3 id="toc_8">Uso de <code>else</code></h3>
+
+<p>Podemos definir qué ocurre cuando la condición <strong>no se cumple</strong>.</p>
+
+<div><pre><code class="language-python">if condicion:
+    instrucciones
+else:
+    otras_instrucciones</code></pre></div>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">nt = &quot;A&quot;
+
+if nt in &quot;GC&quot;:
+    print(&quot;Nucleótido GC&quot;)
+else:
+    print(&quot;No es GC&quot;)</code></pre></div>
+
+<hr>
+
+<h3 id="toc_9">Uso de <code>elif</code></h3>
+
+<p>Cuando existen <strong>varias condiciones posibles</strong>, usamos <code>elif</code> (else-if).</p>
+
+<div><pre><code class="language-python">if condicion1:
+    instrucciones
+elif condicion2:
+    instrucciones
+else:
+    instrucciones</code></pre></div>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">nt = &quot;A&quot;
+
+if nt == &quot;A&quot;:
+    print(&quot;Adenina&quot;)
+elif nt == &quot;T&quot;:
+    print(&quot;Timina&quot;)
+elif nt == &quot;G&quot;:
+    print(&quot;Guanina&quot;)
+elif nt == &quot;C&quot;:
+    print(&quot;Citosina&quot;)
+else:
+    print(&quot;Carácter desconocido&quot;)</code></pre></div>
+
+<hr>
+
+<h3 id="toc_10">Operadores de comparación</h3>
+
+<p>Las condiciones suelen utilizar operadores de comparación:</p>
+
+<table>
+<thead>
+<tr>
+<th>Operador</th>
+<th>Significado</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>==</code></td>
+<td>igual a</td>
+</tr>
+<tr>
+<td><code>!=</code></td>
+<td>diferente</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>mayor que</td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>menor que</td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td>mayor o igual</td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td>menor o igual</td>
+</tr>
+</tbody>
+</table>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">x = 5
+
+if x &gt; 3:
+    print(&quot;x es mayor que 3&quot;)</code></pre></div>
+
+<hr>
+
+<h3 id="toc_11">Operadores lógicos</h3>
+
+<p>Permiten combinar múltiples condiciones.</p>
+
+<table>
+<thead>
+<tr>
+<th>Operador</th>
+<th>Significado</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>and</code></td>
+<td>ambas condiciones deben ser verdaderas</td>
+</tr>
+<tr>
+<td><code>or</code></td>
+<td>al menos una condición debe ser verdadera</td>
+</tr>
+<tr>
+<td><code>not</code></td>
+<td>invierte la condición</td>
+</tr>
+</tbody>
+</table>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">nt = &quot;G&quot;
+
+if nt == &quot;G&quot; or nt == &quot;C&quot;:
+    print(&quot;GC nucleótido&quot;)</code></pre></div>
+
+<p>Otro ejemplo:</p>
+
+<div><pre><code class="language-python">length = 10
+
+if length &gt; 0 and length &lt; 100:
+    print(&quot;longitud razonable&quot;)</code></pre></div>
+
+<hr>
+
+<h3 id="toc_12">Verdad implícita en Python (truthiness)</h3>
+
+<p>En Python muchas estructuras pueden evaluarse directamente en un <code>if</code> sin escribir una comparación explícita.</p>
+
+<p>A esto le llamamos <strong>truthiness</strong>: algunos valores se evalúan automáticamente como <code>True</code> o <code>False</code> en contextos booleanos (como <code>if</code>).</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">seq = &quot;&quot;
+
+if seq:
+    print(&quot;Hay secuencia&quot;)
+else:
+    print(&quot;Secuencia vacía&quot;)</code></pre></div>
+
+<h3 id="toc_13">recomendaciones PEP8 (mínimas para esta clase)</h3>
+
+<p>1) <strong>Espacios alrededor de operadores</strong>
+- ✅ <code>if x &gt; 5:</code>
+- ❌ <code>if x&gt;5:</code></p>
+
+<p>2) <strong>No comparar con <code>True</code>/<code>False</code></strong>
+- ✅ <code>if flag:</code>
+- ✅ <code>if not flag:</code>
+- ❌ <code>if flag == True:</code>
+- ❌ <code>if flag == False:</code></p>
+
+<p>3) <strong>Usar <code>if seq:</code> para verificar “tiene contenido”</strong>
+- ✅ <code>if seq:</code>
+- ❌ <code>if len(seq) &gt; 0:</code></p>
+
+<blockquote>
+<p>Nota: esto aprovecha el <strong>truthiness</strong> de Python.</p>
+</blockquote>
+
+<p>Extra (estilo más claro):
+- ✅ <code>if nt in &quot;GC&quot;:</code>
+- ❌ <code>if nt == &quot;G&quot; or nt == &quot;C&quot;:</code></p>
+
+<hr>
+
+<h1 id="toc_14">3. Ciclos <code>for</code></h1>
+
+<p>En Python los ciclos <code>for</code> se utilizan para recorrer <strong>objetos iterables</strong>.</p>
+
+<h3 id="toc_15">Objetos iterables</h3>
+
+<p>Un <strong>iterable</strong> es cualquier objeto que puede devolver sus elementos <strong>uno por uno</strong>.</p>
+
+<p>Ejemplos de iterables:</p>
+
+<ul>
+<li>cadenas de texto</li>
+<li>listas</li>
+<li>tuplas</li>
+<li>diccionarios</li>
+<li>archivos</li>
+</ul>
+
+<p>Esto significa que podemos recorrerlos con un ciclo <code>for</code>.</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">for nt in &quot;ATGC&quot;:
+    print(nt)</code></pre></div>
+
+<p>Salida:</p>
+
+<div><pre><code class="language-none">A
+T
+G
+C</code></pre></div>
+
+<h3 id="toc_16">Sintaxis</h3>
+
+<div><pre><code class="language-python">for elemento in secuencia:
+    instrucciones</code></pre></div>
+
+<p>El ciclo toma cada elemento de la secuencia y ejecuta el bloque de código.</p>
+
+<hr>
+
+<h3 id="toc_17">Ejemplo 1 — recorrer una secuencia</h3>
+
+<div><pre><code class="language-python">seq = &quot;ATGC&quot;
+
+for nt in seq:
+    print(nt)</code></pre></div>
+
+<p>Salida:</p>
+
+<div><pre><code class="language-none">A
+T
+G
+C</code></pre></div>
+
+<hr>
+
+<h3 id="toc_18">Ejemplo 2 — usar un condicional dentro del <code>for</code></h3>
+
+<div><pre><code class="language-python">seq = &quot;ATGCG&quot;
+
+for nt in seq:
+    if nt in &quot;GC&quot;:
+        print(nt, &quot;es GC&quot;)</code></pre></div>
+
+<p>Salida:</p>
+
+<div><pre><code class="language-none">G es GC
+C es GC
+G es GC</code></pre></div>
+
+<p>Aquí el ciclo recorre cada nucleótido y el condicional permite filtrar solo los nucleótidos de interés.</p>
+
+<hr>
+
+<h2 id="toc_19">Función <code>range()</code>()`</h2>
+
+<p>La función <code>range()</code> genera una secuencia de números enteros.</p>
+
+<p>Se utiliza frecuentemente cuando queremos recorrer <strong>posiciones</strong> dentro de una secuencia.</p>
+
+<h3 id="toc_20">Sintaxis</h3>
+
+<div><pre><code class="language-python">range(inicio, fin)</code></pre></div>
+
+<p>También puede usarse con un solo argumento:</p>
+
+<div><pre><code class="language-python">range(fin)</code></pre></div>
+
+<h3 id="toc_21">Ejemplo</h3>
+
+<div><pre><code class="language-python">for i in range(5):
+    print(i)</code></pre></div>
+
+<p>Salida:</p>
+
+<div><pre><code class="language-none">0
+1
+2
+3
+4</code></pre></div>
+
+<hr>
+
+<h3 id="toc_22">Ejemplo 3 — recorrer posiciones con <code>range()</code></h3>
+
+<p>A veces necesitamos conocer la <strong>posición</strong> dentro de la secuencia.</p>
+
+<div><pre><code class="language-python">seq = &quot;ATGC&quot;
+
+for i in range(len(seq)):
+    print(i, seq[i])</code></pre></div>
+
+<p>Salida:</p>
+
+<div><pre><code class="language-none">0 A
+1 T
+2 G
+3 C</code></pre></div>
+
+<p>Esto es útil cuando necesitamos saber <strong>dónde</strong> ocurre algo dentro de la secuencia.</p>
+
+<h4 id="toc_23">Variables dentro de <code>for</code></h4>
+
+<div><pre><code class="language-python">for i in range(3):
+    pass
+
+print(i)</code></pre></div>
+
+<p>Resultado:</p>
+
+<div><pre><code class="language-none">2</code></pre></div>
+
+<ul>
+<li><code>pass</code> no hace nada, pero permite que el bloque exista.<br></li>
+<li>En Python, la variable <code>i</code> <strong>sigue existiendo</strong> después del ciclo.</li>
+</ul>
+
+<hr>
+
+<h3 id="toc_24">Ejemplo 4 — ciclo <code>for</code> anidado</h3>
+
+<p>Un <strong>for anidado</strong> es un ciclo dentro de otro ciclo.</p>
+
+<p>Esto ocurre cuando necesitamos recorrer dos conjuntos de datos.</p>
+
+<p>Ejemplo: comparar cada nucleótido con una lista de nucleótidos válidos.</p>
+
+<div><pre><code class="language-python">seq = &quot;ATG&quot;
+valid = &quot;ATGC&quot;
+
+for nt in seq:
+    for v in valid:
+        if nt == v:
+            print(nt, &quot;es válido&quot;)</code></pre></div>
+
+<p>En este caso:</p>
+
+<ul>
+<li>el ciclo externo recorre la secuencia</li>
+<li>el ciclo interno recorre los nucleótidos válidos</li>
+</ul>
+
+<p>Los ciclos anidados aparecen en muchos algoritmos de bioinformática, por ejemplo:</p>
+
+<ul>
+<li>comparación de secuencias</li>
+<li>búsqueda de patrones</li>
+<li>cálculo de matrices de similitud</li>
+</ul>
+
+<hr>
+
+<h1 id="toc_25">4. Slicing de cadenas</h1>
+
+<p>Python permite extraer <strong>subsecuencias</strong> de una cadena usando slicing.</p>
+
+<h3 id="toc_26">Sintaxis</h3>
+
+<div><pre><code class="language-python">cadena[inicio:fin]</code></pre></div>
+
+<p>El carácter en <code>inicio</code> se incluye.</p>
+
+<p>El carácter en <code>fin</code> <strong>no se incluye</strong> (límite superior exclusivo).</p>
+
+<hr>
+
+<h3 id="toc_27">Ejemplo</h3>
+
+<div><pre><code class="language-python">seq = &quot;ATGCA&quot;
+
+print(seq[0:3])</code></pre></div>
+
+<p>Salida:</p>
+
+<div><pre><code class="language-none">ATG</code></pre></div>
+
+<p>Otro ejemplo:</p>
+
+<div><pre><code class="language-python">print(seq[1:4])</code></pre></div>
+
+<p>Salida:</p>
+
+<div><pre><code class="language-none">TGC</code></pre></div>
+
+<h4 id="toc_28">Slicing fuera del rango</h4>
+
+<div><pre><code class="language-python">seq = &quot;ATGC&quot;
+
+print(seq[0:100])</code></pre></div>
+
+<p>Resultado:</p>
+
+<div><pre><code class="language-none">ATGC</code></pre></div>
+
+<p>Python <strong>no genera error</strong> cuando el slicing excede el tamaño de la cadena; simplemente devuelve lo que existe.</p>
+
+<hr>
+
+<h2 id="toc_29">Función <code>input()</code></h2>
+
+<p>La función <code>input()</code> permite que un programa <strong>reciba información del usuario</strong> mientras se ejecuta.</p>
+
+<p>Esto es útil cuando queremos que el programa trabaje con datos que el usuario introduce desde el teclado.</p>
+
+<h3 id="toc_30">Sintaxis</h3>
+
+<div><pre><code class="language-python">input(&quot;mensaje&quot;)</code></pre></div>
+
+<p>El texto dentro de los paréntesis se muestra como <strong>mensaje para el usuario</strong>.</p>
+
+<p>El valor introducido se puede guardar en una variable.</p>
+
+<h3 id="toc_31">Ejemplo</h3>
+
+<div><pre><code class="language-python">seq = input(&quot;Introduce una secuencia de DNA: &quot;)
+
+print(seq)</code></pre></div>
+
+<p>Si el usuario escribe:</p>
+
+<div><pre><code class="language-none">ATGCGT</code></pre></div>
+
+<p>La salida será:</p>
+
+<div><pre><code class="language-none">ATGCGT</code></pre></div>
+
+<hr>
+
+<h3 id="toc_32">Importante</h3>
+
+<p>La función <code>input()</code> <strong>siempre devuelve un string</strong>.</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">x = input(&quot;Introduce un número: &quot;)
+
+print(type(x))</code></pre></div>
+
+<p>Salida:</p>
+
+<div><pre><code class="language-none">&lt;class &#39;str&#39;&gt;</code></pre></div>
+
+<p>Por esta razón, cuando queremos trabajar con números debemos convertir el valor.</p>
+
+<hr>
+
+<h3 id="toc_33">Convertir el valor a entero</h3>
+
+<div><pre><code class="language-python">k = int(input(&quot;Introduce el valor de k: &quot;))</code></pre></div>
+
+<p>Ahora <code>k</code> es un <strong>entero</strong> y podemos usarlo en cálculos.</p>
+
+<hr>
+
+<h3 id="toc_34">Ejemplo completo</h3>
+
+<div><pre><code class="language-python">seq = input(&quot;DNA: &quot;).upper()
+k = int(input(&quot;k: &quot;))
+
+print(&quot;Secuencia:&quot;, seq)
+print(&quot;Valor de k:&quot;, k)</code></pre></div>
+
+<blockquote>
+<p>Tip</p>
+</blockquote>
+
+<p>Podemos aplicar métodos directamente al resultado de <code>input()</code>.</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">seq = input(&quot;DNA: &quot;).upper()</code></pre></div>
+
+<p>Esto convierte automáticamente la secuencia a <strong>mayúsculas</strong>.</p>
+
+<hr>
+
+<h1 id="toc_35">5. Pensamiento Algorítmico</h1>
+
+<p>Antes de escribir código debemos pensar <strong>cómo resolver el problema paso a paso</strong>.</p>
+
+<p>Esto se llama diseñar un <strong>algoritmo</strong>.</p>
+
+<h3 id="toc_36">Algoritmo — Generación de k-mers</h3>
+
+<p><strong>Entrada:</strong><br>
+- Una secuencia de DNA<br>
+- Un número entero <code>k</code></p>
+
+<p><strong>Salida:</strong><br>
+- Todas las subsecuencias de longitud <code>k</code> (k-mers)</p>
+
+<h3 id="toc_37">Pasos</h3>
+
+<ol>
+<li>Leer la secuencia.</li>
+<li>Leer <code>k</code>.</li>
+<li>Recorrer posiciones desde <code>0</code> hasta <code>len(seq) - k</code>.</li>
+<li>En cada posición, extraer <code>seq[i:i+k]</code>.</li>
+<li>Imprimir el k-mer.</li>
+</ol>
+
+<hr>
+
+<h3 id="toc_38">Trazado Manual / Casos de prueba</h3>
+
+<p>El trazado manual nos permite entender cómo evoluciona el algoritmo.</p>
+
+<p>Entrada:</p>
+
+<ul>
+<li><code>seq = ATGCA</code></li>
+<li><code>k = 3</code></li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>posición</th>
+<th>k-mer</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>ATG</td>
+</tr>
+<tr>
+<td>1</td>
+<td>TGC</td>
+</tr>
+<tr>
+<td>2</td>
+<td>GCA</td>
+</tr>
+</tbody>
+</table>
+
+<p>Esto nos ayuda a verificar que el algoritmo produce los resultados correctos.</p>
+
+<hr>
+
+<h3 id="toc_39">Casos Límite</h3>
+
+<p>En esta clase <strong>no corregimos con excepciones todavía</strong>, pero sí debemos <strong>probar y describir</strong> qué pasa.</p>
+
+<ul>
+<li><code>seq = &quot;&quot;</code> (vacía)</li>
+<li><code>k = 1</code></li>
+<li><code>k = len(seq)</code></li>
+<li><code>k &gt; len(seq)</code></li>
+<li><code>k &lt;= 0</code></li>
+</ul>
+
+<p>Pensar en estos casos permite construir programas más robustos.</p>
+
+<hr>
+
+<h1 id="toc_40">6. Buenas prácticas para escribir commits</h1>
+
+<p>Los mensajes de commit deben ser <strong>claros, breves y describir el cambio realizado</strong>.</p>
+
+<p>Una convención ampliamente utilizada es <strong>Conventional Commits</strong>.</p>
+
+<p>La estructura general es:</p>
+
+<div><pre><code class="language-none">tipo: descripción corta</code></pre></div>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-none">feat: generate k-mers</code></pre></div>
+
+<h2 id="toc_41">¿Por qué se usa <code>feat</code>?</h2>
+
+<p><code>feat</code> viene de <strong>feature</strong>, es decir, <strong>funcionalidad nueva</strong>.</p>
+
+<p>Se usa cuando el commit agrega una capacidad nueva al programa.</p>
+
+<p>Por eso en esta actividad usamos:</p>
+
+<ul>
+<li><code>feat: generate k-mers</code></li>
+<li><code>feat: compute best GC k-mer</code></li>
+<li><code>feat: sliding window visualization</code></li>
+</ul>
+
+<p>En los tres casos, el programa gana una funcionalidad nueva.</p>
+
+<h2 id="toc_42">Tipos de commits comunes</h2>
+
+<h3 id="toc_43">feat</h3>
+
+<p>Se usa cuando se <strong>añade una nueva funcionalidad</strong> al programa.</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-none">feat: compute best GC k-mer</code></pre></div>
+
+<h3 id="toc_44">fix</h3>
+
+<p>Se usa cuando se <strong>corrige un error</strong>.</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-none">fix: correct GC counting bug</code></pre></div>
+
+<h3 id="toc_45">docs</h3>
+
+<p>Se usa para cambios en documentación.</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-none">docs: update README instructions</code></pre></div>
+
+<h3 id="toc_46">refactor</h3>
+
+<p>Se usa cuando se reorganiza o mejora el código <strong>sin cambiar lo que hace</strong>.</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-none">refactor: simplify GC calculation</code></pre></div>
+
+<h3 id="toc_47">init</h3>
+
+<p>Se puede usar para el <strong>primer commit del proyecto</strong>, cuando se crea la estructura inicial.</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-none">init: project structure</code></pre></div>
+
+<hr>
+
+<h1 id="toc_48">Reglas simples para buenos commits</h1>
+
+<p>Un buen commit debe:</p>
+
+<ul>
+<li>describir <strong>qué cambio se hizo</strong></li>
+<li>ser <strong>breve y específico</strong></li>
+<li>usar una descripción clara</li>
+<li>enfocarse en una modificación concreta</li>
+</ul>
+
+<p>Ejemplos buenos:</p>
+
+<div><pre><code class="language-none">feat: generate k-mers
+feat: compute best GC k-mer
+feat: sliding window visualization</code></pre></div>
+
+<p>Ejemplos malos:</p>
+
+<div><pre><code class="language-none">changes
+update
+new code</code></pre></div>
+
+<p>Estos no explican qué cambió.</p>
+
+<hr>
+
+<h1 id="toc_49">10. Tips útiles y observaciones interesantes</h1>
+
+<p>Estos pequeños ejemplos suelen generar buenas discusiones porque el resultado no siempre es el que los estudiantes esperan.</p>
+
+<h3 id="toc_50">Tip 1 -  Repetir strings</h3>
+
+<p>En Python podemos multiplicar cadenas:</p>
+
+<div><pre><code class="language-python">print(&quot;AT&quot; * 3)</code></pre></div>
+
+<p>Salida:</p>
+
+<div><pre><code class="language-none">ATATAT</code></pre></div>
+
+<p>Esto es útil para crear separadores o patrones de manera rápida.</p>
+
+<h3 id="toc_51">Tip 2 — <code>in</code> funciona con muchas estructuras</h3>
+
+<p>El operador <code>in</code> no solo funciona con cadenas. También funciona con listas, conjuntos y diccionarios. Esto lo convierte en una herramienta muy útil para verificar pertenencia.</p>
+
+<div><pre><code class="language-python">nt = &quot;G&quot;
+
+if nt in &quot;GC&quot;:
+    print(&quot;Es GC&quot;)</code></pre></div>
+
+<p>Más adelante veremos que también funciona con listas:</p>
+
+<div><pre><code class="language-python">bases = [&quot;A&quot;,&quot;T&quot;,&quot;G&quot;,&quot;C&quot;]
+
+if nt in bases:
+    print(&quot;Base válida&quot;)</code></pre></div>
+
+<hr>
+
+<h3 id="toc_52">Tip 3 — Las funciones de Python suelen estar optimizadas</h3>
+
+<p>En la lección anterior usamos:</p>
+
+<div><pre><code class="language-python">seq.count(&quot;G&quot;)</code></pre></div>
+
+<p>Aunque hoy aprendimos a resolver problemas con loops, muchas funciones de Python están implementadas en <strong>C</strong>, por lo que suelen ser <strong>muy rápidas</strong>.</p>
+
+<p>Regla práctica:</p>
+
+<ul>
+<li>Si existe una función del lenguaje que resuelve el problema → úsala.</li>
+<li>Si no existe → implementa el algoritmo.</li>
+</ul>
+
+<hr>
+
+<h3 id="toc_53">Tip 4 — El slicing es extremadamente poderoso</h3>
+
+<p>El slicing permite manipular subsecuencias fácilmente.</p>
+
+<div><pre><code class="language-python">seq = &quot;ATGCGAT&quot;
+
+print(seq[2:5])</code></pre></div>
+
+<p>Salida:</p>
+
+<div><pre><code class="language-none">GCG</code></pre></div>
+
+<p>Muchas operaciones de análisis de secuencias en bioinformática utilizan slicing.</p>
+
+<hr>
+
+<h3 id="toc_54">Tip 5 — Ventanas deslizantes aparecen en muchos algoritmos</h3>
+
+<p>El concepto de <strong>ventana deslizante</strong> que usamos para generar k-mers es muy común en bioinformática y ciencia de datos.</p>
+
+<p>Se utiliza en:</p>
+
+<ul>
+<li>análisis de k-mers</li>
+<li>búsqueda de motivos</li>
+<li>regiones ricas en GC</li>
+<li>análisis de cobertura</li>
+</ul>
+
+<p>Aprender este patrón algorítmico es muy útil porque aparecerá muchas veces más adelante.</p>
+
+<hr>
+
+<h3 id="toc_55">Tip 6 — Siempre prueba con ejemplos pequeños</h3>
+
+<p>Cuando estés programando, usa secuencias pequeñas que puedas verificar manualmente.</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-none">seq = ATGCA
+k = 3</code></pre></div>
+
+<p>Esto facilita verificar que el algoritmo funciona correctamente.</p>
+
+<hr>
+
+<h3 id="toc_56">Observaciones importantes sobre los ciclos</h3>
+
+<ul>
+<li>El ciclo <code>for</code> es uno de los mecanismos más utilizados en Python.</li>
+<li>Permite recorrer cualquier objeto iterable.</li>
+<li>Es muy común en bioinformática para analizar secuencias.</li>
+</ul>
+
+<p>Ejemplos típicos en bioinformática:</p>
+
+<ul>
+<li>recorrer una secuencia DNA</li>
+<li>comparar dos secuencias</li>
+<li>analizar subsecuencias (k-mers)</li>
+<li>contar patrones</li>
+</ul>
+
+<p>Un punto importante es que Python suele favorecer <strong>código simple y legible</strong>.</p>
+
+<p>Por ejemplo, es más común escribir:</p>
+
+<div><pre><code class="language-python">for nt in seq:</code></pre></div>
+
+<p>que:</p>
+
+<div><pre><code class="language-python">for i in range(len(seq)):</code></pre></div>
+
+<p>La primera versión suele ser <strong>más clara y menos propensa a errores</strong>.</p>
+
+<hr>
+
+<h1 id="toc_57">10. Conclusiones</h1>
+
+<p>En esta lección aprendimos a:</p>
+
+<ul>
+<li>utilizar <strong>condicionales</strong> para tomar decisiones</li>
+<li>usar <strong>ciclos</strong> para recorrer secuencias</li>
+<li>usar <code>range()</code> para recorrer posiciones</li>
+<li>utilizar <strong>slicing</strong> para extraer subsecuencias</li>
+<li>diseñar algoritmos antes de programar</li>
+<li>validar soluciones con <strong>trazado manual</strong> y <strong>casos límite</strong></li>
+</ul>
+
+<p>Estos conceptos forman la base de muchos algoritmos utilizados en bioinformática.</p>
+
+<p>En lecciones posteriores ampliaremos este ejercicio utilizando <strong>diccionarios</strong> para contar cuántas veces aparece cada k-mer.</p>
+
+
+
+
+</body>
+
+</html>
