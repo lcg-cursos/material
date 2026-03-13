@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>leccion_estructura_datos</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+  body {
+    padding: 2cm; 
+  }
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">Estructuras de datos</h1>
+
+<h2 id="toc_1">Antes de empezar</h2>
+
+<p>En esta sesión vas a trabajar como se trabaja en programación real:</p>
+
+<ol>
+<li>entender el problema</li>
+<li>definir qué debe hacer el programa</li>
+<li>revisar casos de prueba</li>
+<li>plantear la lógica de la solución</li>
+<li>identificar qué estructuras de datos necesitas</li>
+<li>implementar una primera versión</li>
+<li>extender el programa</li>
+</ol>
+
+<hr>
+
+<h2 id="toc_2">Introducción al problema y dinámica de la clase</h2>
+
+<p>En esta sesión vamos a trabajar con un problema inspirado en <strong>redes de regulación genética</strong>. En biología molecular, los <strong>factores de transcripción (TF)</strong> regulan la expresión de distintos genes, ya sea activándolos (<code>+</code>) o reprimiéndolos (<code>-</code>). A partir de una lista de interacciones regulatorias entre TFs y genes, queremos construir un programa que <strong>resuma esa información</strong> y nos permita entender mejor cómo se organiza la regulación.</p>
+
+<p>El objetivo inicial será generar una tabla que indique, para cada TF:</p>
+
+<ul>
+<li>cuántos genes regula</li>
+<li>cuáles son esos genes</li>
+</ul>
+
+<p>Más adelante extenderemos el programa para identificar si cada TF actúa principalmente como <strong>activador, represor o regulador dual</strong>.</p>
+
+<p>Te invito a leer el articulo <a href="https://margaretstorey.com/blog/2026/02/09/cognitive-debt/">&quot;How Generative and Agentic AI Shift Concern from Technical Debt to Cognitive Debt&quot;</a> donde Margaret-Anne Storey describe el cognitive debt como la pérdida de comprensión sobre un sistema cuando priorizamos producir código rápido en lugar de entender realmente cómo funciona. Cuando dejamos de pensar y solo ejecutamos soluciones, el sistema se vuelve cada vez más difícil de razonar y mantener.</p>
+
+<h3 id="toc_3">Dinámica de la clase</h3>
+
+<p>Durante la clase seguiremos un proceso similar al que se usa en el desarrollo real de software:</p>
+
+<ol>
+<li><strong>Entender el problema</strong> a partir de ejemplos de datos biológicos.</li>
+<li><strong>Definir los requisitos</strong> del programa: qué información recibe y qué debe producir.</li>
+<li><strong>Analizar casos de prueba</strong> para asegurarnos de que entendemos bien el comportamiento esperado.</li>
+<li><strong>Diseñar el algoritmo</strong> usando solo lógica (sin escribir aún código en Python).</li>
+<li><strong>Identificar las estructuras de datos necesarias</strong> (listas, tuplas y diccionarios) y revisar su sintaxis.</li>
+<li><strong>Implementar la primera versión del programa</strong> paso a paso.</li>
+<li><strong>Extender el programa</strong> para clasificar los TFs según su tipo de regulación.</li>
+</ol>
+
+<p>El objetivo no es solo escribir código, sino <strong>aprender a pensar cómo se construye una solución computacional</strong> a partir de un problema real en ciencias genómicas.</p>
+
+<p>Tenemos un conjunto de interacciones regulatorias entre factores de transcripción (TF) y genes.</p>
+
+<p>Cada interacción tiene la forma:</p>
+
+<div><pre><code class="language-none">TF  Gene  Effect</code></pre></div>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-none">AraC araA +
+AraC araB -
+LexA recA -
+CRP lacZ +
+CRP lacY +</code></pre></div>
+
+<h2 id="toc_4">Qué significa cada columna</h2>
+
+<table>
+<thead>
+<tr>
+<th>Columna</th>
+<th>Significado</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>TF</td>
+<td>Factor de transcripción o regulador</td>
+</tr>
+<tr>
+<td>Gene</td>
+<td>Gen regulado</td>
+</tr>
+<tr>
+<td>Effect</td>
+<td>Tipo de regulación</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_5">Significado de <code>Effect</code></h2>
+
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Significado</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>+</code></td>
+<td>Activación</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>Represión</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_6">Meta del programa</h2>
+
+<p>Tu programa debe construir una tabla como esta:</p>
+
+<table>
+<thead>
+<tr>
+<th>TF</th>
+<th style="text-align: right">Total de genes regulados</th>
+<th>Lista de genes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>AraC</td>
+<td style="text-align: right">2</td>
+<td>araA, araB</td>
+</tr>
+<tr>
+<td>LexA</td>
+<td style="text-align: right">1</td>
+<td>recA</td>
+</tr>
+<tr>
+<td>CRP</td>
+<td style="text-align: right">2</td>
+<td>lacZ, lacY</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h1 id="toc_7">2. ¿Por qué este ejercicio sí merece Python y no solo Unix?</h1>
+
+<p>Ya conoces herramientas como:</p>
+
+<div><pre><code class="language-none">grep
+cut
+awk
+sort
+uniq</code></pre></div>
+
+<p>Esas herramientas son muy buenas para:</p>
+
+<ul>
+<li>filtrar líneas</li>
+<li>seleccionar columnas</li>
+<li>contar ocurrencias</li>
+<li>ordenar texto</li>
+</ul>
+
+<p>Por ejemplo, con Unix sí podrías contar cuántas veces aparece cada TF.</p>
+
+<div><pre><code class="language-bash">cut -f1 archivo.txt | sort | uniq -c</code></pre></div>
+
+<p>Pero nuestro problema pide más que contar texto.</p>
+
+<p>Queremos:</p>
+
+<ul>
+<li>agrupar genes por TF</li>
+<li>guardar la lista de genes de cada TF</li>
+<li>después extender el programa para clasificar cada TF como activador, represor o dual</li>
+</ul>
+
+<p>Eso ya implica trabajar con <strong>estructuras en memoria</strong> y con relaciones del tipo:</p>
+
+<div><pre><code class="language-none">TF -&gt; lista de genes</code></pre></div>
+
+<p>Unix trabaja muy bien con <strong>flujos de texto</strong>. Python trabaja muy bien con <strong>estructuras de datos</strong>.</p>
+
+<p>Este ejercicio merece Python porque:</p>
+
+<ol>
+<li>hay que <strong>agrupar</strong> elementos</li>
+<li>hay que <strong>acumular</strong> resultados</li>
+<li>hay que <strong>relacionar</strong> un elemento con varios otros</li>
+<li>queremos que el programa sea fácil de extender</li>
+</ol>
+
+<hr>
+
+<h1 id="toc_8">3. Explora los datos antes de programar</h1>
+
+<p>Antes de escribir código, responde estas preguntas con el grupo.</p>
+
+<h2 id="toc_9">Preguntas guía</h2>
+
+<ol>
+<li>¿Qué representa una fila?</li>
+<li>¿Puede un TF aparecer varias veces?</li>
+<li>¿Por qué aparece repetido?</li>
+<li>¿Qué queremos resumir de cada TF?</li>
+<li>¿Qué parte del problema es fácil de leer para una persona pero difícil de organizar para un programa?</li>
+</ol>
+
+<h2 id="toc_10">Idea importante</h2>
+
+<p>Un mismo TF puede aparecer en muchas filas porque regula muchos genes.</p>
+
+<p>Eso significa que el programa debe <strong>agrupar</strong> filas que pertenecen al mismo TF.</p>
+
+<hr>
+
+<h1 id="toc_11">4. Requisitos del programa</h1>
+
+<h2 id="toc_12">Versión 1</h2>
+
+<p>El programa recibe una colección de interacciones. Cada interacción contiene:</p>
+
+<ul>
+<li>TF</li>
+<li>gene</li>
+<li>effect</li>
+</ul>
+
+<p>El programa debe producir una tabla con:</p>
+
+<ul>
+<li>TF</li>
+<li>número total de genes regulados</li>
+<li>lista de genes regulados</li>
+</ul>
+
+<h2 id="toc_13">Ejemplo de entrada conceptual</h2>
+
+<div><pre><code class="language-none">AraC araA +
+AraC araB -
+LexA recA -</code></pre></div>
+
+<h2 id="toc_14">Ejemplo de salida esperada</h2>
+
+<table>
+<thead>
+<tr>
+<th>TF</th>
+<th style="text-align: right">Total genes</th>
+<th>Lista genes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>AraC</td>
+<td style="text-align: right">2</td>
+<td>araA, araB</td>
+</tr>
+<tr>
+<td>LexA</td>
+<td style="text-align: right">1</td>
+<td>recA</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h1 id="toc_15">5. Casos de prueba</h1>
+
+<p>Los casos de prueba sirven para verificar que entendiste bien el problema <strong>antes de programar</strong>.</p>
+
+<h2 id="toc_16">Caso 1</h2>
+
+<p>Entrada:</p>
+
+<div><pre><code class="language-none">AraC araA +
+AraC araB -</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<table>
+<thead>
+<tr>
+<th>TF</th>
+<th style="text-align: right">Total</th>
+<th>Genes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>AraC</td>
+<td style="text-align: right">2</td>
+<td>araA, araB</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_17">Caso 2</h2>
+
+<p>Entrada:</p>
+
+<div><pre><code class="language-none">AraC araA +
+LexA recA -</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<table>
+<thead>
+<tr>
+<th>TF</th>
+<th style="text-align: right">Total</th>
+<th>Genes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>AraC</td>
+<td style="text-align: right">1</td>
+<td>araA</td>
+</tr>
+<tr>
+<td>LexA</td>
+<td style="text-align: right">1</td>
+<td>recA</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_18">Caso 3</h2>
+
+<p>Entrada:</p>
+
+<div><pre><code class="language-none">CRP lacZ +
+CRP lacY +
+CRP lacA +</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<table>
+<thead>
+<tr>
+<th>TF</th>
+<th style="text-align: right">Total</th>
+<th>Genes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>CRP</td>
+<td style="text-align: right">3</td>
+<td>lacZ, lacY, lacA</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_19">Caso 4</h2>
+
+<p>Entrada:</p>
+
+<div><pre><code class="language-none">AraC araA +
+AraC araB -
+CRP lacZ +
+LexA recA -</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<table>
+<thead>
+<tr>
+<th>TF</th>
+<th style="text-align: right">Total</th>
+<th>Genes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>AraC</td>
+<td style="text-align: right">2</td>
+<td>araA, araB</td>
+</tr>
+<tr>
+<td>CRP</td>
+<td style="text-align: right">1</td>
+<td>lacZ</td>
+</tr>
+<tr>
+<td>LexA</td>
+<td style="text-align: right">1</td>
+<td>recA</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h3 id="toc_20">Crear la estructura del proyecto</h3>
+
+<p><a href="./project_structure_section.html">Guia para crear el proyecto</a></p>
+
+<hr>
+
+<h1 id="toc_21">6. Algoritmo lógico</h1>
+
+<p>En esta etapa todavía <strong>no usamos sintaxis de Python</strong>.</p>
+
+<p>Tampoco decimos “diccionario”, “append” ni nada parecido.</p>
+
+<p>Solo escribimos la lógica.</p>
+
+<h2 id="toc_22">Algoritmo</h2>
+
+<div><pre><code class="language-none">1. Crear una estructura/lista para guardar los TF encontrados
+
+2. Recorrer todas las interacciones
+
+   para cada interacción:
+
+      obtener el TF
+
+      si el TF no está en la lista de TFs
+
+           agregarlo a la lista
+
+3. Para cada TF encontrado
+
+      crear una lista vacía de genes
+
+      recorrer todas las interacciones
+
+           si la interacción pertenece a ese TF
+
+                obtener el gen
+
+                agregar el gen a la lista de genes
+
+      contar cuántos genes tiene la lista
+
+      imprimir:
+
+           TF
+           total de genes
+           lista de genes
+</code></pre></div>
+
+<h2 id="toc_23">Qué notar aquí</h2>
+
+<p>Esta lógica funciona, pero recorre varias veces las interacciones.</p>
+
+<p>Pregunta para el grupo:</p>
+
+<blockquote>
+<p>¿Podemos guardar desde el inicio la relación entre un TF y su lista de genes?</p>
+</blockquote>
+
+<p>Esa pregunta abre el camino hacia la estructura adecuada.</p>
+
+<hr>
+
+<h1 id="toc_24">7. Qué estructuras de datos vamos a necesitar</h1>
+
+<p>Para implementar este problema en Python vamos a trabajar principalmente con:</p>
+
+<ul>
+<li>listas</li>
+<li>tuplas</li>
+<li>diccionarios</li>
+</ul>
+
+<p>Pero vamos por partes.</p>
+
+<hr>
+
+<h1 id="toc_25">8. Listas</h1>
+
+<h2 id="toc_26">Qué es una lista</h2>
+
+<p>Una lista es una colección ordenada de elementos.</p>
+
+<div><pre><code class="language-python">genes = [&quot;araA&quot;, &quot;araB&quot;, &quot;araC&quot;]</code></pre></div>
+
+<h4 id="toc_27">Carateristicas</h4>
+
+<p>a. <strong>Iterable</strong></p>
+
+<p>Una lista en Python es un objeto iterable. Puedes recorrer sus elementos uno por uno usando un <code>for</code>.</p>
+
+<p>b. <strong>Mutabilidad</strong></p>
+
+<p>Las listas son <strong>mutables</strong>. Eso significa que <strong>pueden cambiar después de ser creadas</strong>.</p>
+
+<p>Puedes:</p>
+
+<ul>
+<li>agregar elementos</li>
+<li>quitar elementos</li>
+<li>modificar elementos</li>
+</ul>
+
+<p>Ejemplos:</p>
+
+<div><pre><code class="language-python">genes = [&quot;araA&quot;, &quot;araB&quot;, &quot;araC&quot;]
+genes[1] = &quot;araD&quot;
+print(genes)</code></pre></div>
+
+<div><pre><code class="language-python">genes.append(&quot;araE&quot;)
+print(genes)</code></pre></div>
+
+<p>c. <strong>heterogéneas</strong> Las listas en Python son heterogéneas, lo que significa que pueden almacenar elementos de diferentes tipos de datos dentro de la misma estructura.</p>
+
+<p>d. <strong>Ordenadas</strong>. Los elementos tienen posición (índice).</p>
+
+<h2 id="toc_28">Operaciones básicas con listas</h2>
+
+<h3 id="toc_29">Crear</h3>
+
+<div><pre><code class="language-python">genes = [&quot;araA&quot;, &quot;araB&quot;, &quot;araC&quot;]</code></pre></div>
+
+<h3 id="toc_30">Acceder por índice</h3>
+
+<div><pre><code class="language-python">print(genes[0])
+print(genes[1])</code></pre></div>
+
+<h3 id="toc_31">Último elemento</h3>
+
+<div><pre><code class="language-python">print(genes[-1])</code></pre></div>
+
+<h3 id="toc_32">Recorrer</h3>
+
+<div><pre><code class="language-python">for gene in genes:
+    print(gene)</code></pre></div>
+
+<h3 id="toc_33">Longitud</h3>
+
+<div><pre><code class="language-python">print(len(genes))</code></pre></div>
+
+<h3 id="toc_34">Verificar pertenencia</h3>
+
+<div><pre><code class="language-python">print(&quot;araA&quot; in genes)
+print(&quot;lacZ&quot; in genes)</code></pre></div>
+
+<h2 id="toc_35">Métodos útiles de listas</h2>
+
+<h3 id="toc_36"><code>append()</code></h3>
+
+<p>Agrega un elemento al final.</p>
+
+<div><pre><code class="language-python">genes = [&quot;araA&quot;, &quot;araB&quot;]
+genes.append(&quot;araC&quot;)
+print(genes)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">[&#39;araA&#39;, &#39;araB&#39;, &#39;araC&#39;]</code></pre></div>
+
+<h3 id="toc_37"><code>extend()</code></h3>
+
+<p>Agrega varios elementos.</p>
+
+<div><pre><code class="language-python">genes = [&quot;araA&quot;, &quot;araB&quot;]
+genes.extend([&quot;araC&quot;, &quot;araD&quot;])
+print(genes)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">[&#39;araA&#39;, &#39;araB&#39;, &#39;araC&#39;, &#39;araD&#39;]</code></pre></div>
+
+<h3 id="toc_38"><code>remove()</code></h3>
+
+<p>Quita un elemento por valor.</p>
+
+<div><pre><code class="language-python">genes = [&quot;araA&quot;, &quot;araB&quot;, &quot;araC&quot;]
+genes.remove(&quot;araB&quot;)
+print(genes)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">[&#39;araA&#39;, &#39;araC&#39;]</code></pre></div>
+
+<h3 id="toc_39"><code>pop()</code></h3>
+
+<p>Quita un elemento por posición y lo devuelve.</p>
+
+<div><pre><code class="language-python">genes = [&quot;araA&quot;, &quot;araB&quot;, &quot;araC&quot;]
+ultimo = genes.pop()
+print(ultimo)
+print(genes)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">araC
+[&#39;araA&#39;, &#39;araB&#39;]</code></pre></div>
+
+<h3 id="toc_40"><code>sort()</code></h3>
+
+<p>Ordena la lista.</p>
+
+<div><pre><code class="language-python">genes = [&quot;lacZ&quot;, &quot;araA&quot;, &quot;recA&quot;]
+genes.sort()
+print(genes)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">[&#39;araA&#39;, &#39;lacZ&#39;, &#39;recA&#39;]</code></pre></div>
+
+<h3 id="toc_41"><code>index()</code></h3>
+
+<p>Regresa la posición de un elemento.</p>
+
+<div><pre><code class="language-python">genes = [&quot;araA&quot;, &quot;araB&quot;, &quot;araC&quot;]
+print(genes.index(&quot;araB&quot;))</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">1</code></pre></div>
+
+<h2 id="toc_42">Ejemplos pensados para este problema</h2>
+
+<div><pre><code class="language-python">genes_arac = []
+genes_arac.append(&quot;araA&quot;)
+genes_arac.append(&quot;araB&quot;)
+print(genes_arac)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">[&#39;araA&#39;, &#39;araB&#39;]</code></pre></div>
+
+<div><pre><code class="language-python">for gene in genes_arac:
+    print(gene)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">araA
+araB</code></pre></div>
+
+<hr>
+
+<h1 id="toc_43">9. Tuplas</h1>
+
+<h2 id="toc_44">Qué es una tupla</h2>
+
+<p>Una tupla es una colección ordenada de elementos relacionados.</p>
+
+<div><pre><code class="language-python">interaction = (&quot;AraC&quot;, &quot;araA&quot;, &quot;+&quot;)</code></pre></div>
+
+<p>Aquí los tres valores pertenecen a una misma interacción.</p>
+
+<h2 id="toc_45">Qué significa que sea inmutable</h2>
+
+<p>Las tuplas son <strong>inmutables</strong>.</p>
+
+<p>Eso significa que <strong>no se pueden modificar después de ser creadas</strong>.</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">interaction = (&quot;AraC&quot;, &quot;araA&quot;, &quot;+&quot;)</code></pre></div>
+
+<p>Esto no se puede hacer:</p>
+
+<div><pre><code class="language-python">interaction[1] = &quot;araB&quot;</code></pre></div>
+
+<h2 id="toc_46">¿Por qué usar una tupla aquí?</h2>
+
+<p>Porque una interacción representa un conjunto fijo de datos:</p>
+
+<ul>
+<li>TF</li>
+<li>gene</li>
+<li>effect</li>
+</ul>
+
+<p>No queremos estar cambiando esos tres campos arbitrariamente una vez definida la interacción.</p>
+
+<h2 id="toc_47">Operaciones básicas con tuplas</h2>
+
+<h3 id="toc_48">Crear</h3>
+
+<div><pre><code class="language-python">interaction = (&quot;AraC&quot;, &quot;araA&quot;, &quot;+&quot;)</code></pre></div>
+
+<h3 id="toc_49">Acceder por índice</h3>
+
+<div><pre><code class="language-python">print(interaction[0])
+print(interaction[1])
+print(interaction[2])</code></pre></div>
+
+<h3 id="toc_50">Longitud</h3>
+
+<div><pre><code class="language-python">print(len(interaction))</code></pre></div>
+
+<h3 id="toc_51">Desempaquetar</h3>
+
+<div><pre><code class="language-python">TF, gene, effect = interaction
+print(TF)
+print(gene)
+print(effect)</code></pre></div>
+
+<h2 id="toc_52">Ejemplos útiles</h2>
+
+<div><pre><code class="language-python">interaction = (&quot;LexA&quot;, &quot;recA&quot;, &quot;-&quot;)
+TF, gene, effect = interaction
+print(TF, gene, effect)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">LexA recA -</code></pre></div>
+
+<hr>
+
+<h1 id="toc_53">10. Mutable vs inmutable</h1>
+
+<p>Este contraste es importante.</p>
+
+<table>
+<thead>
+<tr>
+<th>Estructura</th>
+<th>¿Mutable?</th>
+<th>¿Qué significa?</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Lista</td>
+<td>Sí</td>
+<td>Se puede modificar después de creada</td>
+</tr>
+<tr>
+<td>Tupla</td>
+<td>No</td>
+<td>No se puede modificar después de creada</td>
+</tr>
+<tr>
+<td>Diccionario</td>
+<td>Sí</td>
+<td>Se pueden agregar, cambiar o quitar pares clave-valor</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_54">Ejemplo comparativo</h2>
+
+<h3 id="toc_55">Lista mutable</h3>
+
+<div><pre><code class="language-python">genes = [&quot;araA&quot;, &quot;araB&quot;]
+genes.append(&quot;araC&quot;)
+print(genes)</code></pre></div>
+
+<h3 id="toc_56">Tupla inmutable</h3>
+
+<div><pre><code class="language-python">interaction = (&quot;AraC&quot;, &quot;araA&quot;, &quot;+&quot;)</code></pre></div>
+
+<p>No puedes hacer:</p>
+
+<div><pre><code class="language-python">interaction[1] = &quot;araB&quot;</code></pre></div>
+
+<h2 id="toc_57">Idea didáctica</h2>
+
+<p>Para este problema:</p>
+
+<ul>
+<li>usamos <strong>tuplas</strong> para representar una interacción individual</li>
+<li>usamos <strong>listas</strong> para guardar muchas interacciones o muchos genes</li>
+</ul>
+
+<hr>
+
+<h1 id="toc_58">11. Lista de interacciones</h1>
+
+<p>Ahora juntamos ambas ideas.</p>
+
+<p>Una <strong>lista</strong> puede contener muchas <strong>tuplas</strong>.</p>
+
+<div><pre><code class="language-python">interactions = [
+    (&quot;AraC&quot;, &quot;araA&quot;, &quot;+&quot;),
+    (&quot;AraC&quot;, &quot;araB&quot;, &quot;-&quot;),
+    (&quot;LexA&quot;, &quot;recA&quot;, &quot;-&quot;),
+    (&quot;CRP&quot;, &quot;lacZ&quot;, &quot;+&quot;),
+    (&quot;CRP&quot;, &quot;lacY&quot;, &quot;+&quot;)
+]</code></pre></div>
+
+<h2 id="toc_59">Cómo recorrer esta estructura</h2>
+
+<div><pre><code class="language-python">for interaction in interactions:
+    print(interaction)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">(&#39;AraC&#39;, &#39;araA&#39;, &#39;+&#39;)
+(&#39;AraC&#39;, &#39;araB&#39;, &#39;-&#39;)
+(&#39;LexA&#39;, &#39;recA&#39;, &#39;-&#39;)
+(&#39;CRP&#39;, &#39;lacZ&#39;, &#39;+&#39;)
+(&#39;CRP&#39;, &#39;lacY&#39;, &#39;+&#39;)</code></pre></div>
+
+<h2 id="toc_60">Cómo desempaquetar al recorrer</h2>
+
+<div><pre><code class="language-python">for TF, gene, effect in interactions:
+    print(TF, gene, effect)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">AraC araA +
+AraC araB -
+LexA recA -
+CRP lacZ +
+CRP lacY +</code></pre></div>
+
+<p>Esto es muy útil porque cada vuelta del ciclo te da directamente los tres componentes.</p>
+
+<hr>
+
+<h1 id="toc_61">12. Diccionarios</h1>
+
+<h2 id="toc_62">Qué es un diccionario</h2>
+
+<p>Un diccionario guarda pares de la forma:</p>
+
+<div><pre><code class="language-python">clave -&gt; valor</code></pre></div>
+
+<p>Ejemplo simple:</p>
+
+<div><pre><code class="language-python">ages = {
+    &quot;Ana&quot;: 20,
+    &quot;Luis&quot;: 22
+}</code></pre></div>
+
+<h2 id="toc_63">¿Por qué sirve aquí?</h2>
+
+<p>Porque podemos guardar algo como:</p>
+
+<div><pre><code class="language-python">TF -&gt; lista de genes</code></pre></div>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">regulon = {
+    &quot;AraC&quot;: [&quot;araA&quot;, &quot;araB&quot;],
+    &quot;LexA&quot;: [&quot;recA&quot;],
+    &quot;CRP&quot;: [&quot;lacZ&quot;, &quot;lacY&quot;]
+}</code></pre></div>
+
+<p>Eso representa exactamente lo que queremos resumir.</p>
+
+<h2 id="toc_64">Los diccionarios son mutables</h2>
+
+<p>Podemos agregar claves nuevas y modificar valores.</p>
+
+<div><pre><code class="language-python">regulon = {}
+regulon[&quot;AraC&quot;] = [&quot;araA&quot;, &quot;araB&quot;]
+print(regulon)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">{&#39;AraC&#39;: [&#39;araA&#39;, &#39;araB&#39;]}</code></pre></div>
+
+<h2 id="toc_65">Operaciones básicas con diccionarios</h2>
+
+<h3 id="toc_66">Crear vacío</h3>
+
+<div><pre><code class="language-python">regulon = {}</code></pre></div>
+
+<h3 id="toc_67">Agregar una clave</h3>
+
+<div><pre><code class="language-python">regulon[&quot;AraC&quot;] = [&quot;araA&quot;]</code></pre></div>
+
+<h3 id="toc_68">Acceder a un valor</h3>
+
+<div><pre><code class="language-python">print(regulon[&quot;AraC&quot;])</code></pre></div>
+
+<h3 id="toc_69">Verificar si una clave existe</h3>
+
+<div><pre><code class="language-python">print(&quot;AraC&quot; in regulon)
+print(&quot;LexA&quot; in regulon)</code></pre></div>
+
+<h3 id="toc_70">Recorrer claves</h3>
+
+<div><pre><code class="language-python">for TF in regulon:
+    print(TF)</code></pre></div>
+
+<h3 id="toc_71">Recorrer clave y valor</h3>
+
+<div><pre><code class="language-python">for TF, genes in regulon.items():
+    print(TF, genes)</code></pre></div>
+
+<h2 id="toc_72">Métodos útiles de diccionarios</h2>
+
+<h3 id="toc_73"><code>keys()</code></h3>
+
+<p>Devuelve las claves.</p>
+
+<div><pre><code class="language-python">print(regulon.keys())</code></pre></div>
+
+<h3 id="toc_74"><code>values()</code></h3>
+
+<p>Devuelve los valores.</p>
+
+<div><pre><code class="language-python">print(regulon.values())</code></pre></div>
+
+<h3 id="toc_75"><code>items()</code></h3>
+
+<p>Devuelve pares clave-valor.</p>
+
+<div><pre><code class="language-python">for TF, genes in regulon.items():
+    print(TF, genes)</code></pre></div>
+
+<h3 id="toc_76"><code>get()</code></h3>
+
+<p>Permite obtener un valor sin provocar error si no existe la clave.</p>
+
+<div><pre><code class="language-python">print(regulon.get(&quot;AraC&quot;))
+print(regulon.get(&quot;GadW&quot;))</code></pre></div>
+
+<h2 id="toc_77">Ejemplo muy cercano al problema</h2>
+
+<div><pre><code class="language-python">regulon = {}
+regulon[&quot;AraC&quot;] = []
+regulon[&quot;AraC&quot;].append(&quot;araA&quot;)
+regulon[&quot;AraC&quot;].append(&quot;araB&quot;)
+print(regulon)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">{&#39;AraC&#39;: [&#39;araA&#39;, &#39;araB&#39;]}</code></pre></div>
+
+<hr>
+
+<h1 id="toc_78">13. Implementación parte 1</h1>
+
+<p>Ahora sí vamos a implementar la primera versión.</p>
+
+<h2 id="toc_79">Meta</h2>
+
+<p>Construir la tabla:</p>
+
+<p>| TF | Total genes | Lista genes |</p>
+
+<h2 id="toc_80">Paso 1. Representa los datos</h2>
+
+<div><pre><code class="language-python">interactions = [
+    (&quot;AraC&quot;, &quot;araA&quot;, &quot;+&quot;),
+    (&quot;AraC&quot;, &quot;araB&quot;, &quot;-&quot;),
+    (&quot;LexA&quot;, &quot;recA&quot;, &quot;-&quot;),
+    (&quot;CRP&quot;, &quot;lacZ&quot;, &quot;+&quot;),
+    (&quot;CRP&quot;, &quot;lacY&quot;, &quot;+&quot;)
+]</code></pre></div>
+
+<h2 id="toc_81">Paso 2. Crea la estructura para agrupar genes por TF</h2>
+
+<div><pre><code class="language-python">regulon = {}</code></pre></div>
+
+<h2 id="toc_82">Paso 3. Recorre las interacciones</h2>
+
+<div><pre><code class="language-python">for TF, gene, effect in interactions:
+    if TF not in regulon:
+        regulon[TF] = []
+    regulon[TF].append(gene)</code></pre></div>
+
+<h2 id="toc_83">Paso 4. Observa la estructura construida</h2>
+
+<div><pre><code class="language-python">print(regulon)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">{&#39;AraC&#39;: [&#39;araA&#39;, &#39;araB&#39;], &#39;LexA&#39;: [&#39;recA&#39;], &#39;CRP&#39;: [&#39;lacZ&#39;, &#39;lacY&#39;]}</code></pre></div>
+
+<h2 id="toc_84">Visualización conceptual de la estructura</h2>
+
+<p>También puedes imaginarla así:</p>
+
+<div><pre><code class="language-none">AraC -&gt; [araA, araB]
+LexA -&gt; [recA]
+CRP  -&gt; [lacZ, lacY]</code></pre></div>
+
+<p>Y de forma todavía más gráfica:</p>
+
+<div><pre><code class="language-none">regulon
+ ├── AraC -&gt; [araA, araB]
+ ├── LexA -&gt; [recA]
+ └── CRP  -&gt; [lacZ, lacY]</code></pre></div>
+
+<p>Esta visualización suele ayudar mucho a entender qué se está construyendo en memoria.</p>
+
+<h2 id="toc_85">Paso 5. Imprime la tabla resumen</h2>
+
+<p>Queremos que la salida sea <strong>consistente y fácil de leer</strong>.</p>
+
+<p>Por eso vamos a ordenar:</p>
+
+<ul>
+<li>los <strong>TFs</strong> (primera columna)</li>
+<li>la <strong>lista de genes</strong> de cada TF</li>
+</ul>
+
+<p>Esto también ayuda a que los <strong>resultados sean reproducibles</strong> cuando probamos el programa.</p>
+
+<h3 id="toc_86">Paso 5.1 Ordenar los TFs</h3>
+
+<div><pre><code class="language-python">for TF in sorted(regulon):
+    genes = regulon[TF]</code></pre></div>
+
+<p>La función <code>sorted()</code> devuelve una lista ordenada.</p>
+
+<h3 id="toc_87">Paso 5.2 Ordenar los genes</h3>
+
+<div><pre><code class="language-python">genes = sorted(genes)</code></pre></div>
+
+<h3 id="toc_88">Paso 5.3 Imprimir la tabla</h3>
+
+<div><pre><code class="language-python">for TF in sorted(regulon):
+    genes = sorted(regulon[TF])
+    total = len(genes)
+    lista_genes = &quot;, &quot;.join(genes)
+    print(TF, total, lista_genes)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">AraC 2 araA, araB
+CRP 2 lacY, lacZ
+LexA 1 recA</code></pre></div>
+
+<p>De esta forma:</p>
+
+<ul>
+<li>los <strong>TFs aparecerán ordenados alfabéticamente</strong></li>
+<li>los <strong>genes dentro de cada TF también estarán ordenados</strong></li>
+</ul>
+
+<p>Esto produce una salida más clara como:</p>
+
+<div><pre><code class="language-none">AraC 2 araA, araB
+CRP 2 lacY, lacZ
+LexA 1 recA</code></pre></div>
+
+<div><pre><code class="language-python">for TF, genes in regulon.items():
+    total = len(genes)
+    lista_genes = &quot;, &quot;.join(genes)
+    print(TF, total, lista_genes)</code></pre></div>
+
+<h2 id="toc_89">Qué aprendiste aquí</h2>
+
+<ul>
+<li>una lista puede guardar genes</li>
+<li>una tupla puede representar una interacción</li>
+<li>un diccionario puede asociar cada TF con su lista de genes</li>
+<li><code>append()</code> sirve para acumular</li>
+<li><code>items()</code> sirve para recorrer diccionarios</li>
+</ul>
+
+<hr>
+
+<h1 id="toc_90">14. Comprensión de listas</h1>
+
+<p>La comprensión de listas permite construir listas de forma compacta.</p>
+
+<h2 id="toc_91">Ejemplo sencillo</h2>
+
+<div><pre><code class="language-python">nums = [1, 2, 3, 4]
+cuadrados = [n * n for n in nums]
+print(cuadrados)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">[1, 4, 9, 16]</code></pre></div>
+
+<h2 id="toc_92">Ejemplo con filtro</h2>
+
+<div><pre><code class="language-python">nums = [1, 2, 3, 4, 5, 6]
+pares = [n for n in nums if n % 2 == 0]
+print(pares)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">[2, 4, 6]</code></pre></div>
+
+<h2 id="toc_93">Ejemplo aplicado al problema</h2>
+
+<div><pre><code class="language-python">genes_arac = [gene for TF, gene, effect in interactions if TF == &quot;AraC&quot;]
+print(genes_arac)</code></pre></div>
+
+<p>Salida esperada:</p>
+
+<div><pre><code class="language-none">[&#39;araA&#39;, &#39;araB&#39;]</code></pre></div>
+
+<h2 id="toc_94">Cuándo usar comprensión de listas</h2>
+
+<p>Úsala cuando quieras construir una lista nueva de forma clara.</p>
+
+<p>No la uses si hace que el código se vuelva difícil de leer.</p>
+
+<hr>
+
+<h1 id="toc_95">15. Extensión del problema</h1>
+
+<p>Ahora vamos a extender el programa.</p>
+
+<p>Además de la tabla anterior, queremos saber si cada TF es:</p>
+
+<ul>
+<li>activador</li>
+<li>represor</li>
+<li>dual</li>
+</ul>
+
+<h2 id="toc_96">Definiciones</h2>
+
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Regla</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>activador</td>
+<td>solo tiene <code>+</code></td>
+</tr>
+<tr>
+<td>represor</td>
+<td>solo tiene <code>-</code></td>
+</tr>
+<tr>
+<td>dual</td>
+<td>tiene <code>+</code> y <code>-</code></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_97">Nueva salida esperada</h2>
+
+<table>
+<thead>
+<tr>
+<th>TF</th>
+<th style="text-align: right">Total genes</th>
+<th style="text-align: right">Activados</th>
+<th style="text-align: right">Reprimidos</th>
+<th>Tipo</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>AraC</td>
+<td style="text-align: right">2</td>
+<td style="text-align: right">1</td>
+<td style="text-align: right">1</td>
+<td>dual</td>
+</tr>
+<tr>
+<td>LexA</td>
+<td style="text-align: right">1</td>
+<td style="text-align: right">0</td>
+<td style="text-align: right">1</td>
+<td>represor</td>
+</tr>
+<tr>
+<td>CRP</td>
+<td style="text-align: right">2</td>
+<td style="text-align: right">2</td>
+<td style="text-align: right">0</td>
+<td>activador</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h1 id="toc_98">16. Algoritmo lógico para la extensión</h1>
+
+<p>Otra vez: primero la lógica, no la sintaxis.</p>
+
+<ol>
+<li><p>Para cada TF</p></li>
+<li><p>iniciar contador de activados en 0</p></li>
+<li><p>iniciar contador de reprimidos en 0</p></li>
+<li><p>recorrer todas las interacciones</p>
+
+<p>si la interacción pertenece a ese TF</p>
+
+<p>si effect es <code>+</code></p>
+
+<div><pre><code class="language-none"> aumentar activados</code></pre></div>
+
+<p>si effect es <code>-</code></p>
+
+<div><pre><code class="language-none"> aumentar reprimidos</code></pre></div></li>
+<li><p>decidir el tipo</p>
+
+<p>si activados &gt; 0 y reprimidos &gt; 0</p>
+
+<p>tipo = dual</p>
+
+<p>si activados &gt; 0 y reprimidos = 0</p>
+
+<p>tipo = activador</p>
+
+<p>si reprimidos &gt; 0 y activados = 0</p>
+
+<p>tipo = represor</p></li>
+<li><p>imprimir resultados</p></li>
+</ol>
+
+<hr>
+
+<h1 id="toc_99">17. Actividad para ti</h1>
+
+<h2 id="toc_100">Parte A</h2>
+
+<p>Implementa la versión 1 del programa.</p>
+
+<p>Tu programa debe producir:</p>
+
+<p>| TF | Total genes | Lista genes |</p>
+
+<h2 id="toc_101">Parte B</h2>
+
+<p>Implementa la extensión.</p>
+
+<p>Tu programa debe producir:</p>
+
+<p>| TF | Total genes | Activados | Reprimidos | Tipo |</p>
+
+<h2 id="toc_102">Parte C</h2>
+
+<p>Prueba tu programa con al menos estos conjuntos de datos:</p>
+
+<h3 id="toc_103">Datos 1</h3>
+
+<div><pre><code class="language-python">interactions = [
+    (&quot;AraC&quot;, &quot;araA&quot;, &quot;+&quot;),
+    (&quot;AraC&quot;, &quot;araB&quot;, &quot;-&quot;),
+    (&quot;LexA&quot;, &quot;recA&quot;, &quot;-&quot;)
+]</code></pre></div>
+
+<h3 id="toc_104">Datos 2</h3>
+
+<div><pre><code class="language-python">interactions = [
+    (&quot;CRP&quot;, &quot;lacZ&quot;, &quot;+&quot;),
+    (&quot;CRP&quot;, &quot;lacY&quot;, &quot;+&quot;),
+    (&quot;CRP&quot;, &quot;lacA&quot;, &quot;+&quot;)
+]</code></pre></div>
+
+<h3 id="toc_105">Datos 3</h3>
+
+<div><pre><code class="language-python">interactions = [
+    (&quot;LexA&quot;, &quot;recA&quot;, &quot;-&quot;),
+    (&quot;LexA&quot;, &quot;umuC&quot;, &quot;-&quot;),
+    (&quot;AraC&quot;, &quot;araE&quot;, &quot;+&quot;),
+    (&quot;AraC&quot;, &quot;araA&quot;, &quot;-&quot;)
+]</code></pre></div>
+
+<hr>
+
+<h1 id="toc_106">18. Tips prácticos y errores clásicos</h1>
+
+<h2 id="toc_107">Tips con listas</h2>
+
+<ul>
+<li>Usa <code>append()</code> cuando quieres agregar <strong>un solo elemento</strong>.</li>
+<li>Usa <code>extend()</code> cuando quieres agregar <strong>varios elementos</strong>.</li>
+<li>Si vas a recorrer una lista y solo leerla, no necesitas modificarla.</li>
+<li>Si quieres una salida reproducible, recuerda ordenar con <code>sorted()</code> o <code>sort()</code>.</li>
+</ul>
+
+<h2 id="toc_108">Errores clásicos con listas</h2>
+
+<h3 id="toc_109">Error 1: confundir <code>append()</code> con <code>extend()</code></h3>
+
+<div><pre><code class="language-python">genes = [&quot;araA&quot;, &quot;araB&quot;]
+genes.append([&quot;araC&quot;, &quot;araD&quot;])
+print(genes)</code></pre></div>
+
+<p>Salida:</p>
+
+<div><pre><code class="language-none">[&#39;araA&#39;, &#39;araB&#39;, [&#39;araC&#39;, &#39;araD&#39;]]</code></pre></div>
+
+<p>Esto agrega <strong>una lista dentro de la lista</strong>, no dos genes por separado.</p>
+
+<h3 id="toc_110">Error 2: usar un índice que no existe</h3>
+
+<div><pre><code class="language-python">genes = [&quot;araA&quot;, &quot;araB&quot;]
+print(genes[2])</code></pre></div>
+
+<p>Esto produce error porque solo existen las posiciones <code>0</code> y <code>1</code>.</p>
+
+<h2 id="toc_111">Tips con tuplas</h2>
+
+<ul>
+<li>Úsalas cuando los datos de un elemento van juntos.</li>
+<li>Son ideales para representar registros simples, como una interacción.</li>
+<li>El desempaquetado hace el código más claro.</li>
+</ul>
+
+<h2 id="toc_112">Errores clásicos con tuplas</h2>
+
+<h3 id="toc_113">Error 1: intentar modificarlas</h3>
+
+<div><pre><code class="language-python">interaction = (&quot;AraC&quot;, &quot;araA&quot;, &quot;+&quot;)
+interaction[1] = &quot;araB&quot;</code></pre></div>
+
+<p>Esto provoca error porque la tupla es inmutable.</p>
+
+<h3 id="toc_114">Error 2: desempaquetar con un número incorrecto de variables</h3>
+
+<div><pre><code class="language-python">interaction = (&quot;AraC&quot;, &quot;araA&quot;, &quot;+&quot;)
+TF, gene = interaction</code></pre></div>
+
+<p>Esto provoca error porque la tupla tiene tres elementos y solo se dieron dos variables.</p>
+
+<h2 id="toc_115">Tips con diccionarios</h2>
+
+<ul>
+<li>Piensa siempre en la forma <code>clave -&gt; valor</code>.</li>
+<li>En este problema, la clave es el TF y el valor es la lista de genes.</li>
+<li>Usa <code>if clave not in diccionario</code> antes de crear una entrada nueva.</li>
+<li>Usa <code>items()</code> para recorrer clave y valor al mismo tiempo.</li>
+</ul>
+
+<h2 id="toc_116">Errores clásicos con diccionarios</h2>
+
+<h3 id="toc_117">Error 1: acceder a una clave que no existe</h3>
+
+<div><pre><code class="language-python">regulon = {}
+print(regulon[&quot;AraC&quot;])</code></pre></div>
+
+<p>Esto provoca error porque esa clave todavía no fue creada.</p>
+
+<h3 id="toc_118">Error 2: olvidar inicializar la lista antes de hacer <code>append()</code></h3>
+
+<div><pre><code class="language-python">regulon = {}
+regulon[&quot;AraC&quot;].append(&quot;araA&quot;)</code></pre></div>
+
+<p>Esto falla porque primero hay que crear la entrada:</p>
+
+<div><pre><code class="language-python">regulon = {}
+regulon[&quot;AraC&quot;] = []
+regulon[&quot;AraC&quot;].append(&quot;araA&quot;)</code></pre></div>
+
+<h3 id="toc_119">Error 3: olvidar ordenar la salida</h3>
+
+<p>El programa puede funcionar, pero producir una salida difícil de comparar entre pruebas.</p>
+
+<p>Por eso aquí ordenamos:</p>
+
+<ul>
+<li>TFs</li>
+<li>genes por TF</li>
+</ul>
+
+<hr>
+
+<h1 id="toc_120">19. Preguntas para comprobar comprensión</h1>
+
+<ol>
+<li>¿Por qué una lista sola no basta para resolver todo el problema?</li>
+<li>¿Por qué una interacción individual conviene representarla como tupla?</li>
+<li>¿Qué ventaja tiene el diccionario en este problema?</li>
+<li>¿Qué diferencia hay entre mutable e inmutable?</li>
+<li>¿En qué momento usarías comprensión de listas?</li>
+<li>¿Qué parte del problema podría hacerse con Unix y qué parte ya no?</li>
+</ol>
+
+<hr>
+
+<h1 id="toc_121">20. Cierre</h1>
+
+<p>En esta lección aprendiste que programar no es empezar escribiendo código de inmediato.</p>
+
+<p>El proceso correcto fue:</p>
+
+<ol>
+<li>entender el problema</li>
+<li>revisar ejemplos</li>
+<li>definir requisitos</li>
+<li>plantear la lógica</li>
+<li>identificar estructuras de datos</li>
+<li>implementar</li>
+<li>extender</li>
+</ol>
+
+<p>Además aprendiste tres ideas muy importantes:</p>
+
+<ul>
+<li>las <strong>listas</strong> sirven para colecciones ordenadas y son mutables</li>
+<li>las <strong>tuplas</strong> sirven para agrupar datos relacionados y son inmutables</li>
+<li>los <strong>diccionarios</strong> sirven para asociar una clave con un valor y son ideales para agrupar</li>
+</ul>
+
+<p>La siguiente extensión natural de esta lección es leer las interacciones desde un archivo y automatizar el análisis de una red regulatoria más grande.</p>
+
+
+
+
+</body>
+
+</html>
