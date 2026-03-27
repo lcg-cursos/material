@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>funciones_refactorizacion</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+  body {
+    padding: 2cm; 
+  }
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">Lección: Organización del código con funciones</h1>
+
+<h2 id="toc_1">1. Evolución del software y necesidad de organización del código</h2>
+
+<h3 id="toc_2">Contexto</h3>
+
+<p>En las primeras versiones de un programa:</p>
+
+<ul>
+<li>el problema es pequeño</li>
+<li>el código es corto</li>
+<li>una solución lineal suele ser suficiente</li>
+</ul>
+
+<p>En este curso, el programa fue creciendo por etapas:</p>
+
+<ul>
+<li>primero trabajamos con datos en memoria</li>
+<li>después incorporamos lectura desde archivo</li>
+<li>luego agregamos validaciones</li>
+<li>finalmente generamos un archivo de salida</li>
+</ul>
+
+<p>Hasta este punto, el programa <strong>ya resuelve el problema</strong> y cumple los requisitos funcionales definidos.</p>
+
+<h3 id="toc_3">Importancia de los requisitos</h3>
+
+<p>Una buena práctica en desarrollo de software es:</p>
+
+<blockquote>
+<p><strong>identificar lo mejor posible los requisitos desde el inicio</strong></p>
+</blockquote>
+
+<p>Esto ayuda a:</p>
+
+<ul>
+<li>reducir cambios posteriores</li>
+<li>evitar retrabajo</li>
+<li>facilitar el diseño</li>
+<li>disminuir errores</li>
+</ul>
+
+<p>Sin embargo, en la práctica real:</p>
+
+<blockquote>
+<p><strong>los programas cambian constantemente</strong></p>
+</blockquote>
+
+<p>Porque:</p>
+
+<ul>
+<li>aparecen nuevos casos de uso</li>
+<li>se detectan errores</li>
+<li>se solicitan mejoras</li>
+<li>cambian las necesidades del usuario</li>
+</ul>
+
+<p>Por eso, además de entender los requisitos, también necesitamos aprender a <strong>mantener la calidad del código cuando el programa crece</strong>.</p>
+
+<h3 id="toc_4">Problema: crecimiento del código</h3>
+
+<p>Con cada cambio, el programa:</p>
+
+<ul>
+<li>crece en tamaño</li>
+<li>mezcla responsabilidades</li>
+<li>se vuelve más difícil de leer</li>
+<li>se vuelve más difícil de modificar</li>
+<li>aumenta el riesgo de romper algo que ya funcionaba</li>
+</ul>
+
+<p>En este punto, el problema ya no es solo resolver el dominio biológico.</p>
+
+<p>Ahora también necesitamos resolver un problema de diseño:</p>
+
+<blockquote>
+<p><strong>cómo organizar el código para que siga siendo claro, mantenible y fácil de extender</strong></p>
+</blockquote>
+
+<h3 id="toc_5">Refactorización</h3>
+
+<p>Una técnica fundamental para enfrentar este problema es la <strong>refactorización</strong>.</p>
+
+<blockquote>
+<p><strong>Refactorizar significa reorganizar y mejorar el código sin cambiar su comportamiento observable</strong></p>
+</blockquote>
+
+<p>En otras palabras:</p>
+
+<ul>
+<li>mismo input</li>
+<li>mismo output</li>
+<li>mejor estructura interna</li>
+</ul>
+
+<h4 id="toc_6">Objetivos de la refactorización</h4>
+
+<ul>
+<li>mejorar legibilidad</li>
+<li>facilitar mantenimiento</li>
+<li>reducir errores</li>
+<li>preparar el programa para cambios futuros</li>
+</ul>
+
+<h4 id="toc_7">Regla clave</h4>
+
+<p>Después de refactorizar:</p>
+
+<blockquote>
+<p><strong>el programa debe seguir produciendo exactamente los mismos resultados</strong></p>
+</blockquote>
+
+<p>Por eso, es indispensable apoyarse en casos de prueba.</p>
+
+<h3 id="toc_8">Rol de las funciones</h3>
+
+<p>Una de las herramientas más importantes para refactorizar es el uso de <strong>funciones</strong>.</p>
+
+<p>Las funciones permiten:</p>
+
+<ul>
+<li>dividir el programa en partes claras</li>
+<li>asignar una responsabilidad a cada parte</li>
+<li>reutilizar lógica</li>
+<li>probar componentes por separado</li>
+<li>hacer más entendible el flujo del programa</li>
+</ul>
+
+<h3 id="toc_9">Objetivo de esta lección</h3>
+
+<p>En esta sesión:</p>
+
+<ul>
+<li><strong>no vamos a cambiar la funcionalidad del programa</strong></li>
+<li>vamos a <strong>reorganizarlo usando funciones</strong></li>
+</ul>
+
+<p>No vamos a escribir un programa nuevo, sino aprender a <strong>transformar un script lineal en un programa con mejor estructura</strong>.</p>
+
+<hr>
+
+<h2 id="toc_10">2. Del código lineal al código organizado</h2>
+
+<h3 id="toc_11">El programa inicial</h3>
+
+<p>Partimos de un script como este:</p>
+
+<div><pre><code class="language-python">import os
+
+# =========================================
+# Lectura del archivo y construcción de interactions
+# =========================================
+
+interactions = []
+
+filename = &quot;data/raw/NetworkRegulatorGene.tsv&quot;
+
+if not os.path.exists(filename):
+    print(&quot;Error: archivo no encontrado&quot;)
+    exit(1)
+else:
+    with open(filename) as f:        
+        for line in f:
+            
+            line = line.strip()
+
+            # Ignorar líneas vacías
+            if not line:
+                continue
+
+            # Ignorar comentarios
+            if line.startswith(&quot;#&quot;):
+                continue
+
+            # Ignorar encabezado
+            if line.startswith(&quot;1)regulatorId&quot;):
+                continue
+            
+            fields = line.split(&quot;\t&quot;)
+
+            # Validar número mínimo de columnas
+            if len(fields) &lt;= 6:
+                continue
+                        
+            TF = fields[1]
+            gene = fields[4]
+            effect = fields[5]
+
+            # Validar effect
+            if effect not in [&quot;+&quot;, &quot;-&quot;,&quot;+-&quot;]:
+                continue
+
+            interactions.append((TF, gene, effect))
+
+
+# =========================================
+# Construcción del regulon con información extra
+# =========================================
+
+regulon = {}
+
+for TF, gene, effect in interactions:
+    
+    # Inicializar estructura si el TF no existe
+    if TF not in regulon:
+        regulon[TF] = {
+            &quot;genes&quot;: [],
+            &quot;activados&quot;: 0,
+            &quot;reprimidos&quot;: 0
+        }
+
+    # Agregar gen a la lista
+    regulon[TF][&quot;genes&quot;].append(gene)
+
+    # Contar tipo de regulación
+    if effect == &quot;+&quot;:
+        regulon[TF][&quot;activados&quot;] += 1
+    elif effect == &quot;-&quot;:
+        regulon[TF][&quot;reprimidos&quot;] += 1
+    elif effect == &quot;+-&quot;:
+        regulon[TF][&quot;activados&quot;] += 1
+        regulon[TF][&quot;reprimidos&quot;] += 1  
+
+
+# =========================================
+# Generación de la salida
+# =========================================
+
+output_file = &quot;results/regulon_summary.tsv&quot;
+os.makedirs(os.path.dirname(output_file), exist_ok=True)
+
+with open(output_file, &quot;w&quot;) as out:
+    out.write(&quot;TF\tTotal genes\tActivados\tReprimidos\tTipo\tLista de genes\n&quot;)
+
+    for TF in sorted(regulon):
+        
+        # Obtener datos
+        genes = sorted(regulon[TF][&quot;genes&quot;])
+        total = len(genes)
+        activados = regulon[TF][&quot;activados&quot;]
+        reprimidos = regulon[TF][&quot;reprimidos&quot;]
+
+        # Determinar tipo de regulación
+        if activados &gt; 0 and reprimidos &gt; 0:
+            tipo = &quot;dual&quot;
+        elif activados &gt; 0:
+            tipo = &quot;activador&quot;
+        else:
+            tipo = &quot;represor&quot;
+
+        lista_genes = &quot;, &quot;.join(genes)
+        out.write(f&quot;{TF}\t{total}\t{activados}\t{reprimidos}\t{tipo}\t{lista_genes}\n&quot;)
+</code></pre></div>
+
+<p>Este código funciona. </p>
+
+<p>El problema es que <strong>todas las tareas están mezcladas en un solo flujo</strong>:</p>
+
+<ul>
+<li>lectura del archivo</li>
+<li>validación</li>
+<li>construcción de datos</li>
+<li>generación de salida</li>
+<li>clasificación del tipo de regulador</li>
+</ul>
+
+<h3 id="toc_12">El problema del “código espagueti”</h3>
+
+<p>Cuando un programa crece sin una estructura clara:</p>
+
+<ul>
+<li>todo ocurre en una sola secuencia</li>
+<li>diferentes tareas quedan mezcladas</li>
+<li>los límites entre partes del programa no son claros</li>
+<li>modificar una parte puede afectar otras</li>
+</ul>
+
+<p>A esto se le suele llamar informalmente <strong>código espagueti</strong>.</p>
+
+<h3 id="toc_13">Pregunta guía</h3>
+
+<p>Antes de pensar en la sintaxis de funciones, hay que hacerse una pregunta más importante:</p>
+
+<blockquote>
+<p><strong>¿Qué tareas distintas está realizando este programa?</strong></p>
+</blockquote>
+
+<p>Ese cambio de pregunta es clave.</p>
+
+<p>No empezamos por <code>def</code>.</p>
+
+<p>Empezamos por <strong>identificar responsabilidades</strong>.</p>
+
+<hr>
+
+<h2 id="toc_14">3. Cómo agrupar código: identificar responsabilidades</h2>
+
+<h3 id="toc_15">¿Qué es una responsabilidad?</h3>
+
+<p>Una responsabilidad es:</p>
+
+<ul>
+<li>una tarea específica</li>
+<li>con un propósito claro</li>
+<li>que recibe ciertos datos</li>
+<li>y produce un resultado o un efecto</li>
+</ul>
+
+<p>En diseño de software, las funciones no se crean por sintaxis.</p>
+
+<blockquote>
+<p><strong>Las funciones se crean a partir de responsabilidades bien identificadas</strong>.</p>
+</blockquote>
+
+<h3 id="toc_16">Criterios para agrupar código</h3>
+
+<p>Para decidir qué código debería quedar junto, usaremos estos criterios:</p>
+
+<h4 id="toc_17">1. Cohesión</h4>
+
+<blockquote>
+<p>El código que realiza una misma tarea debería permanecer junto.</p>
+</blockquote>
+
+<p>Ejemplo:</p>
+
+<ul>
+<li>abrir archivo</li>
+<li>recorrer líneas</li>
+<li>limpiar texto</li>
+<li>validar columnas</li>
+<li>construir <code>interactions</code></li>
+</ul>
+
+<p>Todo eso pertenece al mismo bloque porque forma parte de una sola responsabilidad: <strong>leer y preparar interacciones</strong>.</p>
+
+<h4 id="toc_18">2. Entradas y salidas claras</h4>
+
+<p>Un buen bloque tiene:</p>
+
+<ul>
+<li>una entrada identificable</li>
+<li>una salida identificable</li>
+</ul>
+
+<p>Ejemplos:</p>
+
+<ul>
+<li><code>archivo -&gt; interactions</code></li>
+<li><code>interactions -&gt; regulon</code></li>
+<li><code>regulon -&gt; archivo de salida</code></li>
+</ul>
+
+<h4 id="toc_19">3. Independencia</h4>
+
+<p>Un bloque bien definido debería poder entenderse sin tener que leer todo el programa al mismo tiempo.</p>
+
+<p>Por ejemplo:</p>
+
+<ul>
+<li>construir el regulon no debería depender de los detalles internos de lectura del archivo</li>
+</ul>
+
+<h4 id="toc_20">4. Reutilización potencial</h4>
+
+<p>Si una parte podría usarse en otro contexto o al menos mejora mucho la legibilidad al separarse, conviene aislarla.</p>
+
+<p>Ejemplo:</p>
+
+<ul>
+<li>la lógica para determinar si un regulador es <code>activador</code>, <code>represor</code> o <code>dual</code></li>
+</ul>
+
+<h4 id="toc_21">5. Facilidad de prueba</h4>
+
+<p>Si una parte puede probarse por separado, normalmente está bien delimitada.</p>
+
+<p>Esto significa que podemos ejecutar esa parte con ciertos datos y verificar si produce el resultado esperado, sin necesidad de correr todo el programa.</p>
+
+<p>Por ejemplo:</p>
+
+<ul>
+<li>podemos probar la función que construye el regulon usando una lista pequeña de interacciones</li>
+<li>podemos probar la función que determina el tipo de regulador con distintos valores de entrada</li>
+<li>podemos verificar que la salida generada tenga el formato correcto</li>
+</ul>
+
+<p>Si tenemos una función:</p>
+
+<div><pre><code class="language-none">def get_regulator_type(activados, reprimidos):
+    ...</code></pre></div>
+
+<p>Podemos probarla directamente:</p>
+
+<div><pre><code class="language-none">get_regulator_type(3, 0)  → debería ser &quot;activador&quot;  
+get_regulator_type(0, 2)  → debería ser &quot;represor&quot;  
+get_regulator_type(2, 2)  → debería ser &quot;dual&quot;  </code></pre></div>
+
+<p>Sin necesidad de leer archivos o construir todo el regulon.</p>
+
+<blockquote>
+<p>En desarrollo profesional, este tipo de pruebas se conocen como <strong>pruebas unitarias</strong>,<br>
+pero aquí lo importante es entender la idea:<br>
+probar piezas pequeñas de forma independiente.</p>
+</blockquote>
+
+<h2 id="toc_22">4. Actividad guiada: detectar bloques en el script actual</h2>
+
+<p><strong>Objetivo</strong></p>
+
+<p>Desarrollar criterio para pasar de <strong>leer código</strong> a <strong>entender su estructura lógica</strong>.</p>
+
+<h3 id="toc_23">Paso 1: Identificar bloques</h3>
+
+<ol>
+<li>Abre el archivo <code>regulon_summary.py</code>.</li>
+<li>Lee el script completo sin modificarlo todavía.</li>
+<li>Marca con comentarios los bloques que identifiques.</li>
+</ol>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python"># leer interacciones
+
+# construir regulon
+
+# determinar tipo regulador
+
+# generar salida</code></pre></div>
+
+<h4 id="toc_24">Preguntas guía</h4>
+
+<p>Para cada bloque responde:</p>
+
+<ul>
+<li>¿Qué hace esta parte del código?</li>
+<li>¿Qué datos recibe?</li>
+<li>¿Qué produce?</li>
+<li>¿De qué otra parte depende?</li>
+</ul>
+
+<h4 id="toc_25">Discusión</h4>
+
+<p>No todos van a marcar exactamente los mismos bloques, y eso está bien.</p>
+
+<p>El diseño requiere criterio.</p>
+
+<p>Sin embargo, sí debería haber acuerdo en las responsabilidades principales.</p>
+
+<h3 id="toc_26">Paso 2: Encontrar responsabilidades del programa</h3>
+
+<p>Una vez identificados los bloques, el siguiente paso es convertirlos en responsabilidades.</p>
+
+<p>Un bloque es una parte del código.
+Una responsabilidad es una descripción clara de:</p>
+
+<ul>
+<li>qué hace<br></li>
+<li>qué datos usa<br></li>
+<li>qué resultado produce</li>
+</ul>
+
+<p><strong>Ejemplo</strong></p>
+
+<p>Bloque identificado:</p>
+
+<ul>
+<li>leer interacciones</li>
+</ul>
+
+<p>Responsabilidad:</p>
+
+<ul>
+<li>Leer un archivo, validar su contenido y construir una lista de interacciones.</li>
+</ul>
+
+<h3 id="toc_27">Paso 3: Refinar responsabilidades</h3>
+
+<p>Una vez identificadas, conviene hacerlas más precisas usando una forma más estructurada:</p>
+
+<ul>
+<li>nombre de la responsabilidad</li>
+<li>entrada</li>
+<li>salida</li>
+</ul>
+
+<p>Ejemplo:</p>
+
+<ul>
+<li>Responsabilidad: leer interacciones desde archivo</li>
+<li>Entrada: archivo</li>
+<li>Salida: lista de interactions</li>
+</ul>
+
+<p>Dentro del código se vería como</p>
+
+<div><pre><code class="language-python"># =========================================
+# Responsabilidad: leer interacciones desde archivo
+# Entrada: archivo
+# Salida: lista de interactions
+# =========================================</code></pre></div>
+
+<p>Esto ayuda a explicitar la intención del bloque antes de convertirlo en función.</p>
+
+<p>Hagamoslo para todos los bloques.</p>
+
+<h3 id="toc_28">Paso 4: Niveles de responsabilidad</h3>
+
+<p>No todas las responsabilidades tienen el mismo papel dentro del programa.</p>
+
+<p>**Clasificacaión:</p>
+
+<ul>
+<li><p>Alta</p>
+
+<ul>
+<li>define el flujo principal del programa.<br></li>
+<li>conecta entradas y salidas principales</li>
+<li>suele corresponder a funciones principales</li>
+</ul></li>
+<li><p>Media (subproceso importante)</p>
+
+<ul>
+<li>forma parte de una responsabilidad mayor</li>
+<li>puede o no convertirse en función</li>
+<li>aquí empieza el criterio de diseño</li>
+</ul></li>
+<li><p>Baja (detalle lógico)</p>
+
+<ul>
+<li>lógica puntual</li>
+<li>condiciones o cálculos específicos</li>
+<li>puede ser función pequeña o inline</li>
+</ul></li>
+</ul>
+
+<h4 id="toc_29">¿Cómo determinar el nivel?</h4>
+
+<p>Hazte esta pregunta:</p>
+
+<blockquote>
+<p>¿Este bloque controla el flujo general, transforma datos o resuelve un detalle?</p>
+</blockquote>
+
+<ul>
+<li>Flujo principal → Alta</li>
+<li>Parte de un proceso → Media</li>
+<li>Regla puntual → Baja</li>
+</ul>
+
+<h5 id="toc_30">Leer interacciones</h5>
+
+<p>Preguntas:</p>
+
+<ul>
+<li>¿Es un paso principal del programa?</li>
+<li>¿Conecta el archivo de entrada con la estructura <code>interactions</code>?</li>
+<li>¿Sin este bloque el programa puede continuar?</li>
+</ul>
+
+<p>Nivel: </p>
+
+<h5 id="toc_31">Construir regulon</h5>
+
+<p>Preguntas:</p>
+
+<ul>
+<li>¿Transforma <code>interactions</code> en una estructura central del programa?</li>
+<li>¿Es uno de los pasos principales del flujo?</li>
+<li>¿Sin este bloque se puede generar la salida?</li>
+</ul>
+
+<p>Nivel: </p>
+
+<h5 id="toc_32">Determinar tipo regulador</h5>
+
+<p>Preguntas:</p>
+
+<ul>
+<li>¿Es una clasificación puntual?</li>
+<li>¿Solo calcula una etiqueta a partir de dos valores?</li>
+<li>¿La necesita todo el programa o solo una parte?</li>
+</ul>
+
+<p>Nivel:</p>
+
+<h5 id="toc_33">Generar salida</h5>
+
+<p>Preguntas:</p>
+
+<ul>
+<li>¿Es el paso final del flujo?</li>
+<li>¿Conecta la estructura interna con el archivo de salida?</li>
+<li>¿Sin este bloque el programa entrega un resultado al usuario?</li>
+</ul>
+
+<p>Nivel:</p>
+
+<p><strong>Resumen de responsabilidades del programa</strong></p>
+
+<p>A partir del análisis anterior, podemos resumir las responsabilidades en la siguiente tabla:</p>
+
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Responsabilidad</th>
+<th>Entrada</th>
+<th>Salida</th>
+<th>Descripción</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Alta</td>
+<td>Leer interacciones</td>
+<td>archivo</td>
+<td>lista de interactions</td>
+<td>Lee el archivo, limpia líneas, valida columnas y construye la lista de interacciones</td>
+</tr>
+<tr>
+<td>Alta</td>
+<td>Construir regulon</td>
+<td>interactions</td>
+<td>regulon</td>
+<td>Agrupa genes por factor de transcripción y cuenta activaciones y represiones</td>
+</tr>
+<tr>
+<td>Baja</td>
+<td>Determinar tipo regulador</td>
+<td>activados, reprimidos</td>
+<td>tipo</td>
+<td>Clasifica al regulador como <code>activador</code>, <code>represor</code> o <code>dual</code></td>
+</tr>
+<tr>
+<td>Alta</td>
+<td>Generar salida</td>
+<td>regulon</td>
+<td>archivo</td>
+<td>Escribe el archivo de resumen con el formato esperado</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>El nivel no depende del tamaño del código,
+sino del rol que cumple dentro del programa.</p>
+</blockquote>
+
+<hr>
+
+<h2 id="toc_34">5. De responsabilidad a función</h2>
+
+<p>Ahora sí podemos hacer una trazabilidad explícita entre el análisis y la implementación.</p>
+
+<table>
+<thead>
+<tr>
+<th>Responsabilidad</th>
+<th>Función propuesta(entrada)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Leer interacciones</td>
+<td><code>load_interactions(input_file)</code></td>
+</tr>
+<tr>
+<td>Construir regulon</td>
+<td><code>build_regulon(interactions)</code></td>
+</tr>
+<tr>
+<td>Determinar tipo regulador</td>
+<td><code>get_regulator_type(activados, reprimidos)</code></td>
+</tr>
+<tr>
+<td>Generar salida</td>
+<td><code>write_summary(regulon, output_file)</code></td>
+</tr>
+<tr>
+<td>Coordinar el flujo general</td>
+<td><code>main()</code></td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>Una función es una responsabilidad bien definida llevada a código.</p>
+</blockquote>
+
+<hr>
+
+<h2 id="toc_35">6. Concepto y sintaxis de funciones en Python</h2>
+
+<p>Una vez identificadas las responsabilidades, necesitamos la herramienta del lenguaje para implementarlas: las <strong>funciones</strong>.</p>
+
+<h3 id="toc_36">¿Qué es una función?</h3>
+
+<blockquote>
+<p>Una función es un bloque de código con nombre que encapsula una tarea específica.</p>
+</blockquote>
+
+<p>Sirve para:</p>
+
+<ul>
+<li>organizar lógica</li>
+<li>reutilizar código</li>
+<li>separar responsabilidades</li>
+<li>hacer más claro el programa</li>
+</ul>
+
+<h3 id="toc_37">Sintaxis básica</h3>
+
+<div><pre><code class="language-python">def nombre_funcion(parametros):
+    # cuerpo de la función
+    return resultado</code></pre></div>
+
+<h3 id="toc_38">Elementos importantes</h3>
+
+<h4 id="toc_39">palabra reservada <code>def</code></h4>
+
+<p>La palabra clave <code>def</code> indica que se está definiendo una función.</p>
+
+<h4 id="toc_40">Nombre de la función</h4>
+
+<p>Debe describir claramente qué hace.</p>
+
+<p>Buenos ejemplos en este problema:</p>
+
+<ul>
+<li><code>load_interactions</code></li>
+<li><code>build_regulon</code></li>
+<li><code>write_summary</code></li>
+</ul>
+
+<h4 id="toc_41">Parámetros</h4>
+
+<p>Son los datos de entrada que la función necesita para trabajar.</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">def load_interactions(input_file):</code></pre></div>
+
+<p>Aquí <code>input_file</code> es el parámetro.</p>
+
+<h4 id="toc_42">Cuerpo de la función</h4>
+
+<p>Es el bloque de instrucciones que realiza la tarea.</p>
+
+<h4 id="toc_43">palabra reservada <code>return</code></h4>
+
+<p>Se usa para devolver un resultado.</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">return interactions</code></pre></div>
+
+<h3 id="toc_44">Modelo mental: una función transforma datos</h3>
+
+<p>En este programa, podemos pensar las funciones así:</p>
+
+<div><pre><code class="language-text">archivo -&gt; interactions -&gt; regulon -&gt; archivo de salida</code></pre></div>
+
+<p>Cada función toma algo, lo transforma y produce un resultado.</p>
+
+<p>Ejemplos:</p>
+
+<ul>
+<li><code>load_interactions(input_file) -&gt; interactions</code></li>
+<li><code>build_regulon(interactions) -&gt; regulon</code></li>
+<li><code>get_regulator_type(activados, reprimidos) -&gt; tipo</code></li>
+</ul>
+
+<p>Este modelo mental es muy útil en bioinformática y ciencia de datos.</p>
+
+<h3 id="toc_45">Funciones con y sin <code>return</code></h3>
+
+<h4 id="toc_46">Funciones que devuelven un valor</h4>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">def get_regulator_type(activados, reprimidos):
+    if activados &gt; 0 and reprimidos &gt; 0:
+        return &quot;dual&quot;
+    elif activados &gt; 0:
+        return &quot;activador&quot;
+    else:
+        return &quot;represor&quot;</code></pre></div>
+
+<p>Aquí la función <strong>devuelve</strong> una clasificación.</p>
+
+<h4 id="toc_47">Funciones que producen un efecto</h4>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">def write_summary(regulon, output_file):
+    ...</code></pre></div>
+
+<p>En este caso, la función no necesita regresar un dato nuevo. Su trabajo principal es <strong>escribir un archivo</strong>.</p>
+
+<h3 id="toc_48">Variables locales</h3>
+
+<p>Las variables creadas dentro de una función existen solo dentro de esa función.</p>
+
+<p>Esto ayuda a:</p>
+
+<ul>
+<li>evitar efectos inesperados</li>
+<li>reducir dependencias innecesarias</li>
+<li>hacer el código más seguro y claro</li>
+</ul>
+
+<h3 id="toc_49">Regla práctica</h3>
+
+<blockquote>
+<p>Una función debe hacer una sola cosa y hacerla bien.</p>
+</blockquote>
+
+<p>Eso no significa que deba tener una sola línea.</p>
+
+<p>Significa que debe tener <strong>una responsabilidad clara</strong>.</p>
+
+<hr>
+
+<h2 id="toc_50">7. 📝 Documentación de funciones: docstrings</h2>
+
+<p>Una vez que empezamos a organizar el código en funciones, surge una nueva necesidad:</p>
+
+<blockquote>
+<p>explicar claramente qué hace cada función</p>
+</blockquote>
+
+<p>Para esto se utilizan los <strong>docstrings</strong>.</p>
+
+<h3 id="toc_51">¿Qué es un docstring?</h3>
+
+<p>Un docstring es un texto que se escribe al inicio de una función para describir:</p>
+
+<ul>
+<li>qué hace</li>
+<li>qué recibe</li>
+<li>qué devuelve</li>
+</ul>
+
+<p>Se define usando comillas triples:</p>
+
+<p>&quot;&quot;&quot; ... &quot;&quot;&quot;</p>
+
+<h3 id="toc_52">Ejemplo en nuestro contexto</h3>
+
+<div><pre><code class="language-python">def load_interactions(input_file):
+    &quot;&quot;&quot;Lee un archivo TSV, valida su contenido y devuelve una lista de interacciones.&quot;&quot;&quot;</code></pre></div>
+
+<h3 id="toc_53">¿Por qué son importantes?</h3>
+
+<p>Los docstrings ayudan a:</p>
+
+<ul>
+<li>entender el código más rápido</li>
+<li>facilitar mantenimiento</li>
+<li>comunicar intención</li>
+<li>mejorar el uso de herramientas de IA</li>
+<li>generar documentación automática</li>
+</ul>
+
+<h3 id="toc_54">¿Qué debería incluir un buen docstring?</h3>
+
+<p>Como mínimo:</p>
+
+<ul>
+<li>qué hace la función</li>
+<li>qué parámetros recibe</li>
+<li>qué devuelve</li>
+</ul>
+
+<h3 id="toc_55">Formatos comunes de docstrings</h3>
+
+<p>Existen varios estilos. No es obligatorio usar uno complejo al inicio, pero es importante conocerlos.</p>
+
+<h4 id="toc_56">1. Formato simple (recomendado)</h4>
+
+<p>def build_regulon(interactions):
+    &quot;&quot;&quot;
+    Construye un diccionario de regulones a partir de una lista de interacciones.</p>
+
+<div><pre><code class="language-none">Parámetros:
+interactions: lista de tuplas (TF, gene, effect)
+
+Retorna:
+dict: estructura del regulon
+&quot;&quot;&quot;</code></pre></div>
+
+<p>✔ claro<br>
+✔ fácil de leer<br>
+✔ suficiente para empezar  </p>
+
+<h4 id="toc_57">2. Formato Google</h4>
+
+<p>def get<em>regulator</em>type(activados, reprimidos):
+    &quot;&quot;&quot;
+    Determina el tipo de regulador.</p>
+
+<div><pre><code class="language-none">Args:
+    activados (int): número de genes activados
+    reprimidos (int): número de genes reprimidos
+
+Returns:
+    str: tipo de regulador (activador, represor o dual)
+&quot;&quot;&quot;</code></pre></div>
+
+<p>✔ muy usado en la industria<br>
+✔ compatible con muchas herramientas  </p>
+
+<h4 id="toc_58">3. Formato NumPy</h4>
+
+<p>def write<em>summary(regulon, output</em>file):
+    &quot;&quot;&quot;
+    Escribe el resumen del regulon en un archivo.</p>
+
+<div><pre><code class="language-none">Parameters
+----------
+regulon : dict
+    Estructura del regulon
+output_file : str
+    Ruta del archivo de salida
+
+Returns
+-------
+None
+&quot;&quot;&quot;</code></pre></div>
+
+<p>✔ común en ciencia de datos<br>
+✔ más estructurado  </p>
+
+<p>Para este curso conviene elegir uno solo para mantener consistencia.</p>
+
+<h3 id="toc_59">Buenas prácticas</h3>
+
+<ul>
+<li>usar frases claras y cortas</li>
+<li>describir la responsabilidad de la función</li>
+<li>no repetir el nombre de la función en la descripción</li>
+<li>mantener consistencia en todo el proyecto</li>
+</ul>
+
+<h3 id="toc_60">Conexión con el diseño</h3>
+
+<blockquote>
+<p>si no puedes escribir claramente qué hace una función en su docstring,<br>
+probablemente la función no está bien definida</p>
+</blockquote>
+
+<h2 id="toc_61">8. Diseño de funciones para este programa</h2>
+
+<p>A partir del análisis anterior, una descomposición razonable es esta:</p>
+
+<div><pre><code class="language-python">def load_interactions(input_file):
+    &quot;&quot;&quot;Carga y valida interacciones desde un archivo TSV.
+
+    Args:
+        input_file (str): Ruta al archivo de entrada.
+
+    Returns:
+        list[tuple[str, str, str]]: Lista de tuplas (TF, gene, effect).
+    &quot;&quot;&quot;
+
+
+def build_regulon(interactions):
+    &quot;&quot;&quot;Construye la estructura regulon a partir de las interacciones.
+
+    Args:
+        interactions (list[tuple[str, str, str]]): Lista de interacciones.
+
+    Returns:
+        dict: Estructura del regulon.
+    &quot;&quot;&quot;
+
+
+def get_regulator_type(activados, reprimidos):
+    &quot;&quot;&quot;Clasifica al regulador como activador, represor o dual.
+
+    Args:
+        activados (int): Número de genes activados.
+        reprimidos (int): Número de genes reprimidos.
+
+    Returns:
+        str: Tipo de regulador.
+    &quot;&quot;&quot;
+
+
+def write_summary(regulon, output_file):
+    &quot;&quot;&quot;Escribe el resumen del regulon en un archivo TSV.
+
+    Args:
+        regulon (dict): Estructura del regulon.
+        output_file (str): Ruta del archivo de salida.
+    &quot;&quot;&quot;
+
+
+def main():
+    &quot;&quot;&quot;Coordina el flujo general del programa.&quot;&quot;&quot;</code></pre></div>
+
+<h3 id="toc_62">Patrón <code>main()</code></h3>
+
+<p><code>main()</code> representa el flujo principal del programa.</p>
+
+<p>Su función no es resolver todos los detalles, sino <strong>coordinar</strong> las funciones principales.</p>
+
+<p>Conceptualmente, debería verse así:</p>
+
+<div><pre><code class="language-python">def main():
+    input_file = &quot;data/raw/NetworkRegulatorGene.tsv&quot;
+    output_file = &quot;results/regulon_summary.tsv&quot;
+
+    interactions = load_interactions(input_file)
+    regulon = build_regulon(interactions)
+    write_summary(regulon, output_file)</code></pre></div>
+
+<p>En programas reales, <code>main()</code> suele ser el punto de entrada principal. Más adelante, esta idea se conecta naturalmente con argumentos por línea de comandos y con la organización modular del proyecto.</p>
+
+<hr>
+
+<h2 id="toc_63">9. Refactorización incremental sobre el código real</h2>
+
+<h3 id="toc_64">Regla general</h3>
+
+<blockquote>
+<p><strong>Nunca conviene refactorizar todo de golpe</strong>.</p>
+</blockquote>
+
+<p>La estrategia correcta es avanzar con cambios pequeños y verificables.</p>
+
+<h3 id="toc_65">Paso 0. Leer antes de mover</h3>
+
+<p>Antes de escribir una sola función:</p>
+
+<ul>
+<li>leer el script completo</li>
+<li>identificar bloques</li>
+<li>entender dependencias</li>
+</ul>
+
+<h3 id="toc_66">Paso 1. Extraer <code>load_interactions()</code></h3>
+
+<p>Conviene comenzar con la lectura y validación porque:</p>
+
+<ul>
+<li>tiene una entrada clara: <code>input_file</code></li>
+<li>tiene una salida clara: <code>interactions</code></li>
+<li>agrupa tareas relacionadas</li>
+</ul>
+
+<h4 id="toc_67">Qué debe hacer</h4>
+
+<ul>
+<li>verificar existencia del archivo</li>
+<li>abrir el archivo</li>
+<li>recorrer líneas</li>
+<li>limpiar texto</li>
+<li>ignorar comentarios y encabezado</li>
+<li>validar columnas</li>
+<li>validar <code>effect</code></li>
+<li>construir la lista <code>interactions</code></li>
+</ul>
+
+<h4 id="toc_68">Resultado esperado</h4>
+
+<div><pre><code class="language-python">
+def load_interactions(input_file):
+    &quot;&quot;&quot;Carga las interacciones del archivo TSV de reguladores a genes.
+
+    Lee `input_file`, ignora comentarios (#), encabezado y filas inválidas.
+    Valida que cada fila tenga al menos 7 columnas y efecto sea &#39;+&#39; o &#39;-&#39;.
+
+    Args:
+        input_file (str): Ruta al archivo TSV de entrada.
+
+    Returns:
+        list[tuple[str, str, str]]: Lista de tuplas (TF, gene, effect).
+
+    Raises:
+        SystemExit: Si el archivo no existe.
+    &quot;&quot;&quot;
+    interactions = []
+
+    if not os.path.exists(input_file):
+        print(&quot;Error: archivo no encontrado&quot;)
+        exit(1)
+    else:
+        with open(input_file) as f:
+            for line in f:
+                line = line.strip()
+
+                # Ignorar líneas vacías
+                if not line:
+                    continue
+
+                # Ignorar comentarios
+                if line.startswith(&quot;#&quot;):
+                    continue
+
+                # Ignorar encabezado
+                if line.startswith(&quot;1)regulatorId&quot;):
+                    continue
+
+                fields = line.split(&quot;\t&quot;)
+
+                # Validar número mínimo de columnas
+                if len(fields) &lt;= 6:
+                    continue
+
+                TF = fields[1]
+                gene = fields[4]
+                effect = fields[5]
+
+                # Validar effect
+                if effect not in [&quot;+&quot;, &quot;-&quot;]:
+                    continue
+
+                interactions.append((TF, gene, effect))
+
+     return interactions  </code></pre></div>
+
+<p>Luego, en el flujo principal:</p>
+
+<div><pre><code class="language-python">interactions = load_interactions(input_file)</code></pre></div>
+
+<p>Después de este cambio, hay que probar que todo siga funcionando igual.</p>
+
+<h3 id="toc_69">Paso 2. Extraer <code>build_regulon()</code></h3>
+
+<p>Después, se separa la transformación de <code>interactions</code> a <code>regulon</code>.</p>
+
+<h4 id="toc_70">Qué debe hacer</h4>
+
+<ul>
+<li>inicializar estructura por TF</li>
+<li>agregar genes</li>
+<li>contar activados y reprimidos</li>
+</ul>
+
+<h4 id="toc_71">Idea clave</h4>
+
+<p>Esta función <strong>no debería leer ni escribir archivos</strong>.</p>
+
+<p>Su responsabilidad es solo <em>transformar datos</em>.</p>
+
+<p>Genera la función</p>
+
+<h4 id="toc_72">Estructura esperada</h4>
+
+<div><pre><code class="language-python">def build_regulon(interactions):
+    &quot;&quot;&quot;Construye la estructura regulon a partir de las interacciones.
+
+    Args:
+        interactions (list[tuple[str, str, str]]): Lista de interacciones.
+
+    Returns:
+        dict: Estructura del regulon.
+    &quot;&quot;&quot;
+    regulon = {}
+
+    for TF, gene, effect in interactions:
+        if TF not in regulon:
+            regulon[TF] = {
+                &quot;genes&quot;: [],
+                &quot;activados&quot;: 0,
+                &quot;reprimidos&quot;: 0,
+            }
+
+        regulon[TF][&quot;genes&quot;].append(gene)
+
+        if effect == &quot;+&quot;:
+            regulon[TF][&quot;activados&quot;] += 1
+        elif effect == &quot;-&quot;:
+            regulon[TF][&quot;reprimidos&quot;] += 1
+
+    return regulon</code></pre></div>
+
+<h3 id="toc_73">Paso 3. Evaluar <code>get_regulator_type()</code></h3>
+
+<p>Aquí hay una decisión de diseño.</p>
+
+<p>La lógica para clasificar el regulador es pequeña, pero tiene identidad propia.</p>
+
+<p>Separarla puede:</p>
+
+<ul>
+<li>mejorar legibilidad</li>
+<li>facilitar pruebas</li>
+<li>hacer más clara la intención del código</li>
+</ul>
+
+<h4 id="toc_74">Discusión guiada</h4>
+
+<p>Hasta ahora identificamos esta responsabilidad:</p>
+
+<ul>
+<li>determinar si un regulador es <code>activador</code>, <code>represor</code> o <code>dual</code></li>
+</ul>
+
+<p>Y propusimos esta posible función:</p>
+
+<div><pre><code class="language-python">def get_regulator_type(activados, reprimidos):
+    ...</code></pre></div>
+
+<h4 id="toc_75">Pregunta central</h4>
+
+<blockquote>
+<p>¿En qué parte del programa debería usarse esta función?</p>
+</blockquote>
+
+<h4 id="toc_76">Contexto del flujo actual</h4>
+
+<ul>
+<li><code>load_interactions()</code> obtiene datos desde archivo</li>
+<li><code>build_regulon()</code> construye la estructura interna</li>
+<li><code>write_summary()</code> genera el archivo de salida</li>
+</ul>
+
+<h4 id="toc_77">Preguntas para discutir</h4>
+
+<ol>
+<li><p>¿Quién necesita realmente el valor de <code>tipo</code>?</p>
+
+<ul>
+<li>¿se necesita para construir el regulon?</li>
+<li>¿o solo para escribir la salida?</li>
+</ul></li>
+<li><p>¿Qué representa <code>tipo</code> dentro del programa?</p>
+
+<ul>
+<li>¿es parte de los datos internos del modelo (<code>regulon</code>)?</li>
+<li>¿o es un valor derivado que solo se usa para mostrarlo en el reporte?</li>
+</ul></li>
+<li><p>Observa estas dos posibilidades de diseño:</p>
+
+<p>Opción A:</p>
+
+<p><code>main() -&gt; load_interactions() -&gt; build_regulon() -&gt; get_regulator_type() -&gt; write_summary()</code></p>
+
+<p>Opción B:</p>
+
+<p><code>main() -&gt; load_interactions() -&gt; build_regulon() -&gt; write_summary() -&gt; get_regulator_type()</code></p></li>
+<li><p>Si <code>get_regulator_type()</code> se usa dentro de <code>build_regulon()</code>:</p>
+
+<ul>
+<li>el regulon queda más completo desde antes</li>
+<li><code>write_summary()</code> solo escribe datos ya preparados</li>
+</ul></li>
+<li><p>Si <code>get_regulator_type()</code> se usa dentro de <code>write_summary()</code>:</p>
+
+<ul>
+<li>el regulon se mantiene más simple</li>
+<li><code>write_summary()</code> calcula un valor derivado para el reporte final</li>
+</ul></li>
+</ol>
+
+<h4 id="toc_78">Criterio de decisión</h4>
+
+<p>No te fijes solo en qué datos usa la función.</p>
+
+<p>Piensa sobre todo en esto:</p>
+
+<ul>
+<li>¿qué responsabilidad está ayudando a cumplir?</li>
+<li>¿está construyendo datos internos?</li>
+<li>¿o está ayudando a generar la salida?</li>
+</ul>
+
+<blockquote>
+<p>La ubicación de una función no depende únicamente de los datos que recibe, sino de la responsabilidad a la que sirve dentro del programa.</p>
+</blockquote>
+
+<h3 id="toc_79">Paso 4. Extraer <code>write_summary()</code></h3>
+
+<p>Finalmente, se separa la escritura del archivo de salida.</p>
+
+<h4 id="toc_80">Qué debe hacer</h4>
+
+<ul>
+<li>crear el directorio de salida si hace falta</li>
+<li>abrir el archivo</li>
+<li>escribir encabezado</li>
+<li>recorrer el regulon</li>
+<li>calcular los datos finales por TF</li>
+<li>llamar a get<em>regulator</em>type</li>
+<li>escribir cada línea</li>
+</ul>
+
+<h3 id="toc_81">Paso 5. Crear <code>main()</code></h3>
+
+<p>Una vez separadas las funciones principales, <code>main()</code> coordina el flujo completo.</p>
+
+<h3 id="toc_82">Antes y después: cambio estructural esperado</h3>
+
+<h3 id="toc_83">Antes</h3>
+
+<div><pre><code class="language-text">script lineal
+ ├── lectura
+ ├── validación
+ ├── construcción
+ ├── clasificación
+ └── salida</code></pre></div>
+
+<h3 id="toc_84">Después</h3>
+
+<div><pre><code class="language-text">main()
+ ├── load_interactions(input_file)
+ ├── build_regulon(interactions)
+ ├── write_summary(regulon, output_file)
+ └──     └── get_regulator_type(activados, reprimidos)   [opcional]
+</code></pre></div>
+
+<p>La funcionalidad es la misma.</p>
+
+<p>Lo que cambia es la organización.</p>
+
+<hr>
+
+<h2 id="toc_85">10. Uso de TODOs como puente entre análisis e implementación</h2>
+
+<p>Los TODOs pueden ayudar a traducir el análisis de responsabilidades a pasos concretos de trabajo.</p>
+
+<p>En refactorización usamos verbos como:</p>
+
+<ul>
+<li>extraer</li>
+<li>mover</li>
+<li>reorganizar</li>
+<li>separar</li>
+<li>encapsular</li>
+</ul>
+
+<p>En implementación usamos:</p>
+
+<ul>
+<li>crear</li>
+<li>implementar</li>
+<li>desarrollar</li>
+</ul>
+
+<p>¿Por qué importa el verbo que usamos?</p>
+
+<p>El verbo comunica la intención del cambio.</p>
+
+<p>Esto es importante tanto para:</p>
+
+<ul>
+<li>el desarrollador</li>
+<li>como para herramientas de IA (como Copilot)</li>
+</ul>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python"># TODO: extraer lectura y validación del archivo a load_interactions()
+# TODO: extraer construcción del regulon a build_regulon()
+# TODO: evaluar si conviene crear get_regulator_type()
+# TODO: extraer escritura del archivo a write_summary()
+# TODO: crear main() para coordinar el flujo</code></pre></div>
+
+<p>Aquí los TODOs no representan “código faltante” desde cero.</p>
+
+<p>Representan <strong>decisiones de refactorización pendientes</strong>.</p>
+
+<p>Los TODOs no solo sirven como recordatorio.</p>
+
+<p>También pueden usarse para guiar herramientas de IA como Copilot.</p>
+
+<p>En la siguiente sección veremos cómo utilizarlos correctamente.</p>
+
+<h3 id="toc_86">12. Validación: pruebas de regresión</h3>
+
+<p>La condición final de toda esta lección es muy simple:</p>
+
+<blockquote>
+<p><strong>con la misma entrada, el programa debe producir la misma salida</strong></p>
+</blockquote>
+
+<p>Por eso, después de cada cambio importante, hay que verificar:</p>
+
+<ul>
+<li>¿el archivo de salida sigue teniendo el mismo formato?</li>
+<li>¿los conteos siguen siendo correctos?</li>
+<li>¿la clasificación <code>activador / represor / dual</code> se mantiene?</li>
+<li>¿los casos de prueba anteriores siguen pasando?</li>
+</ul>
+
+<p>Eso confirma que hubo refactorización real y no un cambio accidental de comportamiento.</p>
+
+<hr>
+
+<h2 id="toc_87">13. Uso de IA con criterio</h2>
+
+<h3 id="toc_88">Estrategia correcta</h3>
+
+<ol>
+<li>analizar el problema</li>
+<li>identificar responsabilidades</li>
+<li>diseñar funciones</li>
+<li>pedir ayuda parcial a la IA</li>
+<li>revisar e integrar manualmente</li>
+<li>validar con pruebas</li>
+</ol>
+
+<h3 id="toc_89">Riesgo común al usar IA</h3>
+
+<p>La IA puede:</p>
+
+<ul>
+<li>cambiar lógica sin avisar</li>
+<li>mezclar responsabilidades</li>
+<li>proponer nombres confusos</li>
+<li>alterar la salida del programa</li>
+</ul>
+
+<p>Por eso:</p>
+
+<blockquote>
+<p><strong>La IA propone; tú decides y verificas</strong></p>
+</blockquote>
+
+<h3 id="toc_90">Buen prompt</h3>
+
+<div><pre><code class="language-text">Tengo un programa en Python que ya funciona.
+
+No quiero cambiar su funcionalidad.
+Quiero refactorizarlo para organizarlo en funciones.
+
+Estas son las responsabilidades identificadas:
+- leer interacciones desde archivo
+- construir regulon
+- determinar tipo de regulador
+- escribir salida
+
+Propón funciones con:
+- nombre
+- parámetros
+- valor de retorno
+
+No escribas el programa completo.</code></pre></div>
+
+<h3 id="toc_91">Mal prompt</h3>
+
+<div><pre><code class="language-text">refactoriza este código</code></pre></div>
+
+<h3 id="toc_92">Checklist al usar IA</h3>
+
+<ul>
+<li>¿cambió la lógica?</li>
+<li>¿cambió la salida?</li>
+<li>¿respeta el diseño?</li>
+<li>¿cada función tiene una responsabilidad clara?</li>
+</ul>
+
+<p>O bien, si implementas usando los TODOs, una vez ya integrados en el codigo podrias dar el siguiente prompt: </p>
+
+<div><pre><code class="language-txt">Extrae únicamente el bloque de lectura y validación del archivo a una función llamada load_interactions(input_file). No cambies la lógica.
+
+
+Documenta la funcion con docstring formato Google</code></pre></div>
+
+<hr>
+
+<h2 id="toc_93">14. Conclusión</h2>
+
+<p>Antes de esta lección, el objetivo era escribir un programa que funcionara.</p>
+
+<p>Ahora damos un paso más:</p>
+
+<blockquote>
+<p><strong>aprender a organizar un programa real para que siga siendo comprensible y mantenible cuando crece</strong></p>
+</blockquote>
+
+<p>La idea central es esta:</p>
+
+<ol>
+<li>primero entiendes qué hace el programa</li>
+<li>luego identificas responsabilidades</li>
+<li>después diseñas funciones</li>
+<li>finalmente refactorizas sin cambiar el comportamiento</li>
+</ol>
+
+<p>Ese es el paso de escribir código que funciona a empezar a construir software de mejor calidad.</p>
+
+<hr>
+
+<h2 id="toc_94">15. Siguiente paso</h2>
+
+<p>A partir de aquí, el siguiente movimiento natural es:</p>
+
+<ul>
+<li>separar el código en módulos</li>
+<li>mejorar la organización del proyecto</li>
+<li>conectar <code>main()</code> con argumentos por línea de comandos</li>
+<li>seguir profesionalizando la estructura del programa</li>
+</ul>
+
+
+
+
+</body>
+
+</html>
