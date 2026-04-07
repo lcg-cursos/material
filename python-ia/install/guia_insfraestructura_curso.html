@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>guia_insfraestructura_curso</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+  body {
+    padding: 2cm; 
+  }
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">🧰 Guía de insfraestructura del curso</h1>
+
+<p><strong>Python – Desarrollo de Software (con apoyo de IA)</strong></p>
+
+<h2 id="toc_1">🎯 Objetivo del curso</h2>
+
+<p>Este curso busca que el alumno pase de <strong>resolver algoritmos</strong> a <strong>desarrollar software real</strong>, aprendiendo:</p>
+
+<ul>
+<li>a trabajar con proyectos</li>
+<li>a usar herramientas profesionales</li>
+<li>a escribir código limpio y probado</li>
+</ul>
+
+<p>Las herramientas están elegidas para <strong>reducir fricción</strong>, no para agregar complejidad.</p>
+
+<h2 id="toc_2">Introducción</h2>
+
+<h3 id="toc_3">🧠 Idea clave del curso</h3>
+
+<blockquote>
+<p><strong>El alumno escribe código.</strong><br>
+Las herramientas solo <strong>preparan el entorno, ordenan el código y verifican que funcione</strong>.</p>
+</blockquote>
+
+<h3 id="toc_4">🧭 Organización y trabajo profesional</h3>
+
+<p>En cursos anteriores resolviste <strong>problemas y algoritmos</strong>.<br>
+En este curso aprenderás a <strong>construir software</strong>.</p>
+
+<p>Cuando el software crece, no basta con escribir archivos <code>.py</code>:</p>
+
+<ul>
+<li>hay múltiples archivos</li>
+<li>hay librerías externas</li>
+<li>hay pruebas</li>
+<li>hay otras personas trabajando en el mismo código</li>
+</ul>
+
+<p>Por eso es necesario <strong>organizar el trabajo</strong> y seguir una infraestructura común.</p>
+
+<p>Este documento presenta la <strong>infraestructura de trabajo</strong> que se usará durante todo el curso y explica:</p>
+
+<ul>
+<li>qué herramientas se usarán</li>
+<li>para qué sirve cada una</li>
+<li>qué conceptos necesitas entender</li>
+</ul>
+
+<p>No es para memorizar comandos, sino para <strong>entender cómo se trabaja en un proyecto real</strong>.</p>
+
+<h3 id="toc_5">📘 Conceptos básicos que usarás todo el curso</h3>
+
+<p><strong>Gestor de paquetes</strong><br>
+Herramienta que instala y administra librerías de un proyecto.</p>
+
+<p><strong>Dependencias</strong><br>
+Librerías externas que el proyecto necesita para funcionar.</p>
+
+<p><strong>Entorno virtual</strong><br>
+Espacio aislado donde viven las dependencias de un solo proyecto.</p>
+
+<p>📌 En este curso, <strong><code>uv</code> se encarga automáticamente de todo esto</strong>.</p>
+
+<h2 id="toc_6">🐍 1. Lenguaje</h2>
+
+<h3 id="toc_7">Instalación de Python</h3>
+
+<p>Para el curso se requiere <strong>Python 3.11 o superior</strong>.</p>
+
+<h3 id="toc_8">🧭 Paso 1: Descargar Python</h3>
+
+<p>Ir al sitio oficial:</p>
+
+<p>👉 https://www.python.org</p>
+
+<ol>
+<li>Haz clic en el botón grande que dice <strong>Download Python</strong></li>
+<li>Se descargará un archivo instalador en tu computadora</li>
+</ol>
+
+<h3 id="toc_9">💻 Paso 2: Instalar Python según tu sistema</h3>
+
+<h4 id="toc_10">🪟 Windows</h4>
+
+<ol>
+<li><p>Abre el archivo descargado (doble clic)</p></li>
+<li><p>⚠️ IMPORTANTE:
+Antes de instalar, activa esta casilla:</p>
+
+<p>✅ <strong>Add Python to PATH</strong></p></li>
+<li><p>Haz clic en:</p>
+
+<p>👉 <strong>Install Now</strong></p></li>
+<li><p>Espera a que termine la instalación</p></li>
+</ol>
+
+<h4 id="toc_11">🍎 macOS</h4>
+
+<ol>
+<li>Abre el archivo <code>.pkg</code> descargado</li>
+<li>Sigue los pasos del instalador (Next → Next → Install)</li>
+<li>No necesitas cambiar opciones</li>
+</ol>
+
+<h4 id="toc_12">🐧 Linux (Ubuntu / Debian)</h4>
+
+<p>Abre una terminal y ejecuta:</p>
+
+<div><pre><code class="language-bash">sudo apt update
+sudo apt install python3 python3-pip</code></pre></div>
+
+<h3 id="toc_13">🧪 Paso 3: Verificar instalación</h3>
+
+<p>Ahora vamos a comprobar que Python quedó bien instalado.</p>
+
+<h4 id="toc_14">📌 Abrir terminal</h4>
+
+<ul>
+<li>Windows → buscar <strong>&quot;cmd&quot;</strong> o <strong>&quot;PowerShell&quot;</strong></li>
+<li>macOS → abrir <strong>Terminal</strong></li>
+<li>Linux → abrir <strong>Terminal</strong></li>
+</ul>
+
+<h4 id="toc_15">Ejecutar:</h4>
+
+<div><pre><code class="language-bash">python --version</code></pre></div>
+
+<p>o si no funciona:</p>
+
+<div><pre><code class="language-bash">python3 --version</code></pre></div>
+
+<h4 id="toc_16">✅ Resultado esperado</h4>
+
+<p>Debe aparecer algo como:</p>
+
+<div><pre><code class="language-text">Python 3.11.5</code></pre></div>
+
+<h3 id="toc_17">🚨 Problemas comunes</h3>
+
+<h4 id="toc_18">❌ &quot;python no se reconoce como comando&quot; (Windows)</h4>
+
+<p>Significa que <strong>no se agregó al PATH</strong>.</p>
+
+<p>Solución:</p>
+
+<ul>
+<li>Reinstalar Python</li>
+<li><p>Asegurarte de marcar:</p>
+
+<p>✅ Add Python to PATH</p></li>
+</ul>
+
+<h4 id="toc_19">❌ Se abre Microsoft Store en Windows</h4>
+
+<p>Es normal si no está bien configurado Python.</p>
+
+<p>Solución:</p>
+
+<ul>
+<li>Reinstalar desde python.org</li>
+<li>Activar &quot;Add to PATH&quot;</li>
+</ul>
+
+<h4 id="toc_20">❌ Python versión menor a 3.11</h4>
+
+<p>Descargar la versión correcta desde:</p>
+
+<p>👉 https://www.python.org/downloads/</p>
+
+<h3 id="toc_21">🧠 ¿Qué acabas de hacer?</h3>
+
+<p>Instalaste:</p>
+
+<ul>
+<li>el lenguaje Python</li>
+<li>el intérprete que ejecuta los programas <code>.py</code></li>
+</ul>
+
+<p>A partir de ahora podrás ejecutar código como:</p>
+
+<div><pre><code class="language-bash">python archivo.py</code></pre></div>
+
+<p>En este curso:</p>
+
+<ul>
+<li>usarás <strong>Python puro (sin frameworks )</strong></li>
+<li>te enfocarás en:<br>
+
+<ul>
+<li>lógica.<br></li>
+<li>estructura</li>
+<li>pruebas</li>
+</ul></li>
+</ul>
+
+<p>Las herramientas avanzadas vendrán después.</p>
+
+<h2 id="toc_22">⚡ 2. Gestor del proyecto: <code>uv</code></h2>
+
+<h3 id="toc_23">2.1 ¿Qué es <code>uv</code>?</h3>
+
+<p><code>uv</code> es la herramienta que <strong>gestiona el proyecto Python</strong>. Se encarga de:</p>
+
+<ul>
+<li>crear el proyecto</li>
+<li>crear y administrar el entorno virtual</li>
+<li>instalar dependencias</li>
+<li>ejecutar Python y herramientas</li>
+</ul>
+
+<p>📌 El alumno <strong>no usa <code>pip</code> ni <code>venv</code> directamente</strong>.</p>
+
+<blockquote>
+<p><code>pip</code> es el gestor de paquetes tradicional de Python. Instala, actualiza y elimina librerias.</p>
+
+<p><code>.venv</code> es la carpeta que contiene el entorno virtual de un proyecto. Dentro de .venv viven: Python del proyecto, las dependencias instaladas, configuraciones aisladas. Cada proyecto tiene su propio <code>.venv</code>, lo que evita conflictos entre proyectos.</p>
+
+<p><code>uv</code> crea y gestiona automáticamente la carpeta <code>.venv</code>. El alumno no necesita entrar ni modificarla.</p>
+</blockquote>
+
+<h3 id="toc_24">2.2 Instalación de <code>uv</code></h3>
+
+<p>Antes de usar <code>uv</code>, debe estar instalado en la computadora.</p>
+
+<ul>
+<li><p><strong>macOS / Linux</strong>:</p>
+
+<div><pre><code class="language-bash">curl -LsSf https://astral.sh/uv/install.sh | sh</code></pre></div></li>
+</ul>
+
+<blockquote>
+<p>curl es una herramienta de línea de comandos para descargar contenido desde internet.</p>
+</blockquote>
+
+<ul>
+<li><p><strong>Windows</strong>:</p>
+
+<div><pre><code class="language-powershell">winget install astral-sh.uv</code></pre></div>
+
+<blockquote>
+<p>winget es el gestor de paquetes de Windows.</p>
+</blockquote>
+
+<p>Cómo verificar si <code>winget</code> está instalado
+En la terminal (PowerShell o CMD):</p>
+
+<div><pre><code class="language-none">winget --version</code></pre></div></li>
+</ul>
+
+<p><strong>Verificación de instalación de <code>uv</code></strong></p>
+
+<p>Cuando se instala un programa, se pueden añadir rutas al PATH.</p>
+
+<p>Las terminales abiertas no se enteran de esos cambios.
+Asi que <em>Cierra</em> completamente PowerShell / CMD / Windows Terminal. Ábrela de nuevo y ejecuta:</p>
+
+<div><pre><code class="language-bash">uv --version</code></pre></div>
+
+<p>debería aparecer un número que es la versión de <code>uv</code>.</p>
+
+<h3 id="toc_25">2.3 Crear un proyecto</h3>
+
+<div><pre><code class="language-bash">uv init nombre-proyecto</code></pre></div>
+
+<p>Esto crea:</p>
+
+<ul>
+<li><code>pyproject.toml</code></li>
+<li><code>README.md</code></li>
+<li>el entorno del proyecto</li>
+</ul>
+
+<h4 id="toc_26">🌱 Relación con Git</h4>
+
+<ul>
+<li>Si Git está instalado, <code>uv init</code> crea el repositorio automáticamente y será controlado por git.</li>
+<li>Si Git no está instalado, el proyecto funciona igual.</li>
+</ul>
+
+<p>Cuando Git se vea en clases posteriores, podrás hacer:</p>
+
+<div><pre><code class="language-bash">git init
+git add .
+git commit -m &quot;Proyecto inicial&quot;</code></pre></div>
+
+<h3 id="toc_27">2.4 Instalar herramientas y dependencias del proyecto</h3>
+
+<div><pre><code class="language-bash">cd nombre-proyecto
+uv add pytest black isort --dev</code></pre></div>
+
+<p><strong>¿Qué hace este comando?</strong></p>
+
+<ul>
+<li><code>uv add</code> → agrega una dependencia al proyecto</li>
+<li><code>pytest</code> → herramienta para ejecutar pruebas</li>
+<li><code>black</code> → formateador automático de código</li>
+<li><code>isort</code> → ordena los imports</li>
+<li><code>--dev</code> → indica que son <strong>dependencias de desarrollo</strong></li>
+</ul>
+
+<p>📌 Las dependencias de desarrollo:</p>
+
+<ul>
+<li>se usan para programar y probar</li>
+<li><strong>no son necesarias</strong> cuando el programa se ejecuta en producción</li>
+</ul>
+
+<p><strong>nota</strong></p>
+
+<blockquote>
+<p>Si el programa no funciona sin esa librería → es de producción.<br>
+Si solo ayuda a desarrollar, probar o dar formato→ es de desarrollo.</p>
+</blockquote>
+
+<p>Todas estas dependencias quedan registradas en <code>pyproject.toml</code>.</p>
+
+<h3 id="toc_28">2.5 Ejecutar código y herramientas</h3>
+
+<div><pre><code class="language-bash">uv run python archivo.py
+uv run pytest</code></pre></div>
+
+<p>No es necesario activar el entorno virtual.</p>
+
+<h3 id="toc_29">2.6 Mantener y actualizar dependencias</h3>
+
+<ul>
+<li><p>Sincronizar el proyecto (por ejemplo, al clonar un repositorio):</p>
+
+<div><pre><code class="language-bash">uv sync</code></pre></div></li>
+<li><p>Actualizar dependencias:</p>
+
+<div><pre><code class="language-bash">uv sync --upgrade</code></pre></div></li>
+</ul>
+
+<h2 id="toc_30">🖥️ 3. Editor de código</h2>
+
+<p>VS Code es el editor que usarás para escribir y ejecutar tu código.</p>
+
+<h3 id="toc_31">Paso 1: Descargar VS Code</h3>
+
+<p>Ir al sitio oficial:</p>
+
+<p>👉 https://code.visualstudio.com</p>
+
+<p>Haz clic en <strong>Download</strong> según tu sistema operativo.</p>
+
+<h3 id="toc_32">Paso 2: Instalar VS Code</h3>
+
+<h4 id="toc_33">🪟 Windows</h4>
+
+<ol>
+<li>Abre el archivo descargado</li>
+<li>Acepta términos</li>
+<li>Marca estas opciones (importante):
+
+<ul>
+<li>✅ Add to PATH</li>
+<li>✅ Add &quot;Open with Code&quot;</li>
+</ul></li>
+<li>Install</li>
+</ol>
+
+<h4 id="toc_34">🍎 macOS</h4>
+
+<ol>
+<li>Abrir el archivo <code>.zip</code></li>
+<li>Arrastrar <strong>Visual Studio Code</strong> a <strong>Applications</strong></li>
+</ol>
+
+<h4 id="toc_35">🐧 Linux (Ubuntu)</h4>
+
+<div><pre><code class="language-bash">sudo snap install code --classic</code></pre></div>
+
+<h3 id="toc_36">Paso 3: Abrir VS Code</h3>
+
+<ul>
+<li>Ejecuta VS Code</li>
+<li>Verás una ventana inicial</li>
+</ul>
+
+<h3 id="toc_37">Paso 4: Instalar extensiones necesarias</h3>
+
+<p>En VS Code:</p>
+
+<ol>
+<li>Ir a <strong>Extensions</strong> (ícono de cuadritos)</li>
+<li><p>Buscar e instalar:</p></li>
+</ol>
+
+<ul>
+<li><p><strong>Python (Microsoft)</strong><br>
+Permite que VS Code entienda el lenguaje Python.</p></li>
+<li><p><strong>Pylance</strong><br>
+Da autocompletado, detección de errores y análisis de tipos.</p></li>
+<li><p><strong>GitHub Copilot</strong><br>
+Asistente de IA que sugiere código y tests.</p></li>
+<li><p><strong>Black Formatter</strong><br>
+Aplica el formato de código automáticamente desde el editor.</p></li>
+<li><p><strong>isort</strong><br>
+Ordena los imports del código.</p></li>
+<li><p><strong>Python Test Explorer</strong><br>
+Permite ejecutar y ver tests <code>pytest</code> desde VS Code.</p></li>
+</ul>
+
+<p>📌 Las extensiones <strong>no instalan herramientas</strong>.<br>
+Solo utilizan las que <code>uv</code> instaló en el proyecto.  </p>
+
+<hr>
+
+<h2 id="toc_38">🌱 4. Uso de Git y GitHub desde VS Code (flujo básico)</h2>
+
+<p>Esta sección explica cómo trabajar <strong>sin usar la terminal</strong>, directamente desde VS Code.</p>
+
+<h3 id="toc_39">1. Abrir tu proyecto en VS Code</h3>
+
+<ul>
+<li>Abrir VS Code</li>
+<li>Ir a <strong>File → Open Folder</strong></li>
+<li>Seleccionar la carpeta de tu proyecto</li>
+</ul>
+
+<h3 id="toc_40">2. Inicializar Git (si aún no está)</h3>
+
+<p>En la barra lateral izquierda:</p>
+
+<ol>
+<li>Haz clic en el ícono de <strong>Source Control</strong> (ramita)</li>
+<li>Si aparece botón <strong>Initialize Repository</strong>, haz clic ahí</li>
+</ol>
+
+<h3 id="toc_41">3. Guardar cambios (commit)</h3>
+
+<ol>
+<li>Modifica o crea archivos</li>
+<li>Ve a <strong>Source Control</strong></li>
+<li>Verás los archivos modificados</li>
+<li>Escribe un mensaje (ej: <code>primer commit</code>)</li>
+<li>Haz clic en <strong>Commit</strong></li>
+</ol>
+
+<p>📌 Esto guarda una versión del proyecto</p>
+
+<h3 id="toc_42">4. Publicar en GitHub</h3>
+
+<p>Después del primer commit:</p>
+
+<ol>
+<li>Haz clic en <strong>Publish to GitHub</strong></li>
+<li>Elegir:
+
+<ul>
+<li>repositorio público o privado</li>
+</ul></li>
+<li>Confirmar</li>
+</ol>
+
+<p>📌 VS Code crea y conecta automáticamente el repositorio</p>
+
+<h3 id="toc_43">5. Flujo de trabajo diario</h3>
+
+<p>Cada vez que cambies algo:</p>
+
+<ol>
+<li>Guardar archivos</li>
+<li>Ir a <strong>Source Control</strong></li>
+<li>Escribir mensaje</li>
+<li>Click en <strong>Commit</strong></li>
+<li>Click en <strong>Sync Changes</strong></li>
+</ol>
+
+<h3 id="toc_44">6. Ver tu código en GitHub</h3>
+
+<ol>
+<li>Ve a https://github.com</li>
+<li>Entra a tu repositorio</li>
+<li>Verás:
+
+<ul>
+<li>tus archivos</li>
+<li>historial de commits</li>
+</ul></li>
+</ol>
+
+<h3 id="toc_45">🚨 Problemas comunes</h3>
+
+<h4 id="toc_46">❌ No aparece &quot;Publish to GitHub&quot;</h4>
+
+<p>→ No has iniciado sesión en GitHub desde VS Code</p>
+
+<p>Solución:<br>
+- Ir a <strong>Accounts → Sign in with GitHub</strong></p>
+
+<h4 id="toc_47">❌ Cambios no aparecen en GitHub</h4>
+
+<p>→ Falta hacer <strong>Sync / Push</strong></p>
+
+<h3 id="toc_48">🧠 Idea clave</h3>
+
+<blockquote>
+<p>VS Code te permite usar Git sin terminal,
+pero el concepto sigue siendo el mismo:
+guardar cambios (commit) y subirlos (push).</p>
+</blockquote>
+
+<hr>
+
+<h2 id="toc_49">5. IA como apoyo</h2>
+
+<h3 id="toc_50">GitHub Copilot</h3>
+
+<p>Copilot se usa como <strong>herramienta de apoyo</strong>, no como sustituto del alumno.</p>
+
+<p>Uso permitido:
+- sugerir código
+- ayudar a escribir tests
+- apoyar refactorizaciones</p>
+
+<p>⚠️ Regla del curso:</p>
+
+<blockquote>
+<p>El alumno debe <strong>entender y poder explicar</strong> el código que entrega.</p>
+</blockquote>
+
+<p>TODO: Nota: crear cuenta** (pensar si instalan git de una vez y sacan su cuenta, y solicitar plan de estudiante)</p>
+
+<p>TODO: chatgpt (cuenta)</p>
+
+<h2 id="toc_51">📁 6. Estructura estándar de proyecto</h2>
+
+<p>Un <strong>proyecto Python</strong> es una carpeta que contiene:
+- código
+- dependencias
+- configuración</p>
+
+<p>El archivo que define el proyecto es <code>pyproject.toml</code>.</p>
+
+<div><pre><code class="language-text">project/
+├── src/
+│   └── app/
+│       ├── __init__.py
+│       └── main.py
+├── tests/
+│   └── test_main.py
+├── pyproject.toml
+└── README.md</code></pre></div>
+
+<p>Esta estructura se mantiene durante todo el curso.</p>
+
+<h2 id="toc_52">🧠 7. Reglas claras del curso</h2>
+
+<ul>
+<li>Todo lo relacionado con Python → <strong><code>uv</code></strong></li>
+<li>Todo lo relacionado con edición → <strong>VS Code</strong></li>
+<li>Código sin formato → <strong>Black lo corrige</strong></li>
+<li>Imports desordenados → <strong>isort los ordena</strong></li>
+<li>Código sin tests → <strong>no está terminado</strong></li>
+<li>Copilot → <strong>ayuda, no reemplaza</strong></li>
+</ul>
+
+<hr>
+
+<h2 id="toc_53">🏁 Frase resumen</h2>
+
+<blockquote>
+<p><strong><code>uv</code> gestiona el proyecto, VS Code edita, pytest prueba,<br>
+black ordena, isort limpia y Copilot apoya.</strong></p>
+</blockquote>
+
+<h1 id="toc_54">Notas Adicionales</h1>
+
+<h3 id="toc_55">¿Qué es un framework?</h3>
+
+<p>Un <strong>framework</strong> es un conjunto de <strong>reglas, estructuras y herramientas predefinidas</strong> que sirven como base para construir un tipo específico de aplicación.</p>
+
+<p>El framework:</p>
+
+<ul>
+<li>define cómo se organiza el proyecto</li>
+<li>controla parte del flujo del programa</li>
+<li>ofrece componentes listos para usar</li>
+</ul>
+
+<p>En lugar de que el programa llame a tu código, <strong>el framework llama a tu código</strong> (inversión de control).</p>
+
+<h3 id="toc_56">Frameworks clásicos en Python</h3>
+
+<ul>
+<li><strong>Django</strong> → aplicaciones web completas (sitios web, sistemas administrativos)</li>
+<li><strong>Flask</strong> → aplicaciones web pequeñas y medianas</li>
+<li><strong>FastAPI</strong> → APIs y servicios web</li>
+</ul>
+
+<p>Estos frameworks se usan mucho en la industria.</p>
+
+<h3 id="toc_57">¿Por qué no los usamos en el curso?</h3>
+
+<p>Porque los frameworks:</p>
+
+<ul>
+<li>imponen una estructura desde el primer día</li>
+<li>esconden parte de la lógica detrás de convenciones</li>
+<li>introducen muchos conceptos al mismo tiempo</li>
+</ul>
+
+<p>En este curso primero aprenderás a:</p>
+
+<ul>
+<li>organizar un proyecto</li>
+<li>escribir código claro</li>
+<li>probar tu código</li>
+</ul>
+
+<p>Una vez dominada la base, <strong>aprender frameworks será mucho más sencillo</strong>.</p>
+
+
+
+
+</body>
+
+</html>
