@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>algoritmos</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+  body {
+    padding: 2cm; 
+  }
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">🧠 Material para alumnos: Algoritmos y diagramas de flujo</h1>
+
+<h2 id="toc_1">1. Introducción</h2>
+
+<p>En programación, antes de escribir código, es importante <strong>pensar cómo resolver un problema</strong>. Muchas veces, los errores no aparecen por no saber un lenguaje como Python, sino por no haber organizado bien la solución.</p>
+
+<p>Por eso, antes de programar, se trabaja con dos herramientas fundamentales:</p>
+
+<ul>
+<li><strong>el algoritmo</strong>, que describe los pasos para resolver un problema,</li>
+<li><strong>el diagrama de flujo</strong>, que representa esos pasos de forma visual.</li>
+</ul>
+
+<p>En este material aprenderás qué son, para qué sirven y cómo se usan para diseñar una solución clara. Después aplicarás esas ideas a un problema concreto de bioinformática básica: <strong>analizar una secuencia de DNA y contar sus nucleótidos</strong>.</p>
+
+<p>La idea principal es esta:</p>
+
+<blockquote>
+<p>Primero se piensa la solución.
+Después se representa.
+Finalmente se programa.</p>
+</blockquote>
+
+<hr>
+
+<h2 id="toc_2">2. ¿Qué es un problema computacional?</h2>
+
+<p>Un problema computacional es una situación que queremos resolver mediante una serie de pasos precisos.</p>
+
+<p>Por ejemplo:</p>
+
+<ul>
+<li>calcular el promedio de calificaciones,</li>
+<li>ordenar una lista de números,</li>
+<li>determinar si una palabra es palíndroma,</li>
+<li>contar nucleótidos en una secuencia de DNA.</li>
+</ul>
+
+<p>Cuando resolvemos un problema en programación, debemos identificar con claridad:</p>
+
+<ul>
+<li><strong>qué datos entran</strong>,<br></li>
+<li><strong>qué proceso se realiza</strong>,<br></li>
+<li><strong>qué resultado debe salir</strong>.</li>
+</ul>
+
+<p>Esta forma de pensar ayuda a dividir el problema en partes más simples.</p>
+
+<hr>
+
+<h2 id="toc_3">3. ¿Qué es un algoritmo?</h2>
+
+<p>Un <strong>algoritmo</strong> es una secuencia ordenada y finita de pasos que permite resolver un problema.</p>
+
+<h3 id="toc_4">Características de un algoritmo</h3>
+
+<p>Un buen algoritmo debe ser:</p>
+
+<ul>
+<li><strong>ordenado</strong>: los pasos siguen una secuencia lógica,</li>
+<li><strong>claro</strong>: cada instrucción se entiende,</li>
+<li><strong>finito</strong>: debe terminar,</li>
+<li><strong>preciso</strong>: no debe ser ambiguo,</li>
+<li><strong>efectivo</strong>: sus pasos deben poder ejecutarse.</li>
+</ul>
+
+<h3 id="toc_5">Ejemplo cotidiano</h3>
+
+<p>Preparar una bebida puede verse como un algoritmo:</p>
+
+<ol>
+<li>Tomar un vaso.<br></li>
+<li>Servir agua.<br></li>
+<li>Agregar polvo para bebida.<br></li>
+<li>Mezclar.<br></li>
+<li>Beber.</li>
+</ol>
+
+<p>Esto muestra que un algoritmo no pertenece solo a la informática. Es una forma de organizar acciones para alcanzar un objetivo.</p>
+
+<hr>
+
+<h2 id="toc_6">4. ¿Para qué sirve un algoritmo?</h2>
+
+<p>Trabajar con algoritmos permite:</p>
+
+<ul>
+<li>organizar el pensamiento,</li>
+<li>entender el problema antes de programar,</li>
+<li>detectar errores lógicos,</li>
+<li>comunicar la solución a otras personas,</li>
+<li>convertir esa solución en código con mayor facilidad.</li>
+</ul>
+
+<p>Un algoritmo es el <strong>puente entre el problema y el programa</strong>.</p>
+
+<hr>
+
+<h2 id="toc_7">5. ¿Cómo se construye un algoritmo?</h2>
+
+<p>Para construir un algoritmo conviene seguir una estrategia de razonamiento.</p>
+
+<h3 id="toc_8">Paso 1. Entender el problema</h3>
+
+<p>Preguntas útiles:</p>
+
+<ul>
+<li>¿Qué me están pidiendo resolver?</li>
+<li>¿Qué datos voy a recibir?</li>
+<li>¿Qué resultado debo obtener?</li>
+<li>¿Qué restricciones existen?</li>
+</ul>
+
+<h3 id="toc_9">Paso 2. Identificar entrada, proceso y salida</h3>
+
+<p>Una manera simple de analizar cualquier problema es dividirlo en tres partes:</p>
+
+<ul>
+<li><strong>Entrada</strong>: los datos que recibe el programa.</li>
+<li><strong>Proceso</strong>: las operaciones que se realizan con esos datos.</li>
+<li><strong>Salida</strong>: el resultado que se muestra o se devuelve.</li>
+</ul>
+
+<h3 id="toc_10">Paso 3. Descomponer el problema</h3>
+
+<p>Un problema grande casi siempre puede dividirse en tareas pequeñas.</p>
+
+<p>Por ejemplo, si queremos contar nucleótidos en DNA, podemos separar el trabajo en:</p>
+
+<ul>
+<li>leer la secuencia,</li>
+<li>convertirla a mayúsculas,</li>
+<li>validar que sea correcta,</li>
+<li>contar cada nucleótido,</li>
+<li>mostrar resultados.</li>
+</ul>
+
+<h3 id="toc_11">Paso 4. Ordenar los pasos</h3>
+
+<p>No basta con saber qué hacer. También hay que decidir <strong>en qué orden</strong> hacerlo.</p>
+
+<h3 id="toc_12">Paso 5. Revisar condiciones</h3>
+
+<p>Muchos problemas incluyen decisiones como:</p>
+
+<ul>
+<li>si el dato está vacío,</li>
+<li>si un valor es inválido,</li>
+<li>si se cumple o no cierta condición.</li>
+</ul>
+
+<p>Estas decisiones son fundamentales en el diseño del algoritmo.</p>
+
+<hr>
+
+<h2 id="toc_13">6. ¿Qué es un diagrama de flujo?</h2>
+
+<p>Un <strong>diagrama de flujo</strong> es una representación gráfica de un algoritmo.</p>
+
+<p>En lugar de escribir los pasos solo con texto, se usan símbolos conectados con flechas para mostrar:</p>
+
+<ul>
+<li>el orden de ejecución,</li>
+<li>las acciones del proceso,</li>
+<li>las decisiones que se toman,</li>
+<li>las entradas y salidas.</li>
+</ul>
+
+<p>Los diagramas de flujo ayudan a visualizar mejor la lógica del problema.</p>
+
+<hr>
+
+<h2 id="toc_14">7. ¿Para qué sirven los diagramas de flujo?</h2>
+
+<p>Los diagramas de flujo son útiles porque permiten:</p>
+
+<ul>
+<li>comprender mejor el algoritmo,</li>
+<li>identificar errores de lógica,</li>
+<li>comunicar la solución de manera visual,</li>
+<li>planear un programa antes de escribir código,</li>
+<li>relacionar condiciones, caminos y resultados.</li>
+</ul>
+
+<p>En otras palabras, un diagrama de flujo permite <strong>ver cómo piensa el algoritmo</strong>.</p>
+
+<hr>
+
+<h2 id="toc_15">8. Símbolos básicos de un diagrama de flujo</h2>
+
+<h3 id="toc_16">8.1 Inicio / Fin</h3>
+
+<p>Se usa para indicar dónde comienza y termina el algoritmo.</p>
+
+<p><strong>Forma habitual:</strong> óvalo.</p>
+
+<p>Ejemplos:</p>
+
+<ul>
+<li>Inicio</li>
+<li>Fin</li>
+</ul>
+
+<h3 id="toc_17">8.2 Proceso</h3>
+
+<p>Representa una acción o instrucción.</p>
+
+<p><strong>Forma habitual:</strong> rectángulo.</p>
+
+<p>Ejemplos:</p>
+
+<ul>
+<li>Leer secuencia</li>
+<li>Convertir a mayúsculas</li>
+<li>Contar nucleótidos</li>
+</ul>
+
+<h3 id="toc_18">8.3 Entrada / Salida</h3>
+
+<p>Representa datos que entran o resultados que salen.</p>
+
+<p><strong>Forma habitual:</strong> paralelogramo.</p>
+
+<p>Ejemplos:</p>
+
+<ul>
+<li>Ingresar secuencia</li>
+<li>Mostrar resultado</li>
+</ul>
+
+<h3 id="toc_19">8.4 Decisión</h3>
+
+<p>Representa una pregunta cuya respuesta suele ser <strong>sí</strong> o <strong>no</strong>.</p>
+
+<p><strong>Forma habitual:</strong> rombo.</p>
+
+<p>Ejemplos:</p>
+
+<ul>
+<li>¿La secuencia está vacía?</li>
+<li>¿Los caracteres son válidos?</li>
+</ul>
+
+<h3 id="toc_20">8.5 Flechas</h3>
+
+<p>Indican la dirección del flujo del algoritmo.</p>
+
+<p>Permiten seguir el recorrido lógico paso a paso.</p>
+
+<hr>
+
+<h2 id="toc_21">9. Cómo leer un diagrama de flujo</h2>
+
+<p>Para leer un diagrama de flujo correctamente, debes:</p>
+
+<ol>
+<li>localizar el inicio,</li>
+<li>seguir las flechas,</li>
+<li>leer cada proceso en orden,</li>
+<li>observar las decisiones y sus posibles caminos,</li>
+<li>continuar hasta llegar al fin.</li>
+</ol>
+
+<p>Cuando aparece una decisión, el algoritmo puede tomar rutas distintas según la respuesta.</p>
+
+<hr>
+
+<h2 id="toc_22">10. Relación entre algoritmo, pseudocódigo y programa</h2>
+
+<p>Es importante distinguir estos tres niveles:</p>
+
+<h3 id="toc_23">Algoritmo</h3>
+
+<p>Es la idea general de la solución.</p>
+
+<h3 id="toc_24">Pseudocódigo</h3>
+
+<p>Es una forma escrita del algoritmo usando lenguaje natural estructurado. No depende de un lenguaje de programación específico.</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-text">leer secuencia
+convertir a mayúsculas
+si la secuencia está vacía
+    mostrar error
+si no
+    validar caracteres
+    contar nucleótidos
+    mostrar resultados</code></pre></div>
+
+<h3 id="toc_25">Programa</h3>
+
+<p>Es la implementación del algoritmo en un lenguaje como Python.</p>
+
+<p>La secuencia didáctica ideal es:</p>
+
+<p><strong>problema → algoritmo → diagrama/pseudocódigo → programa</strong></p>
+
+<hr>
+
+<h2 id="toc_26">11. Estrategia para razonar antes de programar</h2>
+
+<p>Cuando enfrentes un problema, puedes usar estas preguntas guía:</p>
+
+<h3 id="toc_27">Sobre la entrada</h3>
+
+<ul>
+<li>¿Qué dato recibe el programa?</li>
+<li>¿El usuario escribe texto, números o una secuencia?</li>
+<li>¿Puede haber errores en la entrada?</li>
+</ul>
+
+<h3 id="toc_28">Sobre el proceso</h3>
+
+<ul>
+<li>¿Qué debo hacer con el dato?</li>
+<li>¿Necesito contar, comparar, convertir o validar?</li>
+<li>¿Hay decisiones que deban tomarse?</li>
+</ul>
+
+<h3 id="toc_29">Sobre la salida</h3>
+
+<ul>
+<li>¿Qué debe mostrar el programa?</li>
+<li>¿Cómo debe verse el resultado?</li>
+<li>¿Qué pasa si el dato es incorrecto?</li>
+</ul>
+
+<p>Estas preguntas ayudan a construir la solución con lógica, no por adivinación.</p>
+
+<hr>
+
+<h2 id="toc_30">12. Aplicación al problema del DNA</h2>
+
+<h3 id="toc_31">12.1 Enunciado del problema</h3>
+
+<p>Se desea crear un programa que lea una secuencia de DNA ingresada por teclado y reporte el conteo de nucleótidos:</p>
+
+<ul>
+<li>A</li>
+<li>T</li>
+<li>C</li>
+<li>G</li>
+</ul>
+
+<h3 id="toc_32">12.2 Qué debe hacer el programa</h3>
+
+<p>El programa debe:</p>
+
+<ol>
+<li>pedir una secuencia,</li>
+<li>convertirla a mayúsculas,</li>
+<li>revisar si está vacía,</li>
+<li>verificar que solo contenga A, T, C y G,</li>
+<li>contar cuántas veces aparece cada nucleótido,</li>
+<li>mostrar el resultado.</li>
+</ol>
+
+<hr>
+
+<h2 id="toc_33">13. Análisis del problema con entrada, proceso y salida</h2>
+
+<h3 id="toc_34">Entrada</h3>
+
+<p>Una secuencia de DNA escrita por el usuario.</p>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-text">ATGCGCATTA</code></pre></div>
+
+<h3 id="toc_35">Proceso</h3>
+
+<ul>
+<li>normalizar la secuencia,</li>
+<li>validar caracteres,</li>
+<li>contar nucleótidos,</li>
+<li>calcular el total.</li>
+</ul>
+
+<h3 id="toc_36">Salida</h3>
+
+<p>Un reporte como este:</p>
+
+<div><pre><code class="language-text">A: 3
+T: 3
+C: 2
+G: 2
+Total: 10</code></pre></div>
+
+<hr>
+
+<h2 id="toc_37">14. Descomposición del problema</h2>
+
+<p>Resolver este problema es más sencillo si lo dividimos en partes pequeñas:</p>
+
+<h3 id="toc_38">Parte 1. Leer la secuencia</h3>
+
+<p>Se obtiene la información del usuario.</p>
+
+<h3 id="toc_39">Parte 2. Normalizar</h3>
+
+<p>Se convierte la secuencia a mayúsculas para trabajar de forma uniforme.</p>
+
+<h3 id="toc_40">Parte 3. Validar</h3>
+
+<p>Se verifica que la secuencia no esté vacía y que no contenga símbolos inválidos.</p>
+
+<h3 id="toc_41">Parte 4. Contar</h3>
+
+<p>Se recorre la secuencia y se incrementa el contador correspondiente a cada nucleótido.</p>
+
+<h3 id="toc_42">Parte 5. Mostrar resultados</h3>
+
+<p>Se imprime el conteo final de A, T, C y G, además del total.</p>
+
+<hr>
+
+<h2 id="toc_43">15. Algoritmo propuesto para este problema</h2>
+
+<div><pre><code class="language-text">Inicio
+
+1. Pedir al usuario una secuencia de DNA.
+2. Leer la secuencia.
+3. Convertir la secuencia a mayúsculas.
+4. Verificar si la secuencia está vacía.
+5. Si está vacía, mostrar un mensaje de error y terminar.
+6. Revisar cada carácter de la secuencia.
+7. Si aparece un carácter diferente de A, T, C o G, mostrar un mensaje de error y terminar.
+8. Inicializar contadores para A, T, C y G.
+9. Recorrer la secuencia.
+10. Incrementar el contador correspondiente según el nucleótido leído.
+11. Calcular el total de nucleótidos.
+12. Mostrar los resultados.
+
+Fin</code></pre></div>
+
+<hr>
+
+<h2 id="toc_44">16. Diagrama de flujo del problema</h2>
+
+<div><pre><code class="language-mermaid">flowchart TD
+    A([Inicio]) --&gt; B[/Leer secuencia de DNA/]
+    B --&gt; C[Convertir a mayúsculas]
+    C --&gt; D{¿La secuencia está vacía?}
+    D --&gt;|Sí| E[/Mostrar mensaje de error/]
+    E --&gt; F([Fin])
+    D --&gt;|No| G[Revisar caracteres]
+    G --&gt; H{¿Todos los caracteres son válidos?}
+    H --&gt;|No| I[/Mostrar mensaje de error/]
+    I --&gt; F
+    H --&gt;|Sí| J[Inicializar contadores]
+    J --&gt; K[Contar A, T, C y G]
+    K --&gt; L[Calcular total]
+    L --&gt; M[/Mostrar resultados/]
+    M --&gt; F</code></pre></div>
+
+<hr>
+
+<h2 id="toc_45">17. Cómo razonar este diagrama</h2>
+
+<p>Observa que el diagrama no empieza contando inmediatamente. Antes de procesar la secuencia, el algoritmo debe comprobar si la entrada es válida.</p>
+
+<p>Esto enseña una idea muy importante:</p>
+
+<blockquote>
+<p>No todo problema se resuelve directamente. Primero hay que verificar si los datos permiten continuar.</p>
+</blockquote>
+
+<p>El flujo muestra dos decisiones esenciales:</p>
+
+<ul>
+<li>si la secuencia está vacía,</li>
+<li>si la secuencia contiene caracteres válidos.</li>
+</ul>
+
+<p>Solo cuando ambas condiciones se cumplen, el algoritmo pasa al conteo.</p>
+
+<hr>
+
+<h2 id="toc_46">18. Errores comunes al diseñar algoritmos</h2>
+
+<p>Al comenzar, es normal cometer algunos errores frecuentes:</p>
+
+<ul>
+<li>querer programar antes de entender el problema,</li>
+<li>no distinguir entre entrada, proceso y salida,</li>
+<li>olvidar casos de error,</li>
+<li>no considerar datos vacíos,</li>
+<li>escribir pasos ambiguos,</li>
+<li>omitir decisiones importantes,</li>
+<li>hacer diagramas sin seguir una secuencia lógica.</li>
+</ul>
+
+<p>Detectar estos errores es parte del aprendizaje.</p>
+
+<hr>
+
+<h2 id="toc_47">19. Recomendaciones para resolver problemas</h2>
+
+<p>Cuando diseñes una solución, recuerda:</p>
+
+<ul>
+<li>lee el enunciado con atención,</li>
+<li>subraya qué entra y qué debe salir,</li>
+<li>divide el problema en pasos pequeños,</li>
+<li>identifica decisiones,</li>
+<li>usa pseudocódigo si todavía no estás listo para programar,</li>
+<li>revisa si el algoritmo termina,</li>
+<li>comprueba si contempla errores o casos límite.</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_48">20. Casos que conviene pensar antes de programar</h2>
+
+<p>Para este problema, algunos casos importantes son:</p>
+
+<ul>
+<li>una secuencia válida como <code>ATGC</code>,</li>
+<li>una secuencia en minúsculas como <code>atgc</code>,</li>
+<li>una secuencia vacía,</li>
+<li>una secuencia con caracteres inválidos como <code>ATBX</code>,</li>
+<li>una secuencia de un solo nucleótido,</li>
+<li>una secuencia con muchas repeticiones.</li>
+</ul>
+
+<p>Pensar estos casos ayuda a mejorar el algoritmo antes de escribir código.</p>
+
+<hr>
+
+<h2 id="toc_49">21. Idea central que debes recordar</h2>
+
+<p>La programación no comienza cuando escribes código. Comienza cuando entiendes el problema y organizas la solución.</p>
+
+<p>Por eso, antes de usar Python, debes aprender a:</p>
+
+<ul>
+<li>analizar el problema,</li>
+<li>construir un algoritmo,</li>
+<li>representarlo con un diagrama de flujo,</li>
+<li>revisar su lógica.</li>
+</ul>
+
+<p>Cuando haces eso, programar se vuelve mucho más fácil.</p>
+
+<hr>
+
+<h2 id="toc_50">22. Actividades sugeridas</h2>
+
+<p>A continuación se proponen actividades con <strong>ejemplos concretos</strong> para que practiques el razonamiento algorítmico usando contextos sencillos de bioinformática.</p>
+
+<hr>
+
+<h3 id="toc_51">Actividad 1 — Identificar entrada, proceso y salida</h3>
+
+<p><strong>Ejemplo 1: Transcripción de DNA a RNA</strong></p>
+
+<p>Regla: T → U</p>
+
+<ul>
+<li>Entrada: <code>ATGCT</code></li>
+<li>Proceso: reemplazar cada T por U</li>
+<li>Salida: <code>AUGCU</code></li>
+</ul>
+
+<p><strong>Ejemplo 2: Longitud de una secuencia</strong></p>
+
+<ul>
+<li>Entrada: <code>ATGCGC</code></li>
+<li>Proceso: contar número de caracteres</li>
+<li>Salida: <code>6</code></li>
+</ul>
+
+<hr>
+
+<h3 id="toc_52">Actividad 2 — ¿Qué es un algoritmo? (con ejemplo)</h3>
+
+<h4 id="toc_53">🔹 Algoritmo (explicado en lenguaje natural)</h4>
+
+<p>Un algoritmo describe <strong>la idea de la solución</strong>, sin preocuparse todavía por la sintaxis.</p>
+
+<div><pre><code class="language-text">1. Pedir al usuario una secuencia de DNA.
+2. Convertir la secuencia a mayúsculas.
+3. Verificar si la secuencia está vacía.
+4. Si está vacía, indicar error y terminar.
+5. Revisar cada carácter de la secuencia.
+6. Si algún carácter no es A, T, C o G, indicar error y terminar.
+7. Si todos los caracteres son válidos, indicar que la secuencia es correcta.</code></pre></div>
+
+<p>👉 Observa que:
+- Está escrito como una lista de pasos.
+- No depende de ningún lenguaje de programación.
+- Usa lenguaje natural claro.</p>
+
+<hr>
+
+<p>Ahora tomamos <strong>el mismo algoritmo</strong> y lo expresamos en pseudocódigo.</p>
+
+<h4 id="toc_54">🔹 Pseudocódigo</h4>
+
+<div><pre><code class="language-text">leer secuencia
+convertir a mayúsculas
+
+si la secuencia está vacía
+    mostrar &quot;Error: secuencia vacía&quot;
+si no
+    para cada carácter en la secuencia
+        si el carácter no es A, T, C o G
+            mostrar &quot;Error: carácter inválido&quot;
+            terminar
+    mostrar &quot;Secuencia válida&quot;</code></pre></div>
+
+<hr>
+
+<h3 id="toc_55">🔍 Diferencia clave entre algoritmo y pseudocódigo</h3>
+
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Algoritmo</th>
+<th>Pseudocódigo</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Nivel</td>
+<td>Conceptual</td>
+<td>Intermedio (cercano al código)</td>
+</tr>
+<tr>
+<td>Lenguaje</td>
+<td>Natural</td>
+<td>Estructurado</td>
+</tr>
+<tr>
+<td>Sintaxis</td>
+<td>Libre</td>
+<td>Similar a programación</td>
+</tr>
+<tr>
+<td>Objetivo</td>
+<td>Entender la solución</td>
+<td>Preparar para programar</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h3 id="toc_56">💡 Idea importante</h3>
+
+<p>El pseudocódigo es un paso intermedio entre el algoritmo y el programa.</p>
+
+<div><pre><code class="language-text">Problema → Algoritmo → Pseudocódigo → Programa</code></pre></div>
+
+<hr>
+
+<h3 id="toc_57">Actividad 4 — Analizar decisiones en un algoritmo</h3>
+
+<p><strong>Ejemplo: Detectar caracteres inválidos</strong></p>
+
+<p>Pregunta:</p>
+
+<p>¿Por qué es necesario preguntar?</p>
+
+<ul>
+<li>¿La secuencia está vacía?</li>
+<li>¿Los caracteres son válidos?</li>
+</ul>
+
+<p>Respuesta esperada:</p>
+
+<p>Porque el programa no debe continuar si los datos son incorrectos. Estas decisiones evitan resultados erróneos.</p>
+
+<hr>
+
+<h3 id="toc_58">Actividad 5 — Dibujar diagrama de flujo</h3>
+
+<p><strong>Ejemplo: Complemento de DNA (concepto básico)</strong></p>
+
+<p>Reglas:
+- A ↔ T
+- C ↔ G</p>
+
+<p>Ejemplo:</p>
+
+<p>Entrada: <code>ATGC</code>
+Salida esperada: <code>TACG</code></p>
+
+<p>Pistas para el diagrama:</p>
+
+<ul>
+<li>Leer secuencia</li>
+<li>Convertir a mayúsculas</li>
+<li>Validar</li>
+<li>Recorrer la secuencia</li>
+<li>Cambiar cada nucleótido por su complemento</li>
+<li>Mostrar resultado</li>
+</ul>
+
+<hr>
+
+<h3 id="toc_59">Actividad 6 — Proponer mejoras al algoritmo</h3>
+
+<p><strong>Ejemplo 1: Calcular porcentaje de nucleótidos</strong></p>
+
+<p>Entrada: <code>ATGC</code></p>
+
+<p>Salida:
+<code>
+A: 25%
+T: 25%
+C: 25%
+G: 25%
+</code></p>
+
+<hr>
+
+<p><strong>Ejemplo 2: Contenido GC</strong></p>
+
+<p>Entrada: <code>ATGCGC</code></p>
+
+<p>Proceso:
+- contar G y C
+- dividir entre total</p>
+
+<p>Salida aproximada:
+<code>
+GC content: 66.6%
+</code></p>
+
+<hr>
+
+<p><strong>Ejemplo 3: Detectar secuencia inválida</strong></p>
+
+<p>Entrada: <code>ATBX</code></p>
+
+<p>Salida:
+<code>
+Error: carácter inválido
+</code></p>
+
+<hr>
+
+<h2 id="toc_60">23. Cierre</h2>
+
+<p>Aprender algoritmos y diagramas de flujo es aprender a pensar soluciones de manera ordenada.</p>
+
+<p>En este tema, el objetivo no es memorizar símbolos, sino desarrollar una forma de razonamiento que después puedas llevar a cualquier programa.</p>
+
+<p>Hoy trabajamos con una secuencia de DNA, pero esta misma forma de análisis sirve para muchísimos problemas de programación.</p>
+
+<blockquote>
+<p>Un buen programa empieza con una buena idea organizada paso a paso.</p>
+</blockquote>
+
+
+
+
+</body>
+
+</html>
