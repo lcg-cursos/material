@@ -598,15 +598,111 @@ Finalmente se programa.</p>
 
 <hr>
 
-<h2 id="toc_22">10. Relación entre algoritmo, pseudocódigo y programa</h2>
+<h3 id="toc_22">Guía breve para dibujar diagramas de flujo (con Mermaid)</h3>
+
+<h4 id="toc_23">🧱 Elementos básicos</h4>
+
+<table>
+<thead>
+<tr>
+<th>Símbolo</th>
+<th>Uso</th>
+<th>Ejemplo</th>
+<th>Mermaid</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Óvalo</td>
+<td>Inicio / Fin</td>
+<td>Inicio, Fin</td>
+<td><code>([Inicio])</code></td>
+</tr>
+<tr>
+<td>Rectángulo</td>
+<td>Proceso</td>
+<td>Calcular suma</td>
+<td><code>[Calcular suma]</code></td>
+</tr>
+<tr>
+<td>Paralelogramo</td>
+<td>Entrada / Salida</td>
+<td>Leer archivo, Imprimir resultado</td>
+<td><code>[/Leer archivo/]</code></td>
+</tr>
+<tr>
+<td>Rombo</td>
+<td>Decisión</td>
+<td>¿Archivo existe?</td>
+<td><code>{¿Archivo existe?}</code></td>
+</tr>
+<tr>
+<td>Flechas →</td>
+<td>Flujo</td>
+<td>Dirección del algoritmo</td>
+<td><code>A --&gt; B</code></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="toc_24">🔷 Ejemplo 1: Secuencia simple</h4>
+
+<div><pre><code class="language-mermaid">flowchart TD
+    A([Inicio])
+    B[/Leer números/]
+    C[Calcular suma]
+    D[/Mostrar resultado/]
+    E([Fin])
+
+    A --&gt; B --&gt; C --&gt; D --&gt; E</code></pre></div>
+
+<hr>
+
+<h4 id="toc_25">🔷 Ejemplo 2: Condicional (if / else)</h4>
+
+<div><pre><code class="language-mermaid">flowchart TD
+    A([Inicio])
+    B[/Leer archivo/]
+    C{¿Archivo existe?}
+    D[Procesar archivo]
+    E[/Mostrar error/]
+    F([Fin])
+
+    A --&gt; B --&gt; C
+    C -- Sí --&gt; D --&gt; F
+    C -- No --&gt; E --&gt; F</code></pre></div>
+
+<hr>
+
+<h4 id="toc_26">🔷 Ejemplo 3: Uso de llaves <code>{}</code> (decisión explícita)</h4>
+
+<p>👉 En Mermaid, el rombo se define con <code>{}</code></p>
+
+<div><pre><code class="language-mermaid">flowchart TD
+    A([Inicio])
+    B[/Leer lista de números/]
+    C{¿Lista vacía?}
+    D[/Mostrar error/]
+    E[Calcular promedio]
+    F[/Mostrar resultado/]
+    G([Fin])
+
+    A --&gt; B --&gt; C
+    C -- Sí --&gt; D --&gt; G
+    C -- No --&gt; E --&gt; F --&gt; G</code></pre></div>
+
+<hr>
+
+<h2 id="toc_27">10. Relación entre algoritmo, pseudocódigo y programa</h2>
 
 <p>Es importante distinguir estos tres niveles:</p>
 
-<h3 id="toc_23">Algoritmo</h3>
+<h3 id="toc_28">Algoritmo</h3>
 
 <p>Es la idea general de la solución.</p>
 
-<h3 id="toc_24">Pseudocódigo</h3>
+<h3 id="toc_29">Pseudocódigo</h3>
 
 <p>Es una forma escrita del algoritmo usando lenguaje natural estructurado. No depende de un lenguaje de programación específico.</p>
 
@@ -621,7 +717,7 @@ si no
     contar nucleótidos
     mostrar resultados</code></pre></div>
 
-<h3 id="toc_25">Programa</h3>
+<h3 id="toc_30">Programa</h3>
 
 <p>Es la implementación del algoritmo en un lenguaje como Python.</p>
 
@@ -631,11 +727,11 @@ si no
 
 <hr>
 
-<h2 id="toc_26">11. Estrategia para razonar antes de programar</h2>
+<h2 id="toc_31">11. Estrategia para razonar antes de programar</h2>
 
 <p>Cuando enfrentes un problema, puedes usar estas preguntas guía:</p>
 
-<h3 id="toc_27">Sobre la entrada</h3>
+<h3 id="toc_32">Sobre la entrada</h3>
 
 <ul>
 <li>¿Qué dato recibe el programa?</li>
@@ -643,7 +739,7 @@ si no
 <li>¿Puede haber errores en la entrada?</li>
 </ul>
 
-<h3 id="toc_28">Sobre el proceso</h3>
+<h3 id="toc_33">Sobre el proceso</h3>
 
 <ul>
 <li>¿Qué debo hacer con el dato?</li>
@@ -651,7 +747,7 @@ si no
 <li>¿Hay decisiones que deban tomarse?</li>
 </ul>
 
-<h3 id="toc_29">Sobre la salida</h3>
+<h3 id="toc_34">Sobre la salida</h3>
 
 <ul>
 <li>¿Qué debe mostrar el programa?</li>
@@ -663,9 +759,9 @@ si no
 
 <hr>
 
-<h2 id="toc_30">12. Aplicación al problema del DNA</h2>
+<h2 id="toc_35">12. Aplicación al problema del DNA</h2>
 
-<h3 id="toc_31">12.1 Enunciado del problema</h3>
+<h3 id="toc_36">12.1 Enunciado del problema</h3>
 
 <p>Se desea crear un programa que lea una secuencia de DNA ingresada por teclado y reporte el conteo de nucleótidos:</p>
 
@@ -676,7 +772,7 @@ si no
 <li>G</li>
 </ul>
 
-<h3 id="toc_32">12.2 Qué debe hacer el programa</h3>
+<h3 id="toc_37">12.2 Qué debe hacer el programa</h3>
 
 <p>El programa debe:</p>
 
@@ -691,9 +787,9 @@ si no
 
 <hr>
 
-<h2 id="toc_33">13. Análisis del problema con entrada, proceso y salida</h2>
+<h2 id="toc_38">13. Análisis del problema con entrada, proceso y salida</h2>
 
-<h3 id="toc_34">Entrada</h3>
+<h3 id="toc_39">Entrada</h3>
 
 <p>Una secuencia de DNA escrita por el usuario.</p>
 
@@ -701,7 +797,7 @@ si no
 
 <div><pre><code class="language-text">ATGCGCATTA</code></pre></div>
 
-<h3 id="toc_35">Proceso</h3>
+<h3 id="toc_40">Proceso</h3>
 
 <ul>
 <li>normalizar la secuencia,</li>
@@ -710,7 +806,7 @@ si no
 <li>calcular el total.</li>
 </ul>
 
-<h3 id="toc_36">Salida</h3>
+<h3 id="toc_41">Salida</h3>
 
 <p>Un reporte como este:</p>
 
@@ -722,33 +818,33 @@ Total: 10</code></pre></div>
 
 <hr>
 
-<h2 id="toc_37">14. Descomposición del problema</h2>
+<h2 id="toc_42">14. Descomposición del problema</h2>
 
 <p>Resolver este problema es más sencillo si lo dividimos en partes pequeñas:</p>
 
-<h3 id="toc_38">Parte 1. Leer la secuencia</h3>
+<h3 id="toc_43">Parte 1. Leer la secuencia</h3>
 
 <p>Se obtiene la información del usuario.</p>
 
-<h3 id="toc_39">Parte 2. Normalizar</h3>
+<h3 id="toc_44">Parte 2. Normalizar</h3>
 
 <p>Se convierte la secuencia a mayúsculas para trabajar de forma uniforme.</p>
 
-<h3 id="toc_40">Parte 3. Validar</h3>
+<h3 id="toc_45">Parte 3. Validar</h3>
 
 <p>Se verifica que la secuencia no esté vacía y que no contenga símbolos inválidos.</p>
 
-<h3 id="toc_41">Parte 4. Contar</h3>
+<h3 id="toc_46">Parte 4. Contar</h3>
 
 <p>Se recorre la secuencia y se incrementa el contador correspondiente a cada nucleótido.</p>
 
-<h3 id="toc_42">Parte 5. Mostrar resultados</h3>
+<h3 id="toc_47">Parte 5. Mostrar resultados</h3>
 
 <p>Se imprime el conteo final de A, T, C y G, además del total.</p>
 
 <hr>
 
-<h2 id="toc_43">15. Algoritmo propuesto para este problema</h2>
+<h2 id="toc_48">15. Algoritmo propuesto para este problema</h2>
 
 <div><pre><code class="language-text">Inicio
 
@@ -769,7 +865,7 @@ Fin</code></pre></div>
 
 <hr>
 
-<h2 id="toc_44">16. Diagrama de flujo del problema</h2>
+<h2 id="toc_49">16. Diagrama de flujo del problema</h2>
 
 <div><pre><code class="language-mermaid">flowchart TD
     A([Inicio]) --&gt; B[/Leer secuencia de DNA/]
@@ -789,7 +885,7 @@ Fin</code></pre></div>
 
 <hr>
 
-<h2 id="toc_45">17. Cómo razonar este diagrama</h2>
+<h2 id="toc_50">17. Cómo razonar este diagrama</h2>
 
 <p>Observa que el diagrama no empieza contando inmediatamente. Antes de procesar la secuencia, el algoritmo debe comprobar si la entrada es válida.</p>
 
@@ -810,7 +906,7 @@ Fin</code></pre></div>
 
 <hr>
 
-<h2 id="toc_46">18. Errores comunes al diseñar algoritmos</h2>
+<h2 id="toc_51">18. Errores comunes al diseñar algoritmos</h2>
 
 <p>Al comenzar, es normal cometer algunos errores frecuentes:</p>
 
@@ -828,7 +924,7 @@ Fin</code></pre></div>
 
 <hr>
 
-<h2 id="toc_47">19. Recomendaciones para resolver problemas</h2>
+<h2 id="toc_52">19. Recomendaciones para resolver problemas</h2>
 
 <p>Cuando diseñes una solución, recuerda:</p>
 
@@ -844,7 +940,7 @@ Fin</code></pre></div>
 
 <hr>
 
-<h2 id="toc_48">20. Casos que conviene pensar antes de programar</h2>
+<h2 id="toc_53">20. Casos que conviene pensar antes de programar</h2>
 
 <p>Para este problema, algunos casos importantes son:</p>
 
@@ -861,7 +957,7 @@ Fin</code></pre></div>
 
 <hr>
 
-<h2 id="toc_49">21. Idea central que debes recordar</h2>
+<h2 id="toc_54">21. Idea central que debes recordar</h2>
 
 <p>La programación no comienza cuando escribes código. Comienza cuando entiendes el problema y organizas la solución.</p>
 
@@ -878,13 +974,13 @@ Fin</code></pre></div>
 
 <hr>
 
-<h2 id="toc_50">22. Actividades sugeridas</h2>
+<h2 id="toc_55">22. Actividades sugeridas</h2>
 
 <p>A continuación se proponen actividades con <strong>ejemplos concretos</strong> para que practiques el razonamiento algorítmico usando contextos sencillos de bioinformática.</p>
 
 <hr>
 
-<h3 id="toc_51">Actividad 1 — Identificar entrada, proceso y salida</h3>
+<h3 id="toc_56">Actividad 1 — Identificar entrada, proceso y salida</h3>
 
 <p><strong>Ejemplo 1: Transcripción de DNA a RNA</strong></p>
 
@@ -906,9 +1002,9 @@ Fin</code></pre></div>
 
 <hr>
 
-<h3 id="toc_52">Actividad 2 — ¿Qué es un algoritmo? (con ejemplo)</h3>
+<h3 id="toc_57">Actividad 2 — ¿Qué es un algoritmo? (con ejemplo)</h3>
 
-<h4 id="toc_53">🔹 Algoritmo (explicado en lenguaje natural)</h4>
+<h4 id="toc_58">🔹 Algoritmo (explicado en lenguaje natural)</h4>
 
 <p>Un algoritmo describe <strong>la idea de la solución</strong>, sin preocuparse todavía por la sintaxis.</p>
 
@@ -929,7 +1025,7 @@ Fin</code></pre></div>
 
 <p>Ahora tomamos <strong>el mismo algoritmo</strong> y lo expresamos en pseudocódigo.</p>
 
-<h4 id="toc_54">🔹 Pseudocódigo</h4>
+<h4 id="toc_59">🔹 Pseudocódigo</h4>
 
 <div><pre><code class="language-text">leer secuencia
 convertir a mayúsculas
@@ -945,7 +1041,7 @@ si no
 
 <hr>
 
-<h3 id="toc_55">🔍 Diferencia clave entre algoritmo y pseudocódigo</h3>
+<h3 id="toc_60">🔍 Diferencia clave entre algoritmo y pseudocódigo</h3>
 
 <table>
 <thead>
@@ -982,7 +1078,7 @@ si no
 
 <hr>
 
-<h3 id="toc_56">💡 Idea importante</h3>
+<h3 id="toc_61">💡 Idea importante</h3>
 
 <p>El pseudocódigo es un paso intermedio entre el algoritmo y el programa.</p>
 
@@ -990,7 +1086,7 @@ si no
 
 <hr>
 
-<h3 id="toc_57">Actividad 4 — Analizar decisiones en un algoritmo</h3>
+<h3 id="toc_62">Actividad 4 — Analizar decisiones en un algoritmo</h3>
 
 <p><strong>Ejemplo: Detectar caracteres inválidos</strong></p>
 
@@ -1009,7 +1105,7 @@ si no
 
 <hr>
 
-<h3 id="toc_58">Actividad 5 — Dibujar diagrama de flujo</h3>
+<h3 id="toc_63">Actividad 5 — Dibujar diagrama de flujo</h3>
 
 <p><strong>Ejemplo: Complemento de DNA (concepto básico)</strong></p>
 
@@ -1035,49 +1131,7 @@ Salida esperada: <code>TACG</code></p>
 
 <hr>
 
-<h3 id="toc_59">Actividad 6 — Proponer mejoras al algoritmo</h3>
-
-<p><strong>Ejemplo 1: Calcular porcentaje de nucleótidos</strong></p>
-
-<p>Entrada: <code>ATGC</code></p>
-
-<p>Salida:
-<code>
-A: 25%
-T: 25%
-C: 25%
-G: 25%
-</code></p>
-
-<hr>
-
-<p><strong>Ejemplo 2: Contenido GC</strong></p>
-
-<p>Entrada: <code>ATGCGC</code></p>
-
-<p>Proceso:
-- contar G y C
-- dividir entre total</p>
-
-<p>Salida aproximada:
-<code>
-GC content: 66.6%
-</code></p>
-
-<hr>
-
-<p><strong>Ejemplo 3: Detectar secuencia inválida</strong></p>
-
-<p>Entrada: <code>ATBX</code></p>
-
-<p>Salida:
-<code>
-Error: carácter inválido
-</code></p>
-
-<hr>
-
-<h2 id="toc_60">23. Cierre</h2>
+<h2 id="toc_64">23. Cierre</h2>
 
 <p>Aprender algoritmos y diagramas de flujo es aprender a pensar soluciones de manera ordenada.</p>
 
