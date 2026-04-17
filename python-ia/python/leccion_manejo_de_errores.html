@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>leccion_manejo_de_errores</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+  body {
+    padding: 2cm; 
+  }
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">🧪 Lección: Manejo de Errores en <code>regulon_summary</code></h1>
+
+<hr>
+
+<h2 id="toc_1">🎯 1. Objetivo de la lección</h2>
+
+<p>Al finalizar esta sesión, el estudiante será capaz de:</p>
+
+<ul>
+<li>Identificar diferentes tipos de errores en programas reales.</li>
+<li>Distinguir entre validación previa y manejo de excepciones.</li>
+<li>Implementar manejo de errores en Python usando <code>try</code> / <code>except</code>.</li>
+<li>Diseñar el comportamiento del programa ante fallos reales.</li>
+<li>Mejorar la robustez del programa <code>regulon_summary</code>.</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_2">🧩 2. Problema guía</h2>
+
+<p>Ya tenemos un programa funcional que:</p>
+
+<ul>
+<li>Lee un archivo de interacciones.</li>
+<li>Construye un regulón.</li>
+<li>Aplica filtros (<code>--min_genes</code>).</li>
+<li>Genera un archivo de salida.</li>
+</ul>
+
+<p>👉 Pero ahora enfrentamos un problema real de software:</p>
+
+<blockquote>
+<p>❓ ¿Qué pasa cuando algo sale mal?</p>
+</blockquote>
+
+<p>Ejemplos:</p>
+
+<ul>
+<li>El archivo no existe.</li>
+<li>No se puede abrir el archivo.</li>
+<li>El archivo tiene datos incorrectos.</li>
+<li>No se puede escribir la salida.</li>
+<li>El resultado queda vacío.</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_3">🧠 3. Contexto conceptual: tipos de errores en Python</h2>
+
+<p>Antes de hablar de <code>try</code> y <code>except</code>, conviene detenernos en una idea importante:</p>
+
+<blockquote>
+<p>No todos los errores son del mismo tipo, y no todos se resuelven de la misma manera.</p>
+</blockquote>
+
+<p>En programación, distinguir el tipo de error nos ayuda a decidir mejor:</p>
+
+<ul>
+<li>qué revisar primero,</li>
+<li>qué corregir en el código,</li>
+<li>qué informar al usuario,</li>
+<li>y cuándo conviene detener el programa o continuar.</li>
+</ul>
+
+<p>En esta lección trabajaremos con tres categorías muy útiles para analizar programas reales.</p>
+
+<h3 id="toc_4">3.1 Errores de sintaxis</h3>
+
+<p>Son errores en la forma en que está escrito el código.</p>
+
+<p>Python no puede interpretar el programa porque la instrucción está mal construida. En este caso, el programa <strong>ni siquiera comienza a ejecutarse</strong>.</p>
+
+<h4 id="toc_5">Ejemplo</h4>
+
+<div><pre><code class="language-python">if not os.path.exists(input_file)
+    print(&quot;El archivo no existe&quot;)</code></pre></div>
+
+<h3 id="toc_6">¿Qué se intenta hacer aquí?</h3>
+
+<p>Se quiere validar si el archivo de entrada existe. Si no existe, se desea imprimir un mensaje para el usuario.</p>
+
+<h3 id="toc_7">¿Qué problema hay?</h3>
+
+<p>Falta <code>:</code> al final de la línea del <code>if</code>.</p>
+
+<h3 id="toc_8">¿Qué ocurre?</h3>
+
+<p>Python detecta el problema antes de ejecutar el programa y lanza un error de sintaxis.</p>
+
+<h3 id="toc_9">Idea clave</h3>
+
+<p>Un error de sintaxis no se maneja con <code>try</code> / <code>except</code>.</p>
+
+<p>Primero hay que <strong>corregir el código fuente</strong>.</p>
+
+<hr>
+
+<h3 id="toc_10">3.2 Errores lógicos</h3>
+
+<p>Son errores donde el programa sí corre, pero hace algo incorrecto o distinto de lo esperado.</p>
+
+<p>Estos errores son especialmente peligrosos porque a veces no producen traceback (ruta del error) ni mensajes visibles. El programa parece funcionar, pero el resultado está mal.</p>
+
+<h4 id="toc_11">Ejemplo</h4>
+
+<div><pre><code class="language-python">if effect == &quot;+&quot;:
+    regulon[TF][&quot;reprimidos&quot;] += 1</code></pre></div>
+
+<h3 id="toc_12">¿Qué se intenta hacer aquí?</h3>
+
+<p>Se quiere contar cuántos genes son activados por un factor de transcripción.</p>
+
+<h3 id="toc_13">¿Qué problema hay?</h3>
+
+<p>La condición revisa correctamente <code>effect == &quot;+&quot;</code>, pero se incrementa el contador equivocado: <code>reprimidos</code> en vez de <code>activados</code>.</p>
+
+<h3 id="toc_14">¿Qué ocurre?</h3>
+
+<p>El programa sigue corriendo y produce salida, pero los resultados biológicos serían incorrectos.</p>
+
+<h3 id="toc_15">Idea clave</h3>
+
+<p>Los errores lógicos no se arreglan con excepciones.</p>
+
+<p>Se detectan mediante:</p>
+
+<ul>
+<li>revisión del código,</li>
+<li>CASOS DE PRUEBA,</li>
+<li>comparación con RESULTADOS ESPERADOS,</li>
+<li>inspección manual de salidas.</li>
+</ul>
+
+<hr>
+
+<h3 id="toc_16">3.3 Errores en tiempo de ejecución</h3>
+
+<p>Son errores que ocurren mientras el programa ya está corriendo.</p>
+
+<p>Aquí el código puede estar bien escrito, pero el entorno o los datos generan una situación que impide continuar normalmente.</p>
+
+<p>Estos sí son los errores que suelen manejarse con excepciones (<code>try/except</code>).</p>
+
+<h4 id="toc_17">Ejemplo 1</h4>
+
+<div><pre><code class="language-python">with open(input_file) as f:
+    for line in f:
+        print(line)</code></pre></div>
+
+<h3 id="toc_18">¿Qué se intenta hacer aquí?</h3>
+
+<p>Se quiere abrir el archivo de entrada y recorrerlo línea por línea.</p>
+
+<h3 id="toc_19">¿Qué problema podría ocurrir?</h3>
+
+<p>Si el archivo no existe, si la ruta es incorrecta o si no hay permisos para leerlo, <code>open()</code> puede fallar.</p>
+
+<h3 id="toc_20">¿Qué ocurre?</h3>
+
+<p>Python lanza una excepción en tiempo de ejecución, por ejemplo <code>FileNotFoundError</code> u otra relacionada con el sistema de archivos.</p>
+
+<div><pre><code class="language-text">Traceback (most recent call last):
+  File &quot;script.py&quot;, line 1, in &lt;module&gt;
+    with open(input_file) as f:
+FileNotFoundError: [Errno 2] No such file or directory: &#39;archivo.txt&#39;</code></pre></div>
+
+<h4 id="toc_21">🧭 Cómo leer un traceback (de abajo hacia arriba)</h4>
+
+<ol>
+<li><p>🔴 <strong>Última línea → identifica el error</strong></p>
+
+<ul>
+<li>Tipo de error (ej. <code>FileNotFoundError</code>)</li>
+<li>Mensaje (qué salió mal)</li>
+</ul></li>
+<li><p>🟡 <strong>Línea(s) intermedia(s) → ubica dónde ocurrió</strong></p>
+
+<ul>
+<li>La instrucción exacta que causó el error</li>
+<li>Función o bloque donde pasó</li>
+</ul></li>
+<li><p>🔵 <strong>Primeras líneas → entiende el contexto</strong></p>
+
+<ul>
+<li>Archivo (<code>script.py</code>)</li>
+<li>Número de línea</li>
+<li>Flujo de ejecución (cómo llegó ahí)</li>
+</ul></li>
+</ol>
+
+<h4 id="toc_22">🎯 Regla rápida</h4>
+
+<ul>
+<li><strong>Abajo = qué pasó</strong></li>
+<li><strong>En medio = dónde pasó</strong></li>
+<li><strong>Arriba = cómo llegó ahí</strong></li>
+</ul>
+
+<h3 id="toc_23">Idea clave</h3>
+
+<p>Aquí sí tiene sentido usar <code>try</code> / <code>except</code>, porque el problema no siempre depende del código, sino del contexto real en que se ejecuta.</p>
+
+<h4 id="toc_24">Ejemplo 2</h4>
+
+<div><pre><code class="language-python">value = int(user_text)</code></pre></div>
+
+<h3 id="toc_25">¿Qué se intenta hacer aquí?</h3>
+
+<p>Convertir un texto a entero.</p>
+
+<h3 id="toc_26">¿Qué problema podría ocurrir?</h3>
+
+<p>Si <code>user_text</code> contiene letras o símbolos no numéricos, la conversión falla.</p>
+
+<h3 id="toc_27">¿Qué ocurre?</h3>
+
+<p>Python lanza una excepción <code>ValueError</code>.</p>
+
+<div><pre><code class="language-text">Traceback (most recent call last):
+  File &quot;script.py&quot;, line 3, in &lt;module&gt;
+    value = int(user_text)
+ValueError: invalid literal for int() with base 10: &#39;abc&#39;</code></pre></div>
+
+<h4 id="toc_28">🧭 Cómo leer el traceback para: <code>value = int(user_text)</code></h4>
+
+<ol>
+<li><p>🔴 <strong>Última línea → identifica el error</strong></p>
+
+<ul>
+<li>Tipo de error: <code>ValueError</code></li>
+<li>Mensaje típico:
+<code>
+ValueError: invalid literal for int() with base 10: &#39;abc&#39;
+</code></li>
+<li>👉 Significa que el texto no se puede convertir a entero</li>
+</ul></li>
+<li><p>🟡 <strong>Línea(s) intermedia(s) → ubica dónde ocurrió</strong></p>
+
+<ul>
+<li>Línea problemática:
+<code>python
+value = int(user_text)
+</code></li>
+<li>👉 Aquí falló la conversión</li>
+</ul></li>
+<li><p>🔵 <strong>Primeras líneas → entiende el contexto</strong></p>
+
+<ul>
+<li>Archivo y número de línea donde ocurrió</li>
+<li>Flujo del programa hasta llegar a esa conversión</li>
+</ul></li>
+</ol>
+
+<h4 id="toc_29">🎯 Regla rápida</h4>
+
+<ul>
+<li><strong>Abajo = qué pasó</strong> → no se pudo convertir a entero<br></li>
+<li><strong>En medio = dónde pasó</strong> → en <code>int(user_text)</code><br></li>
+<li><strong>Arriba = cómo llegó ahí</strong> → flujo del programa<br></li>
+</ul>
+
+<h3 id="toc_30">⚠️ Causa común</h3>
+
+<ul>
+<li><code>user_text = &quot;abc&quot;</code><br></li>
+<li><code>user_text = &quot;12.5&quot;</code><br></li>
+<li><code>user_text = &quot;&quot;</code><br></li>
+</ul>
+
+<p>👉 Todo lo que <strong>no sea un entero válido</strong> produce este error</p>
+
+<h3 id="toc_31">Idea clave</h3>
+
+<p>No todo error de ejecución tiene que ver con archivos. También pueden surgir al procesar datos, convertir tipos o usar argumentos inválidos.</p>
+
+<h3 id="toc_32">⚠️ Errores de ejecución comunes en Python</h3>
+
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Interpretación</th>
+<th>Ejemplo (por qué ocurre)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>ZeroDivisionError</code></td>
+<td>División entre cero</td>
+<td><code>10 / 0</code></td>
+</tr>
+<tr>
+<td><code>ValueError</code></td>
+<td>Valor inválido para una operación</td>
+<td><code>int(&quot;abc&quot;)</code></td>
+</tr>
+<tr>
+<td><code>TypeError</code></td>
+<td>Tipos de datos incompatibles</td>
+<td><code>&quot;5&quot; + 3</code></td>
+</tr>
+<tr>
+<td><code>NameError</code></td>
+<td>Variable no definida</td>
+<td><code>print(x)</code></td>
+</tr>
+<tr>
+<td><code>IndexError</code></td>
+<td>Índice fuera del rango</td>
+<td><code>[1,2,3][5]</code></td>
+</tr>
+<tr>
+<td><code>KeyError</code></td>
+<td>Clave inexistente en diccionario</td>
+<td><code>{&quot;a&quot;:1}[&quot;b&quot;]</code></td>
+</tr>
+<tr>
+<td><code>FileNotFoundError</code></td>
+<td>Archivo no encontrado</td>
+<td><code>open(&quot;no_existe.txt&quot;)</code></td>
+</tr>
+<tr>
+<td><code>AttributeError</code></td>
+<td>Objeto no tiene ese atributo o método</td>
+<td><code>&quot;hola&quot;.append(&quot;!&quot;)</code></td>
+</tr>
+<tr>
+<td><code>ModuleNotFoundError</code></td>
+<td>Módulo no encontrado</td>
+<td><code>import no_existe</code></td>
+</tr>
+<tr>
+<td><code>OverflowError</code></td>
+<td>Número demasiado grande para manejar</td>
+<td><code>math.exp(1000)</code></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="toc_33">🎯 Nota</h4>
+
+<p>Estos errores ocurren <strong>durante la ejecución del programa</strong> y generan un <strong>traceback</strong> que ayuda a identificar el problema.</p>
+
+<hr>
+
+<h2 id="toc_34">🧪 4. Dinámica: Detectar y clasificar errores</h2>
+
+<p>Identifica el tipo de error, en caso de errores de ejecución explica el traceback, y propon una posible solución.</p>
+
+<h4 id="toc_35">1. Validación</h4>
+
+<div><pre><code class="language-python">if x &gt; 5
+    print(&quot;Mayor que 5&quot;)</code></pre></div>
+
+<p>Al correlo marca:</p>
+
+<div><pre><code class="language-none">SyntaxError: expected &#39;:&#39;</code></pre></div>
+
+<p><strong>Tipo [lógico, sintáxis, ejecución?]</strong>:<br>
+<strong>Solución</strong>:</p>
+
+<h4 id="toc_36">2. Checar si es par</h4>
+
+<div><pre><code class="language-python">def es_par(n):
+    return n % 2 == 1
+
+print(es_par(4))</code></pre></div>
+
+<p>Al correlo marca:</p>
+
+<div><pre><code class="language-none">False</code></pre></div>
+
+<p><strong>Tipo [lógico, sintáxis, ejecución?]</strong>:<br>
+<strong>Solución</strong>:</p>
+
+<h4 id="toc_37">3. Imprimir un elemento</h4>
+
+<div><pre><code class="language-python">numeros = [1, 2, 3]
+print(numeros[3])</code></pre></div>
+
+<p>Al correlo marca:</p>
+
+<div><pre><code class="language-none">Traceback (most recent call last):
+  File &quot;script.py&quot;, line 2, in &lt;module&gt;
+    print(numeros[5])
+IndexError: list index out of range</code></pre></div>
+
+<p><strong>Tipo [lógico, sintáxis, ejecución?]</strong>:<br>
+<strong>explica traceback</strong>:<br>
+<strong>Solución</strong>:</p>
+
+<h4 id="toc_38">4. Sumando  numeros</h4>
+
+<div><pre><code class="language-python">valor = &quot;5&quot;
+resultado = valor + 10</code></pre></div>
+
+<p>Al correlo marca:</p>
+
+<div><pre><code class="language-text">Traceback (most recent call last):
+  File &quot;script.py&quot;, line 2, in &lt;module&gt;
+    resultado = valor + 10
+TypeError: can only concatenate str (not &quot;int&quot;) to str</code></pre></div>
+
+<p><strong>Tipo [lógico, sintáxis, ejecución?]</strong>:<br>
+<strong>explica traceback</strong>:<br>
+<strong>Solución</strong>:</p>
+
+<h4 id="toc_39">5. error</h4>
+
+<div><pre><code class="language-python">def calcular_promedio(valores):
+    return sum(valores) / len(valores)
+
+print(calcular_promedio([]))</code></pre></div>
+
+<blockquote>
+<p>La función <code>sum()</code> sirve para sumar todos los elementos de un iterable (como listas, tuplas, etc.).</p>
+</blockquote>
+
+<p>❓ Preguntas</p>
+
+<ul>
+<li>¿Qué tipo de error ocurre aquí?</li>
+<li>¿Se puede anticipar sin ejecutar el código?</li>
+<li>¿Qué tipo de validación agregarías?</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_40">🧠 Buenas prácticas para minimizar errores de ejecución</h2>
+
+<h3 id="toc_41">1. ✅ Validar antes de operar</h3>
+
+<ul>
+<li>Verifica condiciones antes de ejecutar operaciones críticas<br></li>
+<li>Ejemplo: listas vacías, tipos de datos, valores válidos<br></li>
+</ul>
+
+<p>👉 Evita errores predecibles</p>
+
+<p>✔ Correcto:</p>
+
+<div><pre><code class="language-python">if len(valores) == 0:
+    return None</code></pre></div>
+
+<h3 id="toc_42">2. 🧩 No uses <code>try/except</code> como sustituto de lógica</h3>
+
+<ul>
+<li>No captures errores que podrías prevenir<br></li>
+<li>Evita usar excepciones para controlar flujo normal<br></li>
+</ul>
+
+<p>❌ Mala práctica:</p>
+
+<div><pre><code class="language-python">try:
+    promedio = sum(valores) / len(valores)
+except:
+    promedio = 0</code></pre></div>
+
+<p>✔ Correcto:</p>
+
+<div><pre><code class="language-python">if len(valores) == 0:
+    promedio = 0
+else:
+    promedio = sum(valores) / len(valores)</code></pre></div>
+
+<h3 id="toc_43">3. 🎯 Captura errores específicos</h3>
+
+<ul>
+<li>No uses <code>except:</code> genérico<br></li>
+<li>Captura solo lo que esperas<br></li>
+</ul>
+
+<p>❌ Mala práctica:</p>
+
+<div><pre><code class="language-python">try:
+    archivo = open(&quot;datos.txt&quot;)
+except:
+    print(&quot;Error&quot;)</code></pre></div>
+
+<p>✔ Correcto:</p>
+
+<div><pre><code class="language-python">try:
+    archivo = open(&quot;datos.txt&quot;)
+except FileNotFoundError:
+    print(&quot;El archivo no existe&quot;)</code></pre></div>
+
+<h3 id="toc_44">4. 🗣️ Da mensajes claros al usuario</h3>
+
+<ul>
+<li>Explica qué salió mal y qué hacer<br></li>
+<li>Evita mensajes crípticos<br></li>
+</ul>
+
+<p>❌ Mala práctica:</p>
+
+<div><pre><code class="language-python">print(&quot;Error&quot;)</code></pre></div>
+
+<p>✔ Correcto:</p>
+
+<div><pre><code class="language-python">print(&quot;Error: la lista está vacía, no se puede calcular el promedio&quot;)</code></pre></div>
+
+<h3 id="toc_45">5. 📂 Asume que el entorno puede fallar</h3>
+
+<ul>
+<li>Archivos pueden no existir<br></li>
+<li>Permisos pueden fallar<br></li>
+<li>Datos pueden estar corruptos<br></li>
+</ul>
+
+<p>👉 Aquí sí usa <code>try/except</code></p>
+
+<p>✔ Correcto:</p>
+
+<div><pre><code class="language-python">try:
+    with open(&quot;datos.txt&quot;) as f:
+        contenido = f.read()
+except FileNotFoundError:
+    print(&quot;Archivo no encontrado&quot;)</code></pre></div>
+
+<h3 id="toc_46">6. 🔍 Valida entradas del usuario</h3>
+
+<ul>
+<li>Nunca confíes en input externo<br></li>
+<li>Convierte y valida antes de usar<br></li>
+</ul>
+
+<p>❌ Mala práctica:</p>
+
+<div><pre><code class="language-python">edad = int(input())</code></pre></div>
+
+<p>✔ Correcto:</p>
+
+<div><pre><code class="language-python">texto = input()
+if texto.isdigit():
+    edad = int(texto)
+else:
+    print(&quot;Entrada inválida&quot;)</code></pre></div>
+
+<h3 id="toc_47">7. 🧪 Usa casos de prueba simples</h3>
+
+<ul>
+<li>Prueba con:
+
+<ul>
+<li>valores vacíos<br></li>
+<li>valores extremos<br></li>
+<li>datos incorrectos<br></li>
+</ul></li>
+</ul>
+
+<p>👉 Esto ayuda a detectar errores lógicos y de ejecución</p>
+
+<p>✔ Correcto:</p>
+
+<div><pre><code class="language-python">assert calcular_promedio([1,2,3]) == 2
+assert calcular_promedio([]) is None</code></pre></div>
+
+<h3 id="toc_48">8. 🧱 Diseña fallos controlados</h3>
+
+<ul>
+<li>Decide qué debe hacer el programa si algo falla:
+
+<ul>
+<li>detenerse<br></li>
+<li>continuar<br></li>
+<li>usar valores por defecto<br></li>
+</ul></li>
+</ul>
+
+<p>✔ Correcto:</p>
+
+<div><pre><code class="language-python">if not datos:
+    print(&quot;No hay datos disponibles&quot;)
+    return</code></pre></div>
+
+<h3 id="toc_49">🎯 Regla de oro</h3>
+
+<blockquote>
+<p><strong>Errores predecibles → validación</strong><br>
+<strong>Errores inevitables → manejo con excepciones</strong></p>
+</blockquote>
+
+<hr>
+
+<h2 id="toc_50">🔍 4. Análisis del programa actual</h2>
+
+<h3 id="toc_51">¿Qué ya hace bien?</h3>
+
+<ul>
+<li>Valida si el archivo existe.</li>
+<li>Ignora líneas inválidas.</li>
+<li>Separa responsabilidades en funciones.</li>
+</ul>
+
+<h3 id="toc_52">¿Qué falta?</h3>
+
+<ul>
+<li>Manejo de errores al abrir archivos.</li>
+<li>Manejo de errores al escribir salida.</li>
+<li>Mensajes claros para el usuario.</li>
+<li>Diferenciar entre &quot;sin datos&quot; y &quot;error&quot;.</li>
+</ul>
+
+<div><pre><code class="language-bash">touch data/bloqueado.tsv
+chmod 000 data/bloqueado.tsv
+
+uv run python src/regulon_summary.py data/bloqueado.tsv results/output.tsv</code></pre></div>
+
+<div><pre><code class="language-bash">python src/regulon_summary.py data/input.tsv output.tsv</code></pre></div>
+
+<hr>
+
+<h2 id="toc_53">5. ⚠️ Mapa de posibles errores</h2>
+
+<p>Dada la versión actual de nuestro programa</p>
+
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Posible error</th>
+<th>Tipo</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>argumentos</td>
+<td>faltan parámetros o <code>--min_genes</code> inválido</td>
+<td>Ejecución</td>
+</tr>
+<tr>
+<td>input_file</td>
+<td>no existe</td>
+<td>Ejecución</td>
+</tr>
+<tr>
+<td>input_file</td>
+<td>existe pero no se puede abrir</td>
+<td>Ejecución</td>
+</tr>
+<tr>
+<td>load_interactions</td>
+<td>línea mal formada</td>
+<td>Lógico / dato inválido</td>
+</tr>
+<tr>
+<td>load_interactions</td>
+<td><code>effect</code> inválido</td>
+<td>Lógico / dato inválido</td>
+</tr>
+<tr>
+<td>load_interactions</td>
+<td>no hay interacciones válidas</td>
+<td>Lógico / resultado vacío</td>
+</tr>
+<tr>
+<td>build_regulon</td>
+<td>duplicados o conteos inesperados</td>
+<td>Lógico</td>
+</tr>
+<tr>
+<td>filtro <code>--min_genes</code></td>
+<td>resultado vacío</td>
+<td>Lógico</td>
+</tr>
+<tr>
+<td>output_file</td>
+<td>no se puede crear carpeta</td>
+<td>Ejecución</td>
+</tr>
+<tr>
+<td>output_file</td>
+<td>no se puede escribir archivo</td>
+<td>Ejecución</td>
+</tr>
+<tr>
+<td>salida</td>
+<td>archivo vacío o solo encabezado</td>
+<td>Lógico / resultado vacío</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2 id="toc_54">🛠️ 6. Estrategias de manejo</h2>
+
+<p>No todos los errores se atienden igual. En programación real, suele ser útil combinar dos estrategias:</p>
+
+<ul>
+<li><strong>validación previa</strong>, cuando podemos revisar una condición antes de ejecutar una operación riesgosa,</li>
+<li><strong>manejo de excepciones</strong>, cuando el error solo se conoce al intentar ejecutar la operación.</li>
+</ul>
+
+<p>La idea no es elegir una u otra como si fueran excluyentes, sino entender en qué casos conviene cada una.</p>
+
+<h3 id="toc_55">6.1 Validación previa</h3>
+
+<p>La validación previa consiste en revisar una condición antes de continuar.</p>
+
+<h4 id="toc_56">Ejemplo</h4>
+
+<div><pre><code class="language-python">if not os.path.exists(input_file):
+    print(&quot;Error: archivo no existe&quot;)
+    exit(1)</code></pre></div>
+
+<h3 id="toc_57">¿Qué se intenta hacer aquí?</h3>
+
+<p>Antes de leer el archivo, se verifica si la ruta existe.</p>
+
+<h3 id="toc_58">¿Por qué es útil?</h3>
+
+<p>Porque permite dar un mensaje claro al usuario desde el inicio, sin dejar que el programa avance innecesariamente.</p>
+
+<h3 id="toc_59">Limitación importante</h3>
+
+<p>Aunque esta validación ayuda, <strong>no garantiza por completo</strong> que el archivo podrá abrirse. Por ejemplo, el archivo puede existir pero no tener permisos de lectura.</p>
+
+<h3 id="toc_60">Idea clave</h3>
+
+<p>La validación previa mejora la experiencia del usuario, pero no reemplaza completamente el manejo de excepciones.</p>
+
+<hr>
+
+<h3 id="toc_61">6.2 Manejo de excepciones</h3>
+
+<p>El manejo de excepciones permite controlar errores que aparecen al ejecutar una operación real.</p>
+
+<h4 id="toc_62">Ejemplo</h4>
+
+<div><pre><code class="language-python">try:
+    with open(filename) as f:
+        for line in f:
+            print(line)
+except FileNotFoundError:
+    print(&quot;Error: el archivo no fue encontrado&quot;)</code></pre></div>
+
+<h3 id="toc_63">¿Qué se intenta hacer aquí?</h3>
+
+<p>Abrir un archivo y recorrer su contenido línea por línea.</p>
+
+<h3 id="toc_64">¿Qué hace <code>try</code>?</h3>
+
+<p>Indica el bloque donde podría ocurrir un error.</p>
+
+<h3 id="toc_65">¿Qué hace <code>except FileNotFoundError</code>?</h3>
+
+<p>Captura específicamente el caso en que el archivo no existe.</p>
+
+<h3 id="toc_66">¿Por qué esto es mejor que dejar el traceback crudo?</h3>
+
+<p>Porque permite mostrar un mensaje más claro y controlado para el usuario.</p>
+
+<hr>
+
+<h3 id="toc_67">6.3 ¿Cuándo conviene usar validación y cuándo excepción?</h3>
+
+<p>Una forma práctica de decidirlo es esta:</p>
+
+<ul>
+<li><strong>Valida antes</strong> cuando la condición es fácil, directa y mejora el mensaje al usuario.</li>
+<li><strong>Usa excepción</strong> cuando la operación depende del sistema, del entorno o de datos que solo se conocen al ejecutarse.</li>
+</ul>
+
+<h4 id="toc_68">Ejemplo en este programa</h4>
+
+<ul>
+<li>Revisar si la ruta existe → validación previa.</li>
+<li>Intentar abrir el archivo → manejo de excepción.</li>
+<li>Intentar escribir la salida → manejo de excepción.</li>
+</ul>
+
+<hr>
+
+<h3 id="toc_69">6.4 Regla importante</h3>
+
+<blockquote>
+<p>No todo se valida antes, ni todo se captura después.</p>
+</blockquote>
+
+<p>La robustez de un programa suele surgir de combinar ambas estrategias con criterio.</p>
+
+<hr>
+
+<h2 id="toc_70">💻 7. Implementación guiada (live coding)</h2>
+
+<p>En esta parte no vamos a reescribir todo el programa de golpe.</p>
+
+<p>La idea es mejorar el manejo de errores de forma gradual, entendiendo por qué cada cambio tiene sentido.</p>
+
+<hr>
+
+<h3 id="toc_71">Paso 1: manejar errores al leer el archivo de entrada</h3>
+
+<div><pre><code class="language-python">def load_interactions(filename):
+    interactions = []
+
+    try:
+        with open(filename) as f:
+            for line in f:
+                line = line.strip()
+
+                if not line:
+                    continue
+
+                if line.startswith(&quot;#&quot;):
+                    continue
+
+                if line.startswith(&quot;1)regulatorId&quot;):
+                    continue
+
+                fields = line.split(&quot;   &quot;)
+
+                if len(fields) &lt;= 6:
+                    continue
+
+                TF = fields[1]
+                gene = fields[4]
+                effect = fields[5]
+
+                if effect not in [&quot;+&quot;, &quot;-&quot;, &quot;+-&quot;]:
+                    continue
+
+                interactions.append((TF, gene, effect))
+
+    except FileNotFoundError:
+        raise RuntimeError(f&quot;No se encontró el archivo de entrada: {filename}&quot;)
+    except PermissionError:
+        raise RuntimeError(f&quot;No hay permisos para leer el archivo: {filename}&quot;)
+    except OSError as e:
+        raise RuntimeError(f&quot;Ocurrió un error al leer el archivo {filename}: {e}&quot;)
+
+    return interactions</code></pre></div>
+
+<h3 id="toc_72">¿Qué se está haciendo aquí?</h3>
+
+<p>Se mantiene la lógica original de lectura, pero ahora la apertura del archivo queda protegida por un bloque <code>try</code>.</p>
+
+<h3 id="toc_73">¿Qué mejora aporta?</h3>
+
+<p>Si algo falla al abrir o leer el archivo, el programa puede comunicarlo con un mensaje más comprensible que un traceback técnico sin contexto.</p>
+
+<h3 id="toc_74">¿Por qué usar <code>RuntimeError</code> aquí?</h3>
+
+<p>Porque permite relanzar un error con un mensaje más claro para el flujo general del programa. La función detecta el problema y <code>main()</code> puede decidir cómo reaccionar.</p>
+
+<hr>
+
+<h3 id="toc_75">Paso 2: manejar errores al escribir la salida</h3>
+
+<div><pre><code class="language-python">def write_summary(regulon, output_file):
+    try:
+        os.makedirs(os.path.dirname(output_file), exist_ok=True)
+
+        with open(output_file, &quot;w&quot;) as out:
+            out.write(&quot;TF   Total genes Activados   Reprimidos  Tipo    Lista de genes
+&quot;)
+
+            for TF in sorted(regulon):
+                genes = sorted(regulon[TF][&quot;genes&quot;])
+                total = len(genes)
+                activados = regulon[TF][&quot;activados&quot;]
+                reprimidos = regulon[TF][&quot;reprimidos&quot;]
+
+                if activados &gt; 0 and reprimidos &gt; 0:
+                    tipo = &quot;dual&quot;
+                elif activados &gt; 0:
+                    tipo = &quot;activador&quot;
+                else:
+                    tipo = &quot;represor&quot;
+
+                lista_genes = &quot;, &quot;.join(genes)
+                out.write(
+                    f&quot;{TF}  {total} {activados} {reprimidos}    {tipo}  {lista_genes}
+&quot;
+                )
+
+    except PermissionError:
+        raise RuntimeError(f&quot;No hay permisos para escribir el archivo: {output_file}&quot;)
+    except OSError as e:
+        raise RuntimeError(f&quot;Ocurrió un error al escribir el archivo {output_file}: {e}&quot;)</code></pre></div>
+
+<h3 id="toc_76">¿Qué se está haciendo aquí?</h3>
+
+<p>Se protege tanto la creación del directorio como la escritura del archivo de salida.</p>
+
+<h3 id="toc_77">¿Por qué esto es importante?</h3>
+
+<p>Porque un programa no solo debe manejar bien la entrada. También debe responder con claridad cuando falla al guardar resultados.</p>
+
+<h3 id="toc_78">Observación útil para clase</h3>
+
+<p>Preguntas: </p>
+
+<ul>
+<li>¿qué pasa si la carpeta no existe?,</li>
+<li>¿qué pasa si sí existe, pero no tenemos permisos?,</li>
+<li>¿qué pasa si la ruta es inválida?</li>
+</ul>
+
+<h3 id="toc_79">Paso 3: centralizar el manejo en <code>main()</code></h3>
+
+<div><pre><code class="language-python">def main():
+    args = parse_arguments()
+
+    input_file = args.input_file
+    output_file = args.output_file
+    min_genes = args.min_genes
+
+    if not os.path.exists(input_file):
+        print(f&quot;Error: el archivo no existe -&gt; {input_file}&quot;)
+        exit(1)
+
+    try:
+        interactions = load_interactions(input_file)
+        regulon = build_regulon(interactions)
+
+        nuevo_regulon = {}
+
+        for TF, data in regulon.items():
+            num_genes = len(data[&quot;genes&quot;])
+            if num_genes &gt;= min_genes:
+                nuevo_regulon[TF] = data
+
+        regulon = nuevo_regulon
+
+        write_summary(regulon, output_file)
+
+    except RuntimeError as e:
+        print(f&quot;Error: {e}&quot;)
+        exit(1)</code></pre></div>
+
+<h3 id="toc_80">¿Qué se está haciendo aquí?</h3>
+
+<p><code>main()</code> coordina el flujo principal del programa y decide qué hacer cuando una función reporta un problema.</p>
+
+<h3 id="toc_81">¿Por qué es buena idea centralizar aquí?</h3>
+
+<p>Porque evita que cada función imprima por su cuenta mensajes desordenados. Así, las funciones pueden enfocarse en su responsabilidad y <code>main()</code> en la interacción final con el usuario.</p>
+
+<h3 id="toc_82">Idea importante para discutir</h3>
+
+<p>Aquí vale la pena preguntar:</p>
+
+<ul>
+<li>¿conviene que las funciones impriman errores?</li>
+<li>¿o conviene que lancen excepciones y que <code>main()</code> decida?</li>
+</ul>
+
+<p>Esa discusión ayuda a entender separación de responsabilidades.</p>
+
+<hr>
+
+<h3 id="toc_83">Paso 4: pensar en advertencias, no solo en fallos fatales</h3>
+
+<p>No todo problema debe terminar el programa.</p>
+
+<p>Por ejemplo, si después del filtro <code>--min_genes</code> no queda ningún regulador, eso no necesariamente es una excepción. Puede ser simplemente un resultado vacío que conviene comunicar mejor.</p>
+
+<h4 id="toc_84">Ejemplo</h4>
+
+<div><pre><code class="language-python">if not regulon:
+    print(&quot;Advertencia: no hay reguladores que cumplan el filtro indicado.&quot;)</code></pre></div>
+
+<h3 id="toc_85">¿Qué se intenta hacer aquí?</h3>
+
+<p>Avisar al usuario que el programa sí corrió, pero que no produjo resultados útiles bajo las condiciones dadas.</p>
+
+<h3 id="toc_86">¿Por qué esto es valioso?</h3>
+
+<p>Porque ayuda a distinguir entre:</p>
+
+<ul>
+<li>un programa que falló,</li>
+<li>y un programa que terminó bien, pero no encontró datos relevantes.</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_87">🧪 8. Casos de prueba</h2>
+
+<p>En esta lección, los casos de prueba no solo sirven para revisar si el programa funciona en condiciones normales. También sirven para verificar si el programa responde bien cuando algo sale mal.</p>
+
+<p>La pregunta ya no es solo:</p>
+
+<blockquote>
+<p>¿Corre el programa?</p>
+</blockquote>
+
+<p>Sino también:</p>
+
+<blockquote>
+<p>¿Falla de manera clara, controlada y útil?</p>
+</blockquote>
+
+<hr>
+
+<h3 id="toc_88">Caso 1: el archivo no existe</h3>
+
+<h4 id="toc_89">Qué se va a hacer</h4>
+
+<p>Ejecutar el programa con una ruta de entrada que no corresponde a ningún archivo real.</p>
+
+<h4 id="toc_90">Ejemplo</h4>
+
+<div><pre><code class="language-bash">python src/regulon_summary.py data/inexistente.tsv results/output.tsv</code></pre></div>
+
+<h4 id="toc_91">Qué se espera</h4>
+
+<ul>
+<li>El programa no debe continuar.</li>
+<li>Debe mostrar un mensaje claro.</li>
+<li>Debe terminar con error controlado.</li>
+</ul>
+
+<h4 id="toc_92">Qué se discute aquí</h4>
+
+<p>Este caso permite distinguir entre validación previa y excepción. También ayuda a discutir si el mensaje es suficientemente claro para el usuario.</p>
+
+<hr>
+
+<h3 id="toc_93">Caso 2: el archivo existe, pero contiene filas problemáticas</h3>
+
+<h4 id="toc_94">Qué se va a hacer</h4>
+
+<p>Probar un archivo que tenga:</p>
+
+<ul>
+<li>líneas vacías,</li>
+<li>comentarios,</li>
+<li>filas con pocas columnas,</li>
+<li>efectos inválidos.</li>
+</ul>
+
+<h4 id="toc_95">Qué se espera</h4>
+
+<ul>
+<li>El programa no debe romperse por una sola línea mala.</li>
+<li>Debe seguir procesando el resto.</li>
+<li>Se puede discutir si conviene advertir cuántas líneas fueron ignoradas.</li>
+</ul>
+
+<h4 id="toc_96">Qué se discute aquí</h4>
+
+<p>Este caso es ideal para hablar sobre decisiones de diseño:</p>
+
+<ul>
+<li>¿ignorar silenciosamente?</li>
+<li>¿contar líneas inválidas?</li>
+<li>¿detener el programa en modo estricto?</li>
+</ul>
+
+<hr>
+
+<h3 id="toc_97">Caso 3: la ruta de salida no se puede escribir</h3>
+
+<h4 id="toc_98">Qué se va a hacer</h4>
+
+<p>Intentar guardar el archivo en una ruta problemática o en un lugar sin permisos de escritura.</p>
+
+<h4 id="toc_99">Ejemplo</h4>
+
+<div><pre><code class="language-bash">python src/regulon_summary.py data/input.tsv /ruta/protegida/output.tsv</code></pre></div>
+
+<h4 id="toc_100">Qué se espera</h4>
+
+<ul>
+<li>El programa debe detectar el problema.</li>
+<li>Debe informar que no pudo escribir el archivo.</li>
+<li>No debe dejar un traceback crudo como única salida.</li>
+</ul>
+
+<h4 id="toc_101">Qué se discute aquí</h4>
+
+<p>Este caso ayuda a recordar que un programa robusto no solo valida la entrada; también debe manejar adecuadamente la escritura de resultados.</p>
+
+<hr>
+
+<h3 id="toc_102">Caso 4: el filtro <code>--min_genes</code> deja el resultado vacío</h3>
+
+<h4 id="toc_103">Qué se va a hacer</h4>
+
+<p>Ejecutar el programa con un valor alto en <code>--min_genes</code> para que ningún TF cumpla el filtro.</p>
+
+<h4 id="toc_104">Ejemplo</h4>
+
+<div><pre><code class="language-bash">python src/regulon_summary.py data/input.tsv results/output.tsv --min_genes 999</code></pre></div>
+
+<h4 id="toc_105">Qué se espera</h4>
+
+<ul>
+<li>El programa puede terminar normalmente.</li>
+<li>Puede generar un archivo vacío o solo con encabezado.</li>
+<li>Idealmente debe advertir al usuario que no hubo resultados.</li>
+</ul>
+
+<h4 id="toc_106">Qué se discute aquí</h4>
+
+<p>Este caso es muy útil porque no necesariamente representa una excepción. Permite discutir la diferencia entre:</p>
+
+<ul>
+<li>error real,</li>
+<li>resultado válido pero vacío,</li>
+<li>mensaje útil para interpretación.</li>
+</ul>
+
+<hr>
+
+<h3 id="toc_107">Caso 5: el archivo tiene cero interacciones válidas</h3>
+
+<h4 id="toc_108">Qué se va a hacer</h4>
+
+<p>Usar un archivo donde todas las líneas sean descartadas por formato o por efecto inválido.</p>
+
+<h4 id="toc_109">Qué se espera</h4>
+
+<ul>
+<li>El programa no debe romperse automáticamente.</li>
+<li>Debe quedar claro que no hubo datos útiles para construir el regulón.</li>
+</ul>
+
+<h4 id="toc_110">Qué se discute aquí</h4>
+
+<p>Este caso ayuda a pensar si conviene tratar esta situación como advertencia o como error, según el objetivo del programa.</p>
+
+<hr>
+
+<h2 id="toc_111">💬 9. Discusión guiada con los estudiantes (MUY IMPORTANTE)</h2>
+
+<p>Esta sección no debe verse como un complemento menor. En esta lección, la discusión es central, porque el manejo de errores no consiste solo en aprender sintaxis (<code>try</code>, <code>except</code>, etc.), sino en tomar decisiones de diseño.</p>
+
+<p>La meta de estas preguntas es que los estudiantes razonen sobre cómo debe comportarse un programa real frente a situaciones imperfectas.</p>
+
+<hr>
+
+<h3 id="toc_112">9.1 Preguntas para abrir la discusión</h3>
+
+<ul>
+<li>¿Un programa robusto es el que nunca falla, o el que falla de forma clara?</li>
+<li>¿Es mejor detener el programa ante cualquier problema, o intentar continuar en algunos casos?</li>
+<li>¿Qué diferencias hay entre un error del programador y un problema en los datos o en el entorno?</li>
+</ul>
+
+<h3 id="toc_113">Propósito de estas preguntas</h3>
+
+<p>Sirven para mover la conversación de “cómo se escribe un <code>except</code>” hacia “qué comportamiento queremos diseñar”.</p>
+
+<hr>
+
+<h3 id="toc_114">9.2 Preguntas sobre responsabilidades</h3>
+
+<ul>
+<li>¿Dónde debe manejarse el error: dentro de la función o en <code>main()</code>?</li>
+<li>Si <code>load_interactions()</code> encuentra un problema, ¿debe imprimir un mensaje o lanzar una excepción?</li>
+<li>Si cada función imprime sus propios errores, ¿qué ventajas y desventajas tendría?</li>
+</ul>
+
+<h3 id="toc_115">Qué se busca discutir</h3>
+
+<p>Aquí queremos que los estudiantes vean que el manejo de errores también se relaciona con organización del código y separación de responsabilidades.</p>
+
+<p>Una función puede:</p>
+
+<ul>
+<li>resolver su tarea,</li>
+<li>detectar un problema,</li>
+<li>reportarlo hacia arriba,</li>
+</ul>
+
+<p>mientras que <code>main()</code> puede quedar como el punto donde se decide qué mostrar al usuario final.</p>
+
+<hr>
+
+<h3 id="toc_116">9.3 Preguntas sobre líneas inválidas en el archivo</h3>
+
+<ul>
+<li>Si una línea tiene menos columnas de las esperadas, ¿qué hacemos?</li>
+<li>Si <code>effect</code> no es <code>+</code>, <code>-</code> o <code>+-</code>, ¿la ignoramos o detenemos el programa?</li>
+<li>¿Conviene advertir cuántas líneas se descartaron?</li>
+<li>¿En qué escenarios tendría sentido un modo estricto?</li>
+</ul>
+
+<h3 id="toc_117">Qué se busca discutir</h3>
+
+<p>Esta parte es muy rica porque no hay una sola respuesta correcta. Depende del objetivo del software.</p>
+
+<p>Por ejemplo:</p>
+
+<ul>
+<li>en un modo flexible, el programa puede ignorar líneas malas y seguir,</li>
+<li>en un modo estricto, una línea inválida podría considerarse suficiente para detener el proceso.</li>
+</ul>
+
+<p>Aquí el estudiante comienza a pensar como desarrollador, no solo como alguien que escribe instrucciones sueltas.</p>
+
+<hr>
+
+<h3 id="toc_118">9.4 Preguntas sobre la experiencia del usuario</h3>
+
+<ul>
+<li>Si el programa falla, ¿qué información necesita realmente el usuario?</li>
+<li>¿Le sirve un traceback completo?</li>
+<li>¿Qué mensaje sería más útil para alguien que solo quiere ejecutar el programa?</li>
+<li>¿Qué detalles sí conviene mostrar y cuáles podrían ser excesivos?</li>
+</ul>
+
+<h3 id="toc_119">Qué se busca discutir</h3>
+
+<p>Que un buen manejo de errores también mejora la experiencia de uso del software.</p>
+
+<p>No se trata únicamente de “atrapar excepciones”, sino de comunicar bien:</p>
+
+<ul>
+<li>qué falló,</li>
+<li>dónde falló,</li>
+<li>y, cuando sea posible, qué puede hacer el usuario.</li>
+</ul>
+
+<hr>
+
+<h3 id="toc_120">9.5 Preguntas sobre resultados vacíos</h3>
+
+<ul>
+<li>Si no queda ningún TF después del filtro <code>--min_genes</code>, ¿eso es un error?</li>
+<li>Si todas las líneas fueron descartadas, ¿el programa debería avisar?</li>
+<li>¿Es suficiente generar un archivo con encabezado y nada más?</li>
+</ul>
+
+<h3 id="toc_121">Qué se busca discutir</h3>
+
+<p>Esta parte ayuda a distinguir entre:</p>
+
+<ul>
+<li>una excepción real,</li>
+<li>una advertencia,</li>
+<li>y un resultado válido pero sin información útil.</li>
+</ul>
+
+<p>Es una discusión muy importante porque muchas veces el software científico no “falla”, pero sí produce resultados difíciles de interpretar si no se comunican bien.</p>
+
+<hr>
+
+<h3 id="toc_122">9.6 Preguntas sobre buenas prácticas</h3>
+
+<ul>
+<li>¿Es buena idea usar <code>except:</code> sin especificar el tipo de error?</li>
+<li>¿Qué riesgo hay en capturar demasiado?</li>
+<li>¿Qué ventaja tiene capturar errores específicos como <code>FileNotFoundError</code> o <code>PermissionError</code>?</li>
+</ul>
+
+<h3 id="toc_123">Qué se busca discutir</h3>
+
+<p>Que capturar errores específicos vuelve el código más claro y evita esconder problemas inesperados.</p>
+
+<p>También permite mensajes más precisos y decisiones más adecuadas según el tipo de fallo.</p>
+
+<hr>
+
+<h3 id="toc_124">9.7 Cierre de la discusión</h3>
+
+<p>Una forma útil de cerrar esta sección es pedir a los estudiantes que completen verbalmente o por escrito esta frase:</p>
+
+<blockquote>
+<p>“Para nuestro programa, cuando ocurra ________, decidimos ________ porque ________.”</p>
+</blockquote>
+
+<p>Ejemplos:</p>
+
+<ul>
+<li>“Cuando una línea tenga un <code>effect</code> inválido, decidimos ignorarla porque el resto del archivo puede seguir siendo útil.”</li>
+<li>“Cuando no se pueda escribir la salida, decidimos detener el programa porque el resultado no puede guardarse.”</li>
+<li>“Cuando el filtro deje el resultado vacío, decidimos mostrar una advertencia porque no es una falla técnica, pero sí una situación relevante.”</li>
+</ul>
+
+<p>Esta dinámica ayuda a que las decisiones de manejo de errores queden explícitas y justificadas.</p>
+
+<hr>
+
+<h2 id="toc_125">🧠 10. Reflexión final</h2>
+
+<blockquote>
+<p>Manejar errores no es evitar que el programa falle…</p>
+
+<p>Es decidir cómo debe comportarse cuando el mundo real no es perfecto.</p>
+</blockquote>
+
+<hr>
+
+<h2 id="toc_126">🚀 11. Actividad práctica</h2>
+
+<h3 id="toc_127">Objetivo</h3>
+
+<p>Robustecer <code>regulon_summary</code></p>
+
+<h3 id="toc_128">Tareas</h3>
+
+<ol>
+<li><p>Agregar manejo de errores en:</p>
+
+<ul>
+<li>lectura</li>
+<li>escritura</li>
+</ul></li>
+<li><p>Ejecutar casos de prueba</p></li>
+<li><p>Documentar decisiones:</p></li>
+</ol>
+
+<ul>
+<li>¿Qué errores decidiste capturar?</li>
+<li>¿Qué errores decidiste ignorar?</li>
+<li>¿Por qué?</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_129">🧪 12. Extensión (opcional)</h2>
+
+<ul>
+<li>Contar líneas inválidas.</li>
+<li>Mostrar advertencias.</li>
+<li>Modo <code>--strict</code> (detener ante errores).</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_130">📌 13. Idea clave de la lección</h2>
+
+<blockquote>
+<p>Un programa robusto no es el que nunca falla…</p>
+
+<p>sino el que falla de forma clara, controlada y útil para el usuario.</p>
+</blockquote>
+
+<hr>
+
+
+
+
+</body>
+
+</html>
