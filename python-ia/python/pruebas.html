@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>pruebas</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+  body {
+    padding: 2cm; 
+  }
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">🔬 Lección completa: Pruebas de software con <code>regulon_summary</code></h1>
+
+<hr>
+
+<h2 id="toc_1">1. Propósito de esta lección</h2>
+
+<p>Hasta ahora has construido un programa que ya resuelve un problema real: leer interacciones regulatorias desde un archivo, procesarlas y generar un resumen por factor de transcripción.</p>
+
+<p>Ese programa no es un ejercicio aislado. Ya tiene varias características de software real:</p>
+
+<ul>
+<li>recibe entradas desde línea de comandos</li>
+<li>lee archivos</li>
+<li>transforma datos</li>
+<li>escribe resultados</li>
+<li>valida condiciones de error</li>
+</ul>
+
+<p>Eso significa que ya llegaste a un punto muy importante del desarrollo:</p>
+
+<blockquote>
+<p>ya no solo necesitas que el programa funcione una vez;
+necesitas poder comprobar, de manera confiable, que sigue funcionando cuando lo modificas.</p>
+</blockquote>
+
+<p>Ese es el objetivo de esta lección.</p>
+
+<p>Aquí aprenderás a introducir <strong>pruebas automatizadas</strong> usando como base el programa:</p>
+
+<div><pre><code class="language-text">src/regulon_summary.py</code></pre></div>
+
+<p>La meta no es memorizar comandos ni aprender testing como tema aislado. La meta es entender por qué las pruebas aparecen de forma natural cuando un programa empieza a crecer.</p>
+
+<hr>
+
+<h2 id="toc_2">2. El problema que queremos resolver</h2>
+
+<p>Imagina esta situación.</p>
+
+<p>Ya terminaste una primera versión funcional de <code>regulon_summary</code>. El programa corre, produce un archivo de salida y aparentemente todo está bien.</p>
+
+<p>Pero después aparece una nueva necesidad:</p>
+
+<ul>
+<li>quieres evitar contar genes repetidos</li>
+<li>quieres mejorar el filtrado por número mínimo de genes</li>
+<li>quieres cambiar parte de la salida</li>
+<li>quieres reorganizar funciones para que el código quede más claro</li>
+</ul>
+
+<p>En ese momento aparece una pregunta muy importante:</p>
+
+<blockquote>
+<p>¿Cómo sabrás que tus cambios no rompieron algo que antes sí funcionaba?</p>
+</blockquote>
+
+<p>Puedes correr el programa a mano una vez. Incluso dos o tres veces. Pero eso rápidamente deja de ser suficiente.</p>
+
+<p>Por ejemplo:</p>
+
+<ul>
+<li>quizás pruebas solo un archivo y no otro</li>
+<li>quizás olvidas revisar un caso límite</li>
+<li>quizás el programa sigue corriendo, pero ahora cuenta mal</li>
+<li>quizás el mensaje de error cambió sin darte cuenta</li>
+</ul>
+
+<p>Ese es el problema que resuelven las pruebas.</p>
+
+<p>Las pruebas no existen porque “así se hace profesionalmente” y ya.</p>
+
+<p>Existen porque, cuando un programa empieza a tener más de una parte importante, <strong>necesitas una manera sistemática de verificar su comportamiento</strong>.</p>
+
+<hr>
+
+<h2 id="toc_3">3. Por qué esta lección sigue después de manejo de errores</h2>
+
+<p>Esta secuencia no es casualidad.</p>
+
+<p>Antes trabajaste:</p>
+
+<ul>
+<li>estructuras de control</li>
+<li>estructuras de datos</li>
+<li>funciones</li>
+<li>lectura y escritura de archivos</li>
+<li>argumentos por línea de comandos</li>
+<li>manejo de errores</li>
+</ul>
+
+<p>Y además ya definiste casos de prueba en:</p>
+
+<div><pre><code class="language-text">docs/casos_prueba.md</code></pre></div>
+
+<p>Eso significa que ya hiciste algo fundamental: <strong>pensaste en distintos escenarios</strong>.</p>
+
+<p>Por ejemplo:</p>
+
+<ul>
+<li>qué pasa si el archivo no existe</li>
+<li>qué pasa si una línea está incompleta</li>
+<li>qué pasa si el archivo está vacío</li>
+<li>qué pasa si el filtro deja al resultado sin TFs</li>
+</ul>
+
+<p>Eso ya es pensamiento de pruebas.</p>
+
+<p>La diferencia es que hasta ahora esos escenarios estaban escritos como documentación o se verificaban manualmente.</p>
+
+<p>El siguiente paso lógico es este:</p>
+
+<blockquote>
+<p>convertir esos casos en verificaciones que se puedan ejecutar automáticamente.</p>
+</blockquote>
+
+<p>Por eso esta lección sigue naturalmente después de manejo de errores.</p>
+
+<p>Porque cuando aprendes a anticipar fallos, también empiezas a pensar cómo verificarlos.</p>
+
+<hr>
+
+<h2 id="toc_4">4. Qué son las pruebas automatizadas</h2>
+
+<p>Una prueba automatizada es una forma de expresar en código algo como esto:</p>
+
+<blockquote>
+<p>Dada esta entrada, el programa o una parte del programa debería comportarse de esta manera.</p>
+</blockquote>
+
+<p>Una prueba no consiste en “correr el programa y ver si parece estar bien”.</p>
+
+<p>Una prueba consiste en definir de manera explícita:</p>
+
+<ol>
+<li>qué situación quieres evaluar</li>
+<li>qué parte del programa vas a ejecutar</li>
+<li>qué resultado esperas observar</li>
+</ol>
+
+<p>En términos simples, una prueba tiene esta estructura:</p>
+
+<div><pre><code class="language-text">preparar datos → ejecutar → verificar</code></pre></div>
+
+<p>Por ejemplo:</p>
+
+<ul>
+<li>preparas una lista pequeña de interacciones</li>
+<li>llamas a <code>build_regulon()</code></li>
+<li>verificas que el diccionario resultante tenga los conteos correctos</li>
+</ul>
+
+<p>O bien:</p>
+
+<ul>
+<li>intentas abrir un archivo que no existe</li>
+<li>llamas a <code>load_interactions()</code></li>
+<li>verificas que se produzca la excepción esperada</li>
+</ul>
+
+<p>Eso ya es una prueba.</p>
+
+<hr>
+
+<h2 id="toc_5">5. Qué NO son las pruebas automatizadas</h2>
+
+<p>Es importante aclarar algo.</p>
+
+<p>Las pruebas automatizadas <strong>no sustituyen el razonamiento</strong>.</p>
+
+<p>No sirven de mucho si primero no entendiste qué debería hacer el programa.</p>
+
+<p>Tampoco son simplemente “usar pytest”.</p>
+
+<p><code>pytest</code> es una herramienta. Pero la parte más importante ocurre antes: pensar bien el caso.</p>
+
+<p>Por eso, en esta lección, no vamos a empezar escribiendo tests de inmediato.</p>
+
+<p>Primero vamos a revisar los casos de prueba que ya existen y a convertirlos en algo que realmente pueda verificarse en código.</p>
+
+<hr>
+
+<h2 id="toc_6">6. Punto de partida: <code>docs/casos_prueba.md</code></h2>
+
+<p>Tu proyecto ya cuenta con un documento de casos de prueba:</p>
+
+<div><pre><code class="language-text">docs/casos_prueba.md</code></pre></div>
+
+<p>Eso es muy valioso, porque significa que ya no partimos de una hoja en blanco.</p>
+
+<p>En ese documento ya existen escenarios importantes del programa.</p>
+
+<p>Sin embargo, esos casos suelen estar expresados en lenguaje natural. Por ejemplo:</p>
+
+<ul>
+<li>“si el archivo no existe, debe mostrar error”</li>
+<li>“si el efecto es <code>+-</code>, cuenta como activado y reprimido”</li>
+<li>“si una línea está incompleta, debe ignorarse”</li>
+</ul>
+
+<p>Ese tipo de redacción sirve muy bien para pensar y comunicar el comportamiento esperado. Pero todavía no está lista para convertirse directamente en una prueba automatizada.</p>
+
+<p>¿Por qué?</p>
+
+<p>Porque una prueba necesita mayor precisión.</p>
+
+<p>Necesita responder preguntas como:</p>
+
+<ul>
+<li>¿qué función específica voy a probar?</li>
+<li>¿qué dato concreto voy a usar como entrada?</li>
+<li>¿qué resultado observable voy a verificar?</li>
+<li>¿espero un valor, un archivo generado o una excepción?</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_7">7. Refinar casos de prueba: del lenguaje natural a lo verificable</h2>
+
+<p>Aquí está una de las ideas más importantes de toda la lección.</p>
+
+<p>No vamos a tirar ni rehacer los casos de prueba que ya tienes.</p>
+
+<p>Vamos a <strong>refinarlos</strong>.</p>
+
+<p>Es decir:</p>
+
+<ul>
+<li>conservar el comportamiento que describen</li>
+<li>volverlo más preciso</li>
+<li>hacerlo comprobable en código</li>
+</ul>
+
+<h3 id="toc_8">Ejemplo 1</h3>
+
+<p>Caso original:</p>
+
+<blockquote>
+<p>Si el archivo no existe, debe mostrar error.</p>
+</blockquote>
+
+<p>Versión refinada:</p>
+
+<ul>
+<li>Función a probar: <code>load_interactions</code></li>
+<li>Entrada: <code>&quot;no_existe.tsv&quot;</code></li>
+<li>Resultado esperado: se lanza <code>FileNotFoundError</code></li>
+</ul>
+
+<p>Ahora el caso ya se puede convertir en una prueba real.</p>
+
+<h3 id="toc_9">Ejemplo 2</h3>
+
+<p>Caso original:</p>
+
+<blockquote>
+<p>Si el efecto es <code>+-</code>, debe contar como activado y reprimido.</p>
+</blockquote>
+
+<p>Versión refinada:</p>
+
+<ul>
+<li>Función a probar: <code>build_regulon</code></li>
+<li>Entrada:</li>
+</ul>
+
+<div><pre><code class="language-python">[(&quot;CRP&quot;, &quot;lacZ&quot;, &quot;+-&quot;)]</code></pre></div>
+
+<ul>
+<li>Resultado esperado:
+
+<ul>
+<li>activados = 1</li>
+<li>reprimidos = 1</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_10">Ejemplo 3</h3>
+
+<p>Caso original:</p>
+
+<blockquote>
+<p>Si una línea tiene pocas columnas, debe ignorarse.</p>
+</blockquote>
+
+<p>Versión refinada:</p>
+
+<ul>
+<li>Función a probar: <code>load_interactions</code></li>
+<li>Entrada: archivo temporal con una línea incompleta</li>
+<li>Resultado esperado: la línea no aparece en la lista de interacciones devuelta</li>
+</ul>
+
+<p>Observa la diferencia.</p>
+
+<p>En los tres casos, el comportamiento sigue siendo el mismo. Lo que cambió es el nivel de precisión.</p>
+
+<hr>
+
+<h2 id="toc_11">8. Actividad 1: refinar casos de prueba</h2>
+
+<p>Antes de escribir tests, vas a trabajar sobre los casos existentes.</p>
+
+<h3 id="toc_12">Objetivo</h3>
+
+<p>Transformar casos de prueba en lenguaje natural en casos verificables.</p>
+
+<h3 id="toc_13">Instrucciones paso a paso</h3>
+
+<ol>
+<li>Abre el archivo:</li>
+</ol>
+
+<div><pre><code class="language-text">docs/casos_prueba.md</code></pre></div>
+
+<ol>
+<li><p>Elige al menos 3 casos de prueba.</p></li>
+<li><p>Para cada uno, escribe una versión refinada con estos elementos:</p></li>
+</ol>
+
+<ul>
+<li>nombre del caso</li>
+<li>función a probar</li>
+<li>entrada concreta</li>
+<li><p>resultado esperado verificable</p></li>
+</ul>
+
+<ol>
+<li>Agrega una nueva sección al final del documento, por ejemplo:</li>
+</ol>
+
+<div><pre><code class="language-markdown">## Casos adaptados a testing</code></pre></div>
+
+<ol>
+<li>Coloca ahí tus versiones refinadas.</li>
+</ol>
+
+<h3 id="toc_14">¿Qué significa “entrada concreta”?</h3>
+
+<p>No basta con escribir algo como:</p>
+
+<ul>
+<li>“archivo incorrecto”</li>
+<li>“datos inválidos”</li>
+<li>“caso simple”</li>
+</ul>
+
+<p>Debes escribir algo que pueda usarse realmente en una prueba. Por ejemplo:</p>
+
+<ul>
+<li><code>filename = &quot;no_existe.tsv&quot;</code></li>
+<li>una lista pequeña de tuplas</li>
+<li>un archivo temporal con dos líneas válidas y una inválida</li>
+</ul>
+
+<h3 id="toc_15">¿Qué significa “resultado verificable”?</h3>
+
+<p>Debe ser algo que se pueda comprobar con claridad, por ejemplo:</p>
+
+<ul>
+<li>un valor exacto</li>
+<li>una clave presente en un diccionario</li>
+<li>una longitud esperada</li>
+<li>una excepción específica</li>
+<li>una línea escrita en un archivo</li>
+</ul>
+
+<p>Frases como estas no son suficientemente verificables:</p>
+
+<ul>
+<li>“debe funcionar correctamente”</li>
+<li>“debe verse bien”</li>
+<li>“debe procesarse sin problema”</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_16">9. Uso de IA para refinar casos</h2>
+
+<p>Puedes usar IA como apoyo en esta etapa, pero hay una condición importante:</p>
+
+<blockquote>
+<p>la IA no debe decidir por ti qué comportamiento importa;
+tú ya debiste pensarlo antes.</p>
+</blockquote>
+
+<p>Un uso correcto de IA aquí es pedir ayuda para volver más precisos los casos.</p>
+
+<p>Puedes usar este prompt:</p>
+
+<div><pre><code class="language-prompt">Estoy trabajando en un programa en Python llamado regulon_summary.
+Tengo casos de prueba escritos en lenguaje natural en docs/casos_prueba.md.
+Ayúdame a convertirlos en casos verificables para pytest.
+
+No escribas código todavía.
+Para cada caso dame:
+- nombre del caso
+- función a probar
+- entrada concreta
+- resultado esperado verificable
+
+No inventes nuevos requisitos.
+Solo transforma los existentes.</code></pre></div>
+
+<h3 id="toc_17">Qué debes revisar después de usar IA</h3>
+
+<p>Después de obtener una propuesta, revisa:</p>
+
+<ul>
+<li>si la función elegida tiene sentido</li>
+<li>si la entrada realmente es concreta</li>
+<li>si el resultado esperado se puede verificar</li>
+<li>si la IA no cambió el significado del caso original</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_18">10. Qué parte del programa conviene probar primero</h2>
+
+<p>Aunque el programa completo puede probarse, no conviene empezar por la parte más compleja.</p>
+
+<p>Lo mejor es comenzar por funciones pequeñas o relativamente aisladas.</p>
+
+<p>En este proyecto, una secuencia razonable es:</p>
+
+<ol>
+<li><code>build_regulon(interactions)</code></li>
+<li><code>load_interactions(filename)</code></li>
+<li><code>write_summary(regulon, output_file)</code></li>
+<li>más adelante, si hace falta, el flujo de <code>main()</code></li>
+</ol>
+
+<p>Veamos por qué.</p>
+
+<h3 id="toc_19">10.1 <code>build_regulon</code></h3>
+
+<p>Es una muy buena función para empezar porque:</p>
+
+<ul>
+<li>recibe datos en memoria</li>
+<li>no necesita leer archivos</li>
+<li>no depende de argumentos CLI</li>
+<li>devuelve una estructura que puedes inspeccionar fácilmente</li>
+</ul>
+
+<p>Eso la vuelve ideal para una primera prueba.</p>
+
+<h3 id="toc_20">10.2 <code>load_interactions</code></h3>
+
+<p>Esta función ya implica archivos, así que es un poco más compleja.</p>
+
+<p>Pero sigue siendo muy buena para practicar porque permite probar:</p>
+
+<ul>
+<li>líneas vacías</li>
+<li>comentarios</li>
+<li>filas incompletas</li>
+<li>efectos inválidos</li>
+<li>archivo inexistente</li>
+</ul>
+
+<h3 id="toc_21">10.3 <code>write_summary</code></h3>
+
+<p>Aquí practicas otra idea importante: verificar salida generada.</p>
+
+<p>No solo se prueban valores en memoria. También se puede probar:</p>
+
+<ul>
+<li>si el archivo se creó</li>
+<li>si el encabezado está presente</li>
+<li>si el contenido tiene el formato esperado</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_22">11. La herramienta que vamos a usar: <code>pytest</code></h2>
+
+<p>Para automatizar pruebas vamos a usar <code>pytest</code>.</p>
+
+<p><code>pytest</code> es una herramienta muy popular en Python porque permite escribir pruebas con una sintaxis simple y legible.</p>
+
+<p>En muchos casos, una prueba básica se ve así:</p>
+
+<div><pre><code class="language-python">def test_algo():
+    assert resultado == esperado</code></pre></div>
+
+<p>Y cuando esperas un error, puedes escribir algo como esto:</p>
+
+<div><pre><code class="language-python">import pytest
+
+with pytest.raises(FileNotFoundError):
+    load_interactions(&quot;no_existe.tsv&quot;)</code></pre></div>
+
+<p>Eso hace que la herramienta no estorbe: el foco sigue estando en entender el comportamiento del programa.</p>
+
+<hr>
+
+<h2 id="toc_23">12. Preparación del proyecto para pruebas</h2>
+
+<h3 id="toc_24">Paso 1: agregar <code>pytest</code></h3>
+
+<p>Como el proyecto usa <code>uv</code>, puedes agregar <code>pytest</code> como dependencia de desarrollo con:</p>
+
+<div><pre><code class="language-bash">uv add --dev pytest</code></pre></div>
+
+<h3 id="toc_25">¿Qué significa “dependencia de desarrollo”?</h3>
+
+<p>Que se usa para trabajar sobre el proyecto, pero no forma parte de la lógica principal del programa.</p>
+
+<p>En este caso, <code>pytest</code> se usa para verificar el software, no para ejecutar <code>regulon_summary</code> en producción.</p>
+
+<h3 id="toc_26">Paso 2: crear carpeta <code>tests/</code></h3>
+
+<p>En la raíz del proyecto crea una carpeta llamada:</p>
+
+<div><pre><code class="language-text">tests/</code></pre></div>
+
+<p>Una estructura sencilla puede quedar así:</p>
+
+<div><pre><code class="language-text">regulatory-network/
+├── docs/
+│   └── casos_prueba.md
+├── src/
+│   └── regulon_summary.py
+├── tests/
+│   ├── test_build_regulon.py
+│   ├── test_load_interactions.py
+│   └── test_write_summary.py
+└── pyproject.toml</code></pre></div>
+
+<p>Esta separación ayuda a distinguir claramente entre:</p>
+
+<ul>
+<li>el código del programa</li>
+<li>el código que verifica al programa</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_27">13. Cómo se ejecutan las pruebas</h2>
+
+<p>Una vez instalado <code>pytest</code>, puedes ejecutar las pruebas con:</p>
+
+<div><pre><code class="language-bash">uv run pytest -v</code></pre></div>
+
+<h3 id="toc_28">¿Qué hace ese comando?</h3>
+
+<ul>
+<li><code>uv run</code> ejecuta el comando dentro del entorno del proyecto</li>
+<li><code>pytest</code> busca y corre las pruebas</li>
+<li><code>-v</code> significa “verbose”, es decir, muestra más detalle</li>
+</ul>
+
+<p>Cuando todo esté bien, verás que las pruebas pasan.</p>
+
+<p>Si algo falla, <code>pytest</code> te mostrará qué test falló y en qué línea.</p>
+
+<p>Eso también es importante: una prueba no solo sirve cuando pasa. También sirve cuando falla, porque te ayuda a ubicar el problema.</p>
+
+<hr>
+
+<h2 id="toc_29">14. Primera estrategia: probar <code>build_regulon</code></h2>
+
+<p>Vamos a empezar con la función más accesible.</p>
+
+<h3 id="toc_30">¿Por qué empezar aquí?</h3>
+
+<p>Porque permite concentrarte en la idea central de una prueba sin distraerte con archivos o CLI.</p>
+
+<h3 id="toc_31">Caso sencillo</h3>
+
+<p>Supón que tienes estas interacciones:</p>
+
+<div><pre><code class="language-python">interactions = [
+    (&quot;AraC&quot;, &quot;araA&quot;, &quot;+&quot;),
+    (&quot;AraC&quot;, &quot;araB&quot;, &quot;-&quot;),
+    (&quot;LexA&quot;, &quot;recA&quot;, &quot;-&quot;)
+]</code></pre></div>
+
+<p>Si <code>build_regulon()</code> funciona bien, tendriamos una salida como:</p>
+
+<div><pre><code class="language-python">{
+    &quot;AraC&quot;: {
+        &quot;genes&quot;: {&quot;araA&quot;, &quot;araB&quot;},
+        &quot;activados&quot;: {&quot;araA&quot;},
+        &quot;reprimidos&quot;: {&quot;araB&quot;}
+    },
+    &quot;LexA&quot;: {
+        &quot;genes&quot;: {&quot;recA&quot;},
+        &quot;activados&quot;: set(),
+        &quot;reprimidos&quot;: {&quot;recA&quot;}
+    }
+}</code></pre></div>
+
+<p>entonces deberíamos poder verificar cosas como estas:</p>
+
+<h4 id="toc_32">Que los TF esperados existen</h4>
+
+<p>Esto verifica que build_regulon() creó entradas para ambos factores de transcripción.</p>
+
+<div><pre><code class="language-python">assert &quot;AraC&quot; in regulon
+assert &quot;LexA&quot; in regulon</code></pre></div>
+
+<h4 id="toc_33">Que los genes únicos se guardaron bien</h4>
+
+<div><pre><code class="language-python">assert regulon[&quot;AraC&quot;][&quot;genes&quot;] == {&quot;araA&quot;, &quot;araB&quot;}
+assert regulon[&quot;LexA&quot;][&quot;genes&quot;] == {&quot;recA&quot;}</code></pre></div>
+
+<p>Aquí estamos comprobando que:</p>
+
+<ul>
+<li><code>AraC</code> regula dos genes únicos</li>
+<li><code>LexA</code> regula un solo gen único</li>
+</ul>
+
+<h4 id="toc_34">Que los genes activados se registraron correctamente</h4>
+
+<div><pre><code class="language-python">assert regulon[&quot;AraC&quot;][&quot;activados&quot;] == {&quot;araA&quot;}
+assert regulon[&quot;LexA&quot;][&quot;activados&quot;] == set()</code></pre></div>
+
+<ul>
+<li><code>AraC</code> activa araA</li>
+<li><code>LexA</code> no activa ningún gen en este caso</li>
+</ul>
+
+<h4 id="toc_35">Que los genes reprimidos se registraron correctamente</h4>
+
+<div><pre><code class="language-python">assert regulon[&quot;AraC&quot;][&quot;reprimidos&quot;] == {&quot;araB&quot;}
+assert regulon[&quot;LexA&quot;][&quot;reprimidos&quot;] == {&quot;recA&quot;}</code></pre></div>
+
+<p>Esto verifica que:</p>
+
+<ul>
+<li><code>AraC</code> reprime araB</li>
+<li><code>LexA</code> reprime recA</li>
+</ul>
+
+<h4 id="toc_36">También podríamos verificar tamaños</h4>
+
+<div><pre><code class="language-python">assert len(regulon[&quot;AraC&quot;][&quot;genes&quot;]) == 2
+assert len(regulon[&quot;AraC&quot;][&quot;activados&quot;]) == 1
+assert len(regulon[&quot;AraC&quot;][&quot;reprimidos&quot;]) == 1
+
+assert len(regulon[&quot;LexA&quot;][&quot;genes&quot;]) == 1
+assert len(regulon[&quot;LexA&quot;][&quot;activados&quot;]) == 0
+assert len(regulon[&quot;LexA&quot;][&quot;reprimidos&quot;]) == 1</code></pre></div>
+
+<p>Esto es útil cuando quieres enfatizar el conteo, no necesariamente los nombres exactos.</p>
+
+<hr>
+
+<h2 id="toc_37">15. Live coding 1: primer test real</h2>
+
+<p>En esta parte vas a escribir tu primera prueba automatizada.</p>
+
+<h3 id="toc_38">Paso 1: crear el archivo de pruebas</h3>
+
+<p>Crea un archivo:</p>
+
+<div><pre><code class="language-text">tests/test_build_regulon.py</code></pre></div>
+
+<h3 id="toc_39">Paso 2: importar la función</h3>
+
+<p>Dependiendo de cómo esté organizado tu proyecto, importarás la función desde <code>src/regulon_summary.py</code>.</p>
+
+<h3 id="toc_40">Paso 3: escribir el test</h3>
+
+<p>Un primer ejemplo puede verse así:</p>
+
+<div><pre><code class="language-python">from src.regulon_summary import build_regulon
+
+def test_build_regulon_basico():
+    interactions = [
+        (&quot;AraC&quot;, &quot;araA&quot;, &quot;+&quot;),
+        (&quot;AraC&quot;, &quot;araB&quot;, &quot;-&quot;),
+        (&quot;LexA&quot;, &quot;recA&quot;, &quot;-&quot;)
+    ]
+
+    regulon = build_regulon(interactions)
+
+    assert &quot;AraC&quot; in regulon
+    assert &quot;LexA&quot; in regulon
+
+    assert regulon[&quot;AraC&quot;][&quot;genes&quot;] == {&quot;araA&quot;, &quot;araB&quot;}
+    assert regulon[&quot;AraC&quot;][&quot;activados&quot;] == {&quot;araA&quot;}
+    assert regulon[&quot;AraC&quot;][&quot;reprimidos&quot;] == {&quot;araB&quot;}
+
+    assert regulon[&quot;LexA&quot;][&quot;genes&quot;] == {&quot;recA&quot;}
+    assert regulon[&quot;LexA&quot;][&quot;activados&quot;] == set()
+    assert regulon[&quot;LexA&quot;][&quot;reprimidos&quot;] == {&quot;recA&quot;}
+    </code></pre></div>
+
+<h3 id="toc_41">Qué está haciendo este test</h3>
+
+<p>Este test sigue exactamente la lógica de una prueba:</p>
+
+<ol>
+<li>prepara una entrada pequeña y controlada</li>
+<li>ejecuta la función</li>
+<li>verifica el resultado</li>
+</ol>
+
+<h3 id="toc_42">¿Por qué la entrada debe ser pequeña?</h3>
+
+<p>Porque cuando estás aprendiendo a probar, conviene que el caso sea lo más claro posible.</p>
+
+<p>Si el ejemplo tiene demasiados datos, se vuelve más difícil entender qué está verificando el test.</p>
+
+<hr>
+
+<h2 id="toc_43">16. Qué debes observar durante el live coding</h2>
+
+<p>Mientras escribes y ejecutas esta primera prueba, detente a pensar en estas preguntas:</p>
+
+<ul>
+<li>¿qué comportamiento específico estoy comprobando?</li>
+<li>si la lógica interna cambiara, ¿este test detectaría el error?</li>
+<li>¿el nombre del test describe bien lo que verifica?</li>
+<li>¿la prueba está revisando algo importante o algo superficial?</li>
+</ul>
+
+<p>Estas preguntas son tan importantes como el código mismo.</p>
+
+<hr>
+
+<h2 id="toc_44">17. Live coding 2: probar un caso especial</h2>
+
+<p>Ahora puedes probar el caso del efecto <code>+-</code>.</p>
+
+<h3 id="toc_45">Ejemplo</h3>
+
+<div><pre><code class="language-python">from src.regulon_summary import build_regulon
+
+
+def test_build_regulon_effect_dual_counts_both():
+    interactions = [
+        (&quot;CRP&quot;, &quot;lacZ&quot;, &quot;+-&quot;)
+    ]
+
+    rregulon = build_regulon(interactions)
+
+    assert &quot;CRP&quot; in regulon
+
+    assert regulon[&quot;CRP&quot;][&quot;genes&quot;] == {&quot;lacZ&quot;}
+    assert regulon[&quot;CRP&quot;][&quot;activados&quot;] == {&quot;lacZ&quot;}
+    assert regulon[&quot;CRP&quot;][&quot;reprimidos&quot;] == {&quot;lacZ&quot;}
+</code></pre></div>
+
+<h3 id="toc_46">Qué aporta este test</h3>
+
+<p>Este caso ya no revisa lo más básico. Revisa una regla particular del problema.</p>
+
+<p>Eso es importante porque muestra que una prueba puede capturar no solo el funcionamiento general, sino también detalles específicos del comportamiento esperado.</p>
+
+<h3 id="toc_47">¿Qué pasaría si hay duplicados?</h3>
+
+<div><pre><code class="language-python">(&quot;CRP&quot;, &quot;lacZ&quot;, &quot;+-&quot;),
+(&quot;CRP&quot;, &quot;lacZ&quot;, &quot;+-&quot;)</code></pre></div>
+
+<div><pre><code class="language-python">assert regulon[&quot;CRP&quot;][&quot;genes&quot;] == {&quot;lacZ&quot;}</code></pre></div>
+
+<hr>
+
+<h2 id="toc_48">18. Segunda estrategia: probar <code>load_interactions</code></h2>
+
+<p>Ahora vamos a una función que depende de archivos.</p>
+
+<p>Aquí el objetivo es verificar que la función lea correctamente solo las líneas válidas y descarte las que no cumplen las condiciones.</p>
+
+<h3 id="toc_49">Qué tipo de comportamientos puedes probar</h3>
+
+<ul>
+<li>ignorar líneas vacías</li>
+<li>ignorar comentarios</li>
+<li>ignorar encabezado</li>
+<li>ignorar líneas con pocas columnas</li>
+<li>ignorar efectos inválidos</li>
+<li>devolver solo interacciones válidas</li>
+</ul>
+
+<p>Además, esta función permite probar errores de lectura, por ejemplo:</p>
+
+<ul>
+<li>archivo inexistente</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_50">19. Cómo probar lectura de archivos sin depender de un archivo real del proyecto</h2>
+
+<p>En testing, no siempre conviene usar un archivo real de tu carpeta <code>data/</code>.</p>
+
+<p>¿Por qué?</p>
+
+<p>Porque para una prueba, lo ideal es construir un escenario pequeño, controlado y fácil de entender.</p>
+
+<p>Para eso, <code>pytest</code> ofrece recursos como <code>tmp_path</code>, que permite crear archivos temporales dentro del test.</p>
+
+<p>Eso te ayuda a escribir pruebas más limpias y más independientes.</p>
+
+<hr>
+
+<h2 id="toc_51">20. Live coding 3: probar lectura básica con <code>tmp_path</code></h2>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">from src.regulon_summary import load_interactions
+
+
+def test_load_interactions_reads_only_valid_lines(tmp_path):
+    input_file = tmp_path/&quot;test.tsv&quot;
+    input_file.write_text(
+        &quot;# comentario\n&quot;
+        &quot;1)regulatorId\tregulatorName\tgeneId\tgeneName\tsite\tevidence\teffect\n&quot;
+        &quot;id1\tAraC\tg1\taraA\ts1\tev1\t+\n&quot;
+        &quot;id2\tAraC\tg2\taraB\ts2\tev2\t-\n&quot;
+        &quot;incompleta\tAraC\n&quot;
+        &quot;id3\tCRP\tg3\tlacZ\ts3\tev3\tx\n&quot;
+    )
+
+    interactions = load_interactions(str(input_file))
+
+    assert len(interactions) == 2
+    assert interactions[0] == (&quot;AraC&quot;, &quot;araA&quot;, &quot;+&quot;)
+    assert interactions[1] == (&quot;AraC&quot;, &quot;araB&quot;, &quot;-&quot;)</code></pre></div>
+
+<h3 id="toc_52">Qué verifica este test</h3>
+
+<p>Verifica varias cosas a la vez:</p>
+
+<ul>
+<li>que se ignoren comentarios</li>
+<li>que se ignore el encabezado</li>
+<li>que se ignore la línea incompleta</li>
+<li>que se ignore una línea con efecto inválido</li>
+<li>que solo se conserven las interacciones válidas</li>
+</ul>
+
+<h3 id="toc_53">¿Está bien verificar varias cosas en un solo test?</h3>
+
+<p>A veces sí, si todas forman parte del mismo comportamiento general.</p>
+
+<p>Sin embargo, cuando un test empieza a cubrir demasiadas ideas distintas, puede volverse difícil de entender.</p>
+
+<p>Por eso, más adelante, podrías dividir este tipo de pruebas en casos más pequeños.</p>
+
+<hr>
+
+<h2 id="toc_54">21. Live coding 4: probar error esperado</h2>
+
+<p>También debemos probar que la función falle cuando corresponde.</p>
+
+<p>Por ejemplo, si el archivo no existe:</p>
+
+<div><pre><code class="language-python">import pytest
+from src.regulon_summary import load_interactions
+
+
+def test_load_interactions_raises_error_if_file_does_not_exist():
+    # Ejecuta el código dentro de este bloque y verifica que ocurra esta excepción.
+    with pytest.raises(FileNotFoundError):
+        load_interactions(&quot;no_existe.tsv&quot;)</code></pre></div>
+
+<h3 id="toc_55">Por qué este test es importante</h3>
+
+<p>Porque muestra algo fundamental:</p>
+
+<blockquote>
+<p>las pruebas no son solo para confirmar casos exitosos;
+también sirven para verificar que los errores correctos ocurran en el momento correcto.</p>
+</blockquote>
+
+<p>Esto conecta directamente con la lección anterior sobre manejo de errores.</p>
+
+<hr>
+
+<h2 id="toc_56">22. Tercera estrategia: probar <code>write_summary</code></h2>
+
+<p>La función <code>write_summary()</code> permite practicar otra idea muy importante: verificar salida generada por el programa.</p>
+
+<p>Aquí el objetivo ya no es solo revisar valores en memoria, sino comprobar si el archivo de salida realmente contiene lo esperado.</p>
+
+<h3 id="toc_57">Cosas que puedes verificar</h3>
+
+<ul>
+<li>que el archivo se cree</li>
+<li>que el encabezado se escriba</li>
+<li>que aparezcan los TF correctos</li>
+<li>que las columnas contengan los conteos esperados</li>
+<li>que el tipo (<code>activador</code>, <code>represor</code>, <code>dual</code>) se determine correctamente</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_58">23. Live coding 5: probar escritura básica</h2>
+
+<p>Ejemplo:</p>
+
+<div><pre><code class="language-python">from src.regulon_summary import write_summary
+
+
+def test_write_summary_creates_output_file(tmp_path):
+    regulon = {
+        &quot;AraC&quot;: {
+            &quot;genes&quot;: {&quot;araA&quot;, &quot;araB&quot;},
+            &quot;activados&quot;: {&quot;araA&quot;},
+            &quot;reprimidos&quot;: {&quot;araB&quot;}
+        }
+    }
+
+    output_file = tmp_path/&quot;summary.tsv&quot;
+
+    write_summary(regulon, str(output_file))
+
+    # Verificaciones
+    assert output_file.exists()
+
+    content = output_file.read_text()
+
+    assert &quot;AraC&quot; in content
+    assert &quot;araA&quot; in content
+    assert &quot;araB&quot; in content</code></pre></div>
+
+<h3 id="toc_59">Qué se puede mejorar después</h3>
+
+<p>Este test es una primera verificación.</p>
+
+<p>Más adelante puedes volverlo más estricto revisando:</p>
+
+<ul>
+<li>el encabezado exacto</li>
+<li>el número exacto de líneas</li>
+<li>el contenido exacto de la fila de <code>AraC</code></li>
+</ul>
+
+<p>Eso muestra algo importante: las pruebas también pueden mejorar con el tiempo.</p>
+
+<hr>
+
+<h2 id="toc_60">24. Cómo pensar buenos tests</h2>
+
+<p>A medida que escribas pruebas, conviene seguir algunas reglas sencillas.</p>
+
+<h3 id="toc_61">1. Mantén cada test enfocado</h3>
+
+<p>Un test debe tener una intención clara.</p>
+
+<p>Cuando alguien lo lea, debería poder responder rápidamente:</p>
+
+<blockquote>
+<p>“¿Qué comportamiento verifica este test?”</p>
+</blockquote>
+
+<h3 id="toc_62">2. Usa datos pequeños</h3>
+
+<p>Entre más pequeño sea el ejemplo, más fácil será entenderlo y detectar qué está fallando.</p>
+
+<h3 id="toc_63">3. Usa nombres claros</h3>
+
+<p>El nombre del test debe describir el comportamiento esperado.</p>
+
+<p>Por ejemplo:</p>
+
+<ul>
+<li><code>test_build_regulon_basico</code></li>
+<li><code>test_load_interactions_raises_error_if_file_does_not_exist</code></li>
+</ul>
+
+<h3 id="toc_64">4. Verifica cosas importantes</h3>
+
+<p>No llenes los tests de <code>assert</code> superficiales.</p>
+
+<p>Verifica lo que realmente importa del comportamiento.</p>
+
+<h3 id="toc_65">5. No inventes comportamiento nuevo en el test</h3>
+
+<p>El test debe corresponder a un requisito o a un caso de prueba existente.</p>
+
+<p>Si el test impone una regla que nunca fue definida, puede convertirse en una fuente de confusión.</p>
+
+<hr>
+
+<h2 id="toc_66">25. Uso de IA para generar tests</h2>
+
+<p>Una vez que ya refinaste tus casos de prueba, puedes usar IA para ayudarte a convertirlos en código <code>pytest</code>.</p>
+
+<p>Pero, otra vez, la regla es la misma:</p>
+
+<blockquote>
+<p>la IA ayuda a escribir;
+tú decides si el test tiene sentido.</p>
+</blockquote>
+
+<p>Puedes usar un prompt como este:</p>
+
+<div><pre><code class="language-prompt">Estoy trabajando en un proyecto en Python llamado regulon_summary.
+Ya tengo casos de prueba refinados con:
+- función a probar
+- entrada concreta
+- resultado esperado verificable
+
+Ayúdame a convertirlos en tests con pytest.
+
+Reglas:
+- no modifiques el programa
+- no inventes requisitos nuevos
+- usa assert o pytest.raises según corresponda
+- usa tmp_path si se requieren archivos temporales
+- mantén cada test corto y claro</code></pre></div>
+
+<h3 id="toc_67">Qué debes revisar después</h3>
+
+<ul>
+<li>si el test realmente corresponde al caso refinado</li>
+<li>si el <code>assert</code> verifica algo importante</li>
+<li>si la IA no agregó complejidad innecesaria</li>
+<li>si el test fallaría de verdad cuando el comportamiento es incorrecto</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_68">26. Qué hacer cuando un test falla</h2>
+
+<p>Cuando una prueba falla, no significa automáticamente que el programa esté mal.</p>
+
+<p>Tampoco significa automáticamente que el test esté bien.</p>
+
+<p>Cuando un test falla, debes preguntarte:</p>
+
+<ol>
+<li>¿el caso está bien planteado?</li>
+<li>¿la entrada corresponde a lo que quiero evaluar?</li>
+<li>¿el resultado esperado es correcto?</li>
+<li>¿el error está en el programa o en la prueba?</li>
+</ol>
+
+<p>Este punto es importante porque enseña una forma más madura de trabajar.</p>
+
+<p>No se trata solo de “hacer que la prueba pase”.</p>
+
+<p>Se trata de entender qué está diciendo la prueba sobre el comportamiento del software.</p>
+
+<hr>
+
+<h2 id="toc_69">27. Relación entre pruebas y diseño del programa</h2>
+
+<p>Las pruebas también te enseñan algo sobre la calidad del diseño.</p>
+
+<p>Cuando una función es difícil de probar, muchas veces eso revela que está haciendo demasiadas cosas al mismo tiempo.</p>
+
+<p>Por ejemplo, si toda la lógica del programa estuviera dentro de <code>main()</code>, probar sería mucho más complicado.</p>
+
+<p>En cambio, cuando el programa está dividido en funciones como:</p>
+
+<ul>
+<li><code>load_interactions</code></li>
+<li><code>build_regulon</code></li>
+<li><code>write_summary</code></li>
+</ul>
+
+<p>entonces las pruebas salen de manera más natural.</p>
+
+<p>Esto refuerza una idea muy importante del curso:</p>
+
+<blockquote>
+<p>el código bien organizado no solo se lee mejor;
+también se verifica mejor.</p>
+</blockquote>
+
+<hr>
+
+<h2 id="toc_70">28. Actividad integradora</h2>
+
+<h3 id="toc_71">Objetivo</h3>
+
+<p>Conectar documentación, razonamiento, pruebas y ejecución real.</p>
+
+<h3 id="toc_72">Parte A. Refinar casos</h3>
+
+<p>Toma 3 casos de <code>docs/casos_prueba.md</code> y conviértelos en casos verificables.</p>
+
+<h3 id="toc_73">Parte B. Escribir tests</h3>
+
+<p>Escribe al menos:</p>
+
+<ul>
+<li>1 test para <code>build_regulon</code></li>
+<li>1 test para <code>load_interactions</code></li>
+<li>1 test para <code>write_summary</code></li>
+</ul>
+
+<h3 id="toc_74">Parte C. Ejecutar pruebas</h3>
+
+<p>Corre:</p>
+
+<div><pre><code class="language-bash">uv run pytest -v</code></pre></div>
+
+<h3 id="toc_75">Parte D. Reflexión breve</h3>
+
+<p>Responde por escrito:</p>
+
+<ul>
+<li>¿qué fue lo más fácil de probar?</li>
+<li>¿qué fue más difícil?</li>
+<li>¿qué te dice eso sobre la estructura del programa?</li>
+</ul>
+
+<hr>
+
+<h2 id="toc_76">Uso de la IA</h2>
+
+<p>Se puede usar IA para generar los tests a partir de test_cases.md, pero primero deben revisar que cada caso esté bien definido y que el test corresponda realmente al comportamiento esperado.</p>
+
+<div><pre><code class="language-text">Voy a pegar el contenido de `docs/test_cases.md`.
+
+Primero, NO escribas tests.
+Primero conviértelo en casos verificables con esta estructura:
+
+- nombre del caso
+- función a probar
+- entrada concreta
+- resultado esperado verificable
+- tipo de prueba
+
+Después de que te confirme o revise esos casos, en un segundo paso generaremos los tests en pytest.
+
+No inventes requisitos nuevos.
+No cambies el significado de los casos originales.
+
+Contenido de `docs/test_cases.md`:
+[PEGA AQUÍ EL ARCHIVO]
+
+Con base en estos casos refinados, genera los tests en `pytest`.
+
+Reglas:
+- no modifiques el programa
+- usa assert o pytest.raises según corresponda
+- usa tmp_path si se necesita archivo temporal
+- nombra los tests de forma clara
+- agrupa por función
+- señala cualquier ambigüedad con un comentario breve</code></pre></div>
+
+<hr>
+
+<h2 id="toc_77">29. Resumen conceptual de la lección</h2>
+
+<p>En esta lección no aprendiste solo a usar <code>pytest</code>.</p>
+
+<p>Aprendiste algo más importante:</p>
+
+<ul>
+<li>que los casos de prueba primero se piensan</li>
+<li>que después pueden refinarse</li>
+<li>que luego pueden convertirse en pruebas ejecutables</li>
+<li>que también se prueban errores, no solo casos exitosos</li>
+<li>que las pruebas ayudan a modificar el programa con más seguridad</li>
+</ul>
+
+<p>La secuencia completa queda así:</p>
+
+<div><pre><code class="language-text">Requisitos → Casos de prueba → Implementación → Manejo de errores → Pruebas automatizadas</code></pre></div>
+
+<p>Esto muestra que el testing no es un tema aislado. Es una continuación natural de todo lo que ya venías haciendo.</p>
+
+<hr>
+
+<h2 id="toc_78">30. Mensaje final</h2>
+
+<p>Las pruebas no son un lujo ni una tarea extra puesta al final del curso.</p>
+
+<p>Son una herramienta para pensar mejor el programa.</p>
+
+<p>Un programa puede parecer correcto cuando lo ejecutas una vez.</p>
+
+<p>Pero cuando el proyecto crece, cuando haces cambios, cuando otras personas leen tu código o cuando quieres mejorarlo sin romperlo, las pruebas se vuelven parte del trabajo normal de desarrollo.</p>
+
+<p>En otras palabras:</p>
+
+<blockquote>
+<p>un programa sin pruebas puede funcionar hoy;
+un programa con pruebas puede evolucionar mañana.</p>
+</blockquote>
+
+<hr>
+
+<h2 id="toc_79">31. Siguiente paso recomendado</h2>
+
+<p>Después de esta lección, el paso natural es construir una práctica donde:</p>
+
+<ul>
+<li>actualices <code>docs/casos_prueba.md</code></li>
+<li>crees la carpeta <code>tests/</code></li>
+<li>escribas tus primeros tests reales</li>
+<li>ejecutes <code>pytest</code></li>
+<li>revises y corrijas los fallos encontrados</li>
+</ul>
+
+<p>Con eso, <code>regulon_summary</code> deja de ser solo un script funcional y empieza a convertirse en un proyecto de software mucho más sólido.</p>
+
+
+
+
+</body>
+
+</html>
