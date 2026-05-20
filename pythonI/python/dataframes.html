@@ -16,10 +16,10 @@ class: center, middle, inverse, title-slide
 # Python II y GitHub
 ]
 .institute[
-### Licenciatura en Ciencias Genómicas,UNAM
+### Licenciatura en Ciencias Genómicas, UNAM
 ]
 .date[
-### First version: yyy-mm-dd; Last update: 2025-05-07
+### First version: 2025-05-07; Last update: 2026-05-19
 ]
 
 ---
@@ -43,21 +43,21 @@ pre {
 
 ## 🎯 Objetivo
 
-Comprender y aplicar la biblioteca pandas de Python para el análisis de datos estructurados mediante el uso de DataFrames, permitiendo la exploración, limpieza, transformación y análisis de archivos comunes en bioinformática, como GFF3, TSV y CSV.
+Comprender y aplicar la biblioteca `pandas` de Python para el análisis de datos estructurados mediante el uso de DataFrames, permitiendo la exploración, limpieza, transformación y análisis de archivos comunes en bioinformática, como GFF3, TSV y CSV.
 
 ---
 # Introducción a Pandas y los DataFrames
 
-# 🐼 ¿Qué es pandas?
+# 🐼 ¿Qué es `pandas`?
 
 **`pandas`** es una **biblioteca de Python** especializada en el manejo y análisis de datos **estructurados** (es decir, organizados en filas y columnas, como tablas).
 
 Fue diseñada para ser **rápida, flexible y expresiva**, y permite trabajar fácilmente con datos tabulares, temporales o jerárquicos.
 
-&gt; El nombre viene de "**Panel Data**", un término usado en estadística y econometría.
+&gt; El nombre viene de "**_Panel Data_**", un término usado en estadística y econometría.
 
 ---
-## ✅ ¿Por qué usar pandas?
+## ✅ ¿Por qué usar `pandas`?
 
 -   Permite **leer, escribir, filtrar, agrupar, transformar y visualizar** datos de forma eficiente.
 -   Ofrece estructuras potentes como:
@@ -90,6 +90,8 @@ import pandas as pd
 s = pd.Series([10, 20, 30], index=['a', 'b', 'c'])
 print(s)
 ```
+Es mutable en sus valores (pueden cambiarse como `s.loc['a'] = 5`), pero su tamaño es inmutable.  
+
 ---
 ### 🔸 `DataFrame`
 
@@ -105,6 +107,8 @@ data = {
 df = pd.DataFrame(data)
 print(df)
 ```
+
+Es mutable tanto en sus valores como en su tamaño.  
 
 ---
 ### 🐼 **Dato curioso sobre pandas**
@@ -861,61 +865,6 @@ print(df_indexado.head())
 
 ---
 
----
-
-## 🧪 Ejercicios adicionales: `.apply()` + `lambda`
-
----
-### 🧬 Ejercicio 1: Clasificación de expresión génica
-
-**Contexto:**  
-En tu laboratorio, se necesita categorizar los niveles de expresión génica en `'baja'`, `'media'` o `'alta'`, usando los siguientes criterios:
-
--   `alta` si la expresión es mayor a 40
-    
--   `media` si es mayor a 15 pero menor o igual a 40
-    
--   `baja` si es 15 o menos
-    
-
-**Instrucción:**  
-Agrega una nueva columna llamada `"NivelExp"` con esta clasificación.
-
-📌 Pista: usa `.apply()` con un `lambda` sobre la columna `Expresión`.
-
-
----
-
-### 🧠 Ejercicio 2: Clasificación funcional
-
-**Contexto:**  
-Necesitas clasificar los genes de acuerdo con su función:
-
--   Si la función contiene la palabra `'enzima'`, clasifícalo como `'Metabólico'`.
-    
--   En caso contrario, como `'Otro'`.
-    
-
-**Instrucción:**  
-Crea una nueva columna `"Tipo"` que contenga esta clasificación.
-
-📌 Pista: usa `.lower()` para que el filtro funcione con mayúsculas y minúsculas.
-
----
-### 🧬 Ejercicio 3: Normalización de identificadores
-
-**Contexto:**  
-Para integrar tus datos con otra base, todos los identificadores de gen deben comenzar con el prefijo `"eco_"`.
-
-**Instrucción:**  
-Crea una nueva columna `"GeneID_modificado"` que contenga el ID del gen con el prefijo añadido.
-
-📌 Ejemplo: `b0001` → `eco_b0001`
-
-
-
----
-
 ## 📚 Métodos útiles en bioinformática
 
 Vamos a trabajar con el archivo `genes.csv` que contiene información como:
@@ -1058,72 +1007,14 @@ print(agrupado)
 ```
 📌 **Comentario:** Se obtienen combinaciones únicas de tipo y tamaño funcional.
 
-
----
-
-## 🧪 Ejercicios: Agrupación con `groupby()`
-
----
-
-### 🧩 Ejercicio 1 (básico): Conteo de genes por función
-
-**Objetivo:**  
-Determinar cuántos genes hay de cada tipo funcional (por ejemplo: `'enzima'`, `'regulador'`, etc.).
-
-**Instrucción:**  
-Usa `groupby()` para agrupar el DataFrame por la columna `"Función"` y contar cuántos genes hay en cada grupo. Muestra el resultado como una serie con la función y el conteo.
-
-📌 **Tip:** Usa `.count()` o `.size()`.
-
----
-
-### 🧩 Ejercicio 2 (intermedio): Promedio de longitud por función
-
-**Objetivo:**  
-Comparar el tamaño promedio de los genes según su función.
-
-**Instrucción:**  
-Agrupa los datos por `"Función"` y calcula la **longitud promedio** usando la columna `"Longitud"`. Muestra los resultados ordenados de mayor a menor.
-
-📌 **Tip:** Usa `.mean()` y luego `.sort_values()`.
-
-
----
-### 🧩 Ejercicio 3 (intermedio-avanzado): Estadísticas múltiples de expresión
-
-**Objetivo:**  
-Obtener un resumen detallado del nivel de expresión por tipo funcional.
-
-**Instrucción:**  
-Agrupa los datos por `"Función"` y calcula:
-
--   la media (`mean`)
-    
--   el valor máximo (`max`)
-    
--   el valor mínimo (`min`)
-    
--   el número de genes (`count`)
-    
-
-Presenta el resultado como un `DataFrame` con estas 4 columnas para cada grupo.
-
-📌 **Tip:** Usa `.agg()` pasando una lista de funciones estadísticas.
-
----
-
-
-
-
-
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script src="macros.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
