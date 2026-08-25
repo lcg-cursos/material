@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Python II y GitHub
 ### Licenciatura en Ciencias Genómicas, UNAM
-### First version: 2022-07-08; Last update: 2025-09-09
+### First version: 2022-07-08; Last update: 2026-08-25
 
 ---
 
@@ -38,147 +38,445 @@ pre {
 
 ## Contenido
 
-1. [Especificar versiones en Git con tag](./leccion1/1-Etiquetas.html)
 
-2. [Trabajar con ramas en Git: git branch](./leccion2/2-Ramas.html)  
+1. Buenas prácticas para el desarrollo de software colaborativo  
 
-3. [Manejo de issues en GitHub](3-issues.html)
+2. [Manejo de issues en GitHub](./leccion3-issues/3-issues.html)  
 
-4. [Gestión de un proyecto con GitHub](./leccion4/4-project.html) 
+3. [Gestión de un proyecto con GitHub](../leccion4-project/4-project.html)  
+
+4. [Especificar versiones en Git con tag](./leccion1-etiquetas/1-Etiquetas.html)  
+
+5. [Trabajar con ramas en Git: git branch](./leccion2-ramas/2-Ramas.html)  
 
 
 
 ---
 
+# Del entregable a la actividad
+
+Ya sabemos qué debe contener la primera entrega:
+
+- Reporte inicial del proyecto.
+- README.
+- Estructura del repositorio.
+- `.gitignore`.
+- Licencia.
+
+Ahora necesitamos responder:
+
+### ¿Qué actividades debemos realizar?  
+### ¿Quién será responsable de cada actividad?  
+### ¿Cómo daremos seguimiento al trabajo del pryecto?
+
+En GitHub utilizaremos **issues**.
+
+---
 
 # "Issues" en GitHub
 
 ## Objetivo 
 
-Al finalizar la lección, podremos crear "issues" y dar seguimiento al mantenimiento del software, a reportes de errores, ideas y propuestas de cambios en nuestros repositorios GitHub, así como planificación de actividades. 
+Al finalizar, podrán:
 
+- Convertir un entregable en actividades concretas.
+- Redactar issues claros y verificables.
+- Asignar responsabilidades de común acuerdo.
+- Utilizar etiquetas para clasificar el trabajo.
+- Comentar y dar seguimiento a las actividades del equipo.
 
+&lt;img src="img/sample_issue.png" width="450px" style="display: block; margin: auto;" /&gt;
 
-&lt;img src="img/sample_issue.png" width="500px" style="display: block; margin: auto;" /&gt;
+---
+## ¿Qué es un issue?
+
+Un issue es una unidad de trabajo (actividad) registrada en un repositorio de GitHub.
+
+Permite:
+
+- Describir una tarea, pregunta, error o mejora.
+- Conservar el contexto/histórico y las decisiones.
+- Asignar una o más personas responsables.
+- Establecer criterios para considerar terminado el trabajo.
+- Comentar avances, dudas o "bloqueos".
+
+&gt; Un issue no significa únicamente “hay un problema”, también puede representar: **tareas, propuestas, preguntas o funcionalidades**.
 
 
 ---
-## Introducción
+## ¿Para qué los utilizaremos ahora?
 
+En esta etapa inicial, los issues ayudarán a organizar:
 
-Ahora que estamos desarrollando nuestro proyecto en conjunto y estamos colaborando en un repositorio necesitaremos **organizar el trabajo** de desarrollo o que simplemente nosotros necesitemos organizarnos.  
+### Planeación
 
-Existen tareas importantes por realizar, como:  
+- Delimitar el problema.
+- Definir preguntas de investigación.
+- Identificar datos y restricciones.
+- Establecer requisitos iniciales.
 
-- Dar mantenimiento nuestros programas y documentación     
-- Resolver errores  
-- Crear nuevas funcionalidades  
-- Realizar actualizaciones  
+### Documentación
 
-Así como dar seguimiento a la resolución de aquellos _pull requests_ que hayan sido enviados al repositorio.  
+- Completar el reporte del proyecto.
+- Preparar el README.
+- Documentar la estructura del repositorio.
+- Seleccionar la licencia.
+- Configurar `.gitignore`.
 
-Los __issues__ en GitHub ayudan a gestionar aquellas actividades que permitan tener el _control y comunicación entre nosotros mismos, así como con el equipo de trabajo y con los usuarios del repositorio_.
+Más adelante también permitirán registrar errores, pruebas, nuevas funcionalidades y mejoras.  
 
----
-## Issues
-
-.full-width[.content-box-red[Un _issue_ te permiten rastrear el trabajo en GitHub.]]
-
-Los _issues_ representan una herramienta de seguimiento que está integrada con los repositorios de GitHub.  
-
-Un issue es una herramienta que proporciona GitHub para registrar, dar **seguimiento y discutir tareas, errores o propuestas de mejora** dentro de un proyecto. Funciona como una especie de **“ticket” o “nota”** que se abre en el repositorio para organizar el trabajo y facilitar la colaboración..    
 
 &lt;img src="img/issues.png" width="350px" style="display: block; margin: auto;" /&gt;
 
 
 ---
+## Del entregable a los issues
 
-## Issues
+| Entregable | Posibles issues |
+|:--|:--|
+| Reporte | Redactar el contexto y planteamiento del problema |
+| Reporte | Definir justificación, objetivo y preguntas de investigación |
+| Reporte | Documentar datos, alcance y limitaciones |
+| README | Redactar descripción|
+| README | Documentar estructura e integrantes |
+| Repositorio | Adaptar directorios y configurar `.gitignore` |
+| Licencia | Evaluar y seleccionar una licencia |
 
-Los issues incluyen:  
+&gt; Un entregable puede requerir varios issues. 
 
-- Título  
-- Descripción  
-- Asignación  
-- Etiquetas  
-- `@`menciones  
+“Completar todo el reporte” sería una actividad demasiado grande.  
+Conviene dividirla en contribuciones pequeñas que puedan asignarse y revisarse.  
+
+---
+## Un buen issue responde cinco preguntas
+
+1. **¿Qué se necesita realizar?**
+2. **¿Por qué es necesario?**
+3. **¿Qué resultado debe producir?**
+4. **¿Cómo comprobaremos que está terminado?**
+5. **¿Quién será responsable?**
+
+**Componentes**
+
+- Título.
+- Descripción:
+  - Contexto o descripción.
+  - Resultado esperado.
+  - Criterios de aceptación.
+- Responsable.
+- Etiquetas.
+- Comentarios y menciones @.
+
+&lt;img src="img/estruc-issues.png" width="400px" style="display: block; margin: auto;" /&gt;
+
+
+---
+## El título debe describir una acción
+
+### Títulos poco claros
+
+```text
+README
+Reporte
+Datos
+Licencia
+Cambios
+```
+
+### Títulos más claros
+
+```text
+- Redactar la descripción inicial del proyecto en el README
+- Definir las preguntas de investigación del proyecto
+- Documentar las fuentes y formatos de los datos
+- Evaluar y seleccionar la licencia del repositorio
+- Configurar .gitignore para excluir datos y archivos temporales
+```
+
+&gt; El título debe permitir reconocer el trabajo sin abrir el issue.
+
+---
+
+## Ejemplo 1 — Reporte del proyecto
+
+### Título: Definir las preguntas de investigación
+
+**Contexto**
+
+El reporte necesita preguntas que orienten los análisis y permitan delimitar
+las actividades del proyecto.
+
+**Resultado esperado**
+
+Sección “Preguntas de investigación” actualizada en
+`docs/reporte-proyecto.md`.
+
+**Criterios de aceptación**
+
+- [ ] Se incluyen de una a tres preguntas.
+- [ ] Se relacionan con el problema y el objetivo.
+- [ ] Pueden responderse con los datos previstos.
+- [ ] Se indica qué evidencia necesitará cada pregunta.
+- [ ] El equipo revisó y acordó la redacción.
+
+**Responsable:** @integrante del equipo  
+**Etiqueta:** `documentation` o `planning`
+
+---
+## Ejemplo 2 — README
+
+###  Título: Redactar la presentación inicial del proyecto
+
+**Contexto**
+
+Una persona que visite el repositorio debe comprender rápidamente su propósito
+y localizar el reporte.
+
+**Resultado esperado**
+
+README actualizado con nombre, descripción breve, integrantes y enlace
+al reporte.
+
+**Criterios de aceptación**
+
+- [ ] La descripción explica el propósito en una o dos frases.
+- [ ] Aparecen los tres integrantes.
+- [ ] El enlace al reporte funciona.
+- [ ] No se repiten los antecedentes ni la justificación.
+
+**Responsable:** integrante del equipo  
+**Etiqueta:** `documentation`
+
+---
+
+## Ejemplo 3 — Organización del repositorio
+
+### Título:  Configurar `.gitignore` para el proyecto
+
+**Contexto**
+
+El repositorio no debe almacenar credenciales, archivos temporales ni datos
+grandes que puedan obtenerse nuevamente.
+
+**Resultado esperado**
+
+Archivo `.gitignore` adaptado a las herramientas y datos del proyecto.
+
+**Criterios de aceptación**
+
+- [ ] Excluye archivos temporales del sistema o editor.
+- [ ] Excluye credenciales y archivos de configuración sensibles.
+- [ ] Excluye los datos grandes que no se controlarán con Git.
+- [ ] El README explica cómo obtener los datos excluidos.
+
+**Responsable:** integrante del equipo  
+**Etiqueta:** `repository` o `documentation`
+
+---
+
+## Plantilla para los issues del equipo
+
+```markdown
+## Contexto
+
+¿Por qué es necesaria esta actividad?
+
+## Resultado esperado
+
+¿Qué archivo, decisión o producto debe generar?
+
+## Criterios de aceptación
+
+- [ ] Criterio verificable 1
+- [ ] Criterio verificable 2
+
+
+```
+
+** Al crear el issue, agreguen **  
+
+- Responsable.
+- Etiqueta.
+- Personas que deben participar en la revisión.
+
+---
+## ¿Cómo saber si un issue es demasiado grande?
+
+Probablemente debe dividirse si:
+
+- Abarca varias secciones o entregables
+- Participarán personas distintas para solucionarlo
+- Sus criterios de aceptación son demasiados.
+- El equipo no puede estimar qué significa terminarlo.
+
+### Ejemplo
+
+**Demasiado grande:** completar el reporte del proycto.
+
+**Mejor división:**
+
+- Redactar el planteamiento del problema.
+- Definir objetivos y preguntas.
+- Documentar fuentes de datos.
+- Delimitar alcance y riesgos.
+
+---
+
+## Etiquetas para comenzar
+
+| Etiqueta | Uso |
+|:--|:--|
+| `planning` | Planeación y delimitación |
+| `documentation` | README, reportes, manuales, guías, etc. |
+| `data` | Fuentes, formatos y descarga |
+| `repository` | Estructura y configuración |
+| `question` | Información que falta aclarar |
+| `enhancement` | Mejora o funcionalidad futura |
+| `bug` | Error detectado |
+
+&gt; Utilicen sólo las etiquetas que ayuden a clasificar su trabajo.
+
+GitHub incluye algunas etiquetas predeterminadas, como bug, documentation,
+enhancement y question. El equipo puede crear otras que le san d utilidad.  
+
+---
+## Crear un issue en GitHub
+
+1. Ve  GitHub (web) y localiza el rpositorio del equipo.  
+2. Abran la pestaña **Issues** del repositorio.
+2. Seleccionen **New issue**.
+3. Escriban un título orientado a una acción.
+4. Completen la descripción.
+5. Agreguen criterios de aceptación.
+6. Seleccionen responsable y etiqueta.
+7. Elijan **Create**.
+
 
 &lt;img src="img/estruc-issues.png" width="700px" style="display: block; margin: auto;" /&gt;
 
----
-
-## Uso de los issues
-
-**Escenario 1**  
- 
-Haciedo uso del software (programa en particular, librería, etc.)  
-
-Por ejemplo:  
-
-- Enviar un mensaje al desarrollador para solicitar ayuda en la resolución de un error  
-- Solicitar ayuda en la configuración del software  
-- Preguntar sobre el formato de datos de entrada del software  
-
-**Escenario 2**  
-
-Contribuyendo a la mejora del software por medio de pull request
-
-Por ejemplo:  
-
-- Enviar correcciones a la documentación del software  
-- Proponer mejoras al software  
-- Corrección de errores  
 
 ---
 
+## EJERCICIO EN CLASE
+
+### Paso 1. Revisen la tarea
+
+Identifiquen las actividades necesarias para completar:
+
+- Reporte inicial del proyecto.
+- README.
+- Estructura del repositorio.
+- `.gitignore`.
+- Licencia.
+
+**Tiempo estimado: 5 minutos**
+
+### Paso 2. Creen los issues
+
+Cada integrante crea **dos issues diferentes**:
+
+- Uno relacionado con el reporte del proyecto, el README o el repositorio.
+
+**Resultado por equipo: al menos seis issues.**
 
 
-## Creando issues  
-
-
-&amp;nbsp;&amp;nbsp;- Título  
-&amp;nbsp;&amp;nbsp;- Descripción  
-&amp;nbsp;&amp;nbsp;- Asignación   
-&amp;nbsp;&amp;nbsp;- `@`menciones  
-&amp;nbsp;&amp;nbsp;- Etiquetas 
-
-&lt;img src="img/issues-new.png" width="700px" style="display: block; margin: auto;" /&gt;
-
-
----
-## Práctica
-
-Crea un issue asignando a tu compañero o compañera la actualización de algún documento del repositorio: reporte del proyecto, readme, licencia, etc.  
-
----
-
-## Tablero de issues
-
-Una vez que hemos creado un issue podemos ver en la sección Issues:  
-- Filtros  
-- Etiquetas  
-
-&lt;img src="img/tablero-issues.png" width="700px" style="display: block; margin: auto;" /&gt;
+**Tiempo estimado: 10 minutos**
 
 
 ---
+## EJERCICIO EN CLASE — Asignar y revisar
+
+### Paso 3. Acuerden responsabilidades
+
+Para cada issue:
+
+- Seleccionen una persona responsable.
+- Agreguen una etiqueta.
+- Identifiquen dependencias.
+- **No se asigne toda la documentación a una sola persona.**
+
+Cada integrante debe quedar como responsable de al menos un issue.
+
+**Tiempo estimado: 4 minutos**
+
+---
+### Paso 4. Revisen los issues
+
+Cada persona revisa un issue creado por otra y deja un comentario:
+
+- ¿Se entiende sin explicación oral?
+- ¿Tiene un resultado concreto?
+- ¿Debe dividirse o depende de otro issue?
+
+&gt; Todavía no cierren los issues: representan trabajo pendiente.
 
 
-## Conclusión
+&lt;img src="img/issues-new.png" width="580px" style="display: block; margin: auto;" /&gt;
+**Tiempo estimado: 6 minutos**
 
 
-_GitHub issues_ permite dar seguimiento de "problemas" y dicha funcionalidad está disponible en todos los repositorios de GitHub.  
+---
 
-A tráves de los _issues_ podemos "discutir" con el mundo las cosas que construimos. 
+## Producto del ejercicio/tarea en clase
 
-Los _issues_ en GitHub son usados comúnmente para reportar errores y solicitud de nuevas funcionalidades.  
+Antes de pasar a GitHub Projects, el equipo debe tener:
+
+- [ ] Al menos seis issues abiertos.
+- [ ] Dos issues creados por cada integrante.
+- [ ] Títulos que reflejen una acción.
+- [ ] Contexto y resultado esperado.
+- [ ] Criterios de aceptación.
+- [ ] Responsable y etiqueta.
+- [ ] Al menos un comentario de revisión por integrante.
+
+### Comprobación
+
+Cada integrante debe poder responder:
+
+&gt; ¿Qué issue atenderé durante la tarea y cómo sabré que lo terminé?
 
 
-Con los _issues_ podemos organizar aún más el trabajo con etiquetas, y realizar un seguimiento las tareas.  
 
+---
 
-_¡Usa los issues para comunicarte y controlar el trabajo!_
+## Lo que ocurrirá durante la tarea
 
+Cada integrante deberá:
+
+1. Atender los issues que tenga asignados.
+2. Comunicar dudas o bloqueos mediante comentarios.
+3. Comprobar los criterios de aceptación.
+4. Actualizar el reporte, README o repositorio.
+5. Dejar evidencia de su contribución en Git.
+
+El issue se cerrará cuando:
+
+- El resultado esté incorporado al repositorio (si así se requiere).
+- Se cumplan los criterios de aceptación.
+- El equipo haya revisado el trabajo.
+
+&gt; La tarea se entrega mediante el repositorio, no enviando documentos separados.
+
+---
+## Conclusiones
+
+Los **issues de GitHub** permiten registrar, organizar y dar seguimiento a las actividades de un proyecto.
+
+Por medio de los issues podemos:
+
+- Describir claramente una tarea, pregunta, error o propuesta de mejora.
+- Definir el resultado esperado y los criterios para considerar terminado el trabajo.
+- Asignar responsabilidades entre las personas del equipo.
+- Clasificar las actividades mediante etiquetas.
+- Comunicar avances, dudas, decisiones o bloqueos.
+- Conservar evidencia del trabajo realizado.
+
+&gt; Un issue bien redactado permite que cualquier integrante comprenda qué debe hacerse, por qué es necesario y cómo comprobar que fue completado.
+
+.center[
+### Los issues convierten las actividades del proyecto en trabajo organizado, asignable y verificable.
+]
+--
 
 
 
