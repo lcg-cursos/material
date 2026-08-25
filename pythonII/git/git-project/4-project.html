@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Python II y GitHub
 ### Licenciatura en Ciencias Genómicas, UNAM
-### First version: 2022-07-08; Last update: 2025-09-09
+### First version: 2022-07-08; Last update: 2026-08-25
 
 ---
 
@@ -37,121 +37,238 @@ pre {
 
 ## Contenido
 
-1. [Especificar versiones en Git con tag](./leccion1/1-Etiquetas.html)
+1. Buenas prácticas para el desarrollo de software colaborativo  
 
-2. [Trabajar con ramas en Git: git branch](./leccion2/2-Ramas.html) 
+2. [Manejo de issues en GitHub](./leccion3-issues/3-issues.html)  
 
-3. [Manejo de issues en GitHub](./leccion3/3-issues.html)  
+3. [Gestión de un proyecto con GitHub](../leccion4-project/4-project.html)  
 
-4. [Gestión de un proyecto con GitHub](4-project.html)
+4. [Especificar versiones en Git con tag](./leccion1-etiquetas/1-Etiquetas.html)  
 
----
+5. [Trabajar con ramas en Git: git branch](./leccion2-ramas/2-Ramas.html)  
 
-
-# Gestión de un proyecto con GitHub
-
-## Objetivo 
-
-Al finalizar la lección, dispondremos de un espacio integrado para la gestión de issues y pull requests; medio por el cual podremos priorizar y coordinar nuestro trabajo y el desarrollo del proyecto en general. Conoceremos cómo crear un proyecto y tareas en GitHub, así como vincularlo a un repositorio.
-
-
-&lt;img src="img/board.png" width="450px" style="display: block; margin: auto;" /&gt;
 
 
 ---
-## Introducción
+# De los issues al seguimiento del proyecto
 
+Cada equipo ya tiene:
 
-Pensemos en que queremos dar inicio a un proyecto. Sin importar el tipo que sea, lo principal es comenzar identificando las actividades que debemos realizar, de inicio no lograremos identificar todas las tareas, pero sí al menos las generales.
+- Actividades identificadas.
+- Issues con resultados esperados.
+- Criterios de aceptación.
+- Personas responsables.
+- Etiquetas para clasificar el trabajo.
 
-En el caso de un proyecto donde estamos desarrollando código pasa exactamente lo mismo; tenemos que organizar nuestras actividades, y en conjunto las del equipo de trabajo y colaboradores.
+Ahora necesitamos observar el trabajo como un conjunto:
 
+- ¿Qué está pendiente?  
+- ¿Qué se está realizando?  
+- ¿Qué necesita revisión?  
+- ¿Qué ya fue terminado?
+
+Para responder a estas preguntas utilizaremos **GitHub Projects**.
+
+???
+
+Esta diapositiva enlaza directamente con el ejercicio anterior. Los estudiantes
+no crearán actividades nuevas: organizarán los issues que ya redactaron.
+---
+
+# Gestión del trabajo con GitHub Projects
+
+## Objetivo
+
+Al finalizar, cada equipo contará con un espacio compartido para:
+
+- Reunir los issues de su proyecto.
+- Visualizar el estado del trabajo.
+- Priorizar actividades.
+- Consultar responsabilidades.
+- Identificar avances y bloqueos.
+- Dar seguimiento a la tarea del equipo.
+
+&lt;img src="img/board.png" width="420px" style="display: block; margin: auto;" /&gt;
+
+---
+## Issue y Project no son lo mismo
+
+| Issue | GitHub Project |
+|:--|:--|
+| Describe una actividad | Reúne las actividades |
+| Explica qué debe realizarse | Muestra el avance general |
+| Tiene responsable y criterios | Permite comparar prioridades y estados |
+| Conserva comentarios y decisiones | Ofrece diferentes vistas del trabajo |
+| Se abre y se cierra | Evoluciona durante todo el proyecto |
+  
+  
+
+&gt; Los issues son las unidades de trabajo; el Project es la vista que permite coordinarlas/ordenarlas.
+
+---
+## ¿Qué es GitHub Projects?
+
+Es una herramienta de planificación y seguimiento que integra:
+
+- Issues.
+- Pull Requests.
+- Responsables.
+- Etiquetas.
+- Estados.
+- Prioridades.
+- Fechas y otros campos personalizados.
+
+&lt;img src="img/projects_board.png" width="760px" style="display: block; margin: auto;" /&gt;
+
+---
+## El tablero representa el estado del trabajo
+
+| Estado | Significado |
+|:--|:--|
+| **Backlog** | Actividad identificada que se pretende realizar - IDEAS |
+| **Por hacer** | Actividad seleccionada para realizarse |
+| **En progreso** | Una persona está trabajando en ella |
+| **En revisión** | El resultado necesita ser comprobado |
+| **Terminado** | Cumple los criterios y fue incorporado al repositorio |
+
+Cada issue se mueve conforme avanza el trabajo:
+
+.center[
+### Por hacer → En progreso → En revisión → Terminado
+]
+
+&gt; El estado debe reflejar la situación real de la actividad.
 
 &lt;img src="img/tablero-kanban.png" width="450px" style="display: block; margin: auto;" /&gt;
 
-
----
-## "Project" en GitHub
-
-Un _proyecto_ en GitHub es tablero u hoja de cálculo personalizable que integra los issues y solicitudes de incorporación de cambios (pull requests).   
-
-En un proyecto se puede personalizar el diseño filtrando, clasificando y agrupando los issues.
-
-Los proyectos se componen de issues, pull requests y notas que se clasifican como tarjetas en columnas de su elección. Puedes arrastrar y soltar para reordenar las tarjetas dentro de una columna, mover tarjetas de columna a columna y cambiar el orden de las columnas.
-
-
-&lt;img src="img/projects_board.png" width="850px" style="display: block; margin: auto;" /&gt;
-
-
 ---
 
-## Creación de un "Project" en GitHub
+## EJERCICIO EN CLASE
 
-NOTA: Solo un integrante del equipo  
+# Crear el Project del equipo
 
-1. Ir a la sección "Projects" y hacer clic en New project  
+**Tiempo total: 14 minutos**
 
---
+### Paso 1. Crear el Project — 3 minutos
 
-2.  Seleccionar una plantilla (board)    
+La persona propietaria del repositorio:
 
---
+1. Abre su perfil en GitHub.
+2. Ingresa a **Projects**.
+3. Selecciona **New project**.
+4. Elige la plantilla **Board**.
+5. Asigna un nombre descriptivo.
+6. Habilita **Import items from repository** selecciona el repositorio del equipo
+7. **Create project**
 
-3. Asignar un nombre al proyecto    
-
---
-
-4. Dar clic en el ícono de candado a un lado del nombre del proyecto. Ir a la sección Manage access. Añadir al resto del equipo.
-
---
-
-5. TODOS: Observen que el proyecto está compuesto por 3 carriles "Todo", "In progress" y "Done". Cada uno cambie el nombre de cada carril por la fases generales del proyecto: Planificación, Desarrollo y Cierre      
-
---
-
-6. Agreguen las diferentes actividades que ya tienen identificadas por hacer, por ejemplo:
-- Selección de una licencia para el repositorio  
-- Realización del reporte del proyecto 
-- Actualización del README  
-- Selección de datos par trabajar  
-- Descarga de datos para el proyecto 
-- Filtrado de datos   
-- ¿Qué más?
-
-Recuerden poner el el carril correspondiente cada actividad y etiquetar a las personas involucradas/encargadas.  
+&gt; Sólo una persona crea el Project.
 
 
 ---
-Para ligar el proyecto al repositorio, solo un integrante del equipo:
+## EJERCICIO — Acceso y vinculación
 
-1. Localiza el repositorio en GitHub  
-2. Ve a la sección "Projects"  
-3. Da clic en la opción "Link a project"
-4. Selecciona tu repositorio y da clic en "Submit" 
-5. TODOS: Verifiquen que en la sección "Projects" de su repositorio vean el proyecto.  
+### Paso 2. Agregar al equipo — 3 minutos
 
----
+La persona administradora:
+
+1. Abre el menú del Project (opción ... en la esquina superior derecha).
+2. Ingresa a **Settings**.
+3. Selecciona **Manage access**.
+4. Invita a las otras dos personas de tu equipo.
+5. Otorga permiso de escritura - Role: Write.
 
 
-## "Project" personalización
+### Comprobación
 
-- Seleccionar una vista diferente (table, board)  
-
-- Agregar/borrar items y carriles  
-
-- Cambiar el nombre a los carriles  
-
-- Mover las tareas entre los carriles conforme se vayan realizando  
+Las tres personas deben poder abrir y editar el Project.
 
 ---
 
-## Conclusión
+## EJERCICIO — Configurar el flujo
 
-Por medio de los **Projects** en GitHub podemos planificar las tareas de realizaremos en nuestro proyecto, así como priorizar aquellas actividades que deben ser resueltas.
+### Paso 3. Revisar los estados — 4 minutos
 
-_¡Un "project" en GitHub es una excelente forma de organizar y controlar todo el trabajo en nuestro repositorio!_
+Configuren el tablero con los carriles (estados):
+
+&gt; Usa la opción **+**, "add a new column to the board".  
+
+```text
+Backlog
+Por hacer
+En progreso
+En revisión
+Terminado
+```
+
+
+Después:
+
+1. Coloquen los issues previamente creados en **Por hacer**.
+2. Mantengan en **Backlog** las actividades futuras (opcional por ahora).
+3. Verifiquen que cada integrante tenga trabajo asignado.
+4. Identifiquen si alguna actividad depende de otra.
+
+&gt; Al comenzar una actividad, su responsable deberá moverla a “En progreso”.
+
 ---
 
+## Comprobación del ejercicio
+
+Antes de finalizar, el equipo debe tener:
+
+- [ ] Un solo Project compartido.
+- [ ] Repositorio y Project vinculados.
+- [ ] Acceso para las tres personas.
+- [ ] Al menos seis issues incorporados.
+- [ ] Cinco estados configurados.
+- [ ] Issues de la tarea en “Por hacer”.
+- [ ] Al menos una actividad asignada a cada integrante.
+
+### Pregunta para cada integrante
+
+&gt; ¿Qué issue atenderé y cómo cambiará su estado durante la tarea?
+
+---
+
+## Durante la tarea
+
+Cada integrante deberá actualizar el Project:
+
+| Cuando ocurra esto... | Cambien el estado a... |
+|:--|:--|
+| La actividad fue seleccionada | Por hacer |
+| Comenzaron a trabajar | En progreso |
+| El resultado está listo para comprobarse | En revisión |
+| Cumple los criterios y se integró | Terminado |
+| Todavía no se realizará | Backlog |
+
+También deben utilizar los comentarios del issue para registrar:
+
+- Dudas.
+- Decisiones.
+- Inconvenientes.
+- Avances relevantes.
+
+&gt; El tablero debe mostrar el estado real del equipo, no actualizarse únicamente antes de la entrega.
+
+---
+## Conclusiones
+
+GitHub Projects permite transformar una lista de issues en una visión compartida del trabajo.
+
+Por medio del Project, el equipo puede:
+
+- Visualizar las actividades pendientes.
+- Priorizar el trabajo.
+- Consultar responsables.
+- Identificar tareas en progreso o con pendientes.
+- Saber qué necesita revisión.
+- Dar seguimiento al avance general.
+
+.center[
+### Los issues explican qué debe hacerse.  
+### GitHub Projects muestra cómo avanza el equipo.
+]
 ---
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
