@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Python II y GitHub
 ### Licenciatura en Ciencias Genómicas, UNAM
-### First version: 2021-08-13; Last update: 2025-09-09
+### First version: 2021-08-13; Last update: 2026-09-01
 
 ---
 
@@ -38,443 +38,675 @@ pre {
 
 ## Contenido
 
-1. Buenas prácticas para el desarrollo de software colaborativo 
+1. Buenas prácticas para el desarrollo de software colaborativo  
 
-2. [Especificar versiones en Git con tag](./leccion1-etiquetas/1-Etiquetas.html)  
+2. [Manejo de issues en GitHub](./leccion3-issues/3-issues.html)  
 
-3. **[Trabajar con ramas en Git: git branch](./leccion2-ramas/2-Ramas.html)**  
+3. [Gestión de un proyecto con GitHub](../leccion4-project/4-project.html)  
 
-4. [Manejo de issues en GitHub](./leccion3-issues/3-issues.html)  
+4. [Especificar versiones en Git con tag](./leccion1-etiquetas/1-Etiquetas.html)  
 
-5. [Gestión de un proyecto con GitHub](../leccion4-project/4-project.html)  
+5. [Trabajar con ramas en Git: git branch](./leccion2-ramas/2-Ramas.html)  
 
 ---
 
+# En la clase anterior
+
+Organizamos el trabajo mediante **issues**.
+
+Como parte de la tarea, cada equipo comenzó a elaborar:
+
+- `README.md`.
+- `docs/reporte-proyecto.md`.
+
+Varias personas pudieron modificar simultáneamente los mismos archivos.
+
+### ¿Cómo integraron sus aportaciones?
+
+???
+
+Recupera la experiencia antes de explicar las ramas. Pide dos o tres respuestas
+breves. Evita presentar los problemas como errores personales: fueron una
+consecuencia natural de colaborar directamente sobre la misma rama.
+
+Tiempo estimado: 1 minuto.
+
+---
+## ¿Qué ocurrió durante la tarea?
+
+- ¿Dos personas editaron simultáneamente el mismo archivo?
+- ¿Algún `push` fue rechazado porque había cambios nuevos?
+- ¿Tuvieron que ejecutar `pull` antes de poder enviar?
+- ¿Apareció algún conflicto?
+- ¿Fue sencillo identificar qué sección modificó cada persona?
+- ¿Pudieron revisar los cambios antes de incorporarlos?
+
+&gt; Los issues organizaron las actividades, pero no separaron los cambios realizados en los archivos.
+
+???
+
+No es necesario resolver cada caso en este momento. Registra verbalmente los
+problemas que mencionen y úsalos como punto de partida para la comparación
+siguiente.
+
+Tiempo estimado: 2 minutos.
+
+---
+## En la tarea trabajamos directamente en `main`
+
+Cada integrante realizó un flujo semejante:
+
+.center[
+### Issue → modificar archivos → commit → push a `main`
+]
+
+Este flujo puede funcionar cuando:
+
+- Trabaja una sola persona en el repositorio.
+- Los cambios se realizan uno después de otro.
+- Todos actualizan el repositorio antes de editar.
+- Nadie modifica simultáneamente las mismas líneas.
+
+Cuando varias personas trabajan al mismo tiempo, `main` puede cambiar mientras
+alguien todavía prepara su contribución.
+
+???
+
+Aclara que trabajar directamente en main no es siempre incorrecto. El problema
+es que resulta frágil cuando varias personas colaboran simultáneamente.
+
+Tiempo estimado: 1 minuto.
+
+---
+## Trabajar directamente en `main` o utilizar ramas
+
+| Directamente en `main` | Mediante una rama |
+|:--|:--|
+| El cambio llega inmediatamente a la rama principal | El cambio permanece separado mientras se prepara |
+| Todos envían cambios al mismo destino | Cada actividad tiene su propia rama |
+| Un cambio incompleto puede afectar al equipo | `main` conserva la versión integrada |
+| La revisión ocurre después de enviar | El Pull Request permite revisar antes de integrar |
+| Los problemas aparecen durante `pull` o `push` | Los cambios se comparan antes de fusionarse |
+
+&gt; Las ramas no eliminan los conflictos, pero permiten detectarlos y atenderlos antes de incorporar los cambios en `main`.
+
+???
+
+Ésta es la comparación central de la lección. No prometas que las ramas evitan
+todos los conflictos: si dos personas modifican las mismas líneas, Git todavía
+puede solicitar una decisión.
+
+Tiempo estimado: 2 minutos.
+
+---
+class: center, middle, inverse
+
+# Ya organizamos el trabajo
+
+Con los **issues** sabemos qué debe hacerse y quién es responsable.
+
+Con el **Project** sabemos qué está pendiente, en progreso o en revisión.
+
+Ahora necesitamos separar temporalmente las contribuciones:
+
+### ¿Cómo puede cada integrante atender su issue
+### sin modificar directamente `main`?
+
+# Utilizaremos ramas en Git
+
+???
+
+Al llegar a esta diapositiva, los estudiantes ya habrán realizado el ejercicio
+de GitHub Projects. Pide que cada integrante localice el issue que atenderá y lo
+mueva de “Por hacer” a “En progreso”.
+
+Tiempo estimado: 1 minuto.
+
+---
 # Trabajar con ramas en Git
 
 ## Objetivo
-Al finalizar la lección, podremos trabajar con ramas en Git. Conoceremos cómo crear ramas dentro de nuestro repositorio, nos movernos entre distintas ramas y podremos fusionarlas.
 
+Al finalizar, podrán:
 
+- Explicar para qué se utiliza una rama.
+- Diferenciar `main` de una rama de trabajo.
+- Crear y publicar una rama mediante terminal o GitHub Desktop.
+- Modificar simultáneamente distintas secciones de un mismo archivo.
+- Proponer, revisar e integrar cambios mediante un Pull Request.
 
-&lt;img src="img/branches.png" width="500px" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/branches.png" width="430px" style="display: block; margin: auto;" /&gt;
 
----
+???
 
-### Antes de ir a las ramas 🌳 ...  
+La meta no es memorizar todos los comandos. La meta es comprender y realizar
+una vez el flujo completo con un cambio pequeño y controlado.
 
-📖 *Libro – Capítulos alternativos*
-
-Un escritor tiene un manuscrito (master branch). En lugar de modificar directamente ese texto, crea una copia para probar un capítulo con un final alternativo.  
-👉 Las ramas permiten trabajar en paralelo en diferentes versiones de la historia, y luego decidir cuál integrar al libro final.  
-
-
-🛠️ * Construcción – Planos de remodelación*
-
-Tenemos la casa original (main branch). Un arquitecto hace una copia de los planos para diseñar una remodelación (nueva branch).  
-Si el diseño nos gusta, se integra al plano original; si no, se descarta sin afectar la casa existente.  
-
-🎼 *Música – Versiones de una canción*
-
-Un músico compone una melodía principal (master branch). Después crea una versión acústica, otra con batería, y otra en remix.  
-👉 Cada versión es una branch: comparten la base pero exploran direcciones diferentes, y en cualquier momento puede decidirse cuál publicar o combinarlas.  
+Tiempo estimado: 1 minuto.
 
 ---
-## Introducción
-Imaginemos que estamos trabajando en nuestro proyecto de clase y queremos implementar una nueva funcionalidad en la que sabemos que quizás tengamos que invertir varios días. 
+## `main` y las ramas de trabajo
 
-Posiblemente sea algo experimental, que no sabemos si llegará a incorporarse a nuestro proyecto global, o bien, es algo que tenemos claro que vamos a querer completar, pero que, dado que necesitaremos un tiempo indeterminado, es posible que en medio de nuestro trabajo tengamos que tocar el código "base/principal", en el estado en que lo tenemos en funcionamiento actualmente.
+| `main` | Rama de trabajo |
+|:--|:--|
+| Contiene la versión integrada | Contiene un cambio en preparación |
+| Es compartida por el equipo | Atiende una actividad concreta |
+| Debe conservarse estable | Puede avanzar sin alterar `main` |
+| Recibe cambios revisados | Se propone mediante un Pull Request |
 
-&lt;img src="img/twoBranches.png" width="400px" style="display: block; margin: auto;" /&gt;
-
----
-
-## Introducción
-
-Durante este proceso quisieramos que el código base/principal no se vea afectado por cambios o código inestable. 
-
-¿Para qué nos ayudan las ramas (branches)?
-
-- Añadir una nueva función
-- Solucionar un error
-- Trabajar de manera paralela
-- Controlar que código dudoso se fusione con el código principal 
-
+&gt; Una rama es un espacio temporal para trabajar en una actividad sin modificar directamente la versión principal.
 
 &lt;img src="img/branchesOctopus.jpeg" width="450px" style="display: block; margin: auto;" /&gt;
 
----
+???
 
-## Ramas (Branches) 🌳
+Evita explicar punteros o detalles internos de Git. La rama parte del mismo
+contenido de main y comienza a diferenciarse cuando recibe nuevos commits.
 
-Las ramas son caminos que puede tomar el desarrollo de un software, algo que ocurre naturalmente para resolver problemas o crear nuevas funcionalidades.
-
-Una rama representa una línea independiente de desarrollo.
-
-&lt;img src="img/branchesColab.png" width="350px" style="display: block; margin: auto;" /&gt;
-
-Pensemos en las ramas como un forma de solicitar un **nuevo directorio de trabajo**, un nuevo entorno de desarrollo o un nuevo historial de proyecto. **Los nuevos commits  se registrarán en el historial de la rama actual**, lo que crea una bifurcación en el historial del proyecto.
+Tiempo estimado: 1 minuto.
 
 ---
+## Tres personas pueden editar el mismo archivo
 
-## 📌 Idea central
+Los tres integrantes partirán del mismo archivo:
 
-Las ramas en Git/GitHub son como líneas de tiempo paralelas del proyecto.
+```text
+docs/reporte-proyecto.md
+```
 
-- Sirven para experimentar sin riesgo.
+Cada persona trabajará en una sección diferente:
 
-- Permiten que varias personas trabajen en diferentes partes a la vez.
+| Integrante | Sección | Nombre de la rama de ejemplo |
+|:--|:--|:--|
+| Persona 1 | Resumen del proyecto | `docs/1-resumen` |
+| Persona 2 | Contexto y antecedentes | `docs/2-contexto-antecedentes` |
+| Persona 3 | Justificación | `docs/3-justificacion` |
 
-- Luego, los cambios se pueden fusionar (merge) a la rama principal.
+&gt; Las ramas contienen el documento completo, pero cada persona realizará un cambio distinto.
 
+???
 
----
-## La rama "master" o "main"
+Ésta es la idea central. No se requiere un archivo por persona. Git puede
+integrar cambios realizados en partes diferentes de un mismo archivo.
 
-Cuando inicializamos un proyecto con Git automáticamente nos encontramos en una rama a la que se denomina **master** o **main**.
-
-Esta rama es la principal de nuestro proyecto y a partir de la que podremos crear nuevas ramas cuando lo necesitemos.
-
-
----
-## Listando las ramas existentes en mi repositorio
-
-El comando _git branch_ nos permite crear, listar y eliminar ramas, así como cambiar su nombre.
-
-Para obtener el listado de las ramas que se encuentran creadas en mi repositorio local usaremos:
-
-Sintaxis:  
-
-.full-width[.content-box-yellow[git branch]]
-
-Resultado:  
-
-.full-width[.content-box-yellow[$ git branch &lt;br&gt;
-\* master
-]]
-
+Tiempo estimado: 1 minuto.
 
 ---
+## Del issue a la integración
 
-## Práctica
+.center[
 
-1. Abrir una terminal  
---
+### Issue asignado → En progreso → Rama → Commit
 
-2. Localizar nuestro repositorio local de trabajo 
---
+### → Pull Request → Revisión → Integración en `main`
 
-3. Ejecutar el comando
-
-.full-width[.content-box-yellow[git branch]]
---
-
-¿Cúantas y cuáles son las ramas actuales en el repositorio?
-
----
-
-## Creando una nueva rama
-
-Para crear una rama en nuestro repositorio usaremos el comando:
-
-Sintaxis:  
-
-.full-width[.content-box-yellow[git branch [branch_name]]]
-
-Ejemplo:  
-
-.full-width[.content-box-yellow[$ git branch feature]]
-
----
-
-## Pasando de una rama a otra
-
-Para movernos entre las ramas usaremos el comando _git checkout_ seguido del nombre de la rama que queremos que se active.
-
-
-Sintaxis:  
-
-.full-width[.content-box-yellow[git checkout [branch_name]]]
-
-Ejemplo:  
-
-.full-width[.content-box-yellow[$ git checkout feature]]
-
-Resultado:  
-
-.full-width[.content-box-yellow[Cambiado a rama 'feature']]
-
-
----
-
-## Pasando de una rama a otra
-
-Para verificar que hayamos cambiado de rama podemos usar el comando _git branch_. La rama en la que estemos situados se marcará con un asterisco (*) y aparecerá en un color distinto.
-
-Ejemplo:  
-
-.full-width[.content-box-yellow[$ git branch]]
-
-Resultado:  
-
-&lt;img src="img/currentBranch.png" width="200px" style="display: block; margin: auto auto auto 0;" /&gt;
----
-
-## Práctica
-
-1. Abrir una terminal  
---
-
-2. Localizar nuestro repositorio local de trabajo 
---
-
-3. Revisar el estado del repositorio. No debe haber nada pendiente por confirmar.
-.full-width[.content-box-yellow[git status]]
---
-
-4. Asegurate de estar en la rama _master/main_ y crea la rama _[tu nombre]_
-.full-width[.content-box-yellow[git branch sah]]
---
-
-6. Revisar las ramas de nuestro repositorio
-.full-width[.content-box-yellow[git branch]]
---
-
-6. Pasar de la rama _master/main_ a la rama _[tu nombre]_
-.full-width[.content-box-yellow[git checkout sah]]
---
-
----
-
-## Pasando de una rama a otra
-
-Por ahora, **las dos ramas tienen exactamente el mismo contenido**, pero ahora podríamos empezar a hacer cambios en la rama _[tu nombre]_ y sus correspondientes commits; entonces los archivos de la rama _master/main_ y la rama _[tu nombre]_ tendrán contenido diferente, de modo que al pasar de una rama a otra habrá cambios en los archivos.
-
-
-&lt;img src="img/gitCheckout.png" width="450px" style="display: block; margin: auto;" /&gt;
-
-
-Si hacemos cambios en la rama _[tu nombre]_ y usamos el comando _git show-branch_ veremos una descripción más detallada de las ramas. 
-
-
----
-
-## Práctica
-
-1. Abrir una terminal  
---
-
-2. Localizar nuestro repositorio local de trabajo 
---
-
-3. Estando en la rama _[tu nombre]_ ejecuta el comando:
-.full-width[.content-box-yellow[git show-branch]]
---
-
-4. Editemos un archivo de su elección. Recuerda usar: 
-git add  
-git commit -m "[mensaje]"
---
-
-5. Revisa la descripción detallada de las ramas.
-.full-width[.content-box-yellow[git show-branch]]
---
-
-¿Notas que el nuevo commit solo se encuentra en la rama _[tu nombre]_?
-
-
----
-
-## Práctica
-
-7. Pasa a la rama _master_ o _main_
-.full-width[.content-box-yellow[$  git checkout master]]
---
-
-8. Revisa el contenido del archivo editado
---
-
-
-¿Este archivo tiene los cambios que realizamos en la rama _[tu nombre]_?
-
----
-
-## Fusionando ramas
-
-A medida que creemos ramas y cambiemos el estado de las carpetas o archivos en el proyecto llegará el momento en el que nos interese **fusionar ramas** para poder incorporar el trabajo realizado a la rama __master__ o __main__.
-
-El proceso de fusionado se conoce como __merge__. Git para procesar los merge comprueba los cambios que se han introducido al proyecto, combinando el código de ambas ramas.
-
-&lt;img src="img/merge.png" width="500px" style="display: block; margin: auto;" /&gt;
-
----
-
-## Fusionando ramas
-
-Para hacer un *merge* nos situamos en una rama, en este caso la __master__ o __main__, y decimos con qué otra rama se debe fusionar el código.
-
-El siguiente comando, lanzado desde la rama _master o main_, permite fusionarla con la rama _[tu nombre]_.
-
-Sintaxis:  
-
-.full-width[.content-box-yellow[git merge [branch_name] -m "mensaje"]]
-
-Ejemplo:  
-
-.full-width[.content-box-yellow[$ git merge sah -m "fusionando cambios de la rama sah a la master"]]
-
----
-
-## Práctica
-
-1. Revisar la rama en la que estamos actualmente. 
-.full-width[.content-box-yellow[$ git branch]]
---
-
-2. Si no estamos en la rama _master o main_ cambiarnos a la rama principal.
-.full-width[.content-box-yellow[$ git checkout master]]
---
-
-3. Fusiona el contenido de la rama _[tu nombre]_ con la rama _master o main_
-.full-width[.content-box-yellow[$ git merge sah -m "fusionando cambios de la rama sha a la master"]]
---
-
-4. Revisa el mensaje obtenido al hacer el merge
-
---
-
-5. Revisa el contenido del archivo  
-
----
-
-
-## Eliminando de ramas
-
-En algunas circunstancias puede ser necesario eliminar una rama de nuestro repositorio local, por ejemplo, porque nos hayamos equivocado en el nombre al crearla. 
-Para ello utilizaremos el comando __git branch__, pero agregaremos la opción __-d__ para indicar que es esa rama la que queremos eliminar.
-
-Sintaxis:  
-
-.full-width[.content-box-yellow[git branch -d [branch_name]]]
-
-Ejemplo:  
-
-.full-width[.content-box-yellow[$ git branch -d develop]]
-
-IMPORTANTE: Puede que esta acción no nos funcione porque hayamos hecho cambios que no se hayan salvado en el repositorio remoto, o no se hayan fusionado con otras ramas. Para forzar el borrado utilizaríamos la opción __-D__
-
-
----
-
-## Práctica
-
-Eliminaremos la rama develop-# .... 
-
-1. Revisar la rama en la que estamos actualmente  
-.full-width[.content-box-yellow[$ git branch]]
---
-
-2. Crear la rama _develop-#_
-.full-width[.content-box-yellow[$ git branch develop-1]]
-
-
---
-3. Eliminar la rama _develop-#_ (asegurate de estar fuera de la rama)  
-.full-width[.content-box-yellow[$ git branch -d develop-1]]
---
-
-4. Revisar las ramas disponibles
-.full-width[.content-box-yellow[$ git branch]]
-
-
----
-## Subiendo ramas al repositorio remoto (GitHub)
-
-Hasta este momento, las ramas que hemos creado solo pueden ser vistas en nuestro repositorio local, estas ramas no se publicarán en Github a menos que nosotros lo indiquemos. Para que esto ocurra tenemos que realizar específicamente la acción de subir al repositorio remoto una rama determinada.
-
-Sintaxis:  
-
-.full-width[.content-box-yellow[git push -u origin [branch_name]]]
-
-Ejemplo:  
-
-.full-width[.content-box-yellow[$ git push -u origin docs]]
-
-
-.tiny[
-Nota 1: [Generación de token personal](https://docs.github.com/es/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)]
-
-.tiny[
-Nota 2: [Support for password authentication was removed on August 13, 2021](https://dev.to/arjuncodes/support-for-password-authentication-was-removed-on-august-13-2021-fixed-k1e)
 ]
 
----
-
-## Eliminando ramas remotas
-
-Si la rama que queremos eliminar está en el repositorio remoto tendremos que hacer un push indicando la opción --delete, seguida del nombre de la rama que se deseamos borrar.
-
-
-Sintaxis:  
-
-.full-width[.content-box-yellow[git push origin --delete [branch_name]]]
-
-Ejemplo:  
-
-.full-width[.content-box-yellow[$ git push origin --delete test]]
-
----
-
-## Práctica
-
-1. Crear una nueva rama llamada _test#_
-.full-width[.content-box-yellow[$ git branch test1]]
-
---
-
-2. Subir la rama _test#_ al repositorio remoto
-.full-width[.content-box-yellow[$ git push -u origin test1]]
---
-
-3. Borrar localmente la rama _test#_ 
-.full-width[.content-box-yellow[$ git branch -d test1]]
---
-
-4. Borrar la rama _test#_ del repositorio remoto
-.full-width[.content-box-yellow[$ git push origin --delete test1]]
+1. El issue describe el trabajo.
+2. La rama mantiene separado el cambio.
+3. El commit registra la aportación.
+4. El Pull Request propone incorporarla.
+5. Otra persona revisa el resultado.
+6. `main` reúne las aportaciones aprobadas.
 
 
+&lt;img src="img/branches-pr.png" width="350px" style="display: block; margin: auto;" /&gt;
+
+
+???
+
+Presenta el flujo completo antes de los comandos. Deben saber para qué sirve
+cada paso antes de ejecutarlo.
+
+Tiempo estimado: 1 minuto.
 
 ---
+## Convención de trabajo para el curso
 
-## Descargando una rama del repositorio remoto
+&gt; Cada issue que requiera modificar archivos tendrá una rama propia.
 
-A veces ocurre que se generan ramas en el repositorio remoto, por ejemplo, cuando han sido creadas por otros usuarios y subidas a GitHub, y necesitaremos acceder a ellas en el repositorio local para verificar los cambios o continuar el trabajo. En principio, esas ramas creadas por otros usuarios no están disponibles para nosotros en local, pero las podemos descargar.
+El nombre debe incluir:
 
-Sintaxis:  
+```text
+tipo/numero-actividad (issue)
+```
 
-.full-width[.content-box-yellow[git fetch]]
+Ejemplos:
 
+```text
+docs/12-alcance
+docs/13-limitaciones
+feature/25-descargar-secuencias
+fix/31-validar-fasta
+```
+
+No utilicen nombres como:
+
+```text
+mi-rama   prueba   cambios   nombre-persona
+```
+
+Prefijo: docs/ para documentación, 
+feature/ para funcionalidad y fix/ para correcciones  
+
+El número corresponde al issue, sin escribir el símbolo #  
+
+???
+
+En esta práctica se utilizará únicamente el prefijo docs. Más adelante podrán
+usar feature para funcionalidad y fix para correcciones. El número corresponde
+al issue, sin escribir el símbolo #.
+
+Tiempo estimado: 2 minutos.
+
+---
+## Antes de crear una rama
+
+Comprueben siempre:
+
+1. ¿Estoy dentro del repositorio correcto?
+2. ¿Tengo cambios pendientes?
+3. ¿Estoy en `main`?
+4. ¿`main` está actualizada?
+5. ¿Cuál es el issue que atenderé?
+
+### Terminal
+Localicen su proyecto:
+```bash
+git status
+git switch main
+git pull
+```
+
+### GitHub Desktop
+
+```text
+Current Branch: main → Fetch origin → Pull origin (si aparece)
+```
+
+
+???
+&gt; Revisar → actualizar `main` → crear la rama → trabajar
+
+
+No continúes si git status muestra cambios pendientes. Ayuda al estudiante a
+confirmar o guardar esos cambios antes de crear la rama.
+
+Tiempo estimado: 2 minutos.
+
+---
+## Crear y comprobar la rama
+
+### Terminal
+
+```bash
+git switch -c docs/1-resumen
+git branch
+git status
+```
+
+El asterisco (*) desplegado por  `git branch` indica la rama activa.
+
+### GitHub Desktop
+
+1. Abrir **Current Branch**.
+2. Seleccionar **New Branch**.
+3. Escribir `docs/1-resumen`.
+4. Confirmar **Create Branch**.
+5. Verificar el nombre en **Current Branch**.
+
+&gt; Antes de editar, comprueben que ya no están en `main`.
+
+???
+
+Demuestra ambas interfaces, pero no pidas repetir todo en las dos. En cada
+equipo, al menos una persona puede usar terminal y otra GitHub Desktop.
+
+Tiempo estimado: 3 minutos.
+
+---
+class: inverse
+
+## EJERCICIO EN EQUIPO
+
+# Completar un mismo reporte mediante tres ramas
+
+Cada integrante:
+
+1. Trabajará en una rama diferente.
+2. Editará una sección asignada de `docs/reporte-proyecto.md`.
+3. Agregará uno o más párrafos (cambios se que requiran)
+4. Publicará su rama.
+5. Abrirá un Pull Request.
+6. Revisará el cambio de otra persona.
+7. Integrará los cambios a `main`.
+
+### Tiempo total: 20 minutos
+
+???
+
+Distribución sugerida: preparación 3 minutos; redacción 4; commit y publicación
+4; Pull Requests y revisión 6; integración y comprobación 5.
+
+---
+## Comenzamos: Preparación del ejercicio — 3 minutos
+
+Los tres integrantes:
+
+1. Localicen el issue que les corresponde.
+2. Muévanlo de **Por hacer** a **En progreso**.
+3. Actualicen `main`.
+4. Creen la rama desde `main`. **Cada integrante crea una rama diferente**.
+5. Comprueben la rama activa antes de editar.
+
+| Sección | Rama sugerida |
+|:--|:--|
+| Resumen | `docs/NUMERO-resumen` |
+| Contexto y antecedendes | `docs/NUMERO-contexto-antecedentes` |
+| Justificación | `docs/NUMERO-justificacion` |
+
+&gt; Sustituyan `NUMERO` por el número real del issue.
+
+???
+
+Las tres ramas deben crearse desde main antes de integrar cualquiera. Si
+alguien crea su rama mientras está activa otra rama, debe detenerse y pedir
+apoyo.
+
+Antes de la clase, agrega estos tres bloques al final del reporte y asegúrate de
+que cada equipo tenga tres issues abiertos que correspondan con ellos. Así no
+se sobrescriben las secciones elaboradas en la tarea anterior.
+
+---
+## Redactar la sección — 4 minutos
+
+```bash
+nano docs/reporte-proyecto.md 
+```
+o bien, abrir directamente el archivo desde el explorador/finder.  
+
+Cada persona puede agregar:
+
+- Uno o más párrafos.
+- Una lista.
+- Etc.  
+
+Debe modificar **exclusivamente** el contenido de su sección.  
+
+
+&gt; La cantidad de líneas no causa el conflicto para Git; importa que las personas no modifiquen la misma zona.
+
+---
+## Reglas para evitar conflictos en esta práctica
+
+1. Modifiquen solamente la sección asignada.
+2. No cambien encabezados, marcadores ni separadores.
+3. No reorganicen las secciones.
+4. Revisen las diferencias antes del commit.
+5. Si aparecen cambios fuera de su sección, no continúen.
+
+&gt; En la vida real, la coordinación del equipo también es parte del trabajo con Git.
+
+???
+
+No enseñes todavía a resolver conflictos. El propósito es que vivan primero una
+integración exitosa y comprendan por qué coordinar el trabajo reduce conflictos.
+
+---
+## Revisar y confirmar los cambios — 3 minutos
+
+### Terminal
+
+```bash
+git status
+git diff
+git add docs/reporte-proyecto.md
+git commit -m "docs: documentar el resumen preliminar del proyecto"
+```
+
+### GitHub Desktop
+
+1. Abrir el panel **Changes**.
+2. Confirmar que sólo cambió la sección asignada.
+3. Escribir un mensaje descriptivo.
+4. Seleccionar **Commit to [nombre de la rama]**.
+
+&gt; Aunque la rama contiene el documento completo, el commit registra las líneas modificadas.
+
+???
+
+Muestra una diferencia con líneas eliminadas en rojo y agregadas en verde. Pide
+que confirmen que no tocaron otra sección.
+
+---
+## Publicar la rama — 1 minuto
+
+### Terminal
+
+```bash
+git push -u origin docs/1-resumen  
+```
+**-u** solo se utiliza la primera vez para publicar la rama, después ya no es necesario.   
+
+Después del primer envío bastará con:
+
+```bash
+git push
+```
+
+### GitHub Desktop
+
+Seleccionar:
+
+```text
+Publish branch
+```
+
+&gt; Publicar una rama no modifica automáticamente `main`.
+
+Ahora, localiza la rama en GitHub. ¿Se ven tus cambios en la rama main?  
+
+???
+
+Pide que localicen la rama en GitHub. La opción -u establece la relación entre
+la rama local y la rama remota.
+
+---
+## El Pull Request propone la integración
+
+Un **Pull Request** permite:
+
+- Comparar la rama con `main`.
+- Explicar qué se modificó.
+- Solicitar la revisión de otra persona.
+- Comentar y corregir antes de integrar.
+- Fusionar el cambio cuando esté listo.
+
+.center[
+### Publicar una rama ≠ integrarla en `main`
+]
+
+???
+
+Introduce sólo lo necesario para completar el ejercicio. Los Pull Requests
+podrán estudiarse con mayor profundidad cuando trabajen con código.
+
+---
+## Crear el Pull Request — 3 minutos
+
+En GitHub:
+
+1) Aparecerá un mensaje en color amarillo indicando el nombre de tu rama y el tiempo en que se subieron los cambios. Dar clic en el botón verde **Compare &amp; pull request**.  
+2)  Verificar que se muestre el mensaje: **Able to merge. These branches can be automatically merged.**  
+3) Comprobar cuidadosamente:  
+
+```text
+base: main ← compare: rama-del-estudiante
+```
+
+4) Escribir un título que describa el cambio.  
+5) Explicar brevemente qué sección se modificó.    
+OPCIONAL: Vincular el issue en la descripción: Si indicas la palabra Closes seguido del # y número de issue automáticamente se cerrá cuando el PR sea aprobado.  
+
+```markdown
+Closes #13
+```
+
+---
+## Crear el Pull Request — 3 minutos
+
+6) Asigna un responsable: 
+- Persona 1 revisa a Persona 2.
+- Persona 2 revisa a Persona 3.
+- Persona 3 revisa a Persona 1.
+
+7) Seleccionar **Create pull request**.
+
+&gt; Crear el Pull Request no fusiona todavía los cambios.
+
+???
+
+Punto crítico: verifica que la base sea main y compare sea la rama propia. Si
+aparecen cambios de otra persona, no deben fusionar.
+
+---
+## Revisar antes de integrar — 3 minutos
+
+Cada integrante revisa el Pull Request de otra persona:
+
+- Persona 1 revisa a Persona 2.
+- Persona 2 revisa a Persona 3.
+- Persona 3 revisa a Persona 1.
+
+En **Files changed**, comprueben:
+
+- ¿Sólo cambió la sección asignada?
+- ¿Cumple los criterios del issue?
+- ¿Se conservaron encabezados y marcadores?
+- ¿El texto es claro y coherente?
+
+Después:
+
+```text
+Review changes → Submit review
+```
+
+???
+
+Si los permisos no permiten aprobar formalmente, pueden dejar un comentario.
+No detengas la práctica por esa configuración.
+
+---
+## Integrar las aportaciones — 5 minutos
+
+Regresa a 
+Fusionen los Pull Requests **uno por uno**:
+
+1. Integrar la sección 1 y observar `main`.
+2. Integrar la sección 2 y volver a observar `main`.
+3. Integrar la sección 3 y revisar el reporte completo.
+
+Seleccionen:
+
+```text
+Ready to merge → Merge pull request → Confirm merge
+```
+
+Después de cada integración, `main` acumula una nueva aportación.
+
+&gt; Git puede combinar automáticamente cambios realizados en zonas diferentes del mismo archivo.
+
+???
+
+Verifica que GitHub indique que puede fusionarse. Tras cada integración, abre
+el archivo desde main y muestra cómo se acumulan los cambios.
+
+---
+## Finalizar el flujo de trabajo
+
+Después de integrar:
+
+1. Comprobar los criterios de aceptación del issue.
+2. Verificar que se cerró mediante `Closes #NUMERO`.
+3. Mover el issue a **Terminado** en el Project.
+4. Eliminar la rama con **Delete branch** en la sección Branches.
+5. Antes del siguiente trabajo, actualizar nuevamente `main`.
+
+.center[
+### Issue → rama → Pull Request → revisión → `main` → Terminado
+]
+
+???
+
+La eliminación se realiza desde GitHub después de integrar. No enseñes todavía
+los comandos para eliminar ramas locales o remotas.
 
 ---
 
-## Conclusión
+## Comprobación del ejercicio
 
-Por medio del uso de ramas podremos llevar un mejor control de nuestro código. Se trata de tener nuevos caminos mientras el código evoluciona, en paralelo a otras ramas que se puedan generar.
+Cada equipo debe tener:
 
-- Creación de una funcionalidad que queramos integrar en un programa
-- Desarrollo de distintas funcionalidades de manera paralela
-- No afectaremos la rama principal
+- [ ] Tres issues relacionados con el reporte.
+- [ ] Tres ramas creadas desde `main`.
+- [ ] Tres cambios en secciones diferentes del mismo archivo.
+- [ ] Un commit y una rama publicada por integrante.
+- [ ] Tres Pull Requests comparados contra `main`.
+- [ ] Una revisión realizada por cada integrante.
+- [ ] Las tres aportaciones integradas en `main`.
+- [ ] Los issues cerrados y en estado **Terminado**.
+
+### Pregunta final
+
+&gt; ¿Qué permitió que Git integrara las tres contribuciones sin reemplazar el trabajo de otra persona?
+
+???
+
+Respuesta esperada: cada persona trabajó en una rama y modificó una zona
+diferente, claramente delimitada, del mismo archivo.
+
+Tiempo estimado: 2 minutos.
+
+---
+## Conclusiones
+
+- Los issues indican qué debe hacerse.
+- GitHub Projects muestra cómo avanza el trabajo.
+- Las ramas separan temporalmente las contribuciones.
+- Los commits registran los cambios de cada persona.
+- Los Pull Requests permiten revisar e integrar.
+- `main` reúne las aportaciones aprobadas.
+
+.center[
+### Las ramas permiten trabajar en paralelo sin modificar directamente la versión principal.
+]
+
+???
+
+Regresa al archivo final en main y señala las tres contribuciones.
+
+Tiempo estimado: 1 minuto.
+
+---
+class: center, middle, inverse
+
+# Ya integramos el trabajo del equipo
+
+Las ramas sirvieron para construir cambios.
+
+Ahora necesitamos identificar un punto importante y reproducible del historial:
+
+# Etiquetas o tags de Git
+
+???
+
+Esta diapositiva enlaza con el tema siguiente. Una rama continúa avanzando,
+mientras que un tag identifica un commit específico que representa una entrega
+o versión.
+
 
 
 ---
----
-## Flujo de trabajo  
-
-
-&lt;img src="img/flujoTrabajo.png" width="750px" style="display: block; margin: auto;" /&gt;
-
-
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
