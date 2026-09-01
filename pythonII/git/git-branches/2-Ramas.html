@@ -494,6 +494,12 @@ Después del primer envío bastará con:
 git push
 ```
 
+.tiny[
+Nota 1: [Generación de token personal](https://docs.github.com/es/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)]
+
+.tiny[
+Nota 2: [Support for password authentication was removed on August 13, 2021](https://dev.to/arjuncodes/support-for-password-authentication-was-removed-on-august-13-2021-fixed-k1e)]
+---
 ### GitHub Desktop
 
 Seleccionar:
@@ -707,6 +713,53 @@ o versión.
 
 
 ---
+
+## MATERIAL COMPLEMENTARIO 
+
+
+## Eliminando de ramas
+
+Para ello utilizaremos el comando __git branch__, pero agregaremos la opción __-d__ para indicar que es esa rama la que queremos eliminar.
+
+Sintaxis:  
+
+.full-width[.content-box-yellow[git branch -d [branch_name]]]
+
+Ejemplo:  
+
+.full-width[.content-box-yellow[$ git branch -d docs/1-resumen]]
+
+IMPORTANTE: Parar borrar la rama debemos estar fuera de ella. Puede que esta acción no nos funcione porque hayamos hecho cambios que no se hayan salvado en el repositorio remoto, o no se hayan fusionado con otras ramas. Para forzar el borrado utilizaríamos la opción __-D__
+
+---
+
+## Eliminando ramas remotas
+
+Si la rama que queremos eliminar está en el repositorio remoto tendremos que hacer un push indicando la opción --delete, seguida del nombre de la rama que se deseamos borrar.
+
+
+Sintaxis:  
+
+.full-width[.content-box-yellow[git push origin --delete [branch_name]]]
+
+Ejemplo:  
+
+.full-width[.content-box-yellow[$ git push origin --delete docs/1-resumen]]
+
+
+---
+
+## Descargando una rama del repositorio remoto
+
+A veces ocurre que se generan ramas en el repositorio remoto, por ejemplo, cuando han sido creadas por otros usuarios y subidas a GitHub, y necesitaremos acceder a ellas en el repositorio local para verificar los cambios o continuar el trabajo. En principio, esas ramas creadas por otros usuarios no están disponibles para nosotros en local, pero las podemos descargar.
+
+Sintaxis:  
+
+.full-width[.content-box-yellow[git fetch]]
+
+
+---
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
