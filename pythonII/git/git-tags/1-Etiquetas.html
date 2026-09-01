@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Python II y GitHub
 ### Licenciatura en Ciencias Genómicas, UNAM
-### First version: 2021-08-03; Last update: 2025-09-02
+### First version: 2021-08-03; Last update: 2026-09-01
 
 ---
 
@@ -38,519 +38,565 @@ pre {
 
 ## Contenido
 
-1. **Buenas prácticas para el desarrollo de software colaborativo**  
 
-2. [Especificar versiones en Git con tag](./leccion1-etiquetas/1-Etiquetas.html)  
+1. Buenas prácticas para el desarrollo de software colaborativo  
 
-3. [Trabajar con ramas en Git: git branch](./leccion2-ramas/2-Ramas.html)  
+2. [Manejo de issues en GitHub](./leccion3-issues/3-issues.html)  
 
-4. [Manejo de issues en GitHub](./leccion3-issues/3-issues.html)  
+3. [Gestión de un proyecto con GitHub](../leccion4-project/4-project.html)  
 
-5. [Gestión de un proyecto con GitHub](../leccion4-project/4-project.html)  
+4. [Especificar versiones en Git con tag](./leccion1-etiquetas/1-Etiquetas.html)  
 
+5. [Trabajar con ramas en Git: git branch](./leccion2-ramas/2-Ramas.html)  
 
 ---
 # Versionamiento en Git usando tags
 
 ## Objetivo
-Al finalizar la lección, podremos identificar estados importantes de nuestro código, así como las liberaciones del mismo, mediante el uso de etiquetas en Git/GitHub.
 
+Al finalizar la actividad podremos:
 
-
-&lt;img src="img/git-tags.png" width="250px" style="display: block; margin: auto;" /&gt;
-
----
-
-## Introducción
-
-Tomemos de referencia el proyecto que estamos desarrollando para esta clase. A lo largo del desarrollo se invertirá o hemos invertido mucho tiempo en la solución de problemas, lo que implica agregar nuevas funcionalidades e incluso modificar o corregir el código o documentación que ya hemos hecho (commits). 
-&lt;img src="img/workFlow.png" width="550px" style="display: block; margin: auto;" /&gt;
-
-Sin embargo, durante todo ese proceso, a veces quisieramos guardar una "foto" del **estado actual** de nuestro código, por considerarlo funcionable. Estas "fotos" las podemos llamar **versiones estables** de nuestro código. ¿y qué podemos hacer con ellas?:
-
-- Obtener resultados de versiones pasadas
-- Ejecutar programas anteriores
-- Rastreo de programas o cambios significativos.
-
----
-### Ejemplos  
-
-** 📖 Libro de texto – Ediciones oficiales**  
-Imagina que un libro de bioquímica tiene muchas correcciones mientras se escribe (como los *commits*).  
-Pero cuando se publica la **1ra edición**, la editorial coloca un **sello de edición**. Luego habrá 2da y 3ra edición.  
-
-👉 Esas “ediciones oficiales” son las **tags** en Git: no cambian y permiten identificar una versión específica.  
-
-** 🎶 Música – Álbumes y sencillos**  
-Un artista graba muchas canciones (*commits*) y trabaja en su música constantemente.  
-Pero cuando decide lanzar un **álbum oficial**, etiqueta ese conjunto de canciones como una “Versión publicada”.  
-
-👉 Los *commits* son ensayos y grabaciones, pero las **tags** son los lanzamientos oficiales.  
-
-** 📌 Idea central**
-
-Las tags son etiquetas permanentes que marcan un punto específico en la historia de un proyecto, para que todos sepan que esa versión es importante o estable.  
-
+- Identificar estados importantes de un proyecto mediante **etiquetas o tags**.
+- Crear y consultar etiquetas en Git.
+- Publicarlas en GitHub.
+- Obtener las etiquetas creadas por otros integrantes del equipo.
 
 ---
 
-#  tags : Etiquetando estados de código
+## ¿Qué es una etiqueta?
 
-.full-width[.content-box-blue[Los tags son una manera de etiquetar **estados** de tu repositorio, que se usa comúnmente para indicar las **versiones** o **releases** de un proyecto mantenido con Git.]]
+Durante el desarrollo de un proyecto realizamos muchos cambios:
+
+```text
+●──●──●──●──●──●
+```
+
+Cada punto representa un **commit**.
+
+En algún momento podemos considerar que uno de esos estados es importante:
+
+```text
+                   v0.1.0
+                      ↓
+●──●──●──●──●───────●
+```
+
+.full-width[.content-box-blue[
+Una **etiqueta (`tag`)** es un nombre que asignamos a un commit específico para identificar un estado importante del proyecto.
+]]
+
+---
+
+## ¿Para qué sirven las etiquetas?
+
+Las etiquetas permiten:
+
+- Identificar **versiones** del proyecto.
+- Marcar estados importantes o estables.
+- Saber exactamente qué commit corresponde a una versión.
+- Recuperar o revisar un estado anterior del proyecto.
+- Compartir con los colaboradores qué versión se considera importante.
+
+.full-width[.content-box-yellow[
+Un tag hace referencia al **estado del repositorio completo**, no a la versión de un solo archivo.
+]]
+
+---
+
+## Ejemplo
+
+Podemos usar etiquetas como:
+
+```text
+v0.1.0 → Primera definición del proyecto
+v0.2.0 → Incorporación del análisis de datos
+v1.0.0 → Primera versión completa
+```
+
+.full-width[.content-box-blue[
+Las etiquetas permiten identificar puntos específicos e importantes en la historia de un proyecto.
+]]
+
+---
+
+## Ramas vs. etiquetas
 
 .pull-left[
 
-&lt;img src="img/tagsSchema.png" width="650px" style="display: block; margin: auto;" /&gt;
+### Rama
 
+Una rama representa una **línea de trabajo que continúa cambiando**.
+
+```text
+              docs/12-info-general
+                 ↓
+main ●──●──●
+          \
+           ●──●──●
+```
 
 ]
 
 .pull-right[
 
-- **Estados** importantes en la vida de un repositorio
+### Tag
 
-- Usado principalmente para el manejo de los **releases** de un proyecto
+Un tag identifica un **commit concreto**.
 
-- Permite mantener informados a los usuarios del código del software y otros desarrolladores de las **versiones** de una aplicación
+```text
+                v0.1.0
+                 ↓
+main ●──●──●──●──●
+```
 
 ]
 
+---
+
+## Ramas vs. etiquetas
+
+.full-width[.content-box-yellow[
+**Las ramas se mueven conforme hacemos commits.**
+
+**Las etiquetas permanecen asociadas al mismo commit.**
+]]
 
 ---
 
-## Git Tag 
+## ¿Dónde entran las etiquetas en nuestro flujo de trabajo?
 
-El etiquetado es una herramienta fundamental para que el mismo programador, los usuarios, así como otros sistemas sepan cuándo el software ha cambiado y se permitan desencadenar procesos a ejecutar cada vez que esto ocurre.
-
-.full-width[.content-box-red[Esta operación se conoce comúnmente con el nombre de **"tagging"**]]
-
-Comando para crear etiquetas  
-
-Sintaxis:
-
+```text
+Issue
+  ↓
+Crear rama
+  ↓
+Trabajar
+  ↓
+Commit
+  ↓
+Push
+  ↓
+Pull Request
+  ↓
+Merge
+  ↓
+main
+  ↓
+Tag
 ```
+
+---
+
+## Ejemplo aplicado al proyecto
+
+Supongamos que varios integrantes trabajaron en:
+
+```text
+docs/10-planteamiento
+docs/11-objetivos
+docs/12-info-general
+```
+
+Después de revisar sus Pull Requests, el trabajo quedó integrado en:
+
+```text
+main
+```
+
+Si consideramos que ese estado representa la **primera versión del reporte del proyecto**, podemos marcarlo como:
+
+```text
+v0.1.0
+```
+
+---
+
+## Numeración de versiones
+
+Una forma común de nombrar versiones es:
+
+```text
+vX.Y.Z
+```
+
+Por ejemplo:
+
+```text
+v1.2.3
+```
+
+- **X** → cambios mayores.
+- **Y** → nuevas funcionalidades.
+- **Z** → correcciones o ajustes.
+
+Para nuestro proyecto podemos comenzar con:
+
+```text
+v0.1.0
+```
+
+---
+
+## Antes de crear una etiqueta
+
+Queremos etiquetar una versión que ya fue integrada en `main`.
+
+Primero:
+
+```bash
+git switch main
+```
+
+Después actualizamos:
+
+```bash
+git pull
+```
+
+Y comprobamos:
+
+```bash
+git status
+```
+
+---
+
+## Antes de crear una etiqueta
+
+Esperamos algo semejante a:
+
+```text
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+```
+
+.full-width[.content-box-yellow[
+Debemos asegurarnos de que estamos etiquetando **el estado correcto del proyecto**.
+]]
+
+---
+
+## Crear una etiqueta
+
+Crearemos:
+
+```text
+v0.1.0
+```
+
+Utilizamos:
+
+```bash
+git tag -a v0.1.0 -m "Primera versión de la definición del proyecto"
+```
+
+---
+
+## Crear una etiqueta
+
+¿Qué significa?
+
+```text
 git tag
 ```
 
+Trabaja con etiquetas.
+
+```text
+-a v0.1.0
+```
+
+Crea una etiqueta anotada llamada `v0.1.0`.
+
+```text
+-m "..."
+```
+
+Agrega un mensaje descriptivo.
 
 ---
-## Numeración de las versiones
 
-- Git es un sistema de control de versiones
+## Consultar etiquetas
 
---
+Para saber qué etiquetas existen en nuestro repositorio local:
 
-- Permite mantener todos los estados por los que ha pasado cualquiera de sus archivos
+```bash
+git tag
+```
 
---
+Por ejemplo:
 
-- Con **git tag** no nos referimos a la versión de un archivo en particular, sino de __todo__ el proyecto de manera global
-
---
-
-- **git tag** permite hacer referencia a un estado del **repositorio completo**, práctica que suele ocurrir cada vez que se libera una nueva versión del software
-
-&lt;img src="img/tagging.png" width="500px" style="display: block; margin: auto;" /&gt;
-
----
-## Numeración de las versiones
-
-Las versiones de los proyectos las define el equipo de desarrollo, y se recomienda no crearlas de manera arbitraria, sino darles un significado real de acuerdo a las _modificaciones realizadas en el proyecto de software_.
-
-&lt;img src="img/versions.png" width="250px" style="display: block; margin: auto;" /&gt;
-
-Ejemplo: https://github.com/google/material-design-icons/tags
----
-## Numeración de las versiones
-
-- Generalmente los cambios se pueden dividir en tres niveles de **"importancia": mayor, menor y pequeño ajuste** -&gt; versión **x**,**y**,**z**.
-
-&lt;img src="img/desc-versiones.png" width="350px" style="display: block; margin: auto;" /&gt;
-
---
-
-- x -&gt; si los cambios son tan grandes que cambian la forma en la que funcionaba tu software haciendo que ya no haya compatibilidad con la versión anterior
-
---
-
-- y -&gt; si agregas una nueva funcionalidad que es compatible con tus versiones anteriores
-
---
-
-- z -&gt; si lo que hiciste fue arreglar un bug  
-
----
-## Crear un tag en Git
-
-Hasta este momento hemos trabajado con un repositorio en Git, realizando cambios y enviandolos al servidor remoto, sin embargo, no tenemos ninguna numeración de versión y ningún tag que nos indique si el código ya se encuentra estable o si existe una nueva versión. 
-
-Supongamos que empezamos por el número de versión **0.1.0**. Entonces para crear la correspondiente etiqueta usaremos el comando: 
-
-Sintaxis:  
-
-.full-width[.content-box-yellow[git tag [tag_name]]] 
-
-
-Ejemplo:
-
-.full-width[.content-box-yellow[git tag v0.1.0]]
-
-
-Con esto estaremos etiquetando el __estado actual del repositorio__, el cual apunta al _último commit realizado_.
-
----
-## Crear un tag en Git
-
-Para poder definir una nueva etiqueta, será necesario realizar cambios al repositorio y confirmarlos mediante un commit.  
-
-Para crear una segunda etiqueta:
-
-.full-width[.content-box-yellow[git tag v0.2.0]]
-
-
----
-## Consultar los estados de versiones en el repositorio con _git tag_
-
-Una vez creado un tag en el repositorio, podremos ejecutar el comando "git tag", el cual nos informará sobre las versiones que hemos etiquetado hasta el momento.
-
-Sintaxis:  
-
-.full-width[.content-box-yellow[git tag]]
-
-Resultado:  
-
-.full-width[.content-box-yellow[$ git tag &lt;br&gt;
-v0.1.0&lt;br&gt;
+```text
+v0.1.0
 v0.2.0
+```
+
+---
+
+## Revisar una etiqueta específica
+
+Para revisar la información asociada a una etiqueta:
+
+```bash
+git show v0.1.0
+```
+
+Esto permite consultar información sobre el commit asociado a esa versión.
+
+---
+
+## Local ≠ remoto
+
+Cuando hacemos:
+
+```bash
+git tag -a v0.1.0 -m "Primera versión"
+```
+
+la etiqueta existe inicialmente **solo en nuestro repositorio local**.
+
+```text
+Computadora                   GitHub
+
+v0.1.0                         ?
+```
+
+---
+
+## Publicar una etiqueta
+
+Para publicar una etiqueta específica:
+
+```bash
+git push origin v0.1.0
+```
+
+Después:
+
+```text
+Computadora                   GitHub
+
+v0.1.0 ────────────────────→ v0.1.0
+```
+
+.full-width[.content-box-yellow[
+Crear una etiqueta localmente **no** significa que ya se encuentre publicada en GitHub.
 ]]
 
+---
+
+## ¿Y el resto del equipo?
+
+Supongamos que un integrante creó y publicó:
+
+```text
+v0.1.0
+```
+
+Otro integrante puede obtener las etiquetas remotas mediante:
+
+```bash
+git fetch --tags
+```
+
+Después puede comprobarlas con:
+
+```bash
+git tag
+```
 
 ---
-## Crear tags con mensaje
 
-Crear etiquetas en Git es genial, pero necesitaremos agregar una descripción a la etiqueta que permita a los colaboradores (y a nosotros mismos) entender porqué fue creada.
-Por ejemplo: no creamos un commit sin un mensaje, así que una etiqueta no debe crearse sin un mensaje.
+## Flujo colaborativo
 
-.full-width[.content-box-yellow[git tag v0.2.1 -m "Tercera versión, cambios menores"]]
+```text
+Integrante A
+      │
+ crea v0.1.0
+      │
+      ▼
+git push origin v0.1.0
+      │
+      ▼
+    GitHub
+      │
+      ▼
+git fetch --tags
+      │
+      ▼
+Integrante B
+```
 
+---
 
-Consultar las etiquetas hasta el momento.
+## Comandos básicos para trabajar con tags
 
-Resultado:
+```bash
+# Crear una etiqueta
+git tag -a v0.1.0 -m "Primera versión"
 
-.full-width[.content-box-yellow[$ git tag &lt;br&gt;
-v0.1.0&lt;br&gt;
-v0.2.0&lt;br&gt;
-v0.2.1  Tercera versión, cambios menores
+# Consultar etiquetas locales
+git tag
+
+# Revisar una etiqueta
+git show v0.1.0
+
+# Publicar una etiqueta
+git push origin v0.1.0
+
+# Obtener etiquetas remotas
+git fetch --tags
+```
+
+---
+
+## Práctica: primera versión del proyecto
+
+### Situación
+
+El equipo ha terminado una primera etapa del proyecto.
+
+Los cambios fueron:
+
+- trabajados en ramas;
+- publicados mediante `push`;
+- revisados mediante Pull Requests;
+- integrados en `main`.
+
+Ahora queremos identificar ese estado como:
+
+```text
+v0.1.0
+```
+
+---
+
+## Práctica: preparar `main`
+
+### Paso 1. Ir a `main`
+
+```bash
+git switch main
+```
+
+### Paso 2. Actualizar
+
+```bash
+git pull
+```
+
+### Paso 3. Revisar el estado
+
+```bash
+git status
+```
+
+---
+
+## Práctica: crear y publicar la etiqueta
+
+Un integrante del equipo ejecutará:
+
+```bash
+git tag -a v0.1.0 -m "Primera versión de la definición del proyecto"
+```
+
+Comprueba:
+
+```bash
+git tag
+```
+
+Después publica:
+
+```bash
+git push origin v0.1.0
+```
+
+Finalmente, verifica en GitHub que exista:
+
+```text
+v0.1.0
+```
+
+---
+
+## Práctica colaborativa
+
+Ahora otro integrante del equipo obtendrá la etiqueta.
+
+Primero:
+
+```bash
+git fetch --tags
+```
+
+Después:
+
+```bash
+git tag
+```
+
+Debe aparecer:
+
+```text
+v0.1.0
+```
+
+Puede revisar la información:
+
+```bash
+git show v0.1.0
+```
+
+---
+
+## Pregunta al grupo
+
+.full-width[.content-box-blue[
+**¿Por qué el segundo integrante no tuvo que crear nuevamente `v0.1.0`?**
 ]]
 
----
-## Consultar una etiqueta en particular con _git show_
+Respuesta esperada:
 
-Otro comando interesante en el manejo de etiquetas es  **git show** _[tag_name]_. Este te permite conocer cómo estaba el repositorio en cada estado que has etiquetado, es decir, en cada versión.
-
-.full-width[.content-box-yellow[git show v0.0.2]]
-
-Resultado:
-
-&lt;img src="img/show.png" width="450px" style="display: block; margin: auto;" /&gt;
-
----
-## Desafio
-
-Hemos trabajado mucho en nuestro repositorio de git y ahora que tenemos una versión estable que queremos liberar, por ello, necesitamos crear una etiqueta para identificarla. Entonces, realizamos los siguientes pasos:
-
-1. Ir a una terminal    
---
-
-2. Localizar tu repositorio Git de trabajo
---
-
-3. Revisar el estado de repositorio. Asegurar que no hay nada por confirmar  
---
-
-4. Seleccionar un archivo y modificarlo
-.full-width[.content-box-yellow[git add [nombre del archivo]]]
---
-
-5. Crear una etiqueta
-.full-width[.content-box-yellow[git tag v0.1]]
---
-
-6. Revisar la etiqueta creada en el repositorio
-.full-width[.content-box-yellow[git tag]]
---
-
-**¿Este flujo de acciones será correcto?**
-
-
-
----
-## Consideraciones
-
-
-- Antes de modificar cualquier archivo revisa el estado de tu repositorio  
-**git status**
-
---
-
-- Si tienes cambios pendientes debes confirmarlos  
-**git add**  
-**git commit -m**  
-
---
-
-- Recuerda agregar un mensaje cuando crees la etiqueta  
-**git tag [tag_name] -m "[mensaje]"**
-
---
-
-- Si quieres revisar una etiqueta en particular puedes definirlo  
-**git show [tag_name]**
-
----
-## Práctica
-1. Abre una terminal y localiza tu repositorio de trabajo (repo de tareas)
---
-
-2. Revisa el estado de tu repositorio. Asegurate que no haya nada pendiente por confirmar.
-.full-width[.content-box-yellow[git status]]
---
-
-3. Modifica el Readme. 
-.full-width[.content-box-yellow[git add Readme.md]]
-.full-width[.content-box-yellow[git commit -m "Modificando el archivo Readme.md"]]
---
-
-4. Crea una etiqueta (define cuál será el nombrado de la etiqueta)
-.full-width[.content-box-yellow[git tag v0.1 -m "Se cambió la forma de contacto"]]
+&gt; Porque la etiqueta ya había sido creada y publicada en el repositorio compartido.
 
 ---
 
-## Práctica
-
-5. Repite el paso 3 y 4 agregando el archivo .gitignore  
-
-6. Revisa las etiquetas creadas en el repositorio  
-
-.full-width[.content-box-yellow[git tag]]
---
-
----
-
-
-## Enviar etiquetas y hacer push de los commits al mismo tiempo
-
-Hasta el momento todas las etiquetas que hemos creado han sido en nuestro repositorio local. Sin embargo, llevar estos cambios y las etiquetas al repositorio remoto es muy importante para que los usuarios de nuestros programas conozcan que existe una liberación de código.
-
-Para ello, será necesario hacer un push a GitHub para enviar los cambios, así como _todas_ las etiquetas al mismo tiempo, utilizando el siguiente comando:
-
-Sintaxis:  
-
-.full-width[.content-box-yellow[git push origin master --tags]]  
-
-Nota: Puede ser que su rama principal no sea *master* sino *main*.
-
----
-
-
-
-## Práctica
-
-1-Envía los últimos cambios realizados en el repositorio local, así como la etiqueta recien creada al repositorio remoto
-
-.full-width[.content-box-yellow[git push origin master --tags]]
-
-2-Ve a GitHub y asegurate que los cambios realizados (commit) y la etiqueta se encuentren en el repositorio
-
----
-
-## Enviar a GitHub una etiqueta en particular
-
-Imaginemos que hacemos varias modificaciones (commits) y generamos distintas etiquetas para nuestro control interno. Sin embargo, cuando tenemos una versión estable deseamos llevar solo una de ellas al servidor remoto. Para ello usaremos el siguiente comando:
-
-Sintaxis:  
-
-.full-width[.content-box-yellow[git push origin master [tag_name]]]
-
-
-Ejemplo:  
-
-.full-width[.content-box-yellow[git push origin master v0.1]]
-
-
----
-## Repaso
-
-*git tag [tag_name] -m "[mensaje]"*: Crear una etiqueta  
-
-*git tag*: listado de etiquetas  
-
-*git show [tag_name]*: Consultar una etiqueta en particular  
-
-*git push origin master --tags*: Enviar al repositorio remoto las etiquetas y hacer push de los commits al mismo tiempo  
-
-*git pull origin master --tags*: Descargar del repositorio remoto las etiquetas y los últimos cambios  
-
-*Recuerda que en tu repositorio de trabajo por equipo debes de contar con las etiquetas creadas por el resto de los integrantes.
-
-
----
-
-## Desafio
-
-Jennifer ha realizado algunos cambios a sus scripts de Python y ha generado 3 tags (v0.1.0, v0.1.1 y v1.0.0) en su repositorio local para identificar aspectos relevantes de dichas modificaciones. 
-
-¿Cuál de los siguientes comandos le permitiría a Jennifer enviar la etiqueta v1.0.0 y los últimos cambios al repositorio remoto en GitHub para compartirlo con sus compañeros?
-
-
-.full-width[.content-box-yellow[a) git push origin master v1.0.0]]
-.full-width[.content-box-yellow[b) git push origin]]
-.full-width[.content-box-yellow[c) git push origin master --tags]]
-.full-width[.content-box-yellow[d) git --tags master v1.0.0 ]]
-
-
-
----
-
-## Desafio
-
-
-La opción correcta es la "a", ya que indica exactamente la etiqueta a enviar, así como los cambios realizados. 
-
-La opción "b", c" y "d" son incorrectas en sintaxis.
-
----
-
-## Eliminar una etiqueta local
-
-Ahora que nos encontramos realizando etiquetas en nuestro repositorio, puede ser que comentamos algún error al momento de crearlas o simplemente queremos borrarlas. En caso de que se requiera eliminar una etiqueta, podemos hacer uso del comando:
-
-.full-width[.content-box-yellow[git tag -d [tag_name]]]
-
---
-
- Ejemplo:
-
-.full-width[.content-box-yellow[git tag -d v0.5]]
-
-__Importante:__ La opción __-d__ es utilizada para borrar la etiqueta.
-
----
-## Práctica
-
-NOTA: revisa que no tengas nada pendiente por confirmar.  
-
-1-Realiza cambios en un archivo de tu elección
-
---
-
-2-Confirma los cambios:  
-__git add__,  __git commit -m__
-
---
-
-3-Crea una etiqueta con mensaje:  
-__git tag [tag_name] -m "mensaje"__
-
---
-
-4-Revisar las etiquetas creadas:  
-__git tag__ o __git show [tag_name]__
-
---
-
-5-Borra la etiqueta recíen creada:  
-__git tag -d [tag_name]__
-
---
-
-
-6-Verifica que la etiqueta haya sido eliminada localmente:  
-__git tag__ o __git show [tag_name]__
-
----
-
-
-## Eliminar una etiqueta remota
-
-Hay que tomar en cuenta que en el paso anterior la etiqueta fue eliminada del repositorio local. Si la etiqueta se encontrara ya en el repositorio remoto (GitHub), para eliminarla debemos usar el siguiente comando:
-
-.full-width[.content-box-yellow[git push --delete origin [tag_name]]]
-
---
-
- Ejemplo:
-
-.full-width[.content-box-yellow[git push --delete origin v0.2]]
-
-
----
-
-## Práctica
-
-
-1-Revisa las etiquetas que actualmente se encuentran en tu repositorio remoto (GitHub):  
-__Sección "tags"__
-
---
-
-2-Identifica la etiqueta que deseas borrar y usa el comando:  
-__git push --delete origin [tag_name]__
-
---
-
-3-Revisar las etiquetas del repositorio remoto (GitHub):  
-__Sección "tags"__
-
----
-
-## Etiquetas desde GitHub
-
-No solo desde Git podemos crear etiquetas, también desde nuestro repositorio remoto en GitHub tenemos la opción de generar etiquetas que indiquen las liberaciones del código.
-
-En la página principal del repositorio, se encuentra la opción __releases__, donde se puede acceder a la información sobre las versiones etiquetadas en el proyecto, así como etiquetar nuevas versiones.
-
-
-&lt;img src="img/github-tags.png" width="550px" style="display: block; margin: auto;" /&gt;
-
-&lt;img src="img/new-tag.png" width="350px" style="display: block; margin: auto;" /&gt;
-
----
-
-## Etiquetas desde GitHub Desktop
-
-1. Abrir la aplicación de GitHub Desktop  
-2. Revisar que estemos en el repositorio de trabajo  
-3. Ir a la sección "History"  
-4. Seleccionar alguno de los commits y dar clic derecho  
-5. Seleccionar la opción "Create tag"
-6. Especificar el nombre de la etiqueta y crear  
-7. Subir la etiqueta al servidor remoto
-
-
-&lt;img src="img/tags-github-desktop.png" width="650px" style="display: block; margin: auto;" /&gt;
-
-
+## ¿Qué debemos recordar?
+
+| Concepto | Función |
+|---|---|
+| **Issue** | Define una tarea |
+| **Rama** | Permite trabajar de manera independiente |
+| **Commit** | Registra un cambio |
+| **Push** | Publica avances |
+| **Pull Request** | Solicita integrar cambios |
+| **Merge** | Integra el trabajo a `main` |
+| **Tag** | Identifica un estado o versión |
 
 ---
 
 ## Conclusión
 
-Hemos aprendido a etiquetar estados de un proyecto con Git, algo que se realiza comúnmente para informar en el sistema de control de versiones de los **releases** principales durante la vida del software. Para trabajar las etiquetas en Git necesitamos conocer al menos los siguientes comandos:
+.full-width[.content-box-yellow[
+**Las etiquetas nos ayudan a identificar versiones importantes de ese proyecto.**
+]]
 
-.full-width[.content-box-yellow[git tag [tag_name] - m [mensaje]]]
-.full-width[.content-box-yellow[git show [tag_name]]]
-.full-width[.content-box-yellow[git tag -d [tag_name]]]
+### Comandos clave
 
-
-Puedes obtener más ayuda sobre opciones para el comando git tag con:  
-__git tag -h__
-
-
+```bash
+git tag -a v0.1.0 -m "Primera versión"
+git tag
+git show v0.1.0
+git push origin v0.1.0
+git fetch --tags
+```
 
 ---
-
+---
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
